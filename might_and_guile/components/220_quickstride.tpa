@@ -1,0 +1,204 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						QUICKSTRIDE
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//WARRIOR ABILITY FILES_________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_stri2.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_stri3.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_stri4.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_stri5.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_stri6.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_walk2.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY ~might_and_guile/misc/d5_walk3.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY ~might_and_guile/misc/d5_walk4.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY ~might_and_guile/misc/d5_walk5.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY ~might_and_guile/misc/d5_walk6.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY ~might_and_guile/misc/d5_nstr2.spl~ ~override~
+COPY ~might_and_guile/misc/d5_nstr3.spl~ ~override~
+COPY ~might_and_guile/misc/d5_nstr4.spl~ ~override~
+COPY ~might_and_guile/misc/d5_nstr5.spl~ ~override~
+COPY ~might_and_guile/misc/d5_strim.spl~ ~override~
+	SAY NAME1 @3010
+	SAY UNIDENTIFIED_DESC @3010
+COPY ~might_and_guile/misc/d5_walkm.spl~ ~override~
+	SAY NAME1 @3011
+	SAY UNIDENTIFIED_DESC @3011
+COPY_EXISTING ~clabfi05.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_SPCL151 ~ ~****       ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/stribarb.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabmo01.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+	REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+	BUT_ONLY
+ACTION_IF FILE_EXISTS_IN_GAME ~clabmo02.2da~ THEN BEGIN
+	COPY_EXISTING ~clabmo02.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+		REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabmo03.2da~ THEN BEGIN
+	COPY_EXISTING ~clabmo03.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+		REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+		BUT_ONLY
+END
+COPY_EXISTING ~clabrn01.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strirang.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabrn02.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strirang.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabrn03.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strirang.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabrn04.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strirang.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabrn05.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/misc/strirang.txt~
+	BUT_ONLY
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 37 ) BEGIN
+			FOR ( index = 38 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_stride_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_stride_clabs AS yoo => hoo BEGIN
+		ACTION_IF (%hoo% = 12) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strirang.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 40 ) BEGIN
+			FOR ( index = 41 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_stride_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_stride_clabs AS yoo => hoo BEGIN
+		ACTION_IF (%hoo% = 12) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strirang.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 41 ) BEGIN
+			FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_stride_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_stride_clabs AS yoo => hoo BEGIN
+		ACTION_IF (%hoo% = 12) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strirang.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~9~ "rows"
+		PATCH_IF ( rows > 31 ) BEGIN
+			FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 9 modclab
+				READ_2DA_ENTRY %index% 8 9 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_stride_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_stride_clabs AS yoo => hoo BEGIN
+		ACTION_IF (%hoo% = 12) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strirang.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%yoo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
+				BUT_ONLY
+		END
+	END
+END
+//______________________________________________________________________________
+CLEAR_ARRAYS

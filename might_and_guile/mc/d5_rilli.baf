@@ -1,0 +1,24 @@
+IF
+	Global("RCkit","GLOBAL",0)
+	Race(LastSummonerOf(Myself),ELF)
+THEN
+	RESPONSE #100
+		SetGlobal("RCkit","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),AddSuperKit(D5RILLI))  
+		DestroySelf()
+END
+IF
+	Global("RCkit","GLOBAL",0)
+	!Race(LastSummonerOf(Myself),ELF)
+THEN
+	RESPONSE #200
+		SetGlobal("RCkit","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),AddSuperKit(D5MIELI))  
+		DestroySelf()
+END
+IF
+	Global("RCkit","GLOBAL",0)
+THEN
+	RESPONSE #300
+		DestroySelf()
+END

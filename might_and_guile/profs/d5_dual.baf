@@ -1,0 +1,194 @@
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_THIEF)
+	Kit(LastSummonerOf(Myself),BERSERKER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5BERSK))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_THIEF)
+	Kit(LastSummonerOf(Myself),WIZARDSLAYER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5WIZSL))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_THIEF)
+	Kit(LastSummonerOf(Myself),KENSAI)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5KENSA))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_THIEF)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5FIGHT))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_MAGE)
+	Kit(LastSummonerOf(Myself),BERSERKER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5BERSK))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_MAGE)
+	Kit(LastSummonerOf(Myself),WIZARDSLAYER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5WIZSL))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_MAGE)
+	Kit(LastSummonerOf(Myself),KENSAI)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5KENSA))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_MAGE)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5FIGHT))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_DRUID)
+	Kit(LastSummonerOf(Myself),BERSERKER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5BERSK))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_DRUID)
+	Kit(LastSummonerOf(Myself),WIZARDSLAYER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5WIZSL))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_DRUID)
+	Kit(LastSummonerOf(Myself),KENSAI)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5KENSA))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_DRUID)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5FIGHT))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_CLERIC)
+	Kit(LastSummonerOf(Myself),BERSERKER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5BERSK))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_CLERIC)
+	Kit(LastSummonerOf(Myself),WIZARDSLAYER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5WIZSL))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_CLERIC)
+	Kit(LastSummonerOf(Myself),KENSAI)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5KENSA))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER_CLERIC)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5FIGHT))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),CLERIC_RANGER)
+	Kit(LastSummonerOf(Myself),FERALAN)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5ARCHE))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),CLERIC_RANGER)
+	Kit(LastSummonerOf(Myself),STALKER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5STALK))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),CLERIC_RANGER)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5BEAST))
+	DestroySelf()
+END
+
+IF
+	Class(LastSummonerOf(Myself),CLERIC_RANGER)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5RANGE))
+	DestroySelf()
+END
+
+IF
+OR(8)
+	Kit(LastSummonerOf(Myself),D5FIGHT)
+	Kit(LastSummonerOf(Myself),D5BERSK)
+	Kit(LastSummonerOf(Myself),D5WIZSL)
+	Kit(LastSummonerOf(Myself),D5KENSA)
+	Kit(LastSummonerOf(Myself),D5RANGE)
+	Kit(LastSummonerOf(Myself),D5ARCHE)
+	Kit(LastSummonerOf(Myself),D5STALK)
+	Kit(LastSummonerOf(Myself),D5BEAST)
+THEN
+	RESPONSE #100
+	DestroySelf()
+END

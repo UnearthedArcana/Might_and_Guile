@@ -1,0 +1,916 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						MAGIC RESISTANCE OVERHAUL
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_mro.d5~ ~override~
+//__________________________________________________________________________________
+
+
+//changing creatures with MR________________________________________________________
+//__________________________________________________________________________________
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+		READ_BYTE 0x5d mr
+		PATCH_IF mr BEGIN
+			WRITE_BYTE 0x5d ~0~
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 34 parameter1 = 3 timing=9 END
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 35 parameter1 = 3 timing=9 END
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 36 parameter1 = 3 timing=9 END
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 37 parameter1 = 6 timing=9 END
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 31 parameter1 = 40 timing=9 END
+		END
+	END
+	BUT_ONLY
+//__________________________________________________________________________________
+
+/*
+//changing spells to bypass MR______________________________________________________
+//__________________________________________________________________________________
+INCLUDE ~might_and_guile/spells/mr_list_base.tpa~
+
+ACTION_PHP_EACH mrspell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 0) BEGIN // bypasses MR
+				LPF ALTER_SPELL_EFFECT INT_VAR resist_dispel=3
+			END
+		BUT_ONLY
+	END
+END
+ACTION_PHP_EACH mrspell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 1) BEGIN // affected by MR
+				LPF ALTER_SPELL_EFFECT INT_VAR resist_dispel=1
+			END
+		BUT_ONLY
+	END
+END
+//__________________________________________________________________________________
+*/
+
+//changing MR-granting items________________________________________________________
+//__________________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~amul20.itm~ THEN BEGIN
+	COPY_EXISTING ~amul20.itm~ ~override~ // Kaligun's Amulet of Magic Resistance
+//	+10% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=10 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=10 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~amul27.itm~ THEN BEGIN
+	COPY_EXISTING ~amul27.itm~ ~override~ // Amulet of the Seldarine
+//	+10% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=10 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=10 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~belt12.itm~ THEN BEGIN
+	COPY_EXISTING ~belt12.itm~ ~override~ // Symbols of Helm/Lathander/Talos
+				~belt13.itm~ ~override~
+				~belt14.itm~ ~override~
+//	immunity to silence, deafness, blindness, disease
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=101 parameter2=74 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=101 parameter2=38 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=101 parameter2=60 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=101 parameter2=78 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=101 parameter2=80 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Immunities~
+						REPLACE_TEXTUALLY ~+5%~ ~Disease, Blindness, Deafness, and Silence~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~clck05.itm~ THEN BEGIN
+	COPY_EXISTING ~clck05.itm~ ~override~ // Cloak of Balduran
+//	charisma bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=6 parameter1=1 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=44 parameter1=1 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+					PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Strength and Charisma~
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Strength and Charisma~
+						REPLACE_TEXTUALLY ~25%~ ~1~
+						REPLACE_TEXTUALLY ~10%~ ~1~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~dwchan01.itm~ THEN BEGIN
+	COPY_EXISTING ~dwchan01.itm~ ~override~ // Drow Elven Chain +3
+//	damage resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~leat21.itm~ THEN BEGIN
+	COPY_EXISTING ~leat21.itm~ ~override~ // Human Flesh +5
+//	big spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=4 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Spells bonus~
+						REPLACE_TEXTUALLY ~+20% bonus~ ~doubled~
+						REPLACE_TEXTUALLY ~+20%~ ~doubled~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~ohdarmor.itm~ THEN BEGIN
+	COPY_EXISTING ~ohdarmor.itm~ ~override~ // Silver Dragon Armor (15%)
+//	cold + lightning resistance
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=28 parameter1=50 parameter2=1 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=50 parameter2=1 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Cold and Electrical Resistance~
+						REPLACE_TEXTUALLY ~+15%~ ~50%~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h64.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h64.itm~ ~override~ // The Purifier +4
+				
+//	huge death save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=6 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Death~
+						REPLACE_TEXTUALLY ~+20%~ ~+6~
+						REPLACE_TEXTUALLY ~+10% bonus~ ~+6~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~comps64.itm~ THEN BEGIN
+	COPY_EXISTING ~comps64.itm~ ~override~ // The Purifier +4
+//	huge death save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=33 parameter1=6 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Death~
+						REPLACE_TEXTUALLY ~+20%~ ~+6~
+						REPLACE_TEXTUALLY ~+10% bonus~ ~+6~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h65.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h65.itm~ ~override~ // The Purifier +5
+//	huge death save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=33 parameter1=10 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Death~
+						REPLACE_TEXTUALLY ~+30%~ ~+10~
+						REPLACE_TEXTUALLY ~+15% bonus~ ~+10~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~comps65.itm~ THEN BEGIN
+	COPY_EXISTING ~comps65.itm~ ~override~ // The Purifier +5
+//	huge death save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=33 parameter1=10 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Death~
+						REPLACE_TEXTUALLY ~+30%~ ~+10~
+						REPLACE_TEXTUALLY ~+15% bonus~ ~+10~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h71.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h70.itm~ ~override~ // Hindo's Doom +3
+//	death save bonus
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=33 parameter1=3 END
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h71.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h71.itm~ ~override~ // Hindo's Doom +4
+//	huge death save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=33 parameter1=6 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Death~
+						REPLACE_TEXTUALLY ~+10%~ ~+6~
+						REPLACE_TEXTUALLY ~+15% bonus~ ~+6~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~carsomyr.itm~ THEN BEGIN
+	COPY_EXISTING ~carsomyr.itm~ ~override~ // Carsomyr +5
+//	big spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=6 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Spells bonus~
+						REPLACE_TEXTUALLY ~50%~ ~+6~
+						REPLACE_TEXTUALLY ~+20% bonus~ ~+6~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h10.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h10.itm~ ~override~ // Carsomyr +5
+//	big spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=6 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Spells bonus~
+						REPLACE_TEXTUALLY ~50%~ ~+6~
+						REPLACE_TEXTUALLY ~+20% bonus~ ~+6~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h19.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h19.itm~ ~override~ // Carsomyr +6
+//	huge spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=10 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Spells bonus~
+						REPLACE_TEXTUALLY ~50%~ ~+10~
+						REPLACE_TEXTUALLY ~+25% bonus~ ~+10~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h18.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h18.itm~ ~override~ // Gram the Sword of Grief +5
+//	poison immunity
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=101 parameter2=25 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Immunity~
+						REPLACE_TEXTUALLY ~+5%~ ~poison damage~
+						REPLACE_TEXTUALLY ~+15% bonus~ ~poison damage~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~wa2robe.itm~ THEN BEGIN
+	COPY_EXISTING ~wa2robe.itm~ ~override~ // Robe of Vecna
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+						REPLACE_TEXTUALLY ~+10%~ ~+5%~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
+//item revisions not installed______________________________________________________
+//__________________________________________________________________________________
+ACTION_IF NOT (MOD_IS_INSTALLED "item_rev.tp2" "0") THEN BEGIN
+
+ACTION_IF FILE_EXISTS_IN_GAME ~amul19.itm~ THEN BEGIN
+	COPY_EXISTING ~amul19.itm~ ~override~ // Amulet of 5% Magic Resistance
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~amul21.itm~ THEN BEGIN
+	COPY_EXISTING ~amul21.itm~ ~override~ // Amulet of Power
+//	immunity to magic damage
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=100 parameter2=1 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Immunity~
+						REPLACE_TEXTUALLY ~+5%~ ~pure magic damage~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~blun30.itm~ THEN BEGIN
+	COPY_EXISTING ~blun30.itm~ ~override~ // The Flail of Ages +5
+//	petrify save bonus 
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=3 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Petrification~
+						REPLACE_TEXTUALLY ~+5%~ ~+3 bonus~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~clck15.itm~ THEN BEGIN
+	COPY_EXISTING ~clck15.itm~ ~override~ // Robe of the Good Archmagi
+				~clck16.itm~ ~override~ // Robe of the Neutral Archmagi
+				~clck17.itm~ ~override~ // Robe of the Evil Archmagi
+//	+5% to elemental resistances and spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=3 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=31 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~plat21.itm~ THEN BEGIN
+	COPY_EXISTING ~plat21.itm~ ~override~ // Enkidu Armor (5%)
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~potn34.itm~ THEN BEGIN
+	COPY_EXISTING ~potn34.itm~ ~override~ // Potion of Magic Protection
+//	spells save bonus + magic damage immunity
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=31 parameter1=100 parameter2=1 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Spells~
+						REPLACE_TEXTUALLY ~+50%~ ~+5 bonus
+Immunity to pure magic damage~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~ring39.itm~ THEN BEGIN
+	COPY_EXISTING ~ring39.itm~ ~override~ // Ring of Gaxx
+//	more polymorph save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=35 parameter1=2 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Petrification~
+						REPLACE_TEXTUALLY ~+10%~ ~doubled~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~shld26.itm~ THEN BEGIN
+	COPY_EXISTING ~shld26.itm~ ~override~ // Shield of the Lost +2
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~shld26a.itm~ THEN BEGIN
+	COPY_EXISTING ~shld26a.itm~ ~override~ // Shield of the Lost +2
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h12.itm~ THEN BEGIN
+	COPY_EXISTING ~chevil10.itm~ ~override~ // The Flame of the North +2
+//	breath save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=36 parameter1=3 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Saves vs. Breath~
+						REPLACE_TEXTUALLY ~+10%~ ~+3 bonus~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~wa2s1h.itm~ THEN BEGIN
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	COPY_EXISTING ~wa2s1h.itm~ ~override~ // Sword of Balduran (10%)
+//	bonus to movement
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=126 parameter1=200 parameter2=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+					PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Movement Rate~
+						REPLACE_TEXTUALLY ~+10%~ ~+3 bonus~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	COPY_EXISTING ~wa2s1h.itm~ ~override~ // Sword of Balduran (10%)
+//	bonus to movement
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=126 parameter1=120 parameter2=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Movement Rate~
+						REPLACE_TEXTUALLY ~+10%~ ~+3 bonus~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+END // end of non-IR
+//__________________________________________________________________________________
+
+
+//item revisions detected___________________________________________________________
+//__________________________________________________________________________________
+ACTION_IF (MOD_IS_INSTALLED "item_rev.tp2" "0") THEN BEGIN
+
+ACTION_IF FILE_EXISTS_IN_GAME ~clck15.itm~ THEN BEGIN
+	COPY_EXISTING ~clck15.itm~ ~override~ // IR Robe of the Weave
+//	extra spells
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=42 parameter1=1 parameter2=1 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=42 parameter1=1 parameter2=2 timing=2 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=42 parameter1=1 parameter2=4 timing=2 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=42 parameter1=1 parameter2=8 timing=2 END 
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~+1 spells per day~
+						REPLACE_TEXTUALLY ~+20% bonus~ ~levels 1 through 4~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~helm07.itm~ THEN BEGIN
+	COPY_EXISTING ~helm07.itm~ ~override~ // IR Helm of Balduran
+//	+5% to elemental resistances and spells save bonus
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=37 parameter1=3 END 
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=31 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~shld22.itm~ THEN BEGIN
+	COPY_EXISTING ~shld22.itm~ ~override~ // Shield of Balduran
+//	+10% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=10 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=10 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=10 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~wa2plat.itm~ THEN BEGIN
+	COPY_EXISTING ~wa2plat.itm~ ~override~ // Plate of Balduran
+//	+5% to elemental resistances
+		LPF ALTER_EFFECT INT_VAR match_opcode=166 opcode=31 parameter1=5 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=27 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=28 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=29 parameter1=5 timing=2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode=30 parameter1=5 timing=2 END
+		FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+			READ_LONG "%index%" "valid"
+			PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+				READ_STRREF "%index%" "description"
+				PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~Magic Resistance~) = 0 BEGIN // more validation
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY ~Magic Resistance~ ~Elemental Resistance~
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+END // end of IR
+//__________________________________________________________________________________
+
+
+//__________________________________________________________________________________
+// STILL TO CONSIDER: 
+ // Hell Trials (10%)
+ // Lum the Mad (5%)
+ // sw1h77 : The Answerer (kind of. subtracts MR from its targets.)
+ // ohnshld1 :  Shield of Fyrus Khal (All allies within 5ft gain +5% magic resistance)
+ // IWDEE
+ // Rakshasa!!
+//__________________________________________________________________________________
+
+
+//monks and wizard slayers__________________________________________________________
+//__________________________________________________________________________________
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_nuwsl.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24285 @1611 
+		STRING_SET 25361 @1611 
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25203 @1611
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		STRING_SET 25203 @1611 
+		STRING_SET 37097 @1611 
+	END
+	COPY_EXISTING ~clabfi03.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL131~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_SPCL819~ ~****      ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/mr/nomr.txt~
+		BUT_ONLY
+END
+
+// monk class description
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mfist.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24234 @1615 
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 45867 @1615 
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		STRING_SET 34606 @1615 
+		STRING_SET 37256 @1615
+	END
+END
+
+COPY_EXISTING ~clabmo01.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL131~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_SPCL819~ ~****      ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/mr/nomr.txt~
+		BUT_ONLY
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~10~ "rows"
+	FOR ( index = 1 ; index < rows ; index = index + 1 ) BEGIN
+		READ_2DA_ENTRY %index% 5 10 modclab
+		READ_2DA_ENTRY %index% 8 10 modclass
+		DEFINE_ASSOCIATIVE_ARRAY d5_mr_clabs BEGIN "%modclab%" => "%modclass%" END
+	END
+	BUT_ONLY
+ACTION_PHP_EACH d5_mr_clabs AS voo => doo BEGIN
+	ACTION_IF (%doo% = 20) AND (FILE_EXISTS_IN_GAME ~%voo%.2da~) THEN BEGIN
+		COPY_EXISTING ~%voo%.2da~ ~override~
+			REPLACE_TEXTUALLY ~AP_SPCL131~ ~****      ~
+			REPLACE_TEXTUALLY ~AP_SPCL819~ ~****      ~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/mr/nomr.txt~
+		BUT_ONLY
+	END
+END
+END
+//__________________________________________________________________________________
+CLEAR_ARRAYS

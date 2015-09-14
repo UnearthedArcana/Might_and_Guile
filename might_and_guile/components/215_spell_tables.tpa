@@ -1,0 +1,177 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						SPELL TABLE CHANGES
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE___________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_taspl.d5~ ~override~
+//___________________________________________________________________________________
+
+//REPLACE SPELL TABLES AND EDIT CLAB FILES___________________________________________
+//
+COPY ~might_and_guile/misc/mxsplwiz.2da~ ~override~
+COPY ~might_and_guile/misc/mxsplra2.2da~ ~override/mxsplran.2da~
+COPY ~might_and_guile/misc/mxsplpal.2da~ ~override~
+COPY ~might_and_guile/misc/mxsplprs.2da~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_drspl.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/mxspldru.2da~ ~override~
+END
+COPY ~might_and_guile/misc/mxsplbr2.2da~ ~override/mxsplbrd.2da~
+COPY_EXISTING ~clabrn01.2da~ ~override~
+	APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+	LPM remove_blank_lines
+	BUT_ONLY
+COPY_EXISTING ~clabrn02.2da~ ~override~
+	APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+	LPM remove_blank_lines
+	BUT_ONLY
+COPY_EXISTING ~clabrn03.2da~ ~override~
+	APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+	LPM remove_blank_lines
+	BUT_ONLY
+COPY_EXISTING ~clabrn04.2da~ ~override~
+	APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+	LPM remove_blank_lines
+	BUT_ONLY
+COPY_EXISTING ~clabrn05.2da~ ~override~
+	APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+	LPM remove_blank_lines
+	BUT_ONLY
+COPY ~might_and_guile/ranger/d5_rasp1.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rasp2.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rasp3.spl~ ~override~
+COPY_EXISTING ~clabba01.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabba02.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+	BUT_ONLY
+COPY_EXISTING ~clabba03.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+	BUT_ONLY
+COPY ~might_and_guile/bard/d5_basp1.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp2.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp3.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp4.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp5.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp6.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp7.spl~ ~override~
+COPY ~might_and_guile/bard/d5_basp8.spl~ ~override~
+//__________________________________________________________________________________
+
+//MOD KIT COMPATIBILITY SCRIPT______________________________________________________
+//
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 37 ) BEGIN
+			FOR ( index = 38 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_spell_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_spell_clabs AS boo => zoo BEGIN
+		ACTION_IF (%zoo% = 5) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%zoo% = 12) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 40 ) BEGIN
+			FOR ( index = 41 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_spell_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_spell_clabs AS boo => zoo BEGIN
+		ACTION_IF (%zoo% = 5) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%zoo% = 12) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~10~ "rows"
+		PATCH_IF ( rows > 41 ) BEGIN
+			FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_spell_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_spell_clabs AS boo => zoo BEGIN
+		ACTION_IF (%zoo% = 5) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%zoo% = 12) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+				BUT_ONLY
+		END
+	END
+END
+ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~9~ "rows"
+		PATCH_IF ( rows > 31 ) BEGIN
+			FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 9 modclab
+				READ_2DA_ENTRY %index% 8 9 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_spell_clabs BEGIN "%modclab%" => "%modclass%" END
+			END
+		END
+		BUT_ONLY
+	ACTION_PHP_EACH d5_spell_clabs AS boo => zoo BEGIN
+		ACTION_IF (%zoo% = 5) AND (FILE_EXISTS_IN_GAME ~%boo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%boo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+				BUT_ONLY
+		END
+		ACTION_IF (%zoo% = 12) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
+			COPY_EXISTING ~%coo%.2da~ ~override~
+				LPM remove_blank_lines
+				APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
+				BUT_ONLY
+		END
+	END
+END
+//__________________________________________________________________________________
+CLEAR_ARRAYS

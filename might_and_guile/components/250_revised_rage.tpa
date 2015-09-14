@@ -1,0 +1,227 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED RAGE
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//BERSERKER RAGE____________________________________________________________________
+// 
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24284 @3002
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25201 @3003
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37094 @3003
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 32235 @3004
+	END
+	COPY_EXISTING ~clabfi02.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL321~ ~GA_D5_RAGE~
+		BUT_ONLY
+	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override~
+		SAY NAME1 @3008
+		SAY UNIDENTIFIED_DESC @3004
+	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override/spcl321.spl~
+		SAY NAME1 @3008
+		SAY UNIDENTIFIED_DESC @3004
+//	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override/spcl152.spl~
+//		SAY NAME1 @3008
+//		SAY UNIDENTIFIED_DESC @3004
+//________________________________________________________________________________
+
+//FIGHTER KIT 2DA FILES___________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	COPY_EXISTING ~clabfi01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/fighter/ficlab.txt~
+		BUT_ONLY
+	END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	COPY_EXISTING ~weapprof.2da~ ~override~
+		SET_2DA_ENTRY 3 30 1 ~3~ // Berserker
+		SET_2DA_ENTRY 4 30 1 ~3~
+		SET_2DA_ENTRY 5 30 1 ~3~
+		SET_2DA_ENTRY 6 30 1 ~3~
+		SET_2DA_ENTRY 7 30 1 ~3~
+		SET_2DA_ENTRY 8 30 1 ~3~
+		SET_2DA_ENTRY 9 30 1 ~3~
+		SET_2DA_ENTRY 10 30 1 ~3~
+		SET_2DA_ENTRY 11 30 1 ~3~
+		SET_2DA_ENTRY 12 30 1 ~3~
+		SET_2DA_ENTRY 13 30 1 ~3~
+		SET_2DA_ENTRY 14 30 1 ~3~
+		SET_2DA_ENTRY 15 30 1 ~3~
+		SET_2DA_ENTRY 16 30 1 ~3~
+		SET_2DA_ENTRY 17 30 1 ~3~
+		SET_2DA_ENTRY 18 30 1 ~3~
+		SET_2DA_ENTRY 19 30 1 ~3~
+		SET_2DA_ENTRY 20 30 1 ~3~
+		SET_2DA_ENTRY 21 30 1 ~3~
+		SET_2DA_ENTRY 22 30 1 ~3~
+		SET_2DA_ENTRY 23 30 1 ~3~
+		SET_2DA_ENTRY 24 30 1 ~3~
+		SET_2DA_ENTRY 25 30 1 ~3~
+		SET_2DA_ENTRY 31 30 1 ~1~
+		SET_2DA_ENTRY 32 30 1 ~1~
+		SET_2DA_ENTRY 33 30 1 ~1~
+		SET_2DA_ENTRY 34 30 1 ~1~
+		SET_2DA_ENTRY 3 31 1 ~3~ // WS
+		SET_2DA_ENTRY 4 31 1 ~3~
+		SET_2DA_ENTRY 5 31 1 ~3~
+		SET_2DA_ENTRY 6 31 1 ~3~
+		SET_2DA_ENTRY 7 31 1 ~3~
+		SET_2DA_ENTRY 8 31 1 ~3~
+		SET_2DA_ENTRY 9 31 1 ~3~
+		SET_2DA_ENTRY 10 31 1 ~3~
+		SET_2DA_ENTRY 11 31 1 ~3~
+		SET_2DA_ENTRY 12 31 1 ~3~
+		SET_2DA_ENTRY 13 31 1 ~3~
+		SET_2DA_ENTRY 14 31 1 ~3~
+		SET_2DA_ENTRY 15 31 1 ~3~
+		SET_2DA_ENTRY 16 31 1 ~3~
+		SET_2DA_ENTRY 17 31 1 ~3~
+		SET_2DA_ENTRY 18 31 1 ~3~
+		SET_2DA_ENTRY 19 31 1 ~3~
+		SET_2DA_ENTRY 20 31 1 ~3~
+		SET_2DA_ENTRY 21 31 1 ~3~
+		SET_2DA_ENTRY 22 31 1 ~3~
+		SET_2DA_ENTRY 23 31 1 ~3~
+		SET_2DA_ENTRY 24 31 1 ~3~
+		SET_2DA_ENTRY 25 31 1 ~3~
+		SET_2DA_ENTRY 26 31 1 ~3~
+		SET_2DA_ENTRY 27 31 1 ~3~
+		SET_2DA_ENTRY 28 31 1 ~3~
+		SET_2DA_ENTRY 29 31 1 ~3~
+		SET_2DA_ENTRY 30 31 1 ~3~
+		SET_2DA_ENTRY 3 12 1 ~3~ // FM
+		SET_2DA_ENTRY 4 12 1 ~3~
+		SET_2DA_ENTRY 5 12 1 ~3~
+		SET_2DA_ENTRY 6 12 1 ~3~
+		SET_2DA_ENTRY 7 12 1 ~3~
+		SET_2DA_ENTRY 8 12 1 ~3~
+		SET_2DA_ENTRY 9 12 1 ~3~
+		SET_2DA_ENTRY 10 12 1 ~3~
+		SET_2DA_ENTRY 11 12 1 ~3~
+		SET_2DA_ENTRY 12 12 1 ~3~
+		SET_2DA_ENTRY 13 12 1 ~3~
+		SET_2DA_ENTRY 14 12 1 ~3~
+		SET_2DA_ENTRY 15 12 1 ~3~
+		SET_2DA_ENTRY 16 12 1 ~3~
+		SET_2DA_ENTRY 17 12 1 ~3~
+		SET_2DA_ENTRY 18 12 1 ~3~
+		SET_2DA_ENTRY 19 12 1 ~3~
+		SET_2DA_ENTRY 20 12 1 ~3~
+		SET_2DA_ENTRY 21 12 1 ~3~
+		SET_2DA_ENTRY 22 12 1 ~3~
+		SET_2DA_ENTRY 23 12 1 ~3~
+		SET_2DA_ENTRY 24 12 1 ~3~
+		SET_2DA_ENTRY 25 12 1 ~3~
+		SET_2DA_ENTRY 26 12 1 ~3~
+		SET_2DA_ENTRY 27 12 1 ~3~
+		SET_2DA_ENTRY 28 12 1 ~3~
+		SET_2DA_ENTRY 29 12 1 ~3~
+		SET_2DA_ENTRY 30 12 1 ~3~
+		SET_2DA_ENTRY 3 14 1 ~3~ // FT
+		SET_2DA_ENTRY 4 14 1 ~3~
+		SET_2DA_ENTRY 5 14 1 ~3~
+		SET_2DA_ENTRY 6 14 1 ~3~
+		SET_2DA_ENTRY 7 14 1 ~3~
+		SET_2DA_ENTRY 8 14 1 ~3~
+		SET_2DA_ENTRY 9 14 1 ~3~
+		SET_2DA_ENTRY 10 14 1 ~3~
+		SET_2DA_ENTRY 11 14 1 ~3~
+		SET_2DA_ENTRY 12 14 1 ~3~
+		SET_2DA_ENTRY 13 14 1 ~3~
+		SET_2DA_ENTRY 14 14 1 ~3~
+		SET_2DA_ENTRY 15 14 1 ~3~
+		SET_2DA_ENTRY 16 14 1 ~3~
+		SET_2DA_ENTRY 17 14 1 ~3~
+		SET_2DA_ENTRY 18 14 1 ~3~
+		SET_2DA_ENTRY 19 14 1 ~3~
+		SET_2DA_ENTRY 20 14 1 ~3~
+		SET_2DA_ENTRY 21 14 1 ~3~
+		SET_2DA_ENTRY 22 14 1 ~3~
+		SET_2DA_ENTRY 23 14 1 ~3~
+		SET_2DA_ENTRY 24 14 1 ~3~
+		SET_2DA_ENTRY 25 14 1 ~3~
+		SET_2DA_ENTRY 26 14 1 ~3~
+		SET_2DA_ENTRY 27 14 1 ~3~
+		SET_2DA_ENTRY 28 14 1 ~3~
+		SET_2DA_ENTRY 29 14 1 ~3~
+		SET_2DA_ENTRY 30 14 1 ~3~
+		SET_2DA_ENTRY 3 15 1 ~3~ // FMT
+		SET_2DA_ENTRY 4 15 1 ~3~
+		SET_2DA_ENTRY 5 15 1 ~3~
+		SET_2DA_ENTRY 6 15 1 ~3~
+		SET_2DA_ENTRY 7 15 1 ~3~
+		SET_2DA_ENTRY 8 15 1 ~3~
+		SET_2DA_ENTRY 9 15 1 ~3~
+		SET_2DA_ENTRY 10 15 1 ~3~
+		SET_2DA_ENTRY 11 15 1 ~3~
+		SET_2DA_ENTRY 12 15 1 ~3~
+		SET_2DA_ENTRY 13 15 1 ~3~
+		SET_2DA_ENTRY 14 15 1 ~3~
+		SET_2DA_ENTRY 15 15 1 ~3~
+		SET_2DA_ENTRY 16 15 1 ~3~
+		SET_2DA_ENTRY 17 15 1 ~3~
+		SET_2DA_ENTRY 18 15 1 ~3~
+		SET_2DA_ENTRY 19 15 1 ~3~
+		SET_2DA_ENTRY 20 15 1 ~3~
+		SET_2DA_ENTRY 21 15 1 ~3~
+		SET_2DA_ENTRY 22 15 1 ~3~
+		SET_2DA_ENTRY 23 15 1 ~3~
+		SET_2DA_ENTRY 24 15 1 ~3~
+		SET_2DA_ENTRY 25 15 1 ~3~
+		SET_2DA_ENTRY 26 15 1 ~3~
+		SET_2DA_ENTRY 27 15 1 ~3~
+		SET_2DA_ENTRY 28 15 1 ~3~
+		SET_2DA_ENTRY 29 15 1 ~3~
+		SET_2DA_ENTRY 30 15 1 ~3~
+		SET_2DA_ENTRY 7 13 1 ~3~ // FC
+		SET_2DA_ENTRY 8 13 1 ~3~
+		SET_2DA_ENTRY 10 13 1 ~3~
+		SET_2DA_ENTRY 19 13 1 ~3~
+		SET_2DA_ENTRY 20 13 1 ~3~
+		SET_2DA_ENTRY 23 13 1 ~3~
+		SET_2DA_ENTRY 24 13 1 ~3~
+		SET_2DA_ENTRY 25 13 1 ~3~
+		SET_2DA_ENTRY 6 19 1 ~3~ // FD
+		SET_2DA_ENTRY 7 19 1 ~3~
+		SET_2DA_ENTRY 8 19 1 ~3~
+		SET_2DA_ENTRY 10 19 1 ~3~
+		SET_2DA_ENTRY 17 19 1 ~3~
+		SET_2DA_ENTRY 18 19 1 ~3~
+		SET_2DA_ENTRY 20 19 1 ~3~
+		SET_2DA_ENTRY 21 19 1 ~3~
+		SET_2DA_ENTRY 25 19 1 ~3~
+		SET_2DA_ENTRY 29 19 1 ~3~
+		SET_2DA_ENTRY 7 20 1 ~3~ // FMC
+		SET_2DA_ENTRY 8 20 1 ~3~
+		SET_2DA_ENTRY 10 20 1 ~3~
+		SET_2DA_ENTRY 19 20 1 ~3~
+		SET_2DA_ENTRY 20 20 1 ~3~
+		SET_2DA_ENTRY 23 20 1 ~3~
+		SET_2DA_ENTRY 24 20 1 ~3~
+		SET_2DA_ENTRY 25 20 1 ~3~
+		SET_2DA_ENTRY 30 20 1 ~3~
+		BUT_ONLY
+	END
+//_____________________________________________________________________________
+
+//WARRIOR ABILITY FILES_________________________________________________________
+//
+COPY ~might_and_guile/fighter/d5_berk.spl~ ~override/d5_berk.spl~
+	SAY NAME1 @3008
+	SAY UNIDENTIFIED_DESC @3008
+COPY ~might_and_guile/fighter/d5_fipr1.spl~ ~override/d5_fipr1.spl~
+	SAY NAME1 @3009
+	SAY UNIDENTIFIED_DESC @3009
+//_____________________________________________________________________________

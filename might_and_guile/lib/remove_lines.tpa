@@ -1,0 +1,13 @@
+
+//REMOVE BLANK LINES MACRO_____________________________________________________________
+//
+DEFINE_PATCH_MACRO ~remove_blank_lines~ BEGIN
+	SET "size" = (SOURCE_SIZE - 1)
+	READ_BYTE ("%size%") "eof"
+	WHILE ((%size% > 0) AND (("%eof%" = 0x0a) OR ("%eof%" = 0x0d))) BEGIN // removes any empty lines at the end of the file
+		DELETE_BYTES "%size%" 0x01
+		SET "size" = ("%size%" - 1)
+		READ_BYTE ("%size%") "eof"
+	END
+END
+//__________________________________________________________________________________

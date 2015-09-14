@@ -1,0 +1,1126 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						ITEM TWEAKS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+ACTION_IF NOT GAME_IS ~iwdee~ THEN BEGIN
+
+//ENCHANTMENT STANDARDIZATION_______________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_LONG 0x60 enchantment
+	PATCH_IF (enchantment = 1) BEGIN
+		WRITE_LONG 0x60 3
+	END
+   END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_LONG 0x60 enchantment
+	PATCH_IF (enchantment = 2) BEGIN
+		WRITE_LONG 0x60 3
+	END
+   END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_LONG 0x60 enchantment
+	PATCH_IF (enchantment = 4) BEGIN
+		WRITE_LONG 0x60 3
+	END
+   END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_LONG 0x60 enchantment
+	PATCH_IF (enchantment = 6) BEGIN
+		WRITE_LONG 0x60 5
+	END
+   END
+BUT_ONLY
+
+ACTION_IF FILE_EXISTS_IN_GAME ~arow05.itm~ THEN BEGIN
+COPY_EXISTING ~arow05.itm~ ~override~
+	WRITE_LONG 0x60 1
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow12.itm~ THEN BEGIN
+COPY_EXISTING ~arow12.itm~ ~override~
+	WRITE_LONG 0x60 1
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart04.itm~ THEN BEGIN
+COPY_EXISTING ~dart04.itm~ ~override~
+	WRITE_LONG 0x60 1
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow04.itm~ THEN BEGIN
+COPY_EXISTING ~arow04.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow06.itm~ THEN BEGIN
+COPY_EXISTING ~arow06.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow08.itm~ THEN BEGIN
+COPY_EXISTING ~arow08.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow09.itm~ THEN BEGIN
+COPY_EXISTING ~arow09.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow10.itm~ THEN BEGIN
+COPY_EXISTING ~arow10.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow15.itm~ THEN BEGIN
+COPY_EXISTING ~arow15.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow16.itm~ THEN BEGIN
+COPY_EXISTING ~arow16.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arowkc.itm~ THEN BEGIN
+COPY_EXISTING ~arowkc.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arrophe2.itm~ THEN BEGIN
+COPY_EXISTING ~arrophe2.itm~ ~override~
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart03.itm~ THEN BEGIN
+COPY_EXISTING ~dart03.itm~ ~override~						
+	WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow03.itm~ THEN BEGIN
+COPY_EXISTING ~arow03.itm~ ~override~
+	WRITE_LONG 0x60 3
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow07.itm~ THEN BEGIN
+COPY_EXISTING ~arow07.itm~ ~override~
+	WRITE_LONG 0x60 3
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h07.itm~ THEN BEGIN
+COPY_EXISTING ~ax1h07.itm~ ~override~
+	WRITE_LONG 0x60 3
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bolt05.itm~ THEN BEGIN
+COPY_EXISTING ~bolt05.itm~ ~override~
+	WRITE_LONG 0x60 3
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow02.itm~ THEN BEGIN
+COPY_EXISTING ~arow02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1001
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow11.itm~ THEN BEGIN
+COPY_EXISTING ~arow11.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1002
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~arow1a.itm~ THEN BEGIN
+COPY_EXISTING ~arow1a.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1002
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bolt02.itm~ THEN BEGIN
+COPY_EXISTING ~bolt02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1003
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bolt06.itm~ THEN BEGIN
+COPY_EXISTING ~bolt06.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1004
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull02.itm~ THEN BEGIN
+COPY_EXISTING ~bull02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1005
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull03.itm~ THEN BEGIN
+COPY_EXISTING ~bull03.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1006
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h02.itm~ THEN BEGIN
+COPY_EXISTING ~ax1h02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1007
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h05.itm~ THEN BEGIN
+COPY_EXISTING ~ax1h05.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1008
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h06.itm~ THEN BEGIN
+COPY_EXISTING ~ax1h06.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1008
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun03.itm~ THEN BEGIN
+COPY_EXISTING ~blun03.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1009
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun05.itm~ THEN BEGIN
+COPY_EXISTING ~blun05.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1010
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun07.itm~ THEN BEGIN
+COPY_EXISTING ~blun07.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1011
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun13.itm~ THEN BEGIN
+COPY_EXISTING ~blun13.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1012
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun15.itm~ THEN BEGIN
+COPY_EXISTING ~blun15.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1013
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow02.itm~ THEN BEGIN
+COPY_EXISTING ~bow02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1014
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow04.itm~ THEN BEGIN
+COPY_EXISTING ~bow04.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1015
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow06.itm~ THEN BEGIN
+COPY_EXISTING ~bow06.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1016
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow16.itm~ THEN BEGIN
+COPY_EXISTING ~bow16.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1017
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow17.itm~ THEN BEGIN
+COPY_EXISTING ~bow17.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1018
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow18.itm~ THEN BEGIN
+COPY_EXISTING ~bow18.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1019
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dagg02.itm~ THEN BEGIN
+COPY_EXISTING ~dagg02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1020
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart02.itm~ THEN BEGIN
+COPY_EXISTING ~dart02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1021
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb02.itm~ THEN BEGIN
+COPY_EXISTING ~halb02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1022
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm02.itm~ THEN BEGIN
+COPY_EXISTING ~hamm02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1023
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~slng02.itm~ THEN BEGIN
+COPY_EXISTING ~slng02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1024
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper02.itm~ THEN BEGIN
+COPY_EXISTING ~sper02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1025
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper05.itm~ THEN BEGIN
+COPY_EXISTING ~sper05.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1026
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~staf02.itm~ THEN BEGIN
+COPY_EXISTING ~staf02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1027
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~staf18.itm~ THEN BEGIN
+COPY_EXISTING ~staf18.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1028
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h02.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1029
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h05.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h05.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1030
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h08.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h08.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1031
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h14.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h14.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1031
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h22.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h22.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1032
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h44.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h44.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1033
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h47.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h47.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1034
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h49.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h49.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1035
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h78.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h78.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1036
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h98.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h98.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1031
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h41.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h41.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1037
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h42.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h42.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1038
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h55.itm~ THEN BEGIN
+COPY_EXISTING ~sw1h55.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1039
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h02.itm~ THEN BEGIN
+COPY_EXISTING ~sw2h02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1040
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h11.itm~ THEN BEGIN
+COPY_EXISTING ~sw2h11.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1041
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow02.itm~ THEN BEGIN
+COPY_EXISTING ~xbow02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1042
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow05.itm~ THEN BEGIN
+COPY_EXISTING ~xbow05.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1043
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~chan02.itm~ THEN BEGIN
+COPY_EXISTING ~chan02.itm~ ~override~
+	SAY NAME2 @1044
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~chan05.itm~ THEN BEGIN
+COPY_EXISTING ~chan05.itm~ ~override~
+	SAY NAME2 @1045
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~chan07.itm~ THEN BEGIN
+COPY_EXISTING ~chan07.itm~ ~override~
+	SAY NAME2 @1046
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~chan08.itm~ THEN BEGIN
+COPY_EXISTING ~chan08.itm~ ~override~
+	SAY NAME2 @1046
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat02.itm~ THEN BEGIN
+COPY_EXISTING ~leat02.itm~ ~override~
+	SAY NAME2 @1047
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat05.itm~ THEN BEGIN
+COPY_EXISTING ~leat05.itm~ ~override~
+	SAY NAME2 @1048
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat11.itm~ THEN BEGIN
+COPY_EXISTING ~leat11.itm~ ~override~
+	SAY NAME2 @1049
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plyflind.itm~ THEN BEGIN
+COPY_EXISTING ~plyflind.itm~ ~override~
+	SAY NAME2 @1050
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld02.itm~ THEN BEGIN
+COPY_EXISTING ~shld02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1051
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld02a.itm~ THEN BEGIN
+COPY_EXISTING ~shld02a.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1051
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld04.itm~ THEN BEGIN
+COPY_EXISTING ~shld04.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1052
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld04a.itm~ THEN BEGIN
+COPY_EXISTING ~shld04a.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1052
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld06.itm~ THEN BEGIN
+COPY_EXISTING ~shld06.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1053
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld06a.itm~ THEN BEGIN
+COPY_EXISTING ~shld06a.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1053
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld06p.itm~ THEN BEGIN
+COPY_EXISTING ~shld06p.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1054
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld17.itm~ THEN BEGIN
+COPY_EXISTING ~shld17.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1055
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld28.itm~ THEN BEGIN
+COPY_EXISTING ~shld28.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1056
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld29.itm~ THEN BEGIN
+COPY_EXISTING ~shld29.itm~ ~override~
+	WRITE_LONG 0x60 2
+	SAY NAME2 @1057
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ishld02.itm~ THEN BEGIN
+COPY_EXISTING ~ishld02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1051
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver01.itm~ THEN BEGIN
+COPY_EXISTING ~quiver01.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1058
+	SAY DESC @1059
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver02.itm~ THEN BEGIN
+COPY_EXISTING ~quiver02.itm~ ~override~
+	WRITE_LONG 0x60 1
+	SAY NAME2 @1060
+	SAY DESC @1061
+END
+
+ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~bull07.itm~ THEN BEGIN
+	COPY_EXISTING ~bull07.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull08.itm~ THEN BEGIN
+	COPY_EXISTING ~bull08.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull09.itm~ THEN BEGIN
+	COPY_EXISTING ~bull09.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart09.itm~ THEN BEGIN
+	COPY_EXISTING ~dart09.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart10.itm~ THEN BEGIN
+	COPY_EXISTING ~dart10.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dart11.itm~ THEN BEGIN
+	COPY_EXISTING ~dart11.itm~ ~override~
+		WRITE_LONG 0x60 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~compb06.itm~ THEN BEGIN
+	COPY_EXISTING ~compb06.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1016
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~compb18.itm~ THEN BEGIN
+	COPY_EXISTING ~compb18.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1019
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~comps02.itm~ THEN BEGIN
+	COPY_EXISTING ~comps02.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1029
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~comps42.itm~ THEN BEGIN
+	COPY_EXISTING ~comps42.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1038
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun36.itm~ THEN BEGIN
+	COPY_EXISTING ~blun36.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1062
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver05.itm~ THEN BEGIN
+	COPY_EXISTING ~quiver05.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1063
+		SAY DESC @1064
+END
+END
+
+ACTION_IF GAME_IS ~tutu bgt tob~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~arow11.itm~ THEN BEGIN
+	COPY_EXISTING ~arow11.itm~ ~override/arrow15.itm~
+		SAY NAME2 @1002
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h03.itm~ THEN BEGIN
+	COPY_EXISTING ~ax1h03.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1065
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h11.itm~ THEN BEGIN
+	COPY_EXISTING ~ax1h11.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1065
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull03.itm~ THEN BEGIN
+	COPY_EXISTING ~bull03.itm~ ~override/bull05.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1006
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bull03.itm~ THEN BEGIN
+	COPY_EXISTING ~bull03.itm~ ~override/bull06.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1006
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dagg03.itm~ THEN BEGIN
+	COPY_EXISTING ~dagg03.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1066
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dagg15.itm~ THEN BEGIN
+	COPY_EXISTING ~dagg15.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1067
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dagg15.itm~ THEN BEGIN
+	COPY_EXISTING ~dagg15.itm~ ~override/dagg24.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1067
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb03.itm~ THEN BEGIN
+	COPY_EXISTING ~halb03.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1068
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm03.itm~ THEN BEGIN
+	COPY_EXISTING ~hamm03.itm~ ~override~
+		WRITE_LONG 0x60 3
+		SAY NAME2 @1069
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm05.itm~ THEN BEGIN
+	COPY_EXISTING ~hamm05.itm~ ~override~
+		WRITE_LONG 0x60 3
+		SAY NAME2 @1070
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat07.itm~ THEN BEGIN
+	COPY_EXISTING ~leat07.itm~ ~override~
+		SAY NAME2 @1071
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat12.itm~ THEN BEGIN
+	COPY_EXISTING ~leat12.itm~ ~override~
+		SAY NAME2 @1049
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~leat15.itm~ THEN BEGIN
+	COPY_EXISTING ~leat15.itm~ ~override~
+		SAY NAME2 @1071
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat02.itm~ THEN BEGIN
+	COPY_EXISTING ~plat02.itm~ ~override~
+		SAY NAME2 @1072
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat05.itm~ THEN BEGIN
+	COPY_EXISTING ~plat05.itm~ ~override~
+		SAY NAME2 @1073
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat10.itm~ THEN BEGIN
+	COPY_EXISTING ~plat10.itm~ ~override~
+		SAY NAME2 @1072
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat14.itm~ THEN BEGIN
+	COPY_EXISTING ~plat14.itm~ ~override~
+		SAY NAME2 @1073
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat19.itm~ THEN BEGIN
+	COPY_EXISTING ~plat19.itm~ ~override~
+		SAY NAME2 @1074
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~plat23.itm~ THEN BEGIN
+	COPY_EXISTING ~plat23.itm~ ~override~
+		SAY NAME2 @1074
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld19.itm~ THEN BEGIN
+	COPY_EXISTING ~shld19.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1075
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld30.itm~ THEN BEGIN
+	COPY_EXISTING ~shld30.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1075
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~slng04.itm~ THEN BEGIN
+	COPY_EXISTING ~slng04.itm~ ~override/slng03.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1076
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver05.itm~ THEN BEGIN
+	COPY_EXISTING ~slng04.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1076
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~slng04.itm~ THEN BEGIN
+	COPY_EXISTING ~slng04.itm~ ~override/slng10.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1076
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h06.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h06.itm~ ~override~
+		SAY NAME2 @1077
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h09.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h09.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1078
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h29.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h29.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1078
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h52.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h52.itm~ ~override~
+		WRITE_LONG 0x60 3
+		SAY NAME2 @1079
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ring41.itm~ THEN BEGIN
+	COPY_EXISTING ~ring41.itm~ ~override~
+		SAY NAME2 @1102
+END
+END
+
+ACTION_IF GAME_IS ~bgt tob bg2ee~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~ax1h03.itm~ THEN BEGIN
+	COPY_EXISTING ~ax1h03.itm~ ~override/ax1h17.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1065
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun21.itm~ THEN BEGIN
+	COPY_EXISTING ~blun21.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1080
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun31.itm~ THEN BEGIN
+	COPY_EXISTING ~blun31.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1081
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun21.itm~ THEN BEGIN
+	COPY_EXISTING ~blun21.itm~ ~override/blun33.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1080
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun13.itm~ THEN BEGIN
+	COPY_EXISTING ~blun13.itm~ ~override/blun32.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1012
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun15.itm~ THEN BEGIN
+	COPY_EXISTING ~blun15.itm~ ~override/blun34.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1013
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bolt06.itm~ THEN BEGIN
+	COPY_EXISTING ~bolt06.itm~ ~override/bolt09.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1004
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow16.itm~ THEN BEGIN
+	COPY_EXISTING ~bow16.itm~ ~override/bow24.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1017
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow17.itm~ THEN BEGIN
+	COPY_EXISTING ~bow17.itm~ ~override/bow25.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1018
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~bow18.itm~ THEN BEGIN
+	COPY_EXISTING ~bow18.itm~ ~override/bow26.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1019
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~chan21.itm~ THEN BEGIN
+	COPY_EXISTING ~chan21.itm~ ~override~
+		SAY NAME2 @1046
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwbolt03.itm~ THEN BEGIN
+	COPY_EXISTING ~dwbolt03.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1082
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwblun01.itm~ THEN BEGIN
+	COPY_EXISTING ~dwblun01.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1083
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwhalb01.itm~ THEN BEGIN
+	COPY_EXISTING ~dwhalb01.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1084
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwsper01.itm~ THEN BEGIN
+	COPY_EXISTING ~dwsper01.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1085
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwsw1h01.itm~ THEN BEGIN
+	COPY_EXISTING ~dwsw1h01.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1086
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dwsw1h02.itm~ THEN BEGIN
+	COPY_EXISTING ~dwsw1h02.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1087
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb07.itm~ THEN BEGIN
+	COPY_EXISTING ~halb07.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1050
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb07.itm~ THEN BEGIN
+	COPY_EXISTING ~halb07.itm~ ~override/halb12.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1050
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm08.itm~ THEN BEGIN
+	COPY_EXISTING ~hamm08.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1088
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm08.itm~ THEN BEGIN
+	COPY_EXISTING ~hamm08.itm~ ~override/hamm12.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1088
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~npsw02.itm~ THEN BEGIN
+	COPY_EXISTING ~npsw02.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1089
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper05.itm~ THEN BEGIN
+	COPY_EXISTING ~sper05.itm~ ~override/sper06.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1026
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~staf18.itm~ THEN BEGIN
+	COPY_EXISTING ~staf18.itm~ ~override/staf24.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1028
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h41.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h41.itm~ ~override/sw1h73.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1037
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h42.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h42.itm~ ~override/sw1h72.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1038
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h55.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h55.itm~ ~override/sw1h75.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1039
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h29.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h29.itm~ ~override/sw1h74.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1037
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h55.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h55.itm~ ~override/sw1h76.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1039
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h11.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h11.itm~ ~override/sw2h20.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1041
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow07.itm~ THEN BEGIN
+	COPY_EXISTING ~xbow07.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1090
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow09.itm~ THEN BEGIN
+	COPY_EXISTING ~xbow09.itm~ ~override~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1091
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow07.itm~ THEN BEGIN
+	COPY_EXISTING ~xbow07.itm~ ~override/xbow17.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1090
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~xbow09.itm~ THEN BEGIN
+	COPY_EXISTING ~xbow09.itm~ ~override/xbow18.itm~
+		WRITE_LONG 0x60 2
+		SAY NAME2 @1091
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver03.itm~ THEN BEGIN
+	COPY_EXISTING ~quiver03.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1058
+		SAY DESC @1092
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver04.itm~ THEN BEGIN
+	COPY_EXISTING ~quiver04.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1060
+		SAY DESC @1093
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver05.itm~ THEN BEGIN
+	COPY_EXISTING ~quiver05.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1063
+		SAY DESC @1064
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~quiver06.itm~ THEN BEGIN
+	COPY_EXISTING ~quiver06.itm~ ~override~
+		WRITE_LONG 0x60 1
+		SAY NAME2 @1063
+		SAY DESC @1094
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper10.itm~ THEN BEGIN
+	COPY_EXISTING ~sper10.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~staf14.itm~ THEN BEGIN
+	COPY_EXISTING ~staf14.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~staf20.itm~ THEN BEGIN
+	COPY_EXISTING ~staf20.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h28.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h28.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h71.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h28.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h77.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h77.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h09.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h09.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw2h08.itm~ THEN BEGIN
+	COPY_EXISTING ~sw2h08.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~wamace.itm~ THEN BEGIN
+	COPY_EXISTING ~wamace.itm~ ~override~
+		WRITE_LONG 0x60 5
+END
+END
+//__________________________________________________________________________________
+
+
+//ITEM NAMES PATCH__________________________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+		READ_LONG 0x0c "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x0c "name"
+			PATCH_IF (~%name%~ STRING_CONTAINS_REGEXP ~\+[1-6]~) = 0 BEGIN
+				INNER_PATCH_SAVE new_name ~%name%~ BEGIN
+					REPLACE_TEXTUALLY ~ \+[1-6]~ ~~
+				END
+				SAY_EVALUATED 0x0c ~%new_name%~
+			END
+		END
+	END
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~blun23.itm~ THEN BEGIN
+	COPY_EXISTING ~blun23.itm~ ~override~
+		SAY NAME2 @1095
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~blun24.itm~ THEN BEGIN
+	COPY_EXISTING ~blun24.itm~ ~override~
+		SAY NAME2 @1096
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clck02.itm~ THEN BEGIN
+	COPY_EXISTING ~clck02.itm~ ~override~
+		SAY NAME2 @1097
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb08.itm~ THEN BEGIN
+	COPY_EXISTING ~halb08.itm~ ~override~
+		SAY NAME2 @1098
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~halb09.itm~ THEN BEGIN
+	COPY_EXISTING ~halb09.itm~ ~override~
+		SAY NAME2 @1099
+		WRITE_LONG 0x60 5
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hamm04.itm~ THEN BEGIN
+	COPY_EXISTING ~hamm04.itm~ ~override~
+		SAY NAME2 @1100
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~npsw02.itm~ THEN BEGIN
+	COPY_EXISTING ~npsw02.itm~ ~override~
+		SAY NAME2 @1089
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~ring07.itm~ THEN BEGIN
+	COPY_EXISTING ~ring07.itm~ ~override~
+		SAY NAME2 @1101
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~shld07.itm~ THEN BEGIN
+	COPY_EXISTING ~shld07.itm~ ~override~
+		SAY NAME2 @1103
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper08.itm~ THEN BEGIN
+	COPY_EXISTING ~sper08.itm~ ~override~
+		SAY NAME2 @1104
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sper09.itm~ THEN BEGIN
+	COPY_EXISTING ~sper09.itm~ ~override~
+		SAY NAME2 @1105
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h03.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h03.itm~ ~override~
+		SAY NAME2 @1106
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sw1h23.itm~ THEN BEGIN
+	COPY_EXISTING ~sw1h23.itm~ ~override~
+		SAY NAME2 @1107
+END
+//__________________________________________________________________________________
+
+END // end of not-for-IWDee stuff. Basic tweaks follow:
+
+//__________________________________________________________________________________
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+		READ_SHORT ~0x1c~ ~type~
+		PATCH_IF (~%type%~ = ~16~) BEGIN // daggers
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=7 parameter2=1 END
+		END
+		PATCH_IF (~%type%~ = ~26~) BEGIN // quarterstaff
+			WRITE_BYTE 0x88 4
+			WRITE_BYTE 0x8a 2
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=0 target=1 timing=2 power=1 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~29~) BEGIN // spears
+			WRITE_BYTE 0x88 8
+			READ_BYTE ~0x8c~ ~damagebonus~
+			PATCH_IF (~%damagebonus%~ = ~5~) BEGIN
+				WRITE_SHORT 0x8c 6
+			END
+			PATCH_IF (~%damagebonus%~ = ~4~) BEGIN
+				WRITE_SHORT 0x8c 5
+			END
+			PATCH_IF (~%damagebonus%~ = ~3~) BEGIN
+				WRITE_SHORT 0x8c 4
+			END
+			PATCH_IF (~%damagebonus%~ = ~2~) BEGIN
+				WRITE_SHORT 0x8c 3
+			END
+			PATCH_IF (~%damagebonus%~ = ~1~) BEGIN
+				WRITE_SHORT 0x8c 2
+			END
+			PATCH_IF (~%damagebonus%~ = ~0~) BEGIN
+				WRITE_SHORT 0x8c 1
+			END
+			FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+				READ_LONG "%index%" "valid"
+				PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+					READ_STRREF "%index%" "description"
+						PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~1d6~) = 0 BEGIN // more validation
+							INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+								REPLACE_TEXTUALLY ~1d6~ ~2d4~
+							END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+						END
+				END
+			END
+
+		END
+		PATCH_IF (~%type%~ = ~25~) BEGIN // axes
+			WRITE_SHORT 0x8e 8
+		END
+		PATCH_IF (~%type%~ = ~19~) BEGIN // small swords
+			WRITE_SHORT 0x8e 7
+		END
+	END
+	BUT_ONLY
+//__________________________________________________________________________________
+
+/*
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_missl.d5~ ~override~
+//__________________________________________________________________________________
+*/
+
+//__________________________________________________________________________________
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+		READ_SHORT ~0x1c~ ~type~
+		PATCH_IF (~%type%~ = ~14~) BEGIN // bullets
+			WRITE_SHORT 0x8e 2
+			FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+				READ_LONG "%index%" "valid"
+				PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+					READ_STRREF "%index%" "description"
+						PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~missile~) = 0 BEGIN // more validation
+							INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+								REPLACE_TEXTUALLY ~missiles~ ~projectiles~
+								REPLACE_TEXTUALLY ~missile (piercing)~ ~blunt~
+								REPLACE_TEXTUALLY ~missile~ ~blunt~
+							END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+						END
+				END
+			END
+		END
+		PATCH_IF (~%type%~ = ~24~) BEGIN // darts
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=8 parameter2=1 END
+		END
+		PATCH_IF (~%type%~ = ~31~) BEGIN // bolts
+			WRITE_BYTE 0x88 4
+			WRITE_BYTE 0x8a 2
+		END
+		PATCH_IF (~%type%~ = ~5~) BEGIN // arrows
+			WRITE_BYTE 0x88 5
+			FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+				READ_LONG "%index%" "valid"
+				PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+					READ_STRREF "%index%" "description"
+						PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~1d6~) = 0 BEGIN // more validation
+							INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+								REPLACE_TEXTUALLY ~1d6~ ~1d5~
+							END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+						END
+				END
+			END
+		END
+		READ_BYTE 0x31 ~bowtype~
+		PATCH_IF (~%bowtype%~ = 104) BEGIN
+			READ_LONG 0x64 abilities_off
+			READ_SHORT 0x68 num_abilities
+			FOR (ability = 0; ability < num_abilities; ability += 1) BEGIN
+				PATCH_IF (BYTE_AT (abilities_off + 0x38 * ability + 0x00) == 4) BEGIN // Launcher
+					READ_SHORT (abilities_off + 0x38 * ability + 0x1a) damage_bonus
+					SET new_damage_bonus = damage_bonus + 2
+					WRITE_SHORT (abilities_off + 0x38 * ability + 0x1a) new_damage_bonus
+				END
+			END
+			FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+				READ_LONG "%index%" "valid"
+				PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+					READ_STRREF "%index%" "description"
+					INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +5~ ~Damage: +6~
+						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +4~ ~Damage: +6~
+						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +3~ ~Damage: +5~
+						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +2~ ~Damage: +4~
+						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +1~ ~Damage: +3~
+					END
+					PATCH_IF GAME_IS ~bgee bg2ee iwdee~ AND NOT (~%description%~ STRING_CONTAINS_REGEXP ~Damage:~ = 0) BEGIN
+						INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+							REPLACE_TEXTUALLY ~Speed Factor:~ ~Damage: +2
+Speed Factor:~
+						END
+					END
+					PATCH_IF ENGINE_IS ~tob~ AND NOT (~%description%~ STRING_CONTAINS_REGEXP ~Damage:~ = 0) BEGIN
+						INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+							REPLACE_TEXTUALLY ~Weight:~ ~Damage: +2
+Weight:~
+						END
+					END
+					SAY_EVALUATED "%index%" ~%new_desc%~
+				END
+			END
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=7 parameter2=1 END
+		END
+	END
+	BUT_ONLY
+//__________________________________________________________________________________
+
+
+//__________________________________________________________________________________
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY ~might_and_guile/misc/iwdee/bowmess.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/sbowebu.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/uhxbw3b.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/uhxbw5a.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/ulbow4a.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/ulbow5a.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/ulxbw3b.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/ulxbw5a.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/xbow06.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/xxbow06.itm~ ~override~
+END 
+//__________________________________________________________________________________

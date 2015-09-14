@@ -1,0 +1,173 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						     MONK TWEAKS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/monk/d5_mfist.d5~ ~override~
+//__________________________________________________________________________________
+
+
+//CHANGE MONK FISTS_________________________________________________________________
+//
+COPY ~might_and_guile/monk/mfist1.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist2.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist3.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist4.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist5.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist6.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist7.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+COPY ~might_and_guile/monk/mfist8.itm~ ~override~
+	SAY NAME1 @2653
+	SAY NAME2 @2653
+
+COPY ~might_and_guile/monk/d5mfist1.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist2.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist3.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist4.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist5.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist6.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist7.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+COPY ~might_and_guile/monk/d5mfist8.itm~ ~override~
+	SAY NAME1 @2655
+	SAY NAME2 @2655
+
+COPY ~might_and_guile/monk/d5_mfist.spl~ ~override~
+	SAY NAME1 @2653
+	SAY UNIDENTIFIED_DESC @2654
+COPY ~might_and_guile/monk/d5_nofst.spl~ ~override~
+	SAY NAME1 @2655
+	SAY UNIDENTIFIED_DESC @2656
+
+COPY_EXISTING ~clabmo01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/monk/mfist.txt~
+		BUT_ONLY
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~10~ "rows"
+	FOR ( index = 1 ; index < rows ; index = index + 1 ) BEGIN
+		READ_2DA_ENTRY %index% 5 10 modclab
+		READ_2DA_ENTRY %index% 8 10 modclass
+		DEFINE_ASSOCIATIVE_ARRAY d5_monk_clabs BEGIN "%modclab%" => "%modclass%" END
+	END
+	BUT_ONLY
+ACTION_PHP_EACH d5_monk_clabs AS woo => soo BEGIN
+	ACTION_IF (%soo% = 20) AND (FILE_EXISTS_IN_GAME ~%woo%.2da~) THEN BEGIN
+		COPY_EXISTING ~%woo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/monk/mfist.txt~
+			BUT_ONLY
+	END
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24234 @2651
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 45867 @2651
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		STRING_SET 34606 @2651 // or 37256
+		STRING_SET 37256 @2651 //  
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24234 @2652
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 45867 @2652
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		STRING_SET 34606 @2652 // or 37256
+		STRING_SET 37256 @2652 //  
+	END
+END
+//__________________________________________________________________________________
+
+//FAERUNIAN MONASTIC ORDERS COMPATIBILITY________________________________________
+// 
+ACTION_IF FILE_EXISTS_IN_GAME ~qdmnk02.spl~ THEN BEGIN
+	COPY_EXISTING ~clabmo01.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+	ACTION_IF FILE_EXISTS_IN_GAME ~clabmo02.2da~ THEN BEGIN
+		COPY_EXISTING ~clabmo02.2da~ ~override~
+			REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+			REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~clabmo03.2da~ THEN BEGIN
+	COPY_EXISTING ~clabmo03.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~qdbrkone.2da~ THEN BEGIN
+	COPY_EXISTING ~qdbrkone.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~qdhinfst.2da~ THEN BEGIN
+	COPY_EXISTING ~qdhinfst.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~qdlngdth.2da~ THEN BEGIN
+	COPY_EXISTING ~qdlngdth.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~qdoldord.2da~ THEN BEGIN
+	COPY_EXISTING ~qdoldord.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~qdshnhnd.2da~ THEN BEGIN
+	COPY_EXISTING ~qdshnhnd.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****       ~
+		BUT_ONLY
+END
+//__________________________________________________________________________________

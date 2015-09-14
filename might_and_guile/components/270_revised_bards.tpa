@@ -1,0 +1,269 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED BLADE & SKALD
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//BLADE: WEAPON DISPLAY INSTEAD OF OFF. SPIN_________________________________________
+//
+COPY_EXISTING ~clabba02.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL521 ~ ~****       ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bard/bladedance.txt~
+	BUT_ONLY
+COPY ~might_and_guile/bard/d5_blso1.spl~ ~override~
+COPY ~might_and_guile/bard/d5_blsoa.spl~ ~override~
+	SAY NAME1 @2705
+	SAY UNIDENTIFIED_DESC @2705
+//__________________________________________________________________________________
+
+
+//BLADE & SKALD: CHANGE PROFICIENCIES_______________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	COPY_EXISTING ~weapprof.2da~ ~override~
+		// Blade
+		// no 2-handed; spec. with dagger, short sword, long sword and scimitar
+		SET_2DA_ENTRY_LATER ~#weapprof~ 11 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 12 42 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 13 42 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 14 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 15 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 16 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 17 42 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 18 42 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 19 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 20 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 21 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 22 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 23 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 24 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 25 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 26 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 27 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 28 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 29 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 30 42 1
+		SET_2DA_ENTRY_LATER ~#weapprof~ 31 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 32 42 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 33 42 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 34 42 3
+		// Skald
+		// spec. with any melee weapon
+		SET_2DA_ENTRY_LATER ~#weapprof~ 11 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 12 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 13 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 14 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 15 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 16 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 17 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 18 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 19 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 20 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 21 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 22 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 23 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 24 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 25 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 26 44 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 27 44 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 28 44 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 29 44 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 30 44 0
+		SET_2DA_ENTRY_LATER ~#weapprof~ 31 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 32 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 33 44 2
+		SET_2DA_ENTRY_LATER ~#weapprof~ 34 44 2
+	SET_2DA_ENTRIES_NOW ~#weapprof~ 1
+END
+//__________________________________________________________________________________
+
+
+//SKALD: SLOWER SPELLCASTING________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
+//	COPY ~might_and_guile/misc/mxsplbr1.2da~ ~override/mxsplbrd.2da~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~ 2~ ~ 1~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~ 3~ ~ 2~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~ 4~ ~ 3~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~ 5~ ~ 4~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~ 6~ ~ 5~
+	COPY_EXISTING ~mxsplbrd.2da~ ~override~
+		REPLACE_TEXTUALLY ~1   1   2   3   4   5~ ~1   2   3   4   5   6~
+	COPY_EXISTING ~clabba01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabba02.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabba03.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+		BUT_ONLY
+	COPY ~might_and_guile/bard/d5_skspl.d5~ ~override~
+	COPY ~might_and_guile/bard/d5_basp1.spl~ ~override~
+	COPY ~might_and_guile/bard/d5_basp2.spl~ ~override~
+	COPY ~might_and_guile/bard/d5_basp3.spl~ ~override~
+	COPY ~might_and_guile/bard/d5_basp4.spl~ ~override~
+	COPY ~might_and_guile/bard/d5_basp5.spl~ ~override~
+	COPY ~might_and_guile/bard/d5_basp6.spl~ ~override~
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 37 ) BEGIN
+				FOR ( index = 38 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
+			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%coo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 40 ) BEGIN
+				FOR ( index = 41 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
+			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%coo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 41 ) BEGIN
+				FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
+			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%coo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~9~ "rows"
+			PATCH_IF ( rows > 31 ) BEGIN
+				FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 9 modclab
+					READ_2DA_ENTRY %index% 8 9 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
+			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%coo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+END
+//___________________________________________________________________________________
+
+
+//UPDATE BLADE STRINGS_______________________________________________________________
+// 
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 25372 @2703 // or 24304
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25217 @2703
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37240 @2703
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 25372 @2704
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25217 @2704
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37240 @2704
+	END
+END
+//___________________________________________________________________________________
+
+
+//UPDATE SKALD STRINGS_______________________________________________________________
+// 
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 25374 @2713
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25220 @2713
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37246 @2713
+	END
+END
+/*
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 25374 @2714
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 25220 @2714
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37246 @2714
+	END
+END
+*/
+//___________________________________________________________________________________
+
+
+/*
+//______________________HLAS________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
+	COPY_EXISTING ~LUBa0.2da~ ~override/luba2.2da~	
+END
+//__________________________________________________________________________________
+*/
+
+CLEAR_ARRAYS

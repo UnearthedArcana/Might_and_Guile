@@ -1,0 +1,27 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						STAT BONUSES
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE___________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_stats.d5~ ~override~
+//___________________________________________________________________________________
+
+//EDIT STATS______________________________________________________________
+//
+//COPY ~might_and_guile/misc/abracead.2da~ ~override~
+COPY ~might_and_guile/misc/dexmod.2da~ ~override~
+COPY ~might_and_guile/misc/strmod.2da~ ~override~
+COPY ~might_and_guile/misc/strmodex.2da~ ~override~
+COPY ~might_and_guile/misc/mxsplwis.2da~ ~override~
+COPY ~might_and_guile/misc/chrmodst.2da~ ~override~
+COPY ~might_and_guile/misc/intmod.2da~ ~override~
+COPY_EXISTING ~abclasrq.2da~ ~override~
+	REPLACE_TEXTUALLY ~ 0~ ~ 7~
+	BUT_ONLY
+//___________________________________________________________________________________

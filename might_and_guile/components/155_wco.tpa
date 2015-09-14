@@ -1,0 +1,3657 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						WIZARD CLASS OVERHAUL
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/wizard/d5_wiz.d5~ ~override~
+//__________________________________________________________________________________
+
+//range: @6001-6099 (class strings, sorcerer, cantrips, metamagic)
+
+//UPDATE WIZARD STRINGS_______________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 17245 @6002
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9563 @6002
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37189 @6002
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24290 @6003
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9564 @6003
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37193 @6003
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24291 @6004
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 9565 @6004
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37196 @6004
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 24291 @6005
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		STRING_SET 9565 @6005
+	END
+	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+		STRING_SET 37196 @6005
+	END
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24292 @6006
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9566 @6006
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37199 @6006
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24293 @6007
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9567 @6007
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37202 @6007
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24294 @6008
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9568 @6008
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37205 @6008
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24295 @6009
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9569 @6009
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37208 @6009
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24296 @6010
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9570 @6010
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37211 @6010
+END
+
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 24297 @6011
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	STRING_SET 9571 @6011
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	STRING_SET 37214 @6011
+END
+//__________________________________________________________________________________
+
+//NEW SORCERER, SAME AS THE OLD SORCERER______________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb00.qd~ THEN BEGIN
+
+ADD_KIT ~D5SORCE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5SORCE       5 5 1 1 1 1 1 1~
+~D5SORCE       5 5 1 1 1 1 1 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5SORCE           0   0   10  0   0   9~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5SORCE           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5SORCE           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5SORCE           0   0   0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5SORCE           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5SORCE           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/wizard/d5_sorce.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 19~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Ma0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @6098
+SAY @6098
+SAY @6099
+//__________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@6099)
+		STR_VAR
+			kit_name = D5SORCE
+			clswpbon = ~0 0 3~
+	END
+END
+//____________________________________________________________________________________
+
+//SORCERER 2DA FILES__________________________________________________________________
+//
+COPY ~might_and_guile/wizard/d5_sorce.spl~ ~override~
+COPY ~might_and_guile/wizard/d5_sorce.eff~ ~override~
+COPY ~might_and_guile/wizard/d5_sorce.cre~ ~override~
+COMPILE ~might_and_guile/wizard/d5_sorce.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma01.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma01.2da~ ~override/d5_sorce.2da~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/srcclab.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabma01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/masclab.txt~
+		BUT_ONLY
+END
+//____________________________________________________________________________________
+
+END
+
+
+//CANTRIPS_________________________________________________________________________
+//
+ADD_PROJECTILE ~might_and_guile/wizard/d5_msred.pro~
+ADD_PROJECTILE ~might_and_guile/wizard/d5_msblu.pro~
+ADD_PROJECTILE ~might_and_guile/wizard/d5_msgrn.pro~
+ADD_PROJECTILE ~might_and_guile/wizard/d5_msbrn.pro~
+ADD_PROJECTILE ~might_and_guile/wizard/d5_msorn.pro~
+ADD_PROJECTILE ~might_and_guile/wizard/d5_mswhi.pro~
+COPY ~might_and_guile/wizard/spmagm02.bam~ ~override~
+COPY ~might_and_guile/wizard/spmagm03.bam~ ~override~
+COPY ~might_and_guile/wizard/spmagm04.bam~ ~override~
+COPY ~might_and_guile/wizard/spmagm05.bam~ ~override~
+COPY ~might_and_guile/wizard/spmagm06.bam~ ~override~
+COPY ~might_and_guile/wizard/spmagm07.bam~ ~override~
+COPY ~might_and_guile/wizard/d5_cant.bam~ ~override~
+COPY ~might_and_guile/wizard/d5_sp420.bam~ ~override~
+COPY ~might_and_guile/wizard/d5_sp710.bam~ ~override~
+COPY ~might_and_guile/wizard/d5_sp809.bam~ ~override~
+//COPY ~might_and_guile/wizard/d5_wildm.2da~ ~override~
+COPY ~might_and_guile/wizard/d5_cstbo.spl~ ~override~
+COPY ~might_and_guile/wizard/d5_cstpn.spl~ ~override~
+COPY ~might_and_guile/wizard/d5_cantr.spl~ ~override~
+	SAY NAME1 @6012
+COPY ~might_and_guile/wizard/d5_cant.spl~ ~override~
+	SAY NAME1 @6012
+	SAY UNIDENTIFIED_DESC @6013
+COPY ~might_and_guile/wizard/d5_cant1.spl~ ~override~
+	SAY NAME1 @6012
+	SAY UNIDENTIFIED_DESC @6013
+COPY ~might_and_guile/wizard/d5_cant2.spl~ ~override~
+	SAY NAME1 @6012
+	SAY UNIDENTIFIED_DESC @6013
+COPY ~might_and_guile/wizard/d5_cant3.spl~ ~override~
+	SAY NAME1 @6012
+	SAY UNIDENTIFIED_DESC @6013
+COPY ~might_and_guile/wizard/d5_cantr.2da~ ~override~
+COPY ~might_and_guile/wizard/d5_maab.spl~ ~override~
+	SAY NAME1 @6014
+	SAY UNIDENTIFIED_DESC @6015
+COPY ~might_and_guile/wizard/d5_wiab.spl~ ~override~
+	SAY NAME1 @6014
+	SAY UNIDENTIFIED_DESC @6015
+COPY ~might_and_guile/wizard/d5_maco.spl~ ~override~
+	SAY NAME1 @6016
+	SAY UNIDENTIFIED_DESC @6017
+COPY ~might_and_guile/wizard/d5_wico.spl~ ~override~
+	SAY NAME1 @6016
+	SAY UNIDENTIFIED_DESC @6017
+COPY ~might_and_guile/wizard/d5_rabb.cre~ ~override~
+	SAY NAME1 @6018
+COPY ~might_and_guile/wizard/d5_wolf.bcs~ ~override~
+COPY ~might_and_guile/wizard/d5_madi.spl~ ~override~
+	SAY NAME1 @6019
+	SAY UNIDENTIFIED_DESC @6020
+COPY ~might_and_guile/wizard/d5_widi.spl~ ~override~
+	SAY NAME1 @6019
+	SAY UNIDENTIFIED_DESC @6020
+COPY ~might_and_guile/wizard/d5_maen.spl~ ~override~
+	SAY NAME1 @6021
+	SAY UNIDENTIFIED_DESC @6022
+COPY ~might_and_guile/wizard/d5_wien.spl~ ~override~
+	SAY NAME1 @6021
+	SAY UNIDENTIFIED_DESC @6022
+COPY ~might_and_guile/wizard/d5_mail.spl~ ~override~
+	SAY NAME1 @6023
+	SAY UNIDENTIFIED_DESC @6024
+COPY ~might_and_guile/wizard/d5_wiil.spl~ ~override~
+	SAY NAME1 @6023
+	SAY UNIDENTIFIED_DESC @6024
+COPY ~might_and_guile/wizard/d5_main.spl~ ~override~
+	SAY NAME1 @6025
+	SAY UNIDENTIFIED_DESC @6026
+	WRITE_SHORT 0x098 ~%d5_msred%~
+COPY ~might_and_guile/wizard/d5_wiin.spl~ ~override~
+	SAY NAME1 @6025
+	SAY UNIDENTIFIED_DESC @6026
+	WRITE_SHORT 0x098 ~%d5_msred%~
+COPY ~might_and_guile/wizard/d5_mane.spl~ ~override~
+	SAY NAME1 @6027
+	SAY UNIDENTIFIED_DESC @6028
+COPY ~might_and_guile/wizard/d5_wine.spl~ ~override~
+	SAY NAME1 @6027
+	SAY UNIDENTIFIED_DESC @6028
+COPY ~might_and_guile/wizard/d5_matr.spl~ ~override~
+	SAY NAME1 @6029
+	SAY UNIDENTIFIED_DESC @6030
+COPY ~might_and_guile/wizard/d5_witr.spl~ ~override~
+	SAY NAME1 @6029
+	SAY UNIDENTIFIED_DESC @6030
+COPY ~might_and_guile/wizard/d5_mfir.spl~ ~override~
+	SAY NAME1 @6031
+	SAY UNIDENTIFIED_DESC @6032
+COPY ~might_and_guile/wizard/d5_wfir.spl~ ~override~
+	SAY NAME1 @6031
+	SAY UNIDENTIFIED_DESC @6032
+	WRITE_SHORT 0x098 ~%d5_msorn%~
+COPY ~might_and_guile/wizard/d5_mcld.spl~ ~override~
+	SAY NAME1 @6033
+	SAY UNIDENTIFIED_DESC @6034
+COPY ~might_and_guile/wizard/d5_wcld.spl~ ~override~
+	SAY NAME1 @6033
+	SAY UNIDENTIFIED_DESC @6034
+	WRITE_SHORT 0x098 ~%d5_mswhi%~
+COPY ~might_and_guile/wizard/d5_macd.spl~ ~override~
+	SAY NAME1 @6035
+	SAY UNIDENTIFIED_DESC @6036
+COPY ~might_and_guile/wizard/d5_wacd.spl~ ~override~
+	SAY NAME1 @6035
+	SAY UNIDENTIFIED_DESC @6036
+	WRITE_SHORT 0x098 ~%d5_msgrn%~
+COPY ~might_and_guile/wizard/d5_melc.spl~ ~override~
+	SAY NAME1 @6037
+	SAY UNIDENTIFIED_DESC @6038
+COPY ~might_and_guile/wizard/d5_welc.spl~ ~override~
+	SAY NAME1 @6037
+	SAY UNIDENTIFIED_DESC @6038
+	WRITE_SHORT 0x098 ~%d5_msblu%~
+COPY ~might_and_guile/wizard/d5_wert.spl~ ~override~
+	SAY NAME1 @6039
+	SAY UNIDENTIFIED_DESC @6040
+	WRITE_SHORT 0x098 ~%d5_msbrn%~
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_maab~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wiab~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_maen~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wien~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_main~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wiin~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_mail~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wiil~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_mane~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wine~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_madi~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_widi~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_matr~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_witr~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_maco~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wico~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wfir~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_welc~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wcld~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wacd~ END
+	BUT_ONLY
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode=206 target=1 resist_dispel=3 timing=0 duration=300 power=1 STR_VAR resource=~d5_wert~ END
+	BUT_ONLY
+//_________________________________________________________________________________
+
+
+//REBALANCED MAGIC MISSILE_________________________________________________________
+//
+COPY ~might_and_guile/wizard/spwi112.spl~ ~override~
+	SAY NAME1 @6072
+	SAY UNIDENTIFIED_DESC @6073
+//_________________________________________________________________________________
+
+
+//METAMAGIC FILES__________________________________________________________________
+//
+COPY ~might_and_guile/wizard/d5_seq1.spl~ ~override~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+COPY ~might_and_guile/wizard/d5_seq2.spl~ ~override~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+COPY ~might_and_guile/wizard/d5_seq3.spl~ ~override~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
+COPY ~might_and_guile/wizard/spwi420.spl~ ~override~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+COPY ~might_and_guile/wizard/spwi420d.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi420p.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi710.spl~ ~override~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+COPY ~might_and_guile/wizard/spwi710d.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi710p.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi809.spl~ ~override~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
+COPY ~might_and_guile/wizard/spwi809d.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi809p.spl~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
+	COPY ~might_and_guile/wizard/mseqscrl.itm~ ~override/scrl6p.itm~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
+	COPY ~might_and_guile/wizard/seqscrl.itm~ ~override/scrl8l.itm~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
+	COPY ~might_and_guile/wizard/trigscrl.itm~ ~override/scrl9d.itm~
+END
+COPY ~might_and_guile/wizard/d5_conti.spl~ ~override~
+	SAY NAME1 @6351
+	SAY IDENTIFIED_DESC @6352
+//_________________________________________________________________________________
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						WIZARD KIT CHANGES
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//REMOVE RACIAL KIT RESTRICTIONS____________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	COPY_EXISTING ~mgsrcreq.2da~ ~override~
+		SET_2DA_ENTRY_LATER ~#race~ 1 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 1 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 1 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 4 1
+		SET_2DA_ENTRY_LATER ~#race~ 10 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 10 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 10 4 1
+		SET_2DA_ENTRIES_NOW ~#race~ 8
+	BUT_ONLY
+END
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	COPY_EXISTING ~mgsrcreq.2da~ ~override~
+		SET_2DA_ENTRY_LATER ~#race~ 1 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 1 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 1 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 2 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 3 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 4 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 5 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 6 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 7 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 8 1 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 2 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 3 1
+		SET_2DA_ENTRY_LATER ~#race~ 9 1 1
+		SET_2DA_ENTRIES_NOW ~#race~ 8
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+//TRUECLASS MAGE____________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma01.2da~ THEN BEGIN
+	COPY_EXISTING ~KITLIST.2da~ ~override~
+		SET_2DA_ENTRY 33 5 1 ~d5_wildm ~
+		BUT_ONLY
+	COPY_EXISTING ~clabma01.2da~ ~override/d5_wildm.2da~
+	COPY_EXISTING ~clabma01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma1clab.txt~
+		BUT_ONLY
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma01.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma01.2da~ ~override~
+	COPY ~might_and_guile/wizard/d5_wildm.2da~ ~override~
+END
+//__________________________________________________________________________________
+
+//ABJURER___________________________________________________________________________
+//range: @6201-6249
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma02.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma02.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+		BUT_ONLY
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma02.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma02.2da~ ~override~
+END
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/d5_abju.eff~ ~override~
+	COPY_EXISTING ~spwi522.spl~ ~override~
+			~spwi618.spl~ ~override~
+			~spwi701.spl~ ~override~
+			~spwi902.spl~ ~override~
+			~spwi406.spl~ ~override~
+			~spwi602.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=9 parameter2=64 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
+END
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~spwi406.spl~ ~override/d5_abju1.spl~
+		SAY NAME1 @6201
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi522.spl~ ~override/d5_abju2.spl~
+		SAY NAME1 @6202
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi602.spl~ ~override/d5_abju3.spl~
+		SAY NAME1 @6203
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi618.spl~ ~override/d5_abju4.spl~
+		SAY NAME1 @6204
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi701.spl~ ~override/d5_abju5.spl~
+		SAY NAME1 @6205
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi902.spl~ ~override/d5_abju6.spl~
+		SAY NAME1 @6206
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~spwi406.spl~ ~override/d5_abju1.spl~
+		SAY NAME1 @6211
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi522.spl~ ~override/d5_abju2.spl~
+		SAY NAME1 @6212
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi602.spl~ ~override/d5_abju3.spl~
+		SAY NAME1 @6213
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi618.spl~ ~override/d5_abju4.spl~
+		SAY NAME1 @6214
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi701.spl~ ~override/d5_abju5.spl~
+		SAY NAME1 @6215
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	COPY_EXISTING ~spwi902.spl~ ~override/d5_abju6.spl~
+		SAY NAME1 @6216
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=146 target=1 resist_dispel=0 timing=0 power=0 STR_VAR resource=~spwi519~ END
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi406.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi406.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi522.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi522.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi602.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi602.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi618.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi618.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi701.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi701.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+	ACTION_IF FILE_EXISTS_IN_GAME ~spwi902.spl~ THEN BEGIN
+		COPY_EXISTING ~spwi902.spl~ ~override~
+			WRITE_LONG 0x1e ("0x00000040") //blocked: abjurers
+			BUT_ONLY
+	END
+END
+COPY_EXISTING ~clabma02.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m12clab.txt~
+//__________________________________________________________________________________
+
+//NECROMANCER_______________________________________________________________________
+//range @6251-6299
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma03.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma03.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma03.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma03.2da~ ~override~
+END
+COPY ~might_and_guile/wizard/d5_nect1.spl~ ~override~
+	SAY NAME1 @6251
+	SAY IDENTIFIED_DESC @6252
+COPY ~might_and_guile/wizard/d5_nect2.spl~ ~override~
+	SAY NAME1 @6253
+	SAY IDENTIFIED_DESC @6254
+COPY ~might_and_guile/wizard/d5_nect3.spl~ ~override~
+	SAY NAME1 @6255
+	SAY IDENTIFIED_DESC @6256
+COPY ~might_and_guile/wizard/d5_nnct1.spl~ ~override~
+	SAY NAME1 @6257
+	SAY IDENTIFIED_DESC @6257
+COPY ~might_and_guile/wizard/d5_nnct2.spl~ ~override~
+	SAY NAME1 @6258
+	SAY IDENTIFIED_DESC @6258
+COPY ~might_and_guile/wizard/d5_nnct3.spl~ ~override~
+	SAY NAME1 @6259
+	SAY IDENTIFIED_DESC @6259
+COPY ~might_and_guile/wizard/d5_nect1.itm~ ~override~
+	SAY NAME1 @6251
+	SAY IDENTIFIED_DESC @6251
+COPY ~might_and_guile/wizard/d5_nect2.itm~ ~override~
+	SAY NAME1 @6253
+	SAY IDENTIFIED_DESC @6253
+COPY ~might_and_guile/wizard/d5_nect3.itm~ ~override~
+	SAY NAME1 @6255
+	SAY IDENTIFIED_DESC @6255
+COPY ~might_and_guile/wizard/d5_nect3.bam~ ~override~
+COPY ~might_and_guile/wizard/scrl82.itm~ ~override~
+	SAY NAME1 @6251
+	SAY IDENTIFIED_DESC @6252
+COPY ~might_and_guile/wizard/scrl1c.itm~ ~override~
+	SAY NAME1 @6253
+	SAY IDENTIFIED_DESC @6254
+COPY ~might_and_guile/wizard/scrl1q.itm~ ~override~
+	SAY NAME1 @6255
+	SAY IDENTIFIED_DESC @6256
+COPY ~might_and_guile/wizard/spwi119.spl~ ~override~
+	SAY NAME1 @6260
+	SAY UNIDENTIFIED_DESC @6261
+COPY ~might_and_guile/wizard/spwi119a.spl~ ~override~
+COPY ~might_and_guile/wizard/spwi221.spl~ ~override~
+	SAY NAME1 @6262
+	SAY UNIDENTIFIED_DESC @6263
+COPY ~might_and_guile/misc/d5_dsvbo.spl~ ~override~
+	SAY NAME1 @16
+ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ THEN BEGIN
+	COPY_EXISTING ~hidespl.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/nechide.txt~
+END		
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma03.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m13clab.txt~
+	ACTION_IF FILE_EXISTS_IN_GAME ~A!DIRGE.2da~ THEN BEGIN
+		COPY_EXISTING ~a!dirge.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/wizard/m13clab.txt~
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma03.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m13clabsr.txt~
+	ACTION_IF FILE_EXISTS_IN_GAME ~A!DIRGE.2da~ THEN BEGIN
+		COPY_EXISTING ~a!dirge.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/wizard/m13clabsr.txt~
+	END
+END
+//__________________________________________________________________________________
+
+//TRANSMUTER________________________________________________________________________
+//range: @6301-6349
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma04.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma04.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma4clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma04.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma04.2da~ ~override~
+END
+COPY ~might_and_guile/wizard/d5_tran1.spl~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~sppr117.spl~ ~override/d5_tran2.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 3
+	COPY_EXISTING ~sppr217.spl~ ~override/d5_tran3.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 4
+	COPY_EXISTING ~sppr323.spl~ ~override/d5_tran4.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 5
+	COPY_EXISTING ~sppr419.spl~ ~override/d5_tran5.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 6
+	COPY_EXISTING ~sppr524.spl~ ~override/d5_tran6.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 7
+	COPY_EXISTING ~sppr619.spl~ ~override/d5_tran7.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 8
+	COPY_EXISTING ~clabma04.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m24clab.txt~
+END
+COPY ~might_and_guile/misc/d5_psvbo.spl~ ~override~
+	SAY NAME1 @19
+COPY ~might_and_guile/wizard/d5_golsu.spl~ ~override~
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/tomegol1.cre~ ~override~
+	COPY ~might_and_guile/wizard/tomegol2.cre~ ~override~
+	COPY ~might_and_guile/wizard/tomegol3.cre~ ~override~
+	COPY ~might_and_guile/wizard/tomegol4.cre~ ~override~
+END
+COPY_EXISTING ~clabma04.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m14clab.txt~
+//__________________________________________________________________________________
+
+//DIVINER___________________________________________________________________________
+//range: @6351-6399
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma05.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma05.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma5clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma05.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma05.2da~ ~override~
+END
+COPY ~might_and_guile/wizard/d5_contd.spl~ ~override~
+	SAY NAME1 @6351
+	SAY IDENTIFIED_DESC @6352
+COPY ~might_and_guile/wizard/d5_divi1.spl~ ~override~
+COPY_EXISTING ~clabma05.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m15clab.txt~
+//__________________________________________________________________________________
+
+//CONJURER__________________________________________________________________________
+//range: @6401-6449
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma06.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma06.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma6clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma06.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma06.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma06.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m16clab.txt~
+		BUT_ONLY
+	COPY_EXISTING ~spwi309.spl~ ~override/d5_conv1.spl~
+		LPM spell_to_innate
+	COPY_EXISTING ~spwi407.spl~ ~override/d5_conv2.spl~
+		LPM spell_to_innate
+	COPY_EXISTING ~spwi504.spl~ ~override/d5_conv3.spl~
+		LPM spell_to_innate
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma06.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m16clabsr.txt~
+	COPY_EXISTING ~spwi226.spl~ ~override/d5_conj1.spl~
+		WRITE_LONG 0x34 1
+	COPY_EXISTING ~spwi309.spl~ ~override/d5_conj2.spl~
+		WRITE_LONG 0x34 2
+	COPY_EXISTING ~spwi423.spl~ ~override/d5_conj3.spl~
+		WRITE_LONG 0x34 3
+	COPY_EXISTING ~spwi504.spl~ ~override/d5_conj4.spl~
+		WRITE_LONG 0x34 4
+	COPY_EXISTING ~spwi619.spl~ ~override/d5_conj5.spl~
+		WRITE_LONG 0x34 5
+	COPY_EXISTING ~spwi724.spl~ ~override/d5_conj6.spl~
+		WRITE_LONG 0x34 6
+END
+//__________________________________________________________________________________
+
+//INVOKER___________________________________________________________________________
+//range: @6451-6499
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma07.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma07.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma07.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma07.2da~ ~override~
+END
+ACTION_IF MOD_IS_INSTALLED "TOBEX.TP2" "100" THEN BEGIN
+	COPY_EXISTING ~clabma07.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m27clab.txt~
+	COPY ~might_and_guile/wizard/d5_pyrot.spl~ ~override/d5_pyro1.spl~
+END
+ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
+	COPY_EXISTING ~clabma07.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m27clab.txt~
+	COPY ~might_and_guile/wizard/d5_pyroe.spl~ ~override/d5_pyro1.spl~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma07.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m17clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma07.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m17clabsr.txt~
+END
+//__________________________________________________________________________________
+
+//ILLUSIONIST_______________________________________________________________________
+//range: @6501-6549
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma08.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma08.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma8clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma08.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma08.2da~ ~override~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY ~might_and_guile/wizard/d5_illus.spl~ ~override/d5_illu1.spl~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY ~might_and_guile/wizard/d5_illuv.spl~ ~override/d5_illu1.spl~
+END
+COPY_EXISTING ~sppr109.spl~ ~override/d5_illu2.spl~
+	WRITE_SHORT 0x1c 1
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi310.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi310.spl~ ~override~
+		WRITE_LONG 0x1e ("0x00000400") //blocked: illusionists
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1m.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl1m.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x04") //blocked: illusionists	
+		BUT_ONLY
+END
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spsd02.spl~ ~override~
+		SAY NAME1 @6049
+		SAY UNIDENTIFIED_DESC @6050
+	COPY ~might_and_guile/wizard/spsd02b.bam~ ~override~
+	COPY ~might_and_guile/wizard/spsd02c.bam~ ~override~
+END
+COPY_EXISTING ~clabma08.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m18clab.txt~
+//__________________________________________________________________________________
+
+//ENCHANTER_________________________________________________________________________
+//range: @6551-6598
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma09.2da~ THEN BEGIN
+	COPY_EXISTING ~clabma09.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma09.2da~ THEN BEGIN
+	COPY ~might_and_guile/wizard/clabma09.2da~ ~override~
+END
+COPY ~might_and_guile/misc/d5_ssvbo.spl~ ~override~
+	SAY NAME1 @15
+COPY ~might_and_guile/wizard/d5_ench1.spl~ ~override~
+COPY ~might_and_guile/wizard/d5_ench2.spl~ ~override~
+COPY ~might_and_guile/wizard/d5_ench2.eff~ ~override~
+COPY ~might_and_guile/wizard/d5_enc2a.spl~ ~override~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma09.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m19clab.txt~
+	ACTION_IF FILE_EXISTS_IN_GAME ~A!GYP.2da~ THEN BEGIN
+		COPY_EXISTING ~a!gyp.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/wizard/m19clab.txt~
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~clabma09.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m19clabsr.txt~
+	ACTION_IF FILE_EXISTS_IN_GAME ~A!GYP.2da~ THEN BEGIN
+		COPY_EXISTING ~a!gyp.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/wizard/m19clabsr.txt~
+	END
+END
+//__________________________________________________________________________________
+
+
+//OTHER KIT 2DA FILES_______________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabso01.2da~ THEN BEGIN
+	COPY_EXISTING ~clabso01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~
+END
+/*
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_meist.2da~ THEN BEGIN
+	COPY_EXISTING ~d5_meist.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/bard/meistcant.txt~
+END
+*/
+//__________________________________________________________________________________
+
+/*
+//SONG & SILENCE COMPATIBILITY______________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+		0x00004000
+//__________________________________________________________________________________
+*/
+
+//TOME & BLOOD KIT COMPATIBILITY____________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~QDELDSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDELDSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMAGUS.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMAGUS.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma4clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ABJ.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ABJ.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ALT.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ALT.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma4clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_CON.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_CON.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma6clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ENC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ENC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_EVO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_EVO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ILL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ILL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma8clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_NEC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_NEC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARGT.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARGT.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARMC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARMC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGBTTL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGBTTL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARMC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARMC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma5clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED1.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED1.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+	COPY_EXISTING ~QDMGRED1.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma6clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma5clab.txt~
+	COPY_EXISTING ~QDMGRED2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma6clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED3.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED3.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma5clab.txt~
+	COPY_EXISTING ~QDMGRED3.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED4.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED4.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+	COPY_EXISTING ~QDMGRED4.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED5.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED5.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+	COPY_EXISTING ~QDMGRED5.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma8clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED6.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED6.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+	COPY_EXISTING ~QDMGRED6.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma8clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED7.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED7.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+	COPY_EXISTING ~QDMGRED7.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGPYRO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGPYRO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGAERO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGAERO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb4clab.txt~ // elec missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGGEOM.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGGEOM.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb5clab.txt~ // earth missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHYDR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHYDR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb3clab.txt~ // acid missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARG2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARG2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGSHDW.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGSHDW.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGTRNS.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGTRNS.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGSTAR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGSTAR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGPALE.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGPALE.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGWNEC.2da~ THEN BEGIN // white necro
+	COPY_EXISTING ~QDMGWNEC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP1.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP1.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma2clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma6clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP3.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP3.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma4clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP4.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP4.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP5.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP5.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP6.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP6.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma8clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP7.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP7.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDBLA.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDBLA.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb3clab.txt~ // acid missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDBLU.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDBLU.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb4clab.txt~ // elec missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDGRE.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDGRE.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb3clab.txt~ // acid missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDRED.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDRED.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDWHI.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDWHI.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb2clab.txt~ // cold missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDBRA.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDBRA.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDBRO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDBRO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb4clab.txt~ // elec missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDCOP.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDCOP.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb3clab.txt~ // acid missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDGOL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDGOL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDDSIL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDDSIL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb2clab.txt~ // cold missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDXAN.2da~ THEN BEGIN
+	COPY_EXISTING ~QDXAN.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDYNAHE.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDYNAHE.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma7clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDCELSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDCELSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDFIESOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDFIESOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb1clab.txt~ // fire missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDSTOSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDSTOSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb4clab.txt~ // elec missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDRBLSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDRBLSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb2clab.txt~ // cold missile
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDGROSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDGROSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma4clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDSYLSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDSYLSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma9clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDREVSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDREVSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/ma3clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDOOZSOR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDOOZSOR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/tb3clab.txt~ // acid missile
+END
+//_________________________________________________________________________________
+
+
+//MAGIC BATTLE CHANGES_____________________________________________________________
+//
+COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
+	COUNT_REGEXP_INSTANCES ~spell_battle_changes=1~ spell_battle_changes
+
+ACTION_IF (spell_battle_changes) THEN BEGIN
+
+COPY ~might_and_guile/wizard/spwi318.spl~ ~override~
+	SAY NAME1 @6051
+	SAY UNIDENTIFIED_DESC @6052
+COPY ~might_and_guile/wizard/spwi321.spl~ ~override~
+	SAY NAME1 @6053
+	SAY UNIDENTIFIED_DESC @6054
+COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_mys32.spl~
+	SAY NAME1 @6051
+	SAY UNIDENTIFIED_DESC @6052
+COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_mys22.spl~
+	SAY NAME1 @6053
+	SAY UNIDENTIFIED_DESC @6054
+COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_radfl.spl.spl~
+	SAY NAME1 @6051
+	SAY UNIDENTIFIED_DESC @6052
+COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_rathr.spl~
+	SAY NAME1 @6053
+	SAY UNIDENTIFIED_DESC @6054
+COPY ~might_and_guile/wizard/sppr612.spl~ ~override~
+	SAY NAME1 @6055
+	SAY UNIDENTIFIED_DESC @6056
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi419.spl~ ~override~
+		SAY NAME1 @6057
+		SAY UNIDENTIFIED_DESC @6058
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi419ee.spl~ ~override/spwi419.spl~
+		SAY NAME1 @6057
+		SAY UNIDENTIFIED_DESC @6058
+END
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi419iw.spl~ ~override/spwi419.spl~
+		SAY NAME1 @6057
+		SAY UNIDENTIFIED_DESC @6058
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi704.spl~ ~override~
+		SAY NAME1 @6059
+		SAY UNIDENTIFIED_DESC @6060
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi704ee.spl~ ~override/spwi704.spl~
+		SAY NAME1 @6059
+		SAY UNIDENTIFIED_DESC @6060
+END
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi704iw.spl~ ~override/spwi704.spl~
+		SAY NAME1 @6059
+		SAY UNIDENTIFIED_DESC @6060
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi805.spl~ ~override~
+			SAY NAME1 @6061
+			SAY UNIDENTIFIED_DESC @6062
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi805ee.spl~ ~override/spwi805.spl~
+			SAY NAME1 @6061
+			SAY UNIDENTIFIED_DESC @6062
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi805iw.spl~ ~override/spwi805.spl~
+			SAY NAME1 @6061
+			SAY UNIDENTIFIED_DESC @6062
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl6o.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7l.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl7l.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8g.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl8g.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8h.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl8h.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl9a.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9m.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl9m.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi522.spl~ ~override~
+			SAY NAME1 @6063
+			SAY UNIDENTIFIED_DESC @6064
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi522ee.spl~ ~override/spwi522.spl~
+			SAY NAME1 @6063
+			SAY UNIDENTIFIED_DESC @6064
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi618.spl~ ~override~
+			SAY NAME1 @6065
+			SAY UNIDENTIFIED_DESC @6066
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi618ee.spl~ ~override/spwi618.spl~
+			SAY NAME1 @6065
+			SAY UNIDENTIFIED_DESC @6066
+	END
+	ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi701.spl~ ~override~
+			SAY NAME1 @6067
+			SAY UNIDENTIFIED_DESC @6068
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY ~might_and_guile/wizard/spwi701ee.spl~ ~override/spwi701.spl~
+			SAY NAME1 @6067
+			SAY UNIDENTIFIED_DESC @6068
+	END
+	COPY ~might_and_guile/wizard/spwi902.spl~ ~override~
+		SAY NAME1 @6069
+		SAY UNIDENTIFIED_DESC @6070
+	ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+		STRING_SET 10875 @6071
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		STRING_SET 26593 @6071
+	END
+END	
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7d.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl7d.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7v.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl7v.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8d.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl8d.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9l.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl9l.itm~ ~override~
+		WRITE_BYTE 0x2d ("0x00")  		  
+		WRITE_BYTE 0x2f ("0x00") 
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl6p.itm~ ~override/scrl6g.itm~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl6o.itm~ ~override/scrl6j.itm~
+END
+//_________________________________________________________________________________
+
+//SPELL REVISIONS COMPATIBILITY_____________________________________________________
+//
+//ACTION_IF NOT MOD_IS_INSTALLED "setup-spell_rev.tp2" "60" THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+
+ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi522.spl~ ~override~
+		SAY NAME1 @6063
+		SAY UNIDENTIFIED_DESC @6064
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi522ee.spl~ ~override~
+		SAY NAME1 @6063
+		SAY UNIDENTIFIED_DESC @6064
+END
+ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi618.spl~ ~override~
+		SAY NAME1 @6065
+		SAY UNIDENTIFIED_DESC @6066
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi618ee.spl~ ~override~
+		SAY NAME1 @6065
+		SAY UNIDENTIFIED_DESC @6066
+END
+ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi701.spl~ ~override~
+		SAY NAME1 @6067
+		SAY UNIDENTIFIED_DESC @6068
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	COPY ~might_and_guile/wizard/spwi701ee.spl~ ~override~
+		SAY NAME1 @6067
+		SAY UNIDENTIFIED_DESC @6068
+END
+COPY ~might_and_guile/wizard/spwi902.spl~ ~override~
+	SAY NAME1 @6069
+	SAY UNIDENTIFIED_DESC @6070
+ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+	STRING_SET 10875 @6071
+END
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 26593 @6071
+END
+
+END
+//__________________________________________________________________________________
+
+//MODIFY CLABS______________________________________________________________________
+//
+COPY_EXISTING ~clabma01.2da~ ~override~
+			~clabma03.2da~ ~override~
+			~clabma04.2da~ ~override~
+			~clabma05.2da~ ~override~
+			~clabma06.2da~ ~override~
+			~clabma07.2da~ ~override~
+			~clabma08.2da~ ~override~
+			~clabma09.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+COPY_EXISTING ~clabma02.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/wizard/m42clab.txt~
+//__________________________________________________________________________________
+
+//TOME & BLOOD KIT COMPATIBILITY____________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ABJ.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ABJ.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m42clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ALT.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ALT.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_CON.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_CON.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ENC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ENC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_EVO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_EVO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_ILL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_ILL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMG_NEC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMG_NEC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARGT.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARGT.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARMC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARMC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGBTTL.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGBTTL.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARMC.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARMC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED1.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED1.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED3.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED3.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED4.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED4.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED5.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED5.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED6.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED6.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGRED7.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGRED7.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGPYRO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGPYRO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~ 
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGAERO.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGAERO.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~ 
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGGEOM.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGGEOM.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHYDR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHYDR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~ 
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGARG2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGARG2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGSHDW.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGSHDW.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGTRNS.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGTRNS.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGSTAR.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGSTAR.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGPALE.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGPALE.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGWNEC.2da~ THEN BEGIN // white necro
+	COPY_EXISTING ~QDMGWNEC.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP1.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP1.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP2.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP3.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP3.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP4.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP4.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP5.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP5.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP6.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP6.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDMGHRP7.2da~ THEN BEGIN
+	COPY_EXISTING ~QDMGHRP7.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDXAN.2da~ THEN BEGIN
+	COPY_EXISTING ~QDXAN.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~QDDYNAHE.2da~ THEN BEGIN
+	COPY_EXISTING ~QDDYNAHE.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/wizard/m41clab.txt~
+END
+//_________________________________________________________________________________
+
+	PRINT @119
+END
+ELSE BEGIN
+	PRINT @120
+END
+//__________________________________________________________________________________
+
+
+//COPY WIZARD CRE FILES____________________________________________________________
+//
+ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
+//ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb10.qd~ THEN BEGIN
+	COPY_EXISTING ~DYNAHE.cre~ ~override~
+				~DYNAHE2.cre~ ~override~
+				~DYNAHE4.cre~ ~override~
+				~DYNAHE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
+		BUT_ONLY
+	COPY_EXISTING ~DYNAHE4.cre~ ~override~
+				~DYNAHE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~DYNAHE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+
+	COPY_EXISTING ~EDWIN.cre~ ~override~
+				~EDWIN2.cre~ ~override~
+				~EDWIN4.cre~ ~override~
+				~EDWIN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~EDWIN4.cre~ ~override~
+				~EDWIN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~EDWIN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+
+	COPY_EXISTING ~XAN4.cre~ ~override~
+				~XAN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
+		BUT_ONLY
+	COPY_EXISTING ~XAN4.cre~ ~override~
+				~XAN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~XAN6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+
+	COPY_EXISTING ~XZAR.cre~ ~override~
+				~XZAR2.cre~ ~override~
+				~XZAR4.cre~ ~override~
+				~XZAR6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
+		BUT_ONLY
+	COPY_EXISTING ~XZAR4.cre~ ~override~
+				~XZAR6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~XZAR6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+
+	COPY_EXISTING ~QUAYLE.cre~ ~override~
+				~QUAYLE4.cre~ ~override~
+				~QUAYLE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiil~ END
+		BUT_ONLY
+	COPY_EXISTING ~QUAYLE4.cre~ ~override~
+				~QUAYLE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~QUAYLE6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+//	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~XAN.cre~ THEN BEGIN
+//ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb10.qd~ THEN BEGIN
+	COPY_EXISTING ~XAN.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wien~ END
+		BUT_ONLY
+//	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~NEERA.cre~ THEN BEGIN
+	COPY_EXISTING ~NEERA.cre~ ~override~
+				~NEERA2.cre~ ~override~
+				~NEERA4.cre~ ~override~
+				~NEERA6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~NEERA4.cre~ ~override~
+				~NEERA6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~NEERA6.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+
+ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
+	COPY_EXISTING ~jan8.cre~ ~override~
+				~jan10.cre~ ~override~
+				~jan11.cre~ ~override~
+				~jan12.cre~ ~override~
+				~jan15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiil~ END
+		BUT_ONLY
+	COPY_EXISTING ~jan8.cre~ ~override~
+				~jan10.cre~ ~override~
+				~jan11.cre~ ~override~
+				~jan12.cre~ ~override~
+				~jan15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~jan8.cre~ ~override~
+				~jan10.cre~ ~override~
+				~jan11.cre~ ~override~
+				~jan12.cre~ ~override~
+				~jan15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+	COPY_EXISTING ~edwin9.cre~ ~override~
+				~edwin11.cre~ ~override~
+				~edwin12.cre~ ~override~
+				~edwin13.cre~ ~override~
+				~edwin15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~edwin9.cre~ ~override~
+				~edwin11.cre~ ~override~
+				~edwin12.cre~ ~override~
+				~edwin13.cre~ ~override~
+				~edwin15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~edwin9.cre~ ~override~
+				~edwin11.cre~ ~override~
+				~edwin12.cre~ ~override~
+				~edwin13.cre~ ~override~
+				~edwin15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+	COPY_EXISTING ~aerie6.cre~ ~override~
+				~aerie7.cre~ ~override~
+				~aerie9.cre~ ~override~
+				~aerie10.cre~ ~override~
+				~aerie11.cre~ ~override~
+				~aerie12.cre~ ~override~
+				~imoen6.cre~ ~override~
+				~imoen10.cre~ ~override~
+				~imoen15.cre~ ~override~
+				~imoen211.cre~ ~override~
+				~imoen213.cre~ ~override~
+				~nalia8.cre~ ~override~
+				~nalia10.cre~ ~override~
+				~nalia11.cre~ ~override~
+				~nalia13.cre~ ~override~
+				~nalia15.cre~ ~override~
+				~nalia18.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~aerie6.cre~ ~override~
+				~aerie7.cre~ ~override~
+				~aerie9.cre~ ~override~
+				~aerie10.cre~ ~override~
+				~aerie11.cre~ ~override~
+				~aerie12.cre~ ~override~
+				~imoen6.cre~ ~override~
+				~imoen10.cre~ ~override~
+				~imoen15.cre~ ~override~
+				~imoen211.cre~ ~override~
+				~imoen213.cre~ ~override~
+				~nalia8.cre~ ~override~
+				~nalia10.cre~ ~override~
+				~nalia11.cre~ ~override~
+				~nalia13.cre~ ~override~
+				~nalia15.cre~ ~override~
+				~nalia18.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~aerie6.cre~ ~override~
+				~aerie7.cre~ ~override~
+				~aerie9.cre~ ~override~
+				~aerie10.cre~ ~override~
+				~aerie11.cre~ ~override~
+				~aerie12.cre~ ~override~
+				~imoen6.cre~ ~override~
+				~imoen10.cre~ ~override~
+				~imoen15.cre~ ~override~
+				~imoen211.cre~ ~override~
+				~imoen213.cre~ ~override~
+				~nalia8.cre~ ~override~
+				~nalia10.cre~ ~override~
+				~nalia11.cre~ ~override~
+				~nalia13.cre~ ~override~
+				~nalia15.cre~ ~override~
+				~nalia18.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+	COPY_EXISTING ~neera8.cre~ ~override~
+				~neera10.cre~ ~override~
+				~neera15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~neera8.cre~ ~override~
+				~neera10.cre~ ~override~
+				~neera15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~neera8.cre~ ~override~
+				~neera10.cre~ ~override~
+				~neera15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~J#indi01.cre~ THEN BEGIN
+	COPY_EXISTING ~J#indi01.cre~ ~override~
+				~J#indi03.cre~ ~override~
+				~J#indi03.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~J#indi03.cre~ ~override~
+				~J#indi03.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~tsujath.cre~ THEN BEGIN
+	COPY_EXISTING ~tsujath.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
+		BUT_ONLY
+	COPY_EXISTING ~tsujath.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~tsujath.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~lk#nind.cre~ THEN BEGIN
+	COPY_EXISTING ~lk#nind.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
+		BUT_ONLY
+	COPY_EXISTING ~lk#nind.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~lk#nind.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~lk#ni25.cre~ THEN BEGIN
+	COPY_EXISTING ~lk#ni25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
+		BUT_ONLY
+	COPY_EXISTING ~lk#ni25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~lk#ni25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~rh#adr1.cre~ THEN BEGIN
+	COPY_EXISTING ~rh#adr1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#adr1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#adr1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~rh#ad25c.cre~ THEN BEGIN
+	COPY_EXISTING ~rh#ad25c.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#ad25c.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#ad25c.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~rh#adr2.cre~ THEN BEGIN
+	COPY_EXISTING ~rh#adr2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#adr2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#adr2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~rh#ad25t.cre~ THEN BEGIN
+	COPY_EXISTING ~rh#ad25t.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#ad25t.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~rh#ad25t.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adangel.cre~ THEN BEGIN
+	COPY_EXISTING ~adangel.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangel.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangel.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adang25.cre~ THEN BEGIN
+	COPY_EXISTING ~adang25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
+		BUT_ONLY
+	COPY_EXISTING ~adang25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adang25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adangma1.cre~ THEN BEGIN
+	COPY_EXISTING ~adangma1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma1.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adangma2.cre~ THEN BEGIN
+	COPY_EXISTING ~adangma2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma2.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adangma3.cre~ THEN BEGIN
+	COPY_EXISTING ~adangma3.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma3.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma3.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~adangma4.cre~ THEN BEGIN
+	COPY_EXISTING ~adangma4.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma4.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
+		BUT_ONLY
+	COPY_EXISTING ~adangma4.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
+		BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
+//NERF EDWIN'S AMULET_______________________________________________________________
+//
+COPY ~might_and_guile/wizard/misc89.itm~ ~override~
+	SAY UNIDENTIFIED_DESC @6501
+	SAY IDENTIFIED_DESC @6501
+//__________________________________________________________________________________
+
+
+//TWEAK SUMMONS HLAS________________________________________________________________
+//
+COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
+	COUNT_REGEXP_INSTANCES ~change_hla_summons=1~ change_hla_summons
+
+ACTION_IF (change_hla_summons) THEN BEGIN
+
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr726.spl~ THEN BEGIN
+	COPY ~might_and_guile/spells/sppr726.spl~ ~override~
+		SAY NAME1 @6511
+		SAY UNIDENTIFIED_DESC @6512
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr727.spl~ THEN BEGIN
+	COPY ~might_and_guile/spells/sppr727.spl~ ~override~
+		SAY NAME1 @6513
+		SAY UNIDENTIFIED_DESC @6514
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr723.spl~ THEN BEGIN
+	COPY_EXISTING ~sppr723.spl~ ~override/spwi923.spl~
+		WRITE_SHORT 0x1c 1
+	COPY_EXISTING ~sppr723.spl~ ~override/spwi924.spl~
+		WRITE_SHORT 0x1c 1
+END
+	PRINT @121
+END
+ELSE BEGIN
+	PRINT @122
+END
+//__________________________________________________________________________________
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						SPELL SCHOOL CHANGES
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+//range: @6101-6199
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without Spell Revisions
+
+INCLUDE ~might_and_guile/spells/spell_list_base.tpa~
+
+INCLUDE ~might_and_guile/spells/scroll_list_base.tpa~ 
+
+//__________________________________________________________________________________
+
+//updating spell schools____________________________________________________________
+//
+ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x25 0 //change to unaffiliated 
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~ ~
+						REPLACE_TEXTUALLY ~(Divination)~ ~ ~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~ ~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~ ~
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~ ~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~ ~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~ ~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~ ~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~ ~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_SHORT 0x22 12 //update casting graphic
+				WRITE_BYTE 0x25 1 //change to abjuration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Abjuration)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_SHORT 0x22 10 //update casting graphic
+				WRITE_BYTE 0x25 8 //change to alteration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Alteration)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_SHORT 0x22 14 //update casting graphic
+				WRITE_BYTE 0x25 2 //change to conjuration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Conjuration/Summoning)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_SHORT 0x22 16 //update casting graphic
+				WRITE_BYTE 0x25 3 //change to divination 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Divination)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_SHORT 0x22 11 //update casting graphic
+				WRITE_BYTE 0x25 4 //change to enchantment 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Enchantment/Charm)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_SHORT 0x22 15 //update casting graphic
+				WRITE_BYTE 0x25 6 //change to evocation 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Evocation)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_SHORT 0x22 13 //update casting graphic
+				WRITE_BYTE 0x25 5 //change to illusion 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Illusion/Phantasm)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_SHORT 0x22 9 //update casting graphic
+				WRITE_BYTE 0x25 7 //change to necromancy 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Necromancy)~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+		BUT_ONLY 
+	END
+END
+//__________________________________________________________________________________
+
+//updating schools in scrolls_______________________________________________________
+//
+ACTION_PHP_EACH arcanescroll AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.itm~) BEGIN 
+		COPY_EXISTING ~%ind%.itm~ ~override~ 			
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~ ~
+						REPLACE_TEXTUALLY ~(Divination)~ ~ ~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~ ~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~ ~
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~ ~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~ ~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~ ~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~ ~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~ ~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~ ~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Abjuration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Abjuration)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Alteration)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Alteration)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Conjuration/Summoning)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Conjuration/Summoning)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Divination)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Divination)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Enchantment/Charm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Enchantment/Charm)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Evocation)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Evocation)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Necromancy)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Illusion/Phantasm)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Illusion/Phantasm)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~(Illusion/Phantasm)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Divination)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Enchantment/Charm)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Evocation)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Abjuration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Invocation/Evocation)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Alteration, Illusion)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Evocation, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Divination, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Abjuration, Alteration)~ ~(Necromancy)~
+						REPLACE_TEXTUALLY ~(Conjuration/Summoning, Invocation/Evocation)~ ~(Necromancy)~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+		BUT_ONLY 
+	END
+END
+//__________________________________________________________________________________
+
+//updating opposition schools_______________________________________________________
+//
+COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
+	COUNT_REGEXP_INSTANCES ~no_opposition_schools=1~ no_opposition_schools
+
+ACTION_IF (no_opposition_schools) THEN BEGIN
+
+ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x25 0 //change to unaffiliated 
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none 
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_LONG 0x1e ("0x00006fc0") //blocked: all non-necromancers
+			END
+		BUT_ONLY 
+	END
+END
+ACTION_PHP_EACH arcanescroll AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.itm~) BEGIN 
+		COPY_EXISTING ~%ind%.itm~ ~override~ 			
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none 
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_BYTE 0x2d ("0x00") //blocked: none  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_BYTE 0x2d ("0x00") //blocked: none		  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none  
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_BYTE 0x2d ("0x00") //blocked: none 		  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_BYTE 0x2d ("0x6f") //blocked: all non-necromancers		  
+				WRITE_BYTE 0x2f ("0xc0") //blocked: all 		  
+			END
+		BUT_ONLY 
+	END
+END
+
+	PRINT @123
+END
+ELSE BEGIN
+	PRINT @124
+END
+//__________________________________________________________________________________
+
+//SPECIFIC SPELL CHANGES____________________________________________________________
+//
+//GREASE_____________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi101.spl~ THEN BEGIN
+COPY_EXISTING ~spwi101.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6111
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl66.itm~ THEN BEGIN
+END
+COPY_EXISTING ~scrl66.itm~ ~override~
+	SAY IDENTIFIED_DESC @6111
+END
+
+//BLINDNESS_________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi106.spl~ THEN BEGIN
+COPY_EXISTING ~spwi106.spl~ ~override~
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl71.itm~ THEN BEGIN
+COPY_EXISTING ~scrl71.itm~ ~override~
+	WRITE_LONG 0x34 200
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//DEAFNESS__________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi223.spl~ THEN BEGIN
+COPY_EXISTING ~spwi223.spl~ ~override~
+	WRITE_LONG 0x34 1
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 1~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrla2.itm~ THEN BEGIN
+COPY_EXISTING ~scrla2.itm~ ~override~
+	WRITE_LONG 0x34 100
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 1~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//LUCK_____________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
+COPY_EXISTING ~spwi209.spl~ ~override~
+	WRITE_LONG 0x34 1
+	SAY UNIDENTIFIED_DESC @6115
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl93.itm~ THEN BEGIN
+COPY_EXISTING ~scrl93.itm~ ~override~
+	WRITE_LONG 0x34 100
+	SAY IDENTIFIED_DESC @6115
+END
+
+//FLAME ARROW________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
+COPY_EXISTING ~spwi303.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6116
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1f.itm~ THEN BEGIN
+COPY_EXISTING ~scrl1f.itm~ ~override~
+	SAY IDENTIFIED_DESC @6116
+END
+
+//GREATER MALISON__________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi412.spl~ THEN BEGIN
+COPY_EXISTING ~spwi412.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6117
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl5i.itm~ THEN BEGIN
+COPY_EXISTING ~scrl5i.itm~ ~override~
+	SAY IDENTIFIED_DESC @6117
+END
+
+//INVISIBLE STALKER________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi601.spl~ THEN BEGIN
+COPY_EXISTING ~spwi601.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6118
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7e.itm~ THEN BEGIN
+COPY_EXISTING ~scrl7e.itm~ ~override~
+	SAY IDENTIFIED_DESC @6118
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~stalkesu.cre~ THEN BEGIN
+COPY_EXISTING ~stalkesu.cre~ ~override~
+	WRITE_BYTE 0x275 7
+END
+
+//DISINTEGRATE______________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi616.spl~ THEN BEGIN
+COPY_EXISTING ~spwi616.spl~ ~override~
+	SAY NAME1 @6124
+	SAY UNIDENTIFIED_DESC @6125
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7t.itm~ THEN BEGIN
+COPY_EXISTING ~scrl7t.itm~ ~override~
+	SAY NAME1 @6124
+	SAY IDENTIFIED_DESC @6125
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scdisi.itm~ THEN BEGIN
+COPY_EXISTING ~scdisi.itm~ ~override~
+	SAY NAME1 @6124
+	SAY IDENTIFIED_DESC @6125
+END
+
+//MORDENKAINEN'S SWORD_______________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi716.spl~ THEN BEGIN
+COPY_EXISTING ~spwi716.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6119
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8r.itm~ THEN BEGIN
+COPY_EXISTING ~scrl8r.itm~ ~override~
+	SAY IDENTIFIED_DESC @6119
+END
+
+//LIMITED WISH________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi722.spl~ THEN BEGIN
+COPY_EXISTING ~spwi722.spl~ ~override~
+	WRITE_LONG 0x34 8
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 7~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrla4.itm~ THEN BEGIN
+COPY_EXISTING ~scrla4.itm~ ~override~
+	WRITE_LONG 0x34 5000
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 7~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//SYMBOL: FEAR________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
+COPY_EXISTING ~spwi811.spl~ ~override~
+	WRITE_LONG 0x34 7
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 8~ ~Level: 7~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9f.itm~ ~override~
+	WRITE_LONG 0x34 3000
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 8~ ~Level: 7~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//SHAPECHANGE________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
+COPY_EXISTING ~spwi916.spl~ ~override~
+	WRITE_LONG 0x34 8
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 9~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9y.itm~ ~override~
+	WRITE_LONG 0x34 7500
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 9~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//BLACK BLADE OF DISASTER___________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi915.spl~ THEN BEGIN
+COPY_EXISTING ~spwi915.spl~ ~override~
+	WRITE_LONG 0x34 8
+	SAY UNIDENTIFIED_DESC @6121
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9x.itm~ ~override~
+	WRITE_LONG 0x34 5000
+	SAY IDENTIFIED_DESC @6121
+END
+
+//ENERGY DRAIN_______________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi914.spl~ THEN BEGIN
+COPY ~might_and_guile/spells/spwi914.spl~ ~override~
+	SAY NAME1 @6126
+	SAY UNIDENTIFIED_DESC @6127
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9w.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9w.itm~ ~override~
+	SAY IDENTIFIED_DESC @6127
+END
+
+END // end of non-SR version
+
+//__________________________________________________________________________________
+
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell Revisions
+
+INCLUDE ~might_and_guile/spells/spell_list_sr.tpa~
+
+INCLUDE ~might_and_guile/spells/scroll_list_sr.tpa~ 
+
+//__________________________________________________________________________________
+
+//updating schools and barred schools_______________________________________________
+//
+ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x25 0 //change to unaffiliated 
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Universal~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Universal ~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_SHORT 0x22 12 //update casting graphic
+				WRITE_BYTE 0x25 1 //change to abjuration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Abjuration~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_SHORT 0x22 10 //update casting graphic
+				WRITE_BYTE 0x25 8 //change to alteration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Alteration~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_SHORT 0x22 14 //update casting graphic
+				WRITE_BYTE 0x25 2 //change to conjuration 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Conjuration~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_SHORT 0x22 16 //update casting graphic
+				WRITE_BYTE 0x25 3 //change to divination 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Divination~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_SHORT 0x22 11 //update casting graphic
+				WRITE_BYTE 0x25 4 //change to enchantment 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Enchantment~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_SHORT 0x22 15 //update casting graphic
+				WRITE_BYTE 0x25 6 //change to evocation 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Evocation~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_SHORT 0x22 13 //update casting graphic
+				WRITE_BYTE 0x25 5 //change to illusion 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Illusion~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_SHORT 0x22 9 //update casting graphic
+				WRITE_BYTE 0x25 7 //change to necromancy 
+				READ_LONG 0x50 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x50 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Necromancy~
+					END
+					SAY_EVALUATED 0x50 ~%new_desc%~
+				END
+			END
+		BUT_ONLY 
+	END
+END
+//__________________________________________________________________________________
+
+//updating schools in scrolls_______________________________________________________
+//
+ACTION_PHP_EACH arcanescroll AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.itm~) BEGIN 
+		COPY_EXISTING ~%ind%.itm~ ~override~ 			
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x2d ("0x00") //blocked: none 		  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Universal ~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Universal ~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Abjuration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Abjuration~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Alteration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Alteration~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Conjuration~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Conjuration~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Divination~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Divination~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Enchantment~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Enchantment~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Evocation~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Evocation~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Illusion~
+						REPLACE_TEXTUALLY ~: Necromancy~ ~: Illusion~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				READ_LONG 0x54 "valid"
+				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+					READ_STRREF 0x54 "desc"
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~: Illusion~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Alteration~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Conjuration~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Divination~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Enchantment~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Evocation~ ~: Necromancy~
+						REPLACE_TEXTUALLY ~: Abjuration~ ~: Necromancy~
+					END
+					SAY_EVALUATED 0x54 ~%new_desc%~
+				END
+			END
+		BUT_ONLY 
+	END
+END
+//__________________________________________________________________________________
+
+//updating opposition schools_______________________________________________________
+//
+COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
+	COUNT_REGEXP_INSTANCES ~no_opposition_schools=1~ no_opposition_schools
+
+ACTION_IF (no_opposition_schools) THEN BEGIN
+
+ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
+		COPY_EXISTING ~%ind%.spl~ ~override~ 	
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x25 0 //change to unaffiliated 
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none 
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_LONG 0x1e ("0x00000000") //blocked: none
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_LONG 0x1e ("0x00006fc0") //blocked: all non-necromancers
+			END
+		BUT_ONLY 
+	END
+END
+ACTION_PHP_EACH arcanescroll AS ind => res BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.itm~) BEGIN 
+		COPY_EXISTING ~%ind%.itm~ ~override~ 			
+			PATCH_IF (res = 0) BEGIN //no school
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 1) BEGIN //abjuration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none 
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 2) BEGIN //alteration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 3) BEGIN //conjuration
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 4) BEGIN //divination
+				WRITE_BYTE 0x2d ("0x00") //blocked: none  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 5) BEGIN //enchantment
+				WRITE_BYTE 0x2d ("0x00") //blocked: none		  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none  
+			END
+			PATCH_IF (res = 6) BEGIN //evocation
+				WRITE_BYTE 0x2d ("0x00") //blocked: none
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 7) BEGIN //illusion
+				WRITE_BYTE 0x2d ("0x00") //blocked: none 		  
+				WRITE_BYTE 0x2f ("0x00") //blocked: none
+			END
+			PATCH_IF (res = 8) BEGIN //necromancy
+				WRITE_BYTE 0x2d ("0x6f") //blocked: all non-necromancers		  
+				WRITE_BYTE 0x2f ("0xc0") //blocked: all 		  
+			END
+		BUT_ONLY 
+	END
+END
+
+	PRINT @123
+END
+ELSE BEGIN
+	PRINT @124
+END
+//__________________________________________________________________________________
+
+//SPECIFIC SPELL CHANGES____________________________________________________________
+//
+//ARMOR_____________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi102.spl~ THEN BEGIN
+COPY_EXISTING ~spwi102.spl~ ~override~
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl67.itm~ THEN BEGIN
+COPY_EXISTING ~scrl67.itm~ ~override~
+	WRITE_LONG 0x34 200
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//BLUR______________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi201.spl~ THEN BEGIN
+COPY_EXISTING ~spwi201.spl~ ~override~
+	WRITE_LONG 0x34 1
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 1~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl85.itm~ THEN BEGIN
+COPY_EXISTING ~scrl85.itm~ ~override~
+	WRITE_LONG 0x34 100
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 1~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//REFLECTED IMAGE___________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi120.spl~ THEN BEGIN
+COPY_EXISTING ~spwi120.spl~ ~override~
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl5u.itm~ THEN BEGIN
+COPY_EXISTING ~scrl5u.itm~ ~override~
+	WRITE_LONG 0x34 200
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//MIRROR IMAGE_____________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi212.spl~ THEN BEGIN
+COPY_EXISTING ~spwi212.spl~ ~override~
+	WRITE_LONG 0x34 3
+//	SAY UNIDENTIFIED_DESC @6130
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl96.itm~ THEN BEGIN
+COPY_EXISTING ~scrl96.itm~ ~override~
+	WRITE_LONG 0x34 300
+//	SAY IDENTIFIED_DESC @6130
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+END
+
+//LUCK_____________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
+COPY_EXISTING ~spwi209.spl~ ~override~
+	WRITE_LONG 0x34 1
+	SAY UNIDENTIFIED_DESC @6131
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl93.itm~ THEN BEGIN
+COPY_EXISTING ~scrl93.itm~ ~override~
+	WRITE_LONG 0x34 100
+	SAY IDENTIFIED_DESC @6131
+END
+
+//FLAME ARROW________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
+COPY_EXISTING ~spwi303.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6132
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1f.itm~ THEN BEGIN
+COPY_EXISTING ~scrl1f.itm~ ~override~
+	SAY IDENTIFIED_DESC @6132
+END
+
+//GREATER MALISON__________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi412.spl~ THEN BEGIN
+COPY_EXISTING ~spwi412.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6133
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl5i.itm~ THEN BEGIN
+COPY_EXISTING ~scrl5i.itm~ ~override~
+	SAY IDENTIFIED_DESC @6133
+END
+
+//INVISIBLE STALKER________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi601.spl~ THEN BEGIN
+COPY_EXISTING ~spwi601.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6135
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7e.itm~ THEN BEGIN
+COPY_EXISTING ~scrl7e.itm~ ~override~
+	SAY IDENTIFIED_DESC @6135
+END
+
+//DISINTEGRATE______________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi616.spl~ THEN BEGIN
+COPY_EXISTING ~spwi616.spl~ ~override~
+	SAY NAME1 @6124
+	SAY UNIDENTIFIED_DESC @6136
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7t.itm~ THEN BEGIN
+COPY_EXISTING ~scrl7t.itm~ ~override~
+	SAY NAME1 @6124
+	SAY IDENTIFIED_DESC @6136
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scdisi.itm~ THEN BEGIN
+COPY_EXISTING ~scdisi.itm~ ~override~
+	SAY NAME1 @6124
+	SAY IDENTIFIED_DESC @6136
+END
+
+//MORDENKAINEN'S SWORD_______________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi716.spl~ THEN BEGIN
+COPY_EXISTING ~spwi716.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @6137
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8r.itm~ THEN BEGIN
+COPY_EXISTING ~scrl8r.itm~ ~override~
+	SAY IDENTIFIED_DESC @6137
+END
+
+//SYMBOL: FEAR________________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
+COPY_EXISTING ~spwi811.spl~ ~override~
+	WRITE_LONG 0x34 7
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 8~ ~Level: 7~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9f.itm~ ~override~
+	WRITE_LONG 0x34 3000
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 8~ ~Level: 7~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//SHAPECHANGE______________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
+COPY_EXISTING ~spwi916.spl~ ~override~
+	WRITE_LONG 0x34 8
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 9~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9y.itm~ ~override~
+	WRITE_LONG 0x34 7500
+	READ_LONG 0x54 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x54 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 9~ ~Level: 8~
+		END
+		SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+	BUT_ONLY
+END
+
+//BLACK BLADE OF DISASTER___________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi915.spl~ THEN BEGIN
+COPY_EXISTING ~spwi915.spl~ ~override~
+	WRITE_LONG 0x34 8
+	SAY UNIDENTIFIED_DESC @6139
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9x.itm~ ~override~
+	WRITE_LONG 0x34 5000
+	SAY IDENTIFIED_DESC @6139
+END
+
+//ENERGY DRAIN_______________________________________________________________________
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi914.spl~ THEN BEGIN
+COPY ~might_and_guile/spells/spwi914sr.spl~ ~override/spwi914.spl~
+	WRITE_LONG 0x34 8
+	SAY NAME1 @6141
+	SAY UNIDENTIFIED_DESC @6142
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9w.itm~ THEN BEGIN
+COPY_EXISTING ~scrl9w.itm~ ~override~
+	WRITE_LONG 0x34 5000
+	SAY NAME1 @6141
+	SAY IDENTIFIED_DESC @6142
+END
+//__________________________________________________________________________________
+
+END // end of SR version
+//__________________________________________________________________________________
+
+
+//__________________________________________________________________________________
+CLEAR_ARRAYS

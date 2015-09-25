@@ -168,10 +168,10 @@ CLEAR_ARRAYS
 
 //IMPROVE PROTECTIVE SPELLS__________________________________________________________
 //
-COPY ~scales_of_balance/spells/sppr409.spl~ ~override~
+COPY ~might_and_guile/spells/sppr409.spl~ ~override~
 	SAY NAME1 @1401
  	SAY UNIDENTIFIED_DESC @1402
-COPY ~scales_of_balance/spells/sppr409.spl~ ~override/d5_galdw.spl~
+COPY ~might_and_guile/spells/sppr409.spl~ ~override/d5_galdw.spl~
 	SAY NAME1 @1401
  	SAY UNIDENTIFIED_DESC @1402
 	WRITE_SHORT 0x1c 1

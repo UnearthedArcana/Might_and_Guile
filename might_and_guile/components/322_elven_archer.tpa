@@ -2,10 +2,9 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						WARRIOR TWEAKS
+//						ELVEN ARCHER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
-
 
 
 //ADD ELVEN ARCHER_________________________________________________________________
@@ -72,9 +71,9 @@ ADD_KIT ~D5EARCH~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3043
+SAY @3221
+SAY @3222
+SAY @3223
 //___________________________________________________________________________________
 
 END
@@ -141,9 +140,9 @@ ADD_KIT ~D5EARCH~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3044
+SAY @3221
+SAY @3222
+SAY @3224
 //___________________________________________________________________________________
 
 END
@@ -152,7 +151,7 @@ END
 ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@3030)
+			briefdesc = RESOLVE_STR_REF (@3225)
 		STR_VAR
 			kit_name = D5EARCH
 			clswpbon = ~1 0 2~
@@ -164,28 +163,25 @@ END
 //ARCHER ABILITY FILES________________________________________________________________
 //
 COPY ~might_and_guile/ranger/d5_earch.2da~ ~override~
-COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~
-	SAY NAME1 @3032
-	SAY UNIDENTIFIED_DESC @3033
+COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arent.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~
-	SAY NAME1 @3034
-	SAY UNIDENTIFIED_DESC @3035
+	SAY NAME1 @3231
+	SAY UNIDENTIFIED_DESC @3232
 COPY ~might_and_guile/fighter/d5_arslp.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~
-	SAY NAME1 @3036
-	SAY UNIDENTIFIED_DESC @3037
+	SAY NAME1 @3233
+	SAY UNIDENTIFIED_DESC @3234
 COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
 COPY ~might_and_guile/fighter/d5_arff1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff4.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~
-	SAY NAME1 @3038
-	SAY UNIDENTIFIED_DESC @3039
+	SAY NAME1 @3235
+	SAY UNIDENTIFIED_DESC @3236
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_strid.d5~) THEN BEGIN
 	COPY_EXISTING ~d5_earch.2da~ ~override~
 		LPM remove_blank_lines

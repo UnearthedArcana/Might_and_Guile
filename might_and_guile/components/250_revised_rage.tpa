@@ -10,29 +10,29 @@
 //BERSERKER RAGE____________________________________________________________________
 // 
 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
-		STRING_SET 24284 @3002
+		STRING_SET 24284 @2502
 	END
 	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
-		STRING_SET 25201 @3003
+		STRING_SET 25201 @2503
 	END
 	ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
-		STRING_SET 37094 @3003
+		STRING_SET 37094 @2503
 	END
 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
-		STRING_SET 32235 @3004
+		STRING_SET 32235 @2504
 	END
 	COPY_EXISTING ~clabfi02.2da~ ~override~
 		REPLACE_TEXTUALLY ~GA_SPCL321~ ~GA_D5_RAGE~
 		BUT_ONLY
 	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override~
-		SAY NAME1 @3008
-		SAY UNIDENTIFIED_DESC @3004
+		SAY NAME1 @2508
+		SAY UNIDENTIFIED_DESC @2504
 	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override/spcl321.spl~
-		SAY NAME1 @3008
-		SAY UNIDENTIFIED_DESC @3004
+		SAY NAME1 @2508
+		SAY UNIDENTIFIED_DESC @2504
 //	COPY ~might_and_guile/fighter/d5_rage.spl~ ~override/spcl152.spl~
-//		SAY NAME1 @3008
-//		SAY UNIDENTIFIED_DESC @3004
+//		SAY NAME1 @2508
+//		SAY UNIDENTIFIED_DESC @2504
 //________________________________________________________________________________
 
 //FIGHTER KIT 2DA FILES___________________________________________________________
@@ -219,9 +219,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 //WARRIOR ABILITY FILES_________________________________________________________
 //
 COPY ~might_and_guile/fighter/d5_berk.spl~ ~override/d5_berk.spl~
-	SAY NAME1 @3008
-	SAY UNIDENTIFIED_DESC @3008
+	SAY NAME1 @2508
+	SAY UNIDENTIFIED_DESC @2508
 COPY ~might_and_guile/fighter/d5_fipr1.spl~ ~override/d5_fipr1.spl~
-	SAY NAME1 @3009
-	SAY UNIDENTIFIED_DESC @3009
+	SAY NAME1 @2509
+	SAY UNIDENTIFIED_DESC @2509
 //_____________________________________________________________________________

@@ -79,22 +79,22 @@ END
 //UPDATE EXISTING STRINGS__________________________________________________________
 // 
 ACTION_IF GAME_IS ~bgee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 25367 @3051
+	STRING_SET 25367 @2551
 END
 ACTION_IF ENGINE_IS ~tob bg2ee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 25211 @3051
+	STRING_SET 25211 @2551
 END
 ACTION_IF ENGINE_IS ~iwdee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 37114 @3051
+	STRING_SET 37114 @2551
 END
 ACTION_IF GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 25367 @3052
+	STRING_SET 25367 @2552
 END
 ACTION_IF ENGINE_IS ~tob bg2ee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 25211 @3052
+	STRING_SET 25211 @2552
 END
 ACTION_IF ENGINE_IS ~iwdee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	STRING_SET 37114 @3052
+	STRING_SET 37114 @2552
 END
 //__________________________________________________________________________________
 
@@ -279,6 +279,11 @@ COPY ~might_and_guile/ranger/d5_stsp1.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_stsp2.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_stsp3.spl~ ~override~
 //__________________________________________________________________________________
+
+//ARCHER ABILITIES___________________________________________________________________
+//
+COPY ~might_and_guile/fighter/d5_marks.2da~ ~override/clabrn02.2da~
+//____________________________________________________________________________________
 
 //______________________HLAS________________________________________________________
 //

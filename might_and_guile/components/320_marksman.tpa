@@ -72,9 +72,9 @@ ADD_KIT ~D5MARKS~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3012
-SAY @3013
-SAY @3014
+SAY @3202
+SAY @3203
+SAY @3204
 //___________________________________________________________________________________
 
 END
@@ -142,9 +142,9 @@ ADD_KIT ~D5MARKS~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3012
-SAY @3013
-SAY @3016
+SAY @3202
+SAY @3203
+SAY @3206
 //___________________________________________________________________________________
 
 END
@@ -153,7 +153,7 @@ END
 ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@3015)
+			briefdesc = RESOLVE_STR_REF (@3205)
 		STR_VAR
 			kit_name = D5MARKS
 			clswpbon = ~1 0 2~
@@ -168,18 +168,18 @@ COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~
-	SAY NAME1 @3017
-	SAY UNIDENTIFIED_DESC @3018
+	SAY NAME1 @3211
+	SAY UNIDENTIFIED_DESC @3212
 COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~
-	SAY NAME1 @3019
-	SAY UNIDENTIFIED_DESC @3020
+	SAY NAME1 @3213
+	SAY UNIDENTIFIED_DESC @3214
 COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
-	SAY NAME1 @3021
-	SAY UNIDENTIFIED_DESC @3022
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
 		COPY_EXISTING ~d5_marks.2da~ ~override~

@@ -2,10 +2,9 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						WARRIOR TWEAKS
+//						HALFLING SLINGER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
-
 
 
 //___________________________________________________________________________________
@@ -101,9 +100,9 @@ ADD_KIT ~D5SLING~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3043
+SAY @3241
+SAY @3242
+SAY @3243
 //___________________________________________________________________________________
 
 END
@@ -170,9 +169,9 @@ ADD_KIT ~D5SLING~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3044
+SAY @3241
+SAY @3242
+SAY @3244
 //___________________________________________________________________________________
 
 END
@@ -181,7 +180,7 @@ END
 ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@3030)
+			briefdesc = RESOLVE_STR_REF (@3246)
 		STR_VAR
 			kit_name = D5SLING
 			clswpbon = ~1 0 2~
@@ -257,9 +256,9 @@ ADD_KIT ~D5SLING~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3045
+SAY @3241
+SAY @3242
+SAY @3245
 //___________________________________________________________________________________
 
 END
@@ -326,9 +325,9 @@ ADD_KIT ~D5SLING~
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @3027
-SAY @3028
-SAY @3044
+SAY @3241
+SAY @3242
+SAY @3244
 //___________________________________________________________________________________
 
 END
@@ -338,28 +337,21 @@ END
 //ARCHER+SLINGER ABILITY FILES________________________________________________________
 //
 COPY ~might_and_guile/ranger/d5_sling.2da~ ~override~
+COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~
+	SAY NAME1 @3213
+	SAY UNIDENTIFIED_DESC @3214
+COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
 COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~
-	SAY NAME1 @3032
-	SAY UNIDENTIFIED_DESC @3033
-COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arent.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~
-	SAY NAME1 @3034
-	SAY UNIDENTIFIED_DESC @3035
-COPY ~might_and_guile/fighter/d5_arslp.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~
-	SAY NAME1 @3036
-	SAY UNIDENTIFIED_DESC @3037
-COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
-COPY ~might_and_guile/fighter/d5_arff1.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arff2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arff3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arff4.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~
-	SAY NAME1 @3038
-	SAY UNIDENTIFIED_DESC @3039
+	SAY NAME1 @3251
+	SAY UNIDENTIFIED_DESC @3252
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_strid.d5~) AND (FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~) THEN BEGIN
 	COPY_EXISTING ~d5_sling.2da~ ~override~
 		LPM remove_blank_lines

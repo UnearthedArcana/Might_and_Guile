@@ -1149,50 +1149,194 @@ END
 
 //PROFICIENCIES FOR MOD CLERICS_____________________________________________________
 //
-COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~9~ "rows"
-	PATCH_IF ( rows > 31 ) BEGIN
-		FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
-			READ_2DA_ENTRY %index% 5 9 modclab
-			READ_2DA_ENTRY %index% 8 9 modclass
-			DEFINE_ASSOCIATIVE_ARRAY d5_cleric_weaps BEGIN "%modclab%" => "%modclass%" END
-		END
+DEFINE_ACTION_FUNCTION mod_cleric_profs BEGIN
+	OUTER_SET count = 0
+
+	ACTION_FOR_EACH class IN
+                  cleric
+
+	BEGIN
+		OUTER_SPRINT $clerics("%count%") "%class%"
+		OUTER_SET ++count
 	END
-BUT_ONLY
-ACTION_PHP_EACH d5_cleric_weaps AS coo => qoo BEGIN
-	ACTION_IF (%qoo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
-		COPY_EXISTING ~weapprof.2da~ ~override~
-			COUNT_2DA_COLS num_cols
-			READ_2DA_ENTRIES_NOW ~kits_weapprof~ (num_cols - 1)
-			FOR (col = 3; col < (num_cols - 1); col += 1) BEGIN
-				READ_2DA_ENTRY_FORMER ~kits_weapprof~ 0 col modkit
-				PATCH_IF (~%modkit%~ STRING_EQUAL_CASE ~%coo%~) BEGIN
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 24 (col + 1) 1
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 31 (col + 1) 1
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 32 (col + 1) 1
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 33 (col + 1) 1
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 34 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 11 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 16 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 22 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 27 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 29 (col + 1) 0
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 7 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 8 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 10 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 19 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 23 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 24 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 25 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 30 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 20 (col + 1) 2
-					SET_2DA_ENTRY_LATER ~kits_weapprof~ 26 (col + 1) 2
-					SET_2DA_ENTRIES_NOW ~kits_weapprof~ (num_cols - 1)
+
+	COPY_EXISTING kitlist.2da override
+		READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+			READ_2DA_ENTRY_FORMER kitlist row 1 label
+			READ_2DA_ENTRY_FORMER kitlist row 8 class
+			PATCH_IF class = 3 BEGIN // cleric
+				SPRINT $clerics("%count%") "%label%"
+				++count
+			END
+		END
+	BUT_ONLY
+
+	COPY_EXISTING ~WEAPPROF.2DA~ override
+		READ_2DA_ENTRIES_NOW weapprof 3
+		COUNT_2DA_COLS cols
+		PHP_EACH clerics AS _ => name BEGIN
+			FOR (col = 0; col < cols - 1; ++col) BEGIN
+				READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+				PATCH_IF "%column_name%" STRING_EQUAL_CASE "%name%" BEGIN
+					SET_2DA_ENTRY_LATER wweapprof 31 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 32 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 33 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 34 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 11 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 16 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 22 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 27 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 29 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 7 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 8 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 10 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 19 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 23 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 24 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 25 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 26 (col + 1) 2
 				END
 			END
-		BUT_ONLY
-	END
+		END
+		SET_2DA_ENTRIES_NOW wweapprof 1
+		PRETTY_PRINT_2DA
+	BUT_ONLY
 END
+
+LAF mod_cleric_profs END
+//__________________________________________________________________________________
+
+
+//PROFICIENCIES FOR MOD THIEVES_____________________________________________________
+//
+DEFINE_ACTION_FUNCTION mod_thief_profs BEGIN
+	OUTER_SET count = 0
+
+	ACTION_FOR_EACH class IN
+                  thief
+
+	BEGIN
+		OUTER_SPRINT $thiefs("%count%") "%class%"
+		OUTER_SET ++count
+	END
+
+	COPY_EXISTING kitlist.2da override
+		READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+			READ_2DA_ENTRY_FORMER kitlist row 1 label
+			READ_2DA_ENTRY_FORMER kitlist row 8 class
+			PATCH_IF class = 4 BEGIN // thief
+				SPRINT $thiefs("%count%") "%label%"
+				++count
+			END
+		END
+	BUT_ONLY
+
+	COPY_EXISTING ~WEAPPROF.2DA~ override
+		READ_2DA_ENTRIES_NOW weapprof 3
+		COUNT_2DA_COLS cols
+		PHP_EACH thiefs AS _ => name BEGIN
+			FOR (col = 0; col < cols - 1; ++col) BEGIN
+				READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+				PATCH_IF "%column_name%" STRING_EQUAL_CASE "%name%" BEGIN
+					SET_2DA_ENTRY_LATER wweapprof 31 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 32 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 33 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 34 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 11 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 16 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 22 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 27 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 29 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 12 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 13 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 17 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 18 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 25 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 26 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 28 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 3
+				END
+			END
+		END
+		SET_2DA_ENTRIES_NOW wweapprof 1
+		PRETTY_PRINT_2DA
+	BUT_ONLY
+END
+
+LAF mod_thief_profs END
+//__________________________________________________________________________________
+
+
+//PROFICIENCIES FOR MOD BARDS_______________________________________________________
+//
+DEFINE_ACTION_FUNCTION mod_bard_profs BEGIN
+	OUTER_SET count = 0
+
+	ACTION_FOR_EACH class IN
+                  bard
+
+	BEGIN
+		OUTER_SPRINT $bards("%count%") "%class%"
+		OUTER_SET ++count
+	END
+
+	COPY_EXISTING kitlist.2da override
+		READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+			READ_2DA_ENTRY_FORMER kitlist row 1 label
+			READ_2DA_ENTRY_FORMER kitlist row 8 class
+			PATCH_IF class = 5 BEGIN // bard
+				SPRINT $bards("%count%") "%label%"
+				++count
+			END
+		END
+	BUT_ONLY
+
+	COPY_EXISTING ~WEAPPROF.2DA~ override
+		READ_2DA_ENTRIES_NOW weapprof 3
+		COUNT_2DA_COLS cols
+		PHP_EACH bards AS _ => name BEGIN
+			FOR (col = 0; col < cols - 1; ++col) BEGIN
+				READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+				PATCH_IF "%column_name%" STRING_EQUAL_CASE "%name%" BEGIN
+					SET_2DA_ENTRY_LATER wweapprof 31 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 32 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 33 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 34 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 11 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 16 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 22 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 27 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 29 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 12 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 13 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 14 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 15 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 17 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 18 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 19 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 21 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 23 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 24 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 25 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 26 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 28 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 3
+				END
+			END
+		END
+		SET_2DA_ENTRIES_NOW wweapprof 1
+		PRETTY_PRINT_2DA
+	BUT_ONLY
+END
+
+LAF mod_bard_profs END
 //__________________________________________________________________________________
 
 
@@ -1978,43 +2122,8 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
 		END
 	END
 	BUT_ONLY
-/*
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
-	COPY_EXISTING ~kitlist.2da~ ~override~
-		COUNT_2DA_ROWS ~10~ "rows"
-		FOR ( index = 1 ; index < rows ; index = index + 1 ) BEGIN
-			READ_2DA_ENTRY %index% 1 10 kitname
-			READ_2DA_ENTRY %index% 8 10 kitclass
-			DEFINE_ASSOCIATIVE_ARRAY d5_cleric_profs BEGIN "%kitname%" => "%kitclass%" END
-		END
-		BUT_ONLY
-	ACTION_PHP_EACH d5_cleric_profs AS voo => doo BEGIN
-		ACTION_IF (%doo% = 3) THEN BEGIN
-			COPY_EXISTING ~weapprof.2da~ ~override~
-				SET_2DA_ENTRY 26 ("%voo%" + 22) ("%voo%" + 23) 2
-			BUT_ONLY
-		END
-	END
-END
-ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
-	COPY_EXISTING ~kitlist.2da~ ~override~
-		COUNT_2DA_ROWS ~9~ "rows"
-		FOR ( index = 1 ; index < rows ; index = index + 1 ) BEGIN
-			READ_2DA_ENTRY %index% 1 9 kitname
-			READ_2DA_ENTRY %index% 8 9 kitclass
-			DEFINE_ASSOCIATIVE_ARRAY d5_cleric_profs BEGIN "%kitname%" => "%kitclass%" END
-		END
-		BUT_ONLY
-	ACTION_PHP_EACH d5_cleric_profs AS voo => doo BEGIN
-		ACTION_IF (%doo% = 3) THEN BEGIN
-			COPY_EXISTING ~weapprof.2da~ ~override~
-				SET_2DA_ENTRY 26 ("%voo%" + 22) ("%voo%" + 23) 2
-			BUT_ONLY
-		END
-	END
-END
-*/
 //__________________________________________________________________________________
+
 
 //DELETE NPCS' PROFICIENCIES________________________________________________________
 //

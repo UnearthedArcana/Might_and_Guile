@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 1.0 </strong><br />
+  <p><strong> Version 1.1 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -227,6 +227,7 @@
     <p><strong><em>Revised Rangers</em></strong></p>
       <p> Rangers are limited to medium armor (splint or lighter).</p> 
       <p> Beastmasters gain the ability to wield daggers, axes, and spears.</p>
+      <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Pin, and Disarm)</p> 
       <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
       <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below), and can cast fewer spells per day than normal rangers. However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
   </div>
@@ -608,6 +609,10 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 1.1 - September 2015</strong></p>
+  <ul>
+    <li>fixed proficiency limits for mod clerics and rogues in the WPO</li>
+  </ul>
   <p><strong>Version 1.0 - September 2015</strong></p>
   <ul>
     <li>first version, from the ashes of Scales of Balance</li>

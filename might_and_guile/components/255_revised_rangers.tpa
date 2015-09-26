@@ -304,21 +304,21 @@ SPRINT beastmaster_shapechange @2560
 ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	ACTION_GET_STRREF 25368 beastmaster_description // or 24300
 	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~III.~ ~%beastmaster_shapechange%~
+		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
 	END
 	STRING_SET_EVALUATE 25368 ~%beastmaster_description%~
 END
 ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
 	ACTION_GET_STRREF 25212 beastmaster_description // or 24300
 	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~III.~ ~%beastmaster_shapechange%~
+		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
 	END
 	STRING_SET_EVALUATE 25212 ~%beastmaster_description%~
 END
 ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
 	ACTION_GET_STRREF 37117 beastmaster_description // or 24300
 	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~III.~ ~%beastmaster_shapechange%~
+		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
 	END
 	STRING_SET_EVALUATE 37117 ~%beastmaster_description%~
 END

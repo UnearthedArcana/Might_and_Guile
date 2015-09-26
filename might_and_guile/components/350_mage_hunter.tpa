@@ -164,6 +164,7 @@ END
 
 //MAGE HUNTER ABILITY FILES__________________________________________________________
 //
+COPY ~might_and_guile/ranger/d5_mageh.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rasp1.spl~ ~override~
@@ -204,7 +205,6 @@ COPY ~might_and_guile/ranger/d5_mghs2.eff~ ~override~
 //__________________________________________________________________________________
 
 //2DA MODIFICATIONS___________________________________________________________________
-COPY ~might_and_guile/ranger/d5_mageh.2da~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_mageh.2da~ ~override~
 		LPM remove_blank_lines

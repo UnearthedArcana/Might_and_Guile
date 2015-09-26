@@ -226,7 +226,7 @@
   <div class="section">
     <p><strong><em>Revised Rangers</em></strong></p>
       <p> Rangers are limited to medium armor (splint or lighter).</p> 
-      <p> Beastmasters gain the ability to wield daggers, axes, and spears.</p>
+      <p> Beastmasters gain the ability to wield daggers, axes, and spears, and may shapechange into wolf and werewolf forms.</p>
       <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Pin, and Disarm)</p> 
       <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
       <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below), and can cast fewer spells per day than normal rangers. However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>

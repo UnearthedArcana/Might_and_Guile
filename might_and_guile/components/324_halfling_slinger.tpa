@@ -151,7 +151,7 @@ ADD_KIT ~D5SLING~
 ~D5SLING           0  0  0  0  0  0~
 
 //KIT ABILITIES 2DA FILE______________________________________________________________
-~might_and_guile/ranger/d5_sling.2da~
+~might_and_guile/ranger/slinger/d5_sling.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 ~K_R_HL~
@@ -337,6 +337,10 @@ END
 //ARCHER+SLINGER ABILITY FILES________________________________________________________
 //
 COPY ~might_and_guile/ranger/d5_sling.2da~ ~override~
+COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
+COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_hnosp.eff~ ~override~
+COPY ~might_and_guile/ranger/d5_hnosp.spl~ ~override~
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~

@@ -726,6 +726,8 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	SET_2DA_ENTRY_LATER ~#weapprof~ 22 38 0
 	SET_2DA_ENTRY_LATER ~#weapprof~ 27 38 0
 	SET_2DA_ENTRY_LATER ~#weapprof~ 29 38 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 14 38 4
+	SET_2DA_ENTRY_LATER ~#weapprof~ 18 38 4
 	SET_2DA_ENTRY_LATER ~#weapprof~ 20 38 4
 	SET_2DA_ENTRY_LATER ~#weapprof~ 21 38 4
 	SET_2DA_ENTRY_LATER ~#weapprof~ 25 38 4
@@ -1144,6 +1146,38 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 		SET_2DA_ENTRIES_NOW ~IEE#weapprof~ 1
 		REPLACE_TEXTUALLY ~TYPE ~ ~      ~
 END
+//__________________________________________________________________________________
+
+
+//BEASTMASTER USABILITY_____________________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type
+		PATCH_IF (type = ~16~) BEGIN // daggers
+			READ_BYTE 0x2b kit 
+			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
+		END
+	END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type 
+		PATCH_IF (type = ~25~) BEGIN // axes
+			READ_BYTE 0x2b kit
+			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
+		END
+	END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type
+		PATCH_IF (type = 29) BEGIN // spears
+			READ_BYTE 0x2b kit 
+			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
+		END
+	END
+BUT_ONLY
 //__________________________________________________________________________________
 
 

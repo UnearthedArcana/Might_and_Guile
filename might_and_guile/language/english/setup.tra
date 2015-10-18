@@ -21,36 +21,37 @@
 @22   = ~Tweak Components~
 @23   = ~New Kit Components~
 @30   = ~Would you like to view new kits? (y/n)~
-@100   = ~100: IWO: Item & Weapon Overhaul~
-@120   = ~120: WPO: Weapon Proficiency Overhaul~
-@140   = ~140: RCO: nothing here yet, just a placeholder component~
-@155   = ~155: WCO: Wizard Class Overhaul~
-@160   = ~160: STO: Saving Throw Overhaul~
-@180   = ~180: MRO: Magic Resistance Overhaul~
-@200   = ~200: Revised Stat Bonuses~
-@205   = ~205: Revised Hit Point Tables~
-@210   = ~210: Revised XP Tables~
-@215   = ~215: Revised Spellcasting Tables~
-@220   = ~220: Revised Movement Bonuses (Quickstride)~
-@250   = ~250: Revised Berserker and Rage~
-@255   = ~255: Revised Rangers~
-@260   = ~260: Revised Kensai~
-@265   = ~265: Revised Monk Fists~
-@270   = ~270: Revised Bards~
-@310   = ~310: Add the Corsair (fighter kit)~
-@320   = ~320: Add the Marksman (fighter kit)~
-@322   = ~322: Add the Elven Archer (ranger kit)~
-@324   = ~324: Add the Halfling Slinger (ranger or fighter kit)~
-@350   = ~350: Add the Mage Hunter (ranger kit)~
-@360   = ~360: Add the Barbarian Ranger (ranger kit)~
-@410   = ~410: Add the Sniper (thief kit)~
-@420   = ~420: Add the Scout (thief kit) and revise the Swashbuckler~
-@450   = ~450: Add the Jongleur (bard kit)~
-@460   = ~460: Add the Loremaster (bard kit)~
-@470   = ~470: Add the Gallant (bard kit)~
-@480   = ~480: Add the Meistersinger (bard kit)~
-@490   = ~490: Add the Loresinger (bard kit)~
-@500   = ~500: Add Multiclass Kits~
+@100   = ~IWO: Item & Weapon Overhaul~
+@120   = ~WPO: Weapon Proficiency Overhaul~
+@140   = ~RCO: nothing here yet, just a placeholder component~
+@155   = ~WCO: Wizard Class Overhaul~
+@160   = ~STO: Saving Throw Overhaul~
+@180   = ~MRO: Magic Resistance Overhaul~
+@200   = ~Revised Stat Bonuses~
+@205   = ~Revised Hit Point Tables~
+@210   = ~Revised XP Tables~
+@215   = ~Revised Spellcasting Tables~
+@220   = ~Revised Movement Bonuses (Quickstride)~
+@250   = ~Revised Berserker and Rage~
+@255   = ~Revised Rangers~
+@260   = ~Revised Kensai~
+@265   = ~Revised Monk Fists~
+@270   = ~Revised Bards~
+@275   = ~Revised Shadowdancer~
+@310   = ~Add the Corsair (fighter kit)~
+@320   = ~Add the Marksman (fighter kit)~
+@322   = ~Add the Elven Archer (ranger kit)~
+@324   = ~Add the Halfling Slinger (ranger or fighter kit)~
+@350   = ~Add the Mage Hunter (ranger kit)~
+@360   = ~Add the Barbarian Ranger (ranger kit)~
+@410   = ~Add the Sniper (thief kit)~
+@420   = ~Add the Scout (thief kit) and revise the Swashbuckler~
+@450   = ~Add the Jongleur (bard kit)~
+@460   = ~Add the Loremaster (bard kit)~
+@470   = ~Add the Gallant (bard kit)~
+@480   = ~Add the Meistersinger (bard kit)~
+@490   = ~Add the Loresinger (bard kit)~
+@500   = ~Add Multiclass Kits~
 @1000   = ~100: Item Tweaks~
 @1001   = ~Mastercraft Arrows~
 @1002   = ~Enchanted Arrows~
@@ -973,6 +974,40 @@ Disadvantages:
 - One fewer spell per level.
 - Only has one quarter the normal Pick Pockets score.
 ~
+@2751  = ~SHADOWDANCER: Shadowdancers can harness the power of magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled Thieves are able to blend seamlessly into the shadows in ways that a normal Thief cannot, striking without warning—sometimes with supernatural speed.
+
+Advantages:
+- +10% bonus to Hide In Shadows and Move Silently.
+- Slippery Mind: +1 bonus to Saving Throws.
+- May use Shadow Pool once per day. Gains an additional use for every 5 levels of experience.
+
+SHADOW POOL: This allows the Shadowdancer to use one of the following five abilities:
+  1) Sanctuary
+  2) Blur
+  3) Blindness
+  4) Shadow Door
+  5) Shadowstep
+
+Disadvantages:
+- Alignment restricted to any non-lawful.
+- -1 to backstab multiplier compared to an unkitted Thief:
+  Level 1-4: x1 (no multiplier)
+  Level 5-8: x2
+  Level 9-12: x3
+  Level 13+: x4
+- May only distribute 20 skill points per level (30 at level 1) among thieving skills.
+- May not use the Set Snare ability.
+
+Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
+@2752  = ~Shadow Pool~
+@2753  = ~Shadow Pool:
+
+This allows the Shadowdancer to use one of the following five abilities:
+  1) Sanctuary
+  2) Blur
+  3) Blindness
+  4) Shadow Door
+  5) Shadowstep~
 @3101  = ~corsair~
 @3102  = ~Corsair~
 @3103  = ~CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.
@@ -1503,7 +1538,7 @@ Restrictions:
 @5103  = ~Totem of Mystra~
 @5104  = ~This an ornate carved symbol of the goddess Mystra. Known as the Lady of Spells and the Mother of Magic. She tends to the Weave, which enables mortals to cast spells. Mystra's clerics, known as Monitors, watch over the different uses of magic power and prevent magical abuse. 
 
-Monitors are in tune with magical energies in a way that few spellcasters can match; they can create effects with a power level beyond their nominal experience. They effectively act as if their caster level is one higher than their experience level. This increases by one for each 5 levels of experience they gain.
+Monitors are in tune with magical energies in a way that few spellcasters can match; they can create effects with a power level beyond their nominal experience. They effectively act as if their caster level is one higher than their experience level. This increases by one for each 4 levels of experience they gain.
 
 Monitors may not cast wizard spells from the school of Necromancy.
 

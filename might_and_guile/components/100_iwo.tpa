@@ -962,12 +962,13 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 		READ_SHORT ~0x1c~ ~type~
 		PATCH_IF (~%type%~ = ~16~) BEGIN // daggers
 			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=7 parameter2=1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 parameter1=7 parameter2=1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=2 parameter2=0 END
 		END
 		PATCH_IF (~%type%~ = ~26~) BEGIN // quarterstaff
 			WRITE_BYTE 0x88 4
 			WRITE_BYTE 0x8a 2
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=0 target=1 timing=2 power=1 parameter1=1 parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=0 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
 		PATCH_IF (~%type%~ = ~29~) BEGIN // spears
 			WRITE_BYTE 0x88 8

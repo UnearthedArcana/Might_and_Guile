@@ -261,6 +261,16 @@
         &ndash; May cast one fewer spell per level compared to most bards.<br />.</p>
     </div>
   </div>
+  <h4 class="subheader">Component 275: </h4>
+  <div class="section">
+    <p><strong><em>Revised Shadowdancer</em></strong></p>
+      <p>This component removes Shadowdancers' "Hide in Plain Sight" ability. It also turns their "Shadowstep" ability into something called "Shadow Pool" which allows the Shadowdancer to cast any one of the following spells:<br />
+        &ndash; Sanctuary<br />
+        &ndash; Blur<br />
+        &ndash; Blindness<br />
+        &ndash; Shadow Door<br />
+        &ndash; Shadowstep</p>
+  </div>
   <h4 class="subheader">Component 310: </h4>
   <div class="section">
     <p><strong><em>Add the CORSAIR fighter kit</em></strong></p>

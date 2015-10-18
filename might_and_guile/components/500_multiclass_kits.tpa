@@ -2136,8 +2136,15 @@ COPY ~might_and_guile/mc/d5_mystr.spl~ ~override~
 COPY ~might_and_guile/mc/d5_mystr.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_mystr.baf~
 COPY ~might_and_guile/misc/d5_cllv1.spl~ ~override~
+COPY ~might_and_guile/misc/d5_cllv2.spl~ ~override~
+COPY ~might_and_guile/misc/d5_cllv3.spl~ ~override~
+COPY ~might_and_guile/misc/d5_cllv4.spl~ ~override~
+COPY ~might_and_guile/misc/d5_cllv5.spl~ ~override~
 COPY ~might_and_guile/misc/d5_mglv1.spl~ ~override~
 COPY ~might_and_guile/misc/d5_mglv2.spl~ ~override~
+COPY ~might_and_guile/misc/d5_mglv3.spl~ ~override~
+COPY ~might_and_guile/misc/d5_mglv4.spl~ ~override~
+COPY ~might_and_guile/misc/d5_mglv5.spl~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COPY ~might_and_guile/mc/d5_mystr.2da~ ~override~
 		LPM remove_blank_lines

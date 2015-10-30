@@ -2717,6 +2717,7 @@ END
 //BLINDNESS_________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi106.spl~ THEN BEGIN
 COPY_EXISTING ~spwi106.spl~ ~override~
+ADD_SPELL ~override/spwi106.spl~ 2 2 WIZARD_BLINDNESS
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -2745,6 +2746,7 @@ END
 //DEAFNESS__________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi223.spl~ THEN BEGIN
 COPY_EXISTING ~spwi223.spl~ ~override~
+ADD_SPELL ~override/spwi223.spl~ 2 1 WIZARD_DEAFNESS
 	WRITE_LONG 0x34 1
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -2773,6 +2775,7 @@ END
 //LUCK_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
 COPY_EXISTING ~spwi209.spl~ ~override~
+ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
 	WRITE_LONG 0x34 1
 	SAY UNIDENTIFIED_DESC @6115
 END
@@ -2846,6 +2849,7 @@ END
 //LIMITED WISH________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi722.spl~ THEN BEGIN
 COPY_EXISTING ~spwi722.spl~ ~override~
+ADD_SPELL ~override/spwi722.spl~ 2 8 WIZARD_LIMITED_WISH
 	WRITE_LONG 0x34 8
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -2874,6 +2878,7 @@ END
 //SYMBOL: FEAR________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
 COPY_EXISTING ~spwi811.spl~ ~override~
+ADD_SPELL ~override/spwi811.spl~ 2 7 WIZARD_SYMBOL_FEAR
 	WRITE_LONG 0x34 7
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -2902,6 +2907,7 @@ END
 //SHAPECHANGE________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
 COPY_EXISTING ~spwi916.spl~ ~override~
+ADD_SPELL ~override/spwi916.spl~ 2 8 WIZARD_SHAPECHANGE
 	WRITE_LONG 0x34 8
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -2930,6 +2936,7 @@ END
 //BLACK BLADE OF DISASTER___________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi915.spl~ THEN BEGIN
 COPY_EXISTING ~spwi915.spl~ ~override~
+ADD_SPELL ~override/spwi915.spl~ 2 8 WIZARD_BLACK_BLADE_OF_DISASTER
 	WRITE_LONG 0x34 8
 	SAY UNIDENTIFIED_DESC @6121
 END
@@ -3388,6 +3395,7 @@ END
 //ARMOR_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi102.spl~ THEN BEGIN
 COPY_EXISTING ~spwi102.spl~ ~override~
+ADD_SPELL ~override/spwi102.spl~ 2 2 WIZARD_ARMOR
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3416,6 +3424,7 @@ END
 //BLUR______________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi201.spl~ THEN BEGIN
 COPY_EXISTING ~spwi201.spl~ ~override~
+ADD_SPELL ~override/spwi201.spl~ 2 1 WIZARD_BLUR
 	WRITE_LONG 0x34 1
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3444,6 +3453,7 @@ END
 //REFLECTED IMAGE___________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi120.spl~ THEN BEGIN
 COPY_EXISTING ~spwi120.spl~ ~override~
+ADD_SPELL ~override/spwi120.spl~ 2 8 WIZARD_REFLECTED_IMAGE
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3472,6 +3482,7 @@ END
 //MIRROR IMAGE_____________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi212.spl~ THEN BEGIN
 COPY_EXISTING ~spwi212.spl~ ~override~
+ADD_SPELL ~override/spwi212.spl~ 2 3 WIZARD_MIRROR_IMAGE
 	WRITE_LONG 0x34 3
 //	SAY UNIDENTIFIED_DESC @6130
 	READ_LONG 0x50 "valid"
@@ -3500,6 +3511,7 @@ END
 //LUCK_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
 COPY_EXISTING ~spwi209.spl~ ~override~
+ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
 	WRITE_LONG 0x34 1
 	SAY UNIDENTIFIED_DESC @6131
 END
@@ -3569,6 +3581,7 @@ END
 //SYMBOL: FEAR________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
 COPY_EXISTING ~spwi811.spl~ ~override~
+ADD_SPELL ~override/spwi811.spl~ 2 7 WIZARD_SYMBOL_FEAR
 	WRITE_LONG 0x34 7
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3597,6 +3610,7 @@ END
 //SHAPECHANGE______________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
 COPY_EXISTING ~spwi916.spl~ ~override~
+ADD_SPELL ~override/spwi916.spl~ 2 8 WIZARD_SHAPECHANGE
 	WRITE_LONG 0x34 8
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3625,6 +3639,7 @@ END
 //BLACK BLADE OF DISASTER___________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi915.spl~ THEN BEGIN
 COPY_EXISTING ~spwi915.spl~ ~override~
+ADD_SPELL ~override/spwi915.spl~ 2 8 WIZARD_BLACK_BLADE_OF_DISASTER
 	WRITE_LONG 0x34 8
 	SAY UNIDENTIFIED_DESC @6139
 END

@@ -14,9 +14,9 @@ COPY ~might_and_guile/misc/d5_taspl.d5~ ~override~
 
 //REPLACE SPELL TABLES AND EDIT CLAB FILES___________________________________________
 //
-COPY ~might_and_guile/misc/mxsplwiz.2da~ ~override~
 COPY ~might_and_guile/misc/mxsplra2.2da~ ~override/mxsplran.2da~
 COPY ~might_and_guile/misc/mxsplpal.2da~ ~override~
+COPY ~might_and_guile/misc/mxsplwiz.2da~ ~override~
 COPY ~might_and_guile/misc/mxsplprs.2da~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_drspl.2da~ THEN BEGIN
 	COPY ~might_and_guile/misc/mxspldru.2da~ ~override~

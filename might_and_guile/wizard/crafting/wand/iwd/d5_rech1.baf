@@ -1,0 +1,709 @@
+IF
+        PartyGoldLT(225)
+        !Global("d5_T1","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T1","GLOBAL",1)         //Removes Tier 1 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(475)
+        !Global("d5_T2","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T2","GLOBAL",1)         //Removes Tier 2 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(1250)
+        !Global("d5_T3","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T3","GLOBAL",1)         //Removes Tier 3 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(2500)
+        !Global("d5_T4","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T4","GLOBAL",1)         //Removes Tier 4 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(3750)
+        !Global("d5_T5","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T5","GLOBAL",1)         //Removes Tier 5 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(6250)
+        !Global("d5_T6","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T6","GLOBAL",1)         //Removes Tier 6 Items: money
+                Continue()
+END
+
+IF
+        PartyGoldLT(12500)
+        !Global("d5_T7","GLOBAL",1)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_T7","GLOBAL",1)         //Removes Tier 7 Items: money
+                Continue()
+END
+
+IF
+        OR(6)
+        HasItem("WAND03",LastSummonerOf(Myself))
+        HasItem("WAND12",LastSummonerOf(Myself))
+        HasItem("d5_WND01",LastSummonerOf(Myself))
+        HasItem("LIGHT",LastSummonerOf(Myself))
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        Global("d5_MM","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_MM","GLOBAL",1)         //Gives MM option
+                Continue()
+END
+
+IF
+        OR(6)                                         //Excludes option if character posesses more than one wand of mm
+        NumItemsGT("WAND03",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND12",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND01",LastSummonerOf(Myself),1)
+        NumItemsGT("LIGHT",LastSummonerOf(Myself),1)
+        NumItemsGT("PULS01",LastSummonerOf(Myself),1)
+        NumItemsGT("PULS02",LastSummonerOf(Myself),1)
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+IF                                                       //Excludes option if character posesses more than one wand of mm
+        HasItem("WAND03",LastSummonerOf(Myself))
+        OR(5)
+        HasItem("WAND12",LastSummonerOf(Myself))
+        HasItem("d5_WND01",LastSummonerOf(Myself))
+        HasItem("LIGHT",LastSummonerOf(Myself))
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+IF                                                       //Excludes option if character posesses more than one wand of mm
+        HasItem("WAND12",LastSummonerOf(Myself))
+        OR(4)
+        HasItem("d5_WND01",LastSummonerOf(Myself))
+        HasItem("LIGHT",LastSummonerOf(Myself))
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+
+IF                                                       //Excludes option if character posesses more than one wand of mm
+        HasItem("d5_WND01",LastSummonerOf(Myself))
+        OR(3)
+        HasItem("LIGHT",LastSummonerOf(Myself))
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+IF                                                       //Excludes option if character posesses more than one wand of mm
+        HasItem("LIGHT",LastSummonerOf(Myself))
+        OR(2)
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+IF                                                       //Excludes option if character posesses more than one wand of mm
+        HasItem("PULS01",LastSummonerOf(Myself))
+        HasItem("PULS02",LastSummonerOf(Myself))
+        !Global("d5_MM","GLOBAL",2)
+THEN
+	RESPONSE #100
+                SetGlobal("d5_MM","GLOBAL",2)
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("WAND08",LastSummonerOf(Myself))
+        HasItem("d5_WND02",LastSummonerOf(Myself))
+        Global("d5_SLP","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_SLP","GLOBAL",1)         //Gives Sleep option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("WAND08",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND02",LastSummonerOf(Myself),1)
+        !Global("d5_SLP","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_SLP","GLOBAL",2)         //Excludes Sleep option
+                Continue()
+END
+
+
+
+IF
+        HasItem("WAND08",LastSummonerOf(Myself))
+        HasItem("d5_WND02",LastSummonerOf(Myself))
+        !Global("d5_SLP","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_SLP","GLOBAL",2)         //Excludes Sleep option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("WAND02",LastSummonerOf(Myself))
+        HasItem("d5_WND03",LastSummonerOf(Myself))
+        Global("d5_FEA","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FEA","GLOBAL",1)         //Gives fear option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("WAND02",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND03",LastSummonerOf(Myself),1)
+        !Global("d5_FEA","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FEA","GLOBAL",2)         //Excludes fear option
+                Continue()
+END
+
+
+
+IF
+        HasItem("WAND02",LastSummonerOf(Myself))
+        HasItem("d5_WND03",LastSummonerOf(Myself))
+        !Global("d5_FEA","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_SLP","GLOBAL",2)         //Excludes fear option
+                Continue()
+END
+
+
+IF
+        OR(2)
+        HasItem("WAND05",LastSummonerOf(Myself))
+        HasItem("d5_WND05",LastSummonerOf(Myself))
+        Global("d5_FIR","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FIR","GLOBAL",1)         //Gives fire option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("WAND05",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND05",LastSummonerOf(Myself),1)
+        !Global("d5_FIR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FIR","GLOBAL",2)         //Excludes fire option
+                Continue()
+END
+
+IF
+        HasItem("WAND05",LastSummonerOf(Myself))
+        HasItem("d5_WND05",LastSummonerOf(Myself))
+        !Global("d5_FIR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FIR","GLOBAL",2)         //Excludes fire option
+                Continue()
+END
+
+IF
+        OR(4)
+        HasItem("WAND07",LastSummonerOf(Myself))
+        HasItem("d5_WND07",LastSummonerOf(Myself))
+        HasItem("WANDFAK",LastSummonerOf(Myself))
+        HasItem("WANDREA",LastSummonerOf(Myself))
+        Global("d5_LIG","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_LIG","GLOBAL",1)         //Gives Lightning option
+                Continue()
+END
+
+IF
+        OR(4)
+        NumItemsGT("WAND07",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND07",LastSummonerOf(Myself),1)
+        NumItemsGT("WANDFAK",LastSummonerOf(Myself),1)
+        NumItemsGT("WANDREA",LastSummonerOf(Myself),1)
+        !Global("d5_LIG","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_LIG","GLOBAL",2)         //Excludes lightning option
+                Continue()
+END
+
+IF
+        HasItem("WAND07",LastSummonerOf(Myself))
+        OR(3)
+        HasItem("d5_WND07",LastSummonerOf(Myself))
+        HasItem("WANDFAK",LastSummonerOf(Myself))
+        HasItem("WANDREA",LastSummonerOf(Myself))
+        !Global("d5_LIG","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_LIG","GLOBAL",2)         //Excludes lightning option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND07",LastSummonerOf(Myself))
+        OR(2)
+        HasItem("WANDFAK",LastSummonerOf(Myself))
+        HasItem("WANDREA",LastSummonerOf(Myself))
+        !Global("d5_LIG","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_LIG","GLOBAL",2)         //Excludes lightning option
+                Continue()
+END
+
+IF
+        HasItem("WANDFAK",LastSummonerOf(Myself))
+        HasItem("WANDREA",LastSummonerOf(Myself))
+        !Global("d5_LIG","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_LIG","GLOBAL",2)         //Excludes lightning option
+                Continue()
+END
+
+
+IF
+        OR(2)
+        HasItem("WAND10",LastSummonerOf(Myself))
+        HasItem("d5_WND04",LastSummonerOf(Myself))
+        Global("d5_MON","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_MON","GLOBAL",1)         //Gives Mon Sum option
+                Continue()
+END
+
+IF
+        HasItem("WAND10",LastSummonerOf(Myself))
+        HasItem("d5_WND04",LastSummonerOf(Myself))
+        !Global("d5_MON","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_MON","GLOBAL",2)         //Excludes Mon Sum option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("WAND10",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND04",LastSummonerOf(Myself),1)
+        !Global("d5_MON","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_MON","GLOBAL",2)         //Excludes Mon Sum option
+                Continue()
+END
+
+
+IF
+        OR(3)
+        HasItem("WANDFRE",LastSummonerOf(Myself))
+        HasItem("d5_WND12",LastSummonerOf(Myself))
+        HasItem("d5_WND11",LastSummonerOf(Myself))
+        Global("d5_FRE","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRE","GLOBAL",1)         //Gives Freezing Death option
+                Continue()
+END
+
+IF
+        OR(3)
+        NumItemsGT("WANDFRE",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND12",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND11",LastSummonerOf(Myself),1)
+        !Global("d5_FRE","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRE","GLOBAL",2)         //Excludes Freezing Death option
+                Continue()
+END
+
+
+IF
+        HasItem("WANDFRE",LastSummonerOf(Myself))
+        OR(2)
+        HasItem("d5_WND12",LastSummonerOf(Myself))
+        HasItem("d5_WND11",LastSummonerOf(Myself))
+        !Global("d5_FRE","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRE","GLOBAL",2)         //Excludes Freezing Death option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND12",LastSummonerOf(Myself))
+        HasItem("d5_WND11",LastSummonerOf(Myself))
+        !Global("d5_FRE","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRE","GLOBAL",2)         //Excludes Freezing Death option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND10",LastSummonerOf(Myself))
+        HasItem("WANDARM",LastSummonerOf(Myself))
+        Global("d5_ARM","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_ARM","GLOBAL",1)         //Gives Armory option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND10",LastSummonerOf(Myself))
+        HasItem("WANDARM",LastSummonerOf(Myself))
+        !Global("d5_ARM","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_ARM","GLOBAL",2)         //Excludes Armory option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND10",LastSummonerOf(Myself),1)
+        NumItemsGT("WANDARM",LastSummonerOf(Myself),1)
+        !Global("d5_ARM","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_ARM","GLOBAL",2)         //Excludes Armory option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND14",LastSummonerOf(Myself))
+        HasItem("WAND09",LastSummonerOf(Myself))
+        Global("d5_POL","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_POL","GLOBAL",1)         //Gives Polymorph option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND14",LastSummonerOf(Myself))
+        HasItem("WAND09",LastSummonerOf(Myself))
+        !Global("d5_POL","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_POL","GLOBAL",2)         //Excludes Polymorph option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND14",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND09",LastSummonerOf(Myself),1)
+        !Global("d5_POL","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_POL","GLOBAL",2)         //Excludes Polymorph option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND06",LastSummonerOf(Myself))
+        HasItem("WAND04",LastSummonerOf(Myself))
+        Global("d5_PAR","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_PAR","GLOBAL",1)         //Gives Paralization option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND06",LastSummonerOf(Myself))
+        HasItem("WAND04",LastSummonerOf(Myself))
+        !Global("d5_PAR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_PAR","GLOBAL",2)         //Removes Paralization option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND06",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND04",LastSummonerOf(Myself),1)
+        !Global("d5_PAR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_PAR","GLOBAL",2)         //Removes Paralization option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND08",LastSummonerOf(Myself))
+        HasItem("WAND06",LastSummonerOf(Myself))
+        Global("d5_FRO","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRO","GLOBAL",1)         //Gives Frost option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND08",LastSummonerOf(Myself))
+        HasItem("WAND06",LastSummonerOf(Myself))
+        !Global("d5_FRO","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRO","GLOBAL",2)         //Removes Frost option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND08",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND06",LastSummonerOf(Myself),1)
+        !Global("d5_FRO","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_FRO","GLOBAL",2)         //Removes Frost option
+                Continue()
+END
+
+
+IF
+        OR(2)
+        HasItem("d5_WND19",LastSummonerOf(Myself))
+        HasItem("WAND13",LastSummonerOf(Myself))
+        Global("d5_CLO","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CLO","GLOBAL",1)         //Gives Cloudkill option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND19",LastSummonerOf(Myself))
+        HasItem("WAND13",LastSummonerOf(Myself))
+        !Global("d5_CLO","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CLO","GLOBAL",2)         //Removes Cloudkill option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND19",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND13",LastSummonerOf(Myself),1)
+        !Global("d5_CLO","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CLO","GLOBAL",2)         //Removes Cloudkill option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND09",LastSummonerOf(Myself))
+        HasItem("WAND18",LastSummonerOf(Myself))
+        Global("d5_STRK","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_STRK","GLOBAL",1)         //Gives Spellstriking option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND09",LastSummonerOf(Myself))
+        HasItem("WAND18",LastSummonerOf(Myself))
+        !Global("d5_STRK","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_STRK","GLOBAL",2)         //Removes Spellstriking option
+                Continue()
+END
+
+IF
+        OR(2)
+        NumItemsGT("d5_WND09",LastSummonerOf(Myself),1)
+        NumItemsGT("WAND18",LastSummonerOf(Myself),1)
+        !Global("d5_STRK","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_STRK","GLOBAL",2)         //Removes Spellstriking option
+                Continue()
+END
+
+IF
+        OR(2)
+        HasItem("d5_WND15",LastSummonerOf(Myself))
+        HasItem("WAND19",LastSummonerOf(Myself))
+        Global("d5_CRS","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CRS","GLOBAL",1)         //Gives Cursing option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND15",LastSummonerOf(Myself))
+        HasItem("WAND19",LastSummonerOf(Myself))
+        !Global("d5_CRS","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CRS","GLOBAL",2)         //Removes Cursing option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND15",LastSummonerOf(Myself))
+        HasItem("WAND19",LastSummonerOf(Myself))
+        !Global("d5_CRS","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_CRS","GLOBAL",2)         //Removes Cursing option
+                Continue()
+END
+
+IF
+        OR(3)
+        HasItem("d5_WND17",LastSummonerOf(Myself))
+        HasItem("d5_WND16",LastSummonerOf(Myself))
+        HasItem("WANDCOR",LastSummonerOf(Myself))
+        Global("d5_COR","GLOBAL",0)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_COR","GLOBAL",1)         //Gives Corr option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND17",LastSummonerOf(Myself))
+        OR(2)
+        HasItem("d5_WND16",LastSummonerOf(Myself))
+        HasItem("WANDCOR",LastSummonerOf(Myself))
+        !Global("d5_COR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_COR","GLOBAL",2)         //Removes Corr option
+                Continue()
+END
+
+IF
+        HasItem("d5_WND16",LastSummonerOf(Myself))
+        HasItem("WANDCOR",LastSummonerOf(Myself))
+        !Global("d5_COR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_COR","GLOBAL",2)         //Removes Corr option
+                Continue()
+END
+
+IF
+        OR(3)
+        NumItemsGT("d5_WND17",LastSummonerOf(Myself),1)
+        NumItemsGT("d5_WND16",LastSummonerOf(Myself),1)
+        NumItemsGT("WANDCOR",LastSummonerOf(Myself),1)
+        !Global("d5_COR","GLOBAL",2)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_COR","GLOBAL",2)         //Removes Corr option
+                Continue()
+END
+
+
+IF
+        NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_rech1",Myself))
+		SetNumTimesTalkedTo(1)
+END
+
+IF
+        True()
+THEN
+	RESPONSE #100
+		SetGlobal("d5_MM","GLOBAL",0)
+		SetGlobal("d5_SLP","GLOBAL",0)
+		SetGlobal("d5_FEA","GLOBAL",0)
+		SetGlobal("d5_FIR","GLOBAL",0)
+		SetGlobal("d5_LIG","GLOBAL",0)
+		SetGlobal("d5_MON","GLOBAL",0)
+		SetGlobal("d5_FRE","GLOBAL",0)
+		SetGlobal("d5_ARM","GLOBAL",0)
+		SetGlobal("d5_POL","GLOBAL",0)
+		SetGlobal("d5_PAR","GLOBAL",0)
+		SetGlobal("d5_FRO","GLOBAL",0)
+		SetGlobal("d5_CLO","GLOBAL",0)
+		SetGlobal("d5_STRK","GLOBAL",0)
+		SetGlobal("d5_COR","GLOBAL",0)
+		SetGlobal("d5_T1","GLOBAL",0)
+		SetGlobal("d5_T2","GLOBAL",0)
+		SetGlobal("d5_T3","GLOBAL",0)
+		SetGlobal("d5_T4","GLOBAL",0)
+		SetGlobal("d5_T5","GLOBAL",0)
+		SetGlobal("d5_T6","GLOBAL",0)
+		SetGlobal("d5_T7","GLOBAL",0)
+		SetNumTimesTalkedTo(0)
+		DestroySelf()
+END
+

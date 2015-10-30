@@ -1,0 +1,7 @@
+IF
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_scrib",Myself))
+		DestroySelf()
+END

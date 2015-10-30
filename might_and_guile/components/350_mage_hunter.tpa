@@ -184,11 +184,17 @@ COPY_EXISTING ~spwi302.spl~ ~override/d5_rarem.spl~
 	WRITE_LONG 0x34 2
 COPY_EXISTING ~spwi310.spl~ ~override/d5_ranon.spl~
 	WRITE_SHORT 0x1c 2
-COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
-	WRITE_SHORT 0x1c 2
-	WRITE_LONG 0x34 2
-COPY_EXISTING ~spwi321.spl~ ~override/d5_rathr.spl~
-	WRITE_SHORT 0x1c 2
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_wiz.d5~ BEGIN
+	COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
+		WRITE_SHORT 0x1c 2
+		WRITE_LONG 0x34 2
+	COPY_EXISTING ~spwi321.spl~ ~override/d5_rathr.spl~
+		WRITE_SHORT 0x1c 2
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_wiz.d5~ BEGIN
+	COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
+	COPY_EXISTING ~spwi321.spl~ ~override/d5_rathr.spl~
+END
 COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 	WRITE_SHORT 0x1c 2
 	WRITE_LONG 0x34 3
@@ -261,3 +267,57 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
 END
 //__________________________________________________________________________________
 
+
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+COPY_EXISTING ~d5_mageh.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/life_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/plant_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/air_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_ranger.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_ranger.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SPRINT kit_spheres @3510 // ........................KIT SPHERES TRA REF HERE
+
+OUTER_SPRINT this_kit ~D5MAGEH~ // ..............................KIT NAME HERE
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~Abilities:~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________

@@ -1,0 +1,266 @@
+IF
+	PartyGoldLT(900)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",-1)         //Denotes Scriber (non artificer) Can't afford scrolls
+                Continue()
+END
+
+IF
+	PartyGoldGT(899)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",1)         //Denotes Scriber can afford 1st tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(1499)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",2)         //Denotes Scriber can afford 2nd tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(4999)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",3)         //Denotes Scriber can afford 3rd tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(9999)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",4)         //Denotes Scriber can afford 4th tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(14999)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",5)         //Denotes Scriber can afford 5th tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(24999)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",6)         //Denotes Scriber can afford 6th tier
+                Continue()
+END
+
+IF
+	PartyGoldGT(49999)
+THEN
+	RESPONSE #100
+	        SetGlobal("d5_WAN","GLOBAL",7)         //Denotes Scriber can afford 7th tier
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_MAGIC_MISSILE)
+	PartyHasItemIdentified("SCRL77")
+	Global("d5_MMW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_MMW","GLOBAL",1)  //Opens MM options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_SLEEP)
+	PartyHasItemIdentified("SCRL81")
+	Global("d5_SW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_SW","GLOBAL",1)  //Opens sleep options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_HORROR)
+	PartyHasItemIdentified("SCRL89")
+	Global("d5_HW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_HW","GLOBAL",1)  //Opens fear options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_MONSTER_SUMMONING_1)
+	PartyHasItemIdentified("SCRL1L")
+	Global("d5_MSW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_MSW","GLOBAL",1)  //Opens m. summoning options
+                Continue()
+END
+
+IF
+	OR(3)
+	HaveSpellParty(WIZARD_FIREBALL)
+	PartyHasItemIdentified("SCRL5Z")
+	PartyHasItemIdentified("SCRL1G")
+	Global("d5_FW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_FW","GLOBAL",1)  //Opens fire options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_LIGHTNING_BOLT)
+	PartyHasItemIdentified("SCRL1K")
+	Global("d5_LW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_LW","GLOBAL",1)  //Opens lightning options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_ICE_STORM)
+	PartyHasItemIdentified("SCRL1X")
+	Global("d5_ISW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_ISW","GLOBAL",1)  //Opens freezing death options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_SPIRIT_ARMOR)
+	PartyHasItemIdentified("SCRL5K")
+	Global("d5_SAW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_SAW","GLOBAL",1)  //Opens spirit armor options
+                Continue()
+END
+
+IF
+	OR(3)
+	HaveSpellParty(WIZARD_HOLD_MONSTER)
+	PartyHasItemIdentified("SCHMON")
+	PartyHasItemIdentified("SCRL5O")
+	Global("d5_HMW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_HMW","GLOBAL",1)  //Opens paralysis options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_CONE_OF_COLD)
+	PartyHasItemIdentified("SCRL2F")
+	Global("d5_FRW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_FRW","GLOBAL",1)  //Opens frost options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_PIERCE_MAGIC)
+	PartyHasItemIdentified("SCRL7L")
+	Global("d5_PMW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_PMW","GLOBAL",1)  //Opens Spellstrike options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_POLYMORPH_OTHER)
+	PartyHasItemIdentified("SCRL5L")
+	Global("d5_POW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_POW","GLOBAL",1)  //Opens Polymorph options
+                Continue()
+END
+
+IF
+	OR(3)
+	HaveSpellParty(WIZARD_POWER_WORD_SILENCE)
+	PartyHasItemIdentified("SCPWS")
+	PartyHasItemIdentified("SCRL7P")
+	Global("d5_PWSW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_PWSW","GLOBAL",1)  //Opens cursing options
+                Continue()
+END
+
+IF
+	OR(3)
+	HaveSpellParty(WIZARD_DEATH_FOG)
+	PartyHasItemIdentified("SCDFOG")
+	PartyHasItemIdentified("SCRL7R")
+	Global("d5_ASW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_ASW","GLOBAL",1)  //Opens Death Fog options
+                Continue()
+END
+
+IF
+	OR(2)
+	HaveSpellParty(WIZARD_CLOUDKILL)
+	PartyHasItemIdentified("SCRL2E")
+	Global("d5_CCW","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("d5_CCW","GLOBAL",1)  //Opens cloudkill options
+                Continue()
+END
+
+
+IF
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_wand1",Myself))
+		SetNumTimesTalkedTo(1)
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		SetGlobal("d5_MMW","GLOBAL",0)
+		SetGlobal("d5_SW","GLOBAL",0)
+		SetGlobal("d5_HW","GLOBAL",0)
+		SetGlobal("d5_MSW","GLOBAL",0)
+		SetGlobal("d5_FW","GLOBAL",0)
+		SetGlobal("d5_LW","GLOBAL",0)
+		SetGlobal("d5_ISW","GLOBAL",0)
+                SetGlobal("d5_SAW","GLOBAL",0)
+                SetGlobal("d5_HMW","GLOBAL",0)
+                SetGlobal("d5_FRW","GLOBAL",0)
+                SetGlobal("d5_PMW","GLOBAL",0)
+                SetGlobal("d5_POW","GLOBAL",0)
+                SetGlobal("d5_PWSW","GLOBAL",0)
+                SetGlobal("d5_ASW","GLOBAL",0)
+                SetGlobal("d5_CCW","GLOBAL",0)
+	        SetGlobal("d5_WAN","GLOBAL",0)      //cost
+	        SetGlobal("d5_ARTWD","GLOBAL",0)      //cost
+		SetNumTimesTalkedTo(0)
+		DestroySelf()               //reset all variables, then destroy self
+END

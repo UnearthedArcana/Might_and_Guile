@@ -18,25 +18,30 @@ COPY ~might_and_guile/profs/d5_profs.d5~ ~override~
 ACTION_IF MOD_IS_INSTALLED "TOBEX.TP2" "100" THEN BEGIN
 	COPY ~TobEx_ini/TobExTweak.ini~ ~TobEx_ini~
 		REPLACE_TEXTUALLY ~Proficiency Restrictions=0~ ~Proficiency Restrictions=1~
-		BUT_ONLY
+	BUT_ONLY
 END
 //__________________________________________________________________________________
 
 
 //WSPATCK FOR ALL___________________________________________________________________
 //
-COPY_EXISTING ~clswpbon.2da~ ~override~
-	COUNT_2DA_ROWS ~3~ rows
-	FOR (row = 1; row < rows; row += 1) BEGIN
-		SET_2DA_ENTRY row 1 3 ~1~
-	END
+ACTION_IF FILE_EXISTS_IN_GAME ~clswpbon.2da~ BEGIN
+	COPY_EXISTING ~clswpbon.2da~ ~override~
+		COUNT_2DA_ROWS ~3~ rows
+		FOR (row = 1; row < rows; row += 1) BEGIN
+			SET_2DA_ENTRY row 1 3 ~1~
+		END
 	BUT_ONLY
+END
 //__________________________________________________________________________________
 
 
+//PROF BONUSES______________________________________________________________________
+//
 COPY ~might_and_guile/profs/wspat3.2da~ ~override/wspatck.2da~
 
 COPY ~might_and_guile/profs/wspecial2.2da~ ~override/wspecial.2da~
+//__________________________________________________________________________________
 	
 
 //UPDATE CLASS STRINGS______________________________________________________________
@@ -301,7 +306,7 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	// Druid
 	SET_2DA_ENTRY_LATER ~#weapprof~ 31 10 1
 	SET_2DA_ENTRY_LATER ~#weapprof~ 32 10 0
-	SET_2DA_ENTRY_LATER ~#weapprof~ 33 10 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 33 10 2
 	SET_2DA_ENTRY_LATER ~#weapprof~ 34 10 2
 	SET_2DA_ENTRY_LATER ~#weapprof~ 11 10 0
 	SET_2DA_ENTRY_LATER ~#weapprof~ 16 10 0
@@ -1196,7 +1201,7 @@ DEFINE_ACTION_FUNCTION mod_cleric_profs BEGIN
 
 	COPY_EXISTING kitlist.2da override
 		READ_2DA_ENTRIES_NOW kitlist 3
-		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the vanilla kits
 			READ_2DA_ENTRY_FORMER kitlist row 1 label
 			READ_2DA_ENTRY_FORMER kitlist row 8 class
 			PATCH_IF class = 3 BEGIN // cleric
@@ -1225,13 +1230,15 @@ DEFINE_ACTION_FUNCTION mod_cleric_profs BEGIN
 					SET_2DA_ENTRY_LATER wweapprof 7 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 8 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 10 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 18 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 19 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 21 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 23 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 24 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 25 (col + 1) 2
-					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 2
-					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 2
 					SET_2DA_ENTRY_LATER wweapprof 26 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 2
 				END
 			END
 		END
@@ -1241,6 +1248,65 @@ DEFINE_ACTION_FUNCTION mod_cleric_profs BEGIN
 END
 
 LAF mod_cleric_profs END
+//__________________________________________________________________________________
+
+
+//PROFICIENCIES FOR MOD DRUIDS_______________________________________________________
+//
+DEFINE_ACTION_FUNCTION mod_druid_profs BEGIN
+	OUTER_SET count = 0
+
+	ACTION_FOR_EACH class IN
+                  druid
+
+	BEGIN
+		OUTER_SPRINT $druids("%count%") "%class%"
+		OUTER_SET ++count
+	END
+
+	COPY_EXISTING kitlist.2da override
+		READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the vanilla kits
+			READ_2DA_ENTRY_FORMER kitlist row 1 label
+			READ_2DA_ENTRY_FORMER kitlist row 8 class
+			PATCH_IF class = 11 BEGIN // druid
+				SPRINT $druids("%count%") "%label%"
+				++count
+			END
+		END
+	BUT_ONLY
+
+	COPY_EXISTING ~WEAPPROF.2DA~ override
+		READ_2DA_ENTRIES_NOW weapprof 3
+		COUNT_2DA_COLS cols
+		PHP_EACH druids AS _ => name BEGIN
+			FOR (col = 0; col < cols - 1; ++col) BEGIN
+				READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+				PATCH_IF "%column_name%" STRING_EQUAL_CASE "%name%" BEGIN
+					SET_2DA_ENTRY_LATER wweapprof 31 (col + 1) 1
+					SET_2DA_ENTRY_LATER wweapprof 32 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 33 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 34 (col + 1) 2
+					SET_2DA_ENTRY_LATER wweapprof 11 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 16 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 22 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 27 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 29 (col + 1) 0
+					SET_2DA_ENTRY_LATER wweapprof 17 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 18 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 20 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 21 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 25 (col + 1) 3
+					SET_2DA_ENTRY_LATER wweapprof 30 (col + 1) 3
+				END
+			END
+		END
+		SET_2DA_ENTRIES_NOW wweapprof 1
+		PRETTY_PRINT_2DA
+	BUT_ONLY
+END
+
+LAF mod_druid_profs END
 //__________________________________________________________________________________
 
 
@@ -1259,7 +1325,7 @@ DEFINE_ACTION_FUNCTION mod_thief_profs BEGIN
 
 	COPY_EXISTING kitlist.2da override
 		READ_2DA_ENTRIES_NOW kitlist 3
-		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the vanilla kits
 			READ_2DA_ENTRY_FORMER kitlist row 1 label
 			READ_2DA_ENTRY_FORMER kitlist row 8 class
 			PATCH_IF class = 4 BEGIN // thief
@@ -1321,7 +1387,7 @@ DEFINE_ACTION_FUNCTION mod_bard_profs BEGIN
 
 	COPY_EXISTING kitlist.2da override
 		READ_2DA_ENTRIES_NOW kitlist 3
-		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the header and RESERVE rows
+		FOR (row = 31; row < kitlist; ++row) BEGIN // Skip past the vanilla kits
 			READ_2DA_ENTRY_FORMER kitlist row 1 label
 			READ_2DA_ENTRY_FORMER kitlist row 8 class
 			PATCH_IF class = 5 BEGIN // bard
@@ -1676,6 +1742,42 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clableaf.2da~ THEN BEGIN
 	COPY_EXISTING ~clableaf.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/profs/pcclub.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_tymor.2da~ THEN BEGIN
+	COPY_EXISTING ~d5_tymor.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcslin.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_cllei.2da~ THEN BEGIN
+	COPY_EXISTING ~d5_cllei.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcdagg.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~b_cllov.2da~ THEN BEGIN
+	COPY_EXISTING ~b_cllov.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcflai.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~b_acilm.2da~ THEN BEGIN
+	COPY_EXISTING ~b_ilm.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcstaf.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_acmas.2da~ THEN BEGIN
+	COPY_EXISTING ~d5_acmas.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcsswo.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_acsha.2da~ THEN BEGIN
+	COPY_EXISTING ~d5_acsha.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/profs/pcdagg.txt~
 		BUT_ONLY
 END
 //__________________________________________________________________________________

@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~v1.1~
+VERSION ~v1.4~
 README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -351,7 +351,7 @@ INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 BEGIN @275
 DESIGNATED 275
 //REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee~) @4
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee~) @4
 GROUP @22
 
 INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~

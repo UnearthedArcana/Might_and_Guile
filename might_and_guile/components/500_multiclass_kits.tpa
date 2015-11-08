@@ -12,9 +12,21 @@
 COPY ~might_and_guile/mc/d5_multi.d5~ ~override~
 //__________________________________________________________________________________
 
+/*
 //EDIT DEMIHUMAN STATS______________________________________________________________
 //
 COPY ~might_and_guile/mc/abracead.2da~ ~override~
+//__________________________________________________________________________________
+*/
+
+//KIT DESCRIPTION PATCHING__________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+	OUTER_SPRINT advantages @36
+	OUTER_SPRINT abilities @37
+	OUTER_SPRINT disadvantages @38
+	OUTER_SPRINT restrictions @39
+END
 //__________________________________________________________________________________
 
 //ENABLE MORE MULTICLASSES___________________________________________________________
@@ -69,6 +81,7 @@ ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
 END
 //___________________________________________________________________________________
 
+/*
 //CHECK FOR R/C DRUID SPELLS____________________________________________________________
 //
 ACTION_IF FILE_EXISTS ~%USER_DIRECTORY%/Baldur.ini~ THEN BEGIN
@@ -479,7 +492,7 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
 END
 //___________________________________________________________________________________
 END
-
+*/
 
 //ADD BLADESINGER____________________________________________________________________
 //
@@ -655,6 +668,7 @@ COPY ~might_and_guile/mc/d5_bspr1.spl~ ~override~
 COPY ~might_and_guile/mc/d5_bspr2.spl~ ~override~
 	SAY NAME1 @6
 //____________________________________________________________________________________
+
 
 //ADD SPELLFILCHER____________________________________________________________________
 //
@@ -849,6 +863,7 @@ COPY ~might_and_guile/mc/d5_flch5.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch4.eff~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.eff~ ~override~
 //__________________________________________________________________________________
+
 
 //ADD NIGHTRUNNER___________________________________________________________________
 //
@@ -1045,6 +1060,69 @@ COPY ~might_and_guile/mc/d5_mask3.cre~ ~override~
 //Nightrunner's Summon Shadow ability generously provided by Demivrgvs of Item/Spell/Kit Revisions fame. Big thanks!
 //__________________________________________________________________________________
 
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5MASK~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_mask~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5051 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/dread_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/shadow_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/deception_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/death_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/war_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/affliction_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
+
 //ADD MISADVENTURER__________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
@@ -1234,6 +1312,68 @@ COPY ~might_and_guile/mc/d5_msad3.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @5066
 //__________________________________________________________________________________
 
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5MSADV~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_msadv~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5067 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/air_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/animal_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/shadow_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/deception_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
+
 //ADD HEARTHGUARD____________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
@@ -1399,6 +1539,68 @@ COPY ~might_and_guile/mc/d5_harth.spl~ ~override~
 COPY ~might_and_guile/mc/d5_harth.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_harth.baf~
 //____________________________________________________________________________________
+
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5HARTH~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_harth~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5073 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/war_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/animal_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/plant_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/earth_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
 
 //ADD ALAGHOR_________________________________________________________________________
 //
@@ -1581,6 +1783,67 @@ COPY ~might_and_guile/mc/d5_alag3.itm~ ~override~
 	SAY NAME2 @5087
 //____________________________________________________________________________________
 
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5ALAGH~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_alagh~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5088 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/destruction_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/war_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/earth_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/dread_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_major.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
+
 //ADD GLORYBLOOD______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
@@ -1648,7 +1911,7 @@ ADD_KIT ~D5TEMPU~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 //
-~K_C_E K_C_H K_C_HE K_C_G K_C_D K_C_HL K_C_HO~
+~~
 //___________________________________________________________________________________
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
@@ -1812,6 +2075,67 @@ COPY ~might_and_guile/mc/d5_temp1.itm~ ~override~
 COPY ~might_and_guile/mc/d5_temp2.itm~ ~override~
 COPY ~might_and_guile/mc/d5_temp3.itm~ ~override~
 //____________________________________________________________________________________
+
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5TEMPU~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_tempu~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5095 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+		APPEND_FILE ~f_n_p/spheres/%game%/war_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/destruction_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/dread_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/vigor_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/life_minor.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/death_minor.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/knowledge_minor.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/thought_minor.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/earth_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
 
 //ADD MONITOR_________________________________________________________________________
 //
@@ -2153,6 +2477,69 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5MYSTR~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_mystr~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5105 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_focus.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/destruction_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/dread_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/air_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/fire_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/shadow_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/deception_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
 
 //ADD SPELLBENDER_____________________________________________________________________
 //
@@ -2403,6 +2790,69 @@ COPY ~might_and_guile/mc/d5_divm6.2da~ ~override~
 COPY ~might_and_guile/mc/d5_div6b.bam~ ~override~
 COPY ~might_and_guile/mc/d5_div6c.bam~ ~override~
 //___________________________________________________________________________________
+
+
+//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+	OUTER_SPRINT game ~iwd~
+END
+ELSE BEGIN
+	OUTER_SPRINT game ~bg2~
+END
+
+OUTER_SPRINT this_kit ~D5BENDR~ // ..............................KIT NAME HERE
+OUTER_SPRINT kit_clab ~d5_bendr~ // .....................KIT CLAB FILE HERE (without .2da extension)
+OUTER_SPRINT kit_spheres @5141 // ..........................KIT SPHERES TRA REF HERE
+
+//add spheres_______________________________________________________________________
+//
+COPY_EXISTING ~%kit_clab%.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~f_n_p/spheres/%game%/divine_aid_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/life_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/protection_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/destruction_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/knowledge_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/light_major.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/death_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/war_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/thought_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/dread_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/vigor_minor.txt~
+	APPEND_FILE ~f_n_p/spheres/%game%/magic_minor.txt~
+BUT_ONLY
+
+//__________________________________________________________________________________
+
+OUTER_SET strref = (0 - 1)
+
+COPY_EXISTING - ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS num_cols
+	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
+		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
+		END
+	END
+BUT_ONLY
+
+ACTION_IF (strref >= 0) BEGIN
+	ACTION_GET_STRREF %strref% kit_description 
+	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
+		REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
+		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_spheres%~
+		REPLACE_TEXTUALLY ~%advantages%~ ~%kit_spheres%~
+	END
+	STRING_SET_EVALUATE %strref% ~%kit_description%~
+END
+
+END
+//__________________________________________________________________________________
+
 
 /*
 //CHECK FOR NEW WIZARD SLAYER________________________________________________________

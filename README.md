@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 1.1 </strong><br />
+  <p><strong> Version 1.4 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -36,7 +36,7 @@
   <ul>
   	<li>Some of the tweaks here cover the same ground as other tweak mods. This should hopefully be pretty obvious: I have modified spell tables, and <u>BG2Tweaks</u> has modified spell tables, so you should pick one or the other - don't install both. Other overlaps with <u>BG2Tweaks</u> are my hit dice component and their changes to level-up hit dice; my Weapon Proficiency Overhaul and their proficiency changes; my changes to stat bonuses and various other mods' changes to stat bonuses... etc. Like I say, these kinds of overlaps should be pretty obvious.</li><br />
   	<li>I have not tested compatibility with Kit Revisions. These two mods cover some of the same ground. Eventually (after KR is released, anyway) I will try to see if I can make them work well together. But for now, you should probably choose one or the other. (You may try to skip the M&G overhauls/tweaks and only install new kits... it should work, but there might be balance issues compared to the KR kits.)</li><br />
-  	<li>The first component of <u>Rogue Rebalancing</u> is not compatible, and not necessary, with M&G's component #120 "Weapon Proficiency Overhaul." Also, M&G and RR's Bard Tweaks component modify some of the same resources; be aware that you might see some different behavior depending on which one is installed last.</li><br />
+  	<li>Some of the components of <u>Rogue Rebalancing</u> modify the same resources as M&G; be aware that you might see some different behavior depending on which one is installed last.</li><br />
   	<li>Most of M&G's overhauls and class tweaks are incompatible with the first, "core" component of <u>Six's Kitpack</u>. Take a look at what each mod does and decide which one you want to use.</li><br />
   	<li>The <u>Hidden Kits</u> mods is probably extremely incompatible. You can try to use them together but you might see some very weird behavior, like innate abilities changing or disappearing - if not even worse symptoms.</li>
   </ul></p>
@@ -77,11 +77,13 @@
       <li> All named weapons that were formerly from +1 to +4, become +3 weapons for purposes of what they can hit - though their bonuses and magical abilities remain unchanged.</li>
       <li> All upgraded weapons and originally +5/+6 weapons become +5 for purposes of what they can hit.</li>
     </ul>
-    <p>Second, this component makes small tweaks to the base characteristics of various items:</p>
+    <p>(That first part of the component will not work on IWDEE. But the functional parts of the component, below, will.)</p>
+    <p>Second, this component makes tweaks to the base characteristics of various items:</p>
     <ul>
       <li> BG/BG2 spears being of the 2-handed variety, they now do 1d8+1 damage (this is per PnP).</li>
       <li> Quarterstaves seem better suited to defensive parrying than many other weapons, so they get an inherent -1 AC bonus.</li>
       <li> Daggers get 1.5 base APR. (A thief with Rogue Rebalancing, dual-wielding daggers, should be a reasonable and interesting choice.)</li>
+      <li> Flails do 1d8+1 damage.</li>
       <li> Axes do "slashing or crushing" damage.</li>
       <li> Short swords do "slashing or piercing" damage.</li>
       <li> Crossbow bolts do 2d4 damage.</li>
@@ -89,13 +91,13 @@
       <li> Sling bullets do blunt damage.</li>
       <li> Darts have 5/2 APR instead of 3.</li>
     </ul>
-    <p>This component will not install on IWDEE, as many of its effects are specific to the items found in BG/NG2.</p>
+    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. The list of light weapons that get this thac0 bonus includes short swords, daggers, war hammers, maces, clubs, spears, and quarterstaves.</p>
   </div>
   <h4 class="subheader">Component 120: </h4>
   <div class="section">
     <p><strong><em>Weapon Proficiency Overhaul ("WPO")</em></strong></p>
       <p><strong>Please note, this component can only be installed on an EE or TobEx game.</strong></p>
-      <p>This component can be considered a convenience tweak; it will give most classes substantially more proficiency points to spend. But it incentivizes spreading those points more widely instead of focusing on a single weapon (like the vanilla game), and your overall level of power at any given moment should roughly on par with an unmodded game. The aim is, with more points in more weapons, when you complete a quest and find a wonderful magical artifact, you can actually *use* it instead of tossing it into your pack to sell later.</p>
+      <p>This component can be considered a convenience tweak; it will give most classes substantially more proficiency points to spend. But it incentivizes spreading those points more widely instead of focusing on a single weapon (like the vanilla game), and your overall level of power at any given moment should roughly on par with an unmodded game. The aim is, with more points in more weapons, when you complete a quest and find a wonderful magical artifact, you can actually *use* it instead of just tossing it into your pack to sell later.</p>
       <p>First, this component groups certain proficiencies together:</p>
       <ul>
         <li> Two-handed swords and bastard swords are combined into a "greatswords" proficiency.</li>
@@ -103,8 +105,8 @@
         <li> Spears and halberds are combined into a "polearms" proficiency.</li>
         <li> Daggers and darts are combined into a "knives" proficiency.</li>
         <li> Long bows and short bows are combined into a "bows" proficiency.</li>
-        <li> Clubs are truly universal, simple weapons: everyone can use them and everyone is proficient from level 1.</li>
-        <li> Crossbows are usable by everyone except druids. But no one can reach Grand Mastery except Marksmen (see component 300 below).</li>
+        <li> Clubs are truly universal, simple weapons: everyone can use them.</li>
+        <li> Crossbows are usable by everyone except druids and Beastmasters.</li>
       </ul>
       <p>Weapon use is slightly liberalized: all weapons are usable by clerics, but single-class clerics can only be proficient in traditional cleric weapons (the exception being kitted clerics' favored weapons.) Multiclass clerics primarily benefit from this: cleric/thieves can use thief weapons, and fighter/clerics can use any weapon.</p>
       <p>Fighters start with 10 proficiency points and gain a new one every other level. But they cannot place more than one point in any weapon or style at first level; they cannot reach specialization (++) until 2nd level. Paladins, rangers, barbarians and rogues begin with 6 proficiency points, and gain a new one every 3 levels. Druids begin with 5 proficiency points, and gain a new one every 5 levels. Clerics begin with 5 proficiency points, and gain a new one every 6 levels. Wizards begin with 4 proficiency points, and can never move past their initial proficiencies (NB - dual-classing into a mage means no more weapon advancement <strong>at all!</strong>).</p>
@@ -125,7 +127,7 @@
       &ndash; Barbarian weapons: axe, greatsword, club, spear, and mace.<br />
       &ndash; Swashbuckling weapons: longsword, shortsword, scimitar, and dagger.<br />
       &ndash; Stalker weapons: shortsword, dagger, and club.</p>
-      <p> Rangers can place 1 extra point (so, up to ++++) in ranger weapons. Berserkers, Barbarians, Barbarian Rangers, and Skalds can place 1 extra point (up to ++++) in barbarian weapons. Swashbucklers, Blades, and Scouts can place 1 extra point (up to ++++) in swashbuckling weapons but 1 fewer point (up to ++) in other weapons. Corsairs and Harriers can place 2 extra points (up to +++++) in swashbuckling weapons. Stalkers and Assassins can place 1 extra point (up to ++++) in stalker weapons but 1 fewer point (up to ++) in other weapons.</p>
+      <p> Rangers can place 1 extra point (so, up to ++++) in ranger weapons. Berserkers, Barbarians, Barbarian Rangers, and Skalds can place 1 extra point (up to ++++) in barbarian weapons. Swashbucklers, Blades, and Scouts can place 1 extra point (up to ++++) in swashbuckling weapons but 1 fewer point (up to ++) in other weapons. Corsairs can place 2 extra points (up to +++++) in swashbuckling weapons. Stalkers and Assassins can place 1 extra point (up to ++++) in stalker weapons but 1 fewer point (up to ++) in other weapons.</p>
       <div class="kit_description">
         <p>Proficiency benefits<br />
         &ndash; ** = +1 thac0, +1/2 APR<br />
@@ -136,45 +138,45 @@
       <p>On EE games, this component also slightly rebalances fighting styles (values represent the total combined benefit):</p>
       <div class="kit_description">
         <p>Single-Weapon Style:<br />
-        &ndash; * = -1 AC, +1 thac0<br />
-        &ndash; ** = -2 AC, +2 thac0, +5% chance crit</p>
+        &ndash; * = -1 AC, +1 thac0, +5% chance crit<br />
+        &ndash; ** = -2 AC, +2 thac0, +10% chance crit</p>
         <p>Sword & Shield Style:<br />
         &ndash; * = -1 melee AC, -2 missile AC<br />
         &ndash; ** = -2 melee AC, -4 missile AC, +5% chance crit</p>
         <p>Two-Hand Weapon Style:<br />
         &ndash; * = +1 thac0 +2 damage<br />
-        &ndash; ** = +2 thac0 +4 damage, +5% chance crit</p>
+        &ndash; ** = +2 thac0 +3 damage, +5% chance crit</p>
         <p>Dual-Wielding:<br />
         &ndash; - = -6 thac0 in both main-hand and off-hand<br />
         &ndash; * = -4 thac0 in both main-hand and off-hand<br />
         &ndash; ** = -3 thac0 in main-hand, -2 thac0 in off-hand<br />
         &ndash; *** = -1 thac0 in both main-hand and off-hand<br />.</p>
       </div>
-      <p>This component also tweaks the thac0 tables: Rogues' thac0 is buffed, making it equal to clerics. Their progression is smoothed out, no more jumping by 2. Warriors are a bit better at level 1 (thac0 19) and a bit worse at level 20 (thac0 3), to offset the effects of the proficiency tweaks.</p>
+      <p>This component also tweaks the thac0 tables: Rogues' thac0 is buffed, making it equal to clerics. Their progression is smoothed out, no more jumping by 2. Warriors start at thac0 20, and non-warriors start at thac0 21.</p>
       <p>This component makes serious changes and it has been extremely hard to get various game mechanisms to work with it, especially dual-classing and NPCs. As a result, ALL NPCs you meet will be dropped to level 1, TOB-style, and start with selected base proficiencies. They will have the normal amount of XP however, so you can immediately level them up and direct their advancement. This method doesn't work well for dual-classed NPCs, so for Imoen, Anomen, and Nalia, they will receive a special "Proficiency Tome" that you can use to set their proficiencies correctly.</p>
-      <p>A new, experimental part of this component aims to fix a longstanding bug in the game: when you dual-class, your weapon proficiency advancement is supposed to be capped by your <strong>new</strong> class, not your old one. In BG you can start with a fighter, dual to thief, and get Grandmastery with longswords. Not more. Now, when you dual-class from one of the eight base warrior kits (Fighter, Wizard Slayer, Berserker, Kensai, Ranger, Archer, Beastmaster, or Stalker) you will be limited to Mastery (+++) in any future advancement.
+      <p>A new, experimental part of this component aims to fix a longstanding bug in the game: when you dual-class, your weapon proficiency advancement is supposed to be capped by your <strong>new</strong> class, not your old one. In BG you can start with a fighter, dual to thief at level 2, and get Grandmastery with bastard swords. No more! Now, when you dual-class from one of the eight base warrior kits (Fighter, Wizard Slayer, Berserker, Kensai, Ranger, Archer, Beastmaster, or Stalker) you will be limited to Mastery (+++) in any future advancement.
   </div>
   <h4 class="subheader">Component 160: </h4>
   <div class="section">
     <p><strong><em>Saving Throw Overhaul ("STO")</em></strong></p>
     <p>This component changes all spells such that the saving throws they offer target follow these guidelines:<br />
     <ul>
-      <li>Direct magical effects like Charms and Illusions offer saves vs. Spells. This includes spells like Blindness and Confusion.</li>
-      <li>Area effects that can be dodged (to some extent) offer saves vs. Breath Weapon. This includes spells like Fireball, Web, and Entangle.</li>
-      <li>Necromantic effects and those that affect the subject's health offer saves vs. Poison/Death. This includes all Necromancy effects (including vampire Level Drain), fog spells like Cloudkill, and poisons.</li>
-      <li>Spells that affect the subject's physical form offer saves vs. Petrification/Polymorph. This includes, or course, spells like Flesh to Stone and Polymorph Other.</li>
-      <li>Saving throws vs. Rod/Staff/Wands will rarely be encountered.</li>
+      <li>Direct magical and mental effects like Charms and Illusions offer saves vs. Spells. This includes spells like Blindness and Confusion.</li>
+      <li>Area effects and physical that can be dodged offer saves vs. Breath Weapon. This includes spells like Fireball, Web, and Entangle.</li>
+      <li>Necromantic effects and those that affect the subject's life and health offer saves vs. Poison/Death. This includes all Necromancy effects (including vampire Level Drain), fog spells like Cloudkill, and all poisons.</li>
+      <li>Spells that affect the subject's physical form offer saves vs. Petrification/Polymorph. This includes, of course, spells like Flesh to Stone and Polymorph Other.</li>
+      <li>Saving throws vs. Rod/Staff/Wands are basically unused.</li>
     </ul></p> 
-    <p>Additionally, saving throw tables are made more sensible.  Nothing earth-shaking: wizards save well against spells, priests save well against death, rogues save well against breath, etc.</p>
+    <p>Additionally, saving throw tables are made more sensible.  No earth-shaking changes, just sensible progression: wizards save well against spells, priests save well against death, rogues save well against breath, and warrior save well against almost everything.</p>
   </div>
   <h4 class="subheader">Component 180: </h4>
   <div class="section">
     <p><strong><em>Magic Resistance Overhaul ("MRO")</em></strong></p>
     <p>WARNING: This component makes very severe changes to the way the game works, and has not been extensively tested for its effects on game balance. It should be considered as 'beta' quality. Its purpose is to largely (but not completely) remove the probability-based "magic resistance" mechanic from the game. It makes the following changes:</p>
     <ul>
-      <li>All creatures in the game, such as drow, dragons, skeleton warriors, etc., will have their MR set to zero. Instead, they will receive +3 bonuses to saving throws vs. Breath, Petrification, and Wands, and a +6 bonus to saving throws vs. Spells. (No bonus to saves vs. Death, to make necromancy magic a little stronger and more special.)</li>
+      <li>All creatures in the game, such as drow, dragons, skeleton warriors, etc., will have their MR set to zero. Instead, they will receive +3 bonuses to saving throws vs. Breath, Petrification, and Wands, and a +6 bonus to saving throws vs. Spells. (No bonus to saves vs. Death - this should make necromancy magic a little stronger and more special.)</li>
       <li>Monks and Wizard Slayers will not get MR; instead, they will get a +1 bonus to all saving throws at level 1, and at every 4th level thereafter (5th, 9th, 13th, etc. up to 25th).</li>
-      <li>Almost all items in the game that grant MR have been changed. Some, like the Amulet of Magic Resistance, have their MR converted into resistance to all elemental and magic damage. Others, like Carsomyr, instead get large bonuses to saving throws. Some are very different, like the Sword of Balduran which grants a movement rate bonus.</li>
+      <li>Almost all items in the game that grant MR have been changed. Some, like the Amulet of Magic Resistance, have their MR converted into resistance to all elemental and magic damage. Others, like Carsomyr, instead get large bonuses to saving throws. Some are very different, like the Sword of Balduran which now grants a movement rate bonus.</li>
       <li>It is still possible to get *some* MR, from the Hell Trials and the Machine of Lum the Mad. That's okay, 15% MR isn't game-breaking... it's only when it is stacked that it causes problems.</li>
       <li>Likewise, the "Magic Resistance" spell is left untouched, it can be used as another form of magic protection along with the likes of Spell Deflections and Globes of Invulnerability. Lower Resistance, Pierce Magic, and Pierce Shield are still effective against this spell, and SCS enemies will use them against you.</li>
     </ul></p> 
@@ -182,11 +184,23 @@
   <h4 class="subheader">Component 200: </h4>
   <div class="section">
     <p><strong><em>Revised Stat Bonuses</em></strong></p>
-      <p>STR, DEX, and WIS bonuses are modified so that every point added above 13 (or so) results in a tangible benefit. E.g. for DEX, 13 gives -1 AC; 14 gives +1 missile thac0; 15 gives another -1 AC; etc.</li><br />
+      <p>STR, DEX, and WIS bonuses are modified so that every point added above 13 (or so) results in a tangible benefit:<br />
       <ul>
       	<li>The 18/xx "exceptional" Strength doesn't work in BG like it does in PnP; ALL bonuses are supposed to go up that table in steps (including for non-warriors). BG makes it so that the 1-point jump from 18 to 19 is a bigger difference than the <strong>5-point</strong> jump from 13 to 18. I fix that by, essentially, collapsing the 18/xx values to all be about the same.  Bonuses are pushed downward, so there is now almost the same difference between 14 and 15 as there is between 18 and 19.</li><br />
+      	<li>Dexterity bonuses are also pushed lower and spread out a bit more. 13 DEX gives -1 AC; 14 gives +1 missile thac0; 15 gives another -1 AC; 16 gives another +1 to missile thac0; etc.</p>
+      	<li>Intelligence is no longer a dump-stat. Bards and wizards get an extra spell of each level for as many points of intelligence they have above 12 - so, an extr 1st-level spell for 13 INT, and an extra spell of level 1 through 9 at 21 INT. (This is only measured once, however - drinking a potion for bonus INT points will not give you extra spells.) In addition, at 15 INT the player has a +1 bonus rolling for critical hits; at 17 INT this is a +2 bonus, and at 19 INT it is a +3 bonus to crit. (To make up for this, *everyone* will have a -1 penalty to crit rolls.  So the only way to score critical hits is to have 15 or greater INT, or to have points in Single-Weapon Style or Two-Handed Style.)</p>
       	<li>Wisdom now grants an extra 1st-level priest spell at 13 and at 14; and extra 2nd-level spell at 15 and at 16; an extra 3rd-level spell at 17 and at 18; et cetera, up to 2 extra spells of every level at 25 WIS</p>
+      	<li>Charisma is not a dump stat either! Charisma now measures something like 'spirit' or 'karma' at the beginning of a character's career. Upon creating a character, 15 CHA will grant a +1 bonus to saves. At 16 CHA this bonus will be +2 and at 17 CHA it will be +3. At 18 CHA the character is also granted a permanent +1 Luck, and at 19 CHA this grows to +2 Luck. (Note, this takes the place of so-called "shorty save bonuses" associated with CON, which are removed. Note also, this will not apply to paladins, who have their own save bonuses to reflect the strength of their spirit.)</p>
       	<li>Constitution bonuses are folded into Component #210, Modified Hit Points, below.</p>
+      </ul>
+      <p>Finally, to make more meaningful differences between races, demihumans will have more stat bonuses and penalties.  The racial maximums are now:</p>
+      <ul>
+        <li> Elves: 19 Dex, 19 Int, 17 Str, 16 Con</li>
+        <li> Half-elf: 19 Cha, 17 Wis</li>
+        <li> Dwarf: 19 Con, 19 Wis, 17 Cha, 16 Dex</li>
+        <li> Halfling: 19 Dex, 19 Cha, 17 Int, 16 Str</li>
+        <li> Gnome: 19 Int, 19 Con, 17 Str, 16 Wis</li>
+        <li> Half-orc: 19 Str, 17 Int, 16 Cha</li>
       </ul>
   </div>
   <h4 class="subheader">Component 205: </h4>
@@ -277,7 +291,6 @@
     <div class="kit_description">
       <p>CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.</p>
       <p>Advantages:<br />
-        &ndash; Gain a permanent +1 bonus to Luck.<br />
         &ndash; Can achieve Grand Mastery (5 stars) with light bladed weapons.<br />
         &ndash; Gains a bonus to Armor Class for every six levels gained.<br />
         &ndash; Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
@@ -394,7 +407,6 @@
     <div class="kit_description">
       <p>SWASHBUCKLER: This rogue is part acrobat, part swordsman, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as fops, and they generally make poor thieves. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm fails.</p>
       <p>Advantages:<br />
-        &ndash; Gain a permanent +1 bonus to Luck at 9th level.<br />
         &ndash; +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 6 levels.<br />
         &ndash; May achieve Mastery (three slots) in light bladed weapons (long sword, scimitar, short sword, dagger, darts).<br />
         &ndash; Begins with one proficiency point in Single-Weapon Style, and may add one more.<br />
@@ -491,15 +503,6 @@
         <li> Enables half-elves to be cleric/thieves.</li>
         <li> Enables dwarves to be cleric/thieves.</li>
         <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
-      </ul>
-      <p>To slightly balance this increased freedom and make humans more special, demihumans will have more stat penalties: -2 for their weakest stat, and -1 for the 2nd-weakest (Except half-elves). So the racial maximums would be (and remember, if you have installed the stat tweaks component earlier, the max Str scores will one lower):</p>
-      <ul>
-        <li> Elves: 19 Dex, 17 Str, 16 Con</li>
-        <li> Half-elf: 19 Dex, 17 Con</li>
-        <li> Dwarf: 19 Con, 17 Cha, 16 Dex</li>
-        <li> Halfling: 19 Dex, 17 Int, 16 Str</li>
-        <li> Gnome: 19 Int, 17 Str, 16 Wis</li>
-        <li> Half-orc: 19 Str, 17 Int, 16 Cha</li>
       </ul>
       <p>This component also makes rangers unable to dual-class to cleric, unless they first find a special totem of the goddess Mielikki and use it to change their kit to a Woodscout of Mielikki.  Multiclass ranger/clerics will automatically begin as Woodscouts, except elves who begin as Forestwalkers of Solonor Thelandira. (Note, in IWDEE and BG2EE, these ranger/cleric changes will only take effect if baldur.ini is set such that cleric/rangers receive all druid spells.)</p>
       <p>Finally, in addition to Woodscouts and Forestwalkers, this component introduces nine more multiclass kits to the game. These are not available at character generation, rather you must use a totem or item to adopt the kit. They are:</p>
@@ -619,6 +622,24 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 1.4 - November 2015</strong></p>
+  <ul>
+    <li>fixed marksman and barb ranger usability</li>
+    <li>added light/heavy weapons to WPO</li>
+    <li>archer/slinger proficiency changes</li>
+    <li>added support for F&P kits and sphere system</li>
+  </ul>
+  <p><strong>Version 1.3 - October 2015</strong></p>
+  <ul>
+    <li>fixed corsair and marksman installation</li>
+    <li>fixed elven archer proficiencies</li>
+    <li>fixed monitor's casting level bonuses</li>
+    <li>added "revised shadowdancer" component</li>
+  </ul>
+  <p><strong>Version 1.2 - October 2015</strong></p>
+  <ul>
+    <li></li>
+  </ul>
   <p><strong>Version 1.1 - September 2015</strong></p>
   <ul>
     <li>fixed proficiency limits for mod clerics and rogues in the WPO</li>

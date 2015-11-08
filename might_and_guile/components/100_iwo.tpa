@@ -449,7 +449,7 @@ COPY_EXISTING ~quiver02.itm~ ~override~
 	SAY DESC @1061
 END
 
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
 ACTION_IF FILE_EXISTS_IN_GAME ~bull07.itm~ THEN BEGIN
 	COPY_EXISTING ~bull07.itm~ ~override~
 		WRITE_LONG 0x60 2
@@ -648,7 +648,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~ring41.itm~ THEN BEGIN
 END
 END
 
-ACTION_IF GAME_IS ~bgt tob bg2ee~ THEN BEGIN
+ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
 ACTION_IF FILE_EXISTS_IN_GAME ~ax1h03.itm~ THEN BEGIN
 	COPY_EXISTING ~ax1h03.itm~ ~override/ax1h17.itm~
 		WRITE_LONG 0x60 2
@@ -962,13 +962,16 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 		READ_SHORT ~0x1c~ ~type~
 		PATCH_IF (~%type%~ = ~16~) BEGIN // daggers
 			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 parameter1=7 parameter2=1 END
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 parameter1=6 parameter2=0 END
 		END
 		PATCH_IF (~%type%~ = ~26~) BEGIN // quarterstaff
-			WRITE_BYTE 0x88 4
+			WRITE_BYTE 0x88 3
 			WRITE_BYTE 0x8a 2
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=0 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~23~) BEGIN // flails
+			WRITE_BYTE 0x88 8
+			WRITE_BYTE 0x8a 1
 		END
 		PATCH_IF (~%type%~ = ~29~) BEGIN // spears
 			WRITE_BYTE 0x88 8
@@ -1013,6 +1016,33 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 		END
 	END
 	BUT_ONLY
+//__________________________________________________________________________________
+
+//LIGHT WEAPON BONUSES______________________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+		READ_SHORT ~0x1c~ ~type~
+		PATCH_IF (~%type%~ = ~16~) BEGIN // dagger
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~19~) BEGIN // small sword
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~21~) BEGIN // hammer
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~17~) BEGIN // mace & club
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~26~) BEGIN // quarterstaff
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%type%~ = ~29~) BEGIN // spear
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+	END
+BUT_ONLY
 //__________________________________________________________________________________
 
 /*
@@ -1088,7 +1118,7 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +2~ ~Damage: +4~
 						REPLACE_TEXTUALLY EXACT_MATCH ~Damage: +1~ ~Damage: +3~
 					END
-					PATCH_IF GAME_IS ~bgee bg2ee iwdee~ AND NOT (~%description%~ STRING_CONTAINS_REGEXP ~Damage:~ = 0) BEGIN
+					PATCH_IF GAME_IS ~bgee bg2ee iwdee eet~ AND NOT (~%description%~ STRING_CONTAINS_REGEXP ~Damage:~ = 0) BEGIN
 						INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
 							REPLACE_TEXTUALLY ~Speed Factor:~ ~Damage: +2
 Speed Factor:~

@@ -135,22 +135,22 @@
         &ndash; **** = +2 thac0 and +2 damage total, +1/2 APR at level 7<br />
         &ndash; ***** = +3 thac0 and +4 damage total, +1/2 APR at level 15</p>
       </div>
-      <p>On EE games, this component also slightly rebalances fighting styles (values represent the total combined benefit):</p>
+      <p>On EE games, this component also rebalances fighting styles (values represent the total combined benefit):</p>
       <div class="kit_description">
-        <p>Single-Weapon Style:<br />
-        &ndash; * = -1 AC, +1 thac0, +5% chance crit<br />
-        &ndash; ** = -2 AC, +2 thac0, +10% chance crit</p>
-        <p>Sword & Shield Style:<br />
-        &ndash; * = -1 melee AC, -2 missile AC<br />
-        &ndash; ** = -2 melee AC, -4 missile AC, +5% chance crit</p>
-        <p>Two-Hand Weapon Style:<br />
-        &ndash; * = +1 thac0 +2 damage<br />
-        &ndash; ** = +2 thac0 +3 damage, +5% chance crit</p>
-        <p>Dual-Wielding:<br />
-        &ndash; - = -6 thac0 in both main-hand and off-hand<br />
-        &ndash; * = -4 thac0 in both main-hand and off-hand<br />
-        &ndash; ** = -3 thac0 in main-hand, -2 thac0 in off-hand<br />
-        &ndash; *** = -1 thac0 in both main-hand and off-hand<br />.</p>
+        <p>Single-Weapon Style: now called <b>"Finesse"</b><br />
+        &ndash; * = +1 thac0, -1 AC, +5% crit chance<br />
+        &ndash; ** = +2 thac0, -2 AC, +10% crit chance</p>
+        <p>Sword & Shield Style: now called <b>"Phalanx"</b><br />
+        &ndash; * = +1 thac0, -1 AC<br />
+        &ndash; ** = +2 thac0, -2 AC, +5% crit chance</p>
+        <p>Two-Handed Weapon Style: now called <b>"Cleaving"</b><br />
+        &ndash; * = +1 thac0, +2 damage<br />
+        &ndash; ** = +2 thac0, +4 damage</p>
+        <p>Two-Weapon Style: now called <b>"Dual-Wielding"</b><br />
+        &ndash; - = -5 main-hand thac0, and -3 off-hand thac0<br />
+        &ndash; + = -4 main-hand thac0, and -2 off-hand thac0<br />
+        &ndash; ++ = -3 main-hand thac0, and -1 off-hand thac0<br />
+        &ndash; +++ = -2 main-hand thac0, and no penalty to off-hand thac0<br />.</p>
       </div>
       <p>This component also tweaks the thac0 tables: Rogues' thac0 is buffed, making it equal to clerics. Their progression is smoothed out, no more jumping by 2. Warriors start at thac0 20, and non-warriors start at thac0 21.</p>
       <p>This component makes serious changes and it has been extremely hard to get various game mechanisms to work with it, especially dual-classing and NPCs. As a result, ALL NPCs you meet will be dropped to level 1, TOB-style, and start with selected base proficiencies. They will have the normal amount of XP however, so you can immediately level them up and direct their advancement. This method doesn't work well for dual-classed NPCs, so for Imoen, Anomen, and Nalia, they will receive a special "Proficiency Tome" that you can use to set their proficiencies correctly.</p>

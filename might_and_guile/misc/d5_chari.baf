@@ -1,24 +1,8 @@
 IF
-	CheckStat(LastSummonerOf(Myself),15,CHR)
+	CheckStatGT(LastSummonerOf(Myself),18,CHR)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_cha15",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),16,CHR)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_cha16",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),17,CHR)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_cha17",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_cha19",LastSummonerOf(Myself))
 	DestroySelf()
 END
 
@@ -31,9 +15,32 @@ THEN
 END
 
 IF
-	CheckStat(LastSummonerOf(Myself),19,CHR)
+	CheckStat(LastSummonerOf(Myself),17,CHR)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_cha19",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_cha17",LastSummonerOf(Myself))
+	DestroySelf()
+END
+
+IF
+	CheckStat(LastSummonerOf(Myself),16,CHR)
+THEN
+	RESPONSE #100
+	ReallyForceSpellRES("d5_cha16",LastSummonerOf(Myself))
+	DestroySelf()
+END
+
+IF
+	CheckStat(LastSummonerOf(Myself),15,CHR)
+THEN
+	RESPONSE #100
+	ReallyForceSpellRES("d5_cha15",LastSummonerOf(Myself))
+	DestroySelf()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
 	DestroySelf()
 END

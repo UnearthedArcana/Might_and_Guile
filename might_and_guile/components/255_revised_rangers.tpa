@@ -234,6 +234,12 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 		BUT_ONLY
 END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		BUT_ONLY
+END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~d5_stlk2.2da~ ~override~
 		LPM remove_blank_lines
@@ -302,25 +308,13 @@ COPY ~might_and_guile/ranger/d5_stsp3.spl~ ~override~
 //
 SPRINT beastmaster_shapechange @2560 
 ACTION_IF GAME_IS ~bgee~ THEN BEGIN
-	ACTION_GET_STRREF 25368 beastmaster_description // or 24300
-	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
-	END
-	STRING_SET_EVALUATE 25368 ~%beastmaster_description%~
+	STRING_SET 25368 @2560
 END
 ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
-	ACTION_GET_STRREF 25212 beastmaster_description // or 24300
-	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
-	END
-	STRING_SET_EVALUATE 25212 ~%beastmaster_description%~
+	STRING_SET 25212 @2560
 END
 ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
-	ACTION_GET_STRREF 37117 beastmaster_description // or 24300
-	OUTER_PATCH_SAVE beastmaster_description ~%beastmaster_description%~ BEGIN
-		REPLACE_TEXTUALLY ~May use Find Familiar ability to summon a pseudo dragon (if lawful or neutral good) or fairy dragon (if chaotic good) companion~ ~%beastmaster_shapechange%~
-	END
-	STRING_SET_EVALUATE 37117 ~%beastmaster_description%~
+	STRING_SET 37117 @2560
 END
 COPY ~might_and_guile/ranger/d5_rnnf.spl~ ~override~
 	SAY NAME1 @2561
@@ -354,8 +348,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clabrn04.2da~) THEN BEGIN
 	COPY_EXISTING ~clabrn04.2da~ ~override~
 		REPLACE_TEXTUALLY ~GA_SPCL342~ ~****      ~
 		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/bmshapeshift.txt~
-		BUT_ONLY
+		APPEND_FILE ~might_and_guile/ranger/beastmaster.txt~
+	BUT_ONLY
 END
 //__________________________________________________________________________________
 
@@ -364,8 +358,34 @@ END
 
 //ARCHER ABILITIES___________________________________________________________________
 //
-COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_marks.2da~ ~override/clabrn02.2da~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~clabrn02.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
+COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~
+	SAY NAME1 @3211
+	SAY UNIDENTIFIED_DESC @3212
+COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~
+	SAY NAME1 @3213
+	SAY UNIDENTIFIED_DESC @3214
+COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
+COPY ~might_and_guile/fighter/d5_arham.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~
+	SAY NAME1 @3217
+	SAY UNIDENTIFIED_DESC @3218
 //___________________________________________________________________________________
 
 

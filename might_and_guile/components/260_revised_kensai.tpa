@@ -2278,9 +2278,10 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COMPILE ~might_and_guile/kensai/d5_kkata.baf~
 	COMPILE ~might_and_guile/kensai/d5_khalb.baf~
 END
-/*
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_klswo.2da~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_kbswo.2da~ ~override~
+				 ~d5_klswo.2da~ ~override~
+				 ~d5_kkata.2da~ ~override~
 				 ~d5_kscim.2da~ ~override~
 				 ~d5_ksswo.2da~ ~override~
 				 ~d5_k2swo.2da~ ~override~
@@ -2292,11 +2293,12 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 				 ~d5_kclub.2da~ ~override~
 				 ~d5_kstaf.2da~ ~override~
 				 ~d5_kspea.2da~ ~override~
+				 ~d5_khalb.2da~ ~override~
 		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/profs/w2apr.txt~
-		BUT_ONLY
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
 END
-*/
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
 		COPY_EXISTING ~d5_kbswo.2da~ ~override~
@@ -2316,7 +2318,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 					 ~d5_khalb.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
-			BUT_ONLY
+		BUT_ONLY
 	END
 END
 //______________________________________________________________________________

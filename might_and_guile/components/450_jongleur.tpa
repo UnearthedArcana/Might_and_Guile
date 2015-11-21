@@ -182,6 +182,14 @@ COPY ~might_and_guile/bard/d5_jons1.spl~ ~override~
 COPY ~might_and_guile/bard/d5_jonsa.spl~ ~override~
 	SAY NAME1 @4510
 	SAY UNIDENTIFIED_DESC @4510
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_jongl.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_bards.txt~
+	BUT_ONLY
+END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_jongl.2da~ ~override~
 		LPM remove_blank_lines

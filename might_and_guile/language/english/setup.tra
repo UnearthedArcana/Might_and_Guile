@@ -636,7 +636,19 @@ Abilities:
 Restrictions:
 - May not wear armor heavier than studded leather.
 ~
-@2560  = ~May shapeshift into a wolf at 1st level, and into a werewolf at 6th level~
+@2560  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
+
+Advantages:
+- +15% to Move Silently and Hide In Shadows.
+- May shapeshift into a wolf at 1st level, and into a werewolf at 6th level.
+- At 1st level, may summon a Spirit Wolf. The HD of the spirit animal increases to match the ranger's level at 3rd, 5th, 7th and 10th level.
+- 8th level: May cast an enhanced Animal Summoning as a 1st level spell.
+- 10th level: May cast an enhanced Animal Summoning as a 2nd level spell.
+- 12th level: May cast an enhanced Animal Summoning as a 3rd level spell.
+
+Disadvantages:
+- May not use any large metal weapons (for example: swords, halberds, war hammers, or morning stars).
+- May not wear armor heavier than studded leather.~
 @2561  = ~Shapeshift Natural Form~
 @2562  = ~Shapeshift: Wolf~
 @2563  = ~Shapeshift: Werewolf~
@@ -1152,7 +1164,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows and crossbows.
-- Can use Called Shots once per day per three levels, in order to pin, slow, or disarm the target.
+- Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May only specialize (++) with melee weapons.
@@ -1164,7 +1176,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows and crossbows.
-- Can use Called Shots once per day per three levels, in order to pin, slow, or disarm the target.
+- Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May only specialize (++) with melee weapons.
@@ -1172,13 +1184,16 @@ Restrictions:
 ~
 @3211  = ~Called Shot: Pin~
 @3212  = ~Called Shot: Pin
-In addition to normal damage, all successful ranged attacks within the next round will pin the target to the spot for 12 seconds unless the target makes a successful saving throw vs. paralyzation.~
+In addition to normal damage, all successful ranged attacks within the next round will pin the target to the spot for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
 @3213  = ~Called Shot: Trip~
 @3214  = ~Called Shot: Trip
-In addition to normal damage, all successful ranged attacks within the next round will Slow the target for 12 seconds unless the target makes a successful saving throw vs. paralyzation.~
+In addition to normal damage, all successful ranged attacks within the next round will Slow the target for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
 @3215  = ~Called Shot: Disarm~
 @3216  = ~Called Shot: Disarm
 In addition to normal damage, all successful ranged attacks within the next round will cause the target to fumble his weapon, resulting in -3 penalties to thac0 and AC for 18 seconds, unless the target makes a successful saving throw vs. paralyzation.~
+@3217  = ~Called Shot: Hammer Shot~
+@3218  = ~Called Shot: Hammer Shot
+In addition to normal damage, all successful ranged attacks within the next round will cause an extra 2d4 points of crushing damage, unless the target makes a successful saving throw vs. breath weapon.~
 @3221  = ~elven archer~
 @3222  = ~Elven Archer~
 @3223  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
@@ -1186,7 +1201,7 @@ In addition to normal damage, all successful ranged attacks within the next roun
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
-- Can use use Called Shots once per day per three levels, in order to cause Entanglement, Sleep, or Faerie Fire.
+- Learns the following Called Shots: 'Disarm' at 2nd level; 'Entangle' at 3rd level;  'Sleep' at 4th level; 'Hammer Shot' at 6th level'; 'Blinding Shot' at 8th level' and 'Faerie Fire' at 10th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1197,7 +1212,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
-- Can use use Called Shots once per day per three levels, in order to cause Entanglement, Sleep, or Faerie Fire.
+- Learns the following Called Shots: 'Disarm' at 2nd level; 'Entangle' at 3rd level;  'Sleep' at 4th level; 'Hammer Shot' at 6th level'; 'Blinding Shot' at 8th level' and 'Faerie Fire' at 10th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1207,13 +1222,13 @@ Restrictions:
 @3225  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.~
 @3231  = ~Called Shot: Entangle~
 @3232  = ~Called Shot: Entangle
-In addition to normal damage, all successful ranged attacks within the next round will Entangle the target, per the druid spell, for 12 seconds unless the target makes a successful saving throw vs. paralyzation.~
+In addition to normal damage, all successful ranged attacks within the next round will Entangle the target, per the druid spell, for 12 seconds unless the target makes a successful saving throw vs. spells.~
 @3233  = ~Called Shot: Sleep~
 @3234  = ~Called Shot: Sleep
-In addition to normal damage, all successful ranged attacks within the next round will put the target to sleep for 30 seconds unless the target makes a successful saving throw vs. paralyzation.~
+In addition to normal damage, all successful ranged attacks within the next round will put the target to sleep for 30 seconds unless the target makes a successful saving throw vs. spells.~
 @3235  = ~Called Shot: Faerie Fire~
 @3236  = ~Called Shot: Faerie Fire
-In addition to normal damage, all successful ranged attacks within the next round will light up the target with green flame for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. paralyzation.~
+In addition to normal damage, all successful ranged attacks within the next round will light up the target with green flame for 24 seconds, preventing invisibility and causing a -3 penalty to AC and thac0, unless the target makes a successful saving throw vs. spells.~
 @3241  = ~slinger~
 @3242  = ~Slinger~
 @3243  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
@@ -1221,7 +1236,7 @@ In addition to normal damage, all successful ranged attacks within the next roun
 Abilities:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- Can use Called Shots once per day per three levels.  Called shots have a chance of pinning, slowing, or stunning the target.
+- Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1233,7 +1248,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- Can use Called Shots once per day per three levels, in order to slow, disarm, or stun the target.
+- Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1245,7 +1260,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with missiles weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- Can use Called Shots once per day per three levels, in order to slow, disarm, or stun the target.
+- Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1331,7 +1346,7 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.
 - Can achieve High Mastery (++++) with bows and crossbows
-- Can use use Called Shots once per day per three levels.  Called shots have a chance of pinning, slowing, or blinding the target.
+- Learns the following Called Shots: 'Disarm' at 2nd level; 'Pin' at 4th level; 'Hammer Shot' at 6th level' and 'Blinding Shot' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
 - May only distribute 20 skill points per level among thieving skills.

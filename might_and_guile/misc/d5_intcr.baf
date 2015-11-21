@@ -1,24 +1,8 @@
 IF
-	CheckStat(LastSummonerOf(Myself),15,INT)
+	CheckStatGT(LastSummonerOf(Myself),18,INT)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_crit1",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),16,INT)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_crit1",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),17,INT)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_crit2",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
 	DestroySelf()
 END
 
@@ -31,57 +15,32 @@ THEN
 END
 
 IF
-	CheckStat(LastSummonerOf(Myself),19,INT)
+	CheckStat(LastSummonerOf(Myself),17,INT)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_crit2",LastSummonerOf(Myself))
 	DestroySelf()
 END
 
 IF
-	CheckStat(LastSummonerOf(Myself),20,INT)
+	CheckStat(LastSummonerOf(Myself),16,INT)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_crit1",LastSummonerOf(Myself))
 	DestroySelf()
 END
 
 IF
-	CheckStat(LastSummonerOf(Myself),21,INT)
+	CheckStat(LastSummonerOf(Myself),15,INT)
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
+	ReallyForceSpellRES("d5_crit1",LastSummonerOf(Myself))
 	DestroySelf()
 END
 
 IF
-	CheckStat(LastSummonerOf(Myself),22,INT)
+	True()
 THEN
 	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),23,INT)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),24,INT)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
-	DestroySelf()
-END
-
-IF
-	CheckStat(LastSummonerOf(Myself),25,INT)
-THEN
-	RESPONSE #100
-	ReallyForceSpellRES("d5_crit3",LastSummonerOf(Myself))
 	DestroySelf()
 END

@@ -80,7 +80,7 @@
     <p>(That first part of the component will not work on IWDEE. But the functional parts of the component, below, will.)</p>
     <p>Second, this component makes tweaks to the base characteristics of various items:</p>
     <ul>
-      <li> BG/BG2 spears being of the 2-handed variety, they now do 1d8+1 damage (this is per PnP).</li>
+      <li> Spears do 1d8+1 damage, since in BG games they are of the 2-handed variety (this is per PnP).</li>
       <li> Quarterstaves seem better suited to defensive parrying than many other weapons, so they get an inherent -1 AC bonus.</li>
       <li> Daggers get 1.5 base APR. (A thief with Rogue Rebalancing, dual-wielding daggers, should be a reasonable and interesting choice.)</li>
       <li> Flails do 1d8+1 damage.</li>
@@ -91,7 +91,9 @@
       <li> Sling bullets do blunt damage.</li>
       <li> Darts have 5/2 APR instead of 3.</li>
     </ul>
-    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. The list of light weapons that get this thac0 bonus includes short swords, daggers, war hammers, maces, clubs, spears, and quarterstaves.</p>
+    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. These weapons include short swords, daggers, clubs, spears, and quarterstaves.</p>
+    <p>Medium weapons get a +1 bonus to off-hand thac0. These include long swords, scimitars, wakizashis, axes, war hammers, and maces.</p>
+    <p>Heavy weapons that are inappropriate for dual-wielding get a -1 penalty to off-hand thac0. These include bastard swords, katanas, and flails.</p>
   </div>
   <h4 class="subheader">Component 120: </h4>
   <div class="section">
@@ -140,10 +142,10 @@
         <p>Single-Weapon Style: now called <b>"Finesse"</b><br />
         &ndash; * = +1 thac0, -1 AC, +5% crit chance<br />
         &ndash; ** = +2 thac0, -2 AC, +10% crit chance</p>
-        <p>Sword & Shield Style: now called <b>"Phalanx"</b><br />
+        <p>Sword & Shield Style: now called <b>"Shield-Fighting"</b><br />
         &ndash; * = +1 thac0, -1 AC<br />
         &ndash; ** = +2 thac0, -2 AC, +5% crit chance</p>
-        <p>Two-Handed Weapon Style: now called <b>"Cleaving"</b><br />
+        <p>Two-Handed Weapon Style: now called <b>"Two-Hand Style"</b><br />
         &ndash; * = +1 thac0, +2 damage<br />
         &ndash; ** = +2 thac0, +4 damage</p>
         <p>Two-Weapon Style: now called <b>"Dual-Wielding"</b><br />
@@ -240,8 +242,8 @@
   <div class="section">
     <p><strong><em>Revised Rangers</em></strong></p>
       <p> Rangers are limited to medium armor (splint or lighter).</p> 
-      <p> Beastmasters gain the ability to wield daggers, axes, and spears, and may shapechange into wolf and werewolf forms.</p>
-      <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Pin, and Disarm)</p> 
+      <p> Beastmasters gain the ability to wield daggers, axes, and spears, and may shapechange into wolf and werewolf forms, and may summon a Spirit Wolf.</p>
+      <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Disarm, Hammer Shot, and Disarm)</p> 
       <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
       <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below), and can cast fewer spells per day than normal rangers. However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
   </div>
@@ -308,7 +310,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by a Marksman can <strong>pin, slow, or disarm</strong> the target.</p>
+        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May only specialize (++) with melee weapons.<br />
         &ndash; May not wear heavier armor than splint mail.<br />.</p>
@@ -322,7 +324,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by an Elven Archer can cause <strong>Entanglement, Sleep, or Faerie Fire.</strong></p>
+        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Entangle' at 3rd level;  'Sleep' at 4th level; 'Hammer Shot' at 6th level'; 'Blinding Shot' at 8th level' and 'Faerie Fire' at 10th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />.</p>
@@ -336,7 +338,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with slings.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by a Slinger can <strong>slow, disarm, or stun</strong> the target.</p>
+        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />
@@ -385,7 +387,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Mastery (3 Points) with bows and crossbows<br />
-        &ndash; Can use use Called Shots once per day per three levels.  Called shots by a Sniper can pin, slow, or blind the target.</p>
+        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Pin' at 4th level; 'Hammer Shot' at 6th level' and 'Blinding Shot' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May only distribute 20 skill points per level among thieving skills.<br />
         &ndash; Reduced backstab multiplier.<br />.</p>

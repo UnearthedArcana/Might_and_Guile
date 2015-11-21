@@ -266,6 +266,7 @@ END
 
 //WOODSCOUT ABILITY FILES_____________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_mieli.2da~ ~override~
 COPY_EXISTING ~clabpr01.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/mc/rcclab.txt~
@@ -287,6 +288,13 @@ COPY ~might_and_guile/mc/d5_mieli.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/mc/d5_mieli.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_mieli.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_mieli.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_mieli.2da~ ~override~
 		LPM remove_blank_lines
@@ -452,11 +460,19 @@ END
 
 //FORESTWALKER ABILITY FILES__________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_rilli.2da~ ~override~
 COPY ~might_and_guile/mc/d5_rc.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5_rc.eff~ ~override~
 COPY ~might_and_guile/mc/d5_rilli.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_rilli.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_rilli.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_rilli.2da~ ~override~
 		LPM remove_blank_lines
@@ -648,6 +664,7 @@ END
 
 //BLADESINGER ABILITY FILES_____________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_blads.2da~ ~override~
 COPY ~might_and_guile/misc/d5_acbon.spl~ ~override~
 COPY ~might_and_guile/misc/d5_acmel.spl~ ~override~
 COPY ~might_and_guile/mc/d5_blads.itm~ ~override~
@@ -667,6 +684,14 @@ COPY ~might_and_guile/mc/d5_bspr1.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5_bspr2.spl~ ~override~
 	SAY NAME1 @6
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_blads.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
+	BUT_ONLY
+END
 //____________________________________________________________________________________
 
 
@@ -838,6 +863,7 @@ END
 
 //SPELLFILCHER ABILITY FILES__________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_filch.2da~ ~override~
 COPY ~might_and_guile/mc/d5_filch.itm~ ~override~
 	SAY NAME1 @5032
 	SAY NAME2 @5032
@@ -862,6 +888,14 @@ COPY ~might_and_guile/mc/d5_flch4.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch4.eff~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.eff~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_filch.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
+	BUT_ONLY
+END
 //__________________________________________________________________________________
 
 
@@ -1031,6 +1065,7 @@ END
 
 //NIGHTRUNNER ABILITY FILES__________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_mask.2da~ ~override~
 COPY ~might_and_guile/mc/d5_shans.spl~ ~override~
 COPY ~might_and_guile/mc/d5_mask.itm~ ~override~
 	SAY NAME1 @5042
@@ -1058,6 +1093,13 @@ COPY ~might_and_guile/mc/d5_mask3.eff~ ~override~
 COPY ~might_and_guile/mc/d5_mask3.cre~ ~override~
 	SAY NAME1 @5050
 //Nightrunner's Summon Shadow ability generously provided by Demivrgvs of Item/Spell/Kit Revisions fame. Big thanks!
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_mask.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //__________________________________________________________________________________
 
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
@@ -1289,6 +1331,7 @@ END
 
 //MISADVENTURER ABILITY FILES_________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_msadv.2da~ ~override~
 COPY ~might_and_guile/mc/d5_selns.spl~ ~override~
 COPY ~might_and_guile/misc/d5_luckp.spl~ ~override~
 	SAY NAME1 @3108
@@ -1310,6 +1353,13 @@ COPY ~might_and_guile/mc/d5_msad3.spl~ ~override~
 	SAY NAME1 @5065
 	SAY NAME2 @5065
 	SAY UNIDENTIFIED_DESC @5066
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_msadv.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //__________________________________________________________________________________
 
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
@@ -1528,6 +1578,7 @@ END
 
 //HEARTHGUARD ABILITY FILES___________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_harth.2da~ ~override~
 COPY ~might_and_guile/mc/d5_latns.spl~ ~override~
 COPY ~might_and_guile/mc/d5_harth.itm~ ~override~
 	SAY NAME1 @5071
@@ -1538,6 +1589,13 @@ COPY ~might_and_guile/mc/d5_harth.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/mc/d5_harth.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_harth.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_harth.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //____________________________________________________________________________________
 
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
@@ -1756,6 +1814,7 @@ END
 
 //ALAGHOR ABILITY FILES_______________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_alagh.2da~ ~override~
 COPY ~might_and_guile/mc/d5_temns.spl~ ~override~
 COPY ~might_and_guile/mc/d5_alagh.itm~ ~override~
 	SAY NAME1 @5081
@@ -1781,6 +1840,13 @@ COPY ~might_and_guile/mc/d5_alag2.itm~ ~override~
 COPY ~might_and_guile/mc/d5_alag3.itm~ ~override~
 	SAY NAME1 @5087
 	SAY NAME2 @5087
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_alagh.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //____________________________________________________________________________________
 
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
@@ -2053,6 +2119,7 @@ END
 
 //GLORYBLOOD ABILITY FILES______________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_tempu.2da~ ~override~
 COPY ~might_and_guile/mc/d5_temns.spl~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_tempu.2da~ ~override~
@@ -2074,6 +2141,13 @@ COPY ~might_and_guile/mc/d5_temp1.spl~ ~override~
 COPY ~might_and_guile/mc/d5_temp1.itm~ ~override~
 COPY ~might_and_guile/mc/d5_temp2.itm~ ~override~
 COPY ~might_and_guile/mc/d5_temp3.itm~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_tempu.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //____________________________________________________________________________________
 
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
@@ -2449,6 +2523,7 @@ END
 
 //MONITOR ABILITY FILES_______________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_mystr.2da~ ~override~
 COPY ~might_and_guile/mc/d5_selns.spl~ ~override~
 COPY ~might_and_guile/mc/d5_mystr.itm~ ~override~
 	SAY NAME1 @5103
@@ -2474,6 +2549,14 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/profs/pcstaf.txt~
 		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_mystr.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
+	BUT_ONLY
 END
 //____________________________________________________________________________________
 
@@ -2707,6 +2790,7 @@ END
 
 //SPELLBENDER ABILITY FILES___________________________________________________________
 //
+COPY ~might_and_guile/mc/d5_bendr.2da~ ~override~
 COPY ~might_and_guile/mc/d5_bendr.itm~ ~override~
 	SAY NAME1 @5113
 	SAY NAME2 @5113
@@ -2789,6 +2873,14 @@ COPY ~might_and_guile/mc/d5_divm6.spl~ ~override~
 COPY ~might_and_guile/mc/d5_divm6.2da~ ~override~
 COPY ~might_and_guile/mc/d5_div6b.bam~ ~override~
 COPY ~might_and_guile/mc/d5_div6c.bam~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_bendr.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
+	BUT_ONLY
+END
 //___________________________________________________________________________________
 
 

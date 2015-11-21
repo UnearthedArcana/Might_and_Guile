@@ -1786,7 +1786,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~b_cllov.2da~ THEN BEGIN
 		BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~b_acilm.2da~ THEN BEGIN
-	COPY_EXISTING ~b_ilm.2da~ ~override~
+	COPY_EXISTING ~b_acilm.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/profs/pcstaf.txt~
 		BUT_ONLY

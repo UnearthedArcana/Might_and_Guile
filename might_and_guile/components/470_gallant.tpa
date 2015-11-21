@@ -196,6 +196,14 @@ COPY_EXISTING ~sppr409.spl~ ~override/d5_galdw.spl~
 //COPY ~might_and_guile/bard/d5_galdw.spl~ ~override~
 //	SAY NAME1 @4707
 //	SAY UNIDENTIFIED_DESC @4707
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_galla.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_bards.txt~
+	BUT_ONLY
+END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_skspl.d5~ THEN BEGIN
 //		COPY ~might_and_guile/misc/mxsplbr1.2da~ ~override/mxsplbrd.2da~

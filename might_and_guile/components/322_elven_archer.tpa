@@ -165,6 +165,16 @@ END
 COPY ~might_and_guile/ranger/d5_earch.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_parch.spl~ ~override~
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
+COPY ~might_and_guile/fighter/d5_arham.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~
+	SAY NAME1 @3217
+	SAY UNIDENTIFIED_DESC @3218
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arent.eff~ ~override~
@@ -183,11 +193,22 @@ COPY ~might_and_guile/fighter/d5_arff4.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~
 	SAY NAME1 @3235
 	SAY UNIDENTIFIED_DESC @3236
+COPY ~might_and_guile/fighter/d5_arbli.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~
+	SAY NAME1 @4111
+	SAY UNIDENTIFIED_DESC @4112
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_strid.d5~) THEN BEGIN
 	COPY_EXISTING ~d5_earch.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_earch.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
 END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~d5_earch.2da~ ~override~

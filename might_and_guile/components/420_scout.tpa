@@ -261,6 +261,7 @@ END
 
 //SCOUT & SWASHBUCKLER ABILITY FILES________________________________________________
 //
+COPY ~might_and_guile/thief/d5_swash.2da~ ~override~
 COPY ~might_and_guile/misc/d5_luckp.spl~ ~override~
 	SAY NAME1 @3108
 	SAY UNIDENTIFIED_DESC @3108
@@ -272,6 +273,13 @@ COPY ~might_and_guile/fighter/d5_swash.spl~ ~override~
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
 COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_swash.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //____________________________________________________________________________________
 
 

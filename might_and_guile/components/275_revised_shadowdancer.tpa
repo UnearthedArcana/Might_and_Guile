@@ -211,5 +211,12 @@ COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
 COMPILE ~might_and_guile/thief/d5_shadd.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_shadd.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 //__________________________________________________________________________________
 

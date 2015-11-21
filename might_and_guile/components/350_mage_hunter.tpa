@@ -217,6 +217,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 		BUT_ONLY
 END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_mageh.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~d5_mageh.2da~ ~override~
 		LPM remove_blank_lines

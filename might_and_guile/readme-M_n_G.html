@@ -80,7 +80,7 @@
     <p>(That first part of the component will not work on IWDEE. But the functional parts of the component, below, will.)</p>
     <p>Second, this component makes tweaks to the base characteristics of various items:</p>
     <ul>
-      <li> BG/BG2 spears being of the 2-handed variety, they now do 1d8+1 damage (this is per PnP).</li>
+      <li> Spears do 1d8+1 damage, since in BG games they are of the 2-handed variety (this is per PnP).</li>
       <li> Quarterstaves seem better suited to defensive parrying than many other weapons, so they get an inherent -1 AC bonus.</li>
       <li> Daggers get 1.5 base APR. (A thief with Rogue Rebalancing, dual-wielding daggers, should be a reasonable and interesting choice.)</li>
       <li> Flails do 1d8+1 damage.</li>
@@ -91,7 +91,9 @@
       <li> Sling bullets do blunt damage.</li>
       <li> Darts have 5/2 APR instead of 3.</li>
     </ul>
-    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. The list of light weapons that get this thac0 bonus includes short swords, daggers, war hammers, maces, clubs, spears, and quarterstaves.</p>
+    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. These weapons include short swords, daggers, clubs, spears, and quarterstaves.</p>
+    <p>Medium weapons get a +1 bonus to off-hand thac0. These include long swords, scimitars, wakizashis, axes, war hammers, and maces.</p>
+    <p>Heavy weapons that are inappropriate for dual-wielding get a -1 penalty to off-hand thac0. These include bastard swords, katanas, and flails.</p>
   </div>
   <h4 class="subheader">Component 120: </h4>
   <div class="section">
@@ -188,9 +190,9 @@
       <ul>
       	<li>The 18/xx "exceptional" Strength doesn't work in BG like it does in PnP; ALL bonuses are supposed to go up that table in steps (including for non-warriors). BG makes it so that the 1-point jump from 18 to 19 is a bigger difference than the <strong>5-point</strong> jump from 13 to 18. I fix that by, essentially, collapsing the 18/xx values to all be about the same.  Bonuses are pushed downward, so there is now almost the same difference between 14 and 15 as there is between 18 and 19.</li><br />
       	<li>Dexterity bonuses are also pushed lower and spread out a bit more. 13 DEX gives -1 AC; 14 gives +1 missile thac0; 15 gives another -1 AC; 16 gives another +1 to missile thac0; etc.</p>
-      	<li><strike>Intelligence is no longer a dump-stat. Bards and wizards get an extra spell of each level for as many points of intelligence they have above 12 - so, an extr 1st-level spell for 13 INT, and an extra spell of level 1 through 9 at 21 INT. (This is only measured once, however - drinking a potion for bonus INT points will not give you extra spells.) In addition, at 15 INT the player has a +1 bonus rolling for critical hits; at 17 INT this is a +2 bonus, and at 19 INT it is a +3 bonus to crit. (To make up for this, *everyone* will have a -1 penalty to crit rolls.  So the only way to score critical hits is to have 15 or greater INT, or to have points in Single-Weapon Style or Two-Handed Style.)</strike> EDIT: this is not working at the moment, I should have it working soon.</p>
+      	<li>Intelligence is no longer a dump-stat. Bards and wizards get an extra spell of each level for as many points of intelligence they have above 12 - so, an extr 1st-level spell for 13 INT, and an extra spell of level 1 through 9 at 21 INT. (This is only measured once, however - drinking a potion for bonus INT points will not give you extra spells.) In addition, at 15 INT the player has a +1 bonus rolling for critical hits; at 17 INT this is a +2 bonus, and at 19 INT it is a +3 bonus to crit. (To make up for this, *everyone* will have a -1 penalty to crit rolls.  So the only way to score critical hits is to have 15 or greater INT, or to have points in Single-Weapon Style or Two-Handed Style.)</p>
       	<li>Wisdom now grants an extra 1st-level priest spell at 13 and at 14; and extra 2nd-level spell at 15 and at 16; an extra 3rd-level spell at 17 and at 18; et cetera, up to 2 extra spells of every level at 25 WIS</p>
-      	<li><strike>Charisma is not a dump stat either! Charisma now measures something like 'spirit' or 'karma' at the beginning of a character's career. Upon creating a character, 15 CHA will grant a +1 bonus to saves. At 16 CHA this bonus will be +2 and at 17 CHA it will be +3. At 18 CHA the character is also granted a permanent +1 Luck, and at 19 CHA this grows to +2 Luck. (Note, this takes the place of so-called "shorty save bonuses" associated with CON, which are removed. Note also, this will not apply to paladins, who have their own save bonuses to reflect the strength of their spirit.)</strike> EDIT: this is not working at the moment, I should have it working soon.</p>
+      	<li>Charisma is not a dump stat either! Charisma now measures something like 'spirit' or 'karma' at the beginning of a character's career. Upon creating a character, 15 CHA will grant a +1 bonus to saves. At 16 CHA this bonus will be +2 and at 17 CHA it will be +3. At 18 CHA the character is also granted a permanent +1 Luck, and at 19 CHA this grows to +2 Luck. (Note, this takes the place of so-called "shorty save bonuses" associated with CON, which are removed. Note also, this will not apply to paladins, who have their own save bonuses to reflect the strength of their spirit.)</p>
       	<li>Constitution bonuses are folded into Component #210, Modified Hit Points, below.</p>
       </ul>
       <p>Finally, to make more meaningful differences between races, demihumans will have more stat bonuses and penalties.  The racial maximums are now:</p>
@@ -240,8 +242,8 @@
   <div class="section">
     <p><strong><em>Revised Rangers</em></strong></p>
       <p> Rangers are limited to medium armor (splint or lighter).</p> 
-      <p> Beastmasters gain the ability to wield daggers, axes, and spears, and may shapechange into wolf and werewolf forms.</p>
-      <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Pin, and Disarm)</p> 
+      <p> Beastmasters gain the ability to wield daggers, axes, and spears, and may shapechange into wolf and werewolf forms, and may summon a Spirit Wolf.</p>
+      <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Disarm, Hammer Shot, and Disarm)</p> 
       <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
       <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below), and can cast fewer spells per day than normal rangers. However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
   </div>
@@ -308,7 +310,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by a Marksman can <strong>pin, slow, or disarm</strong> the target.</p>
+        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May only specialize (++) with melee weapons.<br />
         &ndash; May not wear heavier armor than splint mail.<br />.</p>
@@ -322,7 +324,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by an Elven Archer can cause <strong>Entanglement, Sleep, or Faerie Fire.</strong></p>
+        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Entangle' at 3rd level;  'Sleep' at 4th level; 'Hammer Shot' at 6th level'; 'Blinding Shot' at 8th level' and 'Faerie Fire' at 10th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />.</p>
@@ -336,7 +338,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with slings.<br />
-        &ndash; Can use Called Shots once per day per three levels. Called shots by a Slinger can <strong>slow, disarm, or stun</strong> the target.</p>
+        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />
@@ -385,7 +387,7 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Mastery (3 Points) with bows and crossbows<br />
-        &ndash; Can use use Called Shots once per day per three levels.  Called shots by a Sniper can pin, slow, or blind the target.</p>
+        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Pin' at 4th level; 'Hammer Shot' at 6th level' and 'Blinding Shot' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
       <p>Disadvantages:<br />
         &ndash; May only distribute 20 skill points per level among thieving skills.<br />
         &ndash; Reduced backstab multiplier.<br />.</p>

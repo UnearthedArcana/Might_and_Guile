@@ -1054,13 +1054,13 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
 		PATCH_IF (~%prof%~ = ~89~) BEGIN // bastard sword
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(-1) parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(0 - 1) parameter2=0 END
 		END
 		PATCH_IF (~%prof%~ = ~94~) BEGIN // katana
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(-1) parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(0 - 1) parameter2=0 END
 		END
 		PATCH_IF (~%prof%~ = ~100~) BEGIN // flail
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(-1) parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(0 - 1) parameter2=0 END
 		END
 	END
 BUT_ONLY

@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 1.4 </strong><br />
+  <p><strong> Version 1.5 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -624,10 +624,16 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 1.5 - November 2015</strong></p>
+  <ul>
+    <li>at-will called shots</li>
+    <li>increased light/heavy weapon differences in IWO</li>
+    <li>beastmaster spirit summons</li>
+  </ul>
   <p><strong>Version 1.4 - November 2015</strong></p>
   <ul>
     <li>fixed marksman and barb ranger usability</li>
-    <li>added light/heavy weapons to WPO</li>
+    <li>added light/heavy weapons to IWO</li>
     <li>archer/slinger proficiency changes</li>
     <li>added support for F&P kits and sphere system</li>
   </ul>
@@ -640,7 +646,7 @@
   </ul>
   <p><strong>Version 1.2 - October 2015</strong></p>
   <ul>
-    <li></li>
+    <li>werewolf shapeshifting for beastmasters</li>
   </ul>
   <p><strong>Version 1.1 - September 2015</strong></p>
   <ul>

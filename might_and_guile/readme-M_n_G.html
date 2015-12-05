@@ -91,8 +91,7 @@
       <li> Sling bullets do blunt damage.</li>
       <li> Darts have 5/2 APR instead of 3.</li>
     </ul>
-    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. These weapons include short swords, daggers, clubs, spears, and quarterstaves.</p>
-    <p>Medium weapons get a +1 bonus to off-hand thac0. These include long swords, scimitars, wakizashis, axes, war hammers, and maces.</p>
+    <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. These weapons include short swords, daggers, clubs, war hammers, spears, and quarterstaves.</p>
     <p>Heavy weapons that are inappropriate for dual-wielding get a -1 penalty to off-hand thac0. These include bastard swords, katanas, and flails.</p>
   </div>
   <h4 class="subheader">Component 120: </h4>
@@ -208,11 +207,12 @@
   <h4 class="subheader">Component 205: </h4>
   <div class="section">
     <p><strong><em>Revised Hit Point Tables</em></strong></p>
-      <p>This component takes some of the randomness out of hit point rolls. In the vanilla system, a warrior with 16 CON can actually get *fewer* hit points at level-up than a mage with 8 CON. That only leads to annoying reloads or constant moving of the difficulty bar to get max hp (which is just too cheaty, and perverts various game mechanics). With this component, there are still rolls, but the roll will always seem fair and should never cause you to feel you need to reload or go below Core difficulty.<br />
+      <p>This component takes some of the randomness out of hit point rolls. In the vanilla system, a warrior with 16 CON can actually get *fewer* hit points at level-up than a mage with 8 CON. That only leads to annoying reloads or constant moving of the difficulty bar to get max hp (which is just too cheaty, and perverts various game mechanics). With this component, there are still rolls, but the roll will always seem fair and should never cause you to feel you need to reload or go below Core difficulty. Every single point of CON above 11 provides some real benefit. And that 16 CON warrior will get between 8 and 10 hit points per level, instead of from 3 to 12. Higher average rolls, and more satisfying numbers, but not overpowered.<br />
       <ul>
-      	<li>Wizard hit dice is now 1d3+1. The minimum roll is 2 at 12 CON and 3 at 14 CON, they get an extra hp at 16 and at 17, and some very slow regeneration at 18. Xan can get 2-4 hp per level, Edwin would get 5 hp every level, and a Charname with 17 CON would get 6 hp every level.</li><br />
-      	<li>Rogue and Priest hit dice is now 1d4+2. The minimum roll is 2 at 12 CON and 3 at 14 CON, they get an extra hp at 16 and at 17, and some very slow regeneration at 18. So at low CON you could get 3-6 hp per level, and at high CON you could get 7-8 per level.</li><br />
-      	<li>Warrior hit dice is now 1d6+3 (1d8+3 for barbarians). The minimum roll is 2 at 12 CON and 3 at 14 CON, they get an extra hp at 15, 16, 17, and 19, and some very slow regeneration at 18. So at low CON you would get 4-9 hp per level, at 17 CON you could get 9-12 per level, and a dwarf at 19 CON could get 10-13 per level.</li>
+      	<li>Wizard hit dice is now 1d4. Rogue hit dice is 1d5+1. Priest hit dice is 1d6+1. And Warrior hit dice is 1d6+3 (1d8+3 for barbarians).</li>
+      	<li>Non-warriors get an extra hit point for every odd point of CON starting at 13.</li>
+      	<li>The minimum roll for all hit dice rolls is 2 at 12 CON, 3 at 14 CON, and 4 at 16 CON.</li>
+      	<li>Everyone gets some slow hit point regeneration at 18 CON, and the regeneration speeds up a bit with every even point of CON above that.</li>
       </ul>
       <p>Additionally, this smooths out the decline in added hp. Everyone stops getting hit dice after 9th level. Warriors get 4/level from 10 to 15, then 3/level from 16 to 25, and 2/level after that. Rogues and priests get 3/level from 10 to 15, 2/level from 16 to 25, and 1 per level after that. Wizards get 2/level from 10 to 15, and 1/level after that.</p>
   </div>
@@ -629,6 +629,7 @@
     <li>at-will called shots</li>
     <li>increased light/heavy weapon differences in IWO</li>
     <li>beastmaster spirit summons</li>
+    <li>altered hit dice revisions</li>
   </ul>
   <p><strong>Version 1.4 - November 2015</strong></p>
   <ul>

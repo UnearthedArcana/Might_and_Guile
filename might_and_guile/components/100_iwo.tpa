@@ -1025,19 +1025,26 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 		READ_BYTE ~0x31~ ~prof~
 		PATCH_IF (~%prof%~ = ~96~) BEGIN // dagger
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
 		PATCH_IF (~%prof%~ = ~91~) BEGIN // short sword
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
-		PATCH_IF (~%type%~ = ~115~) BEGIN // club
+		PATCH_IF (~%prof%~ = ~115~) BEGIN // club
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
+		END
+		PATCH_IF (~%prof%~ = ~102~) BEGIN // quarterstaff
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
-		PATCH_IF (~%type%~ = ~102~) BEGIN // quarterstaff
+		PATCH_IF (~%prof%~ = ~98~) BEGIN // spear
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
-		PATCH_IF (~%type%~ = ~98~) BEGIN // spear
+		PATCH_IF (~%prof%~ = ~97~) BEGIN // war hammer
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=278 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
+/*
 		PATCH_IF (~%prof%~ = ~90~) BEGIN // long sword
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
@@ -1047,12 +1054,10 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 		PATCH_IF (~%prof%~ = ~95~) BEGIN // scimitar
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
-		PATCH_IF (~%prof%~ = ~97~) BEGIN // war hammer
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
-		END
 		PATCH_IF (~%prof%~ = ~101~) BEGIN // mace
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=1 parameter2=0 END
 		END
+*/
 		PATCH_IF (~%prof%~ = ~89~) BEGIN // bastard sword
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=305 target=1 timing=2 parameter1=(0 - 1) parameter2=0 END
 		END

@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 1.5 </strong><br />
+  <p><strong> Version 1.6 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -93,6 +93,13 @@
     </ul>
     <p>Light, low-damage weapons get a +1 thac0 bonus. So beginning adventurers will be better off using light, simple weapons until they gain experience and their thac0 improves - unless they are strong enough to wield the heavy weapons comfortably, or they are skilled in a weapon style that grants thac0 bonuses. These weapons include short swords, daggers, clubs, war hammers, spears, and quarterstaves.</p>
     <p>Heavy weapons that are inappropriate for dual-wielding get a -1 penalty to off-hand thac0. These include bastard swords, katanas, and flails.</p>
+    <p>Finally, new stuff for IWDEE: </p>
+    <ul>
+      <li> Weapons for sale by Conlan have their prices normalized a bit.</li>
+      <li> The Black Knight and White Bishop figurines are usable once per day instead of once ever.</li>
+      <li> Melee weapons "of Action" are changed a bit: instead of giving bonus APR, they *set* base APR higher.</li>
+      <li> Weapons "of Action" +2 that previously only gave +1 DEX now give an extra 1/2 APR as well.</li>
+    </ul>
   </div>
   <h4 class="subheader">Component 120: </h4>
   <div class="section">
@@ -624,6 +631,11 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 1.6 - December 2015</strong></p>
+  <ul>
+    <li>IWO IWD stuff</li>
+    <li>fix for the Beastmaster spirit summon on the pre-EE engine</li>
+  </ul>
   <p><strong>Version 1.5 - November 2015</strong></p>
   <ul>
     <li>at-will called shots</li>

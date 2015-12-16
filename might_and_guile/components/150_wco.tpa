@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						WIZARD CLASS OVERHAUL
+//						WIZARD TWEAKS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -445,12 +445,18 @@ COPY ~might_and_guile/wizard/spwi809d.spl~ ~override~
 COPY ~might_and_guile/wizard/spwi809p.spl~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
 	COPY ~might_and_guile/wizard/mseqscrl.itm~ ~override/scrl6p.itm~
+		SAY NAME1 @6041
+		SAY IDENTIFIED_DESC @6042
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
 	COPY ~might_and_guile/wizard/seqscrl.itm~ ~override/scrl8l.itm~
+		SAY NAME1 @6043
+		SAY IDENTIFIED_DESC @6044
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
 	COPY ~might_and_guile/wizard/trigscrl.itm~ ~override/scrl9d.itm~
+		SAY NAME1 @6045
+		SAY IDENTIFIED_DESC @6046
 END
 COPY ~might_and_guile/wizard/d5_conti.spl~ ~override~
 	SAY NAME1 @6351
@@ -981,13 +987,6 @@ END
 */
 //__________________________________________________________________________________
 
-/*
-//SONG & SILENCE COMPATIBILITY______________________________________________________
-//
-COPY_EXISTING ~kitlist.2da~ ~override~
-		0x00004000
-//__________________________________________________________________________________
-*/
 
 //TOME & BLOOD KIT COMPATIBILITY____________________________________________________
 //
@@ -1302,63 +1301,91 @@ END
 
 //MAGIC BATTLE CHANGES_____________________________________________________________
 //
-COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
-	COUNT_REGEXP_INSTANCES ~spell_battle_changes=1~ spell_battle_changes
+ACTION_IF NOT GAME_IS ~iwdee~ THEN BEGIN
 
-ACTION_IF (spell_battle_changes) THEN BEGIN
-
-COPY ~might_and_guile/wizard/spwi318.spl~ ~override~
+/*
+ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1) BEGIN // wizards
+			REMOVE_KNOWN_SPELL ~spwi318~
+			REMOVE_KNOWN_SPELL ~spwi321~
+		END
+	END
+ BUT_ONLY
+*/
+ ADD_SPELL ~might_and_guile/wizard/spwi318.spl~ 3 1 WIZARD_MINOR_SPELL_DEFLECTION
 	SAY NAME1 @6051
 	SAY UNIDENTIFIED_DESC @6052
-COPY ~might_and_guile/wizard/spwi321.spl~ ~override~
+ LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MINOR_SPELL_DEFLECTION~ RET spell_res END
+ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~innate~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~innate~
+		END
+	END
+ BUT_ONLY
+ ADD_SPELL ~might_and_guile/wizard/spwi321.spl~ 3 1 WIZARD_SPELL_THRUST 
 	SAY NAME1 @6053
 	SAY UNIDENTIFIED_DESC @6054
-COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_mys32.spl~
+ LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_SPELL_THRUST~ RET spell_res END
+ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~innate~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~innate~
+		END
+	END
+ BUT_ONLY
+ COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_mys32.spl~
 	SAY NAME1 @6051
 	SAY UNIDENTIFIED_DESC @6052
-COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_mys22.spl~
+ COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_mys22.spl~
 	SAY NAME1 @6053
 	SAY UNIDENTIFIED_DESC @6054
-COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_radfl.spl.spl~
+ COPY ~might_and_guile/wizard/spwi318.spl~ ~override/d5_radfl.spl.spl~
 	SAY NAME1 @6051
 	SAY UNIDENTIFIED_DESC @6052
-COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_rathr.spl~
+ COPY ~might_and_guile/wizard/spwi321.spl~ ~override/d5_rathr.spl~
 	SAY NAME1 @6053
 	SAY UNIDENTIFIED_DESC @6054
-COPY ~might_and_guile/wizard/sppr612.spl~ ~override~
+ COPY ~might_and_guile/wizard/sppr612.spl~ ~override~
 	SAY NAME1 @6055
 	SAY UNIDENTIFIED_DESC @6056
-ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+ ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi419.spl~ ~override~
 		SAY NAME1 @6057
 		SAY UNIDENTIFIED_DESC @6058
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+ END
+ ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi419ee.spl~ ~override/spwi419.spl~
 		SAY NAME1 @6057
 		SAY UNIDENTIFIED_DESC @6058
-END
-ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+ END
+ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi419iw.spl~ ~override/spwi419.spl~
 		SAY NAME1 @6057
 		SAY UNIDENTIFIED_DESC @6058
-END
-ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
+ END
+ ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi704.spl~ ~override~
 		SAY NAME1 @6059
 		SAY UNIDENTIFIED_DESC @6060
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+ END
+ ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi704ee.spl~ ~override/spwi704.spl~
 		SAY NAME1 @6059
 		SAY UNIDENTIFIED_DESC @6060
-END
-ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+ END
+ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi704iw.spl~ ~override/spwi704.spl~
 		SAY NAME1 @6059
 		SAY UNIDENTIFIED_DESC @6060
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ END
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	ACTION_IF ENGINE_IS ~tob bg2ee~ THEN BEGIN
 		COPY ~might_and_guile/wizard/spwi805.spl~ ~override~
 			SAY NAME1 @6061
@@ -1374,44 +1401,44 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 			SAY NAME1 @6061
 			SAY UNIDENTIFIED_DESC @6062
 	END
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl6o.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl7l.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl7l.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl7l.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl8g.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl8g.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl8g.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl8h.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl8h.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl8h.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl9a.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl9m.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9m.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl9m.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ END
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
 		COPY ~might_and_guile/wizard/spwi522.spl~ ~override~
 			SAY NAME1 @6063
@@ -1451,83 +1478,85 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 		STRING_SET 26593 @6071
 	END
-END	
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl7d.itm~ THEN BEGIN
+ END	
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl7d.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl7d.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl7v.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl7v.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl7v.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl8d.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl8d.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl8d.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl9l.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9l.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl9l.itm~ ~override~
 		WRITE_BYTE 0x2d ("0x00")  		  
 		WRITE_BYTE 0x2f ("0x00") 
 		BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl6p.itm~ ~override/scrl6g.itm~
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl6o.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl6o.itm~ ~override/scrl6j.itm~
-END
+ END
 //_________________________________________________________________________________
 
 //SPELL REVISIONS COMPATIBILITY_____________________________________________________
 //
 //ACTION_IF NOT MOD_IS_INSTALLED "setup-spell_rev.tp2" "60" THEN BEGIN
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 
-ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+  ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi522.spl~ ~override~
 		SAY NAME1 @6063
 		SAY UNIDENTIFIED_DESC @6064
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+  END
+  ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi522ee.spl~ ~override~
 		SAY NAME1 @6063
 		SAY UNIDENTIFIED_DESC @6064
-END
-ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+  END
+  ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi618.spl~ ~override~
 		SAY NAME1 @6065
 		SAY UNIDENTIFIED_DESC @6066
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+  END
+  ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi618ee.spl~ ~override~
 		SAY NAME1 @6065
 		SAY UNIDENTIFIED_DESC @6066
-END
-ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+  END
+  ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi701.spl~ ~override~
 		SAY NAME1 @6067
 		SAY UNIDENTIFIED_DESC @6068
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+  END
+  ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	COPY ~might_and_guile/wizard/spwi701ee.spl~ ~override~
 		SAY NAME1 @6067
 		SAY UNIDENTIFIED_DESC @6068
-END
-COPY ~might_and_guile/wizard/spwi902.spl~ ~override~
+  END
+  COPY ~might_and_guile/wizard/spwi902.spl~ ~override~
 	SAY NAME1 @6069
 	SAY UNIDENTIFIED_DESC @6070
-ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
+  ACTION_IF ENGINE_IS ~tob bg2ee iwdee~ THEN BEGIN
 	STRING_SET 10875 @6071
-END
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+  END
+  ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	STRING_SET 26593 @6071
-END
+  END
+
+ END
 
 END
 //__________________________________________________________________________________
@@ -1738,13 +1767,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~QDDYNAHE.2da~ THEN BEGIN
 END
 //_________________________________________________________________________________
 
-	PRINT @119
-END
-ELSE BEGIN
-	PRINT @120
-END
-//__________________________________________________________________________________
-
 
 //COPY WIZARD CRE FILES____________________________________________________________
 //
@@ -1756,6 +1778,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 				~DYNAHE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~DYNAHE4.cre~ ~override~
 				~DYNAHE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1763,6 +1786,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 	COPY_EXISTING ~DYNAHE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 
 	COPY_EXISTING ~EDWIN.cre~ ~override~
 				~EDWIN2.cre~ ~override~
@@ -1770,6 +1794,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 				~EDWIN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~EDWIN4.cre~ ~override~
 				~EDWIN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1777,11 +1802,13 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 	COPY_EXISTING ~EDWIN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 
 	COPY_EXISTING ~XAN4.cre~ ~override~
 				~XAN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~XAN4.cre~ ~override~
 				~XAN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1789,6 +1816,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 	COPY_EXISTING ~XAN6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 
 	COPY_EXISTING ~XZAR.cre~ ~override~
 				~XZAR2.cre~ ~override~
@@ -1796,6 +1824,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 				~XZAR6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~XZAR4.cre~ ~override~
 				~XZAR6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1803,12 +1832,14 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 	COPY_EXISTING ~XZAR6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 
 	COPY_EXISTING ~QUAYLE.cre~ ~override~
 				~QUAYLE4.cre~ ~override~
 				~QUAYLE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiil~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~QUAYLE4.cre~ ~override~
 				~QUAYLE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1816,6 +1847,7 @@ ACTION_IF GAME_IS ~tutu bgt bgee~ THEN BEGIN
 	COPY_EXISTING ~QUAYLE6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 //	END
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~XAN.cre~ THEN BEGIN
@@ -1832,6 +1864,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~NEERA.cre~ THEN BEGIN
 				~NEERA6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~NEERA4.cre~ ~override~
 				~NEERA6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
@@ -1839,6 +1872,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~NEERA.cre~ THEN BEGIN
 	COPY_EXISTING ~NEERA6.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 
 ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
@@ -1849,6 +1883,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~jan15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiil~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~jan8.cre~ ~override~
 				~jan10.cre~ ~override~
 				~jan11.cre~ ~override~
@@ -1863,6 +1898,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~jan15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 	COPY_EXISTING ~edwin9.cre~ ~override~
 				~edwin11.cre~ ~override~
 				~edwin12.cre~ ~override~
@@ -1870,6 +1906,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~edwin15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~edwin9.cre~ ~override~
 				~edwin11.cre~ ~override~
 				~edwin12.cre~ ~override~
@@ -1884,6 +1921,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~edwin15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 	COPY_EXISTING ~aerie6.cre~ ~override~
 				~aerie7.cre~ ~override~
 				~aerie9.cre~ ~override~
@@ -1903,6 +1941,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~nalia18.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~aerie6.cre~ ~override~
 				~aerie7.cre~ ~override~
 				~aerie9.cre~ ~override~
@@ -1941,6 +1980,7 @@ ACTION_IF GAME_IS ~tob bgt bg2ee~ THEN BEGIN
 				~nalia18.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 	COPY_EXISTING ~neera8.cre~ ~override~
@@ -1948,6 +1988,7 @@ ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 				~neera15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~neera8.cre~ ~override~
 				~neera10.cre~ ~override~
 				~neera15.cre~ ~override~
@@ -1958,6 +1999,7 @@ ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 				~neera15.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~J#indi01.cre~ THEN BEGIN
@@ -1966,153 +2008,181 @@ ACTION_IF FILE_EXISTS_IN_GAME ~J#indi01.cre~ THEN BEGIN
 				~J#indi03.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~J#indi03.cre~ ~override~
 				~J#indi03.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~tsujath.cre~ THEN BEGIN
 	COPY_EXISTING ~tsujath.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~tsujath.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~tsujath.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~lk#nind.cre~ THEN BEGIN
 	COPY_EXISTING ~lk#nind.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~lk#nind.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~lk#nind.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~lk#ni25.cre~ THEN BEGIN
 	COPY_EXISTING ~lk#ni25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wine~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~lk#ni25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~lk#ni25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~rh#adr1.cre~ THEN BEGIN
 	COPY_EXISTING ~rh#adr1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~rh#adr1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~rh#adr1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~rh#ad25c.cre~ THEN BEGIN
 	COPY_EXISTING ~rh#ad25c.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~rh#ad25c.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~rh#ad25c.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~rh#adr2.cre~ THEN BEGIN
 	COPY_EXISTING ~rh#adr2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~rh#adr2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~rh#adr2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~rh#ad25t.cre~ THEN BEGIN
 	COPY_EXISTING ~rh#ad25t.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_cant~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~rh#ad25t.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~rh#ad25t.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adangel.cre~ THEN BEGIN
 	COPY_EXISTING ~adangel.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adangel.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adangel.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adang25.cre~ THEN BEGIN
 	COPY_EXISTING ~adang25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wiin~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adang25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adang25.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adangma1.cre~ THEN BEGIN
 	COPY_EXISTING ~adangma1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adangma1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adangma1.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adangma2.cre~ THEN BEGIN
 	COPY_EXISTING ~adangma2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adangma2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adangma2.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adangma3.cre~ THEN BEGIN
 	COPY_EXISTING ~adangma3.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adangma3.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adangma3.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~adangma4.cre~ THEN BEGIN
 	COPY_EXISTING ~adangma4.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_wico~ END
 		BUT_ONLY
+/*
 	COPY_EXISTING ~adangma4.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi318~ END
 		BUT_ONLY
 	COPY_EXISTING ~adangma4.cre~ ~override~
 		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~spwi321~ END
 		BUT_ONLY
+*/
 END
 //__________________________________________________________________________________
 
@@ -2120,38 +2190,28 @@ END
 //NERF EDWIN'S AMULET_______________________________________________________________
 //
 COPY ~might_and_guile/wizard/misc89.itm~ ~override~
-	SAY UNIDENTIFIED_DESC @6501
-	SAY IDENTIFIED_DESC @6501
+	SAY UNIDENTIFIED_DESC @6601
+	SAY IDENTIFIED_DESC @6601
 //__________________________________________________________________________________
 
 
 //TWEAK SUMMONS HLAS________________________________________________________________
 //
-COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
-	COUNT_REGEXP_INSTANCES ~change_hla_summons=1~ change_hla_summons
-
-ACTION_IF (change_hla_summons) THEN BEGIN
-
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr726.spl~ THEN BEGIN
 	COPY ~might_and_guile/spells/sppr726.spl~ ~override~
-		SAY NAME1 @6511
-		SAY UNIDENTIFIED_DESC @6512
+		SAY NAME1 @6611
+		SAY UNIDENTIFIED_DESC @6612
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr727.spl~ THEN BEGIN
 	COPY ~might_and_guile/spells/sppr727.spl~ ~override~
-		SAY NAME1 @6513
-		SAY UNIDENTIFIED_DESC @6514
+		SAY NAME1 @6613
+		SAY UNIDENTIFIED_DESC @6614
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr723.spl~ THEN BEGIN
 	COPY_EXISTING ~sppr723.spl~ ~override/spwi923.spl~
 		WRITE_SHORT 0x1c 1
 	COPY_EXISTING ~sppr723.spl~ ~override/spwi924.spl~
 		WRITE_SHORT 0x1c 1
-END
-	PRINT @121
-END
-ELSE BEGIN
-	PRINT @122
 END
 //__________________________________________________________________________________
 
@@ -2613,11 +2673,6 @@ END
 
 //updating opposition schools_______________________________________________________
 //
-COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
-	COUNT_REGEXP_INSTANCES ~no_opposition_schools=1~ no_opposition_schools
-
-ACTION_IF (no_opposition_schools) THEN BEGIN
-
 ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
 		COPY_EXISTING ~%ind%.spl~ ~override~ 	
@@ -2694,12 +2749,6 @@ ACTION_PHP_EACH arcanescroll AS ind => res BEGIN
 		BUT_ONLY 
 	END
 END
-
-	PRINT @123
-END
-ELSE BEGIN
-	PRINT @124
-END
 //__________________________________________________________________________________
 
 //SPECIFIC SPELL CHANGES____________________________________________________________
@@ -2730,8 +2779,24 @@ ADD_SPELL ~override/spwi106.spl~ 2 2 WIZARD_BLINDNESS
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl71.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_BLINDNESS~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl71.itm~ ~override~
 	WRITE_LONG 0x34 200
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -2742,6 +2807,15 @@ COPY_EXISTING ~scrl71.itm~ ~override~
 	END
 	BUT_ONLY
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
 //DEAFNESS__________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi223.spl~ THEN BEGIN
@@ -2759,8 +2833,24 @@ ADD_SPELL ~override/spwi223.spl~ 2 1 WIZARD_DEAFNESS
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrla2.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_DEAFNESS~
+      RET spell_res
+   END
 COPY_EXISTING ~scrla2.itm~ ~override~
 	WRITE_LONG 0x34 100
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -2771,19 +2861,53 @@ COPY_EXISTING ~scrla2.itm~ ~override~
 	END
 	BUT_ONLY
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
 //LUCK_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
-COPY_EXISTING ~spwi209.spl~ ~override~
-ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
-	WRITE_LONG 0x34 1
-	SAY UNIDENTIFIED_DESC @6115
+	COPY_EXISTING ~spwi209.spl~ ~override~
+	ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
+		WRITE_LONG 0x34 1
+		SAY UNIDENTIFIED_DESC @6131
 END
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_LUCK~
+	RET spell_res
+	END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl93.itm~ THEN BEGIN
-COPY_EXISTING ~scrl93.itm~ ~override~
-	WRITE_LONG 0x34 100
-	SAY IDENTIFIED_DESC @6115
+	COPY_EXISTING ~scrl93.itm~ ~override~
+		WRITE_LONG 0x34 100
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 146
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 147
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 148
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+		SAY IDENTIFIED_DESC @6131
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
 //FLAME ARROW________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
@@ -2862,8 +2986,24 @@ ADD_SPELL ~override/spwi722.spl~ 2 8 WIZARD_LIMITED_WISH
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrla4.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_LIMITED_WISH~
+      RET spell_res
+   END
 COPY_EXISTING ~scrla4.itm~ ~override~
 	WRITE_LONG 0x34 5000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -2875,6 +3015,7 @@ COPY_EXISTING ~scrla4.itm~ ~override~
 	BUT_ONLY
 END
 
+/*
 //SYMBOL: FEAR________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
 COPY_EXISTING ~spwi811.spl~ ~override~
@@ -2891,8 +3032,24 @@ ADD_SPELL ~override/spwi811.spl~ 2 7 WIZARD_SYMBOL_FEAR
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_SYMBOL_FEAR~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9f.itm~ ~override~
 	WRITE_LONG 0x34 3000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -2903,6 +3060,7 @@ COPY_EXISTING ~scrl9f.itm~ ~override~
 	END
 	BUT_ONLY
 END
+*/
 
 //SHAPECHANGE________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
@@ -2920,8 +3078,24 @@ ADD_SPELL ~override/spwi916.spl~ 2 8 WIZARD_SHAPECHANGE
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_SHAPECHANGE~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9y.itm~ ~override~
 	WRITE_LONG 0x34 7500
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -2941,8 +3115,24 @@ ADD_SPELL ~override/spwi915.spl~ 2 8 WIZARD_BLACK_BLADE_OF_DISASTER
 	SAY UNIDENTIFIED_DESC @6121
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_BLACK_BLADE_OF_DISASTER~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9x.itm~ ~override~
 	WRITE_LONG 0x34 5000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	SAY IDENTIFIED_DESC @6121
 END
 
@@ -3301,11 +3491,6 @@ END
 
 //updating opposition schools_______________________________________________________
 //
-COPY - ~might_and_guile/sob_settings.ini~ ~might_and_guile/backup~
-	COUNT_REGEXP_INSTANCES ~no_opposition_schools=1~ no_opposition_schools
-
-ACTION_IF (no_opposition_schools) THEN BEGIN
-
 ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
 		COPY_EXISTING ~%ind%.spl~ ~override~ 	
@@ -3382,45 +3567,64 @@ ACTION_PHP_EACH arcanescroll AS ind => res BEGIN
 		BUT_ONLY 
 	END
 END
-
-	PRINT @123
-END
-ELSE BEGIN
-	PRINT @124
-END
 //__________________________________________________________________________________
 
 //SPECIFIC SPELL CHANGES____________________________________________________________
 //
 //ARMOR_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi102.spl~ THEN BEGIN
-COPY_EXISTING ~spwi102.spl~ ~override~
-ADD_SPELL ~override/spwi102.spl~ 2 2 WIZARD_ARMOR
-	WRITE_LONG 0x34 2
-	READ_LONG 0x50 "valid"
-	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
-		READ_STRREF 0x50 "desc"
-		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
-			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+	COPY_EXISTING ~spwi102.spl~ ~override~
+	ADD_SPELL ~override/spwi102.spl~ 2 2 WIZARD_ARMOR
+		WRITE_LONG 0x34 2
+		READ_LONG 0x50 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x50 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x50 ~%new_desc%~
 		END
-		SAY_EVALUATED 0x50 ~%new_desc%~
-	END
-	BUT_ONLY
+END
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_ARMOR~
+	RET spell_res
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl67.itm~ THEN BEGIN
-COPY_EXISTING ~scrl67.itm~ ~override~
-	WRITE_LONG 0x34 200
-	READ_LONG 0x54 "valid"
-	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
-		READ_STRREF 0x54 "desc"
-		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
-			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+	COPY_EXISTING ~scrl67.itm~ ~override~
+		WRITE_LONG 0x34 200
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 146
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 147
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 148
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
 		END
-		SAY_EVALUATED 0x54 ~%new_desc%~
-	END
 	BUT_ONLY
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
+/*
 //BLUR______________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi201.spl~ THEN BEGIN
 COPY_EXISTING ~spwi201.spl~ ~override~
@@ -3437,8 +3641,24 @@ ADD_SPELL ~override/spwi201.spl~ 2 1 WIZARD_BLUR
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl85.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_BLUR~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl85.itm~ ~override~
 	WRITE_LONG 0x34 100
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -3453,7 +3673,7 @@ END
 //REFLECTED IMAGE___________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi120.spl~ THEN BEGIN
 COPY_EXISTING ~spwi120.spl~ ~override~
-ADD_SPELL ~override/spwi120.spl~ 2 8 WIZARD_REFLECTED_IMAGE
+ADD_SPELL ~override/spwi120.spl~ 2 2 WIZARD_REFLECTED_IMAGE
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -3466,8 +3686,24 @@ ADD_SPELL ~override/spwi120.spl~ 2 8 WIZARD_REFLECTED_IMAGE
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl5u.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_REFLECTED_IMAGE~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl5u.itm~ ~override~
 	WRITE_LONG 0x34 200
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -3478,48 +3714,105 @@ COPY_EXISTING ~scrl5u.itm~ ~override~
 	END
 	BUT_ONLY
 END
+*/
+
+//BLUR/RI___________________________________________________________________________
+COPY_EXISTING ~spwi201.spl~ ~override/d5_blur.spl~
+COPY_EXISTING ~spwi120.spl~ ~override/d5_refl.spl~
+COPY_EXISTING ~d5_blur.spl~ ~override/spwi120.spl~
+COPY_EXISTING ~d5_refl.spl~ ~override/spwi201.spl~
 
 //MIRROR IMAGE_____________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi212.spl~ THEN BEGIN
-COPY_EXISTING ~spwi212.spl~ ~override~
-ADD_SPELL ~override/spwi212.spl~ 2 3 WIZARD_MIRROR_IMAGE
-	WRITE_LONG 0x34 3
-//	SAY UNIDENTIFIED_DESC @6130
-	READ_LONG 0x50 "valid"
-	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
-		READ_STRREF 0x50 "desc"
-		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
-			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+	COPY_EXISTING ~spwi212.spl~ ~override~
+	ADD_SPELL ~override/spwi212.spl~ 2 3 WIZARD_MIRROR_IMAGE
+		WRITE_LONG 0x34 3
+//		SAY UNIDENTIFIED_DESC @6130
+		READ_LONG 0x50 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x50 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+			END
+			SAY_EVALUATED 0x50 ~%new_desc%~
 		END
-		SAY_EVALUATED 0x50 ~%new_desc%~
-	END
+END
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_MIRROR_IMAGE~
+	RET spell_res
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl96.itm~ THEN BEGIN
-COPY_EXISTING ~scrl96.itm~ ~override~
-	WRITE_LONG 0x34 300
-//	SAY IDENTIFIED_DESC @6130
-	READ_LONG 0x54 "valid"
-	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
-		READ_STRREF 0x54 "desc"
-		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
-			REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+	COPY_EXISTING ~scrl96.itm~ ~override~
+		WRITE_LONG 0x34 300
+//		SAY IDENTIFIED_DESC @6130
+		LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 146
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 147
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 148
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 2~ ~Level: 3~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
 		END
-		SAY_EVALUATED 0x54 ~%new_desc%~
-	END
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
 //LUCK_____________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
-COPY_EXISTING ~spwi209.spl~ ~override~
-ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
-	WRITE_LONG 0x34 1
-	SAY UNIDENTIFIED_DESC @6131
+	COPY_EXISTING ~spwi209.spl~ ~override~
+	ADD_SPELL ~override/spwi209.spl~ 2 1 WIZARD_LUCK
+		WRITE_LONG 0x34 1
+		SAY UNIDENTIFIED_DESC @6131
 END
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_LUCK~
+	RET spell_res
+	END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl93.itm~ THEN BEGIN
-COPY_EXISTING ~scrl93.itm~ ~override~
-	WRITE_LONG 0x34 100
-	SAY IDENTIFIED_DESC @6131
+	COPY_EXISTING ~scrl93.itm~ ~override~
+		WRITE_LONG 0x34 100
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 146
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 147
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+	    LPF ALTER_EFFECT
+	    	INT_VAR match_opcode = 148
+	    	STR_VAR resource = EVAL ~%spell_res%~
+	    END
+		SAY IDENTIFIED_DESC @6131
 END
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_BYTE 0x273 class
+		PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17) BEGIN // wizards
+			ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+			ADD_MEMORIZED_SPELL ~%spell_res%~ #0 ~wizard~
+		END
+	END
+BUT_ONLY
 
 //FLAME ARROW________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
@@ -3578,6 +3871,7 @@ COPY_EXISTING ~scrl8r.itm~ ~override~
 	SAY IDENTIFIED_DESC @6137
 END
 
+/*
 //SYMBOL: FEAR________________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi811.spl~ THEN BEGIN
 COPY_EXISTING ~spwi811.spl~ ~override~
@@ -3594,8 +3888,24 @@ ADD_SPELL ~override/spwi811.spl~ 2 7 WIZARD_SYMBOL_FEAR
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_SYMBOL_FEAR~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9f.itm~ ~override~
 	WRITE_LONG 0x34 3000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -3606,6 +3916,7 @@ COPY_EXISTING ~scrl9f.itm~ ~override~
 	END
 	BUT_ONLY
 END
+*/
 
 //SHAPECHANGE______________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi916.spl~ THEN BEGIN
@@ -3623,8 +3934,24 @@ ADD_SPELL ~override/spwi916.spl~ 2 8 WIZARD_SHAPECHANGE
 	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_SHAPECHANGE~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9y.itm~ ~override~
 	WRITE_LONG 0x34 7500
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	READ_LONG 0x54 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 		READ_STRREF 0x54 "desc"
@@ -3644,21 +3971,54 @@ ADD_SPELL ~override/spwi915.spl~ 2 8 WIZARD_BLACK_BLADE_OF_DISASTER
 	SAY UNIDENTIFIED_DESC @6139
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_BLACK_BLADE_OF_DISASTER~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9x.itm~ ~override~
 	WRITE_LONG 0x34 5000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	SAY IDENTIFIED_DESC @6139
 END
 
 //ENERGY DRAIN_______________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi914.spl~ THEN BEGIN
 COPY ~might_and_guile/spells/spwi914sr.spl~ ~override/spwi914.spl~
+ADD_SPELL ~override/spwi914.spl~ 2 8 WIZARD_ENERGY_DRAIN
 	WRITE_LONG 0x34 8
 	SAY NAME1 @6141
 	SAY UNIDENTIFIED_DESC @6142
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9w.itm~ THEN BEGIN
+   LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = ~WIZARD_ENERGY_DRAIN~
+      RET spell_res
+   END
 COPY_EXISTING ~scrl9w.itm~ ~override~
 	WRITE_LONG 0x34 5000
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 146
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 147
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
+    LPF ALTER_EFFECT
+    	INT_VAR match_opcode = 148
+    	STR_VAR resource = EVAL ~%spell_res%~
+    END
 	SAY NAME1 @6141
 	SAY IDENTIFIED_DESC @6142
 END

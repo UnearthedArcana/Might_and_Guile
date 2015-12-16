@@ -1123,7 +1123,7 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 			END
 		END
 		READ_BYTE 0x31 ~bowtype~
-		PATCH_IF (~%bowtype%~ = 104) BEGIN
+		PATCH_IF (~%bowtype%~ = 104) BEGIN   // longbows
 			READ_LONG 0x64 abilities_off
 			READ_SHORT 0x68 num_abilities
 			FOR (ability = 0; ability < num_abilities; ability += 1) BEGIN
@@ -1162,12 +1162,154 @@ Weight:~
 			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
 			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=7 parameter2=1 END
 		END
+		READ_BYTE 0x31 ~bowtype~
+		PATCH_IF (~%bowtype%~ = 105) BEGIN   // shortbows
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=2 parameter2=1 END
+		END
 	END
 	BUT_ONLY
 //__________________________________________________________________________________
 
 
+//IWDEE-specific stuff______________________________________________________________
+
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+
+	COPY ~might_and_guile/misc/iwdee/bknight.itm~ ~override~
+	COPY ~might_and_guile/misc/iwdee/bishop.itm~ ~override~
+
+//less-ramdomized loot______________________________________________________________
+//
+//	COPY ~might_and_guile/misc/iwdee/rndtres.2da~ ~override~
 //__________________________________________________________________________________
+
+//item price fixes__________________________________________________________________
+//
+	COPY_EXISTING ~amaunat.itm~ ~override~
+		WRITE_LONG 0x34 ~20000~
+	COPY_EXISTING ~bael.itm~ ~override~
+		WRITE_LONG 0x34 ~15000~
+	COPY_EXISTING ~bess.itm~ ~override~
+		WRITE_LONG 0x34 ~10000~
+	COPY_EXISTING ~blckbow.itm~ ~override~
+		WRITE_LONG 0x34 ~13500~
+	COPY_EXISTING ~daisy.itm~ ~override~
+		WRITE_LONG 0x34 ~13500~
+	COPY_EXISTING ~doves.itm~ ~override~
+		WRITE_LONG 0x34 ~20000~
+	COPY_EXISTING ~eron.itm~ ~override~
+		WRITE_LONG 0x34 ~10000~
+	COPY_EXISTING ~fayr.itm~ ~override~
+		WRITE_LONG 0x34 ~15500~
+	COPY_EXISTING ~giving.itm~ ~override~
+		WRITE_LONG 0x34 ~14000~
+	COPY_EXISTING ~hellpik.itm~ ~override~
+		WRITE_LONG 0x34 ~12000~
+	COPY_EXISTING ~kinetic.itm~ ~override~
+		WRITE_LONG 0x34 ~11000~
+	COPY_EXISTING ~lonesom.itm~ ~override~
+		WRITE_LONG 0x34 ~17500~
+	COPY_EXISTING ~lucky.itm~ ~override~
+		WRITE_LONG 0x34 ~8500~
+	COPY_EXISTING ~mae.itm~ ~override~
+		WRITE_LONG 0x34 ~17000~
+	COPY_EXISTING ~myrloch.itm~ ~override~
+		WRITE_LONG 0x34 ~17500~
+	COPY_EXISTING ~pikeman.itm~ ~override~
+		WRITE_LONG 0x34 ~17000~
+	COPY_EXISTING ~relian.itm~ ~override~
+		WRITE_LONG 0x34 ~16000~
+	COPY_EXISTING ~tomb.itm~ ~override~
+		WRITE_LONG 0x34 ~15500~
+	COPY_EXISTING ~waukeen.itm~ ~override~
+		WRITE_LONG 0x34 ~12000~
+	COPY_EXISTING ~whtash.itm~ ~override~
+		WRITE_LONG 0x34 ~9000~
+	COPY_EXISTING ~zz14in.itm~ ~override~
+		WRITE_LONG 0x34 ~13000~
+	COPY_EXISTING ~zze6pe.itm~ ~override~
+		WRITE_LONG 0x34 ~18000~
+	COPY_EXISTING ~zzg7ts.itm~ ~override~
+		WRITE_LONG 0x34 ~7000~
+	COPY_EXISTING ~zzs6sc.itm~ ~override~
+		WRITE_LONG 0x34 ~4000~
+ACTION_IF FILE_EXISTS_IN_GAME ~wa2amu.itm~ BEGIN
+	COPY_EXISTING ~wa2amu.itm~ ~override~
+		WRITE_LONG 0x34 ~6000~
+	COPY_EXISTING ~wa2dak.itm~ ~override~
+		WRITE_LONG 0x34 ~9500~
+	COPY_EXISTING ~wa2halb.itm~ ~override~
+		WRITE_LONG 0x34 ~10000~
+	COPY_EXISTING ~wa2harp.itm~ ~override~
+		WRITE_LONG 0x34 ~8500~
+	COPY_EXISTING ~wa2helm.itm~ ~override~
+		WRITE_LONG 0x34 ~16000~
+	COPY_EXISTING ~wa2plat.itm~ ~override~
+		WRITE_LONG 0x34 ~24000~
+	COPY_EXISTING ~wa2ring.itm~ ~override~
+		WRITE_LONG 0x34 ~7000~
+	COPY_EXISTING ~wa2robe.itm~ ~override~
+		WRITE_LONG 0x34 ~20000~
+	COPY_EXISTING ~wa2s1h.itm~ ~override~
+		WRITE_LONG 0x34 ~9000~
+	COPY_EXISTING ~wa2shiel.itm~ ~override~
+		WRITE_LONG 0x34 ~12000~
+END
+//	COPY_EXISTING ~.itm~ ~override~
+//	COPY_EXISTING ~.itm~ ~override~
+//__________________________________________________________________________________
+
+/*
+//item price fixes__________________________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+		READ_SHORT 0x1c type
+		PATCH_IF (%type% = 16 || %type% = 17 || %type% = 19 || %type% = 20 || %type% = 21 || %type% = 22 || %type% = 23 || %type% = 25 || %type% = 26 || %type% = 29 || %type% = 30 || %type% = 44 || %type% = 57 || %type% = 69) BEGIN
+			READ_LONG 0x60 enchantment
+			PATCH_IF (%enchantment% = 1) BEGIN
+				WRITE_LONG 0x34 ~~
+			END
+			PATCH_IF (%enchantment% = 2) BEGIN
+				WRITE_LONG 0x34 ~~
+			END
+			PATCH_IF (%enchantment% = 3) BEGIN
+				WRITE_LONG 0x34 ~~
+			END
+			PATCH_IF (%enchantment% = 4) BEGIN
+				WRITE_LONG 0x34 ~~
+			END
+			PATCH_IF (%enchantment% = 5) BEGIN
+				WRITE_LONG 0x34 ~~
+			END
+		END
+	END
+BUT_ONLY
+			
+//__________________________________________________________________________________
+*/
+
+//speed melee weapon fixes__________________________________________________________
+//
+	COPY_EXISTING ~usswd3c.itm~ ~override~
+				~usswd5a.itm~ ~override~
+				~ulswd3d.itm~ ~override~
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=7 parameter2=1 END
+	COPY_EXISTING ~valiant.itm~ ~override~
+				~ulswd5a.itm~ ~override~
+				~uflal3a.itm~ ~override~
+				~udagg4a.itm~ ~override~
+				~ubswd3b.itm~ ~override~
+				~umstr5a.itm~ ~override~
+			LPF DELETE_EFFECT INT_VAR match_opcode = 1 END
+			LPF ADD_ITEM_EQEFFECT INT_VAR opcode=1 target=1 timing=2 power=1 parameter1=2 parameter2=1 END
+//__________________________________________________________________________________
+
+/*
+//deprecated, see next section______________________________________________________
+//
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY ~might_and_guile/misc/iwdee/bowmess.itm~ ~override~
 	COPY ~might_and_guile/misc/iwdee/sbowebu.itm~ ~override~
@@ -1179,5 +1321,26 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY ~might_and_guile/misc/iwdee/ulxbw5a.itm~ ~override~
 	COPY ~might_and_guile/misc/iwdee/xbow06.itm~ ~override~
 	COPY ~might_and_guile/misc/iwdee/xxbow06.itm~ ~override~
+END 
+//__________________________________________________________________________________
+*/
+
+//fix speed missile weapons_________________________________________________________
+//
+	COPY_EXISTING ~uhxbw3b.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR match_opcode=1 parameter2=1 parameter1=7 END	
+	COPY_EXISTING ~uhxbw5a.itm~ ~override~
+				~ulbow4a.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR match_opcode=1 parameter2=1 parameter1=2 END
+	COPY_EXISTING ~bowmess.itm~ ~override~
+				~sbowebu.itm~ ~override~
+				~ulbow5a.itm~ ~override~
+				~ulxbw3b.itm~ ~override~
+				~ulxbw5a.itm~ ~override~
+				~xbow06.itm~ ~override~
+				~xxbow06.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR match_opcode=1 parameter2=1 parameter1=8 END
+//__________________________________________________________________________________
+
 END 
 //__________________________________________________________________________________

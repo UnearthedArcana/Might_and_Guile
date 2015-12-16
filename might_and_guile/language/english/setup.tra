@@ -28,7 +28,7 @@
 @100   = ~IWO: Item & Weapon Overhaul~
 @120   = ~WPO: Weapon Proficiency Overhaul~
 @140   = ~RCO: nothing here yet, just a placeholder component~
-@155   = ~WCO: Wizard Class Overhaul~
+@150   = ~WCO: Wizard Class Overhaul~
 @160   = ~STO: Saving Throw Overhaul~
 @180   = ~MRO: Magic Resistance Overhaul~
 @200   = ~Revised Stat Bonuses~
@@ -1838,6 +1838,7 @@ The descriptions and instructions in this tome may enable the reader to learn th
 @5141  = ~Abilities:
 - Major Access to the spheres of Divine Aid, Life, Protection, Destruction, Knowledge, and Light.
 - Minor Access to the spheres of Death, War, Thought, Dread, Vigor, and Magic.~
+@6000   = ~600: Wizard Class Changes~
 @6002   = ~MAGE: The wizard strives to be a master of magical energies, shaping them and casting them as spells. To do so, wizards study strange tongues and obscure facts and devotes much time to magical research. Wizards are rarely seen adventuring without a retinue of fighters and men-at-arms. Because there are different types (or schools) of magic, there are different types of wizards. The Mage studies all types of magic and learns a wide variety of spells; this breadth of focus makes mages well suited to the demands of adventuring.
 
 CLASS FEATURES:
@@ -1854,59 +1855,59 @@ Hit Die: d4
 Prime Requisite For Dual-Classing: Intelligence~
 @6003   = ~ABJURER: A Mage who specializes in protective magic and metamagic disciplines. These mages can erect powerful wards and barriers, and are also trained to break those wards and effects that are created by other spellcasters.
 
-Abilities:
+Advantages:
 - Abjurers automatically learn spells from the school of Abjuration.
 - Abjurers may use the "Protective Shell" cantrip, which lasts for 3 turns and harmlessly absorbs the first physical strike that hits the caster.
 - Abjurers gain the Parry Magic and Spell Thrust abilities earlier than other mages.
 - When Abjurers cast spell protections, such as a Globe of Invulnerability or Spell Deflection, a Spell Shield is automatically created at the same time, giving the Abjurer an extra layer of protection.~
 @6004   = ~CONJURER: A Mage who specializes in creating or summoning creatures and objects, moving them through space. These wizards ultimately master teleportation magic, able to banish enemies and summon aid from different planes altogether.
 
-Abilities:
+Advantages:
 - Conjurers automatically learn spells from the school of Conjuration.
 - Conjurers may use the "Conjure Rabbit" cantrip, which conjures a rabbit out of thin air!
 - Conjurers may cast Monster Summoning I innately at 2rd and 4th levels; Monster Summoning II at 6th and 8th levels; and Monster Summoning III at 10th level.~
 @6005   = ~CONJURER: A Mage who specializes in creating or summoning creatures and objects, moving them through space. These wizards ultimately master teleportation magic, able to banish enemies and summon aid from different planes altogether.
 
-Abilities:
+Advantages:
 - Conjurers automatically learn spells from the school of Conjuration.
 - Conjurers may use the "Conjure Rabbit" cantrip, which conjures a rabbit out of thin air!
 - Conjurers may cast the various Monster Summoning spells as if they were one level lower.~
 @6006   = ~DIVINER: A Mage who specializes in detection and divining magics. These wizards developer an instinctive ability to glimpse the future; while such visions are rarely clear, they give enough information to provide Diviners with slightly improved reflexes and the ability to use magic to subtly alter the outcome of probabilistic events.
 
-Abilities:
+Advantages:
 - Diviners automatically learn spells from the school of Divination.
 - Diviners do not take extra damage from thieves' backstabs.
 - Diviners can use the Contingency ability at level 1, and can load it with two spells from level 10.~
 @6007   = ~ENCHANTER: A Mage who specializes in Charm and Enchantment magic. These wizards are adept both at using magic to influence the minds of others, inducing sleep, friendliness, despair, or dementia.
 
-Abilities:
+Advantages:
 - Enchanters automatically learn spells from the school of Enchantment.
 - Enchanters may use the "Drowse" cantrip, which causes a target to briefly fall asleep if the target fails a saving throw.
 - Enchanters are resistant to magic within their specialty, becoming immune to Charm and Sleep spells.
 - Magical effects are harder to resist near an Enchanter: nearby enemies automatically suffer a -2 penalty to saves vs. spells.~
 @6008   = ~ILLUSIONIST: A Mage who specializes in creating illusions to confuse and mislead. These canny wizards can bend light and manipulate perceptions in various ways. They can duck out of sight when in danger, and eventually gain the power to create illusions of startling substance and realism.
 
-Abilities:
+Advantages:
 - Illusionists automatically learn spells from the school of Illusion.
 - Illusionists may use the "Bedazzle" cantrip, which dazzles the target's eyes and causes -1 penalties to thac0, damage, and AC for 12 seconds (increasing to -3 penalties, and suffering from Blindness for 6 seconds, if the target fails a saving throw vs. spells).
 - Illusionists may use the "Shadowstep" ability once per day per five levels of experience.
 - Illusionists are permanently under the effect of Nondetection, able to remain invisible even when targeted by scrying magic.~
 @6009   = ~INVOKER: A Mage who specializes in the manipulation of raw and elemental energies. These wizards use magical spells to manipulate the basic energies of the multiverse. They excel at releasing this energy in explosive flashes of fire or lightning, or shunting it away to project an icy freeze.
 
-Abilities:
+Advantages:
 - Invokers automatically learn spells from the school of Invocation.
 - Invokers may use the "Magic Bolt" cantrip, which does 1d4+1 hit points of magic damage to the target.
 - Invokers do 20% more damage with spells that involve fire, lightning, cold, or magic damage.~
 @6010   = ~NECROMANCER: A Mage who specializes in magic dealing with death, undeath, and energy from the Negative Material Plane. Necromancy is a disturbing art, reviled by most civilized practitioners and academies of magic. They experiment with the living and the dead, and create undead abominations that straddle the gap in between. With practice, some Necromancers eventually learn techniques to achieve immortality by changing their own bodies into the form of a lich.
 
-Abilities:
+Advantages:
 - Necromancers are the only wizards able to cast spells from the school of Necromancy.
 - Necromancers automatically learn spells from the school of Necromancy.
 - Necromancers may use the "Stiffen Bones" cantrip, causes -1 penalties to thac0 and AC for 12 seconds (increasing to -2 penalties and being Slowed if the target fails a saving throw).
 - Necromancers may transform parts of their bodies with the power of energy from the Negative Material Plane. Once they learn the technique from a scroll, they may innately use the power of a Chilling Touch, Ghoul Touch, or Vampiric Touch.~
 @6011   = ~TRANSMUTER: A Mage who specializes in magic that alters physical reality. These wizards control and transform matter in all the ways their magical learning affords them. They can cause the air to turn to a toxic mist, change their own shape into that of a powerful monster, and even stop time itself. Transmuters are also alchemists, creating the various magical potions on which so many adventurers rely.
 
-Abilities:
+Advantages:
 - Transmuters automatically learn spells from the school of Alteration.
 - Transmuters may use the "Earthen Grasp" cantrip, which causes tendrils from the ground to reach out and Entangle the target for 1 round (and Holding the target frozen in place for that time if the target fails a saving throw).
 - Transmuters can maintain the stability of their personal form, resisting hostile polymorph, petrification, and disintegration effects.
@@ -2053,7 +2054,7 @@ Saving Throw: None
 
 This cantrip causes a small chunk of stone to fly from the caster's hands, doing 1d5 damage to the target.~
 @6041   = ~Minor Spell Matrix~
-@6042   = ~Minor Sequencer
+@6042   = ~Minor Spell Matrix
 (Invocation/Evocation)
 
 Level: 4
@@ -2612,7 +2613,7 @@ By means of a Ray of Enfeeblement, a wizard launches a magical attack against th
 Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of <PRO_HISHER> Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
 
 For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.~
-@6501   = ~This is Edwin's birthright, inlaid with his family stone.
+@6601   = ~This is Edwin's birthright, inlaid with his family stone.
 
 STATISTICS:
 
@@ -2620,8 +2621,8 @@ Equipped abilities:
 – Can memorize one extra wizard spell of each level
 
 Weight: 1~
-@6511   = ~Summon Deva~
-@6512   = ~Summon Deva 
+@6611   = ~Summon Deva~
+@6612   = ~Summon Deva 
 (Conjuration/Summoning) 
 Level: Quest
 Range: 40 yards 
@@ -2633,8 +2634,8 @@ Saving Throw: None
 This spell opens a celestial gate and calls forth an angelic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
 
 If the summoning priest is 25th level or higher, a powerful planetar is summoned instead.~
-@6513   = ~Summon Fallen Deva~
-@6514   = ~Summon Fallen Deva 
+@6613   = ~Summon Fallen Deva~
+@6614   = ~Summon Fallen Deva 
 (Conjuration/Summoning) 
 Level: Quest
 Range: 40 yards 

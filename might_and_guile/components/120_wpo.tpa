@@ -4642,9 +4642,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~c#ajan14.cre~ THEN BEGIN
 END	
 
 ACTION_IF FILE_EXISTS_IN_GAME ~c#ajan16.cre~ THEN BEGIN
-	COPY_EXISTING ~c#ajan16.cre~ ~override~
-		LPF DELETE_EFFECT INT_VAR match_opcode = 233 END
 	COPY_EXISTING ~c#ajan14.cre~ ~override/c#ajan16.cre~
+		LPF DELETE_EFFECT INT_VAR match_opcode = 233 END
+	COPY_EXISTING ~c#ajan16.cre~ ~override~
 		WRITE_SHORT 0x0234 1 // sets level to 1
 		WRITE_SHORT 0x0235 1
 		WRITE_SHORT 0x0236 1

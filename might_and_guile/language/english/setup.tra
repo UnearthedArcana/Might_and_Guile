@@ -21,23 +21,19 @@
 @22   = ~Tweak Components~
 @23   = ~New Kit Components~
 @30   = ~Would you like to view new kits? (y/n)~
+@33  = ~- Focus access to the spheres of: ~
+@34  = ~- Major access to the spheres of: ~
+@35  = ~- Minor access to the spheres of: ~
 @36  = ~Advantages:~
 @37  = ~Abilities:~
 @38  = ~Disadvantages:~
 @39  = ~Restrictions:~
-@100   = ~IWO: Item & Weapon Overhaul~
-@120   = ~WPO: Weapon Proficiency Overhaul~
-@140   = ~RCO: nothing here yet, just a placeholder component~
-@150   = ~WCO: Wizard Class Overhaul~
-@160   = ~STO: Saving Throw Overhaul~
-@180   = ~MRO: Magic Resistance Overhaul~
-@200   = ~Revised Stat Bonuses~
-@205   = ~Revised Hit Point Tables~
-@210   = ~Revised XP Tables~
 @215   = ~Revised Spellcasting Tables~
 @220   = ~Revised Movement Bonuses (Quickstride)~
+@225   = ~Revised Stalker~
+@230   = ~Revised Archer~
+@235   = ~Revised Beastmaster~
 @250   = ~Revised Berserker and Rage~
-@255   = ~Revised Rangers~
 @260   = ~Revised Kensai~
 @265   = ~Revised Monk Fists~
 @270   = ~Revised Blade & Skald~
@@ -158,7 +154,7 @@ Weight: 0~
 @1075   = ~Enchanted Large Shield~
 @1076   = ~Enchanted Sling~
 @1077   = ~Varscona~
-@1078   = ~Enchanted Short Sword~
+@1078   = ~The Whistling Sword~
 @1079   = ~Water's Edge~
 @1080   = ~Enchanted Mace~
 @1081   = ~Enchanted Club~
@@ -612,7 +608,7 @@ The character is enraged for 5 rounds, which grants a +4 bonus to Strength and C
 
 Abilities:
 - +20% to Move Silently and Hide In Shadows.
-- May achieve Mastery (+++) with short swords and daggers.
+- May achieve one level higher proficiency than normal with short swords and daggers.
 - May set traps, with a success rate that begins at 30% and increases by 3% per level.
 - May use Backstab ability, although for a lower damage multiplier than Thieves:
   Level 1-8: x2
@@ -664,227 +660,257 @@ Disadvantages:
 @2602  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the bastard sword. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2603  = ~This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon. The kensai is deadly, fast, and trained to fight without the protection of armor.~
 @2604  = ~Kensai (long sword)~
 @2605  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the long sword. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2606  = ~Kensai (katana)~
 @2607  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the katana. The kensai is deadly, fast, and trained to fight without the protection of armor.
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2608  = ~Kensai (scimitar)~
 @2609  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the scimitar. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2610  = ~Kensai (short sword)~
 @2611  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the short sword. The kensai is deadly, fast, and trained to fight without the protection of armor.
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2612  = ~Kensai (2-handed sword)~
 @2613  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the 2-handed sword. The kensai is deadly, fast, and trained to fight without the protection of armor.
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2614  = ~Kensai (dagger)~
 @2615  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the dagger. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2616  = ~Kensai (battle axe)~
 @2617  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the battle axe. The kensai is deadly, fast, and trained to fight without the protection of armor.
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2618  = ~Kensai (flail)~
 @2619  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the flail. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2620  = ~Kensai (war hammer)~
 @2621  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the war hammer. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2622  = ~Kensai (mace)~
 @2623  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the mace. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2624  = ~Kensai (club)~
 @2625  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the club. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2626  = ~Kensai (quarterstaff)~
 @2627  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the quarterstaff. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2628  = ~Kensai (spear)~
 @2629  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the spear. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2630  = ~Kensai (halberd)~
 @2631  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the halberd. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2632  = ~Choose weapon focus~
 @2633  = ~Bastard Sword focus~
@@ -904,19 +930,21 @@ Restrictions:
 @2647  = ~Halberd focus~
 @2648  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single weapon. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
-NOTE: During skill selection, you should place as many proficiency points as you can in the weapon you intend to focus in! Otherwise points will be lost. It does not matter where you put the other two points, they will automatically be reassigned to weapon styles when you focus.
+NOTE: During skill selection, where you assign proficiency points is more or less meaningless.  When you choose a weapon of focus, you will begin the game specialized in that weapon, and in the single-weapon, two-weapon, and two-handed weapon fighting styles.
 
 Abilities:
+- +1/2 attack per round.
 - +1 to damage rolls every 4 levels.
 - +1 bonus to Armor Class every 6 levels (starting at 1st level).
-- -1 bonus to Speed Factor every 4 levels.
-- May use the Kai ability once per day every 4 levels (starts at 1st level with one use).
+- -1 bonus to Weapon Speed Factor every 10 levels.
+- May use the Kai ability twice per day every 10 levels (starts at 1st level with one use).
 
 KAI: All successful attacks within the next 10 seconds deal maximum damage.
 
 Restrictions:
 - May not wear any armor.
 - May not use missile weapons.
+- May not dual-class.
 ~
 @2651   = ~MONK: these meditative warriors who pursue perfection through contemplation as well as action. They are versatile fighters, especially skilled in combat without weapons or armor. Though Monks cannot cast spells, they have a unique magic of their own: they channel a subtle energy, called ki, which allows them to perform amazing feats. The Monk's best known feat is their ability to stun an opponent with an unarmed blow.
 
@@ -1139,7 +1167,7 @@ Abilities:
 
 Restrictions:
 - Cannot become proficient with heavy weapons.
-- May only specialize (++) with ranged weapons.
+- May only specialize (++) with ranged weapons and medium-weight blunt weapons.
 - May not wear heavier armor than studded leather.
 - May not dual-class to thief.
 ~
@@ -1153,9 +1181,8 @@ Abilities:
 
 Restrictions:
 - Cannot become proficient with heavy weapons.
-- May only specialize (++) with ranged weapons.
+- May only specialize (++) with ranged weapons and medium-weight blunt weapons.
 - May not wear heavier armor than studded leather.
-- May not dual-class to thief.
 ~
 @3202  = ~marksman~
 @3203  = ~Marksman~
@@ -1167,7 +1194,7 @@ Abilities:
 - Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
-- May only specialize (++) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not wear heavier armor than splint mail.
 ~
 @3205  = ~The Marksman is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some of his proficiency with melee weapons and armor.~
@@ -1179,7 +1206,7 @@ Abilities:
 - Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.
 
 Restrictions:
-- May only specialize (++) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not wear heavier armor than splint mail.
 ~
 @3211  = ~Called Shot: Pin~
@@ -1205,7 +1232,7 @@ Abilities:
 
 Restrictions:
 - May not wear any metal armor.
-- May only become Proficient (+) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 ~
 @3224  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow - the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
 
@@ -1216,7 +1243,7 @@ Abilities:
 
 Restrictions:
 - May not wear any metal armor.
-- May only become Specialized (++) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not use Charm Animal ability.
 ~
 @3225  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.~
@@ -1240,7 +1267,7 @@ Abilities:
 
 Restrictions:
 - May not wear any metal armor.
-- May only become Proficient (+) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not cast druid spells.
 ~
 @3244  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
@@ -1252,7 +1279,7 @@ Abilities:
 
 Restrictions:
 - May not wear any metal armor.
-- May only become Specialized (++) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not cast druid spells.
 ~
 @3245  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
@@ -1264,7 +1291,7 @@ Abilities:
 
 Restrictions:
 - May not wear any metal armor.
-- May only become Proficient (+) with melee weapons.
+- May reach a lower level of proficiency than normal with melee weapons.
 - May not cast druid spells.
 ~
 @3246  = ~The Slinger is the epitome of skill with the sling — the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon.~

@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~v1.5~
+VERSION ~v2~
 README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -26,201 +26,8 @@ LANGUAGE
   ~might_and_guile/language/english/setup.tra~
 
 
+
 /*
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						CHOOSE COMPONENTS
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @10
-DESIGNATED 10
-
-COPY ~might_and_guile/misc/d5_overhauls.d5~ ~override~
-//__________________________________________________________________________________
-
-
-BEGIN @20
-DESIGNATED 20
-
-COPY ~might_and_guile/misc/d5_tweaks.d5~ ~override~
-//__________________________________________________________________________________
-
-
-BEGIN @30
-DESIGNATED 30
-
-COPY ~might_and_guile/misc/d5_kits.d5~ ~override~
-//__________________________________________________________________________________
-*/
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						ITEM/WEAPON OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @100
-DESIGNATED 100
-//REQUIRE_PREDICATE NOT GAME_IS ~iwdee~ @8
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-GROUP @21
-
-INCLUDE ~might_and_guile/components/100_iwo.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						PROFICIENCY OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @120
-DESIGNATED 120
-REQUIRE_PREDICATE (MOD_IS_INSTALLED "TOBEX.TP2" "100") OR (GAME_IS ~bgee bg2ee iwdee~) @1
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-GROUP @21
-
-INCLUDE ~might_and_guile/components/120_wpo.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						ROGUE CLASS OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @140 
-DESIGNATED 140
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-DEPRECATED ~placeholder component~
-GROUP @21
-
-//INCLUDE ~might_and_guile/components/140_rco.tpa~
-
-COPY ~might_and_guile/misc/d5_rco.d5~ ~override~
-//__________________________________________________________________________________
-
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						WIZARD CLASS OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @150
-DESIGNATED 150
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-DEPRECATED ~placeholder component~
-GROUP @21
-
-INCLUDE ~might_and_guile/components/150_wco.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						SAVING THROW OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @160
-DESIGNATED 160
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-GROUP @21
-
-INCLUDE ~might_and_guile/spells/save_list_base.tpa~
-
-INCLUDE ~might_and_guile/components/160_sto.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						MAGIC RESISTANCE OVERHAUL
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @180
-DESIGNATED 180
-//REQUIRE_PREDICATE NOT GAME_IS ~iwdee~ @1
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "10") @3
-GROUP @21
-
-INCLUDE ~might_and_guile/spells/mr_list_base.tpa~
-
-INCLUDE ~might_and_guile/components/180_mro.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						STAT BONUS CHANGES
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @200
-DESIGNATED 200
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
-
-INCLUDE ~might_and_guile/components/200_stats.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						HIT DICE CHANGES
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @205
-DESIGNATED 205
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
-
-INCLUDE ~might_and_guile/components/205_hit_dice.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						XP TABLE CHANGES
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @210
-DESIGNATED 210
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
-
-INCLUDE ~might_and_guile/components/210_xp_tables.tpa~
-//__________________________________________________________________________________
-
-
-
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
@@ -230,12 +37,11 @@ INCLUDE ~might_and_guile/components/210_xp_tables.tpa~
 
 BEGIN @215
 DESIGNATED 215
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+//GROUP @22
 
-INCLUDE ~might_and_guile/components/215_spell_tables.tpa~
+INCLUDE ~scales_of_balance/components/215_spell_tables.tpa~
 //__________________________________________________________________________________
-
+*/
 
 
 //__________________________________________________________________________________
@@ -247,8 +53,7 @@ INCLUDE ~might_and_guile/components/215_spell_tables.tpa~
 
 BEGIN @220
 DESIGNATED 220
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+//GROUP @22
 
 INCLUDE ~might_and_guile/components/220_quickstride.tpa~
 //__________________________________________________________________________________
@@ -258,16 +63,15 @@ INCLUDE ~might_and_guile/components/220_quickstride.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						REVISED BERSERKER + RAGE
+//						 REVISED STALKER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @250
-DESIGNATED 250
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+BEGIN @225
+DESIGNATED 225
+//GROUP @22
 
-INCLUDE ~might_and_guile/components/250_revised_rage.tpa~
+INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
 //__________________________________________________________________________________
 
 
@@ -275,16 +79,47 @@ INCLUDE ~might_and_guile/components/250_revised_rage.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						 REVISED RANGERS
+//						 REVISED ARCHER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @255
-DESIGNATED 255
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+BEGIN @230
+DESIGNATED 230
+//GROUP @22
 
-INCLUDE ~might_and_guile/components/255_revised_rangers.tpa~
+INCLUDE ~might_and_guile/components/230_revised_archer.tpa~
+//__________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						 REVISED BEASTMASTER
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @235
+DESIGNATED 235
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/235_revised_beastmaster.tpa~
+//__________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED BERSERKER/RAGE
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @250
+DESIGNATED 250
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/250_revised_rage.tpa~
 //__________________________________________________________________________________
 
 
@@ -298,8 +133,7 @@ INCLUDE ~might_and_guile/components/255_revised_rangers.tpa~
 
 BEGIN @260
 DESIGNATED 260
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+//GROUP @22
 
 INCLUDE ~might_and_guile/components/260_revised_kensai.tpa~
 //__________________________________________________________________________________
@@ -309,14 +143,13 @@ INCLUDE ~might_and_guile/components/260_revised_kensai.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						   MONK TWEAKS
+//						  REVISED MONK FISTS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @265
 DESIGNATED 265
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+//GROUP @22
 
 INCLUDE ~might_and_guile/components/265_monk_fist.tpa~
 //__________________________________________________________________________________
@@ -332,8 +165,7 @@ INCLUDE ~might_and_guile/components/265_monk_fist.tpa~
 
 BEGIN @270
 DESIGNATED 270
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-GROUP @22
+//GROUP @22
 
 INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 //__________________________________________________________________________________
@@ -349,9 +181,8 @@ INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 
 BEGIN @275
 DESIGNATED 275
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "20") @4
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee~) @4
-GROUP @22
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @4
+//GROUP @22
 
 INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
 //__________________________________________________________________________________
@@ -369,8 +200,7 @@ INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
 //________________________CORSAIR___________________________________________________
 BEGIN @310
 DESIGNATED 310
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/310_corsair.tpa~
 //__________________________________________________________________________________
@@ -379,8 +209,7 @@ INCLUDE ~might_and_guile/components/310_corsair.tpa~
 //________________________MARKSMAN__________________________________________________
 BEGIN @320
 DESIGNATED 320
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/320_marksman.tpa~
 //__________________________________________________________________________________
@@ -389,8 +218,7 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 //________________________ARCHER__________________________________________________
 BEGIN @322
 DESIGNATED 322
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 //__________________________________________________________________________________
@@ -399,8 +227,7 @@ INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 //________________________SLINGER__________________________________________________
 BEGIN @324
 DESIGNATED 324
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //__________________________________________________________________________________
@@ -409,8 +236,7 @@ INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //________________________MAGE HUNTER_______________________________________________
 BEGIN @350
 DESIGNATED 350
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //__________________________________________________________________________________
@@ -419,8 +245,7 @@ INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //_______________________BARBARIAN RANGER___________________________________________
 BEGIN @360
 DESIGNATED 360
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________________________________________________________________
@@ -438,8 +263,7 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________SNIPER__________________________________________________
 BEGIN @410
 DESIGNATED 410
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/410_sniper.tpa~
 //__________________________________________________________________________________
@@ -448,8 +272,7 @@ INCLUDE ~might_and_guile/components/410_sniper.tpa~
 //__________________________SCOUT__________________________________________________
 BEGIN @420
 DESIGNATED 420
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/420_scout.tpa~
 //__________________________________________________________________________________
@@ -458,8 +281,7 @@ INCLUDE ~might_and_guile/components/420_scout.tpa~
 //__________________________JONGLEUR________________________________________________
 BEGIN @450
 DESIGNATED 450
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/450_jongleur.tpa~
 //__________________________________________________________________________________
@@ -468,8 +290,7 @@ INCLUDE ~might_and_guile/components/450_jongleur.tpa~
 //_________________________LOREMASTER________________________________________________
 BEGIN @460
 DESIGNATED 460
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 //__________________________________________________________________________________
@@ -478,8 +299,7 @@ INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 //__________________________GALLANT_________________________________________________
 BEGIN @470
 DESIGNATED 470
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/470_gallant.tpa~
 //__________________________________________________________________________________
@@ -488,8 +308,7 @@ INCLUDE ~might_and_guile/components/470_gallant.tpa~
 //________________________MEISTERSINGER_____________________________________________
 BEGIN @480
 DESIGNATED 480
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 //__________________________________________________________________________________
@@ -498,8 +317,7 @@ INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 //_________________________LORESINGER_______________________________________________
 BEGIN @490
 DESIGNATED 490
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 //__________________________________________________________________________________
@@ -515,10 +333,8 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 
 BEGIN @500
 DESIGNATED 500
-FORBID_COMPONENT ~setup-divine_remix.tp2~ ~1000~ @1
-//REQUIRE_PREDICATE (MOD_IS_INSTALLED "might_and_guile.tp2" "30") @5
 REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ ~for EE and ToBEx games~
-GROUP @23
+//GROUP @23
 
 INCLUDE ~might_and_guile/components/500_multiclass_kits.tpa~
 //__________________________________________________________________________________

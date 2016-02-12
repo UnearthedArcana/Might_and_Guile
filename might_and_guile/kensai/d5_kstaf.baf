@@ -1,7 +1,0 @@
-IF
-	True()
-THEN
-	RESPONSE #100
-	ActionOverride(LastSummonerOf(Myself),AddKit(D5KSTAF))  
-	DestroySelf()
-END

@@ -1,0 +1,239 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED STALKER
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//EDIT STALKER KIT 2DA FILES________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+	SET_2DA_ENTRY 11 5 1 ~d5_STLK2 ~
+	BUT_ONLY
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	COPY_EXISTING ~weapprof.2da~ ~override~
+		SET_2DA_ENTRY 13 37 1 ~3~
+		SET_2DA_ENTRY 18 37 1 ~3~
+		BUT_ONLY
+END
+//___________________________________________________________________________________
+
+
+//UPDATE EXISTING STRINGS__________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 25367 @2551
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 25211 @2551
+END
+ACTION_IF ENGINE_IS ~iwdee~ AND NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 37114 @2551
+END
+ACTION_IF GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 25367 @2552
+END
+ACTION_IF ENGINE_IS ~tob bg2ee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 25211 @2552
+END
+ACTION_IF ENGINE_IS ~iwdee~ AND FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	STRING_SET 37114 @2552
+END
+//__________________________________________________________________________________
+
+
+//VANILLA SPELL TABLES______________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
+	COPY ~might_and_guile/ranger/d5_staspl.d5~ ~override~
+	COPY ~might_and_guile/misc/mxsplra1.2da~ ~override/mxsplran.2da~
+	COPY_EXISTING ~clabrn01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabrn02.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabrn03.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+		BUT_ONLY
+	COPY_EXISTING ~clabrn04.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+		BUT_ONLY
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabrn05.2da~ THEN BEGIN
+	COPY_EXISTING ~clabrn05.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+		BUT_ONLY
+	END
+	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 37 ) BEGIN
+				FOR ( index = 38 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_ranspell_clabs AS moo => shoo BEGIN
+			ACTION_IF (%shoo% = 12) AND (FILE_EXISTS_IN_GAME ~%moo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%moo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 40 ) BEGIN
+				FOR ( index = 41 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_ranspell_clabs AS moo => shoo BEGIN
+			ACTION_IF (%shoo% = 12) AND (FILE_EXISTS_IN_GAME ~%moo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%moo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~10~ "rows"
+			PATCH_IF ( rows > 41 ) BEGIN
+				FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 10 modclab
+					READ_2DA_ENTRY %index% 8 10 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_ranspell_clabs AS moo => shoo BEGIN
+			ACTION_IF (%shoo% = 12) AND (FILE_EXISTS_IN_GAME ~%moo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%moo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+	ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_ROWS ~9~ "rows"
+			PATCH_IF ( rows > 31 ) BEGIN
+				FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
+					READ_2DA_ENTRY %index% 5 9 modclab
+					READ_2DA_ENTRY %index% 8 9 modclass
+					DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
+				END
+			END
+			BUT_ONLY
+		ACTION_PHP_EACH d5_ranspell_clabs AS moo => shoo BEGIN
+			ACTION_IF (%shoo% = 12) AND (FILE_EXISTS_IN_GAME ~%moo%.2da~) THEN BEGIN
+				COPY_EXISTING ~%moo%.2da~ ~override~
+					LPM remove_blank_lines
+					APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
+					BUT_ONLY
+			END
+		END
+	END
+END
+//____________________________________________________________________________________
+
+
+//2DA MODIFICATIONS___________________________________________________________________
+COPY ~might_and_guile/ranger/d5_stlk2.2da~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/strirang.txt~
+		BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		BUT_ONLY
+END
+ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
+		BUT_ONLY
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
+		COPY_EXISTING ~d5_stlk2.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
+			BUT_ONLY
+	END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabrn01.2da~) THEN BEGIN
+	COPY_EXISTING ~clabrn01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/ranstab.txt~
+	BUT_ONLY
+END
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~9~ "rows"
+	PATCH_IF ( rows > 1 ) BEGIN
+		FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+			READ_2DA_ENTRY %index% 5 9 modclab
+			READ_2DA_ENTRY %index% 8 9 modclass
+			DEFINE_ASSOCIATIVE_ARRAY d5_ranstab_clabs BEGIN "%modclab%" => "%modclass%" END
+		END
+	END
+	BUT_ONLY
+ACTION_PHP_EACH d5_ranstab_clabs AS roo => goo BEGIN
+	ACTION_IF (%goo% = 12) AND (FILE_EXISTS_IN_GAME ~%roo%.2da~) THEN BEGIN
+		COPY_EXISTING ~%roo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/ranger/ranstab.txt~
+			BUT_ONLY
+	END
+END
+ACTION_IF (GAME_IS ~bgee bg2ee iwdee~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
+END
+ACTION_IF (GAME_IS ~tob bgt tutu~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
+	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/stlkstab.txt~
+		BUT_ONLY
+END
+//____________________________________________________________________________________
+
+
+//STALKER ABILITY FILES_______________________________________________________________
+//
+COPY ~might_and_guile/ranger/d5_trp40.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_trp3.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
+COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rasp1.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rasp2.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_rasp3.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_stsp1.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_stsp2.spl~ ~override~
+COPY ~might_and_guile/ranger/d5_stsp3.spl~ ~override~
+//___________________________________________________________________________________
+
+
+CLEAR_ARRAYS

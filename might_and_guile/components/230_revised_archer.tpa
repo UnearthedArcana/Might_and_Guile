@@ -1,0 +1,119 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED ARCHER
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//ARCHER ABILITIES___________________________________________________________________
+//
+COPY ~might_and_guile/fighter/d5_marks.2da~ ~override/clabrn02.2da~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~clabrn02.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
+COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~
+	SAY NAME1 @3211
+	SAY UNIDENTIFIED_DESC @3212
+COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~
+	SAY NAME1 @3213
+	SAY UNIDENTIFIED_DESC @3214
+COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
+COPY ~might_and_guile/fighter/d5_arham.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~
+	SAY NAME1 @3217
+	SAY UNIDENTIFIED_DESC @3218
+//___________________________________________________________________________________
+
+
+//ARCHERS USE ELVEN CHAIN____________________________________________________________
+//
+ACTION_FOR_EACH elven_chain IN
+	~chan12~
+	~chan13~
+	~chan14~
+	~chan15~
+	~chan16~
+	~chan19~
+	~clolth~
+	~dwchan01~
+	~a!bchan1~
+	~bsingchn~
+	~c2chan01~
+	~chandrw~
+	~cmarq02~
+	~cmarq12~
+	~cmtuch01~
+	~cota~
+	~dsjearm~
+	~echan01~
+	~echan02~
+	~elfmail~
+	~elvarmx~
+	~fwchan02~
+	~gcmch01~
+	~illas04~
+	~kimchain~
+	~kiyoarm1~
+	~kiyoarm2~
+	~kiyoarm3~
+	~kiyowed1~
+	~mau006~
+	~ntchan04~
+	~rr#chn01~
+	~s!chan02~
+	~scal04~
+	~sgchan2~ 
+	~tzchan01~
+	~u#chan01~
+	~u#chan07~
+	~ucmgch01~
+	~zyplatn8~
+	~chands06~
+	~drowchn1~
+	~drowchn2~
+	~drowchn3~
+	~efml01~
+	~pchan~
+	~AAITM127~
+	~BGSX10~
+	~KOVAWED1~
+	~cmchan02~
+	~elfchan~
+	~kaychai~
+	~ntchan06~
+	~r#aspchn~
+	~tcarmor5~
+	~tcechan~
+	~tcrihar1~
+	~tcrihar2~
+	~tcrivarm~
+	~CMTCH02~
+	~CMTCH03~
+	~CMTCH05~
+	~ESXCHA~
+	~FWCHAN03~
+	~SOAITM01~
+BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%elven_chain%.itm~ BEGIN
+		COPY_EXISTING ~%elven_chain%.itm~ ~override~
+			WRITE_BYTE 0x2d ("0x00") //blocked: none
+		BUT_ONLY
+	END
+END
+//___________________________________________________________________________________
+

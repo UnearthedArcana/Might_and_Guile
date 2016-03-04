@@ -57,6 +57,24 @@
 </div>
 <h2>Contents</h2>
 <div class="section">
+  <h4 class="subheader">Component 200 (BETA): </h4>
+  <div class="section">
+    <p><strong><em>Warrior Feats</em></strong></p>
+      <p> To reflect their stuf of martial disciplines and techniques, single-class fighters and rangers will be able to choose from among 10 melee feats.  They include:
+	  <ul>
+	    <li> Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points and APR will be 1.</li>
+	    <li> Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
+	    <li> Heroic Resistance: for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
+	    <li> Heroic Resolve: the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
+	    <li> Heroic Willpower: for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
+	    <li> Knockdown: for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
+	    <li> Knockback: for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
+	    <li> Cutting Blow: for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
+	    <li> Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
+	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
+	  </ul>
+      <p> Fighters may choose a feat at 2nd, 4th, 7th, 10th, 13th, 16th, and 19th levels.  Rangers may choose a feat at 3rd, 6th, 12th, and 18th levels.</p>
+  </div>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">
     <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>

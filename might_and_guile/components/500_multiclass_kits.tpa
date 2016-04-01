@@ -751,7 +751,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
  BEGIN
 	COPY_EXISTING ~%kit_clab%.2da~ ~override~ 
 		LPM remove_blank_lines
-		APPEND_FILE ~faiths_and_powers/spheres/%game%/%major_sphere%_major.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/%major_sphere%_major.txt~
 	BUT_ONLY
 	OUTER_TEXT_SPRINT major_sphere_list ~%major_sphere_list% %major_sphere%,~
  END
@@ -767,7 +767,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
  BEGIN
 	COPY_EXISTING ~%kit_clab%.2da~ ~override~ 
 		LPM remove_blank_lines
-		APPEND_FILE ~faiths_and_powers/spheres/%game%/%minor_sphere%_minor.txt~
+		APPEND_FILE ~f_n_p/spheres/%game%/%minor_sphere%_minor.txt~
 	BUT_ONLY
 	OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list% %minor_sphere%,~
  END

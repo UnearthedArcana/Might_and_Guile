@@ -16,6 +16,10 @@ ALWAYS
 
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
 
+	ACTION_IF GAME_IS ~bgee~ BEGIN
+		COPY ~might_and_guile/compatibility/25stweap.2da~ ~override~
+	END
+
 END
 
 // ASK_EVERY_COMPONENT

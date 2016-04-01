@@ -27,7 +27,7 @@ END
 
 //ENABLE MORE MULTICLASSES___________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 	COPY_EXISTING ~CLSRCREQ.2da~ ~override~
 		SET_2DA_ENTRY 34 1 8 ~1~
 		SET_2DA_ENTRY 35 1 8 ~1~
@@ -742,8 +742,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
  OUTER_SPRINT kit_clab ~d5_bendr~
 
  ACTION_FOR_EACH major_sphere IN 
-		~Divine_Aid~
 		~Life~
+		~Benediction~
 		~Protection~
 		~Destruction~
 		~Knowledge~
@@ -751,7 +751,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
  BEGIN
 	COPY_EXISTING ~%kit_clab%.2da~ ~override~ 
 		LPM remove_blank_lines
-		APPEND_FILE ~f_n_p/spheres/%game%/%major_sphere%_major.txt~
+		APPEND_FILE ~faiths_and_powers/spheres/%game%/%major_sphere%_major.txt~
 	BUT_ONLY
 	OUTER_TEXT_SPRINT major_sphere_list ~%major_sphere_list% %major_sphere%,~
  END
@@ -767,7 +767,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
  BEGIN
 	COPY_EXISTING ~%kit_clab%.2da~ ~override~ 
 		LPM remove_blank_lines
-		APPEND_FILE ~f_n_p/spheres/%game%/%minor_sphere%_minor.txt~
+		APPEND_FILE ~faiths_and_powers/spheres/%game%/%minor_sphere%_minor.txt~
 	BUT_ONLY
 	OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list% %minor_sphere%,~
  END

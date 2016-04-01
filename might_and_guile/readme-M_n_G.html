@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.0 </strong><br />
+  <p><strong> Version 2.2 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -489,6 +489,16 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.2 - December 2015</strong></p>
+  <ul>
+    <li>EE 2.0 compatibility</li>
+    <li>warrior feats fixes</li>
+  </ul>
+  <p><strong>Version 2.1 - December 2015</strong></p>
+  <ul>
+    <li>warrior feats</li>
+    <li>some bug-fixing</li>
+  </ul>
   <p><strong>Version 2.0 - December 2015</strong></p>
   <ul>
     <li>major re-write</li>

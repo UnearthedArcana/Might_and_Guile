@@ -288,13 +288,13 @@ END
 
 COPY_EXISTING ~d5_mageh.2da~ ~override~
 	LPM remove_blank_lines
-	APPEND_FILE ~f_n_p/spheres/%game%/life_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/protection_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/vigor_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/plant_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/air_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/light_ranger.txt~
-	APPEND_FILE ~f_n_p/spheres/%game%/magic_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/life_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/protection_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/vigor_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/plant_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/air_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/light_ranger.txt~
+	APPEND_FILE ~faiths_and_powers/spheres/%game%/magic_ranger.txt~
 BUT_ONLY
 
 //__________________________________________________________________________________

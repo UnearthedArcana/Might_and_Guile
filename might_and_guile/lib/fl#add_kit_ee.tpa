@@ -2,10 +2,10 @@
  * fl#add_kit_ee - An ADD_KIT supplement for EE-type games
  * Author: Fredrik Lindgren, a.k.a., Wisp
  * Licence: public domain
- * Date: 2014-09-28
+ * Date: 2016-04-02
  */
 
-OUTER_SPRINT fl#add_kit_ee#version "1.0.5"
+OUTER_SPRINT fl#add_kit_ee#version "1.1.2"
 
 DEFINE_ACTION_FUNCTION fl#add_kit_ee#get_row
   STR_VAR
@@ -165,6 +165,42 @@ BEGIN
       END
     END
   END
+  PATCH_IF "%value%" STRING_EQUAL "" BEGIN
+    PATCH_FAIL "ERROR: fl#add_kit_ee failed to retrieve a value for column %column% and row %row% in %SOURCE_FILE%"
+  END
+END
+
+DEFINE_PATCH_MACRO fl#add_kit_ee#validate_kitlist_values BEGIN
+  PATCH_IF IS_AN_INT kit_number AND kit_number < 0 BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not find the kit %kit_name% in kitlist.2da~
+  END
+  PATCH_IF !IS_AN_INT kit_number BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid kit number for kit %kit_name% from kitlist.2da~
+  END
+  PATCH_IF !IS_AN_INT kit_lower BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid lower strref for kit %kit_name% from kitlist.2da~
+  END
+  PATCH_IF !IS_AN_INT kit_mixed BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid mixed strref for kit %kit_name% from kitlist.2da~
+  END
+  PATCH_IF !IS_AN_INT kit_desc BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid help strref for kit %kit_name% from kitlist.2da~
+  END
+  PATCH_IF !IS_AN_INT kit_class BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid class for kit %kit_name% from kitlist.2da~
+  END
+END
+
+DEFINE_PATCH_MACRO fl#add_kit_ee#validate_kitids_value BEGIN
+  PATCH_IF !"%number%" STRING_MATCHES_REGEXP "0x\([0-9]+\)" = 0 BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid kit number for %kit_name% from kit.ids~
+  END
+END
+
+DEFINE_PATCH_MACRO fl#add_kit_ee#validate_clastext_value BEGIN
+  PATCH_IF !IS_AN_INT value BEGIN
+    PATCH_FAIL ~ERROR: fl#add_kit_ee could not read a valid value for column %column% for class %class% from clastext.2da~
+  END
 END
 
 DEFINE_ACTION_FUNCTION fl#add_kit_ee
@@ -189,7 +225,7 @@ DEFINE_ACTION_FUNCTION fl#add_kit_ee
     sneakatt = ""
     crippstr = ""
 BEGIN
-  ACTION_IF ((GAME_IS ~bgee bg2ee~) OR (FILE_EXISTS_IN_GAME ~howparty.2da~)) BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME monkfist.2da BEGIN // "Rule" file as-of-yet unique to EE games
     PRINT "Doing EE-type kit extensions for kit %kit_name%"
 
     OUTER_SET kit_number = "-1"
@@ -206,11 +242,8 @@ BEGIN
           READ_2DA_ENTRY_FORMER kitlist i 8 kit_class
         END
       END
+      LPM fl#add_kit_ee#validate_kitlist_values
     BUT_ONLY
-
-    ACTION_IF kit_number < 0 BEGIN
-      FAIL ~ERROR: the kit %kit_name% was not found in kitlist.2da~
-    END
 
     LAF fl#add_kit_ee#validate
       INT_VAR
@@ -249,6 +282,7 @@ BEGIN
               READ_2DA_ENTRY_FORMER file i 0 number
             END
           END
+          LPM fl#add_kit_ee#validate_kitids_value
         BUT_ONLY
       END
       INNER_PATCH_SAVE kitids "%number%" BEGIN
@@ -277,6 +311,7 @@ BEGIN
               RET
                 value
             END
+            LPM fl#add_kit_ee#validate_clastext_value
             SET EVAL "%column%" = value
           END
         END
@@ -290,18 +325,31 @@ BEGIN
     END
 
     APPEND clastext.2da "%clastext%" UNLESS "%kit_name%"
+    
+    ACTION_IF FILE_EXISTS_IN_GAME ~sodcltxt.2da~ BEGIN
+      APPEND sodcltxt.2da "%clastext%" UNLESS "%kit_name%"
+    END
 
-    ACTION_FOR_EACH item IN
-                    backstab
-                    clsrcreq
-                    clswpbon
-                    hpclass
-                    numwslot
-                    thiefskl
-                    traplimt
-                    sneakatt
-                    crippstr
-    BEGIN
+    ACTION_DEFINE_ARRAY row_files BEGIN
+      backstab
+      clsrcreq
+      clswpbon
+      hpclass
+      numwslot
+      thiefskl
+      traplimt
+      sneakatt
+      crippstr
+    END
+
+    ACTION_DEFINE_ARRAY col_files BEGIN
+      clascolr
+      clasiskl
+      clasthac
+      thiefscl
+    END
+
+    ACTION_PHP_EACH row_files AS _ => item BEGIN
       ACTION_IF FILE_EXISTS_IN_GAME "%item%.2da" BEGIN
         ACTION_IF FILE_CONTAINS_EVALUATED ("%item%.2da" "^[ %TAB%]*%class%[ %TAB%]+") BEGIN
           OUTER_SPRINT clone "%class%"
@@ -318,12 +366,7 @@ BEGIN
       END
     END
 
-    ACTION_FOR_EACH item IN
-                    clascolr
-                    clasiskl
-                    clasthac
-                    thiefscl
-    BEGIN
+    ACTION_PHP_EACH col_files AS _ => item BEGIN
       ACTION_IF FILE_EXISTS_IN_GAME "%item%.2da" BEGIN
         LAF fl#add_kit_ee#add_column
           STR_VAR
@@ -335,23 +378,19 @@ BEGIN
       END
     END
 
-    ACTION_FOR_EACH file IN
-                    backstab
-                    clascolr
-                    clasiskl
-                    clastext
-                    clasthac
-                    clsrcreq
-                    clswpbon
-                    hpclass
-                    numwslot
-                    thiefscl
-                    thiefskl
-                    traplimt
-                    kitlist
-                    sneakatt
-                    crippstr
-    BEGIN
+    ACTION_DEFINE_ARRAY cleanup BEGIN kitlist END
+    OUTER_SET index = 1
+
+    ACTION_PHP_EACH row_files AS _ => file BEGIN
+      OUTER_SPRINT $cleanup("%index%") "%file%"
+      OUTER_SET ++index
+    END
+    ACTION_PHP_EACH col_files AS _ => file BEGIN
+      OUTER_SPRINT $cleanup("%index%") "%file%"
+      OUTER_SET ++index
+    END
+
+    ACTION_PHP_EACH cleanup AS _ => file BEGIN
       ACTION_IF FILE_EXISTS_IN_GAME "%file%.2da" BEGIN
         COPY_EXISTING "%file%.2da" override
           PRETTY_PRINT_2DA

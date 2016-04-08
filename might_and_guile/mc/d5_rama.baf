@@ -1,0 +1,7 @@
+IF
+	True()
+THEN
+	RESPONSE #100
+	ActionOverride(LastSummonerOf(Myself),AddSuperKit(D5RANMAGE))  
+	DestroySelf()
+END

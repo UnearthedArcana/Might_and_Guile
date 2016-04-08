@@ -739,13 +739,15 @@ COPY ~might_and_guile/misc/d5_thac6.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_thac7.spl~ ~override~
 	SAY NAME1 @6
-COPY_EXISTING ~sppr103.spl~ ~override/d5rama11.spl~ // clw
+COPY_EXISTING ~sppr207.spl~ ~override/d5rama01.spl~ // goodberry
+//	WRITE_SHORT 0x1c 1
+//	WRITE_LONG 0x34 1
+	LPM spell_to_innate
+COPY_EXISTING ~sppr105.spl~ ~override/d5rama11.spl~ // entangle
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr105.spl~ ~override/d5rama12.spl~ // entangle
+COPY_EXISTING ~sppr109.spl~ ~override/d5rama12.spl~ // sanctuary
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr109.spl~ ~override/d5rama13.spl~ // sanctuary
-	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr110.spl~ ~override/d5rama14.spl~ // shillelagh
+COPY_EXISTING ~sppr110.spl~ ~override/d5rama13.spl~ // shillelagh
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr202.spl~ ~override/d5rama21.spl~ // barkskin
 	WRITE_SHORT 0x1c 1
@@ -753,15 +755,11 @@ COPY_EXISTING ~sppr212.spl~ ~override/d5rama22.spl~ // slow poison
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr206.spl~ ~override/d5rama23.spl~ // flame blade
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr210.spl~ ~override/d5rama24.spl~ // resist fire/cold
-	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr302.spl~ ~override/d5rama31.spl~ // call lightning
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr315.spl~ ~override/d5rama32.spl~ // cmw
+COPY_EXISTING ~sppr317.spl~ ~override/d5rama32.spl~ // cure disease
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr317.spl~ ~override/d5rama33.spl~ // cure disease
-	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr319.spl~ ~override/d5rama34.spl~ // summon insects
+COPY_EXISTING ~sppr319.spl~ ~override/d5rama33.spl~ // summon insects
 	WRITE_SHORT 0x1c 1
 //__________________________________________________________________________________
 

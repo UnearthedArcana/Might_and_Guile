@@ -403,11 +403,11 @@
           &ndash; None<br />.</p>
       </div>
       <div class="kit_description">
-        <p>RANGER/MAGE:  Yeah.  A multiclass ranger/mage.  (Hint, you have to start out as a thief/mage.  This component is EE-only!)</p>
+        <p>RANGER/MAGE:  Yeah - ranger/mage.  (Hint, you have to start out as a thief/mage.  This component is EE-only!)</p>
         <p>Abilities:<br />
           &ndash; Bonuses to hit points and thac0 compared to thief/mages.<br />
           &ndash; Limited access to thief abilities: may only use Hide in Shadows, Move Silently, Find Traps, and Detect Illusions.<br />
-          &ndash; Has 4 druid spells each of levels 1-3 automatically added to the wizard spellbook.</p>
+          &ndash; May cast Goodberry innately, and has 3 druid spells each of levels 1-3 automatically added to the wizard spellbook.</p>
         <p>Restrictions:<br />
           &ndash; Limited to Good alignments.<br />.</p>
       </div>

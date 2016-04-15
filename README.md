@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.2.3 </strong><br />
+  <p><strong> Version 2.3.1 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -243,6 +243,7 @@
 	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
 	  </ul>
       <p> Fighters may choose a feat at 2nd, 4th, 7th, 10th, 13th, 16th, and 19th levels.  Rangers may choose a feat at 3rd, 6th, 12th, and 18th levels.</p>
+      <p> <b>PLEASE NOTE: for technical reasons too boring to get into, but which cannot be overcome, using the "Choose a Feat" ability outdoors in Athkatla will call the Cowled Wizards down upon you as is you were using arcane magic.  As I said, this cannot be avoided, so go indoors when you choose a new feat.</p>
   </div>
   <h4 class="subheader">Component 410: </h4>
   <div class="section">
@@ -376,12 +377,7 @@
       <ul>
         <li> Elven Bladesinger - for elven fighter/mages.</li>
         <li> Spellfilcher - for mage/thieves.</li>
-        <li> Nightrunner of Mask - for cleric/thieves.</li>
-        <li> Misadventurer of Brandobaris - for halfling cleric/thieves.</li>
-        <li> Hearthguard of Arvoreen - for halfling fighter/clerics.</li>
-        <li> Alaghor of Clangeddin - for dwarven fighter/clerics.</li>
-        <li> Gloryblood of Tempus - for all fighter/clerics.</li>
-        <li> Monitor of Mystra - for cleric/mages.</li>
+        <li> Ranger/mage - from mage/thieves.</li>
         <li> Spellbender - for cleric/mages.</li>
       </ul>
       <div class="kit_description">
@@ -438,18 +434,22 @@
 </div>
 <h2>Credits and Copyright Information</h2>
 <div class="section">
-  <p>Copyright 2015. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
+  <p>Copyright 2015-2016. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
 </div>
 <h2>Version History</h2>
 <div class="section">
-  <p><strong>Version 2.2.3 - April 2016</strong></p>
+  <p><strong>Version 2.3.1 - April 2016</strong></p>
+  <ul>
+    <li>beastmaster fixes, ranger/mage fixes, readme fixes</li>
+  </ul>
+  <p><strong>Version 2.3 - April 2016</strong></p>
   <ul>
     <li>Ranger/mage!!!</li>
   </ul>
   <p><strong>Version 2.1 to 2.2 - ???</strong></p>
   <ul>
     <li>I need to be better about updating this...</li>
-    <li>I think this was basically, EET compatibility and EE 2.0 patch compatibility</li>
+    <li>I think this was basically, EET compatibility and EE 2.0 compatibility</li>
   </ul>
   <p><strong>Version 2.0 - December 2015</strong></p>
   <ul>

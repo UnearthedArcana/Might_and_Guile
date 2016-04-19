@@ -243,7 +243,7 @@
 	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
 	  </ul>
       <p> Fighters may choose a feat at 2nd, 4th, 7th, 10th, 13th, 16th, and 19th levels.  Rangers may choose a feat at 3rd, 6th, 12th, and 18th levels.</p>
-      <p> <b>PLEASE NOTE: for technical reasons too boring to get into, but which cannot be overcome, using the "Choose a Feat" ability outdoors in Athkatla will call the Cowled Wizards down upon you as is you were using arcane magic.  As I said, this cannot be avoided, so go indoors when you choose a new feat.</p>
+      <p> <b>PLEASE NOTE: for technical reasons, this component will be temporarily disabled on BG2EE.  Check back in a few weeks.  :( </p>
   </div>
   <h4 class="subheader">Component 410: </h4>
   <div class="section">
@@ -438,6 +438,10 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.3.2 - April 2016</strong></p>
+  <ul>
+    <li>warrior feats fixes</li>
+  </ul>
   <p><strong>Version 2.3.1 - April 2016</strong></p>
   <ul>
     <li>beastmaster fixes, ranger/mage fixes, readme fixes</li>

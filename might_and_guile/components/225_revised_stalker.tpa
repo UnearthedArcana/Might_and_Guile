@@ -85,8 +85,8 @@ END
 COPY_EXISTING ~kitlist.2da~ ~override~
 	COUNT_2DA_ROWS ~9~ "rows"
 	FOR ( index = 22 ; index < rows ; index = index + 1 ) BEGIN
-		READ_2DA_ENTRY %index% 5 10 modclab
-		READ_2DA_ENTRY %index% 8 10 modclass
+		READ_2DA_ENTRY %index% 5 9 modclab
+		READ_2DA_ENTRY %index% 8 9 modclass
 		DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
 	END
 BUT_ONLY

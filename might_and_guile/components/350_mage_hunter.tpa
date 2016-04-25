@@ -198,6 +198,10 @@ END
 COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 	WRITE_SHORT 0x1c 2
 	WRITE_LONG 0x34 3
+/*
+COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
+	LPM spell_to_innate
+*/
 COPY ~might_and_guile/misc/d5_savbo.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_mghs1.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_mghsa.eff~ ~override~

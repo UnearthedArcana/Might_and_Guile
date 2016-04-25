@@ -6,38 +6,19 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-ACTION_IF GAME_IS ~bgee iwdee~ BEGIN
 
 //FEAT ABILITY FILES________________________________________________________________
 //
+COPY ~might_and_guile/fighter/d5_fifx.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/fighter/d5_fifz.spl~ ~override~
+	SAY NAME1 @7
 COPY ~might_and_guile/fighter/d5_fif1.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @3910
 COPY ~might_and_guile/fighter/d5_fifa.spl~ ~override~
 	SAY NAME1 @7
 COPY ~might_and_guile/fighter/d5_fif1.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1a.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1b.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1c.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1d.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1e.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1f.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1g.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1h.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1i.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1j.eff~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_fif1k.eff~ ~override~
 	SAY NAME1 @7
 COPY ~might_and_guile/fighter/d5_fif2.spl~ ~override~
 	SAY NAME1 @3909
@@ -166,16 +147,65 @@ COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 
 //APPLY FEATS IN CLABS______________________________________________________________
 //
-COPY_EXISTING ~clabfi01.2da~ ~override~
+ACTION_FOR_EACH clab IN ~clabfi01~ ~clabfi02~ ~clabfi03~ ~clabfi04~ ~clabfi05~ ~clabfi06~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%clab%.2da~ BEGIN
+	COPY_EXISTING ~%clab%.2da~ ~override~
+	  LPM remove_blank_lines
+	  APPEND_FILE ~might_and_guile/fighter/fighter_feats.txt~
+	BUT_ONLY
+  END
+END
+ACTION_FOR_EACH clab IN ~clabrn01~ ~clabrn02~ ~clabrn03~ ~clabrn04~ ~clabrn05~ ~clabpa01~ ~clabpa02~ ~clabpa03~ ~clabpa04~ ~clabpa05~ ~clabpa06~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%clab%.2da~ BEGIN
+	COPY_EXISTING ~%clab%.2da~ ~override~
+	  LPM remove_blank_lines
+	  APPEND_FILE ~might_and_guile/fighter/ranger_feats.txt~
+	BUT_ONLY
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma01.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma01.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma02.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma02.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma03.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma03.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma04.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma04.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma05.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma05.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma06.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma06.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma07.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma07.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma08.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma08.2da~ ~override~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma09.2da~ THEN BEGIN
+	COPY ~might_and_guile/misc/clabma09.2da~ ~override~
+END
+COPY_EXISTING ~clabma01.2da~ ~override~
+			~clabma02.2da~ ~override~
+			~clabma03.2da~ ~override~
+			~clabma04.2da~ ~override~
+			~clabma05.2da~ ~override~
+			~clabma06.2da~ ~override~
+			~clabma07.2da~ ~override~
+			~clabma08.2da~ ~override~
+			~clabma09.2da~ ~override~
 	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/fighter/fighter_feats.txt~
-COPY_EXISTING ~clabrn01.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/fighter/ranger_feats.txt~
+	APPEND_FILE ~might_and_guile/fighter/no_feats.txt~
+BUT_ONLY
 
 COPY_EXISTING ~kitlist.2da~ ~override~
 	COUNT_2DA_ROWS ~9~ "rows"
-	FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+	FOR ( index = 31 ; index < rows ; index = index + 1 ) BEGIN
 		READ_2DA_ENTRY %index% 5 9 modclab
 		READ_2DA_ENTRY %index% 8 9 modclass
 		DEFINE_ASSOCIATIVE_ARRAY d5_feat_array BEGIN "%modclab%" => "%modclass%" END
@@ -192,15 +222,17 @@ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/fighter/ranger_feats.txt~
 	END
+	ACTION_IF (%zo% = 6) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/fighter/ranger_feats.txt~
+	END
+	ACTION_IF (%zo% = 1) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/fighter/no_feats.txt~
+	END
 END
 //__________________________________________________________________________________
 
 CLEAR_ARRAYS
-
-END
-
-ACTION_IF ENGINE_IS ~bg2ee tob~ BEGIN
-
-  PRINT ~Sorry, this component is buggy in your game. :(~
-
-END

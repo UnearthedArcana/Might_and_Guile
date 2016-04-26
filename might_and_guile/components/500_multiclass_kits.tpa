@@ -27,7 +27,7 @@ END
 
 //ENABLE MORE MULTICLASSES___________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	COPY_EXISTING ~CLSRCREQ.2da~ ~override~
 		SET_2DA_ENTRY 34 1 8 ~1~
 		SET_2DA_ENTRY 35 1 8 ~1~
@@ -80,6 +80,8 @@ END
 
 //ADD BLADESINGER____________________________________________________________________
 //
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 
 ADD_KIT ~D5BLADS~
@@ -220,7 +222,7 @@ END
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5020)
@@ -353,7 +355,7 @@ BEGIN
 END
 //___________________________________________________________________________________
 
-
+END
 
 //ADD SPELLFILCHER____________________________________________________________________
 //
@@ -426,7 +428,7 @@ SAY @5031
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5031)
@@ -509,7 +511,7 @@ SAY @5031
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5031)
@@ -564,7 +566,7 @@ END
 
 //ADD RANGER/MAGE_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 
@@ -706,7 +708,7 @@ END
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5054)
@@ -900,7 +902,7 @@ SAY @5102
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5112)
@@ -982,7 +984,7 @@ SAY @5112
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@5112)

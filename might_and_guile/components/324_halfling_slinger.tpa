@@ -20,7 +20,7 @@ END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ THEN BEGIN
 
-	ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 		COPY_EXISTING ~clsrcreq.2da~ ~override~
 			SET_2DA_ENTRY 42 5 8 ~1~
 		BUT_ONLY
@@ -177,8 +177,7 @@ SAY @3244
 END
 
 //EE KIT EXTRAS_____________________________________________________________________
-//
-ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@3246)

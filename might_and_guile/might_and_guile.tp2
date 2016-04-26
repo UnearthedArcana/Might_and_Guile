@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~2.4~
+VERSION ~v2~
 README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -16,9 +16,9 @@ ALWAYS
 
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
 
-//	ACTION_IF GAME_IS ~bgee~ BEGIN
-//		COPY ~might_and_guile/compatibility/25stweap.2da~ ~override~
-//	END
+	ACTION_IF GAME_IS ~bgee~ BEGIN
+		COPY ~might_and_guile/compatibility/25stweap.2da~ ~override~
+	END
 
 END
 
@@ -185,7 +185,7 @@ INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 
 BEGIN @275
 DESIGNATED 275
-REQUIRE_PREDICATE (ENGINE_IS ~bgee sod bg2ee iwdee eet~) @4
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~

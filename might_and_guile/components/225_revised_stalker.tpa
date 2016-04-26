@@ -161,7 +161,7 @@ ACTION_PHP_EACH d5_ranstab_clabs AS roo => goo BEGIN
 			BUT_ONLY
 	END
 END
-ACTION_IF (GAME_IS ~bgee bg2ee iwdee~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
+ACTION_IF (GAME_IS ~bgee sod bg2ee eet iwdee~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
 	COPY_EXISTING ~d5_stlk2.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
 END

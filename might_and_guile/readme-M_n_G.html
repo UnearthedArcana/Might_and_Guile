@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.3.1 </strong><br />
+  <p><strong> Version 2.4 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -438,6 +438,11 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.4 - April 2016</strong></p>
+  <ul>
+    <li>SoD compatibility</li>
+    <li>improved Bladesinger</li>
+  </ul>
   <p><strong>Version 2.3.2 - April 2016</strong></p>
   <ul>
     <li>warrior feats fixes</li>

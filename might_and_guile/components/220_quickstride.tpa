@@ -96,7 +96,7 @@ COPY_EXISTING ~clabrn05.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/misc/strirang.txt~
 	BUT_ONLY
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee sod~ THEN BEGIN
 	COPY_EXISTING ~kitlist.2da~ ~override~
 		COUNT_2DA_ROWS ~10~ "rows"
 		PATCH_IF ( rows > 37 ) BEGIN

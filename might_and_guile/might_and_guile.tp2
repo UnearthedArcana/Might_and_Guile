@@ -270,13 +270,13 @@ INCLUDE ~might_and_guile/components/390_warrior_feats.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						   ROGUE FEATS
+//						   ROGUE FEATS & HLAs
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @400
 DESIGNATED 400
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @1
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ @1
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/400_rogue_feats.tpa~

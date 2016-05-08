@@ -1,24 +1,18 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~v2~
-README ~might_and_guile/readme-M_n_G.html~
+VERSION ~2.5~
+//README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
 
-	INCLUDE ~might_and_guile/lib/alter_effect.tpa~
-
-	INCLUDE ~might_and_guile/lib/delete_effect.tpa~
+	INCLUDE ~might_and_guile/lib/hla_actions.tpa~
 
 	INCLUDE ~might_and_guile/lib/remove_lines.tpa~
 
 	INCLUDE ~might_and_guile/lib/spell_to_innate.tpa~
 
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
-
-	ACTION_IF GAME_IS ~bgee~ BEGIN
-		COPY ~might_and_guile/compatibility/25stweap.2da~ ~override~
-	END
 
 END
 
@@ -265,9 +259,27 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 
 BEGIN @390
 DESIGNATED 390
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @1
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/390_warrior_feats.tpa~
+//__________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						   ROGUE FEATS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @400
+DESIGNATED 400
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @1
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/400_rogue_feats.tpa~
 //__________________________________________________________________________________
 
 
@@ -292,6 +304,7 @@ INCLUDE ~might_and_guile/components/410_sniper.tpa~
 //__________________________SCOUT__________________________________________________
 BEGIN @420
 DESIGNATED 420
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~400~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/420_scout.tpa~

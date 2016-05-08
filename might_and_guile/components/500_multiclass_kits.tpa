@@ -80,8 +80,6 @@ END
 
 //ADD BLADESINGER____________________________________________________________________
 //
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
-
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 
 ADD_KIT ~D5BLADS~
@@ -355,7 +353,7 @@ BEGIN
 END
 //___________________________________________________________________________________
 
-END
+
 
 //ADD SPELLFILCHER____________________________________________________________________
 //

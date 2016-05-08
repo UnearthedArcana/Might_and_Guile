@@ -79,7 +79,7 @@ SAY @4904
 
 //EE KIT EXTRAS_____________________________________________________________________
 // 
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@4905)
@@ -162,7 +162,7 @@ SAY @4904
 
 //EE KIT EXTRAS_____________________________________________________________________
 // 
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@4905)

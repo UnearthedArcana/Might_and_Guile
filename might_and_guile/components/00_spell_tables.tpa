@@ -95,7 +95,7 @@ ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 		END
 	END
 END
-ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
 	COPY_EXISTING ~kitlist.2da~ ~override~
 		COUNT_2DA_ROWS ~10~ "rows"
 		PATCH_IF ( rows > 40 ) BEGIN

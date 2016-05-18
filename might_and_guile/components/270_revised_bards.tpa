@@ -204,40 +204,118 @@ END
 //UPDATE BLADE STRINGS_______________________________________________________________
 // 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-	COPY_EXISTING ~clastext.2da~ ~override~
-		SET_2DA_ENTRY 51 4 1 RESOLVE_STR_REF (@2703)
-		SET_2DA_ENTRY 53 4 1 RESOLVE_STR_REF (@2713)
-	BUT_ONLY
-  END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-	COPY_EXISTING ~sodcltxt.2da~ ~override~
-		SET_2DA_ENTRY 51 4 1 RESOLVE_STR_REF (@2703)
-		SET_2DA_ENTRY 53 4 1 RESOLVE_STR_REF (@2713)
-	BUT_ONLY
-  END
-  ACTION_IF ENGINE_IS ~tob~ BEGIN
-	STRING_SET 25217 @2703
-	STRING_SET 25220 @2713
-  END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2703)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2713)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2703)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2713)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2703)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2713)
+	  END
+	END
+  BUT_ONLY
+ END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 25217 @2703
+//	STRING_SET 25220 @2713
+//END
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-	COPY_EXISTING ~clastext.2da~ ~override~
-		SET_2DA_ENTRY 51 4 1 RESOLVE_STR_REF (@2704)
-		SET_2DA_ENTRY 53 4 1 RESOLVE_STR_REF (@2714)
-	BUT_ONLY
-  END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-	COPY_EXISTING ~sodcltxt.2da~ ~override~
-		SET_2DA_ENTRY 51 4 1 RESOLVE_STR_REF (@2704)
-		SET_2DA_ENTRY 53 4 1 RESOLVE_STR_REF (@2714)
-	BUT_ONLY
-  END
-  ACTION_IF ENGINE_IS ~tob~ BEGIN
-	STRING_SET 25217 @2704
-	STRING_SET 25220 @2714
-  END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2704)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2714)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2704)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2714)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2704)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2714)
+	  END
+	END
+  BUT_ONLY
+ END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 25217 @2704
+//	STRING_SET 25220 @2714
+//END
 END
 //___________________________________________________________________________________
 

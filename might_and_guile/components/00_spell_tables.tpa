@@ -69,7 +69,7 @@ COPY ~might_and_guile/bard/d5_basp8.spl~ ~override~
 
 //MOD KIT COMPATIBILITY SCRIPT______________________________________________________
 //
-ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee sod~ THEN BEGIN
 	COPY_EXISTING ~kitlist.2da~ ~override~
 		COUNT_2DA_ROWS ~10~ "rows"
 		PATCH_IF ( rows > 37 ) BEGIN

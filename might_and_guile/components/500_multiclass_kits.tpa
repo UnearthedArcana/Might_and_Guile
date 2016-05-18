@@ -12,7 +12,7 @@
 COPY ~might_and_guile/mc/d5_multi.d5~ ~override~
 //__________________________________________________________________________________
 
-//KIT DESCRIPTION PATCHING__________________________________________________________
+//FnP KIT DESCRIPTION PATCHING__________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
 	OUTER_SPRINT focus_access @33

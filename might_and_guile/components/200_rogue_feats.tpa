@@ -7,6 +7,11 @@
 //__________________________________________________________________________________
 
 
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/thief/d5_rfeat.d5~ ~override~
+//__________________________________________________________________________________
+
 
 //REVISED SHADOWDANCER______________________________________________________________
 //
@@ -31,8 +36,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@4004)
 	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@4005)
 	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@4006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@4005)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@4006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@4007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@4008)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
@@ -50,8 +55,35 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@4004)
 	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@4005)
 	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@4006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@4005)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@4006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@4007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@4008)
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~ASSASIN~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4003)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4004)
+		SET_2DA_ENTRY (%patch_row%) 2 cols RESOLVE_STR_REF (@4005)
+		SET_2DA_ENTRY (%patch_row%) 3 cols RESOLVE_STR_REF (@4006)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SWASHBUCKLER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4007)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SHADOWDANCER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4008)
+	  END
+	END
   BUT_ONLY
 END
 //__________________________________________________________________________________

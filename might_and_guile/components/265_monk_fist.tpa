@@ -93,38 +93,75 @@ ACTION_PHP_EACH d5_monk_clabs AS woo => soo BEGIN
 			BUT_ONLY
 	END
 END
+//__________________________________________________________________________________
 
+
+//UPDATE EXISTING STRINGS__________________________________________________________
+// 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-	COPY_EXISTING ~clastext.2da~ ~override~
-		SET_2DA_ENTRY 56 4 1 RESOLVE_STR_REF (@2651)
-	BUT_ONLY
-  END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-	COPY_EXISTING ~sodcltxt.2da~ ~override~
-		SET_2DA_ENTRY 56 4 1 RESOLVE_STR_REF (@2651)
-	BUT_ONLY
-  END
-  ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
-	STRING_SET 45867 @2651
-  END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~MONK~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2651)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~MONK~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2651)
+	  END
+	END
+  BUT_ONLY
+ END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 45867 @2651
+//END
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-	COPY_EXISTING ~clastext.2da~ ~override~
-		SET_2DA_ENTRY 56 4 1 RESOLVE_STR_REF (@2652)
-	BUT_ONLY
-  END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-	COPY_EXISTING ~sodcltxt.2da~ ~override~
-		SET_2DA_ENTRY 56 4 1 RESOLVE_STR_REF (@2652)
-	BUT_ONLY
-  END
-  ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
-	STRING_SET 45867 @2652
-  END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~MONK~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2652)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~MONK~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2652)
+	  END
+	END
+  BUT_ONLY
+ END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 45867 @2652
+//END
 END
 //__________________________________________________________________________________
+
 
 //FAERUNIAN MONASTIC ORDERS COMPATIBILITY________________________________________
 // 

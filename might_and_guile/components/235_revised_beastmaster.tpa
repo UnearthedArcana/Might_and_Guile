@@ -50,22 +50,55 @@ BUT_ONLY
 //___________________________________________________________________________________
 
 
-//BEASTMASTER SHAPECHANGING + SPIRIT WOLF____________________________________________
-//
-//SPRINT beastmaster_shapechange @2560 
+//UPDATE EXISTING STRINGS__________________________________________________________
+// 
 ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-	COPY_EXISTING ~clastext.2da~ ~override~
-		SET_2DA_ENTRY 11 4 1 RESOLVE_STR_REF (@2560)
-	BUT_ONLY
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+	  END
+	END
+  BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-	COPY_EXISTING ~sodcltxt.2da~ ~override~
-		SET_2DA_ENTRY 11 4 1 RESOLVE_STR_REF (@2560)
-	BUT_ONLY
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+	  END
+	END
+  BUT_ONLY
 END
-ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
-	STRING_SET 25212 @2560
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+	  END
+	END
+  BUT_ONLY
 END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 25212 @2560
+//END
+//__________________________________________________________________________________
+
+
+//BEASTMASTER SHAPECHANGING + SPIRIT WOLF____________________________________________
+//
 COPY ~might_and_guile/ranger/d5_rnnf.spl~ ~override~
 	SAY NAME1 @2561
 	SAY UNIDENTIFIED_DESC @2561

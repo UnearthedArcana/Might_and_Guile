@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.4 </strong><br />
+  <p><strong> Version 2.5 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -38,6 +38,7 @@
   	<li>Some of the components of <u>Rogue Rebalancing</u> modify the same resources as M&G; be aware that you might see some different behavior depending on which one is installed last.</li><br />
   </ul></p>
   <p>If you install lots of kit mods, keep in mind that without TobEx, the kit selection screen can only show 10 kits per class - the main class plus nine kits. If you install a lot of kits, some of the Might and Guile kits may not be visible. The vanilla game has 4 kits in each class, so you can install six kits without worries. Plan ahead, or else use the 'Mod Kit Remover' mod to clear space in the Character Generation screens before installing M&G.</p>
+  <p>See the component descriptions below for more specific information about compatibility.</p>
   <p><strong>Load Order:</strong><br />
     Might and Guile should be installed <strong>after</strong> all other mods that add or change items or kits. It should be installed <strong>after</strong> the "WSPATCK for All" component of <u>tb#Tweaks</u>. It should be installed <strong>before</strong> <u>Refinements</u> and <u>Sword Coast Stratagems</u>.</p>
   <p>My load order looks something like this:
@@ -56,7 +57,53 @@
   </ul>
 </div>
 <h2>Contents</h2>
-<div class="section">
+  <h4 class="subheader">Component 400 (BETA - and only for EE 2.0+): </h4>
+  <div class="section">
+    <p><strong><em>Rogue Feats and HLAs</em></strong></p>
+      <p> To reflect their cleverness and resourcefulness, thieves will be given the chance to learn feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
+      <p><b>Also note:</b> when you use the "choose a feat" innate ability, do not take any other action (moving, fighting, spellcasting) until you have chosen a feat. If the list of feats disappears from the screen, you cannot get them back and will have to wait until you gain two more levels to choose another one.</p>
+      <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
+      <p>The Rogue Feats include:
+	  <ul>
+	    <li> <b>Stealth Bonus:</b> this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
+	    <li> <b>Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
+	    <li> <b>Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
+	    <li> <b>Spike Trap:</b> this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.</li>
+	    <li> <b>Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter. (Requires Spike Trap)</li>
+	    <li> <b>Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Hunter only - requires Spike Trap)</li>
+	    <li> <b>Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Spike Trap)</li>
+	    <li> <b>Brew Potions:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Strength; Potion of Perception; Potion of Fire Resistance; or Potion of Cold Resistance.</li>
+	    <li> <b>Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
+	    <li> <b>Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
+	    <li> <b>Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
+	    <li> <b>Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> <b>Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
+	    <li> <b>Contingency (Escape):</b> the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
+	    <li> <b>To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires To-Hit Bonus)</li></li>
+	    <li> <b>Melee Trick (Trip):</b> upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
+	    <li> Melee Trick (Disarm):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
+	    <li> <b>Melee Trick (Blind):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff. (Requires To-Hit Bonus)</li>
+	    <li> <b>Melee Trick (Disrupt):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires To-Hit Bonus)</li>
+	    <li> <b>Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
+	    <li> <b>Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
+	    <li> <b>Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
+	    <li> <b>Shadow Pool:</b> this allows the Shadowdancer to use one of the following five abilities: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep. (Shadowdancer only)</li>
+	    <li> <b>Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass or Swashbuckler only)</li>
+	  </ul>
+      <p> A note about backstabbing: the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
+      <p> Additionally, this component will alter the rogue HLA tables. Since the Spike Trap and Fire Trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
+	  <ul>
+	    <li> Time Trap becomes Maze Trap.</li>
+	    <li> The Swashbuckler feat 'Contingency: Escape' wil be available to all thieves as an HLA.</li>
+	    <li> The Shadowdancer feat 'Shadow Pool' will be available to all thieves as an HLA.</li>
+	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Contingency: Escape, and Power Attack.</li>
+	    <li> Blades can choose Extra Level 6 Spell, Contingency: Escape, and Whirlwind.</li>
+	    <li> Jesters can choose Extra Level 6 Spell, Contingency: Escape, and Shadow Pool.</li>
+	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
+	  </ul>
+      <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) Please note that this component will only grant feats to the base five thief kits: thief, assassin, hunter, swashbuckler, and shadowdancer. Thief kits from other mods may be used alongside this component, but they will only get their normal kit abilities.</p>
+  </div>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">
     <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
@@ -68,31 +115,42 @@
     <p><strong><em>Revised Stalkers</em></strong></p>
       <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below), and can cast fewer spells per day than normal rangers. However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
       <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
+      <p><b>Compatibility:</b> warning, the changes to spell tables wrought by this component will not interact well with other mods that change rangers' spell tables (like Tweaks Anthology's "IWD Spell Tables for Rangers"). The exception to this is Faiths & Powers: the F&P ranger spell tables will be recognized by M&G. If you want rangers to have more and earlier spellcasting, we suggest installing F&P.</p>
   </div>
   <h4 class="subheader">Component 230: </h4>
   <div class="section">
     <p><strong><em>Revised Archers</em></strong></p>
-    <p> Archers are switched to the Marksman schedule of bonuses and Called Shots (Trip, Disarm, Hammer Shot, and Disarm)</p> 
+    <p> Archers are switched to the Marksman schedule of bonuses and Called Shots.</p> 
     <div class="kit_description">
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
+        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only become proficient (+) with melee weapons.<br />
         &ndash; May only wear leather or similar armors.<br />.</p>
     </div>
+    <p><b>Compatibility:</b> this component will conflict with other mods that alter the Archer kit, like the "Improved Archer" mod.</p>
   </div>
   <h4 class="subheader">Component 235: </h4>
   <div class="section">
     <p><strong><em>Revised Beastmasters</em></strong></p>
       <p> Beastmasters gain the ability to wield daggers, axes, and spears in addition to the normal group of weapons available to them.</p>
-      <p> Beastmasters may shapechange into wolf and werewolf forms, and may summon a Spirit Wolf to aid them in combat once per day.</p>
+      <p> Beastmasters may also shapechange into wolf and werewolf forms, and may summon a Spirit Wolf to aid them in combat once per day.</p>
   </div>
   <h4 class="subheader">Component 250: </h4>
   <div class="section">
     <p><strong><em>Revised Berserker and Rage</em></strong></p>
-      <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage and Barbarian Rage are merged, because 1) I don't know why there are two different kinds of Rage, and 2) vanilla Berserk Rage is more like a Mind Shield spell than an actual Rage. Rage now lasts for 30 seconds, provides a bonus 1 APR, increases STR and CON by 4, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment), and penalizes AC by 2.</p>
+      <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage and Barbarian Rage are merged, because 1) I don't know why there are two different kinds of Rage, and 2) vanilla Berserk Rage is more like a Mind Shield spell than an actual Rage. Rage now lasts for 30 seconds, provides a bonus 0.5 APR, increases STR and CON by 3, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment), and penalizes AC by 2.</p>
   </div>
   <h4 class="subheader">Component 260: </h4>
   <div class="section">
@@ -123,6 +181,7 @@
       <p>Disadvantages:<br />
         &ndash; May cast one fewer spell per level compared to most bards.<br />.</p>
     </div>
+    <p><b>Compatibility:</b> this component will conflict with some of the changes in the 4th component of Rogue Rebalancing, "Bard Kit Revisions." If you install both, some of the RR stuff may be overridden by this mod. I think it should be okay to do so, however, which would give you M&G Blades and Skalds, and RR Jesters.</p>
   </div>
   <h4 class="subheader">Component 275: </h4>
   <div class="section">
@@ -153,11 +212,20 @@
   <div class="section">
     <p><strong><em>Add the MARKSMAN fighter kit</em></strong></p>
     <div class="kit_description">
-      <p>MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.</p>
+      <p>MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the Marksman has had to sacrifice some proficiency with melee weapons and armor.</p>
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Pin' at 9th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
+        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman may chose from among the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only specialize (++) with melee weapons.<br />
         &ndash; May not wear heavier armor than splint mail.<br />.</p>
@@ -171,7 +239,17 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows.<br />
-        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Entangle' at 3rd level;  'Sleep' at 4th level; 'Hammer Shot' at 6th level'; 'Blinding Shot' at 8th level' and 'Faerie Fire' at 10th level. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
+        &ndash; May learn to use a Called Shot at levels 1, 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman may chose from among the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.<br />
+        &ndash; Entangling Shot: this shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.<br />
+        &ndash; Sleep Shot: this shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.<br />
+        &ndash; Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />.</p>
@@ -185,7 +263,16 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with slings.<br />
-        &ndash; Learns the following Called Shots: 'Trip' at 2nd level; 'Disarm' at 4th level; 'Hammer Shot' at 6th level' and 'Stunning Blow' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
+        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger may chose from among the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />
@@ -229,7 +316,7 @@
   <h4 class="subheader">Component 390 (BETA): </h4>
   <div class="section">
     <p><strong><em>Warrior Feats</em></strong></p>
-      <p> To reflect their stuf of martial disciplines and techniques, single-class fighters and rangers will be able to choose from among 10 melee feats.  They include:
+      <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
 	  <ul>
 	    <li> Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points and APR will be 1.</li>
 	    <li> Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
@@ -240,20 +327,29 @@
 	    <li> Knockback: for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
 	    <li> Cutting Blow: for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
 	    <li> Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
-	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
+	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
 	  </ul>
       <p> Fighters may choose a feat at 2nd, 4th, 7th, 10th, 13th, 16th, and 19th levels.  Rangers may choose a feat at 3rd, 6th, 12th, and 18th levels.</p>
-      <p> <b>PLEASE NOTE: for technical reasons, this component will be temporarily disabled on BG2EE.  Check back in a few weeks.  :( </p>
+      <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
   </div>
   <h4 class="subheader">Component 410: </h4>
   <div class="section">
     <p><strong><em>Add the SNIPER thief kit</em></strong></p>
     <div class="kit_description">
-      <p>SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marskman who can get the job done.</p>
+      <p>SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the Sniper is a highly trained stealthy marskman who can get the job done.</p>
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Mastery (3 Points) with bows and crossbows<br />
-        &ndash; Learns the following Called Shots: 'Disarm' at 2nd level; 'Pin' at 4th level; 'Hammer Shot' at 6th level' and 'Blinding Shot' at 9th level. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while doing so, but must remain stationary during that time to set up the shot.</p>
+        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Sniper has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Sniper may chose from among the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only distribute 20 skill points per level among thieving skills.<br />
         &ndash; Reduced backstab multiplier.<br />.</p>
@@ -438,6 +534,11 @@
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.5 - May 2016</strong></p>
+  <ul>
+    <li>changed Called Shots over to a feat system</li>
+    <li>added Rogue Feats & HLAs!!</li>
+  </ul>
   <p><strong>Version 2.4 - April 2016</strong></p>
   <ul>
     <li>SoD compatibility</li>
@@ -445,7 +546,7 @@
   </ul>
   <p><strong>Version 2.3.2 - April 2016</strong></p>
   <ul>
-    <li>warrior feats fixes</li>
+    <li>warrior feats!!</li>
   </ul>
   <p><strong>Version 2.3.1 - April 2016</strong></p>
   <ul>

@@ -244,6 +244,22 @@ COPY ~might_and_guile/fighter/d5_csj.spl~ ~override~
 //___________________________________________________________________________________
 
 
+//REMOVE VANILLA CALLED SHOTS FROM NPCs______________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_LONG 0x1cc biography
+		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
+			READ_BYTE 0x273 npc_class
+			PATCH_IF (%npc_class% = 12) BEGIN // ranger
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~SPCL121~ END
+			END
+		END
+	END
+BUT_ONLY
+//___________________________________________________________________________________
+
+
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
 ACTION_FOR_EACH elven_chain IN

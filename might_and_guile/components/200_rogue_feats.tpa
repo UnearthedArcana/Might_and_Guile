@@ -334,6 +334,7 @@ COPY ~might_and_guile/thief/d5_rf83n.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rfh4.spl~ ~override~
 	SAY NAME1 @4089
 	SAY UNIDENTIFIED_DESC @4090
+COPY ~might_and_guile/thief/d5_rfh4.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfh4x.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf84n.spl~ ~override~
 
@@ -510,6 +511,12 @@ COPY ~might_and_guile/thief/d5_rfxw.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfxd.spl~ ~override~
 	SAY NAME1 @7
 COPY ~might_and_guile/thief/d5_rfxd.eff~ ~override~
+COPY ~might_and_guile/thief/d5_rfxc.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/thief/d5_rfxc.eff~ ~override~
+COPY ~might_and_guile/thief/d5_rfxr.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/thief/d5_rfxr.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfz.spl~ ~override~
 	SAY NAME1 @7
 
@@ -526,17 +533,17 @@ COPY ~might_and_guile/misc/d5_savbo.spl~ ~override~
 //EDIT SKILL POINTS_________________________________________________________________
 //
 COPY_EXISTING ~thiefskl.2da~ ~override~
-  SET_2DA_ENTRY_LATER ~#backstab~ 3 1 30 // trueclass start
-  SET_2DA_ENTRY_LATER ~#backstab~ 3 2 20 // per level
-  SET_2DA_ENTRY_LATER ~#backstab~ 4 1 30 // shadowdancer start
-  SET_2DA_ENTRY_LATER ~#backstab~ 4 2 20 // per level
-  SET_2DA_ENTRY_LATER ~#backstab~ 5 1 30 // assassin start
-  SET_2DA_ENTRY_LATER ~#backstab~ 5 2 20 // per level
-  SET_2DA_ENTRY_LATER ~#backstab~ 6 1 30 // hunter start
-  SET_2DA_ENTRY_LATER ~#backstab~ 6 2 20 // per level
-  SET_2DA_ENTRY_LATER ~#backstab~ 7 1 30 // swashbuckler start
-  SET_2DA_ENTRY_LATER ~#backstab~ 7 2 20 // per level
-  SET_2DA_ENTRIES_NOW ~#backstab~ 1
+  SET_2DA_ENTRY_LATER ~#skills~ 3 1 30 // trueclass start
+  SET_2DA_ENTRY_LATER ~#skills~ 3 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 4 1 30 // shadowdancer start
+  SET_2DA_ENTRY_LATER ~#skills~ 4 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 5 1 30 // assassin start
+  SET_2DA_ENTRY_LATER ~#skills~ 5 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 6 1 30 // hunter start
+  SET_2DA_ENTRY_LATER ~#skills~ 6 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 7 1 30 // swashbuckler start
+  SET_2DA_ENTRY_LATER ~#skills~ 7 2 20 // per level
+  SET_2DA_ENTRIES_NOW ~#skills~ 1
   PRETTY_PRINT_2DA
 BUT_ONLY
 //__________________________________________________________________________________

@@ -143,6 +143,7 @@ Abilities:
 
 Restrictions:
 - May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
 ~
 @2552  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
@@ -157,6 +158,34 @@ Abilities:
 
 Restrictions:
 - May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
+~
+@2553  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
+
+Abilities:
+- +20% to Move Silently and Hide In Shadows.
+- May achieve Grand Mastery (+++++) with short swords and daggers.
+- May set traps, with a success rate that begins at 30% and increases by 3% per level.
+- At every third level from 3 to 18, may choose to learn a Rogue Feat from those available to Hunters:
+
+ROGUE FEATS:
+- Stealth Bonus
+- Set Spike Trap
+- Set Dart Trap (prerequisite: Spike Trap)
+- Brew Potions
+- Flaming Weapon (prerequisite: Brew Potions)
+- Paralytic Poison (prerequisite: Brew Potions)
+- Backstab Bonus (prerequisite: THAC0 Bonus)
+- Trip Opponent (prerequisite: THAC0 Bonus)
+- Disarm Opponent (prerequisite: THAC0 Bonus)
+- Blind Opponent (prerequisite: THAC0 Bonus)
+- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Grease Jar
+- Smoke Bomb
+
+Restrictions:
+- May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
 ~
 @2560  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
 
@@ -710,6 +739,34 @@ Restrictions:
 - May only specialize (++) with ranged weapons and medium-weight blunt weapons.
 - May not wear heavier armor than studded leather.
 ~
+@3111  = ~CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.
+
+Abilities:
+- Can achieve Grand Mastery (+++++) with light bladed weapons.
+- Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+- +1 bonus to saves vs. Breath for each 5 levels of experience.
+- At every odd level from 3 to 19, may choose to learn a Rogue Feat from those available to Swashbucklers:
+
+ROGUE FEATS:
+- Brew Potions
+- Flaming Weapon (prerequisite: Brew Potions)
+- Armor Class Bonus
+- Saving Throw Bonus (prerequisite: AC Bonus)
+- Contingency: Escape (prerequisite: AC Bonus)
+- THAC0 Bonus
+- Trip Opponent (prerequisite: THAC0 Bonus)
+- Disarm Opponent (prerequisite: THAC0 Bonus)
+- Blind Opponent (prerequisite: THAC0 Bonus)
+- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Grease Jar
+- Smoke Bomb
+- Miscellaneous: Luck Bonus
+
+Restrictions:
+- Cannot become proficient with heavy weapons.
+- May only specialize (++) with ranged weapons and medium-weight blunt weapons.
+- May not wear heavier armor than studded leather.
+~
 @3200  = ~ARCHER: The Archer is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
  
 Abilities:
@@ -1013,25 +1070,25 @@ CLASS FEATURES:
 - May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
 
 ROGUE FEATS: 
-- Skills mastery: Stealth Bonus (Hide in Shadows and Move Silently)
-- Skills mastery: Thieving Bonus (Pick Pockets and Open Locks)
-- Skills mastery: Detection Bonus (Find Traps and Detect Illusion)
-- Mechanical skills: Set Spike Trap
-- Mechanical skills: Set Dart Trap (prerequisite: Spike Trap)
-- Alchemical skills: Brew Potions
-- Alchemical skills: Flaming Weapon (prerequisite: Brew Potions)
-- Evasive skills: Armor Class Bonus
-- Evasive skills: Saving Throws Bonus (prerequisite: Armor Class Bonus)
-- Melee skills: THAC0 Bonus
-- Melee skills: Backstab Multiplier Bonus (prerequisite: THAC0 Bonus)
-- Melee skills: Trip Opponent (prerequisite: THAC0 Bonus)
-- Melee skills: Disarm Opponent (prerequisite: THAC0 Bonus)
-- Melee skills: Blind Opponent (prerequisite: THAC0 Bonus)
-- Melee skills: Disrupt Magic (prerequisite: THAC0 Bonus)
-- Pseudo-magic: Grease Jar
-- Pseudo-magic: Smoke Bomb
-- Pseudo-magic: Use Wands (prerequisite: 15 Intelligence or higher)
-- Pseudo-magic: Use Scrolls (prerequisite: 17 Intelligence or higher)
+- Stealth Bonus (Hide in Shadows/Move Silently)
+- Thieving Bonus (Pick Pockets/Open Locks)
+- Detection Bonus (Find Traps/Detect Illusion)
+- Set Spike Trap
+- Set Dart Trap (prerequisite: Spike Trap)
+- Brew Potions
+- Flaming Weapon (prerequisite: Brew Potions)
+- Armor Class Bonus
+- Saving Throw Bonus (prerequisite: AC Bonus)
+- THAC0 Bonus
+- Backstab  Bonus (prerequisite: THAC0 Bonus)
+- Trip Opponent (prerequisite: THAC0 Bonus)
+- Disarm Opponent (prerequisite: THAC0 Bonus)
+- Blind Opponent (prerequisite: THAC0 Bonus)
+- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Grease Jar
+- Smoke Bomb
+- Use Wands (prerequisite: 15+ Intelligence)
+- Use Scrolls (prerequisite: 17+ Intelligence)
 - Miscellaneous: Luck Bonus
 
 CLASS RESTRICTIONS:

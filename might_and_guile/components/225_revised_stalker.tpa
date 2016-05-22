@@ -9,15 +9,15 @@
 
 //EDIT STALKER KIT 2DA FILES________________________________________________________
 //
-COPY_EXISTING ~kitlist.2da~ ~override~
-	SET_2DA_ENTRY 11 5 1 ~d5_STLK2 ~
-	BUT_ONLY
+//COPY_EXISTING ~kitlist.2da~ ~override~
+//	SET_2DA_ENTRY 11 5 1 ~d5_STLK2 ~
+//BUT_ONLY
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
 		SET_2DA_ENTRY 13 37 1 ~3~
 		SET_2DA_ENTRY 18 37 1 ~3~
-		BUT_ONLY
+	BUT_ONLY
 END
 //___________________________________________________________________________________
 
@@ -93,7 +93,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	COPY ~might_and_guile/misc/mxsplra2.2da~ ~override/mxsplran.2da~
 	COPY_EXISTING ~clabrn01.2da~ ~override~
 				~clabrn02.2da~ ~override~
-				~clabrn03.2da~ ~override~
+//				~clabrn03.2da~ ~override~
 				~clabrn04.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
@@ -134,31 +134,31 @@ END
 
 
 //2DA MODIFICATIONS___________________________________________________________________
-COPY ~might_and_guile/ranger/d5_stlk2.2da~ ~override~
+//COPY ~might_and_guile/ranger/d5_stlk2.2da~ ~override~
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
-		BUT_ONLY
+	BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		BUT_ONLY
+	BUT_ONLY
 END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
-		BUT_ONLY
+	BUT_ONLY
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
-		COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		COPY_EXISTING ~clabrn03.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
-			BUT_ONLY
+		BUT_ONLY
 	END
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~clabrn01.2da~) THEN BEGIN
@@ -182,18 +182,77 @@ ACTION_PHP_EACH d5_ranstab_clabs AS roo => goo BEGIN
 		COPY_EXISTING ~%roo%.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/ranger/ranstab.txt~
-			BUT_ONLY
+		BUT_ONLY
 	END
 END
-ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
-	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) THEN BEGIN
+	COPY_EXISTING ~clabrn03.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
-END
-ACTION_IF (GAME_IS ~tob bgt tutu~) AND (FILE_EXISTS_IN_GAME ~d5_stlk2.2da~) THEN BEGIN
-	COPY_EXISTING ~d5_stlk2.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL311 ~ ~****       ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/ranger/stalker_no_feats.txt~
+  END
+  ACTION_IF (GAME_IS ~tob bgt tutu~) THEN BEGIN
+	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/stlkstab.txt~
-		BUT_ONLY
+	BUT_ONLY
+  END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+	COPY_EXISTING ~clabrn03.2da~ ~override~
+		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
+		REPLACE_TEXTUALLY ~GA_SPCL311 ~ ~****       ~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/thief/rogue_feats_stalker.txt~
+  COPY_EXISTING ~backstab.2da~ ~override~
+	COUNT_2DA_COLS cols
+	FOR (col = 2; col < cols; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#stalkstab~ 7 col 2 // stalker
+	END
+	SET_2DA_ENTRIES_NOW ~#stalkstab~ 1
+	PRETTY_PRINT_2DA
+  BUT_ONLY
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+	  END
+	END
+  BUT_ONLY
+ END
+ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+	  END
+	END
+  BUT_ONLY
+ END
 END
 //____________________________________________________________________________________
 

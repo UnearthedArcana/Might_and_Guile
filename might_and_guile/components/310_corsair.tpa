@@ -174,6 +174,57 @@ COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_swash.spl~ ~override~
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+  COPY_EXISTING ~d5_corsa.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/fighter/no_rogue_feats_corsair.txt~
+  BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+  COPY_EXISTING ~d5_corsa.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/thief/rogue_feats_corsair.txt~
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+   COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5CORSA~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3111)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+   COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5CORSA~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3111)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+   COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5CORSA~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3111)
+	  END
+	END
+   BUT_ONLY
+  END
+END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_corsa.2da~ ~override~
 		LPM remove_blank_lines

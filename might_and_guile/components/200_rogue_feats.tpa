@@ -116,6 +116,8 @@ COPY ~might_and_guile/thief/d5_rfac.spl~ ~override~
 
 // mechanical
 
+ADD_PROJECTILE ~might_and_guile/thief/d5trspik.pro~
+ADD_PROJECTILE ~might_and_guile/thief/d5trfire.pro~
 COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~
 	SAY NAME1 @4021
 	SAY UNIDENTIFIED_DESC @4022
@@ -124,6 +126,7 @@ COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
 	SAY NAME1 @4021
 	SAY UNIDENTIFIED_DESC @4022
 COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
 
 COPY ~might_and_guile/thief/d5_rfb2.spl~ ~override~
 	SAY NAME1 @4023
@@ -143,6 +146,7 @@ COPY ~might_and_guile/thief/d5_rf23.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @4026
 COPY ~might_and_guile/thief/d5_rf23.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf23b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trfire% END
 
 COPY ~might_and_guile/thief/d5_rfb4.spl~ ~override~
 	SAY NAME1 @4027
@@ -152,6 +156,7 @@ COPY ~might_and_guile/thief/d5_rf24.spl~ ~override~
 	SAY NAME1 @4027
 	SAY UNIDENTIFIED_DESC @4028
 COPY ~might_and_guile/thief/d5_rf24b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
 
 // alchemical
 
@@ -411,90 +416,114 @@ COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~
 
 //FEAT CLAB FILES___________________________________________________________________
 //
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS k_cols // amount of columns
+	READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
+	FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
+	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
+	    SET sd_row = %k_row%
+	    READ_2DA_ENTRY_FORMER k_rows sd_row 9 sd_code // read column value
+	  END
+	END
+BUT_ONLY
+
 COPY ~might_and_guile/thief/d5_rofa.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof01.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof01.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofb.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof02.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof02.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofc.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof03.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof03.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofd.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof04.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof04.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofe.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof05.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof05.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_roff.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof06.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof06.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofg.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof07.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof07.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofh.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof08.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof08.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofi.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof09.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof09.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofj.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof10.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof10.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofk.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof11.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof11.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 COPY ~might_and_guile/thief/d5_rofl.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
 COPY ~might_and_guile/thief/d5_rof12.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof12.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @4003
+	SAY UNIDENTIFIED_DESC @4001
+	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
 
 COPY ~might_and_guile/thief/d5_rfxt.spl~ ~override~
 	SAY NAME1 @7
@@ -691,6 +720,49 @@ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
 END
 
 CLEAR_ARRAYS
+//__________________________________________________________________________________
+
+
+//add feat abilities to joinable NPCs_______________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_LONG 0x1cc biography
+		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
+			READ_BYTE 0x273 npc_class
+			PATCH_IF (npc_class = 4) BEGIN 
+				READ_BYTE 0x234 npc_level
+				PATCH_IF (npc_level > 2) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof01~ END
+				END
+				PATCH_IF (npc_level > 4) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof02~ END
+				END
+				PATCH_IF (npc_level > 6) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof03~ END
+				END
+				PATCH_IF (npc_level > 8) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof04~ END
+				END
+				PATCH_IF (npc_level > 10) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof05~ END
+				END
+				PATCH_IF (npc_level > 12) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof06~ END
+				END
+				PATCH_IF (npc_level > 14) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof07~ END
+				END
+				PATCH_IF (npc_level > 16) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof08~ END
+				END
+				PATCH_IF (npc_level > 18) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof09~ END
+				END
+			END
+		END
+	END
+BUT_ONLY
 //__________________________________________________________________________________
 
 

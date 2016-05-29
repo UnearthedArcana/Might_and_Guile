@@ -1073,8 +1073,7 @@ ROGUE FEATS:
 - Stealth Bonus (Hide in Shadows/Move Silently)
 - Thieving Bonus (Pick Pockets/Open Locks)
 - Detection Bonus (Find Traps/Detect Illusion)
-- Set Spike Trap
-- Set Dart Trap (prerequisite: Spike Trap)
+- Set Dart Trap
 - Brew Potions
 - Flaming Weapon (prerequisite: Brew Potions)
 - Armor Class Bonus
@@ -1132,7 +1131,7 @@ Abilities:
 
 Disadvantages:
 - Alignment restricted to any non-lawful.
-- -1 to base backstab multiplier compared to an unkitted Thief:
+- -1 to base backstab multiplier compared to an unkitted Thief
 
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
 @4009  = ~~
@@ -1395,7 +1394,6 @@ Woodscouts combine the abilities of rangers and clerics.  It is said that Mielik
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
 @5014   = ~Forestwalker of Solonor Thelandira~
-@5020   = ~Bladesinger~
 @5021   = ~The Art of the Bladesong~
 @5022   = ~Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.
 
@@ -1408,9 +1406,21 @@ The descriptions and instructions in this tome may enable an elf reading it to l
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
 @5023   = ~Bladesong~
 @5024   = ~BLADESONG: for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.~
-@5031   = ~Spellfilcher~
-@5032   = ~Secrets of the Spellfilchers~
-@5033   = ~The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.
+@5027   = ~bladesinger~
+@5028   = ~Bladesinger~
+@5029   = ~BLADESINGER: Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting.
+
+Abilities:
+- Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which a blade is spun and whirled faster than the eye can follow, blocking incoming attacks and devastating enemies.
+
+BLADESONG:
+- Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.
+
+Restrictions:
+- Must be an elf
+~
+@5031   = ~Secrets of the Spellfilchers~
+@5032   = ~The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.
 
 First, they may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells. Of course many wizards know the Vocalize spell to overcome such a disadvantage, but a skilled Spellfilcher knows that the time it takes to do so may make all the difference in the world.
 
@@ -1423,13 +1433,40 @@ Finally, every time a Spellfilcher successfully strikes a wizard with a melee at
 The secrets contained in this tome may enable the owner to learn the skills and abilities of a Spellfilcher.
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5034   = ~Silence~
-@5035   = ~All enemies in the area must make a saving throw vs. spell at -1; if the save is failed, then they are silenced for the duration of the spell, unless an affected spellcaster then casts Vocalize.  At the instant the spell is completed, it affects all creatures in a 15 foot radius centered on the point selected by the Spellfilcher.~
-@5036   = ~Spell Turning~
-@5037   = ~This abjuration causes one spell cast against the Spellfilcher to rebound upon the original caster.~
+@5033   = ~Silence~
+@5034   = ~All enemies in the area must make a saving throw vs. spell at -1; if the save is failed, then they are silenced for the duration of the spell, unless an affected spellcaster then casts Vocalize.  At the instant the spell is completed, it affects all creatures in a 15 foot radius centered on the point selected by the Spellfilcher.~
+@5035   = ~Spell Turning~
+@5036   = ~This abjuration causes one spell cast against the Spellfilcher to rebound upon the original caster.~
+@5037   = ~spellfilcher~
+@5038   = ~Spellfilcher~
+@5039   = ~SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards. Spellfilchers have developed a few special tricks they can employ when confronted by angry mages.
+
+Abilities:
+- Once per day, Spellfilchers may cast the priest spell "Silence 15' Radius" 
+- At 5th level Spellfilchers can cast a special variant of "Spell Turning" which only turns back a single spell, but lasts for 12 hours.
+- At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-Detection."
+- Every time a Spellfilcher successfully strikes a wizard with a melee attack, the target must save vs. rods/wands or suffer a 33% chance of miscast magic for 2 rounds.
+
+Restrictions:
+- None
+~
 @5051   = ~ranger~
 @5052   = ~Ranger~
-@5053   = ~Ranger~
+@5053   = ~RANGER/MAGE: While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the pangers. The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
+
+Abilities:
+- 2 more hit points each level than a standard thief/mage, up to level 10; and 1 extra hit point every level after level that, up to level 20.
+- 1-point bonus to thac0 every third level, up to level 18.
+- May use Animal Empathy innately just like any ranger, and can also cast Goodberry innately.
+- Automatically learns the following druid spells in their wizard spellbook:
+Level 1: Entangle, Sanctuary, Shillelagh
+Level 2: Barkskin, Slow Poison, Flame Blade
+Level 3: Cure Disease, Call Lightning, Summon Insects
+
+Restrictions:
+- May only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.
+- May spend only 12 skill points per level to advance thief abilities.
+~
 @5054   = ~Ranger~
 @5055   = ~Tome of Woodland Survival~
 @5056   = ~While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the pangers.  The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
@@ -1440,7 +1477,7 @@ Ranger/mages get 2 more hit points than a thief/mage up to level 10, and 1 extra
 
 Ranger/mages can use Animal Empathy innately just like any ranger, and can also cast Goodberry innately.  They automatically learn the following druid spells in their wizard spellbook:
 - Level 1: Entangle, Sanctuary, Shillelagh
-- level 2: Barkskin, Slow Poison, Flame Blade
+- Level 2: Barkskin, Slow Poison, Flame Blade
 - Level 3: Cure Disease, Call Lightning, Summon Insects
 
 Using this Tome will allow the reader to forsake a career as a thief and instead follow the path of a ranger.
@@ -1463,14 +1500,16 @@ With a totem such as this, a cleric/mage may devote oneself fully to the worship
 - Focus Access to the sphere of Magic.
 - Major Access to the spheres of Divine Aid, Life, Protection, Destruction, Knowledge, and Light.
 - Minor Access to the spheres of Thought, Dread, Vigor, Air, Fire, Shadow, and Deception.~
+@5110  = ~spellbender~
 @5111  = ~Spellbender~
-@5112  = ~The goddess Mystra rules the fabled Weave of Faerun, the ethereal conduit that allows mortals to shape magical energies into spells and effects. In order to avoid disasters like that which befell Anauroch, Mystra ensures that the use of those energies is strictly controlled: spellcasters must formulate the Weave into specific, known spells, and must memorize the patterns of those spells in order to successfully release them.
+@5112  = ~SPELLBENDER: The goddess Mystra rules all magic, and mandates that spellcasters must formulate known spells, and must memorize the patterns of those spells in order to successfully release them. But as with any system, the are gaps and shortcuts that may be used to circumvent the rules. Sorcerers are born with the ability to shape magic directly, though only into a limited number of effects; and wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects. Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics as well as studying arcane magery, they learn to manipulate the intersection of those two areas of magic. 
 
-But, as with any rigid system, the are gaps and shortcuts that may be used to circumvent Mystra's rules. Sorcerers are born with the ability to focus the Weave directly, though only into a limited number of effects. Wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects.
+Abilities:
+- Spellbenders may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. 
 
-Unlike those classes, Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics and studying arcane magery, they learn to manipulate the intersection of those two areas of magic. They may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. Some energy is lost in the translation - the improvisational effects must be spells of lower level than the one sacrificed. (It is unknown what happens to the lost energy - some believe this practice has contributed to the recent rise of wild magic and sorcerers. Spellbenders must be wary, as they are apt to be persecuted by Mystra's Monitors.)
-
-While Spellbenders are not as powerful one-to-one as a Sorcerer or Wild Mage or Monitor, the studious application of their knowledge gives them precise control over the Weave that is unmatched by any other spellcaster.~
+Restrictions:
+- None
+~
 @5113  = ~Spellbender's Studies~
 @5114  = ~The goddess Mystra rules the fabled Weave of Faerun, the ethereal conduit that allows mortals to shape magical energies into spells and effects. In order to avoid disasters like that which befell Anauroch, Mystra ensures that the use of those energies is strictly controlled: spellcasters must formulate the Weave into specific, known spells, and must memorize the patterns of those spells in order to successfully release them.
 
@@ -1487,12 +1526,12 @@ The secrets contained in this tome may enable the owner to learn the skills and 
 @5116  = ~Arcane Weaving
 
 This magic will allow the Spellbender to cast one of the following spells:
-- Identify
+- Spook
 - Shield
 - Reflected Image
 - Grease
 - Sleep
-- Shocking Grasp
+- Chromatic Orb
 - Burning Hands
 - Magic Missile~
 @5117  = ~Arcane Weaving II~

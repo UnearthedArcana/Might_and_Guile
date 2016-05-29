@@ -13,8 +13,9 @@ COPY ~might_and_guile/thief/d5_rfeat.d5~ ~override~
 //__________________________________________________________________________________
 
 
-//REVISED SHADOWDANCER______________________________________________________________
+//REVISED KITS______________________________________________________________________
 //
+INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
 INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
 //__________________________________________________________________________________
 
@@ -99,6 +100,7 @@ COPY ~might_and_guile/thief/d5_rfa1.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rfaa.spl~ ~override~
 	SAY NAME1 @4011
 	SAY UNIDENTIFIED_DESC @4012
+COPY ~might_and_guile/thief/d5_rf11.bam~ ~override~
 
 COPY ~might_and_guile/thief/d5_rfa2.spl~ ~override~
 	SAY NAME1 @4013
@@ -106,6 +108,7 @@ COPY ~might_and_guile/thief/d5_rfa2.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rfab.spl~ ~override~
 	SAY NAME1 @4013
 	SAY UNIDENTIFIED_DESC @4014
+COPY ~might_and_guile/thief/d5_rf12.bam~ ~override~
 
 COPY ~might_and_guile/thief/d5_rfa3.spl~ ~override~
 	SAY NAME1 @4015
@@ -113,11 +116,12 @@ COPY ~might_and_guile/thief/d5_rfa3.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rfac.spl~ ~override~
 	SAY NAME1 @4015
 	SAY UNIDENTIFIED_DESC @4016
+COPY ~might_and_guile/thief/d5_rf13.bam~ ~override~
 
 // mechanical
 
 ADD_PROJECTILE ~might_and_guile/thief/d5trspik.pro~
-ADD_PROJECTILE ~might_and_guile/thief/d5trfire.pro~
+/*
 COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~
 	SAY NAME1 @4021
 	SAY UNIDENTIFIED_DESC @4022
@@ -127,16 +131,18 @@ COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @4022
 COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
+*/
 
-COPY ~might_and_guile/thief/d5_rfb2.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~
 	SAY NAME1 @4023
 	SAY UNIDENTIFIED_DESC @4024
-COPY ~might_and_guile/thief/d5_rf22.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
 	SAY NAME1 @4023
 	SAY UNIDENTIFIED_DESC @4024
+COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf22.bam~ ~override~
-COPY ~might_and_guile/thief/d5_rf22b.spl~ ~override~
 
+ADD_PROJECTILE ~might_and_guile/thief/d5trfire.pro~
 COPY ~might_and_guile/thief/d5_rfb3.spl~ ~override~
 	SAY NAME1 @4025
 	SAY UNIDENTIFIED_DESC @4026
@@ -144,10 +150,11 @@ COPY ~might_and_guile/thief/d5_rfb3.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf23.spl~ ~override~
 	SAY NAME1 @4025
 	SAY UNIDENTIFIED_DESC @4026
-COPY ~might_and_guile/thief/d5_rf23.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf23b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trfire% END
+COPY ~might_and_guile/thief/d5_rf23.bam~ ~override~
 
+ADD_PROJECTILE ~might_and_guile/thief/d5trweb.pro~
 COPY ~might_and_guile/thief/d5_rfb4.spl~ ~override~
 	SAY NAME1 @4027
 	SAY UNIDENTIFIED_DESC @4028
@@ -156,7 +163,7 @@ COPY ~might_and_guile/thief/d5_rf24.spl~ ~override~
 	SAY NAME1 @4027
 	SAY UNIDENTIFIED_DESC @4028
 COPY ~might_and_guile/thief/d5_rf24b.spl~ ~override~
-	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trweb% END
 
 // alchemical
 
@@ -406,7 +413,7 @@ BUT_ONLY_IF_IT_CHANGES
 //end use scrolls/wands_____________________________________________________________
 
 // miscellaneous
-
+//
 COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~
 	SAY NAME1 ~Luck Bonus~
 	SAY UNIDENTIFIED_DESC ~Luck Bonus~
@@ -435,7 +442,7 @@ COPY ~might_and_guile/thief/d5_rof01.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof01.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofb.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -443,7 +450,7 @@ COPY ~might_and_guile/thief/d5_rof02.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof02.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofc.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -451,7 +458,7 @@ COPY ~might_and_guile/thief/d5_rof03.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof03.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofd.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -459,7 +466,7 @@ COPY ~might_and_guile/thief/d5_rof04.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof04.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofe.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -467,7 +474,7 @@ COPY ~might_and_guile/thief/d5_rof05.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof05.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_roff.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -475,7 +482,7 @@ COPY ~might_and_guile/thief/d5_rof06.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof06.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofg.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -483,7 +490,7 @@ COPY ~might_and_guile/thief/d5_rof07.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof07.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofh.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -491,7 +498,7 @@ COPY ~might_and_guile/thief/d5_rof08.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof08.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofi.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -499,7 +506,7 @@ COPY ~might_and_guile/thief/d5_rof09.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof09.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofj.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -507,7 +514,7 @@ COPY ~might_and_guile/thief/d5_rof10.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof10.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofk.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -515,7 +522,7 @@ COPY ~might_and_guile/thief/d5_rof11.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof11.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 COPY ~might_and_guile/thief/d5_rofl.spl~ ~override~
 	SAY NAME1 @7
 	SAY UNIDENTIFIED_DESC @7
@@ -523,7 +530,7 @@ COPY ~might_and_guile/thief/d5_rof12.eff~ ~override~
 COPY ~might_and_guile/thief/d5rof12.spl~ ~override~
 	SAY NAME1 @3909
 	SAY UNIDENTIFIED_DESC @4001
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 
 COPY ~might_and_guile/thief/d5_rfxt.spl~ ~override~
 	SAY NAME1 @7

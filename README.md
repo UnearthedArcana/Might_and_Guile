@@ -469,7 +469,7 @@ CALLED SHOTS <br />
         <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
       </ul>
       <p>This component also makes rangers unable to dual-class to cleric, unless they first find a special totem of the goddess Mielikki and use it to change their kit to a Woodscout of Mielikki.  Multiclass ranger/clerics will automatically begin as Woodscouts, except elves who begin as Forestwalkers of Solonor Thelandira. (Note, in IWDEE and BG2EE, these ranger/cleric changes will only take effect if baldur.ini is set such that cleric/rangers receive all druid spells.)</p>
-      <p>Finally, in addition to Woodscouts and Forestwalkers, this component introduces nine more multiclass kits to the game. These are not available at character generation, rather you must use a totem or item to adopt the kit. They are:</p>
+      <p>Finally, this component introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in earlier versions of the games, you must use a totem or item to adopt the kit. The multiclass kits are:</p>
       <ul>
         <li> Elven Bladesinger - for elven fighter/mages.</li>
         <li> Spellfilcher - for mage/thieves.</li>

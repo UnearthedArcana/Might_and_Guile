@@ -142,9 +142,9 @@ ADD_KIT ~D5BLADS~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5020
-SAY @5020
-SAY @5020
+SAY @5027
+SAY @5028
+SAY @5029
 //__________________________________________________________________________________
 
 END
@@ -211,9 +211,9 @@ ADD_KIT ~D5BLADS~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5020
-SAY @5020
-SAY @5020
+SAY @5027
+SAY @5028
+SAY @5029
 //__________________________________________________________________________________
 
 END
@@ -223,7 +223,7 @@ END
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@5020)
+			briefdesc = RESOLVE_STR_REF (@5029)
 		STR_VAR
 			kit_name = D5BLADS
 			clswpbon = ~1 0 2~
@@ -275,6 +275,22 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	BUT_ONLY
 END
 //____________________________________________________________________________________
+
+//ADD KIT TO MENUS____________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~K_FM_E.2da~ BEGIN
+	COPY ~might_and_guile/mc/K_FM_E.2da~ ~override~
+  END
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+  BUT_ONLY
+  OUTER_SET kit_row -= 2
+  ACTION_IF FILE_EXISTS_IN_GAME ~K_FM_E.2da~ BEGIN
+	APPEND ~K_FM_E.2da~ ~1	%kit_row%~
+  END
+END
+//___________________________________________________________________________________
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
@@ -419,9 +435,9 @@ ADD_KIT ~D5FILCH~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5031
-SAY @5031
-SAY @5031
+SAY @5037
+SAY @5038
+SAY @5039
 //__________________________________________________________________________________
 
 //EE KIT EXTRAS_____________________________________________________________________
@@ -429,7 +445,7 @@ SAY @5031
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@5031)
+			briefdesc = RESOLVE_STR_REF (@5039)
 		STR_VAR
 			kit_name = D5FILCH
 			clswpbon = ~0 0 3~
@@ -502,9 +518,9 @@ ADD_KIT ~D5FILCH~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5031
-SAY @5031
-SAY @5031
+SAY @5037
+SAY @5038
+SAY @5039
 //__________________________________________________________________________________
 
 //EE KIT EXTRAS_____________________________________________________________________
@@ -512,7 +528,7 @@ SAY @5031
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@5031)
+			briefdesc = RESOLVE_STR_REF (@5039)
 		STR_VAR
 			kit_name = D5FILCH
 			clswpbon = ~1 0 3~
@@ -527,10 +543,10 @@ END
 //
 COPY ~might_and_guile/mc/d5_filch.2da~ ~override~
 COPY ~might_and_guile/mc/d5_filch.itm~ ~override~
-	SAY NAME1 @5032
-	SAY NAME2 @5032
-	SAY UNIDENTIFIED_DESC @5033
-	SAY IDENTIFIED_DESC @5033
+	SAY NAME1 @5031
+	SAY NAME2 @5031
+	SAY UNIDENTIFIED_DESC @5032
+	SAY IDENTIFIED_DESC @5032
 COPY ~might_and_guile/mc/d5_filch.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/mc/d5_filch.cre~ ~override~
@@ -538,13 +554,13 @@ COMPILE ~might_and_guile/mc/d5_filch.baf~
 COPY ~might_and_guile/misc/d5_ssvbo.spl~ ~override~
 	SAY NAME1 @15
 COPY ~might_and_guile/mc/d5_flch1.spl~ ~override~
-	SAY NAME1 @5034
-	SAY NAME2 @5034
-	SAY UNIDENTIFIED_DESC @5035
+	SAY NAME1 @5033
+	SAY NAME2 @5033
+	SAY UNIDENTIFIED_DESC @5034
 COPY ~might_and_guile/mc/d5_flch2.spl~ ~override~
-	SAY NAME1 @5036
-	SAY NAME2 @5036
-	SAY UNIDENTIFIED_DESC @5037
+	SAY NAME1 @5035
+	SAY NAME2 @5035
+	SAY UNIDENTIFIED_DESC @5036
 COPY ~might_and_guile/mc/d5_flch3.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch4.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.spl~ ~override~
@@ -559,6 +575,26 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	BUT_ONLY
 END
 //__________________________________________________________________________________
+
+//ADD KIT TO MENUS____________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_FOR_EACH new_menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~%new_menu%.2da~ BEGIN
+	  COPY ~might_and_guile/mc/%new_menu%.2da~ ~override~
+	END
+  END
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+  BUT_ONLY
+  OUTER_SET kit_row -= 2
+  ACTION_FOR_EACH menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%menu%.2da~ BEGIN
+	  APPEND ~%menu%.2da~ ~1	%kit_row%~
+	END
+  END
+END
+//___________________________________________________________________________________
 
 
 
@@ -780,6 +816,26 @@ COPY_EXISTING ~sppr319.spl~ ~override/d5rama33.spl~ // summon insects
 	WRITE_SHORT 0x1c 1
 //__________________________________________________________________________________
 
+//ADD KIT TO MENUS____________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_FOR_EACH new_menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~%new_menu%.2da~ BEGIN
+	  COPY ~might_and_guile/mc/%new_menu%.2da~ ~override~
+	END
+  END
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+  BUT_ONLY
+  OUTER_SET kit_row -= 2
+  ACTION_FOR_EACH menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%menu%.2da~ BEGIN
+	  APPEND ~%menu%.2da~ ~1	%kit_row%~
+	END
+  END
+END
+//___________________________________________________________________________________
+
 /*
 //CHECK FOR R/C DRUID SPELLS____________________________________________________________
 //
@@ -893,9 +949,9 @@ ADD_KIT ~D5BENDR~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5100
-SAY @5101
-SAY @5102
+SAY @5110
+SAY @5111
+SAY @5112
 //__________________________________________________________________________________
 
 //EE KIT EXTRAS_____________________________________________________________________
@@ -975,7 +1031,7 @@ ADD_KIT ~D5BENDR~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5111
+SAY @5110
 SAY @5111
 SAY @5112
 //__________________________________________________________________________________
@@ -1090,7 +1146,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 END
 //___________________________________________________________________________________
 
-
 //FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
@@ -1165,11 +1220,32 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
 END
 //___________________________________________________________________________________
 
+//ADD KIT TO MENUS____________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_FOR_EACH new_menu IN ~K_CM_D~ ~K_CM_E~ ~K_CM_G~ ~K_CM_H~ ~K_CM_HE~ ~K_CM_HL~ ~K_CM_HO~ BEGIN
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~%new_menu%.2da~ BEGIN
+	  COPY ~might_and_guile/mc/%new_menu%.2da~ ~override~
+	END
+  END
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+  BUT_ONLY
+  OUTER_SET kit_row -= 2
+  ACTION_FOR_EACH menu IN ~K_CM_D~ ~K_CM_E~ ~K_CM_G~ ~K_CM_H~ ~K_CM_HE~ ~K_CM_HL~ ~K_CM_HO~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%menu%.2da~ BEGIN
+	  APPEND ~%menu%.2da~ ~1	%kit_row%~
+	END
+  END
+END
+//___________________________________________________________________________________
+
 
 
 //ADD KIT ITEMS______________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_blads~ #0 #0 #0 ~identified~ #1
 		ADD_STORE_ITEM ~d5_filch~ #0 #0 #0 ~identified~ #1
@@ -1180,8 +1256,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 			ADD_STORE_ITEM ~d5_rama~ #0 #0 #0 ~identified~ #1
 		BUT_ONLY
 	END
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~shop08.sto~)THEN BEGIN
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~shop08.sto~)THEN BEGIN
 	COPY_EXISTING ~shop08.sto~ ~override~
 		ADD_STORE_ITEM ~d5_blads~ #0 #0 #0 ~identified~ #1
 		ADD_STORE_ITEM ~d5_filch~ #0 #0 #0 ~identified~ #1
@@ -1192,8 +1268,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~shop08.sto~)THEN BEGIN
 			ADD_STORE_ITEM ~d5_rama~ #0 #0 #0 ~identified~ #1
 		BUT_ONLY
 	END
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~kuoswald.sto~) THEN BEGIN
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~kuoswald.sto~) THEN BEGIN
 	COPY_EXISTING ~kuoswald.sto~ ~override~
 		ADD_STORE_ITEM ~d5_blads~ #0 #0 #0 ~identified~ #1
 		ADD_STORE_ITEM ~d5_filch~ #0 #0 #0 ~identified~ #1
@@ -1212,6 +1288,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kuoswald.sto~) THEN BEGIN
 			ADD_STORE_ITEM ~d5_rama~ #0 #0 #0 ~identified~ #1
 		BUT_ONLY
 	END
+  END
 END
 //____________________________________________________________________________________
 

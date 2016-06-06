@@ -183,38 +183,83 @@ END
 //
 COPY ~might_and_guile/thief/d5_snipe.2da~ ~override~
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+
 COPY ~might_and_guile/fighter/d5_artrp.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_artrp.spl~ ~override~
 	SAY NAME1 @3213
 	SAY UNIDENTIFIED_DESC @3214
+	WRITE_ASCII 0x3a ~d5_artrp~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_artrp~ END
+COPY ~might_and_guile/fighter/d5_artrp.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~
 	SAY NAME1 @3211
 	SAY UNIDENTIFIED_DESC @3212
+	WRITE_ASCII 0x3a ~d5_armov~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_armov~ END
+COPY ~might_and_guile/fighter/d5_armov.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_arslo.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~
-	SAY NAME1 @3213
-	SAY UNIDENTIFIED_DESC @3214
+	SAY NAME1 @3219
+	SAY UNIDENTIFIED_DESC @3220
+	WRITE_ASCII 0x3a ~d5_arslo~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslo~ END
+COPY ~might_and_guile/fighter/d5_arslo.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~
 	SAY NAME1 @3215
 	SAY UNIDENTIFIED_DESC @3216
+	WRITE_ASCII 0x3a ~d5_ardis~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ardis~ END
+COPY ~might_and_guile/fighter/d5_ardis.bam~ ~override~
+
+COPY ~might_and_guile/fighter/d5_arbli.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~
+	SAY NAME1 @4111
+	SAY UNIDENTIFIED_DESC @4112
+	WRITE_ASCII 0x3a ~d5_arbli~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arbli~ END
+COPY ~might_and_guile/fighter/d5_arbli.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_arham.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~
 	SAY NAME1 @3217
 	SAY UNIDENTIFIED_DESC @3218
+	WRITE_ASCII 0x3a ~d5_arham~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arham~ END
+COPY ~might_and_guile/fighter/d5_arham.bam~ ~override~
+
+COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~
+	SAY NAME1 @3251
+	SAY UNIDENTIFIED_DESC @3252
+	WRITE_ASCII 0x3a ~d5_arstn~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arstn~ END
+COPY ~might_and_guile/fighter/d5_arstn.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_arnt1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arnt2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~
 	SAY NAME1 @3231
 	SAY UNIDENTIFIED_DESC @3232
+	WRITE_ASCII 0x3a ~d5_arent~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arent~ END
+COPY ~might_and_guile/fighter/d5_arent.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_arslp.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~
 	SAY NAME1 @3233
 	SAY UNIDENTIFIED_DESC @3234
+	WRITE_ASCII 0x3a ~d5_arslp~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslp~ END
+COPY ~might_and_guile/fighter/d5_arslp.bam~ ~override~
+
 COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
 COPY ~might_and_guile/fighter/d5_arff1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff2.eff~ ~override~
@@ -225,14 +270,61 @@ COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
 COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~
 	SAY NAME1 @3235
 	SAY UNIDENTIFIED_DESC @3236
-COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~
-	SAY NAME1 @3251
-	SAY UNIDENTIFIED_DESC @3252
-COPY ~might_and_guile/fighter/d5_arbli.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~
+	WRITE_ASCII 0x3a ~d5_arffi~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arffi~ END
+COPY ~might_and_guile/fighter/d5_arffi.bam~ ~override~
+
+COPY ~might_and_guile/fighter/d5_csa.spl~ ~override~
+	SAY NAME1 @3213
+	SAY UNIDENTIFIED_DESC @3214
+	WRITE_ASCII 0x3a ~d5_artrp~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_artrp~ END
+COPY ~might_and_guile/fighter/d5_csb.spl~ ~override~
+	SAY NAME1 @3211
+	SAY UNIDENTIFIED_DESC @3212
+	WRITE_ASCII 0x3a ~d5_armov~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_armov~ END
+COPY ~might_and_guile/fighter/d5_csc.spl~ ~override~
+	SAY NAME1 @3219
+	SAY UNIDENTIFIED_DESC @3220
+	WRITE_ASCII 0x3a ~d5_arslo~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslo~ END
+COPY ~might_and_guile/fighter/d5_csd.spl~ ~override~
+	SAY NAME1 @3215
+	SAY UNIDENTIFIED_DESC @3216
+	WRITE_ASCII 0x3a ~d5_ardis~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ardis~ END
+COPY ~might_and_guile/fighter/d5_cse.spl~ ~override~
 	SAY NAME1 @4111
 	SAY UNIDENTIFIED_DESC @4112
+	WRITE_ASCII 0x3a ~d5_arbli~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arbli~ END
+COPY ~might_and_guile/fighter/d5_csf.spl~ ~override~
+	SAY NAME1 @3217
+	SAY UNIDENTIFIED_DESC @3218
+	WRITE_ASCII 0x3a ~d5_arham~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arham~ END
+COPY ~might_and_guile/fighter/d5_csg.spl~ ~override~
+	SAY NAME1 @3251
+	SAY UNIDENTIFIED_DESC @3252
+	WRITE_ASCII 0x3a ~d5_arstn~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arstn~ END
+COPY ~might_and_guile/fighter/d5_csh.spl~ ~override~
+	SAY NAME1 @3231
+	SAY UNIDENTIFIED_DESC @3232
+	WRITE_ASCII 0x3a ~d5_arent~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arent~ END
+COPY ~might_and_guile/fighter/d5_csi.spl~ ~override~
+	SAY NAME1 @3233
+	SAY UNIDENTIFIED_DESC @3234
+	WRITE_ASCII 0x3a ~d5_arslp~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslp~ END
+COPY ~might_and_guile/fighter/d5_csj.spl~ ~override~
+	SAY NAME1 @3235
+	SAY UNIDENTIFIED_DESC @3236
+	WRITE_ASCII 0x3a ~d5_arffi~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arffi~ END
+
 COPY ~might_and_guile/fighter/d5_rafx.spl~ ~override~
 	SAY NAME1 @7
 COPY ~might_and_guile/fighter/d5_rafy.spl~ ~override~
@@ -244,121 +336,26 @@ COPY ~might_and_guile/fighter/d5_raf1.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @3210
 COPY ~might_and_guile/fighter/d5_rafa.spl~ ~override~
 	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf1.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf2.spl~ ~override~
+
+COPY ~might_and_guile/fighter/d5_raf.bam~ ~override~
+ACTION_FOR_EACH shotclab IN ~d5_rafa~ ~d5_rafb~ ~d5_rafc~ ~d5_rafd~ ~d5_rafe~ ~d5_raff~ ~d5_rafg~ ~d5_refh~ ~d5_refa~ ~d5_refb~ ~d5_refc~ ~d5_refd~ ~d5_refe~ ~d5_reff~ ~d5_refg~ ~d5_refh~ BEGIN
+  COPY ~might_and_guile/fighter/%shotclab%.spl~ ~override~
+	SAY NAME1 @7
+	SAY UNIDENTIFIED_DESC @7
+	WRITE_ASCII 0x3a ~d5_raf~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_raf~ END
+END
+ACTION_FOR_EACH shoteff IN ~d5_raf1~ ~d5_raf2~ ~d5_raf3~ ~d5_raf4~ ~d5_raf5~ ~d5_raf6~ ~d5_raf7~ ~d5_ref1~ ~d5_ref2~ ~d5_ref3~ ~d5_ref4~ ~d5_ref5~ ~d5_ref6~ ~d5_ref7~ ~d5_ref8~ BEGIN
+  COPY ~might_and_guile/fighter/%shoteff%.eff~ ~override~
+END
+ACTION_FOR_EACH shotspell IN ~d5_raf1~ ~d5_raf2~ ~d5_raf3~ ~d5_raf4~ ~d5_raf5~ ~d5_raf6~ ~d5_raf7~ ~d5_ref1~ ~d5_ref2~ ~d5_ref3~ ~d5_ref4~ ~d5_ref5~ ~d5_ref6~ ~d5_ref7~ ~d5_ref8~ BEGIN
+  COPY ~might_and_guile/fighter/%shotspell%.spl~ ~override~
 	SAY NAME1 @3210
 	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafb.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf3.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafc.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf4.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafd.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf4.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf5.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafe.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf5.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf6.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_raff.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf6.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_raf7.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafg.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf7.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref1.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refa.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref1.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref2.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refb.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref3.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refc.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref4.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refd.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref4.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref5.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refe.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref5.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref6.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_reff.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref6.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref7.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refg.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref7.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ref8.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_refh.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_ref8.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_csa.spl~ ~override~
-	SAY NAME1 @3213
-	SAY UNIDENTIFIED_DESC @3214
-COPY ~might_and_guile/fighter/d5_csb.spl~ ~override~
-	SAY NAME1 @3211
-	SAY UNIDENTIFIED_DESC @3212
-COPY ~might_and_guile/fighter/d5_csc.spl~ ~override~
-	SAY NAME1 @3219
-	SAY UNIDENTIFIED_DESC @3220
-COPY ~might_and_guile/fighter/d5_csd.spl~ ~override~
-	SAY NAME1 @3215
-	SAY UNIDENTIFIED_DESC @3216
-COPY ~might_and_guile/fighter/d5_cse.spl~ ~override~
-	SAY NAME1 @4111
-	SAY UNIDENTIFIED_DESC @4112
-COPY ~might_and_guile/fighter/d5_csf.spl~ ~override~
-	SAY NAME1 @3217
-	SAY UNIDENTIFIED_DESC @3218
-COPY ~might_and_guile/fighter/d5_csg.spl~ ~override~
-	SAY NAME1 @3251
-	SAY UNIDENTIFIED_DESC @3252
-COPY ~might_and_guile/fighter/d5_csh.spl~ ~override~
-	SAY NAME1 @3231
-	SAY UNIDENTIFIED_DESC @3232
-COPY ~might_and_guile/fighter/d5_csi.spl~ ~override~
-	SAY NAME1 @3233
-	SAY UNIDENTIFIED_DESC @3234
-COPY ~might_and_guile/fighter/d5_csj.spl~ ~override~
-	SAY NAME1 @3235
-	SAY UNIDENTIFIED_DESC @3236
+	WRITE_ASCII 0x3a ~d5_raf~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_raf~ END
+END
+
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_snipe.2da~ ~override~
 		LPM remove_blank_lines

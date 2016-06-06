@@ -7,48 +7,43 @@
 //__________________________________________________________________________________
 
 
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_strid.d5~ ~override~
+//__________________________________________________________________________________
+
+
 //WARRIOR ABILITY FILES_________________________________________________________
 //
-COPY ~might_and_guile/misc/d5_stri2.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_stri3.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_stri4.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_stri5.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_stri6.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_walk2.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
-COPY ~might_and_guile/misc/d5_walk3.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
-COPY ~might_and_guile/misc/d5_walk4.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
-COPY ~might_and_guile/misc/d5_walk5.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
-COPY ~might_and_guile/misc/d5_walk6.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
+ACTION_FOR_EACH stride IN ~d5_stri2~ ~d5_stri3~ ~d5_stri4~ ~d5_stri5~ ~d5_stri6~ ~d5_strim~ BEGIN
+  ACTION_IF ENGINE_IS ~tob bgt~ BEGIN
+	COPY ~might_and_guile/misc/%stride%.spl~ ~override/%stride%.spl~
+	  SAY NAME1 @2210
+	  SAY UNIDENTIFIED_DESC @2210
+  END
+  ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
+	COPY ~might_and_guile/misc/%stride%ee.spl~ ~override/%stride%.spl~
+	  SAY NAME1 @2210
+	  SAY UNIDENTIFIED_DESC @2210
+  END
+END
+ACTION_FOR_EACH walk IN ~d5_walk2~ ~d5_walk3~ ~d5_walk4~ ~d5_walk5~ ~d5_walk6~ ~d5_walkm~ BEGIN
+  ACTION_IF ENGINE_IS ~tob bgt~ BEGIN
+	COPY ~might_and_guile/misc/%walk%.spl~ ~override/%walk%.spl~
+	  SAY NAME1 @2210
+	  SAY UNIDENTIFIED_DESC @2210
+  END
+  ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
+	COPY ~might_and_guile/misc/%walk%ee.spl~ ~override/%walk%.spl~
+	  SAY NAME1 @2211
+	  SAY UNIDENTIFIED_DESC @2211
+  END
+END
 COPY ~might_and_guile/misc/d5_nstr2.spl~ ~override~
 COPY ~might_and_guile/misc/d5_nstr3.spl~ ~override~
 COPY ~might_and_guile/misc/d5_nstr4.spl~ ~override~
 COPY ~might_and_guile/misc/d5_nstr5.spl~ ~override~
-COPY ~might_and_guile/misc/d5_strim.spl~ ~override~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @2210
-COPY ~might_and_guile/misc/d5_walkm.spl~ ~override~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
+
 COPY_EXISTING ~clabfi05.2da~ ~override~
 	REPLACE_TEXTUALLY ~AP_SPCL151 ~ ~****       ~
 	LPM remove_blank_lines

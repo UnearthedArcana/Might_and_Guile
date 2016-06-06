@@ -269,6 +269,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 				~d5rof11.spl~ ~override~
 				~d5rof12.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16392 parameter1 = %cor_code% STR_VAR resource = ~D5_RFXC~ END
+  COPY_EXISTING ~d5_rfd1.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFD2~ END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFE2~ END
+  COPY_EXISTING ~d5_rff1.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFF2~ END
 END
 //____________________________________________________________________________________
 

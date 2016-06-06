@@ -32,7 +32,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2551)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2251)
 	  END
 	END
   BUT_ONLY
@@ -45,7 +45,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2551)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2251)
 	  END
 	END
   BUT_ONLY
@@ -58,13 +58,13 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2551)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2251)
 	  END
 	END
   BUT_ONLY
 END
 //ACTION_IF ENGINE_IS ~tob~ BEGIN
-//  STRING_SET 25211 @2551
+//  STRING_SET 25211 @2251
 //END
 //__________________________________________________________________________________
 
@@ -222,7 +222,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2253)
 	  END
 	END
   BUT_ONLY
@@ -235,7 +235,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2253)
 	  END
 	END
   BUT_ONLY
@@ -248,7 +248,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2553)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2253)
 	  END
 	END
   BUT_ONLY

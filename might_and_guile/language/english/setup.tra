@@ -54,8 +54,255 @@
 @480   = ~Add the Meistersinger (bard kit)~
 @490   = ~Add the Loresinger (bard kit)~
 @500   = ~Add Multiclass Kits~
+@2000  = ~Rogue~
+@2001  = ~Use this ability to learn a rogue feat~
+@2002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
+
+CLASS FEATURES:
+
+- May not wear armor heavier than studded leather.
+- May not equip shields larger than bucklers.
+- May only use the following weapons: long sword, short sword, katana, scimitar, dagger, club, quarterstaff, crossbow, shortbow, dart, sling.
+- May only become Proficient (one slot) in any weapon class.
+- May only become Proficient (one slot) in any fighting style.
+- May distribute 20 points per level (30 at level 1) in thieving abilities: Open Locks, Pick Pockets, Find Traps, Move Silently, Hide In Shadows, Detect Illusion, Set Traps.
+- Starts with base scores of 10% in Open Locks, 5% in Find Traps, 15% in Pick Pockets, 10% in Move Silently, and 5% in Hide in Shadows.
+- May backstab for increased damage:
+  Level 1-8: x2
+  Level 9-17: x3
+  Level 18+: x4
+- May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
+
+ROGUE FEATS: 
+- Stealth Bonus (Hide in Shadows/Move Silently)
+- Thieving Bonus (Pick Pockets/Open Locks)
+- Detection Bonus (Find Traps/Detect Illusion)
+- Set Dart Trap
+- Basic Alchemy
+- Flaming Weapon (requires Alchemy)
+- Armor Class Bonus
+- Saving Throw Bonus (requires AC Bonus)
+- THAC0 Bonus
+- Backstab  Bonus (requires THAC0 Bonus)
+- Trip Opponent (requires THAC0 Bonus)
+- Disarm Opponent (requires THAC0 Bonus)
+- Blind Opponent (requires THAC0 Bonus)
+- Disrupt Magic (requires THAC0 Bonus)
+- Grease Jar
+- Smoke Bomb
+- Use Wands (requires 15+ Intelligence)
+- Use Scrolls (requires 17+ Intelligence)
+- Miscellaneous: Luck Bonus
+
+CLASS RESTRICTIONS:
+- Alignment restricted to any except lawful good.
+- Hit Die: d6
+
+Prime Requisites For Dual-Classing: Dexterity~
+@2003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
+
+Abilities:
+- Begins with the following rogue feats at 1st level: Stealth Bonus, THAC0 Bonus, and Melee Trick: Blind Opponent.
+- May learn the Backstab Bonus feat up to three times, reaching a possible maximum multiplier of x7.
+- May learn a special Assassin-only feat: Poison Weapon (Toxin). For each time the assassin chooses this feat, the poison ability may be used one per day.
+~
+@2004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
+
+Abilities:
+- Begins with the following rogue feats at 1st level: Detection Bonus, Spike Trap, and Brew Potions
+- May learn three special feats unique to Hunters: Fire Trap, Web Trap, and Poison Weapon (Paralytic).
+~
+@2005  = ~hunter~
+@2006  = ~Hunter~
+@2007  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
+
+Abilities:
+- Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Melee Trick: Trip Opponent.
+- May repeat learning the AC Bonus and THAC0 Bonus feats, up to four times each.
+- May learn a special Swashbuckler-only feat: Contingency (Escape). This will allow the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
+- May Specialize (two slots) in any melee weapon available to Thieves.
+- May place 3 slots into Two-Weapon Style.
+
+Disadvantages:
+- Swashbucklers have no backstab multipliers by default; they may raise it to a maximum of x2 by choosing the Backstab Bonus feat.
+- May not learn any trap-setting feats.
+~
+@2008  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
+
+Abilities:
+- Begins with the following rogue feats at 1st level: Stealth Bonus, Smoke Bomb, Grease Jar, and Saving Throws Bonus.
+- May learn a special Shadowdancer-only feat: Shadow Pool. This magical ability can mimic one of the following spells: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep.
+
+Disadvantages:
+- Alignment restricted to any non-lawful.
+- -1 to base backstab multiplier compared to an unkitted Thief
+
+Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
+@2009  = ~~
+@2010  = ~Use this ability to choose from among the rogue feats~
+@2011  = ~Stealth Bonus~
+@2012  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
+@2013  = ~Thieving Bonus~
+@2014  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
+@2015  = ~Detection Bonus~
+@2016  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
+@2021  = ~Spike Trap~
+@2022  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
+@2023  = ~Dart Trap~
+@2024  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.~
+@2025  = ~Fire Trap~
+@2026  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
+@2027  = ~Web Trap~
+@2028  = ~Web Trap: this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect.~
+@2031  = ~Basic Alchemy~
+@2032  = ~Basic Alchemy: using foraged ingredients, this ability allows the rogue to craft the following potion once per day: one Elixir of Health; one Potion of Strength; one Potion of Perception; one Potion of Fire Resistance; one Potion of Cold Resistance; or two Flaming Oils.~
+@2051  = ~Elixir of Health~
+@2052  = ~Potion of Strength~
+@2053  = ~Potion of Perception~
+@2054  = ~Potion of Fire Resistance~
+@2055  = ~Potion of Cold Resistance~
+@2056  = ~Flaming Oil~
+@2057  = ~Inside of this glass pot is an special mixture of oil and other chemicals. When this mixture is set ablaze, it burns for several seconds at a very hot temperature. Flaming oil is sometimes difficult to use because it takes a long time for the user to properly throw it. Adventurers often carry oil with them to deal with trolls.
+
+STATISTICS:
+
+When thrown at a target, the glass pot breaks, spreading flaming oil over everything within a 5-ft. radius and doing 2d8 points of fire damage.
+
+Weight: 0
+~
+@2033  = ~Flaming Weapon~
+@2034  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
+@2035  = ~Poison Weapon (Toxin)~
+@2036  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
+@2037  = ~Poison Weapon (Paralytic)~
+@2038  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds.~
+@2041  = ~Armor Class Bonus~
+@2042  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class upon the rogue.~
+@2043  = ~Saving Throws Bonus~
+@2044  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
+@2045  = ~Contingency (Escape)~
+@2046  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
+@2061  = ~To-Hit Bonus~
+@2062  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
+@2063  = ~Backstab Bonus~
+@2064  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
+@2065  = ~Melee Trick (Trip)~
+@2066  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
+@2067  = ~Melee Trick (Disarm)~
+@2068  = ~Melee Trick (Disarm): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
+@2069  = ~Melee Trick (Blind)~
+@2070  = ~Melee Trick (Blind): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff.~
+@2071  = ~Melee Trick (Disrupt)~
+@2072  = ~Melee Trick (Disrupt): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
+@2081  = ~Smoke Bomb + Grease Jar~
+@2082  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
+@2083  = ~Grease Jar~
+@2084  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
+@2085  = ~Smoke Bomb~
+@2086  = ~Smoke Bomb: this ability mimics the effects of the wizard spell Stinking Cloud. Everyone in the area of effect must make a saving throw or be paralyzed with retching and spasms by the noxious gas.~
+@2087  = ~Use Wands~
+@2088  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
+@2089  = ~Use Scrolls~
+@2090  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
+@2091  = ~Luck Bonus~
+@2092  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
+@2097  = ~Maze Trap~
+@2098  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
+@2101   = ~alchemist~
+@2102   = ~Alchemist~
+@2103   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
+
+Abilities:
+- Begins with the following rogue feats at 1st level: Basic Alchemy, Flaming Weapon, and Grease Jar/Smoke Bomb.
+- May learn to use the poisons of the Assassin and the Hunter.
+- May repeat learning the Basic Alchemy feat, resulting in the ability to create two potions per day.
+- After devoting two feats to Basic Alchemy, two new feats become available: Advanced Alchemy, which allows for the creation of more powerful and tactically useful potions; and Hulking Transformation, which allows the Alchemist to turn into a powerful brute, at a cost to <PRO_HISHER> own Strength and Constitution.
+- While most rogues may choose the Advanced Alchemy feat as an HLA, Alchemists may choose a more powerful version: High-Level Alchemy.
+
+ADVANCED ALCHEMY: this ability allows the Alchemist to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.
+
+Disadvantages:
+- Alchemists have no backstab multiplier by default, and may not raise it via feats.
+- May not learn any combat feats.~
+@2105  = ~Advanced Alchemy~
+@2106  = ~Advanced Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
+@2107  = ~Potion of Regeneration~
+@2108  = ~Oil of Speed~
+@2109  = ~Potion of Clarity~
+@2110  = ~Potion of Mind Focusing~
+@2111  = ~Potion of Invisibility~
+@2112  = ~Potion of Fiery Burning~
+@2115  = ~High-Level Alchemy~
+@2116  = ~High-Level Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: two Potions of Extra-Healing; a Potion of Giant Strength; a Potion of Power; a Potion of Magic Shielding; a Potion of Freedom; or a Potion of Fire Breath.~
+@2117  = ~Potion of Extra Healing~
+@2118  = ~Potion of Giant Strength~
+@2119  = ~Potion of Power~
+@2120  = ~Potion of Magic Shielding~
+@2121  = ~Potion of Freedom~
+@2122  = ~Potion Fire Breath~
+@2125  = ~Hulking Transformation~
+@2126  = ~Hulking Transformation: by taking this feat, the Alchemist causes changes in <PRO_HISHER> own body. This enables the ability to trigger a change causing the Alchemist to grow to monstrous proportions, with brutish strength and a tough leathery hide, for one turn once per day. But there is a long-term cost, a toll on the Alchemist's health that manifests as a permanent -1 penalty to Strength and Constitution.~
+@2127  = ~Brute Fist~
+@2128  = ~Hulking Brute~
 @2210   = ~Quickstride~
 @2211   = ~Normal Stride~
+@2251  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
+
+Abilities:
+- +20% to Move Silently and Hide In Shadows.
+- May achieve one level higher proficiency than normal with short swords and daggers.
+- May set traps, with a success rate that begins at 30% and increases by 3% per level.
+- May use Backstab ability, although for a lower damage multiplier than Thieves:
+  Level 1-8: x2
+  Level 9-16: x3
+  Level 17+: x4
+
+Restrictions:
+- May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
+~
+@2252  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
+
+Abilities:
+- +20% to Move Silently and Hide In Shadows.
+- May achieve Grand Mastery (+++++) with short swords and daggers.
+- May set traps, with a success rate that begins at 30% and increases by 3% per level.
+- May use Backstab ability, although for a lower damage multiplier than Thieves:
+  Level 1-8: x2
+  Level 9-16: x3
+  Level 17+: x4
+
+Restrictions:
+- May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
+~
+@2253  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
+
+Abilities:
+- +20% to Move Silently and Hide In Shadows.
+- May achieve Grand Mastery (+++++) with short swords and daggers.
+- May set traps, with a success rate that begins at 30% and increases by 3% per level.
+- At every third level from 3 to 18, may choose to learn a Rogue Feat from those available to Hunters:
+
+ROGUE FEATS:
+- Stealth Bonus
+- Set Spike Trap
+- Set Dart Trap (prerequisite: Spike Trap)
+- Brew Potions
+- Flaming Weapon (prerequisite: Brew Potions)
+- Paralytic Poison (prerequisite: Brew Potions)
+- Backstab Bonus (prerequisite: THAC0 Bonus)
+- Trip Opponent (prerequisite: THAC0 Bonus)
+- Disarm Opponent (prerequisite: THAC0 Bonus)
+- Blind Opponent (prerequisite: THAC0 Bonus)
+- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Grease Jar
+- Smoke Bomb
+
+Restrictions:
+- May not wear armor heavier than studded leather.
+- May not use rangers' Charm Animal ability
+~
 @2301   = ~ARCHER: The Archer is the epitome of skill with the bow, able to make almost any shot, no matter how difficult. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
@@ -76,6 +323,28 @@ Disadvantages:
 – May only wear leather, studded leather, and hide armors (and elven chain).
 – May only become Proficient (one slot) with melee weapons.
 – May not use the Charm Animal ability.~
+@2350  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
+
+Advantages:
+- +15% to Move Silently and Hide In Shadows.
+- May shapeshift into a wolf at 1st level, and into a werewolf at 6th level.
+- At 1st level, may summon a Spirit Wolf. The HD of the spirit animal increases to match the ranger's level at 3rd, 5th, 7th and 10th level.
+- 8th level: May cast an enhanced Animal Summoning as a 1st level spell.
+- 10th level: May cast an enhanced Animal Summoning as a 2nd level spell.
+- 12th level: May cast an enhanced Animal Summoning as a 3rd level spell.
+
+Disadvantages:
+- May not use any large metal weapons (for example: swords, halberds, war hammers, or morning stars).
+- May not wear armor heavier than studded leather.~
+@2351  = ~Shapeshift Natural Form~
+@2352  = ~Shapeshift: Wolf~
+@2353  = ~Shapeshift: Werewolf~
+@2354  = ~Claw~
+@2355  = ~Wolf~
+@2356  = ~Dire Wolf~
+@2357  = ~Werewolf~
+@2358  = ~Wolfwere~
+@2359  = ~Greater Wolfwere~
 @2502   = ~BERSERKER: This is a warrior who, during combat, can achieve an ecstatic state of mind that will enable him to fight longer, harder, and more savagely than any person has a right to. Berserkers tend to be barbarian-like in nature, but not always. Sometimes it is a conscious choice that a warrior in training makes. Regardless, opponents on the battlefield will be unsettled when they see the savage and inhuman elements of the Berserker's personality. This class is common amongst dwarves, known to them as the Battlerager.
 
 Abilities:
@@ -130,85 +399,6 @@ The character is enraged for 5 rounds, which grants a +4 bonus to Strength and C
 @2507   = ~Rage~
 @2508   = ~Berserking~
 @2509   = ~Fighter Style Proficiencies~
-@2551  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
-
-Abilities:
-- +20% to Move Silently and Hide In Shadows.
-- May achieve one level higher proficiency than normal with short swords and daggers.
-- May set traps, with a success rate that begins at 30% and increases by 3% per level.
-- May use Backstab ability, although for a lower damage multiplier than Thieves:
-  Level 1-8: x2
-  Level 9-16: x3
-  Level 17+: x4
-
-Restrictions:
-- May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
-@2552  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
-
-Abilities:
-- +20% to Move Silently and Hide In Shadows.
-- May achieve Grand Mastery (+++++) with short swords and daggers.
-- May set traps, with a success rate that begins at 30% and increases by 3% per level.
-- May use Backstab ability, although for a lower damage multiplier than Thieves:
-  Level 1-8: x2
-  Level 9-16: x3
-  Level 17+: x4
-
-Restrictions:
-- May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
-@2553  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
-
-Abilities:
-- +20% to Move Silently and Hide In Shadows.
-- May achieve Grand Mastery (+++++) with short swords and daggers.
-- May set traps, with a success rate that begins at 30% and increases by 3% per level.
-- At every third level from 3 to 18, may choose to learn a Rogue Feat from those available to Hunters:
-
-ROGUE FEATS:
-- Stealth Bonus
-- Set Spike Trap
-- Set Dart Trap (prerequisite: Spike Trap)
-- Brew Potions
-- Flaming Weapon (prerequisite: Brew Potions)
-- Paralytic Poison (prerequisite: Brew Potions)
-- Backstab Bonus (prerequisite: THAC0 Bonus)
-- Trip Opponent (prerequisite: THAC0 Bonus)
-- Disarm Opponent (prerequisite: THAC0 Bonus)
-- Blind Opponent (prerequisite: THAC0 Bonus)
-- Disrupt Magic (prerequisite: THAC0 Bonus)
-- Grease Jar
-- Smoke Bomb
-
-Restrictions:
-- May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
-@2560  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
-
-Advantages:
-- +15% to Move Silently and Hide In Shadows.
-- May shapeshift into a wolf at 1st level, and into a werewolf at 6th level.
-- At 1st level, may summon a Spirit Wolf. The HD of the spirit animal increases to match the ranger's level at 3rd, 5th, 7th and 10th level.
-- 8th level: May cast an enhanced Animal Summoning as a 1st level spell.
-- 10th level: May cast an enhanced Animal Summoning as a 2nd level spell.
-- 12th level: May cast an enhanced Animal Summoning as a 3rd level spell.
-
-Disadvantages:
-- May not use any large metal weapons (for example: swords, halberds, war hammers, or morning stars).
-- May not wear armor heavier than studded leather.~
-@2561  = ~Shapeshift Natural Form~
-@2562  = ~Shapeshift: Wolf~
-@2563  = ~Shapeshift: Werewolf~
-@2564  = ~Claw~
-@2565  = ~Wolf~
-@2566  = ~Dire Wolf~
-@2567  = ~Werewolf~
-@2568  = ~Wolfwere~
-@2569  = ~Greater Wolfwere~
 @2599  = ~Abilities:
 - Access to the spheres of: Life, Protection, Vigor, Animal, Plant, Air, Light.~
 @2601  = ~Kensai (bastard sword)~
@@ -985,7 +1175,6 @@ Abilities:
 Restrictions:
 - Suffers a -1 penalty to Strength and Constitution.
 - May not use Charm Animal ability.
-
 ~
 @3506  = ~Mage Hunters participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.~
 @3508  = ~Vocal Disruption~
@@ -1051,150 +1240,12 @@ Restrictions:
 @3930  = ~Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.~
 @3931  = ~Disrupt~
 @3932  = ~Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.~
-@4001  = ~Use this ability to learn a rogue feat~
-@4002  = ~THIEF: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Thief to make.
-
-CLASS FEATURES:
-
-- May not wear armor heavier than studded leather.
-- May not equip shields larger than bucklers.
-- May only use the following weapons: long sword, short sword, katana, scimitar, dagger, club, quarterstaff, crossbow, shortbow, dart, sling.
-- May only become Proficient (one slot) in any weapon class.
-- May only become Proficient (one slot) in any fighting style.
-- May distribute 20 points per level (30 at level 1) in thieving abilities: Open Locks, Pick Pockets, Find Traps, Move Silently, Hide In Shadows, Detect Illusion, Set Traps.
-- Starts with base scores of 10% in Open Locks, 5% in Find Traps, 15% in Pick Pockets, 10% in Move Silently, and 5% in Hide in Shadows.
-- May backstab for increased damage:
-  Level 1-8: x2
-  Level 9-17: x3
-  Level 18+: x4
-- May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
-
-ROGUE FEATS: 
-- Stealth Bonus (Hide in Shadows/Move Silently)
-- Thieving Bonus (Pick Pockets/Open Locks)
-- Detection Bonus (Find Traps/Detect Illusion)
-- Set Dart Trap
-- Brew Potions
-- Flaming Weapon (prerequisite: Brew Potions)
-- Armor Class Bonus
-- Saving Throw Bonus (prerequisite: AC Bonus)
-- THAC0 Bonus
-- Backstab  Bonus (prerequisite: THAC0 Bonus)
-- Trip Opponent (prerequisite: THAC0 Bonus)
-- Disarm Opponent (prerequisite: THAC0 Bonus)
-- Blind Opponent (prerequisite: THAC0 Bonus)
-- Disrupt Magic (prerequisite: THAC0 Bonus)
-- Grease Jar
-- Smoke Bomb
-- Use Wands (prerequisite: 15+ Intelligence)
-- Use Scrolls (prerequisite: 17+ Intelligence)
-- Miscellaneous: Luck Bonus
-
-CLASS RESTRICTIONS:
-- Alignment restricted to any except lawful good.
-- Hit Die: d6
-
-Prime Requisites For Dual-Classing: Dexterity~
-@4003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
-
-Abilities:
-- Begins with the following rogue feats at 1st level: Stealth Bonus, THAC0 Bonus, and Melee Trick: Blind Opponent.
-- May learn the Backstab Bonus feat up to three times, reaching a possible maximum multiplier of x7.
-- May learn a special Assassin-only feat: Poison Weapon (Toxin). For each time the assassin chooses this feat, the poison ability may be used one per day.
-~
-@4004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
-
-Abilities:
-- Begins with the following rogue feats at 1st level: Detection Bonus, Spike Trap, and Brew Potions
-- May learn three special feats unique to Hunters: Fire Trap, Web Trap, and Poison Weapon (Paralytic).
-~
-@4005  = ~hunter~
-@4006  = ~Hunter~
-@4007  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
-
-Abilities:
-- Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Melee Trick: Trip Opponent.
-- May repeat learning the AC Bonus and THAC0 Bonus feats, up to four times each.
-- May learn a special Swashbuckler-only feat: Contingency (Escape). This will allow the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
-- May Specialize (two slots) in any melee weapon available to Thieves.
-- May place 3 slots into Two-Weapon Style.
-
-Disadvantages:
-- Swashbucklers have no backstab multipliers by default; they may raise it to a maximum of x2 by choosing the Backstab Bonus feat.
-- May not learn any trap-setting feats.
-~
-@4008  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
-
-Abilities:
-- Begins with the following rogue feats at 1st level: Stealth Bonus, Smoke Bomb, Grease Jar, and Saving Throws Bonus.
-- May learn a special Shadowdancer-only feat: Shadow Pool. This magical ability can mimic one of the following spells: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep.
-
-Disadvantages:
-- Alignment restricted to any non-lawful.
-- -1 to base backstab multiplier compared to an unkitted Thief
-
-Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
-@4009  = ~~
-@4010  = ~Use this ability to choose from among the rogue feats~
-@4011  = ~Stealth Bonus~
-@4012  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
-@4013  = ~Thieving Bonus~
-@4014  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
-@4015  = ~Detection Bonus~
-@4016  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
-@4021  = ~Spike Trap~
-@4022  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
-@4023  = ~Dart Trap~
-@4024  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.~
-@4025  = ~Fire Trap~
-@4026  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
-@4027  = ~Web Trap~
-@4028  = ~Web Trap: this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect.~
-@4031  = ~Brew Potions~
-@4032  = ~Brew Potions: using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Strength; Potion of Perception; Potion of Fire Resistance; or Potion of Cold Resistance.~
-@4051  = ~Elixir of Health~
-@4052  = ~Potion of Strength~
-@4053  = ~Potion of Perception~
-@4054  = ~Potion of Fire Resistance~
-@4055  = ~Potion of Cold Resistance~
-@4033  = ~Flaming Weapon~
-@4034  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
-@4035  = ~Poison Weapon (Toxin)~
-@4036  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
-@4037  = ~Poison Weapon (Paralytic)~
-@4038  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds.~
-@4041  = ~Armor Class Bonus~
-@4042  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class upon the rogue.~
-@4043  = ~Saving Throws Bonus~
-@4044  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
-@4045  = ~Contingency (Escape)~
-@4046  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
-@4061  = ~To-Hit Bonus~
-@4062  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
-@4063  = ~Backstab Bonus~
-@4064  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
-@4065  = ~Melee Trick (Trip)~
-@4066  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
-@4067  = ~Melee Trick (Disarm)~
-@4068  = ~Melee Trick (Disarm): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
-@4069  = ~Melee Trick (Blind)~
-@4070  = ~Melee Trick (Blind): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff.~
-@4071  = ~Melee Trick (Disrupt)~
-@4072  = ~Melee Trick (Disrupt): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
-@4081  = ~Smoke Bomb + Grease Jar~
-@4082  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
-@4083  = ~Grease Jar~
-@4084  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
-@4085  = ~Smoke Bomb~
-@4086  = ~Smoke Bomb: this ability mimics the effects of the wizard spell Stinking Cloud. Everyone in the area of effect must make a saving throw or be paralyzed with retching and spasms by the noxious gas.~
-@4087  = ~Use Wands~
-@4088  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
-@4089  = ~Use Scrolls~
-@4090  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
-@4091  = ~Luck Bonus~
-@4092  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
-@4097  = ~Maze Trap~
-@4098  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
+@3933  = ~Tactics~
+@3934  = ~Tactics: this gives the warrior a permanent ability to supervise and direct those around him, resulting in either a +1 AC bonus, or a +1 thac0 bonus, for all party members within 20 feet. The warrior is not affected by this bonus, and may only use one tactical ability at a time.~
+@3935  = ~Tactics: Formation~
+@3936  = ~Tactics (Formation): the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
+@3937  = ~Tactics: Discipline~
+@3938  = ~Tactics (Discipline): the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
 @4101  = ~sniper~ 
 @4102  = ~Sniper~
 @4103  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.

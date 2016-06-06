@@ -60,7 +60,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
 	  END
 	END
   BUT_ONLY
@@ -73,7 +73,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
 	  END
 	END
   BUT_ONLY
@@ -86,13 +86,13 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2560)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
 	  END
 	END
   BUT_ONLY
 END
 //ACTION_IF ENGINE_IS ~tob~ BEGIN
-//	STRING_SET 25212 @2560
+//	STRING_SET 25212 @2350
 //END
 //__________________________________________________________________________________
 
@@ -100,33 +100,33 @@ END
 //BEASTMASTER SHAPECHANGING + SPIRIT WOLF____________________________________________
 //
 COPY ~might_and_guile/ranger/d5_rnnf.spl~ ~override~
-	SAY NAME1 @2561
-	SAY UNIDENTIFIED_DESC @2561
+	SAY NAME1 @2351
+	SAY UNIDENTIFIED_DESC @2351
 COPY ~might_and_guile/ranger/d5_rnwlf.spl~ ~override~
-	SAY NAME1 @2562
-	SAY UNIDENTIFIED_DESC @2562
+	SAY NAME1 @2352
+	SAY UNIDENTIFIED_DESC @2352
 COPY ~might_and_guile/ranger/d5_rnww.spl~ ~override~
-	SAY NAME1 @2563
-	SAY UNIDENTIFIED_DESC @2563
+	SAY NAME1 @2353
+	SAY UNIDENTIFIED_DESC @2353
 COPY ~might_and_guile/ranger/d5_clwlf.itm~ ~override~
-	SAY NAME1 @2564
-	SAY UNIDENTIFIED_DESC @2564
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
 COPY ~might_and_guile/ranger/d5_clww1.itm~ ~override~
-	SAY NAME1 @2564
-	SAY UNIDENTIFIED_DESC @2564
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
 COPY ~might_and_guile/ranger/d5_clww2.itm~ ~override~
-	SAY NAME1 @2564
-	SAY UNIDENTIFIED_DESC @2564
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
 COPY ~might_and_guile/ranger/d5_wolf.cre~ ~override~
-	SAY NAME1 @2565
+	SAY NAME1 @2355
 COPY ~might_and_guile/ranger/d5_dire.cre~ ~override~
-	SAY NAME1 @2566
+	SAY NAME1 @2356
 COPY ~might_and_guile/ranger/d5_ww01.cre~ ~override~
-	SAY NAME1 @2567
+	SAY NAME1 @2357
 COPY ~might_and_guile/ranger/d5_ww02.cre~ ~override~
-	SAY NAME1 @2568
+	SAY NAME1 @2358
 COPY ~might_and_guile/ranger/d5_ww03.cre~ ~override~
-	SAY NAME1 @2569
+	SAY NAME1 @2359
 ACTION_IF (ENGINE_IS ~tob~) BEGIN
 	COPY_EXISTING ~clabrn04.2da~ ~override~
 		REPLACE_TEXTUALLY ~GA_SPCL342~ ~****      ~

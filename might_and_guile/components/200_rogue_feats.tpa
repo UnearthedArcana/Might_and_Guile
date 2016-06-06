@@ -715,6 +715,13 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
 	WRITE_SHORT 0x2f current BOR 0b00100000
   END
+  PATCH_IF (item_type = 9) BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b11111101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
 BUT_ONLY_IF_IT_CHANGES
 //end use scrolls/wands_____________________________________________________________
 

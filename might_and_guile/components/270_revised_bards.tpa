@@ -84,20 +84,25 @@ END
 
 //SKALD: SLOWER SPELLCASTING________________________________________________________
 //
+COPY ~might_and_guile/misc/d5_thac0.spl~ ~override~
+COPY_EXISTING ~clabba04.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bard/skald_clab.txt~
+
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
-//	COPY ~might_and_guile/misc/mxsplbr1.2da~ ~override/mxsplbrd.2da~
 	COPY_EXISTING ~mxsplbrd.2da~ ~override~
 		REPLACE_TEXTUALLY ~ 2~ ~ 1~
-	COPY_EXISTING ~mxsplbrd.2da~ ~override~
 		REPLACE_TEXTUALLY ~ 3~ ~ 2~
-	COPY_EXISTING ~mxsplbrd.2da~ ~override~
 		REPLACE_TEXTUALLY ~ 4~ ~ 3~
-	COPY_EXISTING ~mxsplbrd.2da~ ~override~
 		REPLACE_TEXTUALLY ~ 5~ ~ 4~
-	COPY_EXISTING ~mxsplbrd.2da~ ~override~
 		REPLACE_TEXTUALLY ~ 6~ ~ 5~
-	COPY_EXISTING ~mxsplbrd.2da~ ~override~
-		REPLACE_TEXTUALLY ~1   1   2   3   4   5~ ~1   2   3   4   5   6~
+		REPLACE_TEXTUALLY ~ 7~ ~ 6~
+		REPLACE_TEXTUALLY ~ 8~ ~ 7~
+		COUNT_2DA_COLS s_cols
+		FOR (s_col = 1; s_col < s_cols; ++s_col) BEGIN // iterate over columns
+			SET_2DA_ENTRY 2 (s_col - 1) 1 s_col
+		END	
+	PRETTY_PRINT_2DA
 	COPY_EXISTING ~clabba01.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
@@ -117,83 +122,39 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	COPY ~might_and_guile/bard/d5_basp4.spl~ ~override~
 	COPY ~might_and_guile/bard/d5_basp5.spl~ ~override~
 	COPY ~might_and_guile/bard/d5_basp6.spl~ ~override~
-	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 		COPY_EXISTING ~kitlist.2da~ ~override~
 			COUNT_2DA_ROWS ~10~ "rows"
-			PATCH_IF ( rows > 37 ) BEGIN
-				FOR ( index = 38 ; index < rows ; index = index + 1 ) BEGIN
-					READ_2DA_ENTRY %index% 5 10 modclab
-					READ_2DA_ENTRY %index% 8 10 modclass
-					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
-				END
+			FOR ( index = 31 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 10 modclab
+				READ_2DA_ENTRY %index% 8 10 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
 			END
-			BUT_ONLY
+		BUT_ONLY
 		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
 			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
 				COPY_EXISTING ~%coo%.2da~ ~override~
 					LPM remove_blank_lines
 					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
-					BUT_ONLY
-			END
-		END
-	END
-	ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
-		COPY_EXISTING ~kitlist.2da~ ~override~
-			COUNT_2DA_ROWS ~10~ "rows"
-			PATCH_IF ( rows > 40 ) BEGIN
-				FOR ( index = 41 ; index < rows ; index = index + 1 ) BEGIN
-					READ_2DA_ENTRY %index% 5 10 modclab
-					READ_2DA_ENTRY %index% 8 10 modclass
-					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
-				END
-			END
-			BUT_ONLY
-		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
-			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
-				COPY_EXISTING ~%coo%.2da~ ~override~
-					LPM remove_blank_lines
-					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
-					BUT_ONLY
-			END
-		END
-	END
-	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-		COPY_EXISTING ~kitlist.2da~ ~override~
-			COUNT_2DA_ROWS ~10~ "rows"
-			PATCH_IF ( rows > 41 ) BEGIN
-				FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
-					READ_2DA_ENTRY %index% 5 10 modclab
-					READ_2DA_ENTRY %index% 8 10 modclass
-					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
-				END
-			END
-			BUT_ONLY
-		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
-			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
-				COPY_EXISTING ~%coo%.2da~ ~override~
-					LPM remove_blank_lines
-					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
-					BUT_ONLY
+				BUT_ONLY
 			END
 		END
 	END
 	ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
 		COPY_EXISTING ~kitlist.2da~ ~override~
 			COUNT_2DA_ROWS ~9~ "rows"
-			PATCH_IF ( rows > 31 ) BEGIN
-				FOR ( index = 32 ; index < rows ; index = index + 1 ) BEGIN
-					READ_2DA_ENTRY %index% 5 9 modclab
-					READ_2DA_ENTRY %index% 8 9 modclass
-					DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
-				END
+			FOR ( index = 31 ; index < rows ; index = index + 1 ) BEGIN
+				READ_2DA_ENTRY %index% 5 9 modclab
+				READ_2DA_ENTRY %index% 8 9 modclass
+				DEFINE_ASSOCIATIVE_ARRAY d5_bardspell_clabs BEGIN "%modclab%" => "%modclass%" END
 			END
-			BUT_ONLY
+		BUT_ONLY
 		ACTION_PHP_EACH d5_bardspell_clabs AS coo => koo BEGIN
 			ACTION_IF (%koo% = 5) AND (FILE_EXISTS_IN_GAME ~%coo%.2da~) THEN BEGIN
 				COPY_EXISTING ~%coo%.2da~ ~override~
 					LPM remove_blank_lines
 					APPEND_FILE ~might_and_guile/bard/baspl1.txt~
-					BUT_ONLY
+				BUT_ONLY
 			END
 		END
 	END
@@ -319,14 +280,5 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 END
 //___________________________________________________________________________________
 
-
-/*
-//______________________HLAS________________________________________________________
-//
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
-	COPY_EXISTING ~LUBa0.2da~ ~override/luba2.2da~	
-END
-//__________________________________________________________________________________
-*/
 
 CLEAR_ARRAYS

@@ -79,7 +79,7 @@ SAY @4704
 
 //EE KIT EXTRAS_____________________________________________________________________
 // 
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@4705)
@@ -162,7 +162,7 @@ SAY @4704
 
 //EE KIT EXTRAS_____________________________________________________________________
 // 
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@4705)
@@ -206,19 +206,19 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_skspl.d5~ THEN BEGIN
-//		COPY ~might_and_guile/misc/mxsplbr1.2da~ ~override/mxsplbrd.2da~
 		COPY_EXISTING ~mxsplbrd.2da~ ~override~
 			REPLACE_TEXTUALLY ~ 2~ ~ 1~
-		COPY_EXISTING ~mxsplbrd.2da~ ~override~
 			REPLACE_TEXTUALLY ~ 3~ ~ 2~
-		COPY_EXISTING ~mxsplbrd.2da~ ~override~
 			REPLACE_TEXTUALLY ~ 4~ ~ 3~
-		COPY_EXISTING ~mxsplbrd.2da~ ~override~
 			REPLACE_TEXTUALLY ~ 5~ ~ 4~
-		COPY_EXISTING ~mxsplbrd.2da~ ~override~
 			REPLACE_TEXTUALLY ~ 6~ ~ 5~
-		COPY_EXISTING ~mxsplbrd.2da~ ~override~
-			REPLACE_TEXTUALLY ~1   1   2   3   4   5~ ~1   2   3   4   5   6~
+			REPLACE_TEXTUALLY ~ 7~ ~ 6~
+			REPLACE_TEXTUALLY ~ 8~ ~ 7~
+			COUNT_2DA_COLS s_cols
+			FOR (s_col = 1; s_col < s_cols; ++s_col) BEGIN // iterate over columns
+				SET_2DA_ENTRY 2 (s_col - 1) 1 s_col
+			END	
+		PRETTY_PRINT_2DA
 		COPY_EXISTING ~clabba01.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/bard/baspl1.txt~
@@ -252,7 +252,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 				END
 			END
 		END
-		ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+		ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 			COPY_EXISTING ~kitlist.2da~ ~override~
 				COUNT_2DA_ROWS ~10~ "rows"
 				PATCH_IF ( rows > 40 ) BEGIN

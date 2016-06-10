@@ -1,0 +1,515 @@
+//---------------------------------------------
+// qd_multiclass 
+// For adding existing kits to the multiclass kit selection during chargen.
+// For use with the Enhanced Infinity Engine v2.0 and later. 
+// Author: Aquadrizzt 
+// Version: 0.1 
+// Published: June 7, 2016 
+//---------------------------------------------
+
+OUTER_SPRINT qd_multiclass#version "0.1"
+
+DEFINE_ACTION_FUNCTION qd_multiclass 
+	STR_VAR 
+		kit_name = "" 
+		kit_clab = "" 
+		base_class = ""
+		mc_dir = "" 
+BEGIN 
+	
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma01.2da~ BEGIN
+	  COPY ~%mc_dir%/blankclab.2da~ ~clabma01.2da~
+	END
+
+	//this will only install the first time a multiclass kit using this macro is installed
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~qd_multi.qd~ BEGIN 
+		COPY_EXISTING ~CLABFI01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mcf_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mcf_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mcf_check% = 0) BEGIN 
+
+			APPEND ~CLABFI01.2da~ ~QD_MULTI     AP_QD_MCF01 AP_QD_MCF02 AP_QD_MCF03 AP_QD_MCF04 AP_QD_MCF05 AP_QD_MCF06 AP_QD_MCF07 AP_QD_MCF08 AP_QD_MCF09 AP_QD_MCF10 AP_QD_MCF11 AP_QD_MCF12 AP_QD_MCF13 AP_QD_MCF14 AP_QD_MCF15 AP_QD_MCF16 AP_QD_MCF17 AP_QD_MCF18 AP_QD_MCF19 AP_QD_MCF20 AP_QD_MCF21 AP_QD_MCF22 AP_QD_MCF23 AP_QD_MCF24 AP_QD_MCF25 AP_QD_MCF26 AP_QD_MCF27 AP_QD_MCF28 AP_QD_MCF29 AP_QD_MCF30 AP_QD_MCF31 AP_QD_MCF32 AP_QD_MCF33 AP_QD_MCF34 AP_QD_MCF35 AP_QD_MCF36 AP_QD_MCF37 AP_QD_MCF38 AP_QD_MCF39 AP_QD_MCF40 AP_QD_MCF41 AP_QD_MCF42 AP_QD_MCF43 AP_QD_MCF44 AP_QD_MCF45 AP_QD_MCF46 AP_QD_MCF47 AP_QD_MCF48 AP_QD_MCF49 AP_QD_MCF50~ //fighter
+		END 
+
+		COPY_EXISTING ~CLABTH01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mct_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mct_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mct_check% = 0) BEGIN 
+			APPEND ~CLABTH01.2da~ ~QD_MULTI     AP_QD_MCT01 AP_QD_MCT02 AP_QD_MCT03 AP_QD_MCT04 AP_QD_MCT05 AP_QD_MCT06 AP_QD_MCT07 AP_QD_MCT08 AP_QD_MCT09 AP_QD_MCT10 AP_QD_MCT11 AP_QD_MCT12 AP_QD_MCT13 AP_QD_MCT14 AP_QD_MCT15 AP_QD_MCT16 AP_QD_MCT17 AP_QD_MCT18 AP_QD_MCT19 AP_QD_MCT20 AP_QD_MCT21 AP_QD_MCT22 AP_QD_MCT23 AP_QD_MCT24 AP_QD_MCT25 AP_QD_MCT26 AP_QD_MCT27 AP_QD_MCT28 AP_QD_MCT29 AP_QD_MCT30 AP_QD_MCT31 AP_QD_MCT32 AP_QD_MCT33 AP_QD_MCT34 AP_QD_MCT35 AP_QD_MCT36 AP_QD_MCT37 AP_QD_MCT38 AP_QD_MCT39 AP_QD_MCT40 AP_QD_MCT41 AP_QD_MCT42 AP_QD_MCT43 AP_QD_MCT44 AP_QD_MCT45 AP_QD_MCT46 AP_QD_MCT47 AP_QD_MCT48 AP_QD_MCT49 AP_QD_MCT50~ //thief
+		END 
+
+		COPY_EXISTING ~CLABDR01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mcd_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mcd_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mcd_check% = 0) BEGIN 
+			APPEND ~CLABDR01.2da~ ~QD_MULTI     AP_QD_MCD01 AP_QD_MCD02 AP_QD_MCD03 AP_QD_MCD04 AP_QD_MCD05 AP_QD_MCD06 AP_QD_MCD07 AP_QD_MCD08 AP_QD_MCD09 AP_QD_MCD10 AP_QD_MCD11 AP_QD_MCD12 AP_QD_MCD13 AP_QD_MCD14 AP_QD_MCD15 AP_QD_MCD16 AP_QD_MCD17 AP_QD_MCD18 AP_QD_MCD19 AP_QD_MCD20 AP_QD_MCD21 AP_QD_MCD22 AP_QD_MCD23 AP_QD_MCD24 AP_QD_MCD25 AP_QD_MCD26 AP_QD_MCD27 AP_QD_MCD28 AP_QD_MCD29 AP_QD_MCD30 AP_QD_MCD31 AP_QD_MCD32 AP_QD_MCD33 AP_QD_MCD34 AP_QD_MCD35 AP_QD_MCD36 AP_QD_MCD37 AP_QD_MCD38 AP_QD_MCD39 AP_QD_MCD40 AP_QD_MCD41 AP_QD_MCD42 AP_QD_MCD43 AP_QD_MCD44 AP_QD_MCD45 AP_QD_MCD46 AP_QD_MCD47 AP_QD_MCD48 AP_QD_MCD49 AP_QD_MCD50~ //druid
+		END 
+
+		COPY_EXISTING ~CLABMA01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mcm_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mcm_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mcm_check% = 0) BEGIN 	
+			APPEND ~CLABMA01.2da~ ~QD_MULTI     AP_QD_MCM01 AP_QD_MCM02 AP_QD_MCM03 AP_QD_MCM04 AP_QD_MCM05 AP_QD_MCM06 AP_QD_MCM07 AP_QD_MCM08 AP_QD_MCM09 AP_QD_MCM10 AP_QD_MCM11 AP_QD_MCM12 AP_QD_MCM13 AP_QD_MCM14 AP_QD_MCM15 AP_QD_MCM16 AP_QD_MCM17 AP_QD_MCM18 AP_QD_MCM19 AP_QD_MCM20 AP_QD_MCM21 AP_QD_MCM22 AP_QD_MCM23 AP_QD_MCM24 AP_QD_MCM25 AP_QD_MCM26 AP_QD_MCM27 AP_QD_MCM28 AP_QD_MCM29 AP_QD_MCM30 AP_QD_MCM31 AP_QD_MCM32 AP_QD_MCM33 AP_QD_MCM34 AP_QD_MCM35 AP_QD_MCM36 AP_QD_MCM37 AP_QD_MCM38 AP_QD_MCM39 AP_QD_MCM40 AP_QD_MCM41 AP_QD_MCM42 AP_QD_MCM43 AP_QD_MCM44 AP_QD_MCM45 AP_QD_MCM46 AP_QD_MCM47 AP_QD_MCM48 AP_QD_MCM49 AP_QD_MCM50~ //mage
+		END 
+
+		COPY_EXISTING ~CLABPR01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mcp_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mcp_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mcp_check% = 0) BEGIN 	
+			APPEND ~CLABPR01.2da~ ~QD_MULTI     AP_QD_MCP01 AP_QD_MCP02 AP_QD_MCP03 AP_QD_MCP04 AP_QD_MCP05 AP_QD_MCP06 AP_QD_MCP07 AP_QD_MCP08 AP_QD_MCP09 AP_QD_MCP10 AP_QD_MCP11 AP_QD_MCP12 AP_QD_MCP13 AP_QD_MCP14 AP_QD_MCP15 AP_QD_MCP16 AP_QD_MCP17 AP_QD_MCP18 AP_QD_MCP19 AP_QD_MCP20 AP_QD_MCP21 AP_QD_MCP22 AP_QD_MCP23 AP_QD_MCP24 AP_QD_MCP25 AP_QD_MCP26 AP_QD_MCP27 AP_QD_MCP28 AP_QD_MCP29 AP_QD_MCP30 AP_QD_MCP31 AP_QD_MCP32 AP_QD_MCP33 AP_QD_MCP34 AP_QD_MCP35 AP_QD_MCP36 AP_QD_MCP37 AP_QD_MCP38 AP_QD_MCP39 AP_QD_MCP40 AP_QD_MCP41 AP_QD_MCP42 AP_QD_MCP43 AP_QD_MCP44 AP_QD_MCP45 AP_QD_MCP46 AP_QD_MCP47 AP_QD_MCP48 AP_QD_MCP49 AP_QD_MCP50~ //cleric
+		END
+
+		COPY_EXISTING ~CLABRN01.2da~ ~override~ //copy the clab of the base kit 
+			SET qd_mcr_check = 0 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				READ_2DA_ENTRY_FORMER rows row 0 rowname // read column value
+				PATCH_IF (~%rowname%~ STRING_EQUAL ~QD_MULTI~) BEGIN 
+					qd_mcr_check = 1
+				END 
+			END 
+
+		ACTION_IF (%qd_mcr_check% = 0) BEGIN 	
+			APPEND ~CLABRN01.2da~ ~QD_MULTI     AP_QD_MCR01 AP_QD_MCR02 AP_QD_MCR03 AP_QD_MCR04 AP_QD_MCR05 AP_QD_MCR06 AP_QD_MCR07 AP_QD_MCR08 AP_QD_MCR09 AP_QD_MCR10 AP_QD_MCR11 AP_QD_MCR12 AP_QD_MCR13 AP_QD_MCR14 AP_QD_MCR15 AP_QD_MCR16 AP_QD_MCR17 AP_QD_MCR18 AP_QD_MCR19 AP_QD_MCR20 AP_QD_MCR21 AP_QD_MCR22 AP_QD_MCR23 AP_QD_MCR24 AP_QD_MCR25 AP_QD_MCR26 AP_QD_MCR27 AP_QD_MCR28 AP_QD_MCR29 AP_QD_MCR30 AP_QD_MCR31 AP_QD_MCR32 AP_QD_MCR33 AP_QD_MCR34 AP_QD_MCR35 AP_QD_MCR36 AP_QD_MCR37 AP_QD_MCR38 AP_QD_MCR39 AP_QD_MCR40 AP_QD_MCR41 AP_QD_MCR42 AP_QD_MCR43 AP_QD_MCR44 AP_QD_MCR45 AP_QD_MCR46 AP_QD_MCR47 AP_QD_MCR48 AP_QD_MCR49 AP_QD_MCR50~ //cleric
+		END
+		
+		//making the empty multiclass spells	
+		COPY ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF50.SPL~ 
+			 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCT50.SPL~
+			 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCD50.SPL~
+			 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCM50.SPL~
+			 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCP50.SPL~
+			 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR01.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR02.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR03.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR04.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR05.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR06.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR07.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR08.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR09.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR10.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR11.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR12.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR13.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR14.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR15.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR16.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR17.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR18.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR19.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR20.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR21.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR22.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR23.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR24.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR25.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR26.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR27.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR28.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR29.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR30.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR31.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR32.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR33.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR34.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR35.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR36.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR37.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR38.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR39.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR40.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR41.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR42.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR43.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR44.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR45.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR46.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR47.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR48.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR49.SPL~ 
+			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR50.SPL~
+		
+		COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ //multiclass macro identifier file
+	END 
+
+	//getting kit code
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_COLS k_cols // amount of columns
+		READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
+		FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
+		  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
+		  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+			SET kit_row = %k_row%
+			READ_2DA_ENTRY_FORMER k_rows kit_row 9 kit_code
+		  END
+		END
+	BUT_ONLY
+	
+	//read clab
+	COPY_EXISTING ~%kit_clab%.2da~ ~override~ //copy the clab of the base kit 
+		COUNT_2DA_COLS cols // amount of columns
+		READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+		FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+			FOR (col = 1; col < cols; ++col) BEGIN // iterate over columns
+				READ_2DA_ENTRY_FORMER rows row col ability // read column value
+				// PATCH_PRINT ~%ability%~
+				PATCH_IF (NOT ~%ability%~ STRING_EQUAL ~****~) BEGIN 
+					LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END 
+					SET string_length = (STRING_LENGTH ~%ability%~) - 3
+					LPF SUBSTRING INT_VAR start = 3 length = EVAL ~%string_length%~  STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
+					PATCH_IF (~%string_length%~ > 7) BEGIN 
+						PATCH_PRINT ~Internal ability name too long~
+					END 
+					
+					PATCH_IF (~%string_length%~ <= 7) BEGIN 
+						//passive bonuses
+						PATCH_IF (~%abil_type%~ STRING_EQUAL ~AP_~) BEGIN 
+							//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
+							INNER_ACTION BEGIN 
+								COPY ~%mc_dir%/QD_MC_AP.eff~ ~override/%abil_new%#.eff~
+									WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
+									SET col_length = STRING_LENGTH ~%col%~
+								ACTION_IF (%col_length% = 1) BEGIN 
+									COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
+										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+								END 
+								ACTION_IF (%col_length% = 2) BEGIN
+									COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
+										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = ~%abil_new%#~ END  
+								END 
+							END 
+						END
+						
+						//granted abilities
+						PATCH_IF (~%abil_type%~ STRING_EQUAL ~GA_~) BEGIN 
+							//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
+							INNER_ACTION BEGIN 
+								COPY ~%mc_dir%/QD_MC_GA.eff~ ~override/%abil_new%#.eff~
+									WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
+									SET col_length = STRING_LENGTH ~%col%~
+								ACTION_IF (%col_length% = 1) BEGIN 
+									COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
+										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+								END 
+								ACTION_IF (%col_length% = 2) BEGIN
+									COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
+										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = ~%abil_new%#~ END  
+								END 
+							END 
+						END
+
+						//exceptions
+						PATCH_IF NOT ((~%abil_type%~ STRING_EQUAL ~GA_~) OR 
+									  (~%abil_type%~ STRING_EQUAL ~AP_~)) BEGIN 
+							PATCH_PRINT ~Error reading kit table~
+						END 
+					END 
+				END 
+			END 	
+		END 
+END 
+
+DEFINE_ACTION_FUNCTION qd_multiclass_tables 
+	STR_VAR 
+		mc_dir = ""
+BEGIN 
+	ACTION_FOR_EACH mc IN ~FM~ ~FC~ ~FT~ ~FMT~ ~MT~ ~CM~ ~CT~ ~FD~ ~FMC~ ~CR~ BEGIN 
+		ACTION_FOR_EACH race IN ~H~ ~D~ ~G~ ~E~ ~HE~ ~HL~ ~HO~ BEGIN 
+			ACTION_IF NOT FILE_EXISTS_IN_GAME ~K_%mc%_%race%.2da~ BEGIN
+				COPY ~%mc_dir%/blank_K_X_X.2da~ ~override/K_%mc%_%race%.2da~
+			END
+		END
+	END	
+END 

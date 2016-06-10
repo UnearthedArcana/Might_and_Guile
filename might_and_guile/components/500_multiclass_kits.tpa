@@ -619,7 +619,7 @@ ADD_KIT ~D5RANMAGE~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5RANMAGE     2 2 2 2 2 2 2 2~
-~D5RANMAGE     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5RANMAGE     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -649,16 +649,16 @@ ADD_KIT ~D5RANMAGE~
 ~might_and_guile/mc/d5_rama.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~~
+~K_MT_H K_MT_E K_MT_HE~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
-~0x00004000 4~
+~0x00004000 13~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~MT0~
+~FM0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
@@ -718,16 +718,16 @@ ADD_KIT ~D5RANMAGE~
 ~might_and_guile/mc/d5_rama.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~~
+~K_MT_H K_MT_E K_MT_HE~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
-~0x00004000 4~
+~0x00004000 13~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~MT0~
+~FM0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
@@ -760,6 +760,17 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANMAGE~ 
+		kit_clab = ~d5_rama~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
+
 //RANGER/MAGE ABILITY FILES___________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_rama.2da~ ~override~
@@ -772,50 +783,45 @@ COPY ~might_and_guile/mc/d5_rama.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/mc/d5_rama.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_rama.baf~
-COPY ~might_and_guile/mc/d5_nothf.spl~ ~override~
+COPY ~might_and_guile/mc/d5_nthf.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_1hpbo.spl~ ~override~
+COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_2hpbo.spl~ ~override~
+COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac1.spl~ ~override~
+COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac2.spl~ ~override~
-	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac3.spl~ ~override~
-	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac4.spl~ ~override~
-	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac5.spl~ ~override~
-	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac6.spl~ ~override~
-	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac7.spl~ ~override~
-	SAY NAME1 @6
-COPY_EXISTING ~sppr207.spl~ ~override/d5rama01.spl~ // goodberry
+COPY_EXISTING ~sppr207.spl~ ~override/D5RNM01.spl~ // goodberry
 //	WRITE_SHORT 0x1c 1
 //	WRITE_LONG 0x34 1
 	LPM spell_to_innate
-COPY_EXISTING ~sppr105.spl~ ~override/d5rama11.spl~ // entangle
+COPY_EXISTING ~sppr105.spl~ ~override/D5RNM11.spl~ // entangle
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr109.spl~ ~override/d5rama12.spl~ // sanctuary
+COPY_EXISTING ~sppr109.spl~ ~override/D5RNM12.spl~ // sanctuary
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr110.spl~ ~override/d5rama13.spl~ // shillelagh
+COPY_EXISTING ~sppr110.spl~ ~override/D5RNM13.spl~ // shillelagh
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr202.spl~ ~override/d5rama21.spl~ // barkskin
+COPY_EXISTING ~sppr202.spl~ ~override/D5RNM21.spl~ // barkskin
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr212.spl~ ~override/d5rama22.spl~ // slow poison
+COPY_EXISTING ~sppr212.spl~ ~override/D5RNM22.spl~ // slow poison
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr206.spl~ ~override/d5rama23.spl~ // flame blade
+COPY_EXISTING ~sppr206.spl~ ~override/D5RNM23.spl~ // flame blade
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr302.spl~ ~override/d5rama31.spl~ // call lightning
+COPY_EXISTING ~sppr302.spl~ ~override/D5RNM31.spl~ // call lightning
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr317.spl~ ~override/d5rama32.spl~ // cure disease
+COPY_EXISTING ~sppr317.spl~ ~override/D5RNM32.spl~ // cure disease
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr319.spl~ ~override/d5rama33.spl~ // summon insects
+COPY_EXISTING ~sppr319.spl~ ~override/D5RNM33.spl~ // summon insects
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr402.spl~ ~override/D5RNM42.spl~ // animal summ 1
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr409.spl~ ~override/D5RNM44.spl~ // death ward
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr501.spl~ ~override/D5RNM51.spl~ // animal summ 2
 	WRITE_SHORT 0x1c 1
 //__________________________________________________________________________________
 
+/*
 //ADD KIT TO MENUS____________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
@@ -835,6 +841,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
   END
 END
 //___________________________________________________________________________________
+*/
 
 /*
 //CHECK FOR R/C DRUID SPELLS____________________________________________________________
@@ -846,31 +853,31 @@ ACTION_IF FILE_EXISTS ~%USER_DIRECTORY%/Baldur.lua~ THEN BEGIN
 	PRINT @13
   END
   ELSE BEGIN
-	COPY_EXISTING ~sppr401.spl~ ~override/d5rama41.spl~ // csw
+	COPY_EXISTING ~sppr401.spl~ ~override/D5RNM41.spl~ // csw
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr402.spl~ ~override/d5rama42.spl~ // animal summ 1
+	COPY_EXISTING ~sppr402.spl~ ~override/D5RNM42.spl~ // animal summ 1
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr406.spl~ ~override/d5rama43.spl~ // defensive harmony
+	COPY_EXISTING ~sppr406.spl~ ~override/D5RNM43.spl~ // defensive harmony
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr409.spl~ ~override/d5rama44.spl~ // death ward
+	COPY_EXISTING ~sppr409.spl~ ~override/D5RNM44.spl~ // death ward
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr501.spl~ ~override/d5rama51.spl~ // animal summ 2
+	COPY_EXISTING ~sppr501.spl~ ~override/D5RNM51.spl~ // animal summ 2
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr502.spl~ ~override/d5rama52.spl~ // ccw
+	COPY_EXISTING ~sppr502.spl~ ~override/D5RNM52.spl~ // ccw
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr508.spl~ ~override/d5rama53.spl~ // chaotic commands
+	COPY_EXISTING ~sppr508.spl~ ~override/D5RNM53.spl~ // chaotic commands
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr602.spl~ ~override/d5rama61.spl~ // animal summ 3
+	COPY_EXISTING ~sppr602.spl~ ~override/D5RNM61.spl~ // animal summ 3
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr606.spl~ ~override/d5rama62.spl~ // fire seeds
+	COPY_EXISTING ~sppr606.spl~ ~override/D5RNM62.spl~ // fire seeds
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr607.spl~ ~override/d5rama63.spl~ // heal
+	COPY_EXISTING ~sppr607.spl~ ~override/D5RNM63.spl~ // heal
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr702.spl~ ~override/d5rama71.spl~ // earth elemental
+	COPY_EXISTING ~sppr702.spl~ ~override/D5RNM71.spl~ // earth elemental
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr711.spl~ ~override/d5rama72.spl~ // regeneration
+	COPY_EXISTING ~sppr711.spl~ ~override/D5RNM72.spl~ // regeneration
 		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr717.spl~ ~override/d5rama73.spl~ // creeping doom
+	COPY_EXISTING ~sppr717.spl~ ~override/D5RNM73.spl~ // creeping doom
 		WRITE_SHORT 0x1c 1
 	COPY_EXISTING ~d5_rama.2da~ ~override~
 		LPM remove_blank_lines

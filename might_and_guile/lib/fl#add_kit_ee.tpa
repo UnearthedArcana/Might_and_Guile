@@ -244,7 +244,7 @@ BEGIN
       END
       LPM fl#add_kit_ee#validate_kitlist_values
     BUT_ONLY
-
+/*
     LAF fl#add_kit_ee#validate
       INT_VAR
         kit_number
@@ -271,7 +271,7 @@ BEGIN
         sneakatt
         crippstr
     END
-
+*/
     COPY_EXISTING kitlist.2da override
       INNER_ACTION BEGIN
         COPY_EXISTING kit.ids override

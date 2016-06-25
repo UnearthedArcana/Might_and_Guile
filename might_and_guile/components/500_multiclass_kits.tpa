@@ -12,6 +12,12 @@
 COPY ~might_and_guile/mc/d5_multi.d5~ ~override~
 //__________________________________________________________________________________
 
+//COPY MARKER FILE_________________________________________________________________
+//
+LAF qd_multiclass_tables
+	STR_VAR mc_dir = ~might_and_guile/lib/qd_mc~ END
+//__________________________________________________________________________________
+
 //FnP KIT DESCRIPTION PATCHING__________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
@@ -127,7 +133,7 @@ ADD_KIT ~D5BLADS~
 ~might_and_guile/mc/d5_blads.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~~
+~K_FM_E~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -196,7 +202,7 @@ ADD_KIT ~D5BLADS~
 ~might_and_guile/mc/d5_blads.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~~
+~K_FM_E~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -231,6 +237,17 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5BLADS~ 
+		kit_clab = ~d5_blads~
+		base_class = ~F~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
+
 //BLADESINGER ABILITY FILES_____________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_blads.2da~ ~override~
@@ -245,13 +262,13 @@ COPY ~might_and_guile/mc/d5_blads.spl~ ~override~
 	SAY NAME1 @9
 COPY ~might_and_guile/mc/d5_blads.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_blads.baf~
-COPY ~might_and_guile/mc/d5_blad1.spl~ ~override~
+COPY ~might_and_guile/mc/d5_bld1.spl~ ~override~
 	SAY NAME1 @5023
 	SAY NAME2 @5023
 	SAY UNIDENTIFIED_DESC @5024
-COPY ~might_and_guile/mc/d5_bspr1.spl~ ~override~
+COPY ~might_and_guile/mc/d5bspr1.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/mc/d5_bspr2.spl~ ~override~
+COPY ~might_and_guile/mc/d5bspr2.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5_blada.spl~ ~override~
 	SAY NAME1 @6
@@ -261,11 +278,11 @@ COPY ~might_and_guile/mc/d5_bladb.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5_bladb.eff~ ~override~
 	SAY NAME1 @6
-ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ THEN BEGIN
-	COPY_EXISTING ~clabfi01.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/mc/bladesinger_clab.txt~
-END
+//ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ THEN BEGIN
+//	COPY_EXISTING ~clabfi01.2da~ ~override~
+//		LPM remove_blank_lines
+//		APPEND_FILE ~might_and_guile/mc/bladesinger_clab.txt~
+//END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_blads.2da~ ~override~
 		LPM remove_blank_lines
@@ -276,6 +293,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+/*
 //ADD KIT TO MENUS____________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
@@ -291,6 +309,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
   END
 END
 //___________________________________________________________________________________
+*/
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
@@ -619,7 +638,7 @@ ADD_KIT ~D5RANMAGE~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5RANMAGE     2 2 2 2 2 2 2 2~
-~D5RANMAGE     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5RANMAGE     2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 0 0 2 2 2 2 0 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR

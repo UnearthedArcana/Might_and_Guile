@@ -13,6 +13,108 @@ COPY ~might_and_guile/thief/d5_rfeat.d5~ ~override~
 //__________________________________________________________________________________
 
 
+//IMPROVE THAC0 TABLE_______________________________________________________________
+//
+COPY_EXISTING ~thac0.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	SET_2DA_ENTRY 2 3 cols ~19~
+	SET_2DA_ENTRY 2 6 cols ~17~
+	SET_2DA_ENTRY 2 9 cols ~15~
+	SET_2DA_ENTRY 2 12 cols ~13~
+	SET_2DA_ENTRY 2 15 cols ~11~
+	SET_2DA_ENTRY 2 18 cols ~9~
+	SET_2DA_ENTRY 2 21 cols ~7~
+	SET_2DA_ENTRY 6 3 cols ~19~
+	SET_2DA_ENTRY 6 6 cols ~17~
+	SET_2DA_ENTRY 6 9 cols ~15~
+	SET_2DA_ENTRY 6 12 cols ~13~
+	SET_2DA_ENTRY 6 15 cols ~11~
+	SET_2DA_ENTRY 6 18 cols ~9~
+	SET_2DA_ENTRY 6 21 cols ~7~
+	SET_2DA_ENTRY 13 3 cols ~19~
+	SET_2DA_ENTRY 13 6 cols ~17~
+	SET_2DA_ENTRY 13 9 cols ~15~
+	SET_2DA_ENTRY 13 12 cols ~13~
+	SET_2DA_ENTRY 13 15 cols ~11~
+	SET_2DA_ENTRY 13 18 cols ~9~
+	SET_2DA_ENTRY 13 21 cols ~7~
+	SET_2DA_ENTRY 14 3 cols ~19~
+	SET_2DA_ENTRY 14 6 cols ~17~
+	SET_2DA_ENTRY 14 9 cols ~15~
+	SET_2DA_ENTRY 14 12 cols ~13~
+	SET_2DA_ENTRY 14 15 cols ~11~
+	SET_2DA_ENTRY 14 18 cols ~9~
+	SET_2DA_ENTRY 14 21 cols ~7~
+	SET_2DA_ENTRY 20 3 cols ~19~
+	SET_2DA_ENTRY 20 6 cols ~17~
+	SET_2DA_ENTRY 20 9 cols ~15~
+	SET_2DA_ENTRY 20 12 cols ~13~
+	SET_2DA_ENTRY 20 15 cols ~11~
+	SET_2DA_ENTRY 20 18 cols ~9~
+	SET_2DA_ENTRY 20 21 cols ~7~
+	SET_2DA_ENTRY 3 4 cols ~18~
+	SET_2DA_ENTRY 3 5 cols ~18~
+	SET_2DA_ENTRY 3 6 cols ~17~
+	SET_2DA_ENTRY 3 7 cols ~16~
+	SET_2DA_ENTRY 3 8 cols ~16~
+	SET_2DA_ENTRY 3 9 cols ~15~
+	SET_2DA_ENTRY 3 10 cols ~14~
+	SET_2DA_ENTRY 3 11 cols ~14~
+	SET_2DA_ENTRY 3 12 cols ~13~
+	SET_2DA_ENTRY 3 13 cols ~12~
+	SET_2DA_ENTRY 3 14 cols ~12~
+	SET_2DA_ENTRY 3 15 cols ~11~
+	SET_2DA_ENTRY 3 16 cols ~10~
+	SET_2DA_ENTRY 3 17 cols ~10~
+	SET_2DA_ENTRY 3 18 cols ~9~
+	SET_2DA_ENTRY 3 19 cols ~8~
+	SET_2DA_ENTRY 3 20 cols ~8~
+	SET_2DA_ENTRY 3 21 cols ~7~
+	SET_2DA_ENTRY 4 4 cols ~18~
+	SET_2DA_ENTRY 4 5 cols ~18~
+	SET_2DA_ENTRY 4 6 cols ~17~
+	SET_2DA_ENTRY 4 7 cols ~16~
+	SET_2DA_ENTRY 4 8 cols ~16~
+	SET_2DA_ENTRY 4 9 cols ~15~
+	SET_2DA_ENTRY 4 10 cols ~14~
+	SET_2DA_ENTRY 4 11 cols ~14~
+	SET_2DA_ENTRY 4 12 cols ~13~
+	SET_2DA_ENTRY 4 13 cols ~12~
+	SET_2DA_ENTRY 4 14 cols ~12~
+	SET_2DA_ENTRY 4 15 cols ~11~
+	SET_2DA_ENTRY 4 16 cols ~10~
+	SET_2DA_ENTRY 4 17 cols ~10~
+	SET_2DA_ENTRY 4 18 cols ~9~
+	SET_2DA_ENTRY 4 19 cols ~8~
+	SET_2DA_ENTRY 4 20 cols ~8~
+	SET_2DA_ENTRY 4 21 cols ~7~
+	SET_2DA_ENTRY 12 4 cols ~18~
+	SET_2DA_ENTRY 12 5 cols ~18~
+	SET_2DA_ENTRY 12 6 cols ~17~
+	SET_2DA_ENTRY 12 7 cols ~16~
+	SET_2DA_ENTRY 12 8 cols ~16~
+	SET_2DA_ENTRY 12 9 cols ~15~
+	SET_2DA_ENTRY 12 10 cols ~14~
+	SET_2DA_ENTRY 12 11 cols ~14~
+	SET_2DA_ENTRY 12 12 cols ~13~
+	SET_2DA_ENTRY 12 13 cols ~12~
+	SET_2DA_ENTRY 12 14 cols ~12~
+	SET_2DA_ENTRY 12 15 cols ~11~
+	SET_2DA_ENTRY 12 16 cols ~10~
+	SET_2DA_ENTRY 12 17 cols ~10~
+	SET_2DA_ENTRY 12 18 cols ~9~
+	SET_2DA_ENTRY 12 19 cols ~8~
+	SET_2DA_ENTRY 12 20 cols ~8~
+	SET_2DA_ENTRY 12 21 cols ~7~
+	FOR (col = 22; col < cols; ++col) BEGIN // iterate over rows
+		SET_2DA_ENTRY 3 col cols ~6~
+		SET_2DA_ENTRY 4 col cols ~6~
+		SET_2DA_ENTRY 12 col cols ~6~
+	END
+BUT_ONLY		
+//__________________________________________________________________________________
+
+
 //REVISED KITS______________________________________________________________________
 //
 INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
@@ -399,7 +501,6 @@ COPY ~might_and_guile/thief/d5_clalc.itm~ ~override~
 	SAY UNIDENTIFIED_DESC @2127
 COPY ~might_and_guile/thief/d5_alch.cre~ ~override~
 	SAY NAME1 @2128
-	SAY UNIDENTIFIED_DESC @2128
 
 COPY ~might_and_guile/thief/d5_rfc8.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfc8.spl~ ~override~

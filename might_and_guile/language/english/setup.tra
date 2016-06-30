@@ -54,6 +54,8 @@
 @480   = ~Add the Meistersinger (bard kit)~
 @490   = ~Add the Loresinger (bard kit)~
 @500   = ~Add Multiclass Kits~
+//
+//
 @2000  = ~Rogue~
 @2001  = ~Use this ability to learn a rogue feat~
 @2002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
@@ -74,25 +76,28 @@ CLASS FEATURES:
 - May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
 
 ROGUE FEATS: 
-- Stealth Bonus (Hide in Shadows/Move Silently)
-- Thieving Bonus (Pick Pockets/Open Locks)
-- Detection Bonus (Find Traps/Detect Illusion)
+- Stealth Bonus (HiS/MS)
+- Thieving Bonus (PP/OL)
+- Detection Bonus (FT/DI)
 - Set Dart Trap
 - Basic Alchemy
-- Flaming Weapon (requires Alchemy)
+ -- Flaming Weapon
 - Armor Class Bonus
-- Saving Throw Bonus (requires AC Bonus)
+ -- Saving Throw Bonus
 - THAC0 Bonus
-- Backstab  Bonus (requires THAC0 Bonus)
-- Trip Opponent (requires THAC0 Bonus)
-- Disarm Opponent (requires THAC0 Bonus)
-- Blind Opponent (requires THAC0 Bonus)
-- Disrupt Magic (requires THAC0 Bonus)
+ -- Backstab Bonus
+ -- Trip Opponent
+ -- Disarm Opponent
+ -- Blind Opponent
+ -- Disrupt Magic
 - Grease Jar
 - Smoke Bomb
-- Use Wands (requires 15+ Intelligence)
-- Use Scrolls (requires 17+ Intelligence)
-- Miscellaneous: Luck Bonus
+ -- Use Wands (req. 15+ INT)
+ -- Use Scrolls (req. 17+ INT)
+- Luck Bonus
+- Telepathy (req. 15+ INT)
+
+Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points.
 
 CLASS RESTRICTIONS:
 - Alignment restricted to any except lawful good.
@@ -244,8 +249,25 @@ Disadvantages:
 @2126  = ~Hulking Transformation: by taking this feat, the Alchemist causes changes in <PRO_HISHER> own body. This enables the ability to trigger a change causing the Alchemist to grow to monstrous proportions, with brutish strength and a tough leathery hide, for one turn once per day. But there is a long-term cost, a toll on the Alchemist's health that manifests as a permanent -1 penalty to Strength and Constitution.~
 @2127  = ~Brute Fist~
 @2128  = ~Hulking Brute~
+@2131  = ~Telepathy~
+@2132  = ~Telepathy: this feat confers the Mind Thrust ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@2133  = ~Mind Thrust~
+@2134  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
+@2135  = ~Id Insinuation~
+@2136  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
+@2137  = ~Domination~
+@2138  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
+@2139  = ~Psychic Crush~
+@2140  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
+@2141  = ~Intellect Fortress~
+@2142  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain this shield is 10% of the rogue's max hit points.~
+@2143  = ~Cancel Intellect Fortress~
+//
+//
 @2210   = ~Quickstride~
 @2211   = ~Normal Stride~
+//
+//
 @2251  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
 Abilities:
@@ -259,8 +281,7 @@ Abilities:
 
 Restrictions:
 - May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
+- May not use rangers' Charm Animal ability~
 @2252  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
 Abilities:
@@ -274,8 +295,7 @@ Abilities:
 
 Restrictions:
 - May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
+- May not use rangers' Charm Animal ability~
 @2253  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
 Abilities:
@@ -301,8 +321,9 @@ ROGUE FEATS:
 
 Restrictions:
 - May not wear armor heavier than studded leather.
-- May not use rangers' Charm Animal ability
-~
+- May not use rangers' Charm Animal ability~
+//
+//
 @2301   = ~ARCHER: The Archer is the epitome of skill with the bow, able to make almost any shot, no matter how difficult. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
@@ -323,6 +344,8 @@ Disadvantages:
 – May only wear leather, studded leather, and hide armors (and elven chain).
 – May only become Proficient (one slot) with melee weapons.
 – May not use the Charm Animal ability.~
+//
+//
 @2350  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
 
 Advantages:
@@ -345,6 +368,8 @@ Disadvantages:
 @2357  = ~Werewolf~
 @2358  = ~Wolfwere~
 @2359  = ~Greater Wolfwere~
+//
+//
 @2502   = ~BERSERKER: This is a warrior who, during combat, can achieve an ecstatic state of mind that will enable him to fight longer, harder, and more savagely than any person has a right to. Berserkers tend to be barbarian-like in nature, but not always. Sometimes it is a conscious choice that a warrior in training makes. Regardless, opponents on the battlefield will be unsettled when they see the savage and inhuman elements of the Berserker's personality. This class is common amongst dwarves, known to them as the Battlerager.
 
 Abilities:
@@ -401,6 +426,8 @@ The character is enraged for 5 rounds, which grants a +4 bonus to Strength and C
 @2509   = ~Fighter Style Proficiencies~
 @2599  = ~Abilities:
 - Access to the spheres of: Life, Protection, Vigor, Animal, Plant, Air, Light.~
+//
+//
 @2601  = ~Kensai (bastard sword)~
 @2602  = ~KENSAI: This class's name, which means "sword saint" in the common tongue, refers to a warrior who has been specially trained to be one with a single chosen weapon - in this case, the bastard sword. The kensai is deadly, fast, and trained to fight without the protection of armor. 
 
@@ -691,6 +718,8 @@ Restrictions:
 - May not use missile weapons.
 - May not dual-class.
 ~
+//
+//
 @2651   = ~MONK: these meditative warriors who pursue perfection through contemplation as well as action. They are versatile fighters, especially skilled in combat without weapons or armor. Though Monks cannot cast spells, they have a unique magic of their own: they channel a subtle energy, called ki, which allows them to perform amazing feats. The Monk's best known feat is their ability to stun an opponent with an unarmed blow.
 
 CLASS FEATURES:
@@ -771,6 +800,8 @@ QUIVERING PALM: The next successful attack forces the opponent to save vs. Spell
 @2654   = ~Invoking this ability, a monk can concentrate ki energy to boost unarmed attacks. His fists will glow with a pale fire, doing lethal crushing and magic damage against enemies.~
 @2655   = ~Normal Fist~
 @2656   = ~By using this ability a monk powers down his fists. He can still make unarmed attacks with formidable skill, but the damage done will be non-magical and non-lethal.~
+//
+//
 @2703  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
 
 Abilities:
@@ -828,6 +859,8 @@ Restrictions:
 - One fewer spell per level.
 - Only has one quarter the normal Pick Pockets score.
 ~
+//
+//
 @2751  = ~shadowdancer~
 @2752  = ~Shadowdancer~
 @2753  = ~SHADOWDANCER: Shadowdancers can harness the power of magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled Thieves are able to blend seamlessly into the shadows in ways that a normal Thief cannot, striking without warning—sometimes with supernatural speed.
@@ -865,6 +898,8 @@ This allows the Shadowdancer to use one of the following five abilities:
   4) Shadow Door
   5) Shadowstep
 ~
+//
+//
 @3101  = ~corsair~
 @3102  = ~Corsair~
 @3103  = ~CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.
@@ -957,6 +992,8 @@ Restrictions:
 - May only specialize (++) with ranged weapons and medium-weight blunt weapons.
 - May not wear heavier armor than studded leather.
 ~
+//
+//
 @3200  = ~ARCHER: The Archer is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
  
 Abilities:
@@ -1026,16 +1063,18 @@ Restrictions:
 In addition to normal damage, all successful ranged attacks within the next round will pin the target to the spot for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
 @3213  = ~Called Shot: Trip~
 @3214  = ~Called Shot: Trip
-In addition to normal damage, all successful ranged attacks within the next round will Slow the target for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
+In addition to normal damage, all successful ranged attacks within the next round will cause the target to fall down for round unless the target makes a successful saving throw vs. breath weapon.~
 @3215  = ~Called Shot: Fumble~
 @3216  = ~Called Shot: Fumble
 In addition to normal damage, all successful ranged attacks within the next round will cause the target to fumble his weapon, resulting in -3 penalties to thac0 and AC for 12 seconds and reduced APR, unless the target makes a successful saving throw vs. paralyzation.~
 @3217  = ~Called Shot: Hammer Shot~
 @3218  = ~Called Shot: Hammer Shot
-In addition to normal damage, all successful ranged attacks within the next round will cause an extra 2d4 points of crushing damage, unless the target makes a successful saving throw vs. breath weapon.~
+In addition to normal damage, all successful ranged attacks within the next round will cause an extra 1d4 points of crushing damage, unless the target makes a successful saving throw vs. breath weapon.~
 @3219  = ~Called Shot: Tangle~
 @3220  = ~Called Shot: Tangle
 In addition to normal damage, all successful ranged attacks within the next round will cause the target to become Slowed for 12 seconds, unless the target makes a successful saving throw vs. breath weapon.~
+//
+//
 @3221  = ~elven archer~
 @3222  = ~Elven Archer~
 @3223  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
@@ -1091,6 +1130,8 @@ In addition to normal damage, all successful ranged attacks within the next roun
 @3235  = ~Called Shot: Faerie Fire~
 @3236  = ~Called Shot: Faerie Fire
 In addition to normal damage, all successful ranged attacks within the next round will light up the target with green flame for 24 seconds, preventing invisibility and causing a -3 penalty to AC and thac0, unless the target makes a successful saving throw vs. spells.~
+//
+//
 @3241  = ~slinger~
 @3242  = ~Slinger~
 @3243  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
@@ -1160,6 +1201,8 @@ Restrictions:
 @3251  = ~Called Shot: Stun~
 @3252  = ~Called Shot: Stun
 In addition to normal damage, all successful ranged attacks within the next round will stun the target for 3 seconds unless the target makes a successful saving throw vs. paralyzation.~
+//
+//
 @3503  = ~mage hunter~
 @3504  = ~Mage Hunter~
 @3505  = ~MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.
@@ -1183,6 +1226,8 @@ Restrictions:
 Mage Hunters have learned to produce a coarse, groaning shout that is of a particular frequency that affects the inner ear of nearby spellcasters. Such spellcasters must make a saving throw vs. Petrification or be somewhat deafened and suffer a 40% chance of spell failure for 5 rounds. The effort involved in producing this sound is such that Mage Hunters cannot perform the feat very often before needing to rest their vocal cords.~
 @3510  = ~Abilities:
 - Access to the spheres of: Life, Protection, Vigor, Plant, Air, Light, Magic.~
+//
+//
 @3604  = ~barbarian ranger~
 @3605  = ~Barbarian Ranger~
 @3606  = ~BARBARIAN RANGER: Among barbarian tribes there are hunters of great skill. Spending many days alone in the wild, stalking their prey, they are closer to nature than most men. They are not quite as hardy as their more aggressive brethren, and tend to be loners. Yet they bring uncommon skills to bear both in providing for, and in defending, their tribe.
@@ -1216,6 +1261,8 @@ Restrictions:
 - May not wear armor heavier than studded leather or hide armor
 - May not dual-class.
 ~
+//
+//
 @3909  = ~Choose a feat~
 @3910  = ~Use this ability to choose one of the 10 warrior feats~
 @3911  = ~Parry~
@@ -1246,6 +1293,8 @@ Restrictions:
 @3936  = ~Tactics (Formation): the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
 @3937  = ~Tactics: Discipline~
 @3938  = ~Tactics (Discipline): the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
+//
+//
 @4101  = ~sniper~ 
 @4102  = ~Sniper~
 @4103  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
@@ -1284,6 +1333,8 @@ Restrictions:
 @4111  = ~Called Shot: Blind~
 @4112  = ~Called Shot: Blind
 In addition to normal damage, all successful ranged attacks within the next round will blind the target for 6 seconds unless the target makes a successful saving throw vs. paralyzation.~
+//
+//
 @4202  = ~scout~
 @4203  = ~Scout~
 @4204  = ~SCOUT: While technically a member of the thief class, a scout does not burgle or murder. Scouts employ the dexterity and ingenuity of thieves for military purposes. They have skill in combat and with traps, but do not employ backstabs against enemies.
@@ -1324,6 +1375,8 @@ Restrictions:
 - May not dual-class to fighter.
 ~
 @4209  = ~This rogue is part acrobat, part duellist, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as dandies, and they generally make poor thieves. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm fails.~
+//
+//
 @4505  = ~jongleur~
 @4506  = ~Jongleur~
 @4507  = ~JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements. 
@@ -1354,6 +1407,8 @@ Restrictions:
 ~
 @4509  = ~These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements.~
 @4510  = ~Dance of Illusion~
+//
+//
 @4602  = ~loremaster~
 @4603  = ~Loremaster~
 @4604  = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
@@ -1367,6 +1422,8 @@ Restrictions:
 - Bard Song does not improve over time.
 ~
 @4605  = ~Loremasters are romantically entranced by the past. There is a fine line between Loremaster and sage. So fine that many Lore masters call themselves sages and are rarely questioned about it. However, true sages are knowledge specialists who concentrate their efforts into mastering a specific field such as mushrooms, elven swords, and so on. Loremasters are fond of any aspect of history that makes a good story.~
+//
+//
 @4702  = ~gallant~
 @4703  = ~Gallant~
 @4704  = ~GALLANT: Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.
@@ -1394,6 +1451,8 @@ Area of Effect: self
 Saving Throw: None 
 
 This spell protects the Gallant from all forms of death magic for the duration of the spell. This includes, but is not limited to, Disintegrate; Power Word, Kill; Death Spell; and Finger of Death.~
+//
+//
 @4802  = ~meistersinger~
 @4803  = ~Meistersinger~
 @4804  = ~MEISTERSINGER: These bards wander the woodlands, charming animals with their melodies and helping druids and rangers to protect nature. They are the enemies of ruthless hunters and trappers, striving against such activities with their animal allies, beguiling music, and nature-based magic.
@@ -1422,6 +1481,8 @@ Saving Throw: None
 
 This cantrip conjures a medium-sized rodent in the location of the caster's choosing.~
 @4810   = ~Rabbit~
+//
+//
 @4902  = ~loresinger~
 @4903  = ~Loresinger~
 @4904  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.
@@ -1436,6 +1497,8 @@ Restrictions:
 @4905  = ~Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.~
 @4906  = ~Song of Blessing~
 @4907  = ~Song of Warding~
+//
+//
 @5010   = ~CLERIC/RANGER: This character can use the abilities of a Cleric and a Ranger, though weapons are restricted to only those allowed by the Cleric's ethos.  This character may Specialize in any weapon a cleric can use.  Upon starting the game, this character will automatically become a kitted Woodscout of Mielikki, or, if an elf, a Forestwalker of Solonor Thelandira.  With the blessings of these forest deities, the Woodscout or Forestwalker may cast both cleric and druid spells of all levels.~
 @5011   = ~Woodscout of Mielikki~
 @5012   = ~Totem of Mielikki~

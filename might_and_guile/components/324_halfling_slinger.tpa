@@ -85,7 +85,7 @@ ADD_KIT ~D5SLING~
 ~might_and_guile/ranger/d5_sling.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~K_R_HL~
+~~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -154,7 +154,7 @@ ADD_KIT ~D5SLING~
 ~might_and_guile/ranger/d5_sling.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~K_R_HL~
+~~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -600,3 +600,16 @@ END
 
 END
 //__________________________________________________________________________________
+
+
+//REPLACE BASE RANGER WITH THIS KIT___________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ THEN BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS ~7~ "kit_row"
+	OUTER_SET kit_row -= 2
+	COPY_EXISTING ~K_R_HL.2da~ ~override~
+		REPLACE_TEXTUALLY ~0~ ~%kit_row%~
+	BUT_ONLY
+END
+//___________________________________________________________________________________

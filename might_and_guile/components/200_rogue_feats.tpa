@@ -138,7 +138,7 @@ ADD_KIT ~D5ALCHM~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5ALCHM       1 1 1 0 0 0 0 1~
-~D5ALCHM       1 1 1 0 0 0 0 1 0 1 1 0 0 0 1 1 0 1 0 0 0 0 0 1 1 1 1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5ALCHM       1 1 1 0 0 0 0 1 0 1 1 1 0 0 1 1 0 1 0 0 0 0 1 1 1 1 1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -698,14 +698,14 @@ COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 
 // pseudo-magical
 
-COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~
+COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~   //            grease jar
 	SAY NAME1 @2083 
 	SAY UNIDENTIFIED_DESC @2084
 	WRITE_ASCII 0x3a ~d5_rf81~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf81~ END
 	LPM spell_to_innate
 COPY ~might_and_guile/thief/d5_rf81.bam~ ~override~
-COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~
+COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~   //            smoke bomb
 	SAY NAME1 @2085
 	SAY UNIDENTIFIED_DESC @2086
 	WRITE_ASCII 0x3a ~d5_rf82~
@@ -719,7 +719,7 @@ COPY ~might_and_guile/thief/d5_rfh1.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf82~ END
 COPY ~might_and_guile/thief/d5_rfh1x.spl~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfh5.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rfh5.spl~ ~override~   //           shadow pool
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
 	WRITE_ASCII 0x3a ~d5_rf85~
@@ -735,7 +735,7 @@ COPY ~might_and_guile/thief/d5_shad1.2da~ ~override~
 
 //use scrolls/wands_________________________________________________________________
 //
-COPY ~might_and_guile/thief/d5_rfh3.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rfh3.spl~ ~override~   //           use wands
 	SAY NAME1 @2087
 	SAY UNIDENTIFIED_DESC @2088
 	WRITE_ASCII 0x3a ~d5_rf83~
@@ -745,7 +745,7 @@ COPY ~might_and_guile/thief/d5_rfh3.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfh3x.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf83n.spl~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfh4.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rfh4.spl~ ~override~   //           use scrolls
 	SAY NAME1 @2089
 	SAY UNIDENTIFIED_DESC @2090
 	WRITE_ASCII 0x3a ~d5_rf84~
@@ -828,12 +828,68 @@ BUT_ONLY_IF_IT_CHANGES
 
 // miscellaneous
 //
-COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~   //           luck bonus
 	SAY NAME1 ~Luck Bonus~
 	SAY UNIDENTIFIED_DESC ~Luck Bonus~
 	WRITE_ASCII 0x3a ~d5_rf91~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf91~ END
 COPY ~might_and_guile/thief/d5_rf91.bam~ ~override~
+
+// psionic
+//
+COPY ~might_and_guile/thief/d5_ps100.bam~ ~override~
+COPY ~might_and_guile/thief/d5psa00.spl~ ~override~   //           telepathy
+COPY ~might_and_guile/thief/d5_psa01.eff~ ~override~
+
+COPY ~might_and_guile/thief/d5psa01.spl~ ~override~   //           telepathy
+	SAY NAME1 @2131
+	SAY UNIDENTIFIED_DESC @2132
+COPY ~might_and_guile/thief/d5ps101.spl~ ~override~   //           mind thrust
+	SAY NAME1 @2133
+	SAY UNIDENTIFIED_DESC @2134
+COPY ~might_and_guile/thief/d5_ps101.bam~ ~override~
+COPY ~might_and_guile/thief/d5_ps101.eff~ ~override~
+
+COPY ~might_and_guile/thief/d5psa02.spl~ ~override~   //           id insinuation
+	SAY NAME1 @2135
+	SAY UNIDENTIFIED_DESC @2136
+COPY ~might_and_guile/thief/d5ps102.spl~ ~override~
+	SAY NAME1 @2135
+	SAY UNIDENTIFIED_DESC @2136
+COPY ~might_and_guile/thief/d5_ps102.bam~ ~override~
+COPY ~might_and_guile/thief/d5_ps102.eff~ ~override~
+
+COPY ~might_and_guile/thief/d5psa03.spl~ ~override~   //           domination
+	SAY NAME1 @2137
+	SAY UNIDENTIFIED_DESC @2138
+COPY ~might_and_guile/thief/d5ps103.spl~ ~override~
+	SAY NAME1 @2137
+	SAY UNIDENTIFIED_DESC @2138
+COPY ~might_and_guile/thief/d5_ps103.bam~ ~override~
+COPY ~might_and_guile/thief/d5_ps103.eff~ ~override~
+
+COPY ~might_and_guile/thief/d5psa04.spl~ ~override~   //           psychic crush
+	SAY NAME1 @2139
+	SAY UNIDENTIFIED_DESC @2140
+COPY ~might_and_guile/thief/d5ps104.spl~ ~override~
+	SAY NAME1 @2139
+	SAY UNIDENTIFIED_DESC @2140
+COPY ~might_and_guile/thief/d5_ps104.bam~ ~override~
+COPY ~might_and_guile/thief/d5_ps104.eff~ ~override~
+
+COPY ~might_and_guile/thief/d5psa05.spl~ ~override~   //           intellect fortress
+	SAY NAME1 @2141
+	SAY UNIDENTIFIED_DESC @2142
+COPY ~might_and_guile/thief/d5ps105.spl~ ~override~
+	SAY NAME1 @2141
+	SAY UNIDENTIFIED_DESC @2142
+COPY ~might_and_guile/thief/d5_ps105.bam~ ~override~
+COPY ~might_and_guile/thief/d5_ps105.eff~ ~override~
+COPY ~might_and_guile/thief/d5ps10e.spl~ ~override~
+	SAY NAME1 @2143
+	SAY UNIDENTIFIED_DESC @2143
+COPY ~might_and_guile/thief/d5_ps10e.bam~ ~override~
+
 
 //end feat ability files____________________________________________________________
 

@@ -1209,6 +1209,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
 			READ_BYTE 0x273 npc_class
 			PATCH_IF (npc_class = 4) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
 				READ_LONG 0x244 npc_kit
 				PATCH_IF (npc_kit = 0) BEGIN
 					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof10~ END
@@ -1250,6 +1253,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 				END
 			END
 			PATCH_IF (npc_class = 9 || npc_class = 15) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
 				READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
 				PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
 					READ_LONG 0x244 npc_kit
@@ -1292,6 +1298,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof09~ END
 					END
 				END
+			END
+			PATCH_IF (npc_class = 13) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
 			END
 		END
 	END

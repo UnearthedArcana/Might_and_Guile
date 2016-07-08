@@ -183,9 +183,9 @@ ADD_KIT ~D5ALCHM~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @2101
-SAY @2102
-SAY @2103
+SAY @20011
+SAY @20012
+SAY @20013
 //___________________________________________________________________________________
 
 //EE KIT EXTRAS_____________________________________________________________________
@@ -193,7 +193,7 @@ SAY @2103
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@2103)
+			briefdesc = RESOLVE_STR_REF (@20013)
 		STR_VAR
 			kit_name = D5ALCHM
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
@@ -237,15 +237,15 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	    SET patch_row = %row%
 	  END
 	END
-	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@2002)
-	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@2000)
-	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@2000)
-	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@2003)
-	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@2004)
-	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@2005)
-	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@2006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@2007)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@2008)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@20000)
+	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@20000)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
@@ -258,13 +258,13 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	    SET patch_row = %row%
 	  END
 	END
-	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@2002)
-	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@2003)
-	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@2004)
-	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@2005)
-	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@2006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@2007)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@2008)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
@@ -275,25 +275,25 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~ASSASIN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2003)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20003)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2004)
-		SET_2DA_ENTRY (%patch_row%) 2 cols RESOLVE_STR_REF (@2005)
-		SET_2DA_ENTRY (%patch_row%) 3 cols RESOLVE_STR_REF (@2006)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20004)
+		SET_2DA_ENTRY (%patch_row%) 2 cols RESOLVE_STR_REF (@20005)
+		SET_2DA_ENTRY (%patch_row%) 3 cols RESOLVE_STR_REF (@20006)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SWASHBUCKLER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2007)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20007)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SHADOWDANCER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2008)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2008)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
 	  END
 	END
   BUT_ONLY
@@ -305,38 +305,38 @@ END
 //
 // skills mastery
 
-COPY ~might_and_guile/thief/d5_rfa1.spl~ ~override~
-	SAY NAME1 @2011
-	SAY UNIDENTIFIED_DESC @2012
+COPY ~might_and_guile/thief/d5_rfa1.spl~ ~override~   // 			stealth bonus
+	SAY NAME1 @20001
+	SAY UNIDENTIFIED_DESC @20002
 	WRITE_ASCII 0x3a ~d5_rf11~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf11~ END
 COPY ~might_and_guile/thief/d5_rfaa.spl~ ~override~
-	SAY NAME1 @2011
-	SAY UNIDENTIFIED_DESC @2012
+	SAY NAME1 @20001
+	SAY UNIDENTIFIED_DESC @20002
 	WRITE_ASCII 0x3a ~d5_rf11~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf11~ END
 COPY ~might_and_guile/thief/d5_rf11.bam~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfa2.spl~ ~override~
-	SAY NAME1 @2013
-	SAY UNIDENTIFIED_DESC @2014
+COPY ~might_and_guile/thief/d5_rfa2.spl~ ~override~   // 			thieving bonus
+	SAY NAME1 @20003
+	SAY UNIDENTIFIED_DESC @20004
 	WRITE_ASCII 0x3a ~d5_rf12~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf12~ END
 COPY ~might_and_guile/thief/d5_rfab.spl~ ~override~
-	SAY NAME1 @2013
-	SAY UNIDENTIFIED_DESC @2014
+	SAY NAME1 @20003
+	SAY UNIDENTIFIED_DESC @20004
 	WRITE_ASCII 0x3a ~d5_rf12~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf12~ END
 COPY ~might_and_guile/thief/d5_rf12.bam~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfa3.spl~ ~override~
-	SAY NAME1 @2015
-	SAY UNIDENTIFIED_DESC @2016
+COPY ~might_and_guile/thief/d5_rfa3.spl~ ~override~   // 			detection bonus
+	SAY NAME1 @20005
+	SAY UNIDENTIFIED_DESC @20006
 	WRITE_ASCII 0x3a ~d5_rf13~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf13~ END
 COPY ~might_and_guile/thief/d5_rfac.spl~ ~override~
-	SAY NAME1 @2015
-	SAY UNIDENTIFIED_DESC @2016
+	SAY NAME1 @20005
+	SAY UNIDENTIFIED_DESC @20006
 	WRITE_ASCII 0x3a ~d5_rf13~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf13~ END
 COPY ~might_and_guile/thief/d5_rf13.bam~ ~override~
@@ -345,40 +345,40 @@ COPY ~might_and_guile/thief/d5_rf13.bam~ ~override~
 
 ADD_PROJECTILE ~might_and_guile/thief/d5trspik.pro~
 /*
-COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~
-	SAY NAME1 @2021
-	SAY UNIDENTIFIED_DESC @2022
+COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~   // 			spike trap
+	SAY NAME1 @20111
+	SAY UNIDENTIFIED_DESC @20112
 COPY ~might_and_guile/thief/d5_rfb1x.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
-	SAY NAME1 @2021
-	SAY UNIDENTIFIED_DESC @2022
+	SAY NAME1 @20111
+	SAY UNIDENTIFIED_DESC @20112
 COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
 */
 
-COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~
-	SAY NAME1 @2023
-	SAY UNIDENTIFIED_DESC @2024
+COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~   // 			dart trap
+	SAY NAME1 @20113
+	SAY UNIDENTIFIED_DESC @20114
 	WRITE_ASCII 0x3a ~d5_rf22~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf22~ END
 COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
-	SAY NAME1 @2023
-	SAY UNIDENTIFIED_DESC @2024
+	SAY NAME1 @20113
+	SAY UNIDENTIFIED_DESC @20114
 	WRITE_ASCII 0x3a ~d5_rf22~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf22~ END
 COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf22.bam~ ~override~
 
 ADD_PROJECTILE ~might_and_guile/thief/d5trfire.pro~
-COPY ~might_and_guile/thief/d5_rfb3.spl~ ~override~
-	SAY NAME1 @2025
-	SAY UNIDENTIFIED_DESC @2026
+COPY ~might_and_guile/thief/d5_rfb3.spl~ ~override~   // 			fire trap
+	SAY NAME1 @20115
+	SAY UNIDENTIFIED_DESC @20116
 	WRITE_ASCII 0x3a ~d5_rf23~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf23~ END
 COPY ~might_and_guile/thief/d5_rfb3.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf23.spl~ ~override~
-	SAY NAME1 @2025
-	SAY UNIDENTIFIED_DESC @2026
+	SAY NAME1 @20115
+	SAY UNIDENTIFIED_DESC @20116
 	WRITE_ASCII 0x3a ~d5_rf23~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf23~ END
 COPY ~might_and_guile/thief/d5_rf23b.spl~ ~override~
@@ -386,283 +386,312 @@ COPY ~might_and_guile/thief/d5_rf23b.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf23.bam~ ~override~
 
 ADD_PROJECTILE ~might_and_guile/thief/d5trweb.pro~
-COPY ~might_and_guile/thief/d5_rfb4.spl~ ~override~
-	SAY NAME1 @2027
-	SAY UNIDENTIFIED_DESC @2028
+COPY ~might_and_guile/thief/d5_rfb4.spl~ ~override~   // 			web trap
+	SAY NAME1 @20117
+	SAY UNIDENTIFIED_DESC @20118
 	WRITE_ASCII 0x3a ~d5_rf24~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf24~ END
 COPY ~might_and_guile/thief/d5_rfb4.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf24.spl~ ~override~
-	SAY NAME1 @2027
-	SAY UNIDENTIFIED_DESC @2028
+	SAY NAME1 @20117
+	SAY UNIDENTIFIED_DESC @20118
 	WRITE_ASCII 0x3a ~d5_rf24~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf24~ END
 COPY ~might_and_guile/thief/d5_rf24b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trweb% END
 COPY ~might_and_guile/thief/d5_rf24.bam~ ~override~
 
+COPY ~might_and_guile/thief/d5_rf2z.spl~ ~override~   // 			maze trap
+	SAY NAME1 @20129
+	SAY UNIDENTIFIED_DESC @20130
+COPY ~might_and_guile/thief/d5_rf2z.bam~ ~override~
+COPY ~might_and_guile/thief/d5_rf2zb.spl~ ~override~
+
 // alchemical
 
-COPY ~might_and_guile/thief/d5_rfc1.spl~ ~override~
-	SAY NAME1 @2031
-	SAY UNIDENTIFIED_DESC @2032
+COPY ~might_and_guile/thief/d5_rfc1.spl~ ~override~   // 			basic alchemy
+	SAY NAME1 @20131
+	SAY UNIDENTIFIED_DESC @20132
 	WRITE_ASCII 0x3a ~d5_rf31~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf31~ END
 	LPF ALTER_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16384 parameter1 = %al_code% STR_VAR resource = ~D5_RFC8~ END
 COPY ~might_and_guile/thief/d5_rf31.spl~ ~override~
-	SAY NAME1 @2031
-	SAY UNIDENTIFIED_DESC @2032
+	SAY NAME1 @20131
+	SAY UNIDENTIFIED_DESC @20132
 	WRITE_ASCII 0x3a ~d5_rf31~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf31~ END
 COPY ~might_and_guile/thief/d5_rf31.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf31.2da~ ~override~
 COPY ~might_and_guile/thief/d5_rf31a.spl~ ~override~
-	SAY NAME1 @2051
-	SAY UNIDENTIFIED_DESC @2051
+	SAY NAME1 @20133
+	SAY UNIDENTIFIED_DESC @20133
 COPY ~might_and_guile/thief/d5_rf31b.spl~ ~override~
-	SAY NAME1 @2052
-	SAY UNIDENTIFIED_DESC @2052
+	SAY NAME1 @20134
+	SAY UNIDENTIFIED_DESC @20134
 COPY ~might_and_guile/thief/d5_rf31c.spl~ ~override~
-	SAY NAME1 @2053
-	SAY UNIDENTIFIED_DESC @2053
+	SAY NAME1 @20135
+	SAY UNIDENTIFIED_DESC @20135
 COPY ~might_and_guile/thief/d5_rf31d.spl~ ~override~
-	SAY NAME1 @2054
-	SAY UNIDENTIFIED_DESC @2054
+	SAY NAME1 @20136
+	SAY UNIDENTIFIED_DESC @20136
 COPY ~might_and_guile/thief/d5_rf31e.spl~ ~override~
-	SAY NAME1 @2055
-	SAY UNIDENTIFIED_DESC @2055
+	SAY NAME1 @20137
+	SAY UNIDENTIFIED_DESC @20137
 COPY ~might_and_guile/thief/d5_rf31f.spl~ ~override~
-	SAY NAME1 @2056
-	SAY UNIDENTIFIED_DESC @2056
+	SAY NAME1 @20138
+	SAY UNIDENTIFIED_DESC @20138
 COPY ~might_and_guile/thief/d5_floil.itm~ ~override~
-	SAY NAME1 @2056
-	SAY NAME2 @2056
-	SAY UNIDENTIFIED_DESC @2057
+	SAY NAME1 @20138
+	SAY NAME2 @20138
+	SAY UNIDENTIFIED_DESC @20139
 COPY ~might_and_guile/thief/d5_floil.bam~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfc2.spl~ ~override~
-	SAY NAME1 @2033
-	SAY UNIDENTIFIED_DESC @2034
+COPY ~might_and_guile/thief/d5_rfc2.spl~ ~override~   // 			flaming weapon
+	SAY NAME1 @20151
+	SAY UNIDENTIFIED_DESC @20152
 	WRITE_ASCII 0x3a ~d5_rf32~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf32~ END
 COPY ~might_and_guile/thief/d5_rf32.spl~ ~override~
-	SAY NAME1 @2033
-	SAY UNIDENTIFIED_DESC @2034
+	SAY NAME1 @20151
+	SAY UNIDENTIFIED_DESC @20152
 	WRITE_ASCII 0x3a ~d5_rf32~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf32~ END
 COPY ~might_and_guile/thief/d5_rf32.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf32.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfc3.spl~ ~override~
-	SAY NAME1 @2035 
-	SAY UNIDENTIFIED_DESC @2036
+COPY ~might_and_guile/thief/d5_rfc3.spl~ ~override~   // 			toxic poison
+	SAY NAME1 @20161
+	SAY UNIDENTIFIED_DESC @20162
 	WRITE_ASCII 0x3a ~d5_rf33~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf33~ END
 COPY_EXISTING ~spcl423.spl~ ~override/d5_rf33.spl~
-	SAY NAME1 @2025
-	SAY UNIDENTIFIED_DESC @2036
+	SAY NAME1 @20161
+	SAY UNIDENTIFIED_DESC @20162
 	WRITE_ASCII 0x3a ~d5_rf33~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf33~ END
 COPY ~might_and_guile/thief/d5_rf33.bam~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfc4.spl~ ~override~
-	SAY NAME1 @2037
-	SAY UNIDENTIFIED_DESC @2038
+COPY ~might_and_guile/thief/d5_rfc4.spl~ ~override~   // 			paralytic poison
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
 	WRITE_ASCII 0x3a ~d5_rf34~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf34~ END
 COPY ~might_and_guile/thief/d5_rf34.spl~ ~override~
-	SAY NAME1 @2037
-	SAY UNIDENTIFIED_DESC @2038
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
 	WRITE_ASCII 0x3a ~d5_rf34~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf34~ END
 COPY ~might_and_guile/thief/d5_rf34.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf34a.spl~ ~override~
-	SAY NAME1 @2037
-	SAY UNIDENTIFIED_DESC @2038
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
 COPY ~might_and_guile/thief/d5_rf34.bam~ ~override~
 
 COPY ~might_and_guile/thief/d5_rfc7.eff~ ~override~
-COPY ~might_and_guile/thief/d5_rfc7.spl~ ~override~
-	SAY NAME1 @2125
-	SAY UNIDENTIFIED_DESC @2126
+COPY ~might_and_guile/thief/d5_rfc7.spl~ ~override~   // 		hulking transformation
+	SAY NAME1 @20171
+	SAY UNIDENTIFIED_DESC @20172
 	WRITE_ASCII 0x3a ~d5_rf37~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf37~ END
 COPY ~might_and_guile/thief/d5_rf37.spl~ ~override~
-	SAY NAME1 @2125
-	SAY UNIDENTIFIED_DESC @2126
+	SAY NAME1 @20171
+	SAY UNIDENTIFIED_DESC @20172
 	WRITE_ASCII 0x3a ~d5_rf37~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf37~ END
 COPY ~might_and_guile/thief/d5_rf37.bam~ ~override~
 COPY ~might_and_guile/thief/d5_alnf.spl~ ~override~
-	SAY NAME1 @2351
-	SAY UNIDENTIFIED_DESC @2351
+	SAY NAME1 @40
+	SAY UNIDENTIFIED_DESC @40
 COPY ~might_and_guile/thief/d5_clalc.itm~ ~override~
-	SAY NAME1 @2127
-	SAY UNIDENTIFIED_DESC @2127
+	SAY NAME1 @20173
+	SAY UNIDENTIFIED_DESC @20173
 COPY ~might_and_guile/thief/d5_alch.cre~ ~override~
-	SAY NAME1 @2128
+	SAY NAME1 @20174
 
-COPY ~might_and_guile/thief/d5_rfc8.eff~ ~override~
+COPY ~might_and_guile/thief/d5_rfc8.eff~ ~override~   // 			2nd basic alchemy
 COPY ~might_and_guile/thief/d5_rfc8.spl~ ~override~
-	SAY NAME1 @2031
-	SAY UNIDENTIFIED_DESC @2032
+	SAY NAME1 @20131
+	SAY UNIDENTIFIED_DESC @20132
 	WRITE_ASCII 0x3a ~d5_rf31~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf31~ END
 
-COPY ~might_and_guile/thief/d5_rfc9.spl~ ~override~
-	SAY NAME1 @2105
-	SAY UNIDENTIFIED_DESC @2106
+COPY ~might_and_guile/thief/d5_rfc9.spl~ ~override~   // 			advanced alchemy
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
 	WRITE_ASCII 0x3a ~d5_rf39~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf39~ END
 COPY ~might_and_guile/thief/d5_rf39.spl~ ~override~
-	SAY NAME1 @2105
-	SAY UNIDENTIFIED_DESC @2106
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
 	WRITE_ASCII 0x3a ~d5_rf39~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf39~ END
 COPY ~might_and_guile/thief/d5_rf39.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf39.2da~ ~override~
 COPY ~might_and_guile/thief/d5_rf39a.spl~ ~override~
-	SAY NAME1 @2107
-	SAY UNIDENTIFIED_DESC @2107
+	SAY NAME1 @20183
+	SAY UNIDENTIFIED_DESC @20183
 COPY ~might_and_guile/thief/d5_rf39b.spl~ ~override~
-	SAY NAME1 @2108
-	SAY UNIDENTIFIED_DESC @2108
+	SAY NAME1 @20184
+	SAY UNIDENTIFIED_DESC @20184
 COPY ~might_and_guile/thief/d5_rf39c.spl~ ~override~
-	SAY NAME1 @2109
-	SAY UNIDENTIFIED_DESC @2109
+	SAY NAME1 @20185
+	SAY UNIDENTIFIED_DESC @20185
 COPY ~might_and_guile/thief/d5_rf39d.spl~ ~override~
-	SAY NAME1 @2110
-	SAY UNIDENTIFIED_DESC @2110
+	SAY NAME1 @20186
+	SAY UNIDENTIFIED_DESC @20186
 COPY ~might_and_guile/thief/d5_rf39e.spl~ ~override~
-	SAY NAME1 @2111
-	SAY UNIDENTIFIED_DESC @2111
+	SAY NAME1 @20187
+	SAY UNIDENTIFIED_DESC @20187
 COPY ~might_and_guile/thief/d5_rf39f.spl~ ~override~
-	SAY NAME1 @2112
-	SAY UNIDENTIFIED_DESC @2112
+	SAY NAME1 @20188
+	SAY UNIDENTIFIED_DESC @20188
 
 COPY ~might_and_guile/thief/d5_rfc0.spl~ ~override~
-	SAY NAME1 @2105
-	SAY UNIDENTIFIED_DESC @2106
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
 	WRITE_ASCII 0x3a ~d5_rf39~
+
+COPY ~might_and_guile/thief/d5_rf3z.spl~ ~override~    // 			high-level alchemy
+	SAY NAME1 @20191
+	SAY UNIDENTIFIED_DESC @20192
+COPY ~might_and_guile/thief/d5_rf3z.2da~ ~override~
+COPY ~might_and_guile/thief/d5_rf3za.spl~ ~override~
+	SAY NAME1 @20193
+	SAY UNIDENTIFIED_DESC @20193
+COPY ~might_and_guile/thief/d5_rf3zb.spl~ ~override~
+	SAY NAME1 @20194
+	SAY UNIDENTIFIED_DESC @20194
+COPY ~might_and_guile/thief/d5_rf3zc.spl~ ~override~
+	SAY NAME1 @20195
+	SAY UNIDENTIFIED_DESC @20195
+COPY ~might_and_guile/thief/d5_rf3zd.spl~ ~override~
+	SAY NAME1 @20196
+	SAY UNIDENTIFIED_DESC @20196
+COPY ~might_and_guile/thief/d5_rf3ze.spl~ ~override~
+	SAY NAME1 @20197
+	SAY UNIDENTIFIED_DESC @20197
+COPY ~might_and_guile/thief/d5_rf3zf.spl~ ~override~
+	SAY NAME1 @20198
+	SAY UNIDENTIFIED_DESC @20198
 
 // evasive
 
-COPY ~might_and_guile/thief/d5_rfd1.spl~ ~override~
-	SAY NAME1 @2041
-	SAY UNIDENTIFIED_DESC @2042
+COPY ~might_and_guile/thief/d5_rfd1.spl~ ~override~    // 			AC bonus
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
 	WRITE_ASCII 0x3a ~d5_rf41~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf41~ END
 COPY ~might_and_guile/thief/d5_rf41.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rfd2.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rfd2.spl~ ~override~
-	SAY NAME1 @2041
-	SAY UNIDENTIFIED_DESC @2042
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
 	WRITE_ASCII 0x3a ~d5_rf41~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf41~ END
 COPY ~might_and_guile/thief/d5_rfd3.spl~ ~override~
-	SAY NAME1 @2041
-	SAY UNIDENTIFIED_DESC @2042
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
 	WRITE_ASCII 0x3a ~d5_rf41~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf41~ END
 COPY ~might_and_guile/thief/d5_rfd4.spl~ ~override~
-	SAY NAME1 @2041
-	SAY UNIDENTIFIED_DESC @2042
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
 	WRITE_ASCII 0x3a ~d5_rf41~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf41~ END
 COPY ~might_and_guile/thief/d5_rfd5.spl~ ~override~
-	SAY NAME1 @2041
-	SAY UNIDENTIFIED_DESC @2042
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
 	WRITE_ASCII 0x3a ~d5_rf41~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf41~ END
 
-COPY ~might_and_guile/thief/d5_rfe1.spl~ ~override~
-	SAY NAME1 @2043
-	SAY UNIDENTIFIED_DESC @2044
+COPY ~might_and_guile/thief/d5_rfe1.spl~ ~override~   // 			save bonuses
+	SAY NAME1 @20211
+	SAY UNIDENTIFIED_DESC @20212
 	WRITE_ASCII 0x3a ~d5_rf51~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf51~ END
 COPY ~might_and_guile/thief/d5_rf51.bam~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfe2.spl~ ~override~
-	SAY NAME1 @2045
-	SAY UNIDENTIFIED_DESC @2046
+COPY ~might_and_guile/thief/d5_rfe2.spl~ ~override~   // 			escape
+	SAY NAME1 @20221
+	SAY UNIDENTIFIED_DESC @20222
 	WRITE_ASCII 0x3a ~d5_rf52~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf52~ END
 COPY ~might_and_guile/thief/d5_rf52.spl~ ~override~
-	SAY NAME1 @2045
-	SAY UNIDENTIFIED_DESC @2046
+	SAY NAME1 @20221
+	SAY UNIDENTIFIED_DESC @20222
 	WRITE_ASCII 0x3a ~d5_rf52~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf52~ END
 COPY ~might_and_guile/thief/d5_rf52.bam~ ~override~
 
 // combat 
 
-COPY ~might_and_guile/thief/d5_rff1.spl~ ~override~
-	SAY NAME1 @2061
-	SAY UNIDENTIFIED_DESC @2062
+COPY ~might_and_guile/thief/d5_rff1.spl~ ~override~   // 			thac0 bonus
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
 	WRITE_ASCII 0x3a ~d5_rf61~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf61~ END
 COPY ~might_and_guile/thief/d5_rf61.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rff2.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rff2.spl~ ~override~
-	SAY NAME1 @2061
-	SAY UNIDENTIFIED_DESC @2062
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
 	WRITE_ASCII 0x3a ~d5_rf61~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf61~ END
 COPY ~might_and_guile/thief/d5_rff3.spl~ ~override~
-	SAY NAME1 @2061
-	SAY UNIDENTIFIED_DESC @2062
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
 	WRITE_ASCII 0x3a ~d5_rf61~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf61~ END
 COPY ~might_and_guile/thief/d5_rff4.spl~ ~override~
-	SAY NAME1 @2061
-	SAY UNIDENTIFIED_DESC @2062
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
 	WRITE_ASCII 0x3a ~d5_rf61~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf61~ END
 COPY ~might_and_guile/thief/d5_rff5.spl~ ~override~
-	SAY NAME1 @2061
-	SAY UNIDENTIFIED_DESC @2062
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
 	WRITE_ASCII 0x3a ~d5_rf61~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf61~ END
 
-COPY ~might_and_guile/thief/d5_rff7.spl~ ~override~
-	SAY NAME1 @2063
-	SAY UNIDENTIFIED_DESC @2064
+COPY ~might_and_guile/thief/d5_rff7.spl~ ~override~   // 			backstab bonus
+	SAY NAME1 @20241
+	SAY UNIDENTIFIED_DESC @20242
 	WRITE_ASCII 0x3a ~d5_rf67~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf67~ END
 COPY ~might_and_guile/thief/d5_rf67.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rff8.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rff8.spl~ ~override~
-	SAY NAME1 @2063
-	SAY UNIDENTIFIED_DESC @2064
+	SAY NAME1 @20241
+	SAY UNIDENTIFIED_DESC @20242
 	WRITE_ASCII 0x3a ~d5_rf67~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf67~ END
 COPY ~might_and_guile/thief/d5_rff9.spl~ ~override~
-	SAY NAME1 @2063
-	SAY UNIDENTIFIED_DESC @2064
+	SAY NAME1 @20241
+	SAY UNIDENTIFIED_DESC @20242
 	WRITE_ASCII 0x3a ~d5_rf67~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf67~ END
 
-COPY ~might_and_guile/thief/d5_rfg1.spl~ ~override~
-	SAY NAME1 @2065
-	SAY UNIDENTIFIED_DESC @2066
+COPY ~might_and_guile/thief/d5_rfg1.spl~ ~override~   // 			trip
+	SAY NAME1 @20251
+	SAY UNIDENTIFIED_DESC @20252
 	WRITE_ASCII 0x3a ~d5_rf71~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf71~ END
 COPY ~might_and_guile/thief/d5_rf71.spl~ ~override~
-	SAY NAME1 @2065
-	SAY UNIDENTIFIED_DESC @2066
+	SAY NAME1 @20251
+	SAY UNIDENTIFIED_DESC @20252
 	WRITE_ASCII 0x3a ~d5_rf71~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf71~ END
 COPY ~might_and_guile/thief/d5_rf71.bam~ ~override~
 COPY ~might_and_guile/fighter/d5_wf07.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfg2.spl~ ~override~
-	SAY NAME1 @2067
-	SAY UNIDENTIFIED_DESC @2068
+COPY ~might_and_guile/thief/d5_rfg2.spl~ ~override~   // 			disarm
+	SAY NAME1 @20253
+	SAY UNIDENTIFIED_DESC @20254
 	WRITE_ASCII 0x3a ~d5_rf72~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf72~ END
 COPY ~might_and_guile/thief/d5_rf72.spl~ ~override~
-	SAY NAME1 @2067
-	SAY UNIDENTIFIED_DESC @2068
+	SAY NAME1 @20253
+	SAY UNIDENTIFIED_DESC @20254
 	WRITE_ASCII 0x3a ~d5_rf72~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf72~ END
 COPY ~might_and_guile/thief/d5_rf72.bam~ ~override~
@@ -670,27 +699,27 @@ COPY ~might_and_guile/thief/d5_rf72a.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf72b.eff~ ~override~
 COPY ~might_and_guile/thief/d5_rf72c.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfg3.spl~ ~override~
-	SAY NAME1 @2069
-	SAY UNIDENTIFIED_DESC @2070
+COPY ~might_and_guile/thief/d5_rfg3.spl~ ~override~   // 			blind
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
 	WRITE_ASCII 0x3a ~d5_rf73~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf73~ END
 COPY ~might_and_guile/thief/d5_rf73.spl~ ~override~
-	SAY NAME1 @2069
-	SAY UNIDENTIFIED_DESC @2070
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
 	WRITE_ASCII 0x3a ~d5_rf73~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf73~ END
 COPY ~might_and_guile/thief/d5_rf73.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rf73.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5_rfg4.spl~ ~override~
-	SAY NAME1 @2071
-	SAY UNIDENTIFIED_DESC @2072
+COPY ~might_and_guile/thief/d5_rfg4.spl~ ~override~   // 			disrupt
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
 	WRITE_ASCII 0x3a ~d5_rf74~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf74~ END
 COPY ~might_and_guile/thief/d5_rf74.spl~ ~override~
-	SAY NAME1 @2071
-	SAY UNIDENTIFIED_DESC @2072
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
 	WRITE_ASCII 0x3a ~d5_rf74~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf74~ END
 COPY ~might_and_guile/thief/d5_rf74.bam~ ~override~
@@ -699,22 +728,22 @@ COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 // pseudo-magical
 
 COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~   //            grease jar
-	SAY NAME1 @2083 
-	SAY UNIDENTIFIED_DESC @2084
+	SAY NAME1 @20273 
+	SAY UNIDENTIFIED_DESC @20274
 	WRITE_ASCII 0x3a ~d5_rf81~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf81~ END
 	LPM spell_to_innate
 COPY ~might_and_guile/thief/d5_rf81.bam~ ~override~
 COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~   //            smoke bomb
-	SAY NAME1 @2085
-	SAY UNIDENTIFIED_DESC @2086
+	SAY NAME1 @20275
+	SAY UNIDENTIFIED_DESC @20276
 	WRITE_ASCII 0x3a ~d5_rf82~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf82~ END
 	LPM spell_to_innate
 COPY ~might_and_guile/thief/d5_rf82.bam~ ~override~
 COPY ~might_and_guile/thief/d5_rfh1.spl~ ~override~
-	SAY NAME1 @2081
-	SAY UNIDENTIFIED_DESC @2082
+	SAY NAME1 @20271
+	SAY UNIDENTIFIED_DESC @20272
 	WRITE_ASCII 0x3a ~d5_rf82~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf82~ END
 COPY ~might_and_guile/thief/d5_rfh1x.spl~ ~override~
@@ -736,8 +765,8 @@ COPY ~might_and_guile/thief/d5_shad1.2da~ ~override~
 //use scrolls/wands_________________________________________________________________
 //
 COPY ~might_and_guile/thief/d5_rfh3.spl~ ~override~   //           use wands
-	SAY NAME1 @2087
-	SAY UNIDENTIFIED_DESC @2088
+	SAY NAME1 @20291
+	SAY UNIDENTIFIED_DESC @20292
 	WRITE_ASCII 0x3a ~d5_rf83~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf83~ END
 COPY ~might_and_guile/thief/d5_rf83.bam~ ~override~
@@ -746,8 +775,8 @@ COPY ~might_and_guile/thief/d5_rfh3x.spl~ ~override~
 COPY ~might_and_guile/thief/d5_rf83n.spl~ ~override~
 
 COPY ~might_and_guile/thief/d5_rfh4.spl~ ~override~   //           use scrolls
-	SAY NAME1 @2089
-	SAY UNIDENTIFIED_DESC @2090
+	SAY NAME1 @20293
+	SAY UNIDENTIFIED_DESC @20294
 	WRITE_ASCII 0x3a ~d5_rf84~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf84~ END
 COPY ~might_and_guile/thief/d5_rf84.bam~ ~override~
@@ -828,67 +857,121 @@ BUT_ONLY_IF_IT_CHANGES
 
 // miscellaneous
 //
-COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~   //           luck bonus
-	SAY NAME1 ~Luck Bonus~
-	SAY UNIDENTIFIED_DESC ~Luck Bonus~
+COPY ~might_and_guile/thief/d5_rfi1.spl~ ~override~   // 			luck bonus
+	SAY NAME1 @20299
+	SAY UNIDENTIFIED_DESC @20300
 	WRITE_ASCII 0x3a ~d5_rf91~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rf91~ END
 COPY ~might_and_guile/thief/d5_rf91.bam~ ~override~
 
 // psionic
 //
-COPY ~might_and_guile/thief/d5_ps100.bam~ ~override~
-COPY ~might_and_guile/thief/d5psa00.spl~ ~override~   //           telepathy
-COPY ~might_and_guile/thief/d5_psa01.eff~ ~override~
+COPY ~might_and_guile/psi/d5_ps100.bam~ ~override~
+COPY ~might_and_guile/psi/d5psa00.spl~ ~override~   // 				telepathy
+COPY ~might_and_guile/psi/d5_psa01.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5psa01.spl~ ~override~   //           telepathy
-	SAY NAME1 @2131
-	SAY UNIDENTIFIED_DESC @2132
-COPY ~might_and_guile/thief/d5ps101.spl~ ~override~   //           mind thrust
-	SAY NAME1 @2133
-	SAY UNIDENTIFIED_DESC @2134
-COPY ~might_and_guile/thief/d5_ps101.bam~ ~override~
-COPY ~might_and_guile/thief/d5_ps101.eff~ ~override~
+COPY ~might_and_guile/psi/d5psa01.spl~ ~override~   // 				telepathy
+	SAY NAME1 @20301
+	SAY UNIDENTIFIED_DESC @20302
+COPY ~might_and_guile/psi/d5ps101.spl~ ~override~   //  			mind thrust
+	SAY NAME1 @20303
+	SAY UNIDENTIFIED_DESC @20304
+COPY ~might_and_guile/psi/d5_ps101.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps101.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5psa02.spl~ ~override~   //           id insinuation
-	SAY NAME1 @2135
-	SAY UNIDENTIFIED_DESC @2136
-COPY ~might_and_guile/thief/d5ps102.spl~ ~override~
-	SAY NAME1 @2135
-	SAY UNIDENTIFIED_DESC @2136
-COPY ~might_and_guile/thief/d5_ps102.bam~ ~override~
-COPY ~might_and_guile/thief/d5_ps102.eff~ ~override~
+COPY ~might_and_guile/psi/d5psa02.spl~ ~override~   //  			id insinuation
+	SAY NAME1 @20305
+	SAY UNIDENTIFIED_DESC @20306
+COPY ~might_and_guile/psi/d5ps102.spl~ ~override~
+	SAY NAME1 @20305
+	SAY UNIDENTIFIED_DESC @20306
+COPY ~might_and_guile/psi/d5_ps102.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps102.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5psa03.spl~ ~override~   //           domination
-	SAY NAME1 @2137
-	SAY UNIDENTIFIED_DESC @2138
-COPY ~might_and_guile/thief/d5ps103.spl~ ~override~
-	SAY NAME1 @2137
-	SAY UNIDENTIFIED_DESC @2138
-COPY ~might_and_guile/thief/d5_ps103.bam~ ~override~
-COPY ~might_and_guile/thief/d5_ps103.eff~ ~override~
+COPY ~might_and_guile/psi/d5psa03.spl~ ~override~   // 				domination
+	SAY NAME1 @20307
+	SAY UNIDENTIFIED_DESC @20308
+COPY ~might_and_guile/psi/d5ps103.spl~ ~override~
+	SAY NAME1 @20307
+	SAY UNIDENTIFIED_DESC @20308
+COPY ~might_and_guile/psi/d5_ps103.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps103.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5psa04.spl~ ~override~   //           psychic crush
-	SAY NAME1 @2139
-	SAY UNIDENTIFIED_DESC @2140
-COPY ~might_and_guile/thief/d5ps104.spl~ ~override~
-	SAY NAME1 @2139
-	SAY UNIDENTIFIED_DESC @2140
-COPY ~might_and_guile/thief/d5_ps104.bam~ ~override~
-COPY ~might_and_guile/thief/d5_ps104.eff~ ~override~
+COPY ~might_and_guile/psi/d5psa04.spl~ ~override~   // 				psychic crush
+	SAY NAME1 @20309
+	SAY UNIDENTIFIED_DESC @20310
+COPY ~might_and_guile/psi/d5ps104.spl~ ~override~
+	SAY NAME1 @20309
+	SAY UNIDENTIFIED_DESC @20310
+COPY ~might_and_guile/psi/d5_ps104.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps104.eff~ ~override~
 
-COPY ~might_and_guile/thief/d5psa05.spl~ ~override~   //           intellect fortress
-	SAY NAME1 @2141
-	SAY UNIDENTIFIED_DESC @2142
-COPY ~might_and_guile/thief/d5ps105.spl~ ~override~
-	SAY NAME1 @2141
-	SAY UNIDENTIFIED_DESC @2142
-COPY ~might_and_guile/thief/d5_ps105.bam~ ~override~
-COPY ~might_and_guile/thief/d5_ps105.eff~ ~override~
-COPY ~might_and_guile/thief/d5ps10e.spl~ ~override~
-	SAY NAME1 @2143
-	SAY UNIDENTIFIED_DESC @2143
-COPY ~might_and_guile/thief/d5_ps10e.bam~ ~override~
+COPY ~might_and_guile/psi/d5psa05.spl~ ~override~   // 			intellect fortress
+	SAY NAME1 @20311
+	SAY UNIDENTIFIED_DESC @20312
+COPY ~might_and_guile/psi/d5ps105.spl~ ~override~
+	SAY NAME1 @20311
+	SAY UNIDENTIFIED_DESC @20312
+COPY ~might_and_guile/psi/d5_ps105.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps105.eff~ ~override~
+COPY ~might_and_guile/psi/d5ps10e.spl~ ~override~
+	SAY NAME1 @20313
+	SAY UNIDENTIFIED_DESC @20313
+COPY ~might_and_guile/psi/d5_ps10e.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5_ps200.bam~ ~override~  // 				telekinesis
+COPY ~might_and_guile/psi/d5psb01.spl~ ~override~
+	SAY NAME1 @20321
+	SAY UNIDENTIFIED_DESC @20322
+COPY ~might_and_guile/psi/d5ps201.spl~ ~override~   // 				root
+	SAY NAME1 @20323
+	SAY UNIDENTIFIED_DESC @20324
+COPY ~might_and_guile/psi/d5_ps201.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps201.eff~ ~override~
+
+COPY ~might_and_guile/psi/d5psb02.spl~ ~override~   // 				kinetic ram
+	SAY NAME1 @20325
+	SAY UNIDENTIFIED_DESC @20326
+COPY ~might_and_guile/psi/d5ps202.spl~ ~override~
+	SAY NAME1 @20325
+	SAY UNIDENTIFIED_DESC @20326
+COPY ~might_and_guile/psi/d5_ps202.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps202.eff~ ~override~
+
+COPY ~might_and_guile/psi/d5psb03.spl~ ~override~   // 				inertial barrier
+	SAY NAME1 @20327
+	SAY UNIDENTIFIED_DESC @20328
+COPY ~might_and_guile/psi/d5ps203.spl~ ~override~
+	SAY NAME1 @20327
+	SAY UNIDENTIFIED_DESC @20328
+COPY ~might_and_guile/psi/d5_ps203.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps203.eff~ ~override~
+
+COPY ~might_and_guile/psi/d5psb04.spl~ ~override~   // 				psychic knife
+	SAY NAME1 @20329
+	SAY UNIDENTIFIED_DESC @20330
+COPY ~might_and_guile/psi/d5ps204.spl~ ~override~
+	SAY NAME1 @20329
+	SAY UNIDENTIFIED_DESC @20330
+COPY ~might_and_guile/psi/d5_ps204.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps204.eff~ ~override~
+COPY ~might_and_guile/psi/d5psibla.itm~ ~override~
+	SAY NAME1 @20329
+	SAY UNIDENTIFIED_DESC @20329
+COPY ~might_and_guile/psi/d5psibla.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5psb05.spl~ ~override~   // 				free action
+	SAY NAME1 @20331
+	SAY UNIDENTIFIED_DESC @20332
+COPY ~might_and_guile/psi/d5ps205.spl~ ~override~
+	SAY NAME1 @20331
+	SAY UNIDENTIFIED_DESC @20332
+COPY ~might_and_guile/psi/d5_ps205.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps205.eff~ ~override~
+COPY ~might_and_guile/psi/d5ps20e.spl~ ~override~
+	SAY NAME1 @20333
+	SAY UNIDENTIFIED_DESC @20333
+COPY ~might_and_guile/psi/d5_ps20e.bam~ ~override~
 
 
 //end feat ability files____________________________________________________________
@@ -910,11 +993,12 @@ END
 ACTION_FOR_EACH featspell IN ~d5rof01~ ~d5rof02~ ~d5rof03~ ~d5rof04~ ~d5rof05~ ~d5rof06~ ~d5rof07~ ~d5rof08~ ~d5rof09~ ~d5rof10~ ~d5rof11~ ~d5rof12~ BEGIN
   COPY ~might_and_guile/thief/%featspell%.spl~ ~override~
 	SAY NAME1 @3909
-	SAY UNIDENTIFIED_DESC @2001
+	SAY UNIDENTIFIED_DESC @20100
 	WRITE_ASCII 0x3a ~d5_rof~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rof~ END
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %sd_code% STR_VAR resource = ~D5_RFXD~ END
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16417 parameter1 = %al_code% STR_VAR resource = ~D5_RFXAL~ END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16384 parameter1 = 0 STR_VAR resource = ~D5_RFXT~ END
 END
 
 COPY ~might_and_guile/thief/d5_rfxt.spl~ ~override~
@@ -1124,9 +1208,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 		READ_LONG 0x1cc biography
 		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
 			READ_BYTE 0x273 npc_class
-			PATCH_IF (npc_class = 4) BEGIN 
+			PATCH_IF (npc_class = 4) BEGIN
+				READ_LONG 0x244 npc_kit
+				PATCH_IF (npc_kit = 0) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof10~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof11~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof12~ END
+				END
+				PATCH_IF (npc_kit = 16384) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof10~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof11~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof12~ END
+				END
 				READ_BYTE 0x234 npc_level
-				PATCH_IF (npc_level > 2) BEGIN 
+				PATCH_IF (npc_level > 2) BEGIN
 					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof01~ END
 				END
 				PATCH_IF (npc_level > 4) BEGIN 
@@ -1154,6 +1249,50 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof09~ END
 				END
 			END
+			PATCH_IF (npc_class = 9 || npc_class = 15) BEGIN
+				READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
+				PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
+					READ_LONG 0x244 npc_kit
+					PATCH_IF (npc_kit = 0) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof10~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof11~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof12~ END
+					END
+					PATCH_IF (npc_kit = 16384) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof10~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof11~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof12~ END
+					END
+					READ_BYTE 0x235 npc_level
+					PATCH_IF (npc_level > 2) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof01~ END
+					END
+					PATCH_IF (npc_level > 4) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof02~ END
+					END
+					PATCH_IF (npc_level > 6) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof03~ END
+					END
+					PATCH_IF (npc_level > 8) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof04~ END
+					END
+					PATCH_IF (npc_level > 10) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof05~ END
+					END
+					PATCH_IF (npc_level > 12) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof06~ END
+					END
+					PATCH_IF (npc_level > 14) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof07~ END
+					END
+					PATCH_IF (npc_level > 16) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof08~ END
+					END
+					PATCH_IF (npc_level > 18) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5rof09~ END
+					END
+				END
+			END
 		END
 	END
 BUT_ONLY
@@ -1162,35 +1301,6 @@ BUT_ONLY
 
 //ADD MORE HLAS_____________________________________________________________________
 //
-COPY ~might_and_guile/thief/d5_rf2z.spl~ ~override~ // maze trap
-	SAY NAME1 @2097
-	SAY UNIDENTIFIED_DESC @2098
-COPY ~might_and_guile/thief/d5_rf2z.bam~ ~override~
-COPY ~might_and_guile/thief/d5_rf2zb.spl~ ~override~
-
-COPY ~might_and_guile/thief/d5_rf3z.spl~ ~override~
-	SAY NAME1 @2115
-	SAY UNIDENTIFIED_DESC @2116
-COPY ~might_and_guile/thief/d5_rf3z.2da~ ~override~
-COPY ~might_and_guile/thief/d5_rf3za.spl~ ~override~
-	SAY NAME1 @2117
-	SAY UNIDENTIFIED_DESC @2117
-COPY ~might_and_guile/thief/d5_rf3zb.spl~ ~override~
-	SAY NAME1 @2118
-	SAY UNIDENTIFIED_DESC @2118
-COPY ~might_and_guile/thief/d5_rf3zc.spl~ ~override~
-	SAY NAME1 @2119
-	SAY UNIDENTIFIED_DESC @2119
-COPY ~might_and_guile/thief/d5_rf3zd.spl~ ~override~
-	SAY NAME1 @2120
-	SAY UNIDENTIFIED_DESC @2120
-COPY ~might_and_guile/thief/d5_rf3ze.spl~ ~override~
-	SAY NAME1 @2121
-	SAY UNIDENTIFIED_DESC @2121
-COPY ~might_and_guile/thief/d5_rf3zf.spl~ ~override~
-	SAY NAME1 @2122
-	SAY UNIDENTIFIED_DESC @2122
-
 LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL910~ END	
 LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL911~ END
 LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL912~ END

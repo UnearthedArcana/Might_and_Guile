@@ -28,6 +28,7 @@
 @37  = ~Abilities:~
 @38  = ~Disadvantages:~
 @39  = ~Restrictions:~
+@40  = ~Shapeshift Natural Form~
 @100   = ~Revised Spellcasting Tables~
 @200   = ~Rogue Feats (beta)~
 @220   = ~Revised Movement Bonuses (Quickstride)~
@@ -56,9 +57,9 @@
 @500   = ~Add Multiclass Kits~
 //
 //
-@2000  = ~Rogue~
-@2001  = ~Use this ability to learn a rogue feat~
-@2002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
+@20000  = ~Rogue~
+@20001  = ~Use this ability to learn a rogue feat~
+@20002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
 
 CLASS FEATURES:
 
@@ -96,30 +97,31 @@ ROGUE FEATS:
  -- Use Scrolls (req. 17+ INT)
 - Luck Bonus
 - Telepathy (req. 15+ INT)
+- Telekinesis (req. 15+ INT)
 
-Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points.
+Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points. Most rogues can only learn psionic powers from a single discipline.
 
 CLASS RESTRICTIONS:
 - Alignment restricted to any except lawful good.
 - Hit Die: d6
 
 Prime Requisites For Dual-Classing: Dexterity~
-@2003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
+@20003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, THAC0 Bonus, and Melee Trick: Blind Opponent.
 - May learn the Backstab Bonus feat up to three times, reaching a possible maximum multiplier of x7.
 - May learn a special Assassin-only feat: Poison Weapon (Toxin). For each time the assassin chooses this feat, the poison ability may be used one per day.
 ~
-@2004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
+@20004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Detection Bonus, Spike Trap, and Brew Potions
 - May learn three special feats unique to Hunters: Fire Trap, Web Trap, and Poison Weapon (Paralytic).
 ~
-@2005  = ~hunter~
-@2006  = ~Hunter~
-@2007  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
+@20005  = ~hunter~
+@20006  = ~Hunter~
+@20007  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Melee Trick: Trip Opponent.
@@ -132,7 +134,7 @@ Disadvantages:
 - Swashbucklers have no backstab multipliers by default; they may raise it to a maximum of x2 by choosing the Backstab Bonus feat.
 - May not learn any trap-setting feats.
 ~
-@2008  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
+@20008  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, Smoke Bomb, Grease Jar, and Saving Throws Bonus.
@@ -143,79 +145,9 @@ Disadvantages:
 - -1 to base backstab multiplier compared to an unkitted Thief
 
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
-@2009  = ~~
-@2010  = ~Use this ability to choose from among the rogue feats~
-@2011  = ~Stealth Bonus~
-@2012  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
-@2013  = ~Thieving Bonus~
-@2014  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
-@2015  = ~Detection Bonus~
-@2016  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
-@2021  = ~Spike Trap~
-@2022  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
-@2023  = ~Dart Trap~
-@2024  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.~
-@2025  = ~Fire Trap~
-@2026  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
-@2027  = ~Web Trap~
-@2028  = ~Web Trap: this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect.~
-@2031  = ~Basic Alchemy~
-@2032  = ~Basic Alchemy: using foraged ingredients, this ability allows the rogue to craft the following potion once per day: one Elixir of Health; one Potion of Strength; one Potion of Perception; one Potion of Fire Resistance; one Potion of Cold Resistance; or two Flaming Oils.~
-@2051  = ~Elixir of Health~
-@2052  = ~Potion of Strength~
-@2053  = ~Potion of Perception~
-@2054  = ~Potion of Fire Resistance~
-@2055  = ~Potion of Cold Resistance~
-@2056  = ~Flaming Oil~
-@2057  = ~Inside of this glass pot is an special mixture of oil and other chemicals. When this mixture is set ablaze, it burns for several seconds at a very hot temperature. Flaming oil is sometimes difficult to use because it takes a long time for the user to properly throw it. Adventurers often carry oil with them to deal with trolls.
-
-STATISTICS:
-
-When thrown at a target, the glass pot breaks, spreading flaming oil over everything within a 5-ft. radius and doing 2d8 points of fire damage.
-
-Weight: 0
-~
-@2033  = ~Flaming Weapon~
-@2034  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
-@2035  = ~Poison Weapon (Toxin)~
-@2036  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
-@2037  = ~Poison Weapon (Paralytic)~
-@2038  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds.~
-@2041  = ~Armor Class Bonus~
-@2042  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class upon the rogue.~
-@2043  = ~Saving Throws Bonus~
-@2044  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
-@2045  = ~Contingency (Escape)~
-@2046  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
-@2061  = ~To-Hit Bonus~
-@2062  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
-@2063  = ~Backstab Bonus~
-@2064  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
-@2065  = ~Melee Trick (Trip)~
-@2066  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
-@2067  = ~Melee Trick (Disarm)~
-@2068  = ~Melee Trick (Disarm): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
-@2069  = ~Melee Trick (Blind)~
-@2070  = ~Melee Trick (Blind): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff.~
-@2071  = ~Melee Trick (Disrupt)~
-@2072  = ~Melee Trick (Disrupt): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
-@2081  = ~Smoke Bomb + Grease Jar~
-@2082  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
-@2083  = ~Grease Jar~
-@2084  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
-@2085  = ~Smoke Bomb~
-@2086  = ~Smoke Bomb: this ability mimics the effects of the wizard spell Stinking Cloud. Everyone in the area of effect must make a saving throw or be paralyzed with retching and spasms by the noxious gas.~
-@2087  = ~Use Wands~
-@2088  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
-@2089  = ~Use Scrolls~
-@2090  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
-@2091  = ~Luck Bonus~
-@2092  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
-@2097  = ~Maze Trap~
-@2098  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
-@2101   = ~alchemist~
-@2102   = ~Alchemist~
-@2103   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
+@20011   = ~alchemist~
+@20012   = ~Alchemist~
+@20013   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Basic Alchemy, Flaming Weapon, and Grease Jar/Smoke Bomb.
@@ -229,39 +161,122 @@ ADVANCED ALCHEMY: this ability allows the Alchemist to craft one of the followin
 Disadvantages:
 - Alchemists have no backstab multiplier by default, and may not raise it via feats.
 - May not learn any combat feats.~
-@2105  = ~Advanced Alchemy~
-@2106  = ~Advanced Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
-@2107  = ~Potion of Regeneration~
-@2108  = ~Oil of Speed~
-@2109  = ~Potion of Clarity~
-@2110  = ~Potion of Mind Focusing~
-@2111  = ~Potion of Invisibility~
-@2112  = ~Potion of Fiery Burning~
-@2115  = ~High-Level Alchemy~
-@2116  = ~High-Level Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: two Potions of Extra-Healing; a Potion of Giant Strength; a Potion of Power; a Potion of Magic Shielding; a Potion of Freedom; or a Potion of Fire Breath.~
-@2117  = ~Potion of Extra Healing~
-@2118  = ~Potion of Giant Strength~
-@2119  = ~Potion of Power~
-@2120  = ~Potion of Magic Shielding~
-@2121  = ~Potion of Freedom~
-@2122  = ~Potion Fire Breath~
-@2125  = ~Hulking Transformation~
-@2126  = ~Hulking Transformation: by taking this feat, the Alchemist causes changes in <PRO_HISHER> own body. This enables the ability to trigger a change causing the Alchemist to grow to monstrous proportions, with brutish strength and a tough leathery hide, for one turn once per day. But there is a long-term cost, a toll on the Alchemist's health that manifests as a permanent -1 penalty to Strength and Constitution.~
-@2127  = ~Brute Fist~
-@2128  = ~Hulking Brute~
-@2131  = ~Telepathy~
-@2132  = ~Telepathy: this feat confers the Mind Thrust ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
-@2133  = ~Mind Thrust~
-@2134  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
-@2135  = ~Id Insinuation~
-@2136  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
-@2137  = ~Domination~
-@2138  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
-@2139  = ~Psychic Crush~
-@2140  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
-@2141  = ~Intellect Fortress~
-@2142  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain this shield is 10% of the rogue's max hit points.~
-@2143  = ~Cancel Intellect Fortress~
+@20009  = ~~
+@20100  = ~Use this ability to choose from among the rogue feats~
+@20101  = ~Stealth Bonus~
+@20102  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
+@20103  = ~Thieving Bonus~
+@20104  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
+@20105  = ~Detection Bonus~
+@20106  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
+@20111  = ~Spike Trap~
+@20112  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
+@20113  = ~Dart Trap~
+@20114  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.~
+@20115  = ~Fire Trap~
+@20116  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
+@20117  = ~Web Trap~
+@20118  = ~Web Trap: this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect.~
+@20129  = ~Maze Trap~
+@20130  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
+@20131  = ~Basic Alchemy~
+@20132  = ~Basic Alchemy: using foraged ingredients, this ability allows the rogue to craft the following potion once per day: one Elixir of Health; one Potion of Strength; one Potion of Perception; one Potion of Fire Resistance; one Potion of Cold Resistance; or two Flaming Oils.~
+@20133  = ~Elixir of Health~
+@20134  = ~Potion of Strength~
+@20135  = ~Potion of Perception~
+@20136  = ~Potion of Fire Resistance~
+@20137  = ~Potion of Cold Resistance~
+@20138  = ~Flaming Oil~
+@20139  = ~Inside of this glass pot is an special mixture of oil and other chemicals. When this mixture is set ablaze, it burns for several seconds at a very hot temperature. Flaming oil is sometimes difficult to use because it takes a long time for the user to properly throw it. Adventurers often carry oil with them to deal with trolls.
+
+STATISTICS:
+
+When thrown at a target, the glass pot breaks, spreading flaming oil over everything within a 5-ft. radius and doing 2d8 points of fire damage.
+
+Weight: 0
+~
+@20151  = ~Flaming Weapon~
+@20152  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
+@20161  = ~Poison Weapon (Toxin)~
+@20162  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
+@20163  = ~Poison Weapon (Paralytic)~
+@20164  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds.~
+@20171  = ~Hulking Transformation~
+@20172  = ~Hulking Transformation: by taking this feat, the Alchemist causes changes in <PRO_HISHER> own body. This enables the ability to trigger a change causing the Alchemist to grow to monstrous proportions, with brutish strength and a tough leathery hide, for one turn once per day. But there is a long-term cost, a toll on the Alchemist's health that manifests as a permanent -1 penalty to Strength and Constitution.~
+@20173  = ~Brute Fist~
+@20174  = ~Hulking Brute~
+@20181  = ~Advanced Alchemy~
+@20182  = ~Advanced Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
+@20183  = ~Potion of Regeneration~
+@20184  = ~Oil of Speed~
+@20185  = ~Potion of Clarity~
+@20186  = ~Potion of Mind Focusing~
+@20187  = ~Potion of Invisibility~
+@20188  = ~Potion of Fiery Burning~
+@20191  = ~High-Level Alchemy~
+@20192  = ~High-Level Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: two Potions of Extra-Healing; a Potion of Giant Strength; a Potion of Power; a Potion of Magic Shielding; a Potion of Freedom; or a Potion of Fire Breath.~
+@20193  = ~Potion of Extra Healing~
+@20194  = ~Potion of Giant Strength~
+@20195  = ~Potion of Power~
+@20196  = ~Potion of Magic Shielding~
+@20197  = ~Potion of Freedom~
+@20198  = ~Potion Fire Breath~
+@20201  = ~Armor Class Bonus~
+@20202  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class upon the rogue.~
+@20211  = ~Saving Throws Bonus~
+@20212  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
+@20221  = ~Contingency (Escape)~
+@20222  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
+@20231  = ~To-Hit Bonus~
+@20232  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
+@20241  = ~Backstab Bonus~
+@20242  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
+@20251  = ~Melee Trick (Trip)~
+@20252  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
+@20253  = ~Melee Trick (Disarm)~
+@20254  = ~Melee Trick (Disarm): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
+@20255  = ~Melee Trick (Blind)~
+@20256  = ~Melee Trick (Blind): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff.~
+@20257  = ~Melee Trick (Disrupt)~
+@20258  = ~Melee Trick (Disrupt): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
+@20271  = ~Smoke Bomb + Grease Jar~
+@20272  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
+@20273  = ~Grease Jar~
+@20274  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
+@20275  = ~Smoke Bomb~
+@20276  = ~Smoke Bomb: this ability mimics the effects of the wizard spell Stinking Cloud. Everyone in the area of effect must make a saving throw or be paralyzed with retching and spasms by the noxious gas.~
+@20291  = ~Use Wands~
+@20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
+@20293  = ~Use Scrolls~
+@20294  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
+@20299  = ~Luck Bonus~
+@20300  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
+@20301  = ~Telepathy~
+@20302  = ~Telepathy: this feat confers the Mind Thrust ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@20303  = ~Mind Thrust~
+@20304  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
+@20305  = ~Id Insinuation~
+@20306  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
+@20307  = ~Domination~
+@20308  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
+@20309  = ~Psychic Crush~
+@20310  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
+@20311  = ~Intellect Fortress~
+@20312  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 8 hit points.~
+@20313  = ~Cancel Intellect Fortress~
+@20321  = ~Telekinesis~
+@20322  = ~Telekinesis: this feat confers the Root ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
+@20323  = ~Hold~
+@20324  = ~Hold: the target of this power is Held frozen for 1 round upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. The cost is 3 hit points.~
+@20325  = ~Kinetic Ram~
+@20326  = ~Kinetic Ram: the rogue blasts a target with powerful but unfocused telekinetic energy, causing 2d3 crushing damage and, upon a failed save vs. wands, knocking the target back 10 feet. The cost is 5 hit points.~
+@20327  = ~Inertial Barrier~
+@20328  = ~Inertial Barrier: the rogue creates a movable barrier inches from <PRO_HISHER> skin, which has several protective effects: it provides a +2 bonus to AC and 40% damage resistance against crushing and missile attacks; a +1 AC bonus and 20% damage resistance against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the Magic Missile spell. The barrier lasts 5 rounds and costs 7 hit points.~
+@20329  = ~Psychic Knife~
+@20330  = ~Psychic Knife: the rogue can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. The blade lasts 7 rounds and costs 10 hit points.~
+@20331  = ~Free Action~
+@20332  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 8 hit points.~
+@20333  = ~Cancel Free Action~
 //
 //
 @2210   = ~Quickstride~

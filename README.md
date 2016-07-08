@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.6 </strong><br />
+  <p><strong> Version 2.7 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -92,8 +92,19 @@
 	    <li> <b>Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
 	    <li> <b>Shadow Pool:</b> this allows the Shadowdancer to use one of the following five abilities: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep. (Shadowdancer only)</li>
 	    <li> <b>Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass or Swashbuckler only)</li>
+	    <li> <b>Telepathy - Mind Thrust:</b> this ability causes the target to save vs. wands or fall asleep for 5 rounds, at a cost of 3 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telepathy - Id Insinuation:</b> this ability causes the target to save vs. wands with a -3 penalty or be affected by terror for 3 rounds, at a cost of 5 max hp. (Requires Mind thrust.)</li>
+	    <li> <b>Telepathy - Domination:</b> this ability causes the target to save vs. wands or become charmed for 5 rounds, at a cost of 7 max hp. (Requires Id Insinuation.)</li>
+	    <li> <b>Telepathy - Psychic Crush:</b> this ability causes the target to save vs. wands with a -3 penalty or be stunned for 3 rounds. (Requires Domination.)</li>
+	    <li> <b>Telepathy - Intellect Fortress:</b> while maintained (at a cost of 8 max hp), this ability renders the rogue immune to all hostile mental effects, whether psionic or magical. (Requires Domination.)</li>
+	    <li> <b>Telekinesis - Hold:</b> this ability Slows the target for one round; and causes the target to save vs. wands or be Held for one round and Slowed for a second round. The cost is 3 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telekinesis - Kinetic Ram:</b> the target of this telekinetic attack takes 2d3 crushing damage, and must save vs. wands or be knocked back 10 feet. The cost is 5 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telekinesis - Inertial Barrier:</b> this ability envelops the rogue in a shell of telekinetic energy that absorbs incoming blows. It provides a -2 AC bonus and 4-% DR against crushing or missile attacks; a -1 AC bonus and 20% DR against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the spell 'Magic Missile.' The cost is 7 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It lasts for 7 rounds and is wielded as if the user has Mastery (+++) with it. The cost is 10 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telekinesis - Free Action:</b> while maintained (at a cost of 8 max hp), this ability renders the rogue immune to all effects that hinder normal movement, whether psionic or magical. (Requires Inertial Barrier.)</li>
 	  </ul>
       <p> A note about backstabbing: the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
+      <p> A note about psionics: psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 10 points), which are restored at a rate of 1 per round. Maintainable powers cause an 8-point reduction in max hit points for as long as they are maintained. Maintainable powers are interrupted if the rogue's hit points are reduced to 25% of the normal total.</p>
       <p> Additionally, this component will alter the rogue HLA tables. Since the Spike Trap and Fire Trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
 	  <ul>
 	    <li> Time Trap becomes Maze Trap.</li>
@@ -104,6 +115,7 @@
 	    <li> Jesters can choose Extra Level 6 Spell, Contingency: Escape, and Shadow Pool.</li>
 	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
 	  </ul>
+      <p>Finally, this component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
       <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) Please note that this component will only grant feats to the base five thief kits: thief, assassin, hunter, swashbuckler, and shadowdancer. Thief kits from other mods may be used alongside this component, but they will only get their normal kit abilities.</p>
   </div>
   <h4 class="subheader">Component 220: </h4>
@@ -536,6 +548,10 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.7 - June 2016</strong></p>
+  <ul>
+    <li>dipping toes into psionic waters - telepathic feats added</li>
+  </ul>
   <p><strong>Version 2.6 - June 2016</strong></p>
   <ul>
     <li>added tactician stances to warrior feats</li>

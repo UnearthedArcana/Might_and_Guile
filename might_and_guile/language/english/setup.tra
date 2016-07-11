@@ -158,10 +158,21 @@ Abilities:
 
 ADVANCED ALCHEMY: this ability allows the Alchemist to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.
 
-Disadvantages:
+Restrictions:
 - Alchemists have no backstab multiplier by default, and may not raise it via feats.
 - May not learn any combat feats.~
-@20009  = ~~
+@20021  = ~psion~
+@20022  = ~Psion~
+@20023  = ~PSION: the Psion is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psions are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
+
+Abilities:
+- Begins with access to the first power in all four psionic disciplines: Mind Thrust, Hold, Static Transfer, and Adrenaline Rush. The Psion can proceed to learn abilities from any psionic discipline.
+- Gains one extra hit point per level from levels 1 through 9.
+
+Restrictions:
+- May only distribute 12 skill points per level into thief skills.
+- May not Pick Pockets or Set Traps.
+- May not be Chaotic.~
 @20100  = ~Use this ability to choose from among the rogue feats~
 @20101  = ~Stealth Bonus~
 @20102  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
@@ -252,7 +263,7 @@ Weight: 0
 @20299  = ~Luck Bonus~
 @20300  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
 @20301  = ~Telepathy~
-@20302  = ~Telepathy: this feat confers the Mind Thrust ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@20302  = ~Telepathy: this feat confers the 'Mind Thrust' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
 @20303  = ~Mind Thrust~
 @20304  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
 @20305  = ~Id Insinuation~
@@ -262,10 +273,10 @@ Weight: 0
 @20309  = ~Psychic Crush~
 @20310  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
 @20311  = ~Intellect Fortress~
-@20312  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 8 hit points.~
+@20312  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 10 hit points.~
 @20313  = ~Cancel Intellect Fortress~
 @20321  = ~Telekinesis~
-@20322  = ~Telekinesis: this feat confers the Root ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
+@20322  = ~Telekinesis: this feat confers the 'Hold' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
 @20323  = ~Hold~
 @20324  = ~Hold: the target of this power is Held frozen for 1 round upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. The cost is 3 hit points.~
 @20325  = ~Kinetic Ram~
@@ -275,8 +286,34 @@ Weight: 0
 @20329  = ~Psychic Knife~
 @20330  = ~Psychic Knife: the rogue can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. The blade lasts 7 rounds and costs 10 hit points.~
 @20331  = ~Free Action~
-@20332  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 8 hit points.~
+@20332  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 10 hit points.~
 @20333  = ~Cancel Free Action~
+@20341  = ~Pyrokinesis~
+@20342  = ~Pyrokinesis: this feat confers the 'Static Transfer' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@20343  = ~Static Transfer~
+@20344  = ~Static Transfer: this ability is similar to the Shacking Grasp wizard spell. The rogue collects static electricity in his hand, and then uses it to attack an enemy. The enemy takes 2d6 points of damage, and must save vs. wands or be stunned for 1 round. The cost if 3 hit points.~
+@20345  = ~Energy Draw~
+@20346  = ~Energy Draw: this ability can draw energy directly from a foe, causing 3d4 cold damage. The stolen energy temporarily augments the rogues own life force, adding 5 hit points to his total for 10 rounds. The rogue can only gain this benefit once every 5 rounds.~
+@20347  = ~Generate Lightning~
+@20348  = ~Generate Lightning: after taking a few moments to collect static energy from the surrounding area, the rogue can discharge it as violent lightning energy. The lightning strikes the target and arcs to any other enemies within 10 feet (the rogue has some measure of control and can protect <PRO_HISHER> companions). The discharge does 4d4 lightning damage, which is halved upon a successful save vs. wands. The cost is 7 hit points.~
+@20349  = ~Psychic Combustion~
+@20350  = ~Psychic Combustion: this ability allows the user to spontaneously create a brief but powerful fire in any location. The flames to 5d4+5 fire damage to all enemies within 5 feet of the flames. The cost is 10 hit points.~
+@20351  = ~Energy Barrier~
+@20352  = ~Energy Barrier: while this ability is maintained, it sets the rogue's resistance to energy-based damage (fire, cold, electricity, and magic damage) to 75%. The cost to maintain the barrier is 10 hit points.~
+@20353  = ~Cancel Energy Barrier~
+@20361  = ~Biokinesis~
+@20362  = ~Biokinesis: this feat confers the 'Adrenaline Rush' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Biokinesis discipline.~
+@20363  = ~Adrenaline Rush~
+@20364  = ~Adrenaline Rush: this ability temporarily boosts the rogue's physical stats by 2 points, for 4 rounds. Afterward, the rogue becomes fatigued for 3 rounds. The cost is 3 hit points and the ability may not be used again until the fatigue has worn off.~
+@20365  = ~Metabolic Boost~
+@20366  = ~Metabolic Boost: this ability supercharges the rogue's biological processes for 4 rounds, doubling movement speed and adding an extra attack per round, like the Haste wizard spell. The cost is 5 hit points.~
+@20367  = ~Camouflage~
+@20368  = ~Camouflage: this ability makes the rogue's body blend into the nearby environment like a chameleon. The effect is similar to the Improved Invisibility spell, without actually involving invisibility: the rogue has a -4 bonus to AC, a +40% bonus to stealth, and cannot easily be targeted by spellcasters. The effect lasts 5 rounds and the cost is 7 hit points.~
+@20369  = ~Carapace~
+@20370  = ~Carapace: this ability causes the rogue's skin to harden into a fast-growing, and strong but brittle shell. This provides a -2 bonus to AC, and harmlessly absorbs 1 physical attack each round. The effect lasts 7 rounds and the cost is 10 hit points.~
+@20371  = ~Bioegeneration~
+@20372  = ~Bioregeneration: while maintained, this ability boost the immune system and healing capabilities of the rogue's body, regenerating 1 hit point every 3 seconds. The cost to maintain this ability is 10 hit points.~
+@20373  = ~Cancel Bioregeneration~
 //
 //
 @2210   = ~Quickstride~

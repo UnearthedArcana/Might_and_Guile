@@ -161,9 +161,9 @@ ADVANCED ALCHEMY: this ability allows the Alchemist to craft one of the followin
 Restrictions:
 - Alchemists have no backstab multiplier by default, and may not raise it via feats.
 - May not learn any combat feats.~
-@20021  = ~psion~
-@20022  = ~Psion~
-@20023  = ~PSION: the Psion is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psions are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
+@20021  = ~psypher~
+@20022  = ~Psypher~
+@20023  = ~PSYPHER: the Psypher is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psyphers are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
 
 Abilities:
 - Begins with access to the first power in all four psionic disciplines: Mind Thrust, Hold, Static Transfer, and Adrenaline Rush. The Psion can proceed to learn abilities from any psionic discipline.
@@ -173,6 +173,23 @@ Restrictions:
 - May only distribute 12 skill points per level into thief skills.
 - May not Pick Pockets or Set Traps.
 - May not be Chaotic.~
+@20041  = ~soulblade~
+@20042  = ~Soulblade~
+@20043  = ~SOULBLADE: this warrior uses meditation to harness psychic powers in order to enhance <PRO_HISHER> martial abilities. Often training with Psionicists or Psyphers, the Soulblade can use a select few psionic abilities, generally those which fortify <PRO_HISHER> body or mind against attacks.
+
+Abilities:
+- Begins with access to the Metabolic Boost and Kinetic Ram abilities. May learn another psionic ability every at every third level of experience, up to 18th level. The abilities that a Soulblade may learn include:
+ -- from the Telekinesis discipline: Inertial Barrier, Psychic Knife, and Free Action
+ -- from the Biokinesis discipline: Camouflage, Carapace, and Bioregeneration
+ -- from the Telepathy discipline: Intellect Fortress
+ -- from the Pyrokinesis discipline: Energy Shield
+
+Restrictions:
+- Limited to light armors and weapons.
+- Limited to Mastery (+++) with melee weapons.
+- Limited to Proficiency (+) with ranged weapons.
+- May not be Chaotic.
+~
 @20100  = ~Use this ability to choose from among the rogue feats~
 @20101  = ~Stealth Bonus~
 @20102  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
@@ -1129,7 +1146,7 @@ In addition to normal damage, all successful ranged attacks within the next roun
 //
 @3221  = ~elven archer~
 @3222  = ~Elven Archer~
-@3223  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
+@3223  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
@@ -1150,7 +1167,7 @@ Restrictions:
 - May not wear any metal armor.
 - May reach a lower level of proficiency than normal with melee weapons.
 ~
-@3224  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow - the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
+@3224  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
@@ -1172,7 +1189,7 @@ Restrictions:
 - May reach a lower level of proficiency than normal with melee weapons.
 - May not use Charm Animal ability.
 ~
-@3225  = ~ELVEN ARCHER: The Archer is the epitome of skill with the bow — the result of elves' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.~
+@3225  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.~
 @3231  = ~Called Shot: Entangle~
 @3232  = ~Called Shot: Entangle
 In addition to normal damage, all successful ranged attacks within the next round will Entangle the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.~

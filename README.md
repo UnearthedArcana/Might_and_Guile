@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.7 </strong><br />
+  <p><strong> Version 2.8 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -63,7 +63,7 @@
       <p> To reflect their cleverness and resourcefulness, thieves will be given the chance to learn feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p><b>Also note:</b> when you use the "choose a feat" innate ability, do not take any other action (moving, fighting, spellcasting) until you have chosen a feat. If the list of feats disappears from the screen, you cannot get them back and will have to wait until you gain two more levels to choose another one.</p>
       <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
-      <p>This component includes two new kits.  The first is the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects.  The second is the Psion.  This character studies and meditates in order to gain power in psionic ability.  This is the only kit able to learn psionic powers from more than one discipline.</p>
+      <p>This component includes three new kits.  The first is the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects.  The second is the Psypher.  This character studies and meditates in order to gain power in psionic ability.  This is the only rogue kit able to learn psionic powers from more than one discipline.  The third new kit is the Soulblade - a fighter kit with limited ability to learn psionic abilities.</p>
       <p>The Rogue Feats include:
 	  <ul>
 	    <li> <b>Stealth Bonus:</b> this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
@@ -558,9 +558,13 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 2.8 - August 2016</strong></p>
+  <ul>
+    <li>added the Soulblade fighter kit, in the Rogue Feats component</li>
+  </ul>
   <p><strong>Version 2.7 - June 2016</strong></p>
   <ul>
-    <li>dipping toes into psionic waters - telepathic feats added</li>
+    <li>dipping toes into psionic waters - psionic feats and the Psypher kit</li>
   </ul>
   <p><strong>Version 2.6 - June 2016</strong></p>
   <ul>

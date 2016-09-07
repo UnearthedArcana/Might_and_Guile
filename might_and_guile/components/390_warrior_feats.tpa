@@ -35,7 +35,7 @@ ACTION_FOR_EACH wfeatclab IN ~d5_fifa~ ~d5_fifb~ ~d5_fifc~ ~d5_fifd~ ~d5_fife~ ~
 	SAY UNIDENTIFIED_DESC @6
 END
 
-COPY ~might_and_guile/fighter/d5_wfa.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfa.spl~ ~override~ 		//			flurry
 	SAY NAME1 @3911
 	SAY UNIDENTIFIED_DESC @3912
 	WRITE_ASCII 0x3a ~d5_wf01~
@@ -57,7 +57,7 @@ COPY ~might_and_guile/fighter/d5_wf02.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_wf02~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf02~ END
 COPY ~might_and_guile/fighter/d5_wf02.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfc.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfc.spl~ ~override~ 		//			parry
 	SAY NAME1 @3915
 	SAY UNIDENTIFIED_DESC @3916
 	WRITE_ASCII 0x3a ~d5_wf03~
@@ -68,7 +68,7 @@ COPY ~might_and_guile/fighter/d5_wf03.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_wf03~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf03~ END
 COPY ~might_and_guile/fighter/d5_wf03.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfd.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfd.spl~ ~override~ 		//			resistance
 	SAY NAME1 @3917
 	SAY UNIDENTIFIED_DESC @3918
 	WRITE_ASCII 0x3a ~d5_wf04~
@@ -79,7 +79,7 @@ COPY ~might_and_guile/fighter/d5_wf04.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_wf04~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf04~ END
 COPY ~might_and_guile/fighter/d5_wf04.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfe.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfe.spl~ ~override~ 		//			resolve
 	SAY NAME1 @3919
 	SAY UNIDENTIFIED_DESC @3920
 	WRITE_ASCII 0x3a ~d5_wf05~
@@ -92,7 +92,7 @@ COPY ~might_and_guile/fighter/d5_wf05.spl~ ~override~
 COPY ~might_and_guile/fighter/d5_wf05a.spl~ ~override~
 	SAY NAME1 @3919
 COPY ~might_and_guile/fighter/d5_wf05.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wff.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wff.spl~ ~override~ 		//			willpower
 	SAY NAME1 @3921
 	SAY UNIDENTIFIED_DESC @3922
 	WRITE_ASCII 0x3a ~d5_wf06~
@@ -103,7 +103,7 @@ COPY ~might_and_guile/fighter/d5_wf06.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_wf06~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf06~ END
 COPY ~might_and_guile/fighter/d5_wf06.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfg.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfg.spl~ ~override~		//			knockdown
 	SAY NAME1 @3923
 	SAY UNIDENTIFIED_DESC @3924
 	WRITE_ASCII 0x3a ~d5_wf07~
@@ -115,7 +115,7 @@ COPY ~might_and_guile/fighter/d5_wf07.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf07~ END
 COPY ~might_and_guile/fighter/d5_wf07.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf07.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfh.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfh.spl~ ~override~		//			knockback
 	SAY NAME1 @3925
 	SAY UNIDENTIFIED_DESC @3926
 	WRITE_ASCII 0x3a ~d5_wf08~
@@ -127,7 +127,7 @@ COPY ~might_and_guile/fighter/d5_wf08.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf08~ END
 COPY ~might_and_guile/fighter/d5_wf08.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf08.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfi.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfi.spl~ ~override~ 		//			cutting blow
 	SAY NAME1 @3927
 	SAY UNIDENTIFIED_DESC @3928
 	WRITE_ASCII 0x3a ~d5_wf09~
@@ -141,7 +141,7 @@ COPY ~might_and_guile/fighter/d5_wf09.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf09a.spl~ ~override~
 	SAY NAME1 @3927
 COPY ~might_and_guile/fighter/d5_wf09.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfj.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfj.spl~ ~override~ 		//			tempo
 	SAY NAME1 @3929
 	SAY UNIDENTIFIED_DESC @3930
 	WRITE_ASCII 0x3a ~d5_wf10~
@@ -153,7 +153,7 @@ COPY ~might_and_guile/fighter/d5_wf10.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf10~ END
 COPY ~might_and_guile/fighter/d5_wf10.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf10.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfk.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfk.spl~ ~override~ 		//			disrupt
 	SAY NAME1 @3931
 	SAY UNIDENTIFIED_DESC @3932
 	WRITE_ASCII 0x3a ~d5_wf11~
@@ -165,7 +165,7 @@ COPY ~might_and_guile/fighter/d5_wf11.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf11~ END
 COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf11.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wfl.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wfl.spl~ ~override~ 		//			tactics
 	SAY NAME1 @3933
 	SAY UNIDENTIFIED_DESC @3934
 	WRITE_ASCII 0x3a ~d5_wf12~
@@ -180,7 +180,7 @@ COPY ~might_and_guile/fighter/d5_wf12a.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
 COPY ~might_and_guile/fighter/d5_wf12.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_wf12.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_wf13.spl~ ~override~
+COPY ~might_and_guile/fighter/d5_wf13.spl~ ~override~ 		//			tactics
 	SAY NAME1 @3937
 	SAY UNIDENTIFIED_DESC @3938
 	WRITE_ASCII 0x3a ~d5_wf13~

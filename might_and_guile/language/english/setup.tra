@@ -30,7 +30,9 @@
 @39  = ~Restrictions:~
 @40  = ~Shapeshift Natural Form~
 @100   = ~Revised Spellcasting Tables~
-@200   = ~Rogue Feats (beta)~
+@200   = ~Rogue Feats~
+@205   = ~Psionics~
+@210   = ~Bards are thief kits~
 @220   = ~Revised Movement Bonuses (Quickstride)~
 @225   = ~Revised Stalker~
 @230   = ~Revised Archer~
@@ -93,19 +95,18 @@ ROGUE FEATS:
  -- Disrupt Magic
 - Grease Jar
 - Smoke Bomb
- -- Use Wands (req. 15+ INT)
- -- Use Scrolls (req. 17+ INT)
+ -- Illusion Magic (requires 15+ INT)
+ -- Shadow Magic (requires 15+ INT)
+ -- Use Wands (requires 15+ INT)
+ -- Use Scrolls (requires 17+ INT)
 - Luck Bonus
-- Telepathy (req. 15+ INT)
-- Telekinesis (req. 15+ INT)
-
-Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points. Most rogues can only learn psionic powers from a single discipline.
 
 CLASS RESTRICTIONS:
 - Alignment restricted to any except lawful good.
 - Hit Die: d6
 
-Prime Requisites For Dual-Classing: Dexterity~
+Prime Requisite For Dual-Classing: Dexterity
+~
 @20003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
 
 Abilities:
@@ -138,7 +139,7 @@ Disadvantages:
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, Smoke Bomb, Grease Jar, and Saving Throws Bonus.
-- May learn a special Shadowdancer-only feat: Shadow Pool. This magical ability can mimic one of the following spells: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep.
+- May learn the Shadow Magic feat up to 5 times. This magical ability can mimic one of the following spells: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow.
 
 Disadvantages:
 - Alignment restricted to any non-lawful.
@@ -152,43 +153,16 @@ Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
 Abilities:
 - Begins with the following rogue feats at 1st level: Basic Alchemy, Flaming Weapon, and Grease Jar/Smoke Bomb.
 - May learn to use the poisons of the Assassin and the Hunter.
-- May repeat learning the Basic Alchemy feat, resulting in the ability to create two potions per day.
-- After devoting two feats to Basic Alchemy, two new feats become available: Advanced Alchemy, which allows for the creation of more powerful and tactically useful potions; and Hulking Transformation, which allows the Alchemist to turn into a powerful brute, at a cost to <PRO_HISHER> own Strength and Constitution.
+- May learn the Basic Alchemy feat a 2nd time, resulting in the ability to create two potions per day.  After learning Basic Alchemy twice, two new feats become available:
+- Advanced Alchemy, which allows for the creation of more powerful and tactically useful potions.
+- Hulking Transformation, which allows the Alchemist to turn into a powerful brute, at a cost to <PRO_HISHER> own Strength and Constitution.
 - While most rogues may choose the Advanced Alchemy feat as an HLA, Alchemists may choose a more powerful version: High-Level Alchemy.
 
 ADVANCED ALCHEMY: this ability allows the Alchemist to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.
 
 Restrictions:
 - Alchemists have no backstab multiplier by default, and may not raise it via feats.
-- May not learn any combat feats.~
-@20021  = ~psypher~
-@20022  = ~Psypher~
-@20023  = ~PSYPHER: the Psypher is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psyphers are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
-
-Abilities:
-- Begins with access to the first power in all four psionic disciplines: Mind Thrust, Hold, Static Transfer, and Adrenaline Rush. The Psion can proceed to learn abilities from any psionic discipline.
-- Gains one extra hit point per level from levels 1 through 9.
-
-Restrictions:
-- May only distribute 12 skill points per level into thief skills.
-- May not Pick Pockets or Set Traps.
-- May not be Chaotic.~
-@20041  = ~soulblade~
-@20042  = ~Soulblade~
-@20043  = ~SOULBLADE: this warrior uses meditation to harness psychic powers in order to enhance <PRO_HISHER> martial abilities. Often training with Psionicists or Psyphers, the Soulblade can use a select few psionic abilities, generally those which fortify <PRO_HISHER> body or mind against attacks.
-
-Abilities:
-- Begins with access to the Metabolic Boost and Kinetic Ram abilities. May learn another psionic ability every at every third level of experience, up to 18th level. The abilities that a Soulblade may learn include:
- -- from the Telekinesis discipline: Inertial Barrier, Psychic Knife, and Free Action
- -- from the Biokinesis discipline: Camouflage, Carapace, and Bioregeneration
- -- from the Telepathy discipline: Intellect Fortress
- -- from the Pyrokinesis discipline: Energy Shield
-
-Restrictions:
-- Limited to light armors and weapons.
-- Limited to Mastery (+++) with melee weapons.
-- Limited to Proficiency (+) with ranged weapons.
-- May not be Chaotic.
+- May not learn any combat feats.
 ~
 @20100  = ~Use this ability to choose from among the rogue feats~
 @20101  = ~Stealth Bonus~
@@ -255,6 +229,8 @@ Weight: 0
 @20212  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
 @20221  = ~Contingency (Escape)~
 @20222  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
+@20229  = ~Finesse~
+@20230  = ~Finesse: this ability applies a bonus to hit based on Dexterity rather than Strength.  This bonus only applies to light melee weapons (daggers, short swords, scimitars, ninja-to, quarterstaves, and clubs).~
 @20231  = ~To-Hit Bonus~
 @20232  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
 @20241  = ~Backstab Bonus~
@@ -277,60 +253,163 @@ Weight: 0
 @20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
 @20293  = ~Use Scrolls~
 @20294  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
+@20295  = ~Illusion Magic~
+@20296  = ~Illusion Magic:
+
+This allows the use of any one of the following five abilities:
+  1) Color Spray
+  3) Blur
+  3) Glitterdust (at 7th level)
+  4) Mirror Image (at 7th level)
+  5) Misleading Clone (at 11th level)
+~
+@20297  = ~Misleading Clone~
+@20298  = ~Misleading Clone
+
+Duration: 12 rounds
+Casting Time: 1
+
+When this magic is used, the rogue is briefly affected by an Improved Invisibility spell (for a mere two seconds) appears to jump teleported a few feet away from <PRO_HISHER> original position. Meanwhile, an exact image of the rogue is created where <PRO_HESHE> used to be, with exactly the same Hit Points. The image cannot perform any actions at all, such as attacking or casting spells. It can, however, move around and act as a decoy for the invisible wizard. The image will remain under control of the caster until reduced to 0 Hit Points, or until dispelled or revealed by a spell such as True Sight.
+~
 @20299  = ~Luck Bonus~
 @20300  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
-@20301  = ~Telepathy~
-@20302  = ~Telepathy: this feat confers the 'Mind Thrust' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
-@20303  = ~Mind Thrust~
-@20304  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
-@20305  = ~Id Insinuation~
-@20306  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
-@20307  = ~Domination~
-@20308  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
-@20309  = ~Psychic Crush~
-@20310  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
-@20311  = ~Intellect Fortress~
-@20312  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 10 hit points.~
-@20313  = ~Cancel Intellect Fortress~
-@20321  = ~Telekinesis~
-@20322  = ~Telekinesis: this feat confers the 'Hold' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
-@20323  = ~Hold~
-@20324  = ~Hold: the target of this power is Held frozen for 1 round upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. The cost is 3 hit points.~
-@20325  = ~Kinetic Ram~
-@20326  = ~Kinetic Ram: the rogue blasts a target with powerful but unfocused telekinetic energy, causing 2d3 crushing damage and, upon a failed save vs. wands, knocking the target back 10 feet. The cost is 5 hit points.~
-@20327  = ~Inertial Barrier~
-@20328  = ~Inertial Barrier: the rogue creates a movable barrier inches from <PRO_HISHER> skin, which has several protective effects: it provides a +2 bonus to AC and 40% damage resistance against crushing and missile attacks; a +1 AC bonus and 20% damage resistance against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the Magic Missile spell. The barrier lasts 5 rounds and costs 7 hit points.~
-@20329  = ~Psychic Knife~
-@20330  = ~Psychic Knife: the rogue can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. The blade lasts 7 rounds and costs 10 hit points.~
-@20331  = ~Free Action~
-@20332  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 10 hit points.~
-@20333  = ~Cancel Free Action~
-@20341  = ~Pyrokinesis~
-@20342  = ~Pyrokinesis: this feat confers the 'Static Transfer' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
-@20343  = ~Static Transfer~
-@20344  = ~Static Transfer: this ability is similar to the Shacking Grasp wizard spell. The rogue collects static electricity in his hand, and then uses it to attack an enemy. The enemy takes 2d6 points of damage, and must save vs. wands or be stunned for 1 round. The cost if 3 hit points.~
-@20345  = ~Energy Draw~
-@20346  = ~Energy Draw: this ability can draw energy directly from a foe, causing 3d4 cold damage. The stolen energy temporarily augments the rogues own life force, adding 5 hit points to his total for 10 rounds. The rogue can only gain this benefit once every 5 rounds.~
-@20347  = ~Generate Lightning~
-@20348  = ~Generate Lightning: after taking a few moments to collect static energy from the surrounding area, the rogue can discharge it as violent lightning energy. The lightning strikes the target and arcs to any other enemies within 10 feet (the rogue has some measure of control and can protect <PRO_HISHER> companions). The discharge does 4d4 lightning damage, which is halved upon a successful save vs. wands. The cost is 7 hit points.~
-@20349  = ~Psychic Combustion~
-@20350  = ~Psychic Combustion: this ability allows the user to spontaneously create a brief but powerful fire in any location. The flames to 5d4+5 fire damage to all enemies within 5 feet of the flames. The cost is 10 hit points.~
-@20351  = ~Energy Barrier~
-@20352  = ~Energy Barrier: while this ability is maintained, it sets the rogue's resistance to energy-based damage (fire, cold, electricity, and magic damage) to 75%. The cost to maintain the barrier is 10 hit points.~
-@20353  = ~Cancel Energy Barrier~
-@20361  = ~Biokinesis~
-@20362  = ~Biokinesis: this feat confers the 'Adrenaline Rush' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Biokinesis discipline.~
-@20363  = ~Adrenaline Rush~
-@20364  = ~Adrenaline Rush: this ability temporarily boosts the rogue's physical stats by 2 points, for 4 rounds. Afterward, the rogue becomes fatigued for 3 rounds. The cost is 3 hit points and the ability may not be used again until the fatigue has worn off.~
-@20365  = ~Metabolic Boost~
-@20366  = ~Metabolic Boost: this ability supercharges the rogue's biological processes for 4 rounds, doubling movement speed and adding an extra attack per round, like the Haste wizard spell. The cost is 5 hit points.~
-@20367  = ~Camouflage~
-@20368  = ~Camouflage: this ability makes the rogue's body blend into the nearby environment like a chameleon. The effect is similar to the Improved Invisibility spell, without actually involving invisibility: the rogue has a -4 bonus to AC, a +40% bonus to stealth, and cannot easily be targeted by spellcasters. The effect lasts 5 rounds and the cost is 7 hit points.~
-@20369  = ~Carapace~
-@20370  = ~Carapace: this ability causes the rogue's skin to harden into a fast-growing, and strong but brittle shell. This provides a -2 bonus to AC, and harmlessly absorbs 1 physical attack each round. The effect lasts 7 rounds and the cost is 10 hit points.~
-@20371  = ~Bioegeneration~
-@20372  = ~Bioregeneration: while maintained, this ability boost the immune system and healing capabilities of the rogue's body, regenerating 1 hit point every 3 seconds. The cost to maintain this ability is 10 hit points.~
-@20373  = ~Cancel Bioregeneration~
+@20301  = ~Lore Bonus~
+@20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to the rogue's Lore.~
+//
+//
+@20500  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
+
+CLASS FEATURES:
+
+- May not wear armor heavier than studded leather.
+- May not equip shields larger than bucklers.
+- May only use the following weapons: long sword, short sword, katana, scimitar, dagger, club, quarterstaff, crossbow, shortbow, dart, sling.
+- May only become Proficient (one slot) in any weapon class.
+- May only become Proficient (one slot) in any fighting style.
+- May distribute 20 points per level (30 at level 1) in thieving abilities: Open Locks, Pick Pockets, Find Traps, Move Silently, Hide In Shadows, Detect Illusion, Set Traps.
+- Starts with base scores of 10% in Open Locks, 5% in Find Traps, 15% in Pick Pockets, 10% in Move Silently, and 5% in Hide in Shadows.
+- May backstab for increased damage:
+  Level 1-8: x2
+  Level 9-17: x3
+  Level 18+: x4
+- May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
+
+ROGUE FEATS: 
+- Stealth Bonus (HiS/MS)
+- Thieving Bonus (PP/OL)
+- Detection Bonus (FT/DI)
+- Set Dart Trap
+- Basic Alchemy
+ -- Flaming Weapon
+- Armor Class Bonus
+ -- Saving Throw Bonus
+- THAC0 Bonus
+ -- Backstab Bonus
+ -- Trip Opponent
+ -- Disarm Opponent
+ -- Blind Opponent
+ -- Disrupt Magic
+- Grease Jar
+- Smoke Bomb
+ -- Illusion Magic (requires 15+ INT)
+ -- Shadow Magic (requires 15+ INT)
+ -- Use Wands (requires 15+ INT)
+ -- Use Scrolls (requires 17+ INT)
+- Luck Bonus
+- Telepathy (requires 15+ INT)
+- Telekinesis (requires 15+ INT)
+- Pyrokinesis (requires 15+ INT)
+- Biokinesis (requires 15+ INT)
+
+Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points. Most rogues can only learn psionic powers from a single discipline.
+
+CLASS RESTRICTIONS:
+- Alignment restricted to any except lawful good.
+- Hit Die: d6
+
+Prime Requisites For Dual-Classing: Dexterity
+~
+@20501  = ~psypher~
+@20502  = ~Psypher~
+@20503  = ~PSYPHER: the Psypher is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psyphers are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
+
+Abilities:
+- Begins with access to the first power in all four psionic disciplines: Mind Thrust, Hold, Static Transfer, and Adrenaline Rush. The Psion can proceed to learn abilities from any psionic discipline.
+- Gains one extra hit point per level from levels 1 through 9.
+
+Restrictions:
+- May only distribute 12 skill points per level into thief skills.
+- May not Pick Pockets or Set Traps.
+- May not be Chaotic.~
+@20511  = ~soulblade~
+@20512  = ~Soulblade~
+@20513  = ~SOULBLADE: this warrior uses meditation to harness psychic powers in order to enhance <PRO_HISHER> martial abilities. Often training with Psionicists or Psyphers, the Soulblade can use a select few psionic abilities, generally those which fortify <PRO_HISHER> body or mind against attacks.
+
+Abilities:
+- Begins with access to the Metabolic Boost and Kinetic Ram abilities. May learn another psionic ability every at every third level of experience, up to 18th level. The abilities that a Soulblade may learn include:
+ -- from the Telekinesis discipline: Inertial Barrier, Psychic Knife, and Free Action
+ -- from the Biokinesis discipline: Camouflage, Carapace, and Bioregeneration
+ -- from the Telepathy discipline: Intellect Fortress
+ -- from the Pyrokinesis discipline: Energy Shield
+
+Restrictions:
+- Limited to light armors and weapons.
+- Limited to Mastery (+++) with melee weapons.
+- Limited to Proficiency (+) with ranged weapons.
+- May not be Chaotic.
+~
+@20601  = ~Telepathy~
+@20602  = ~Telepathy: this feat confers the 'Mind Thrust' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@20603  = ~Mind Thrust~
+@20604  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
+@20605  = ~Id Insinuation~
+@20606  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
+@20607  = ~Domination~
+@20608  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
+@20609  = ~Psychic Crush~
+@20610  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
+@20611  = ~Intellect Fortress~
+@20612  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 10 hit points.~
+@20613  = ~Cancel Intellect Fortress~
+@20621  = ~Telekinesis~
+@20622  = ~Telekinesis: this feat confers the 'Hold' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
+@20623  = ~Hold~
+@20624  = ~Hold: the target of this power is Held frozen for 1 round upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. The cost is 3 hit points.~
+@20625  = ~Kinetic Ram~
+@20626  = ~Kinetic Ram: the rogue blasts a target with powerful but unfocused telekinetic energy, causing 2d3 crushing damage and, upon a failed save vs. wands, knocking the target back 10 feet. The cost is 5 hit points.~
+@20627  = ~Inertial Barrier~
+@20628  = ~Inertial Barrier: the rogue creates a movable barrier inches from <PRO_HISHER> skin, which has several protective effects: it provides a +2 bonus to AC and 40% damage resistance against crushing and missile attacks; a +1 AC bonus and 20% damage resistance against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the Magic Missile spell. The barrier lasts 5 rounds and costs 7 hit points.~
+@20629  = ~Psychic Knife~
+@20630  = ~Psychic Knife: the rogue can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. The blade lasts 7 rounds and costs 10 hit points.~
+@20631  = ~Free Action~
+@20632  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 10 hit points.~
+@20633  = ~Cancel Free Action~
+@20641  = ~Pyrokinesis~
+@20642  = ~Pyrokinesis: this feat confers the 'Static Transfer' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
+@20643  = ~Static Transfer~
+@20644  = ~Static Transfer: this ability is similar to the Shacking Grasp wizard spell. The rogue collects static electricity in his hand, and then uses it to attack an enemy. The enemy takes 2d6 points of damage, and must save vs. wands or be stunned for 1 round. The cost if 3 hit points.~
+@20645  = ~Energy Draw~
+@20646  = ~Energy Draw: this ability can draw energy directly from a foe, causing 3d4 cold damage. The stolen energy temporarily augments the rogues own life force, adding 5 hit points to his total for 10 rounds. The rogue can only gain this benefit once every 5 rounds.~
+@20647  = ~Generate Lightning~
+@20648  = ~Generate Lightning: after taking a few moments to collect static energy from the surrounding area, the rogue can discharge it as violent lightning energy. The lightning strikes the target and arcs to any other enemies within 10 feet (the rogue has some measure of control and can protect <PRO_HISHER> companions). The discharge does 4d4 lightning damage, which is halved upon a successful save vs. wands. The cost is 7 hit points.~
+@20649  = ~Psychic Combustion~
+@20650  = ~Psychic Combustion: this ability allows the user to spontaneously create a brief but powerful fire in any location. The flames to 5d4+5 fire damage to all enemies within 5 feet of the flames. The cost is 10 hit points.~
+@20651  = ~Energy Barrier~
+@20652  = ~Energy Barrier: while this ability is maintained, it sets the rogue's resistance to energy-based damage (fire, cold, electricity, and magic damage) to 75%. The cost to maintain the barrier is 10 hit points.~
+@20653  = ~Cancel Energy Barrier~
+@20661  = ~Biokinesis~
+@20662  = ~Biokinesis: this feat confers the 'Adrenaline Rush' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Biokinesis discipline.~
+@20663  = ~Adrenaline Rush~
+@20664  = ~Adrenaline Rush: this ability temporarily boosts the rogue's physical stats by 2 points, for 4 rounds. Afterward, the rogue becomes fatigued for 3 rounds. The cost is 3 hit points and the ability may not be used again until the fatigue has worn off.~
+@20665  = ~Metabolic Boost~
+@20666  = ~Metabolic Boost: this ability supercharges the rogue's biological processes for 4 rounds, doubling movement speed and adding an extra attack per round, like the Haste wizard spell. The cost is 5 hit points.~
+@20667  = ~Camouflage~
+@20668  = ~Camouflage: this ability makes the rogue's body blend into the nearby environment like a chameleon. The effect is similar to the Improved Invisibility spell, without actually involving invisibility: the rogue has a -4 bonus to AC, a +40% bonus to stealth, and cannot easily be targeted by spellcasters. The effect lasts 5 rounds and the cost is 7 hit points.~
+@20669  = ~Carapace~
+@20670  = ~Carapace: this ability causes the rogue's skin to harden into a fast-growing, and strong but brittle shell. This provides a -2 bonus to AC, and harmlessly absorbs 1 physical attack each round. The effect lasts 7 rounds and the cost is 10 hit points.~
+@20671  = ~Bioegeneration~
+@20672  = ~Bioregeneration: while maintained, this ability boost the immune system and healing capabilities of the rogue's body, regenerating 1 hit point every 3 seconds. The cost to maintain this ability is 10 hit points.~
+@20673  = ~Cancel Bioregeneration~
 //
 //
 @2210   = ~Quickstride~
@@ -937,14 +1016,14 @@ Restrictions:
 Abilities:
 - +10% bonus to Hide In Shadows and Move Silently.
 - Slippery Mind: +1 bonus to Saving Throws.
-- May use Shadow Pool once per day. Gains an additional use for every 5 levels of experience.
+- May use Shadow Magic once per day. Gains an additional use for every 5 levels of experience.
 
-SHADOW POOL: This allows the Shadowdancer to use one of the following five abilities:
+SHADOW MAGIC: This allows the Shadowdancer to use one of the following five abilities:
   1) Sanctuary
-  2) Blur
   3) Blindness
-  4) Shadow Door
-  5) Shadowstep
+  3) Shadow Door (at 7th level)
+  4) Shadowstep (at 7th level)
+  5) Summon Shadow (at 11th level)
 
 Restrictions:
 - Alignment restricted to any non-lawful.
@@ -957,16 +1036,19 @@ Restrictions:
 - May not use the Set Snare ability.
 
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
-@2755  = ~Shadow Pool~
-@2756  = ~Shadow Pool:
+@2755  = ~Shadow Magic~
+@2756  = ~Shadow Magic:
 
-This allows the Shadowdancer to use one of the following five abilities:
+This allows the use of any one of the following five abilities:
   1) Sanctuary
-  2) Blur
   3) Blindness
-  4) Shadow Door
-  5) Shadowstep
+  3) Shadow Door (at 7th level)
+  4) Shadowstep (at 7th level)
+  5) Summon Shadow (at 11th level)
 ~
+@2757  = ~Summon Shadow~
+@2758  = ~This spell summons a shadow, an undead monster which will serve the Nightrunner under any conditions.~
+@2759  = ~Shadow~
 //
 //
 @3101  = ~corsair~

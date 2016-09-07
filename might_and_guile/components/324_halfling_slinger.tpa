@@ -388,7 +388,9 @@ COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arbli~ END
 COPY ~might_and_guile/fighter/d5_arbli.bam~ ~override~
 
-COPY ~might_and_guile/fighter/d5_arham.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arhm1.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arhm2.eff~ ~override~
+COPY ~might_and_guile/fighter/d5_arhm3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~
 	SAY NAME1 @3217
 	SAY UNIDENTIFIED_DESC @3218

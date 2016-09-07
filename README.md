@@ -17,9 +17,8 @@
 </div>
 <h2>Overview</h2>
 <div class="section">
-  <p>This mod is all about improving gameplay. While I love mods that bring the game closer to PnP, like Rogue Rebalancing and aTweaks, BG is a single-player computer game. If tweaking a rule makes this specific game more fun, then it's a good tweak, PnP be damned. Consider this mod as a collection of 'house rules' specific to the BG campaign. Every choice has been made with an eye to the particular gameplay mechanics of BG2 and the EEs.</p>
-  <p>I call this a "post-hac tweak mod" because it is designed to be installed on top of - not instead of - all the other great mods out there.  I began with a BGT game with over 75 mods; they made the game great, but a few things still irked me, like druid shapechanges and the the archer's called shots and awkwardly fourth-wall-breaking weapon names. (<i>Holy sword +6? Really? That's a punchline, not a game feature.</i>) I made a bunch of little tweaks, then I learned Weidu for easy re-installation, and then I learned more.  Before I knew it I had 30 components altering many different aspects of the game.</p>
-  <p><strong><u>Everything is completely optional.  You can use as many or as few of the mod components as you want.  None of them rely on each other, there is no 'core' component. Use what you like, ignore what you don't.</u></strong> </p>
+  <p>This mod is all about improving gameplay. While I love mods that bring the game closer to PnP, like Rogue Rebalancing and aTweaks, BG is a single-player computer game. If tweaking a rule makes this specific game more fun, then it's a good tweak, PnP be damned. Consider this mod as a collection of 'house rules' specific to the BG campaign. Some of these components nod in the direction of 3E or 5E rules... but they are still resolutely root in this 2E game engine. Every choice has been made with an eye to the particular gameplay mechanics of BG2 and the EEs.</p>
+  <p><strong><u>Everything here is completely optional. You can use as many or as few of these mod components as you want. There is no 'core' component; use what you like, ignore what you don't.</u></strong> </p>
 </div>
 <h2>Installation</h2>
 <div class="section">
@@ -32,16 +31,15 @@
 <h2>Compatibility</h2>
 <div class="section">
   <p>Might and Guile is designed to work with any Infinity Engine game on a variant of the BG2 engine that someone might purchase and play today, in 2015. At the moment, that includes TOB, TuTu, BGT, BG:EE, BG2:EE, and IWD:EE.</p>
-  <p>Might and Guile aims to be compatible with almost all other popular mods. There are however a few compatibility issues of note:<br />
+  <p>Might and Guile aims to be compatible with almost all other popular mods. There are however a few compatibility issues of note:
   <ul>
   	<li>I have not tested compatibility with Kit Revisions. These two mods cover some of the same ground. Eventually (after KR is released, anyway) I will try to see if I can make them work well together. But for now, you should probably choose one or the other. (You may try to skip the M&G overhauls/tweaks and only install new kits... it should work, but there might be balance issues compared to the KR kits.)</li><br />
-  	<li>Some of the components of <u>Rogue Rebalancing</u> modify the same resources as M&G; be aware that you might see some different behavior depending on which one is installed last.</li><br />
-  </ul></p>
-  <p>If you install lots of kit mods, keep in mind that without TobEx, the kit selection screen can only show 10 kits per class - the main class plus nine kits. If you install a lot of kits, some of the Might and Guile kits may not be visible. The vanilla game has 4 kits in each class, so you can install six kits without worries. Plan ahead, or else use the 'Mod Kit Remover' mod to clear space in the Character Generation screens before installing M&G.</p>
+  	<li>Some of the components of <u>Rogue Rebalancing</u> modify the same resources as M&G; be aware that you might see some different behavior depending on which one is installed last.</li>
+  </ul>
   <p>See the component descriptions below for more specific information about compatibility.</p>
   <p><strong>Load Order:</strong><br />
     Might and Guile should be installed <strong>after</strong> all other mods that add or change items or kits. It should be installed <strong>after</strong> the "WSPATCK for All" component of <u>tb#Tweaks</u>. It should be installed <strong>before</strong> <u>Refinements</u> and <u>Sword Coast Stratagems</u>.</p>
-  <p>My load order looks something like this:
+  <p>My load order looks roughly like this:
   <ul>
     <li> [item mods]</li>
     <li> [quest mods]</li>
@@ -49,49 +47,73 @@
     <li> [spell mods]</li>
     <li> [kit mods]</li>
     <li> [tweak mods]</li>
-    <li> BG2Tweaks</li>
+    <li> Tweaks Anthology</li>
     <li> Might and Guile</li>
-    <li> Refinements HLAs</li>
     <li> SCS</li>
-    <li> aTweaks</li>
+    <li> [end-of-order mods]</li>
   </ul>
 </div>
 <h2>Contents</h2>
-  <h4 class="subheader">Component 400 (BETA - and only for EE 2.0+): </h4>
+  <h4 class="subheader">Component 200 (only for EE 2.0+): </h4>
   <div class="section">
     <p><strong><em>Rogue Feats and HLAs</em></strong></p>
       <p> To reflect their cleverness and resourcefulness, thieves will be given the chance to learn feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p><b>Also note:</b> when you use the "choose a feat" innate ability, do not take any other action (moving, fighting, spellcasting) until you have chosen a feat. If the list of feats disappears from the screen, you cannot get them back and will have to wait until you gain two more levels to choose another one.</p>
       <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
-      <p>This component includes three new kits.  The first is the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects.  The second is the Psypher.  This character studies and meditates in order to gain power in psionic ability.  This is the only rogue kit able to learn psionic powers from more than one discipline.  The third new kit is the Soulblade - a fighter kit with limited ability to learn psionic abilities.</p>
+      <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
       <p>The Rogue Feats include:
 	  <ul>
-	    <li> <b>Stealth Bonus:</b> this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
-	    <li> <b>Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
-	    <li> <b>Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
-	    <li> <b>Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
-	    <li> <b>Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Hunter only - requires Dart Trap)</li>
-	    <li> <b>Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li>
-	    <li> <b>Basic Alchemy:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
-	    <li> <b>Advanced Alchemy:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: toPion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
-	    <li> <b>Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li>
-	    <li> <b>Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
-	    <li> <b>Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
-	    <li> <b>Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
-	    <li> <b>Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
-	    <li> <b>Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
-	    <li> <b>Contingency (Escape):</b> the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
-	    <li> <b>To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
-	    <li> Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires To-Hit Bonus)</li></li>
-	    <li> <b>Melee Trick (Trip):</b> upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
-	    <li> Melee Trick (Disarm):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
-	    <li> <b>Melee Trick (Blind):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff. (Requires To-Hit Bonus)</li>
-	    <li> <b>Melee Trick (Disrupt):</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires To-Hit Bonus)</li>
-	    <li> <b>Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
-	    <li> <b>Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
-	    <li> <b>Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
-	    <li> <b>Shadow Pool:</b> this allows the Shadowdancer to use one of the following five abilities: Sanctuary, Blur, Blindness, Shadow Door, or Shadowstep. (Shadowdancer only)</li>
-	    <li> <b>Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass or Swashbuckler only)</li>
+	    <li> <b>Skills Mastery - Stealth Bonus:</b> this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
+	    <li> <b>Skills Mastery - Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
+	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
+	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
+	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Hunter only - requires Dart Trap)</li>
+	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li>
+	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
+	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
+	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li>
+	    <li> <b>Alchemy - Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil, once per day. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
+	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
+	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
+	    <li> <b>Combat Skills - Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> <b>Combat Skills - Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
+	    <li> <b>Combat Skills - Contingency (Escape):</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
+	    <li> <b>Combat Skills - To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires To-Hit Bonus)</li></li>
+	    <li> <b>Combat Skills - Trip Opponent:</b> upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
+	    <li> Combat Skills - Disarm Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
+	    <li> <b>Combat Skills - Blind Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff. (Requires To-Hit Bonus)</li>
+	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires To-Hit Bonus)</li>
+	    <li> <b>Magical Skills - Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
+	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
+	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
+	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
+	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Mislead. (Requires Smoke Bomb/Grease Jar)</li>
+	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
+	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li>
+	  </ul>
+      <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
+      <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since the Spike Trap and Fire Trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
+	  <ul>
+	    <li> Time Trap becomes Maze Trap.</li>
+	    <li> The Swashbuckler feat 'Contingency: Escape' wil be available to all thieves as an HLA.</li>
+	    <li> The Shadowdancer feat 'Shadow Pool' will be available to all thieves as an HLA.</li>
+	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Contingency: Escape, and Power Attack.</li>
+	    <li> Blades can choose Extra Level 6 Spell, Contingency: Escape, and Whirlwind.</li>
+	    <li> Jesters can choose Extra Level 6 Spell, Contingency: Escape, and Shadow Pool.</li>
+	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
+	  </ul>
+      <p><b>Finally,</b> this component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
+      <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) This component is not compatible with Kit Revisions' Revised thief kits.</p>
+      <p>Please note that this component will only grant feats to the base five thief kits: thief, assassin, hunter, swashbuckler, and shadowdancer. Thief kits from other mods may be used alongside this component, but they will only get their normal kit abilities.</p>
+  </div>
+  <h4 class="subheader">Component 205 (only for EE 2.0+): </h4>
+  <div class="section">
+    <p><strong><em>Psionics</em></strong></p>
+      <p>To <i>further</i> reflect their cleverness and resourcefulness, thieves will be given the chance to learn psionic abilities.  There are four psionic disciplines: Telepathy, Telekinesis, Pyrokinesis, and Biokinesis.  Each discipline contains five powers, which must be learned in order from the simplest to the most powerful.  Most rogues can only focus on a single discipline; once they choose the first power from one, the other three disciplines are closed off to them. feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
+      <p>This component includes two new kits. The first is the Psypher: this character studies and meditates in order to gain power in psionic ability. This is the only rogue kit able to learn psionic powers from more than one discipline. The second new kit is the Soulblade: a fighter kit with a slightly limited ability to learn psionic powers.</p>
+      <p>The psionic abilities include:
+	  <ul>
 	    <li> <b>Telepathy - Mind Thrust:</b> this ability causes the target to save vs. wands or fall asleep for 5 rounds, at a cost of 3 max hp. (Requires Intelligence 15 or higher.)</li>
 	    <li> <b>Telepathy - Id Insinuation:</b> this ability causes the target to save vs. wands with a -3 penalty or be affected by terror for 3 rounds, at a cost of 5 max hp. (Requires Mind thrust.)</li>
 	    <li> <b>Telepathy - Domination:</b> this ability causes the target to save vs. wands or become charmed for 5 rounds, at a cost of 7 max hp. (Requires Id Insinuation.)</li>
@@ -113,21 +135,12 @@
 	    <li> <b>Biokinesis - Carapace:</b> this ability causes the rogue's skin to become tough and brittle. For 7 rounds it confers a -2 AC bonus and absorbs 1 physical attack each round. The cost is 10 max hit points. (Requires Camouflage.)</li>
 	    <li> <b>Biokinesis - Bioregeneration:</b> while maintained (at a cost of 10 max hp), this ability causes the rogue to regenerate 1 hit point every 3 seconds. (Requires Camouflage.)</li>
 	  </ul>
-      <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
-      <p> <b>A note about psionics:</b> psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 10 points), which are restored at a rate of 1 per round. Maintainable powers cause an 10-point reduction in max hit points for as long as they are maintained. Maintainable powers are interrupted if the rogue's hit points are reduced to 25% of the normal total. Psions are the only kit able to learn powers from more than one discipline; they may learn up to 13 psionic powers. All other rogues may only learn a psionic ability at 3rd level, and may only learn the five abilities in the discipline chosen first.</p>
-      <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since the Spike Trap and Fire Trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
-	  <ul>
-	    <li> Time Trap becomes Maze Trap.</li>
-	    <li> The Swashbuckler feat 'Contingency: Escape' wil be available to all thieves as an HLA.</li>
-	    <li> The Shadowdancer feat 'Shadow Pool' will be available to all thieves as an HLA.</li>
-	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Contingency: Escape, and Power Attack.</li>
-	    <li> Blades can choose Extra Level 6 Spell, Contingency: Escape, and Whirlwind.</li>
-	    <li> Jesters can choose Extra Level 6 Spell, Contingency: Escape, and Shadow Pool.</li>
-	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
-	  </ul>
-      <p><b>Finally,</b> this component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
-      <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) Please note that this component will only grant feats to the base five thief kits: thief, assassin, hunter, swashbuckler, and shadowdancer. Thief kits from other mods may be used alongside this component, but they will only get their normal kit abilities.</p>
+      <p> <b>Using psionics:</b> psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 10 points), which are restored at a rate of 1 per round. Maintainable powers cause an 10-point reduction in max hit points for as long as they are maintained. Maintainable powers are interrupted if the rogue's hit points are reduced to 25% of the normal total. Psyphers are the only rogue kit able to learn psionics at level 1 and to learn powers from more than one discipline; they may learn up to 13 of the 20  psionic powers. All other rogues may only learn psionic abilities starting at 3rd level, and may only learn the five abilities in the first discipline they choose.</p>
   </div>
+  <h4 class="subheader">Component 210: </h4>
+  <div class="section">
+    <p><strong><em>Roguish Bards</em></strong></p>
+      <p> Under construction...</p>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">
     <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
@@ -149,8 +162,8 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
-
+        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:<br />
+<br />
 CALLED SHOTS <br />
         &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
         &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
@@ -158,7 +171,7 @@ CALLED SHOTS <br />
         &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
         &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
         &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
+        &ndash; Hammer Shot: this shot strikes with unusual force, adding 1d3 crushing damage to the normal missile damage and knocking the target a few feet away unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only become proficient (+) with melee weapons.<br />
         &ndash; May only wear leather or similar armors.<br />.</p>
@@ -212,10 +225,10 @@ CALLED SHOTS <br />
     <p><strong><em>Revised Shadowdancer</em></strong></p>
       <p>This component removes Shadowdancers' "Hide in Plain Sight" ability. It also turns their "Shadowstep" ability into something called "Shadow Pool" which allows the Shadowdancer to cast any one of the following spells:<br />
         &ndash; Sanctuary<br />
-        &ndash; Blur<br />
         &ndash; Blindness<br />
         &ndash; Shadow Door<br />
-        &ndash; Shadowstep</p>
+        &ndash; Shadowstep<br />
+        &ndash; Summon Shadow</p>
   </div>
   <h4 class="subheader">Component 310: </h4>
   <div class="section">
@@ -337,7 +350,7 @@ CALLED SHOTS <br />
         &ndash; May not dual-class.<br />.</p>
     </div>
   </div>
-  <h4 class="subheader">Component 390 (BETA): </h4>
+  <h4 class="subheader">Component 390  (only for EE 2.0+): </h4>
   <div class="section">
     <p><strong><em>Warrior Feats</em></strong></p>
       <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
@@ -560,7 +573,7 @@ CALLED SHOTS <br />
 <div class="section">
   <p><strong>Version 2.8 - August 2016</strong></p>
   <ul>
-    <li>added the Soulblade fighter kit, in the Rogue Feats component</li>
+    <li>added the Soulblade psionic fighter kit</li>
   </ul>
   <p><strong>Version 2.7 - June 2016</strong></p>
   <ul>

@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~2.8~
+VERSION ~2.8.1~
 //README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -64,6 +64,40 @@ INCLUDE ~might_and_guile/components/200_rogue_feats.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
+//						  	PSIONICS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @205
+DESIGNATED 205
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/205_psionics.tpa~
+//__________________________________________________________________________________
+
+
+/*
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						   BARDS = THIEVES
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @210
+DESIGNATED 210
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/210_bard_thieves.tpa~
+//__________________________________________________________________________________
+*/
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
 //						   QUICKSTRIDE
 //__________________________________________________________________________________
 //__________________________________________________________________________________
@@ -119,6 +153,7 @@ INCLUDE ~might_and_guile/components/230_revised_archer.tpa~
 
 BEGIN @235
 DESIGNATED 235
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_beastmaster.d5~ @5
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/235_revised_beastmaster.tpa~
@@ -234,9 +269,10 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 //__________________________________________________________________________________
 
 
-//________________________ARCHER__________________________________________________
+//______________________ELVEN ARCHER________________________________________________
 BEGIN @322
 DESIGNATED 322
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_earch.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
@@ -246,6 +282,7 @@ INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 //________________________SLINGER__________________________________________________
 BEGIN @324
 DESIGNATED 324
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_sling.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
@@ -255,6 +292,7 @@ INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //________________________MAGE HUNTER_______________________________________________
 BEGIN @350
 DESIGNATED 350
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_mageh.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
@@ -264,6 +302,7 @@ INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //_______________________BARBARIAN RANGER___________________________________________
 BEGIN @360
 DESIGNATED 360
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_rbarb.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
@@ -280,7 +319,7 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 
 BEGIN @390
 DESIGNATED 390
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @1
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ @1
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/390_warrior_feats.tpa~
@@ -370,7 +409,7 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 
 BEGIN @500
 DESIGNATED 500
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ ~for EE and ToBEx games~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ ~2.0+~
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/500_multiclass_kits.tpa~

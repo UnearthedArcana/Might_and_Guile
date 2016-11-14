@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~2.8.1~
+VERSION ~2.8.2~
 //README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -53,7 +53,7 @@ INCLUDE ~scales_of_balance/components/00_spell_tables.tpa~
 
 BEGIN @200
 DESIGNATED 200
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ @1
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/200_rogue_feats.tpa~
@@ -234,7 +234,7 @@ INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 
 BEGIN @275
 DESIGNATED 275
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @4
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
 //GROUP @22
 
@@ -409,7 +409,7 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 
 BEGIN @500
 DESIGNATED 500
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ ~2.0+~
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/500_multiclass_kits.tpa~

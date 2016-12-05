@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						WARRIOR KITS
+//							WARRIOR KITS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -12,7 +12,7 @@
 ADD_KIT ~D5CORSA~
 //___________________________________________________________________________________
 
-//WEAPON PROFICIENCIES________________________________________________________________
+//WEAPON PROFICIENCIES_______________________________________________________________
 //11                                   T   S           F   Q             S S
 //10           L S                     W   C           L   U             W I
 //9            A M             B L S   O   I   W       A   A             O N
@@ -35,7 +35,7 @@ ADD_KIT ~D5CORSA~
 //                 STR DEX CON INT WIS CHR
 ~D5CORSA           0   0   0   0   0   0~
 
-//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
 //                 STR DEX CON INT WIS CHR
 ~D5CORSA           15  15  0   0   0   0~
 
@@ -51,19 +51,19 @@ ADD_KIT ~D5CORSA~
 //                 FT CL MA TH DR RA
 ~D5CORSA           0  1  1  1  0  0~
 
-//KIT ABILITIES 2DA FILE______________________________________________________________
+//KIT ABILITIES 2DA FILE_____________________________________________________________
 ~might_and_guile/fighter/d5_corsa.2da~
 
-//RACIAL KIT AVAILABILITY_____________________________________________________________
+//RACIAL KIT AVAILABILITY____________________________________________________________
 ~K_F_H K_F_G K_F_E K_F_HE K_F_HL K_F_HO~
 
-//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
 ~0x00010000 2~
 
-//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
 ~Fi0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
@@ -75,7 +75,7 @@ SAY @3102
 SAY @3103
 //___________________________________________________________________________________
 
-//EE KIT EXTRAS_____________________________________________________________________
+//EE KIT EXTRAS______________________________________________________________________
 //
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
@@ -88,7 +88,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//CORSAIR ABILITY FILES______________________________________________________________
+//CORSAIR ABILITY FILES_______________________________________________________________
 //
 COPY ~might_and_guile/fighter/d5_corsa.2da~ ~override~
 COPY ~might_and_guile/misc/d5_bsvbo.spl~ ~override~
@@ -97,19 +97,24 @@ COPY ~might_and_guile/misc/d5_luckp.spl~ ~override~
 	SAY NAME1 @3108
 	SAY UNIDENTIFIED_DESC @3108
 COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
-COPY ~might_and_guile/fighter/d5_swash.spl~ ~override~
+COPY ~might_and_guile/fighter/d5swash.spl~ ~override~
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
+//____________________________________________________________________________________
+	
+//FEAT SYSTEM_________________________________________________________________________
+//
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   COPY_EXISTING ~d5_corsa.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/fighter/no_rogue_feats_corsair.txt~
   BUT_ONLY
 END
+
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   COPY_EXISTING ~d5_corsa.2da~ ~override~
 	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/thief/rogue_feats_corsair.txt~
+	APPEND_FILE ~might_and_guile/feats/feats_corsair.txt~
   BUT_ONLY
   ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
    COPY_EXISTING ~clastext.2da~ ~override~
@@ -150,56 +155,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	END
    BUT_ONLY
   END
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_corsa.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
-	BUT_ONLY
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
-		COPY_EXISTING ~d5_corsa.2da~ ~override~
-			LPM remove_blank_lines
-			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
-			BUT_ONLY
-	END
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/feats/d5_corsa.baf~
 END
 //___________________________________________________________________________________
-
-//ROGUE FEATS________________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
-  COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS k_cols // amount of columns
-	READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
-	FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
-	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5CORSA~ BEGIN
-	    SET cor_row = %k_row%
-	    READ_2DA_ENTRY_FORMER k_rows cor_row 9 cor_code // read column value
-	  END
-	END
-  BUT_ONLY
-  COPY_EXISTING ~d5rof01.spl~ ~override~
-				~d5rof02.spl~ ~override~
-				~d5rof03.spl~ ~override~
-				~d5rof04.spl~ ~override~
-				~d5rof05.spl~ ~override~
-				~d5rof06.spl~ ~override~
-				~d5rof07.spl~ ~override~
-				~d5rof08.spl~ ~override~
-				~d5rof09.spl~ ~override~
-				~d5rof10.spl~ ~override~
-				~d5rof11.spl~ ~override~
-				~d5rof12.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16392 parameter1 = %cor_code% STR_VAR resource = ~D5_RFXC~ END
-  COPY_EXISTING ~d5_rfd1.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFD2~ END
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFE2~ END
-  COPY_EXISTING ~d5_rff1.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16396 parameter1 = %cor_code% STR_VAR resource = ~D5_RFF2~ END
-END
-//____________________________________________________________________________________
-

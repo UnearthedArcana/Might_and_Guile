@@ -1,0 +1,9 @@
+IF
+	Kit(LastSummonerOf(Myself),D5EARCH)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_earch",Myself))
+END

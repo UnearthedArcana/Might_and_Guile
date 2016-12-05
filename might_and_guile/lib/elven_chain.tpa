@@ -1,0 +1,92 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						ELVEN CHAIN USABILITY
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_echan.d5~ ~override~
+//__________________________________________________________________________________
+
+
+//ARCHERS USE ELVEN CHAIN____________________________________________________________
+//
+ACTION_FOR_EACH elven_chain IN
+	~chan12~
+	~chan13~
+	~chan14~
+	~chan15~
+	~chan16~
+	~chan19~
+	~clolth~
+	~dwchan01~
+	~a!bchan1~
+	~bsingchn~
+	~c2chan01~
+	~chandrw~
+	~cmarq02~
+	~cmarq12~
+	~cmtuch01~
+	~cota~
+	~dsjearm~
+	~echan01~
+	~echan02~
+	~elfmail~
+	~elvarmx~
+	~fwchan02~
+	~gcmch01~
+	~illas04~
+	~kimchain~
+	~kiyoarm1~
+	~kiyoarm2~
+	~kiyoarm3~
+	~kiyowed1~
+	~mau006~
+	~ntchan04~
+	~rr#chn01~
+	~s!chan02~
+	~scal04~
+	~sgchan2~ 
+	~tzchan01~
+	~u#chan01~
+	~u#chan07~
+	~ucmgch01~
+	~zyplatn8~
+	~chands06~
+	~drowchn1~
+	~drowchn2~
+	~drowchn3~
+	~efml01~
+	~pchan~
+	~AAITM127~
+	~BGSX10~
+	~KOVAWED1~
+	~cmchan02~
+	~elfchan~
+	~kaychai~
+	~ntchan06~
+	~r#aspchn~
+	~tcarmor5~
+	~tcechan~
+	~tcrihar1~
+	~tcrihar2~
+	~tcrivarm~
+	~CMTCH02~
+	~CMTCH03~
+	~CMTCH05~
+	~ESXCHA~
+	~FWCHAN03~
+	~SOAITM01~
+BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%elven_chain%.itm~ BEGIN
+		COPY_EXISTING ~%elven_chain%.itm~ ~override~
+			WRITE_BYTE 0x2d ("0x00") //blocked: none
+		BUT_ONLY
+	END
+END
+//___________________________________________________________________________________
+

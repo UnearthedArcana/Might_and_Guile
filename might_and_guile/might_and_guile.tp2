@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~2.8.2~
+VERSION ~3.0~
 //README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -47,7 +47,7 @@ INCLUDE ~scales_of_balance/components/00_spell_tables.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						   ROGUE FEATS & HLAs
+//						   FEATS & HLAs
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -56,7 +56,7 @@ DESIGNATED 200
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
-INCLUDE ~might_and_guile/components/200_rogue_feats.tpa~
+INCLUDE ~might_and_guile/components/200_feats.tpa~
 //__________________________________________________________________________________
 
 
@@ -70,7 +70,8 @@ INCLUDE ~might_and_guile/components/200_rogue_feats.tpa~
 
 BEGIN @205
 DESIGNATED 205
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+//REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/205_psionics.tpa~
@@ -309,7 +310,7 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________________________________________________________________
 
 
-
+/*
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
@@ -324,7 +325,7 @@ REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ @1
 
 INCLUDE ~might_and_guile/components/390_warrior_feats.tpa~
 //__________________________________________________________________________________
-
+*/
 
 
 //__________________________________________________________________________________

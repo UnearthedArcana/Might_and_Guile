@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 2.8 </strong><br />
+  <p><strong> Version 3.0 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -54,12 +54,25 @@
   </ul>
 </div>
 <h2>Contents</h2>
-  <h4 class="subheader">Component 200 (only for EE 2.0+): </h4>
+  <h4 class="subheader">Component 200 (EE-only): </h4>
   <div class="section">
-    <p><strong><em>Rogue Feats and HLAs</em></strong></p>
-      <p> To reflect their cleverness and resourcefulness, thieves will be given the chance to learn feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
-      <p><b>Also note:</b> when you use the "choose a feat" innate ability, do not take any other action (moving, fighting, spellcasting) until you have chosen a feat. If the list of feats disappears from the screen, you cannot get them back and will have to wait until you gain two more levels to choose another one.</p>
-      <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
+    <p><strong><em>Feat System and Revised HLAs</em></strong></p>
+      <p> This component adds learnable feats, which may be chosen by the player at certain levels in a dialogue-based method. The feats include a few melee techniques for fighters, and many skills of various kinds for thieves. If you install psionics and revised Called Shots, those abilities will be folded into this system.
+      <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
+	  <ul>
+	    <li> Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points.</li>
+	    <li> Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
+	    <li> Heroic Resistance: for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
+	    <li> Heroic Resolve: the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
+	    <li> Heroic Willpower: for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
+	    <li> Knockdown: for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
+	    <li> Knockback: for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
+	    <li> Cutting Blow: for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
+	    <li> Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
+	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
+	    <li> Tactics: making use of strong leadership in combat situations, the warrior develops the permanent ability to confer bonuses upon allies within earshot (20 feet). The warrior can switch back and forth between a +1 AC bonus and a +1 thac0 bonus, but cannot use both tactics at the same time, and the warrior himself does not benefit from the bonus.</li>
+	  </ul>
+      <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
       <p>The Rogue Feats include:
 	  <ul>
@@ -67,7 +80,8 @@
 	    <li> <b>Skills Mastery - Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
 	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
-	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Hunter only - requires Dart Trap)</li>
+	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Requires Dart Trap and Basic Alchemy)</li>
+	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li>
 	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
 	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
@@ -77,7 +91,7 @@
 	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
 	    <li> <b>Combat Skills - Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
-	    <li> <b>Combat Skills - Contingency (Escape):</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
+	    <li> <b>Combat Skills - Escape Artist:</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
 	    <li> <b>Combat Skills - To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires To-Hit Bonus)</li></li>
 	    <li> <b>Combat Skills - Trip Opponent:</b> upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
@@ -88,58 +102,59 @@
 	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
 	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
 	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
-	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Mislead. (Requires Smoke Bomb/Grease Jar)</li>
+	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Misleading Clone. (Requires Smoke Bomb/Grease Jar)</li>
 	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
 	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li>
 	  </ul>
       <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
-      <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since the Spike Trap and Fire Trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
+      <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since various trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
 	  <ul>
 	    <li> Time Trap becomes Maze Trap.</li>
-	    <li> The Swashbuckler feat 'Contingency: Escape' wil be available to all thieves as an HLA.</li>
-	    <li> The Shadowdancer feat 'Shadow Pool' will be available to all thieves as an HLA.</li>
-	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Contingency: Escape, and Power Attack.</li>
-	    <li> Blades can choose Extra Level 6 Spell, Contingency: Escape, and Whirlwind.</li>
-	    <li> Jesters can choose Extra Level 6 Spell, Contingency: Escape, and Shadow Pool.</li>
+	    <li> The Swashbuckler feat 'Escape Artist' wil be available to all thieves as an HLA.</li>
+	    <li> The 'Shadow Pool' feat will be available to all thieves as an HLA.</li>
+	    <li> The 'Illusion Magic' feat will be available to all thieves as an HLA.</li>
+	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Escape Artist, and Power Attack.</li>
+	    <li> Blades can choose Extra Level 6 Spell, Escape Artist, and Whirlwind.</li>
+	    <li> Jesters can choose Extra Level 6 Spell, Escape Artist, and Shadow Pool.</li>
 	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
 	  </ul>
       <p><b>Finally,</b> this component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
       <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) This component is not compatible with Kit Revisions' Revised thief kits.</p>
-      <p>Please note that this component will only grant feats to the base five thief kits: thief, assassin, hunter, swashbuckler, and shadowdancer. Thief kits from other mods may be used alongside this component, but they will only get their normal kit abilities.</p>
+      <p>Please note that this component will only grant feats to the base five thief kits: Thief, Assassin, Hunter, Swashbuckler, and Shadowdancer, as well as thief kits added by this mod and by the 'Song & Silence' mod. Thief kits from other mods may be used alongside this component... but they will only get their normal kit abilities, no feats.</p>
   </div>
   <h4 class="subheader">Component 205 (only for EE 2.0+): </h4>
   <div class="section">
     <p><strong><em>Psionics</em></strong></p>
-      <p>To <i>further</i> reflect their cleverness and resourcefulness, thieves will be given the chance to learn psionic abilities.  There are four psionic disciplines: Telepathy, Telekinesis, Pyrokinesis, and Biokinesis.  Each discipline contains five powers, which must be learned in order from the simplest to the most powerful.  Most rogues can only focus on a single discipline; once they choose the first power from one, the other three disciplines are closed off to them. feats as they progress in levels. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>Note: this makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into optional feats. The idea is, you will be able to choose feats to build something like the vanilla kits... but you can also build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Also note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
+      <p>To <i>further</i> reflect their cleverness and resourcefulness, thieves will be given the chance to learn psionic abilities.  There are four psionic disciplines: Telepathy, Telekinesis, Pyrokinesis, and Biokinesis.  Each discipline contains five powers, which must be learned in order from the simplest to the most powerful.  Most rogues can only focus on a single discipline; once they choose the first power from one, the other three disciplines are closed off to them. Note: rogues must have 15+ INT in order to choose psionic powers as feats.</p>
       <p>This component includes two new kits. The first is the Psypher: this character studies and meditates in order to gain power in psionic ability. This is the only rogue kit able to learn psionic powers from more than one discipline. The second new kit is the Soulblade: a fighter kit with a slightly limited ability to learn psionic powers.</p>
       <p>The psionic abilities include:
 	  <ul>
-	    <li> <b>Telepathy - Mind Thrust:</b> this ability causes the target to save vs. wands or fall asleep for 5 rounds, at a cost of 3 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Telepathy - Id Insinuation:</b> this ability causes the target to save vs. wands with a -3 penalty or be affected by terror for 3 rounds, at a cost of 5 max hp. (Requires Mind thrust.)</li>
+	    <li> <b>Telepathy - Id Insinuation:</b> this ability causes the target to save vs. wands with a -3 penalty or be affected by terror for 3 rounds, at a cost of 4 max hp. (Requires Mind thrust.)</li>
+	    <li> <b>Telepathy - Ego Repair</b> this ability removes the effects of fear, sleep, feeblemindedness, unconsciousness, and intoxication, as well as berserk and confused states of mind. The cost is 5 max hit points.</li>
 	    <li> <b>Telepathy - Domination:</b> this ability causes the target to save vs. wands or become charmed for 5 rounds, at a cost of 7 max hp. (Requires Id Insinuation.)</li>
-	    <li> <b>Telepathy - Psychic Crush:</b> this ability causes the target to save vs. wands with a -3 penalty or be stunned for 3 rounds, at a cost of 10 max hit points. (Requires Domination.)</li>
-	    <li> <b>Telepathy - Intellect Fortress:</b> while maintained (at a cost of 10 max hp), this ability renders the rogue immune to all hostile mental effects, whether psionic or magical. (Requires Domination.)</li>
-	    <li> <b>Telekinesis - Hold:</b> this ability Slows the target for one round; and causes the target to save vs. wands or be Held for one round and Slowed for a second round. The cost is 3 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Telekinesis - Kinetic Ram:</b> the target of this telekinetic attack takes 2d3 crushing damage, and must save vs. wands or be knocked back 10 feet. The cost is 5 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Telekinesis - Inertial Barrier:</b> this ability envelops the rogue in a shell of telekinetic energy that absorbs incoming blows. It provides a -2 AC bonus and 4-% DR against crushing or missile attacks; a -1 AC bonus and 20% DR against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the spell 'Magic Missile.' The cost is 7 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It lasts for 7 rounds and is wielded as if the user has Mastery (+++) with it. The cost is 10 max hp. (Requires Intelligence 15 or higher.)</li>
+	    <li> <b>Telepathy - Intellect Fortress:</b> while maintained (at a cost of 9 max hp), this ability renders the rogue immune to all hostile mental effects, whether psionic or magical. (Requires Domination.)</li>
+	    <li> <b>Telepathy - Psychic Crush:</b> this ability causes the target to save vs. wands with a -3 penalty or be stunned for 3 rounds, at a cost of 9 max hit points. (Requires Domination.)</li>
+	    <li> <b>Telekinesis - Immobilization:</b> this ability Slows the target for one round; and causes the target to save vs. wands or be Held for one round and Slowed for a second round. The cost is 4 max hp. </li>
+	    <li> <b>Telekinesis - Kinetic Ram:</b> the target of this telekinetic attack takes 2d3 crushing damage, and must save vs. wands or be knocked back 10 feet. The cost is 5 max hp. (Requires Immobilize.)</li>
+	    <li> <b>Telekinesis - Inertial Barrier:</b> this ability envelops the rogue in a shell of telekinetic energy that absorbs incoming blows. It provides a -2 AC bonus and 4-% DR against crushing or missile attacks; a -1 AC bonus and 20% DR against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the spell 'Magic Missile.' The cost to maintain the barrier is 7 max hp. (Requires Kinetic Ram.)</li>
+	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It lasts for 7 rounds and is wielded as if the user has Mastery (+++) with it. The cost to maintain the blade is 7 max hp. (Requires Inertial Barrier.)</li>
 	    <li> <b>Telekinesis - Free Action:</b> while maintained (at a cost of 10 max hp), this ability renders the rogue immune to all effects that hinder normal movement, whether psionic or magical. (Requires Inertial Barrier.)</li>
-	    <li> <b>Pyrokinesis - Static Transfer:</b> this ability gathers static electricity into the rogue's hand, like the Shocking Grasp spell. A successful attack then causes 2d6 points of electric damage and the target will be stunned for 1 round on a failed save vs. wands. The cost is 3 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Pyrokinesis - Energy Draw:</b> this ability drains energy directly from a victim, causing 3d4 points of cold damage; and uses the energy to temporarily augment the rogue's own vitality, increasing his or her max hit points by 5 for 10 rounds. A rogue can only benefit from this once every 5 rounds, and the ability costs 5 max hp. (Requires Static Transfer.)</li>
-	    <li> <b>Pyrokinesis - Generate Lightning:</b> this ability sends a powerful arc of electricity to the target and any nearby enemies, causing 4d4 electric damage (save vs. wands for half). The cost is 7 max hp. (Requires Energy Draw.)</li>
-	    <li> <b>Pyrokinesis - Psychic Combustion:</b> this ability causes a spontaneous plume of fire, causing 5d4+5 damage to all within 5 feet of the target location. The costs is 10 max hit points. (Requires Generate Lightning.)</li>
-	    <li> <b>Pyrokinesis - Energy Barrier:</b> while maintained (at a cost of 10 max hp), this ability sets the rogues resistance to energy-based damage (fire, cold, electric and magic damage) to 75%. (Requires Generate Lightning.)</li>
-	    <li> <b>Biokinesis - Adrenaline Rush:</b> this ability causes the rogue's physical stats to increase by 2 for 4 rounds, followed by 3 rounds of fatigue. The cost is 3 max hp. (Requires Intelligence 15 or higher.)</li>
-	    <li> <b>Biokinesis - Metabolic Boost:</b> this ability causes the to be affected by Haste, increasing movement speed and gaining an extra attack per round. The effect lasts 4 rounds the costs 5 max hit points. (Requires Adrenaline Rush.)</li>
-	    <li> <b>Biokinesis - Camouflage:</b> this ability causes the rogue to become partially invisible, resulting in a -4 AC bonus, a 40% bonus to stealth, and the inability to be targeted by spells. It lasts 5 rounds and costs of 7 max hp. (Metabolic Boost.)</li>
-	    <li> <b>Biokinesis - Carapace:</b> this ability causes the rogue's skin to become tough and brittle. For 7 rounds it confers a -2 AC bonus and absorbs 1 physical attack each round. The cost is 10 max hit points. (Requires Camouflage.)</li>
-	    <li> <b>Biokinesis - Bioregeneration:</b> while maintained (at a cost of 10 max hp), this ability causes the rogue to regenerate 1 hit point every 3 seconds. (Requires Camouflage.)</li>
+	    <li> <b>Pyrokinesis - Static Discharge:</b> this ability gathers static electricity into the rogue's hand, like the Shocking Grasp spell. A successful attack then causes 2d6 points of electric damage and the target will be stunned for 1 round on a failed save vs. wands. The cost is 4 max hp.</li>
+	    <li> <b>Pyrokinesis - Energy Transfer:</b> the immediate expenditure of energy to initiate this ability is converted into a steady bloom of positive energy in the target, resulting in a slow healing, at half the rate of the psion's hp recovery. The cost is 5 max hp. (Requires Static Discharge.)</li>
+	    <li> <b>Pyrokinesis - Psychic Combustion:</b> this ability causes a spontaneous plume of fire, causing 3d4+3 damage to all within 5 feet of the target location. The costs is 7 max hit points. (Requires Energy Transfer.)</li>
+	    <li> <b>Pyrokinesis - Energy Dispersion:</b> while maintained (at a cost of 9 max hp), this ability sets the rogues resistance to energy-based damage (fire, cold, electric and magic damage) to 75%. (Requires Psychic Combustion.)</li>
+	    <li> <b>Pyrokinesis - Generate Lightning:</b> this ability sends a powerful arc of electricity to the target and any nearby enemies, causing 2d6+2 electric damage (save vs. wands for half). The cost is 9 max hp. (Requires Psychic Combustion.)</li>
+	    <li> <b>Biokinesis - Adrenaline Rush:</b> this ability causes the rogue's physical stats to increase by 2 for 4 rounds, followed by 2 rounds of fatigue. The cost is 4 max hp.</li>
+	    <li> <b>Biokinesis - Metabolic Boost:</b> this ability causes the to be affected by Haste, increasing movement speed and gaining an extra attack per round. The effect lasts 3 rounds and costs 5 max hit points. (Requires Adrenaline Rush.)</li>
+	    <li> <b>Biokinesis - Bioregeneration:</b> this ability causes the psion to regenerate l hit points lost to wounds as he or she regenerates the max hp from initiating the ability. The cost is 7 max hp. (Requires Metabolic Boost.)</li>
+	    <li> <b>Biokinesis - Camouflage:</b> this ability causes the rogue to become partially invisible, resulting in a -4 AC bonus, a 40% bonus to stealth, and the inability to be targeted by spells. It costs 9 max hp to maintain this power. (Requires Bioregeneration.)</li>
+	    <li> <b>Biokinesis - Carapace:</b> this ability causes the rogue's skin to become tough and brittle. The carapace confers a -2 AC bonus and absorbs 1 physical attack each round. The cost to maintain this power is 9 max hit points. (Requires Bioregeneration.)</li>
 	  </ul>
-      <p> <b>Using psionics:</b> psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 10 points), which are restored at a rate of 1 per round. Maintainable powers cause an 10-point reduction in max hit points for as long as they are maintained. Maintainable powers are interrupted if the rogue's hit points are reduced to 25% of the normal total. Psyphers are the only rogue kit able to learn psionics at level 1 and to learn powers from more than one discipline; they may learn up to 13 of the 20  psionic powers. All other rogues may only learn psionic abilities starting at 3rd level, and may only learn the five abilities in the first discipline they choose.</p>
+      <p> <b>Using psionics:</b> psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 9 points), which are restored at a rate of 1 per round. Maintainable powers cause a reduction in max hit points for as long as they are maintained. Psyphers are the only rogue kit able to learn psionics at level 1 and to learn powers from more than one discipline; they may learn up to 14 of the 20  psionic powers. All other rogues may only learn psionic abilities starting at 3rd level, and may only learn the five abilities in their chosen discipline.</p>
   </div>
   <h4 class="subheader">Component 210: </h4>
   <div class="section">
-    <p><strong><em>Roguish Bards</em></strong></p>
+    <p><strong><em>Revised Bards</em></strong></p>
       <p> Under construction...</p>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">
@@ -162,20 +177,19 @@
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:<br />
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:<br />
 <br />
 CALLED SHOTS <br />
-        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
-        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 1d3 crushing damage to the normal missile damage and knocking the target a few feet away unless the target makes a successful save vs. Breath.</p>
+        &ndash; 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
       <p>Disadvantages:<br />
         &ndash; May only become proficient (+) with melee weapons.<br />
         &ndash; May only wear leather or similar armors.<br />.</p>
     </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
     <p><b>Compatibility:</b> this component will conflict with other mods that alter the Archer kit, like the "Improved Archer" mod.</p>
   </div>
   <h4 class="subheader">Component 235: </h4>
@@ -253,20 +267,19 @@ CALLED SHOTS <br />
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman may chose from among the following Called Shots:
-
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman learns the following Called Shots:<br />
+<br />
 CALLED SHOTS <br />
-        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
-        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
+        &ndash; 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only specialize (++) with melee weapons.<br />
         &ndash; May not wear heavier armor than splint mail.<br />.</p>
     </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
   </div>
   <h4 class="subheader">Component 322: </h4>
   <div class="section">
@@ -276,21 +289,22 @@ CALLED SHOTS <br />
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with bows.<br />
-        &ndash; May learn to use a Called Shot at levels 1, 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman may chose from among the following Called Shots:
+        &ndash; May learn to use Called Shots at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
 CALLED SHOTS <br />
         &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
-        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.<br />
-        &ndash; Entangling Shot: this shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.<br />
-        &ndash; Sleep Shot: this shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.<br />
-        &ndash; Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.</p>
+        &ndash; 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+		&ndash; 2nd level: Sleep Shot. This shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.<br />
+		&ndash; 4th level: Entangling Shot. This shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.<br />
+		&ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+		&ndash; 8th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+		&ndash; 10th level: Faerie Fire. This shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.<br />
+		&ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />.</p>
     </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
   </div>
   <h4 class="subheader">Component 324: </h4>
   <div class="section">
@@ -300,21 +314,20 @@ CALLED SHOTS <br />
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Grand Mastery (+++++) with slings.<br />
-        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger may chose from among the following Called Shots:
-
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger learns the following Called Shots:<br />
+<br />
 CALLED SHOTS <br />
-        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
-        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
+        &ndash; 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
       <p>Disadvantages:<br />
         &ndash; May not wear any metal armor.<br />
         &ndash; May only become Proficient (+) with melee weapons.<br />
         &ndash; May not cast druid spells.<br />.</p>
     </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
   </div>
   <h4 class="subheader">Component 350: </h4>
   <div class="section">
@@ -350,25 +363,6 @@ CALLED SHOTS <br />
         &ndash; May not dual-class.<br />.</p>
     </div>
   </div>
-  <h4 class="subheader">Component 390  (only for EE 2.0+): </h4>
-  <div class="section">
-    <p><strong><em>Warrior Feats</em></strong></p>
-      <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
-	  <ul>
-	    <li> Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points and APR will be 1.</li>
-	    <li> Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
-	    <li> Heroic Resistance: for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
-	    <li> Heroic Resolve: the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
-	    <li> Heroic Willpower: for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
-	    <li> Knockdown: for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
-	    <li> Knockback: for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
-	    <li> Cutting Blow: for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
-	    <li> Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
-	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
-	    <li> Tactics: the warrior develops the permanent ability to confer combat bonuses upon allies within earshot (20 feet). The warrior can switch back and forth between a +1 AC bonus and a +1 thac0 bonus, but cannot use both tactics at the same time, and the warrior himself does not benefit from the bonus.</li>	  </ul>
-      <p> Fighters may choose a feat at 2nd, 4th, 7th, 10th, 13th, 16th, and 19th levels.  Rangers may choose a feat at 3rd, 6th, 12th, and 18th levels.</p>
-      <p><b>Also note:</b> technically, choosing a feat counts as casting a wizard spell. If you do it outdoors in Athkatla, the Cowled Wizards will teleport in and confront you. Unfortunately there is no workaround for this.</p>
-  </div>
   <h4 class="subheader">Component 410: </h4>
   <div class="section">
     <p><strong><em>Add the SNIPER thief kit</em></strong></p>
@@ -377,20 +371,19 @@ CALLED SHOTS <br />
       <p>Advantages:<br />
         &ndash; +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.<br />
         &ndash; Can achieve Mastery (3 Points) with bows and crossbows<br />
-        &ndash; May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Sniper has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Sniper may chose from among the following Called Shots:
-
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Sniper has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Sniper learns the following Called Shots:<br />
+<br />
 CALLED SHOTS <br />
-        &ndash; Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
-        &ndash; Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.</p>
+        &ndash; 1st level: Pinning Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
       <p>Disadvantages:<br />
         &ndash; May only distribute 20 skill points per level among thieving skills.<br />
         &ndash; Reduced backstab multiplier.<br />.</p>
     </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
   </div>
   <h4 class="subheader">Component 420: </h4>
   <div class="section">
@@ -571,6 +564,14 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 3.0 - November 2016</strong></p>
+  <ul>
+    <li>completely rewrote the feat system, merging rogue feats and warrior feats</li>
+    <li>rolled back Called Shots to be granted in the clab table, unless the feat system is installed in which they are integrated with it</li>
+    <li>revised psionic powers and made then integrated with, but independent of, the new feat system</li>
+    <li>added psionic HLAs for the Psypher and Soulblade kits</li>
+    <li>fixed various bugs (like the rogue version of Mislead not working correctly)</li>
+  </ul>
   <p><strong>Version 2.8 - August 2016</strong></p>
   <ul>
     <li>added the Soulblade psionic fighter kit</li>

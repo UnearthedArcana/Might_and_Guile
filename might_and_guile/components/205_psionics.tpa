@@ -88,7 +88,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			briefdesc = RESOLVE_STR_REF (@20503)
 		STR_VAR
 			kit_name = D5_PSYPHER
-			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
 			clswpbon = ~0 0 3~
 			thiefskl = ~30 12~
 			thiefscl = ~0 100 100 100 100 100 0 0~
@@ -178,7 +178,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-
+/*
 //KIT IDENTIFIERS FOR PATCHING LATER__________________________________________________
 //
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -197,7 +197,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	END
 BUT_ONLY
 //____________________________________________________________________________________
-
+*/
 
 //CHANGE CLASS TEXT_________________________________________________________________
 //
@@ -235,114 +235,138 @@ END
 COPY ~might_and_guile/misc/d5_1hpbo.spl~ ~override~
 	SAY NAME1 @7
 //
-COPY ~might_and_guile/psi/d5psa01.spl~ ~override~   // 				telepathy
+COPY ~might_and_guile/psi/d5_ps100.bam~ ~override~  // 				telepathy
+COPY ~might_and_guile/psi/d5psa00.spl~ ~override~
 	SAY NAME1 @20601
-	SAY UNIDENTIFIED_DESC @20602
-COPY ~might_and_guile/psi/d5ps101.spl~ ~override~   //  			mind thrust
+	SAY UNIDENTIFIED_DESC @20601
+COPY ~might_and_guile/psi/d5psa02.spl~ ~override~
+	SAY NAME1 @20601
+	SAY UNIDENTIFIED_DESC @20601
+COPY ~might_and_guile/psi/d5psa03.spl~ ~override~
+	SAY NAME1 @20601
+	SAY UNIDENTIFIED_DESC @20601
+COPY ~might_and_guile/psi/d5psa04.spl~ ~override~
+	SAY NAME1 @20601
+	SAY UNIDENTIFIED_DESC @20601
+COPY ~might_and_guile/psi/d5psa05.spl~ ~override~
+	SAY NAME1 @20601
+	SAY UNIDENTIFIED_DESC @20601
+COPY ~might_and_guile/psi/d5_ps100.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps102.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps103.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps104.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps105.2da~ ~override~
+
+
+COPY ~might_and_guile/psi/d5ps101.spl~ ~override~   //  			id insinuation
 	SAY NAME1 @20603
 	SAY UNIDENTIFIED_DESC @20604
 COPY ~might_and_guile/psi/d5_ps101.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps101.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psa02.spl~ ~override~   //  			id insinuation
-	SAY NAME1 @20605
-	SAY UNIDENTIFIED_DESC @20606
-COPY ~might_and_guile/psi/d5ps102.spl~ ~override~
-	SAY NAME1 @20605
-	SAY UNIDENTIFIED_DESC @20606
+COPY ~might_and_guile/psi/d5ps102.spl~ ~override~   //  			ego repair
+	SAY NAME1 @20606
+	SAY UNIDENTIFIED_DESC @20607
 COPY ~might_and_guile/psi/d5_ps102.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps102.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psa03.spl~ ~override~   // 				domination
-	SAY NAME1 @20607
-	SAY UNIDENTIFIED_DESC @20608
-COPY ~might_and_guile/psi/d5ps103.spl~ ~override~
-	SAY NAME1 @20607
-	SAY UNIDENTIFIED_DESC @20608
+COPY ~might_and_guile/psi/d5ps103.spl~ ~override~   // 				domination
+	SAY NAME1 @20609
+	SAY UNIDENTIFIED_DESC @20610
 COPY ~might_and_guile/psi/d5_ps103.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps103.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psa04.spl~ ~override~   // 				psychic crush
-	SAY NAME1 @20609
-	SAY UNIDENTIFIED_DESC @20610
-COPY ~might_and_guile/psi/d5ps104.spl~ ~override~
-	SAY NAME1 @20609
-	SAY UNIDENTIFIED_DESC @20610
-COPY ~might_and_guile/psi/d5_ps104.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps104.eff~ ~override~
-
-COPY ~might_and_guile/psi/d5psa05.spl~ ~override~   // 			intellect fortress
-	SAY NAME1 @20611
-	SAY UNIDENTIFIED_DESC @20612
-COPY ~might_and_guile/psi/d5ps105.spl~ ~override~
-	SAY NAME1 @20611
-	SAY UNIDENTIFIED_DESC @20612
-COPY ~might_and_guile/psi/d5_ps105.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps105.eff~ ~override~
-COPY ~might_and_guile/psi/d5ps10e.spl~ ~override~
-	SAY NAME1 @20613
+COPY ~might_and_guile/psi/d5ps104.spl~ ~override~   // 				intellect fortress
+	SAY NAME1 @20612
 	SAY UNIDENTIFIED_DESC @20613
-COPY ~might_and_guile/psi/d5_ps10e.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps104.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps1x4.spl~ ~override~
+	SAY NAME1 @20614
+	SAY UNIDENTIFIED_DESC @20614
+COPY ~might_and_guile/psi/d5_ps1x4.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5ps105.spl~ ~override~   // 				psychic crush
+	SAY NAME1 @20615
+	SAY UNIDENTIFIED_DESC @20616
+COPY ~might_and_guile/psi/d5_ps105.bam~ ~override~
 
 COPY ~might_and_guile/psi/d5_ps200.bam~ ~override~  // 				telekinesis
-COPY ~might_and_guile/psi/d5psb01.spl~ ~override~
+COPY ~might_and_guile/psi/d5psb00.spl~ ~override~
 	SAY NAME1 @20621
-	SAY UNIDENTIFIED_DESC @20622
-COPY ~might_and_guile/psi/d5ps201.spl~ ~override~   // 				root
+	SAY UNIDENTIFIED_DESC @20621
+COPY ~might_and_guile/psi/d5psb02.spl~ ~override~
+	SAY NAME1 @20621
+	SAY UNIDENTIFIED_DESC @20621
+COPY ~might_and_guile/psi/d5psb03.spl~ ~override~
+	SAY NAME1 @20621
+	SAY UNIDENTIFIED_DESC @20621
+COPY ~might_and_guile/psi/d5psb04.spl~ ~override~
+	SAY NAME1 @20621
+	SAY UNIDENTIFIED_DESC @20621
+COPY ~might_and_guile/psi/d5psb05.spl~ ~override~
+	SAY NAME1 @20621
+	SAY UNIDENTIFIED_DESC @20621
+COPY ~might_and_guile/psi/d5_ps202.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps203.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps204.2da~ ~override~
+
+COPY ~might_and_guile/psi/d5ps201.spl~ ~override~   // 				immobilize
 	SAY NAME1 @20623
 	SAY UNIDENTIFIED_DESC @20624
 COPY ~might_and_guile/psi/d5_ps201.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps201.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psb02.spl~ ~override~   // 				kinetic ram
-	SAY NAME1 @20625
-	SAY UNIDENTIFIED_DESC @20626
-COPY ~might_and_guile/psi/d5ps202.spl~ ~override~
-	SAY NAME1 @20625
-	SAY UNIDENTIFIED_DESC @20626
+COPY ~might_and_guile/psi/d5ps202.spl~ ~override~   // 				kinetic ram
+	SAY NAME1 @20626
+	SAY UNIDENTIFIED_DESC @20627
 COPY ~might_and_guile/psi/d5_ps202.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps202.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psb03.spl~ ~override~   // 				inertial barrier
-	SAY NAME1 @20627
-	SAY UNIDENTIFIED_DESC @20628
-COPY ~might_and_guile/psi/d5ps203.spl~ ~override~
-	SAY NAME1 @20627
-	SAY UNIDENTIFIED_DESC @20628
+COPY ~might_and_guile/psi/d5ps203.spl~ ~override~   // 				inertial barrier
+	SAY NAME1 @20629
+	SAY UNIDENTIFIED_DESC @20630
 COPY ~might_and_guile/psi/d5_ps203.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps203.eff~ ~override~
-
-COPY ~might_and_guile/psi/d5psb04.spl~ ~override~   // 				psychic knife
-	SAY NAME1 @20629
-	SAY UNIDENTIFIED_DESC @20630
-COPY ~might_and_guile/psi/d5ps204.spl~ ~override~
-	SAY NAME1 @20629
-	SAY UNIDENTIFIED_DESC @20630
-COPY ~might_and_guile/psi/d5_ps204.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps204.eff~ ~override~
-COPY ~might_and_guile/psi/d5psibla.itm~ ~override~
-	SAY NAME1 @20629
-	SAY UNIDENTIFIED_DESC @20629
-COPY ~might_and_guile/psi/d5psibla.bam~ ~override~
-
-COPY ~might_and_guile/psi/d5psb05.spl~ ~override~   // 				free action
+COPY ~might_and_guile/psi/d5ps2x3.spl~ ~override~
 	SAY NAME1 @20631
-	SAY UNIDENTIFIED_DESC @20632
-COPY ~might_and_guile/psi/d5ps205.spl~ ~override~
-	SAY NAME1 @20631
-	SAY UNIDENTIFIED_DESC @20632
-COPY ~might_and_guile/psi/d5_ps205.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps205.eff~ ~override~
-COPY ~might_and_guile/psi/d5ps20e.spl~ ~override~
-	SAY NAME1 @20633
+	SAY UNIDENTIFIED_DESC @20631
+COPY ~might_and_guile/psi/d5_ps2x3.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5ps204.spl~ ~override~   // 				psychic knife
+	SAY NAME1 @20632
 	SAY UNIDENTIFIED_DESC @20633
-COPY ~might_and_guile/psi/d5_ps20e.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps204.bam~ ~override~
+COPY ~might_and_guile/psi/d5psibla.itm~ ~override~
+	SAY NAME1 @20632
+	SAY UNIDENTIFIED_DESC @20632
+COPY ~might_and_guile/psi/d5psibla.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps2x4.spl~ ~override~
+	SAY NAME1 @20634
+	SAY UNIDENTIFIED_DESC @20634
+COPY ~might_and_guile/psi/d5_ps2x4.bam~ ~override~
 
-COPY ~might_and_guile/psi/d5_ps300.bam~ ~override~
-COPY ~might_and_guile/psi/d5psc01.spl~ ~override~   // 				pyrokinesis
+COPY ~might_and_guile/psi/d5ps205.spl~ ~override~   // 				instinctive freedom
+	SAY NAME1 @20635
+	SAY UNIDENTIFIED_DESC @20636
+COPY ~might_and_guile/psi/d5_ps205.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5_ps300.bam~ ~override~   // 			pyrokinesis
+COPY ~might_and_guile/psi/d5psc00.spl~ ~override~
 	SAY NAME1 @20641
-	SAY UNIDENTIFIED_DESC @20642
-COPY ~might_and_guile/psi/d5ps301.spl~ ~override~   //  			static transfer
+	SAY UNIDENTIFIED_DESC @20641
+COPY ~might_and_guile/psi/d5psc02.spl~ ~override~
+	SAY NAME1 @20641
+	SAY UNIDENTIFIED_DESC @20641
+COPY ~might_and_guile/psi/d5psc03.spl~ ~override~
+	SAY NAME1 @20641
+	SAY UNIDENTIFIED_DESC @20641
+COPY ~might_and_guile/psi/d5psc04.spl~ ~override~
+	SAY NAME1 @20641
+	SAY UNIDENTIFIED_DESC @20641
+COPY ~might_and_guile/psi/d5psc05.spl~ ~override~
+	SAY NAME1 @20641
+	SAY UNIDENTIFIED_DESC @20641
+COPY ~might_and_guile/psi/d5_ps300.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps302.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps303.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps304.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps305.2da~ ~override~
+
+COPY ~might_and_guile/psi/d5ps301.spl~ ~override~   //  			static discharge
 	SAY NAME1 @20643
 	SAY UNIDENTIFIED_DESC @20644
 COPY ~might_and_guile/psi/d5ps301.itm~ ~override~
@@ -352,133 +376,467 @@ COPY ~might_and_guile/psi/d5ps301d.spl~ ~override~
 	SAY NAME1 @20643
 	SAY UNIDENTIFIED_DESC @20644
 COPY ~might_and_guile/psi/d5_ps301.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps301.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psc02.spl~ ~override~   //  			energy draw
-	SAY NAME1 @20645
-	SAY UNIDENTIFIED_DESC @20646
-COPY ~might_and_guile/psi/d5ps302.spl~ ~override~
-	SAY NAME1 @20645
-	SAY UNIDENTIFIED_DESC @20646
+COPY ~might_and_guile/psi/d5ps302.spl~ ~override~   //  			energy transfer
+	SAY NAME1 @20646
+	SAY UNIDENTIFIED_DESC @20647
 COPY ~might_and_guile/psi/d5_ps302.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps302.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psc03.spl~ ~override~   // 				generate lightning
-	SAY NAME1 @20647
-	SAY UNIDENTIFIED_DESC @20648
-COPY ~might_and_guile/psi/d5ps303.spl~ ~override~
-	SAY NAME1 @20647
-	SAY UNIDENTIFIED_DESC @20648
-COPY ~might_and_guile/psi/d5_ps303.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps303.eff~ ~override~
-
-COPY ~might_and_guile/psi/d5psc04.spl~ ~override~   // 				psychic combustion
-	SAY NAME1 @20649
-	SAY UNIDENTIFIED_DESC @20650
 //Projectile
-ADD_PROJECTILE ~might_and_guile/psi/b_pfire.pro~   //	projectile
 COPY ~might_and_guile/psi/PFIREA.bam~ ~override~
 COPY ~might_and_guile/psi/PFIREX.bam~ ~override~
 COPY ~might_and_guile/psi/#PRFIRE.vvc~ ~override~
 COPY ~might_and_guile/psi/#EFF_P45.WAV~ ~override~
 COPY ~might_and_guile/psi/#ARE_P03.WAV~ ~override~
-COPY ~might_and_guile/psi/d5ps304.spl~ ~override~
+ADD_PROJECTILE ~might_and_guile/psi/b_pfire.pro~   //		projectile
+COPY ~might_and_guile/psi/d5ps303.spl~ ~override~   // 				psychic combustion
 	SAY NAME1 @20649
 	SAY UNIDENTIFIED_DESC @20650
-	WRITE_SHORT 0x098 ~%b_pfire%~  //Projectile
-COPY ~might_and_guile/psi/d5_ps304.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps304.eff~ ~override~
+	WRITE_SHORT 0x98 ~%b_pfire%~  //Projectile
+	WRITE_SHORT 0xc0 ~%b_pfire%~  //Projectile
+	WRITE_SHORT 0xe8 ~%b_pfire%~  //Projectile
+COPY ~might_and_guile/psi/d5_ps303.bam~ ~override~
 
-COPY ~might_and_guile/psi/d5psc05.spl~ ~override~   // 				energy barrier
-	SAY NAME1 @20651
-	SAY UNIDENTIFIED_DESC @20652
-COPY ~might_and_guile/psi/d5ps305.spl~ ~override~
-	SAY NAME1 @20651
-	SAY UNIDENTIFIED_DESC @20652
-COPY ~might_and_guile/psi/d5_ps305.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps305.eff~ ~override~
-COPY ~might_and_guile/psi/d5ps30e.spl~ ~override~
-	SAY NAME1 @20653
+COPY ~might_and_guile/psi/d5ps304.spl~ ~override~   // 				energy dispersion
+	SAY NAME1 @20652
 	SAY UNIDENTIFIED_DESC @20653
-COPY ~might_and_guile/psi/d5_ps30e.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps304.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps3x4.spl~ ~override~
+	SAY NAME1 @20654
+	SAY UNIDENTIFIED_DESC @20654
+COPY ~might_and_guile/psi/d5_ps3x4.bam~ ~override~
 
-COPY ~might_and_guile/psi/d5_ps400.bam~ ~override~
-COPY ~might_and_guile/psi/d5psd01.spl~ ~override~   // 				biokinesis
+COPY ~might_and_guile/psi/d5ps305.spl~ ~override~   // 				generate lightning
+	SAY NAME1 @20655
+	SAY UNIDENTIFIED_DESC @20656
+COPY ~might_and_guile/psi/d5_ps305.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5_ps400.bam~ ~override~   // 			biokinesis
+COPY ~might_and_guile/psi/d5psd00.spl~ ~override~
 	SAY NAME1 @20661
-	SAY UNIDENTIFIED_DESC @20662
+	SAY UNIDENTIFIED_DESC @20661
+COPY ~might_and_guile/psi/d5psd02.spl~ ~override~
+	SAY NAME1 @20661
+	SAY UNIDENTIFIED_DESC @20661
+COPY ~might_and_guile/psi/d5psd03.spl~ ~override~
+	SAY NAME1 @20661
+	SAY UNIDENTIFIED_DESC @20661
+COPY ~might_and_guile/psi/d5psd04.spl~ ~override~
+	SAY NAME1 @20661
+	SAY UNIDENTIFIED_DESC @20661
+COPY ~might_and_guile/psi/d5psd05.spl~ ~override~
+	SAY NAME1 @20661
+	SAY UNIDENTIFIED_DESC @20661
+COPY ~might_and_guile/psi/d5_ps400.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps402.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps403.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps404.2da~ ~override~
+COPY ~might_and_guile/psi/d5_ps405.2da~ ~override~
+
 COPY ~might_and_guile/psi/d5ps401.spl~ ~override~   //  			adrenaline rush
 	SAY NAME1 @20663
 	SAY UNIDENTIFIED_DESC @20664
 COPY ~might_and_guile/psi/d5_ps401.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps401.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psd02.spl~ ~override~   //  			metabolic boost
-	SAY NAME1 @20665
-	SAY UNIDENTIFIED_DESC @20666
-COPY ~might_and_guile/psi/d5ps402.spl~ ~override~
-	SAY NAME1 @20665
-	SAY UNIDENTIFIED_DESC @20666
+COPY ~might_and_guile/psi/d5ps402.spl~ ~override~   //  			metabolic boost
+	SAY NAME1 @20666
+	SAY UNIDENTIFIED_DESC @20667
 COPY ~might_and_guile/psi/d5_ps402.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps402.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psd03.spl~ ~override~   // 				camouflage
-	SAY NAME1 @20667
-	SAY UNIDENTIFIED_DESC @20668
-COPY ~might_and_guile/psi/d5ps403.spl~ ~override~
-	SAY NAME1 @20667
-	SAY UNIDENTIFIED_DESC @20668
+COPY ~might_and_guile/psi/d5ps403.spl~ ~override~   // 				bioregeneration
+	SAY NAME1 @20669
+	SAY UNIDENTIFIED_DESC @20670
 COPY ~might_and_guile/psi/d5_ps403.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps403.eff~ ~override~
 
-COPY ~might_and_guile/psi/d5psd04.spl~ ~override~   // 				carapace
-	SAY NAME1 @20669
-	SAY UNIDENTIFIED_DESC @20670
-COPY ~might_and_guile/psi/d5ps404.spl~ ~override~
-	SAY NAME1 @20669
-	SAY UNIDENTIFIED_DESC @20670
-COPY ~might_and_guile/psi/d5_ps404.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps404.eff~ ~override~
-
-COPY ~might_and_guile/psi/d5psd05.spl~ ~override~   // 				bioregeneration
-	SAY NAME1 @20671
-	SAY UNIDENTIFIED_DESC @20672
-COPY ~might_and_guile/psi/d5ps405.spl~ ~override~
-	SAY NAME1 @20671
-	SAY UNIDENTIFIED_DESC @20672
-COPY ~might_and_guile/psi/d5_ps405.bam~ ~override~
-COPY ~might_and_guile/psi/d5_ps405.eff~ ~override~
-COPY ~might_and_guile/psi/d5ps40e.spl~ ~override~
-	SAY NAME1 @20673
+COPY ~might_and_guile/psi/d5ps404.spl~ ~override~   // 				camouflage
+	SAY NAME1 @20672
 	SAY UNIDENTIFIED_DESC @20673
-COPY ~might_and_guile/psi/d5_ps40e.bam~ ~override~
+COPY ~might_and_guile/psi/d5_ps404.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps4x4.spl~ ~override~
+	SAY NAME1 @20674
+	SAY UNIDENTIFIED_DESC @20674
+COPY ~might_and_guile/psi/d5_ps4x4.bam~ ~override~
+
+COPY ~might_and_guile/psi/d5ps405.spl~ ~override~   // 				carapace
+	SAY NAME1 @20675
+	SAY UNIDENTIFIED_DESC @20676
+COPY ~might_and_guile/psi/d5_ps405.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps4x5.spl~ ~override~
+	SAY NAME1 @20677
+	SAY UNIDENTIFIED_DESC @20677
+COPY ~might_and_guile/psi/d5_ps4x5.bam~ ~override~
 
 //end feat ability files____________________________________________________________
 
 
-//FEAT CLAB FILES___________________________________________________________________
+//NU FEAT FILES_____________________________________________________________________
 //
-ACTION_FOR_EACH featspell IN ~d5rof01~ ~d5rof02~ ~d5rof03~ ~d5rof04~ ~d5rof05~ ~d5rof06~ ~d5rof07~ ~d5rof08~ ~d5rof09~ ~d5rof10~ ~d5rof11~ ~d5rof12~ BEGIN
-  COPY_EXISTING ~%featspell%.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %ps_code% STR_VAR match_resource = ~D5_RFXD~ resource = ~D5_RFXPS~ END
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %sb_code% STR_VAR match_resource = ~D5_RFXD~ resource = ~D5_RFXSB~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
+	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
+		SAY NAME1 @20099
+		SAY UNIDENTIFIED_DESC @20100
+		WRITE_ASCII 0x3a ~d5_feat~ #8
+		LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+  END
+  COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
+  COPY ~might_and_guile/feats/d5_feat.eff~ ~override~ 
+  COPY ~might_and_guile/feats/d5_feat.cre~ ~override~ 
+  COMPILE ~might_and_guile/psi/d5_feat.baf~ 
+  COMPILE ~might_and_guile/psi/d5_soulb.d~ 
+  COMPILE ~might_and_guile/psi/d5_psyph.d~ 
 END
-
-COPY ~might_and_guile/thief/d5_rfxps.eff~ ~override~ 	//	psypher
-COPY ~might_and_guile/thief/d5_rfxps.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/thief/d5_rfxsb.eff~ ~override~ 	//	soulblade
-COPY ~might_and_guile/thief/d5_rfxsb.spl~ ~override~
-	SAY NAME1 @7
-
-// need to mess with these v
-
-COPY_EXISTING ~d5psa00.spl~ ~override~
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 resist_dispel = 0 STR_VAR resource = ~D5PSD01~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 resist_dispel = 0 STR_VAR resource = ~D5PSC01~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 resist_dispel = 0 STR_VAR resource = ~D5PSB01~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 resist_dispel = 0 STR_VAR resource = ~D5PSA01~ END
-
-// REMEMBER: if add more feats, add them to d5_rfz.spl!!!!!!!!!!!
-
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  COPY_EXISTING ~d5_feat.bcs~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+	  REPLACE_TEXTUALLY ~SetGlobal("D5_PSI","GLOBAL",0)~ ~SetGlobal("D5_PSI","GLOBAL",1)~
+	END
+  BUT_ONLY
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/psi/d5_fpsi.baf~
+  COMPILE ~might_and_guile/psi/d5_soulb.d~ 
+  COMPILE ~might_and_guile/psi/d5_psyph.d~ 
+END
 //__________________________________________________________________________________
 
+
+//PSIONIC HLAS______________________________________________________________________
+//
+COPY ~might_and_guile/psi/d5psifz.spl~ ~override~ 		//	more psionic feats
+	SAY NAME1 @20099
+	SAY UNIDENTIFIED_DESC @20600
+  WRITE_ASCII 0x3a ~d5_feat~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 2 location = 4 STR_VAR icon = ~d5_feat~ END
+
+COPY ~might_and_guile/psi/d5_ps108.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps108.spl~ ~override~ 		//	ultrablast
+  SAY NAME1 @20580
+  SAY UNIDENTIFIED_DESC @20581
+  WRITE_SHORT 0x1c 4
+  WRITE_ASCII 0x3a ~d5_ps108~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 2 location = 4 STR_VAR icon = ~d5_ps108~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps109.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps109.spl~ ~override~ 		//	tower of iron will
+  SAY NAME1 @20582
+  SAY UNIDENTIFIED_DESC @20583
+  WRITE_ASCII 0x3a ~d5_ps1x9~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 2 location = 4 STR_VAR icon = ~d5_ps109~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+
+COPY ~might_and_guile/psi/d5_ps1x9.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps1x9.spl~ ~override~ 		//	cancel resilience
+  SAY NAME1 @20584
+  SAY UNIDENTIFIED_DESC @20584
+  WRITE_ASCII 0x3a ~d5_ps1x9~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 0 location = 4 STR_VAR icon = ~d5_ps1x9~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps208.bam~ ~override~
+COPY_EXISTING ~sppr720.spl~ ~override/d5ps208.spl~ 	//	earthquake
+  SAY NAME1 @20585
+  SAY UNIDENTIFIED_DESC @20586
+  WRITE_SHORT 0x1c 4
+  WRITE_ASCII 0x3a ~d5_ps208~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 location = 4 STR_VAR icon = ~d5_ps208~ END
+  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps209.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps209.spl~ ~override~ 		//	stasis field
+  SAY NAME1 @20587
+  SAY UNIDENTIFIED_DESC @20588
+  WRITE_ASCII 0x3a ~d5_ps209~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps209~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps308.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps308.spl~ ~override~ 		//	solar flash
+	SAY NAME1 @20589
+	SAY UNIDENTIFIED_DESC @20590
+  WRITE_ASCII 0x3a ~d5_ps308~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps308~ END
+  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~sp707l20.eff~ BEGIN
+	COPY ~might_and_guile/psi/sp707l20.eff~ ~override~
+END
+
+COPY ~might_and_guile/psi/d5_ps309.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps309.spl~ ~override~ 		//	storm of energy
+	SAY NAME1 @20591
+	SAY UNIDENTIFIED_DESC @20592
+  WRITE_ASCII 0x3a ~d5_ps309~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps309~ END
+  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps408.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps408.spl~ ~override~ 	//	monstrous evolution
+	SAY NAME1 @20593
+	SAY UNIDENTIFIED_DESC @20594
+  WRITE_ASCII 0x3a ~d5_ps408~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps408~ END
+  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+	
+COPY ~might_and_guile/psi/d5_sham.cre~ ~override~
+	SAY NAME1 @20595
+COPY ~might_and_guile/psi/d5_clsha.itm~ ~override~
+	SAY NAME1 @20596
+	SAY UNIDENTIFIED_DESC @20596
+COPY ~might_and_guile/psi/d5psinf.spl~ ~override~
+	SAY NAME1 @20597
+	SAY UNIDENTIFIED_DESC @20597
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+
+COPY ~might_and_guile/psi/d5_ps409.bam~ ~override~
+COPY ~might_and_guile/psi/d5ps409.spl~ ~override~ 		//	fission
+  WRITE_ASCII 0x3a ~d5_ps409~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps409~ END
+	SAY NAME1 @20598
+	SAY UNIDENTIFIED_DESC @20599
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 4 duration = 2 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 4 duration = 2 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 12 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 18 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 30 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 36 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 42 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 48 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 54 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 60 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 66 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 72 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 78 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 84 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 90 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 96 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 102 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 108 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 114 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 120 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 126 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 132 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 138 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 144 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 150 END
+//__________________________________________________________________________________
+
+
+//PSIONIC HLA TABLES________________________________________________________________
+//
+LAF action_remove_hla STR_VAR kit_name = ~D5_SOULBLADE~ remove_ability = ~GA_SPCL902~ END	
+LAF action_remove_hla STR_VAR kit_name = ~D5_SOULBLADE~ remove_ability = ~GA_SPCL903~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SOULBLADE~ remove_ability = ~GA_SPCL908~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SOULBLADE~ ability = ~AP_D5PSIFZ~ num_allowed = ~6~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SOULBLADE~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SOULBLADE~ ability = ~GA_D5_RFD5~ num_allowed = ~1~ END
+ACTION_IF FILE_EXISTS_IN_GAME ~tg#toug.spl~ BEGIN
+  LAF action_add_hla STR_VAR kit_name = ~D5_SOULBLADE~ ability = ~AP_TG#TOUG~ num_allowed = ~5~ END
+END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL910~ END	
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~AP_SPCL915~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL916~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL918~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_PSYPHER~ remove_ability = ~GA_SPCL919~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~AP_D5PSIFZ~ num_allowed = ~10~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~GA_D5_RFD5~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~AP_D5_RFH3~ num_allowed = ~1~ END
+ACTION_IF FILE_EXISTS_IN_GAME ~tg#toug.spl~ BEGIN
+  LAF action_add_hla STR_VAR kit_name = ~D5_PSYPHER~ ability = ~AP_TG#TOUG~ num_allowed = ~5~ END
+END
+//__________________________________________________________________________________

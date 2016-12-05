@@ -1,0 +1,1546 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								ROGUE FEATS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_rfeat.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_wfeat.d5~ ~override~
+//__________________________________________________________________________________
+
+
+//IMPROVE THAC0 TABLE_______________________________________________________________
+//
+COPY_EXISTING ~thac0.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	SET_2DA_ENTRY 2 3 cols ~19~
+	SET_2DA_ENTRY 2 6 cols ~17~
+	SET_2DA_ENTRY 2 9 cols ~15~
+	SET_2DA_ENTRY 2 12 cols ~13~
+	SET_2DA_ENTRY 2 15 cols ~11~
+	SET_2DA_ENTRY 2 18 cols ~9~
+	SET_2DA_ENTRY 2 21 cols ~7~
+	SET_2DA_ENTRY 6 3 cols ~19~
+	SET_2DA_ENTRY 6 6 cols ~17~
+	SET_2DA_ENTRY 6 9 cols ~15~
+	SET_2DA_ENTRY 6 12 cols ~13~
+	SET_2DA_ENTRY 6 15 cols ~11~
+	SET_2DA_ENTRY 6 18 cols ~9~
+	SET_2DA_ENTRY 6 21 cols ~7~
+	SET_2DA_ENTRY 13 3 cols ~19~
+	SET_2DA_ENTRY 13 6 cols ~17~
+	SET_2DA_ENTRY 13 9 cols ~15~
+	SET_2DA_ENTRY 13 12 cols ~13~
+	SET_2DA_ENTRY 13 15 cols ~11~
+	SET_2DA_ENTRY 13 18 cols ~9~
+	SET_2DA_ENTRY 13 21 cols ~7~
+	SET_2DA_ENTRY 14 3 cols ~19~
+	SET_2DA_ENTRY 14 6 cols ~17~
+	SET_2DA_ENTRY 14 9 cols ~15~
+	SET_2DA_ENTRY 14 12 cols ~13~
+	SET_2DA_ENTRY 14 15 cols ~11~
+	SET_2DA_ENTRY 14 18 cols ~9~
+	SET_2DA_ENTRY 14 21 cols ~7~
+	SET_2DA_ENTRY 3 4 cols ~18~
+	SET_2DA_ENTRY 3 5 cols ~18~
+	SET_2DA_ENTRY 3 6 cols ~17~
+	SET_2DA_ENTRY 3 7 cols ~16~
+	SET_2DA_ENTRY 3 8 cols ~16~
+	SET_2DA_ENTRY 3 9 cols ~15~
+	SET_2DA_ENTRY 3 10 cols ~14~
+	SET_2DA_ENTRY 3 11 cols ~14~
+	SET_2DA_ENTRY 3 12 cols ~13~
+	SET_2DA_ENTRY 3 13 cols ~12~
+	SET_2DA_ENTRY 3 14 cols ~12~
+	SET_2DA_ENTRY 3 15 cols ~11~
+	SET_2DA_ENTRY 3 16 cols ~10~
+	SET_2DA_ENTRY 3 17 cols ~10~
+	SET_2DA_ENTRY 3 18 cols ~9~
+	SET_2DA_ENTRY 3 19 cols ~8~
+	SET_2DA_ENTRY 3 20 cols ~8~
+	SET_2DA_ENTRY 3 21 cols ~7~
+	SET_2DA_ENTRY 4 4 cols ~18~
+	SET_2DA_ENTRY 4 5 cols ~18~
+	SET_2DA_ENTRY 4 6 cols ~17~
+	SET_2DA_ENTRY 4 7 cols ~16~
+	SET_2DA_ENTRY 4 8 cols ~16~
+	SET_2DA_ENTRY 4 9 cols ~15~
+	SET_2DA_ENTRY 4 10 cols ~14~
+	SET_2DA_ENTRY 4 11 cols ~14~
+	SET_2DA_ENTRY 4 12 cols ~13~
+	SET_2DA_ENTRY 4 13 cols ~12~
+	SET_2DA_ENTRY 4 14 cols ~12~
+	SET_2DA_ENTRY 4 15 cols ~11~
+	SET_2DA_ENTRY 4 16 cols ~10~
+	SET_2DA_ENTRY 4 17 cols ~10~
+	SET_2DA_ENTRY 4 18 cols ~9~
+	SET_2DA_ENTRY 4 19 cols ~8~
+	SET_2DA_ENTRY 4 20 cols ~8~
+	SET_2DA_ENTRY 4 21 cols ~7~
+	SET_2DA_ENTRY 12 4 cols ~18~
+	SET_2DA_ENTRY 12 5 cols ~18~
+	SET_2DA_ENTRY 12 6 cols ~17~
+	SET_2DA_ENTRY 12 7 cols ~16~
+	SET_2DA_ENTRY 12 8 cols ~16~
+	SET_2DA_ENTRY 12 9 cols ~15~
+	SET_2DA_ENTRY 12 10 cols ~14~
+	SET_2DA_ENTRY 12 11 cols ~14~
+	SET_2DA_ENTRY 12 12 cols ~13~
+	SET_2DA_ENTRY 12 13 cols ~12~
+	SET_2DA_ENTRY 12 14 cols ~12~
+	SET_2DA_ENTRY 12 15 cols ~11~
+	SET_2DA_ENTRY 12 16 cols ~10~
+	SET_2DA_ENTRY 12 17 cols ~10~
+	SET_2DA_ENTRY 12 18 cols ~9~
+	SET_2DA_ENTRY 12 19 cols ~8~
+	SET_2DA_ENTRY 12 20 cols ~8~
+	SET_2DA_ENTRY 12 21 cols ~7~
+	FOR (col = 22; col < cols; ++col) BEGIN // iterate over rows
+		SET_2DA_ENTRY 3 col cols ~6~
+		SET_2DA_ENTRY 4 col cols ~6~
+		SET_2DA_ENTRY 12 col cols ~6~
+	END
+BUT_ONLY
+
+ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY_EXISTING ~thac0.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	SET_2DA_ENTRY 20 3 cols ~19~
+	SET_2DA_ENTRY 20 6 cols ~17~
+	SET_2DA_ENTRY 20 9 cols ~15~
+	SET_2DA_ENTRY 20 12 cols ~13~
+	SET_2DA_ENTRY 20 15 cols ~11~
+	SET_2DA_ENTRY 20 18 cols ~9~
+	SET_2DA_ENTRY 20 21 cols ~7~
+  BUT_ONLY
+END	
+//__________________________________________________________________________________
+
+
+//REVISED KITS______________________________________________________________________
+//
+ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~225~ BEGIN
+	INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
+END
+ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~275~ BEGIN
+	INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
+END
+//__________________________________________________________________________________
+
+
+//ADD ALCHEMIST_____________________________________________________________________
+
+ADD_KIT ~D5ALCHM~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5ALCHM       0 0 0 0 0 0 0 0~
+~D5ALCHM       0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 0 1 0 0 0 0 1 1 1 1 1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5ALCHM    	   0   9   0   15   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5ALCHM           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5ALCHM           0   0   0   17  0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5ALCHM  	       0   0   0   15  0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5ALCHM           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5ALCHM           1  1  1  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/feats/d5_alchm.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~K_T_D K_T_E K_T_G K_T_H K_T_HE K_T_HL K_T_HO~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 4~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Th0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @20011
+SAY @20012
+SAY @20013
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@20013)
+		STR_VAR
+			kit_name = D5ALCHM
+			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			clswpbon = ~0 0 3~
+			thiefskl = ~30 20~
+			clsrcreq = ~1 1 1 1 1 1 1~
+	END
+END
+//____________________________________________________________________________________
+
+
+//KIT IDENTIFIERS FOR PATCHING LATER__________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS k_cols // amount of columns
+	READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
+	FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
+	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5ALCHM~ BEGIN
+	    SET al_row = %k_row%
+	    READ_2DA_ENTRY_FORMER k_rows al_row 9 al_code
+	  END
+	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
+	    SET sd_row = %k_row%
+	    READ_2DA_ENTRY_FORMER k_rows sd_row 9 sd_code
+	  END
+	END
+BUT_ONLY
+//____________________________________________________________________________________
+
+
+//CHANGE CLASS TEXT_________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@20000)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
+	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@20001)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@20000)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
+	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@20001)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~ASSASIN~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20003)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20004)
+		SET_2DA_ENTRY (%patch_row%) 2 cols RESOLVE_STR_REF (@20005)
+		SET_2DA_ENTRY (%patch_row%) 3 cols RESOLVE_STR_REF (@20006)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SWASHBUCKLER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20007)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SHADOWDANCER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
+	  END
+	END
+  BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
+//FEAT ABILITY FILES________________________________________________________________
+//
+// skills mastery
+
+COPY ~might_and_guile/feats/d5_rfa1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa1.spl~ ~override~   // 			stealth bonus
+	SAY NAME1 @20101
+	SAY UNIDENTIFIED_DESC @20102
+	WRITE_ASCII 0x3a ~d5_rfa1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa1~ END
+
+COPY ~might_and_guile/feats/d5_rfa2.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa2.spl~ ~override~   // 			thieving bonus
+	SAY NAME1 @20103
+	SAY UNIDENTIFIED_DESC @20104
+	WRITE_ASCII 0x3a ~d5_rfa2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa2~ END
+
+COPY ~might_and_guile/feats/d5_rfa3.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa3.spl~ ~override~   // 			detection bonus
+	SAY NAME1 @20105
+	SAY UNIDENTIFIED_DESC @20106
+	WRITE_ASCII 0x3a ~d5_rfa3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa3~ END
+
+// miscellaneous
+
+COPY ~might_and_guile/feats/d5_rfa4.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa4.spl~ ~override~   // 			lore bonus
+	SAY NAME1 @20301
+	SAY UNIDENTIFIED_DESC @20302
+	WRITE_ASCII 0x3a ~d5_rfa4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa4~ END
+
+COPY ~might_and_guile/feats/d5_rfa5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa5.spl~ ~override~   // 			luck bonus
+	SAY NAME1 @20299
+	SAY UNIDENTIFIED_DESC @20300
+	WRITE_ASCII 0x3a ~d5_rfa5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa5~ END
+
+// mechanical
+
+/*
+ADD_PROJECTILE ~might_and_guile/thief/d5trspik.pro~
+COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~   // 			spike trap
+	SAY NAME1 @20111
+	SAY UNIDENTIFIED_DESC @20112
+COPY ~might_and_guile/thief/d5_rfb1x.spl~ ~override~
+COPY ~might_and_guile/thief/d5_rf21.spl~ ~override~
+	SAY NAME1 @20111
+	SAY UNIDENTIFIED_DESC @20112
+COPY ~might_and_guile/thief/d5_rf21b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trspik% END
+*/
+
+COPY ~might_and_guile/feats/d5_rfb1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfb1.spl~ ~override~   // 			dart trap
+	SAY NAME1 @20113
+	SAY UNIDENTIFIED_DESC @20114
+	WRITE_ASCII 0x3a ~d5_rfb1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb1~ END
+COPY ~might_and_guile/feats/d5_rf21.spl~ ~override~
+	SAY NAME1 @20113
+	SAY UNIDENTIFIED_DESC @20114
+	WRITE_ASCII 0x3a ~d5_rfb1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb1~ END
+COPY ~might_and_guile/feats/d5_rf21b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfb3.bam~ ~override~
+ADD_PROJECTILE ~might_and_guile/feats/d5trfire.pro~
+COPY ~might_and_guile/feats/d5_rfb3.spl~ ~override~   // 			fire trap
+	SAY NAME1 @20115
+	SAY UNIDENTIFIED_DESC @20116
+	WRITE_ASCII 0x3a ~d5_rfb3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb3~ END
+COPY ~might_and_guile/feats/d5_rf23.spl~ ~override~
+	SAY NAME1 @20115
+	SAY UNIDENTIFIED_DESC @20116
+	WRITE_ASCII 0x3a ~d5_rfb3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb3~ END
+COPY ~might_and_guile/feats/d5_rf23b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trfire% END
+
+COPY ~might_and_guile/feats/d5_rfb4.bam~ ~override~
+ADD_PROJECTILE ~might_and_guile/feats/d5trweb.pro~
+COPY ~might_and_guile/feats/d5_rfb4.spl~ ~override~   // 			web trap
+	SAY NAME1 @20117
+	SAY UNIDENTIFIED_DESC @20118
+	WRITE_ASCII 0x3a ~d5_rfb4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb4~ END
+COPY ~might_and_guile/feats/d5_rf24.spl~ ~override~
+	SAY NAME1 @20117
+	SAY UNIDENTIFIED_DESC @20118
+	WRITE_ASCII 0x3a ~d5_rfb4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb4~ END
+COPY ~might_and_guile/feats/d5_rf24b.spl~ ~override~
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trweb% END
+
+COPY ~might_and_guile/feats/d5_rfb5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfb5.spl~ ~override~   // 			poison trap
+	SAY NAME1 @20119
+	SAY UNIDENTIFIED_DESC @20120
+	WRITE_ASCII 0x3a ~d5_rfb1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb5~ END
+COPY ~might_and_guile/feats/d5_rf25.spl~ ~override~
+	SAY NAME1 @20119
+	SAY UNIDENTIFIED_DESC @20120
+	WRITE_ASCII 0x3a ~d5_rfb1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb5~ END
+COPY ~might_and_guile/feats/d5_rf25b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5_rf2z.spl~ ~override~   // 			maze trap
+	SAY NAME1 @20129
+	SAY UNIDENTIFIED_DESC @20130
+COPY ~might_and_guile/feats/d5_rf2z.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rf2zb.spl~ ~override~
+
+// alchemical
+
+COPY ~might_and_guile/feats/d5_rfc1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc1.spl~ ~override~   // 			basic alchemy
+	SAY NAME1 @20131
+	SAY UNIDENTIFIED_DESC @20132
+	WRITE_ASCII 0x3a ~d5_rfc1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
+	LPF ALTER_EFFECT INT_VAR multi_match = 1 match_opcode = 177 match_paramater1 = 16384 parameter1 = %al_code% STR_VAR resource = ~D5_RFC8~ END
+COPY ~might_and_guile/feats/d5_rf31.spl~ ~override~
+	SAY NAME1 @20131
+	SAY UNIDENTIFIED_DESC @20132
+	WRITE_ASCII 0x3a ~d5_rfc1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
+COPY ~might_and_guile/feats/d5_rf31.2da~ ~override~
+COPY ~might_and_guile/feats/d5_rf31a.spl~ ~override~
+	SAY NAME1 @20133
+	SAY UNIDENTIFIED_DESC @20133
+COPY ~might_and_guile/feats/d5_rf31b.spl~ ~override~
+	SAY NAME1 @20134
+	SAY UNIDENTIFIED_DESC @20134
+COPY ~might_and_guile/feats/d5_rf31c.spl~ ~override~
+	SAY NAME1 @20135
+	SAY UNIDENTIFIED_DESC @20135
+COPY ~might_and_guile/feats/d5_rf31d.spl~ ~override~
+	SAY NAME1 @20136
+	SAY UNIDENTIFIED_DESC @20136
+COPY ~might_and_guile/feats/d5_rf31e.spl~ ~override~
+	SAY NAME1 @20137
+	SAY UNIDENTIFIED_DESC @20137
+COPY ~might_and_guile/feats/d5_rf31f.spl~ ~override~
+	SAY NAME1 @20138
+	SAY UNIDENTIFIED_DESC @20138
+COPY ~might_and_guile/feats/d5_floil.itm~ ~override~
+	SAY NAME1 @20139
+	SAY NAME2 @20139
+	SAY UNIDENTIFIED_DESC @20140
+COPY ~might_and_guile/feats/d5_floil.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfc2.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc2.spl~ ~override~   // 			advanced alchemy
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
+	WRITE_ASCII 0x3a ~d5_rfc2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc2~ END
+COPY ~might_and_guile/feats/d5_rf32.spl~ ~override~
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
+	WRITE_ASCII 0x3a ~d5_rfc2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc2~ END
+COPY ~might_and_guile/feats/d5_rf32.2da~ ~override~
+COPY ~might_and_guile/feats/d5_rf32a.spl~ ~override~
+	SAY NAME1 @20183
+	SAY UNIDENTIFIED_DESC @20183
+COPY ~might_and_guile/feats/d5_rf32b.spl~ ~override~
+	SAY NAME1 @20184
+	SAY UNIDENTIFIED_DESC @20184
+COPY ~might_and_guile/feats/d5_rf32c.spl~ ~override~
+	SAY NAME1 @20185
+	SAY UNIDENTIFIED_DESC @20185
+COPY ~might_and_guile/feats/d5_rf32d.spl~ ~override~
+	SAY NAME1 @20186
+	SAY UNIDENTIFIED_DESC @20186
+COPY ~might_and_guile/feats/d5_rf32e.spl~ ~override~
+	SAY NAME1 @20187
+	SAY UNIDENTIFIED_DESC @20187
+COPY ~might_and_guile/feats/d5_rf32f.spl~ ~override~
+	SAY NAME1 @20188
+	SAY UNIDENTIFIED_DESC @20188
+COPY ~might_and_guile/feats/d5_rf32g.spl~ ~override~
+	SAY NAME1 @20189
+	SAY UNIDENTIFIED_DESC @20189
+
+COPY ~might_and_guile/feats/d5_rfc0.spl~ ~override~
+	SAY NAME1 @20181
+	SAY UNIDENTIFIED_DESC @20182
+	WRITE_ASCII 0x3a ~d5_rfc2~ #8
+
+COPY ~might_and_guile/feats/d5_rfc3.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc3.spl~ ~override~   // 			toxic poison
+	SAY NAME1 @20161
+	SAY UNIDENTIFIED_DESC @20162
+	WRITE_ASCII 0x3a ~d5_rfc3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc3~ END
+COPY_EXISTING ~spcl423.spl~ ~override/d5_rf33.spl~
+	SAY NAME1 @20161
+	SAY UNIDENTIFIED_DESC @20162
+	WRITE_ASCII 0x3a ~d5_rfc3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc3~ END
+
+COPY ~might_and_guile/feats/d5_rfc4.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc4.spl~ ~override~   // 			paralytic poison
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
+	WRITE_ASCII 0x3a ~d5_rfc4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc4~ END
+COPY ~might_and_guile/feats/d5_rf34.spl~ ~override~
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
+	WRITE_ASCII 0x3a ~d5_rfc4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc4~ END
+COPY ~might_and_guile/feats/d5_rf34.eff~ ~override~
+COPY ~might_and_guile/feats/d5_rf34a.spl~ ~override~
+	SAY NAME1 @20163
+	SAY UNIDENTIFIED_DESC @20164
+
+COPY ~might_and_guile/feats/d5_rfc6.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc6.spl~ ~override~   // 			flaming weapon
+	SAY NAME1 @20151
+	SAY UNIDENTIFIED_DESC @20152
+	WRITE_ASCII 0x3a ~d5_rfc6~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc6~ END
+COPY ~might_and_guile/feats/d5_rf36.spl~ ~override~
+	SAY NAME1 @20151
+	SAY UNIDENTIFIED_DESC @20152
+	WRITE_ASCII 0x3a ~d5_rfc6~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc6~ END
+COPY ~might_and_guile/feats/d5_rf36.eff~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfc7.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfc7.spl~ ~override~   // 		  hulking transformation
+	SAY NAME1 @20171
+	SAY UNIDENTIFIED_DESC @20172
+	WRITE_ASCII 0x3a ~d5_rfc7~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc7~ END
+COPY ~might_and_guile/feats/d5_rf37.spl~ ~override~
+	SAY NAME1 @20171
+	SAY UNIDENTIFIED_DESC @20172
+	WRITE_ASCII 0x3a ~d5_rfc7~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc7~ END
+COPY ~might_and_guile/feats/d5_alnf.spl~ ~override~
+	SAY NAME1 @40
+	SAY UNIDENTIFIED_DESC @40
+COPY ~might_and_guile/feats/d5_clalc.itm~ ~override~
+	SAY NAME1 @20173
+	SAY UNIDENTIFIED_DESC @20173
+COPY ~might_and_guile/feats/d5_alch.cre~ ~override~
+	SAY NAME1 @20174
+
+COPY ~might_and_guile/feats/d5_rf3z.spl~ ~override~    // 			high-level alchemy
+	SAY NAME1 @20191
+	SAY UNIDENTIFIED_DESC @20192
+COPY ~might_and_guile/feats/d5_rf3z.2da~ ~override~
+COPY ~might_and_guile/feats/d5_rf3za.spl~ ~override~
+	SAY NAME1 @20193
+	SAY UNIDENTIFIED_DESC @20193
+COPY ~might_and_guile/feats/d5_rf3zb.spl~ ~override~
+	SAY NAME1 @20194
+	SAY UNIDENTIFIED_DESC @20194
+COPY ~might_and_guile/feats/d5_rf3zc.spl~ ~override~
+	SAY NAME1 @20195
+	SAY UNIDENTIFIED_DESC @20195
+COPY ~might_and_guile/feats/d5_rf3zd.spl~ ~override~
+	SAY NAME1 @20196
+	SAY UNIDENTIFIED_DESC @20196
+COPY ~might_and_guile/feats/d5_rf3ze.spl~ ~override~
+	SAY NAME1 @20197
+	SAY UNIDENTIFIED_DESC @20197
+COPY ~might_and_guile/feats/d5_rf3zf.spl~ ~override~
+	SAY NAME1 @20198
+	SAY UNIDENTIFIED_DESC @20198
+
+// evasive
+
+COPY ~might_and_guile/feats/d5_rfd1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfd1.spl~ ~override~    // 			AC bonus
+	SAY NAME1 @20201
+	SAY UNIDENTIFIED_DESC @20202
+	WRITE_ASCII 0x3a ~d5_rfd1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd1~ END
+
+COPY ~might_and_guile/feats/d5_rfd2.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfd2.spl~ ~override~   // 			escape artist
+	SAY NAME1 @20221
+	SAY UNIDENTIFIED_DESC @20222
+	WRITE_ASCII 0x3a ~d5_rfd2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
+COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
+	SAY NAME1 @20221
+	SAY UNIDENTIFIED_DESC @20222
+	WRITE_ASCII 0x3a ~d5_rfd2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
+
+COPY ~might_and_guile/feats/d5_rfd5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override~   // 			save bonuses
+	SAY NAME1 @20211
+	SAY UNIDENTIFIED_DESC @20212
+	WRITE_ASCII 0x3a ~d5_rfd5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
+
+// combat 
+
+COPY ~might_and_guile/feats/d5_rfe1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfe1.spl~ ~override~   // 			melee thac0
+	SAY NAME1 @20231
+	SAY UNIDENTIFIED_DESC @20232
+	WRITE_ASCII 0x3a ~d5_rfe1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe1~ END
+
+COPY ~might_and_guile/feats/d5_rfe2.spl~ ~override~   // 			ranged thac0
+	SAY NAME1 @20233
+	SAY UNIDENTIFIED_DESC @20234
+
+COPY ~might_and_guile/feats/d5_rfe5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
+	SAY NAME1 @20241
+	SAY UNIDENTIFIED_DESC @20242
+	WRITE_ASCII 0x3a ~d5_rfe5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe5~ END
+
+// combat techniques - rogue
+
+COPY ~might_and_guile/fighter/d5swash.spl~ ~override~	//			swashbuckling
+	SAY NAME1 @3106
+	SAY UNIDENTIFIED_DESC @3107
+
+COPY ~might_and_guile/feats/d5_rfg1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg1.spl~ ~override~   // 			trip
+	SAY NAME1 @20251
+	SAY UNIDENTIFIED_DESC @20252
+	WRITE_ASCII 0x3a ~d5_rfg1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg1~ END
+COPY ~might_and_guile/feats/d5_rf71.spl~ ~override~
+	SAY NAME1 @20251
+	SAY UNIDENTIFIED_DESC @20252
+	WRITE_ASCII 0x3a ~d5_rfg1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg1~ END
+COPY ~might_and_guile/fighter/d5_wf07.eff~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfg2.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg2.spl~ ~override~   // 			disarm
+	SAY NAME1 @20253
+	SAY UNIDENTIFIED_DESC @20254
+	WRITE_ASCII 0x3a ~d5_rfg2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg2~ END
+COPY ~might_and_guile/feats/d5_rf72.spl~ ~override~
+	SAY NAME1 @20253
+	SAY UNIDENTIFIED_DESC @20254
+	WRITE_ASCII 0x3a ~d5_rfg2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg2~ END
+COPY ~might_and_guile/feats/d5_rf72a.eff~ ~override~
+COPY ~might_and_guile/feats/d5_rf72b.eff~ ~override~
+COPY ~might_and_guile/feats/d5_rf72c.eff~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override~   // 			blind
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
+	WRITE_ASCII 0x3a ~d5_rfg3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
+COPY ~might_and_guile/feats/d5_rf73.spl~ ~override~
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
+	WRITE_ASCII 0x3a ~d5_rfg3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
+COPY ~might_and_guile/feats/d5_rf73.eff~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfg4.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override~   // 			disrupt
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
+	WRITE_ASCII 0x3a ~d5_rfg4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
+COPY ~might_and_guile/feats/d5_rf74.spl~ ~override~
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
+	WRITE_ASCII 0x3a ~d5_rfg4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
+COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
+
+// pseudo-magical
+
+COPY ~might_and_guile/feats/d5_rfh1.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh2.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh1.spl~ ~override~   //          grease jar/smoke bomb
+	SAY NAME1 @20271
+	SAY UNIDENTIFIED_DESC @20272
+	WRITE_ASCII 0x3a ~d5_rfh2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh2~ END
+COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~   //            grease jar
+	SAY NAME1 @20273 
+	SAY UNIDENTIFIED_DESC @20274
+	WRITE_ASCII 0x3a ~d5_rfh1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh1~ END
+	LPM spell_to_innate
+COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~   //            smoke bomb
+	SAY NAME1 @20275
+	SAY UNIDENTIFIED_DESC @20276
+	WRITE_ASCII 0x3a ~d5_rfh2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh2~ END
+	LPM spell_to_innate
+
+COPY ~might_and_guile/feats/d5_rfh5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh5.spl~ ~override~   //           shadow pool
+	SAY NAME1 @2755
+	SAY UNIDENTIFIED_DESC @2756
+	WRITE_ASCII 0x3a ~d5_rfh5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh5~ END
+COPY ~might_and_guile/feats/d5_rf85.spl~ ~override~
+	SAY NAME1 @2755
+	SAY UNIDENTIFIED_DESC @2756
+	WRITE_ASCII 0x3a ~d5_rfh5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh5~ END
+//COPY ~might_and_guile/feats/d5_shad1.2da~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfh6.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh6.spl~ ~override~   // 		  illusion pool
+	SAY NAME1 @20295
+	SAY UNIDENTIFIED_DESC @20296
+	WRITE_ASCII 0x3a ~d5_rfh6~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh6~ END
+COPY ~might_and_guile/feats/d5_illp.spl~ ~override~
+	SAY NAME1 @20295
+	SAY UNIDENTIFIED_DESC @20296
+	WRITE_ASCII 0x3a ~d5_rfh6~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh6~ END
+COPY ~might_and_guile/feats/d5illpa.2da~ ~override~
+COPY ~might_and_guile/feats/d5illpb.2da~ ~override~
+COPY ~might_and_guile/feats/d5illpc.2da~ ~override~
+COPY ~might_and_guile/feats/d5illp5.spl~ ~override~
+	SAY NAME1 @20297
+	SAY UNIDENTIFIED_DESC @20298
+COPY ~might_and_guile/feats/d5illp5a.spl~ ~override~
+	SAY NAME1 @20297
+COPY ~might_and_guile/feats/d5illp5b.spl~ ~override~
+	SAY NAME1 @20297
+COPY ~might_and_guile/feats/d5illp5a.eff~ ~override~
+
+//use scrolls/wands_________________________________________________________________
+//
+COPY ~might_and_guile/feats/d5_rfh3.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh3.spl~ ~override~   //           use wands
+	SAY NAME1 @20291
+	SAY UNIDENTIFIED_DESC @20292
+	WRITE_ASCII 0x3a ~d5_rfh3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh3~ END
+COPY ~might_and_guile/feats/d5_rf83n.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfh4.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
+	SAY NAME1 @20293
+	SAY UNIDENTIFIED_DESC @20294
+	WRITE_ASCII 0x3a ~d5_rfh4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4~ END
+COPY ~might_and_guile/feats/d5_rf84n.spl~ ~override~
+
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+  READ_BYTE     0x2f current ELSE 0
+  READ_BYTE     0x2b current2 ELSE 0
+  // Analyze items; if:
+  // 1) Have 2 extended headers
+  // 2) one contains ~cast spell~ (0x92 or 0x94) on a wizard spell
+  // 3) The other contains ~Learn Spell~ (0x93) on the same spell
+  // then it's a wizardly spell scroll: update for Use Scrolls!
+  // (also do wands)
+  READ_LONG 0x64 headoffset  ELSE 0
+  READ_SHORT 0x68 headcount  ELSE 0
+  READ_LONG 0x6a effectsoffset  ELSE 0
+//  haslearn = 0
+  hascast = 0
+//  PATCH_IF (headcount = 2) BEGIN
+    FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
+      thishead = 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x1e) effcount  ELSE 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x20) effectsindex  ELSE 0
+      FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
+        READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
+/*
+        PATCH_IF (opcode = 0x93) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_learn  ELSE 0
+          INNER_PATCH_FILE ~%resref_learn%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) BEGIN // spell scroll
+            thishead = 1
+            haslearn = 1
+          END
+        END // PATCH_IF... (opcode = learn spell)
+*/
+        PATCH_IF ((opcode = 0x92) OR (opcode = 0x94)) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_cast  ELSE 0
+          INNER_PATCH_FILE ~%resref_cast%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) OR (type = 2) BEGIN // spell scroll
+            thishead = 1
+            hascast = 1
+          END
+        END // PATCH_IF (opcode = cast spell)
+      END // FOR... effect_cycle
+    END // FOR... header cycle
+//  END // PATCH_IF... have exactly 2 headers
+  PATCH_IF /*(haslearn = 1) AND */(hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b11111101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+  READ_SHORT 0x1c item_type
+  PATCH_IF (item_type = 35) BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b11111101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+  PATCH_IF (item_type = 9) BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b11111101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+BUT_ONLY_IF_IT_CHANGES
+//end use scrolls/wands_____________________________________________________________
+
+//
+
+// combat techniques - warrior
+
+// add weapon of focus feat
+
+// add intimidation as wf01
+// @3915 AND @3916
+
+COPY ~might_and_guile/fighter/d5_wfb.spl~ ~override~ 	//			flurry
+	SAY NAME1 @3911
+	SAY UNIDENTIFIED_DESC @3912
+	WRITE_ASCII 0x3a ~d5_wf02~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf02~ END
+COPY ~might_and_guile/feats/d5_wf02.spl~ ~override~
+	SAY NAME1 @3911
+	SAY UNIDENTIFIED_DESC @3912
+	WRITE_ASCII 0x3a ~d5_wf02~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf02~ END
+COPY ~might_and_guile/feats/d5_wf01.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfc.spl~ ~override~ 		//			parry
+	SAY NAME1 @3915
+	SAY UNIDENTIFIED_DESC @3916
+	WRITE_ASCII 0x3a ~d5_wf03~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf03~ END
+COPY ~might_and_guile/feats/d5_wf03.spl~ ~override~
+	SAY NAME1 @3915
+	SAY UNIDENTIFIED_DESC @3916
+	WRITE_ASCII 0x3a ~d5_wf03~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf03~ END
+COPY ~might_and_guile/feats/d5_wf03.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfd.spl~ ~override~ 		//			resistance
+	SAY NAME1 @3917
+	SAY UNIDENTIFIED_DESC @3918
+	WRITE_ASCII 0x3a ~d5_wf04~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf04~ END
+COPY ~might_and_guile/feats/d5_wf04.spl~ ~override~
+	SAY NAME1 @3917
+	SAY UNIDENTIFIED_DESC @3918
+	WRITE_ASCII 0x3a ~d5_wf04~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf04~ END
+COPY ~might_and_guile/feats/d5_wf04.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfe.spl~ ~override~ 		//			resolve
+	SAY NAME1 @3919
+	SAY UNIDENTIFIED_DESC @3920
+	WRITE_ASCII 0x3a ~d5_wf05~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf05~ END
+COPY ~might_and_guile/feats/d5_wf05.spl~ ~override~
+	SAY NAME1 @3919
+	SAY UNIDENTIFIED_DESC @3920
+	WRITE_ASCII 0x3a ~d5_wf05~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf05~ END
+COPY ~might_and_guile/feats/d5_wf05a.spl~ ~override~
+	SAY NAME1 @3919
+COPY ~might_and_guile/feats/d5_wf05.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wff.spl~ ~override~ 		//			willpower
+	SAY NAME1 @3921
+	SAY UNIDENTIFIED_DESC @3922
+	WRITE_ASCII 0x3a ~d5_wf06~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf06~ END
+COPY ~might_and_guile/feats/d5_wf06.spl~ ~override~
+	SAY NAME1 @3921
+	SAY UNIDENTIFIED_DESC @3922
+	WRITE_ASCII 0x3a ~d5_wf06~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf06~ END
+COPY ~might_and_guile/feats/d5_wf06.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfg.spl~ ~override~		//			knockdown
+	SAY NAME1 @3923
+	SAY UNIDENTIFIED_DESC @3924
+	WRITE_ASCII 0x3a ~d5_wf07~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf07~ END
+COPY ~might_and_guile/feats/d5_wf07.spl~ ~override~
+	SAY NAME1 @3923
+	SAY UNIDENTIFIED_DESC @3924
+	WRITE_ASCII 0x3a ~d5_wf07~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf07~ END
+COPY ~might_and_guile/feats/d5_wf07.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf07.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfh.spl~ ~override~		//			knockback
+	SAY NAME1 @3925
+	SAY UNIDENTIFIED_DESC @3926
+	WRITE_ASCII 0x3a ~d5_wf08~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf08~ END
+COPY ~might_and_guile/feats/d5_wf08.spl~ ~override~
+	SAY NAME1 @3925
+	SAY UNIDENTIFIED_DESC @3926
+	WRITE_ASCII 0x3a ~d5_wf08~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf08~ END
+COPY ~might_and_guile/feats/d5_wf08.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf08.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfi.spl~ ~override~ 		//			cutting blow
+	SAY NAME1 @3927
+	SAY UNIDENTIFIED_DESC @3928
+	WRITE_ASCII 0x3a ~d5_wf09~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf09~ END
+COPY ~might_and_guile/feats/d5_wf09.spl~ ~override~
+	SAY NAME1 @3927
+	SAY UNIDENTIFIED_DESC @3928
+	WRITE_ASCII 0x3a ~d5_wf09~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf09~ END
+COPY ~might_and_guile/feats/d5_wf09.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf09a.spl~ ~override~
+	SAY NAME1 @3927
+COPY ~might_and_guile/feats/d5_wf09.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfj.spl~ ~override~ 		//			tempo
+	SAY NAME1 @3929
+	SAY UNIDENTIFIED_DESC @3930
+	WRITE_ASCII 0x3a ~d5_wf10~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf10~ END
+COPY ~might_and_guile/feats/d5_wf10.spl~ ~override~
+	SAY NAME1 @3929
+	SAY UNIDENTIFIED_DESC @3930
+	WRITE_ASCII 0x3a ~d5_wf10~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf10~ END
+COPY ~might_and_guile/feats/d5_wf10.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf10.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfk.spl~ ~override~ 		//			disrupt
+	SAY NAME1 @3931
+	SAY UNIDENTIFIED_DESC @3932
+	WRITE_ASCII 0x3a ~d5_wf11~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf11~ END
+COPY ~might_and_guile/feats/d5_wf11.spl~ ~override~
+	SAY NAME1 @3931
+	SAY UNIDENTIFIED_DESC @3932
+	WRITE_ASCII 0x3a ~d5_wf11~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf11~ END
+COPY ~might_and_guile/feats/d5_wf11.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf11.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfl.spl~ ~override~ 		//			tactics
+	SAY NAME1 @3933
+	SAY UNIDENTIFIED_DESC @3934
+	WRITE_ASCII 0x3a ~d5_wf12~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
+COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			tactics
+	SAY NAME1 @3935
+	SAY UNIDENTIFIED_DESC @3936
+	WRITE_ASCII 0x3a ~d5_wf12~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
+COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
+	WRITE_ASCII 0x3a ~d5_wf12~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
+COPY ~might_and_guile/feats/d5_wf12.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf12.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~ 		//			tactics
+	SAY NAME1 @3937
+	SAY UNIDENTIFIED_DESC @3938
+	WRITE_ASCII 0x3a ~d5_wf13~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf13~ END
+COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
+	WRITE_ASCII 0x3a ~d5_wf13~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf13~ END
+COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf13.bam~ ~override~
+
+//
+
+//end feat ability files____________________________________________________________
+
+
+//NU FEAT FILES_____________________________________________________________________
+//
+ACTION_FOR_EACH abil IN ~d5feat1~ ~d5feat2~ ~d5feat3~ ~d5feat4~ ~d5feat5~ ~d5feat6~ ~d5feat7~ ~d5feat8~ ~d5feat9~ ~d5feat10~ ~d5feat11~ ~d5feat12~ ~d5feat13~ ~d5feat14~ ~d5feat15~ ~d5feat16~ ~d5feat17~ ~d5feat18~ ~d5feat19~ ~d5feat20~ BEGIN
+	COPY ~might_and_guile/feats/%abil%.spl~ ~override~ 
+	COPY ~might_and_guile/feats/%abil%.eff~ ~override~ 
+END
+ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
+	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
+		SAY NAME1 @20099
+		SAY UNIDENTIFIED_DESC @20100
+		WRITE_ASCII 0x3a ~d5_feat~ #8
+		LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+END
+COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
+COPY ~might_and_guile/feats/d5_feat.eff~ ~override~ 
+COPY ~might_and_guile/feats/d5_feat.cre~ ~override~ 
+COMPILE ~might_and_guile/feats/d5_feat.baf~ 
+COMPILE ~might_and_guile/feats/d5_rogue.d~ 
+COMPILE ~might_and_guile/feats/d5_asasn.d~ 
+COMPILE ~might_and_guile/feats/d5_huntr.d~ 
+COMPILE ~might_and_guile/feats/d5_swash.d~ 
+COMPILE ~might_and_guile/feats/d5_shado.d~ 
+COMPILE ~might_and_guile/feats/d5_alchm.d~ 
+COMPILE ~might_and_guile/feats/d5_fight.d~ 
+COMPILE ~might_and_guile/feats/d5_range.d~ 
+//COMPILE ~might_and_guile/feats/d5_stalk.d~ 
+
+//__________________________________________________________________________________
+
+COPY ~might_and_guile/misc/d5_thac1.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/misc/d5_acbo1.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/misc/d5_savbo.spl~ ~override~
+	SAY NAME1 @7
+COPY ~might_and_guile/misc/d5_1hpbo.spl~ ~override~
+	SAY NAME1 @7
+//__________________________________________________________________________________
+
+
+//EDIT SKILL POINTS_________________________________________________________________
+//
+COPY_EXISTING ~thiefskl.2da~ ~override~
+  SET_2DA_ENTRY_LATER ~#skills~ 3 1 30 // trueclass start
+  SET_2DA_ENTRY_LATER ~#skills~ 3 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 4 1 30 // shadowdancer start
+  SET_2DA_ENTRY_LATER ~#skills~ 4 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 5 1 30 // assassin start
+  SET_2DA_ENTRY_LATER ~#skills~ 5 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 6 1 30 // hunter start
+  SET_2DA_ENTRY_LATER ~#skills~ 6 2 20 // per level
+  SET_2DA_ENTRY_LATER ~#skills~ 7 1 30 // swashbuckler start
+  SET_2DA_ENTRY_LATER ~#skills~ 7 2 20 // per level
+  SET_2DA_ENTRIES_NOW ~#skills~ 1
+  PRETTY_PRINT_2DA
+BUT_ONLY
+//__________________________________________________________________________________
+
+
+//EDIT BACKSTABS____________________________________________________________________
+//
+COPY_EXISTING ~backstab.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 3; row < rows; ++row) BEGIN // iterate through rows
+	FOR (col = 2; col < 10; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#backstab~ row col 2 // all others
+	END
+	FOR (col = 10; col < 19; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#backstab~ row col 3 // all others
+	END
+	FOR (col = 19; col < cols; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#backstab~ row col 4 // all others
+	END
+  END
+  SET_2DA_ENTRIES_NOW ~#backstab~ 1
+  FOR (col = 2; col < 10; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 4 col 1 // shadowdancer
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 7 col 1 // stalker
+  END
+  FOR (col = 10; col < 19; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 4 col 2 // shadowdancer
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 7 col 2 // stalker
+  END
+  FOR (col = 19; col < cols; ++col) BEGIN // iterate through columns
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 4 col 3 // shadowdancer
+	  SET_2DA_ENTRY_LATER ~#altbackstab~ 7 col 3 // stalker
+  END
+  SET_2DA_ENTRIES_NOW ~#altbackstab~ 1
+  PRETTY_PRINT_2DA
+BUT_ONLY
+//__________________________________________________________________________________
+
+
+//APPLY FEATS IN CLABS______________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
+	COPY_EXISTING ~clabth01.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_trueclass.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabth02.2da~ BEGIN
+	COPY_EXISTING ~clabth02.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPCL421~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPCL423~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPCL332~ ~****      ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_assassin.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabth03.2da~ BEGIN
+	COPY_EXISTING ~clabth03.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPCL414~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPCL417~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPCL801~ ~****      ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_hunter.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabth04.2da~ BEGIN
+	COPY_EXISTING ~clabth04.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPCL141~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPCL441~ ~****      ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_swashbuckler.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabth05.2da~ BEGIN
+	COPY_EXISTING ~clabth05.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPSD01 ~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPSD02 ~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_D5_SHAD1~ ~****       ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_shadowdancer.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_shadd.2da~ BEGIN
+	COPY_EXISTING ~d5_shadd.2da~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+		REPLACE_TEXTUALLY ~AP_SPSD01 ~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_SPSD02 ~ ~****      ~	
+		REPLACE_TEXTUALLY ~GA_D5_SHAD1~ ~****       ~	
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/rogue_feats_shadowdancer.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+END
+
+ACTION_FOR_EACH mageclab IN ~clabma01~ ~clabma02~ ~clabma03~ ~clabma04~ ~clabma05~ ~clabma06~ ~clabma07~ ~clabma08~ ~clabma09~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%mageclab%.2da~ BEGIN
+    COPY ~might_and_guile/misc/%mageclab%.2da~ ~override~
+  END 
+END
+COPY_EXISTING ~clabma01.2da~ ~override~
+			~clabma02.2da~ ~override~
+			~clabma03.2da~ ~override~
+			~clabma04.2da~ ~override~
+			~clabma05.2da~ ~override~
+			~clabma06.2da~ ~override~
+			~clabma07.2da~ ~override~
+			~clabma08.2da~ ~override~
+			~clabma09.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/use_wands.txt~
+	APPEND_FILE ~might_and_guile/feats/use_scrolls.txt~
+BUT_ONLY
+
+ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ BEGIN
+	COPY_EXISTING ~clabfi01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/fighter_feats.txt~
+	BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabrn01.2da~ BEGIN
+	COPY_EXISTING ~clabrn01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/ranger_feats.txt~
+	BUT_ONLY
+END
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~9~ "rows"
+	FOR ( index = 31 ; index < rows ; index = index + 1 ) BEGIN
+		READ_2DA_ENTRY %index% 5 9 modclab
+		READ_2DA_ENTRY %index% 8 9 modclass
+		DEFINE_ASSOCIATIVE_ARRAY d5_feat_array BEGIN "%modclab%" => "%modclass%" END
+	END
+BUT_ONLY
+ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
+	ACTION_IF (%zo% = 4) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+			APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	END
+	ACTION_IF (%zo% = 1) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/feats/use_wands.txt~
+			APPEND_FILE ~might_and_guile/feats/use_scrolls.txt~
+	END
+	ACTION_IF (%zo% = 12) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/feats/ranger_feats.txt~
+	END
+END
+
+CLEAR_ARRAYS
+//__________________________________________________________________________________
+
+
+//add feat abilities to joinable NPCs_______________________________________________
+//
+// need to give some feats directly to thief/mages
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		READ_LONG 0x1cc biography
+		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
+			READ_BYTE 0x273 npc_class
+			PATCH_IF (npc_class = 4) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+				READ_LONG 0x244 npc_kit
+				PATCH_IF (npc_kit = 0) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
+				END
+				PATCH_IF (npc_kit = 16384) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
+				END
+				READ_BYTE 0x234 npc_level
+				PATCH_IF (npc_level > 2) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat4~ END
+				END
+				PATCH_IF (npc_level > 4) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat5~ END
+				END
+				PATCH_IF (npc_level > 6) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat6~ END
+				END
+				PATCH_IF (npc_level > 8) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat7~ END
+				END
+				PATCH_IF (npc_level > 10) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat8~ END
+				END
+				PATCH_IF (npc_level > 12) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat9~ END
+				END
+				PATCH_IF (npc_level > 14) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat10~ END
+				END
+				PATCH_IF (npc_level > 16) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat11~ END
+				END
+				PATCH_IF (npc_level > 18) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat12~ END
+				END
+			END
+			PATCH_IF (npc_class = 9 || npc_class = 15) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+				READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
+				PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
+					READ_LONG 0x244 npc_kit
+					PATCH_IF (npc_kit = 0) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
+					END
+					PATCH_IF (npc_kit = 16384) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
+					END
+					READ_BYTE 0x235 npc_level
+					PATCH_IF (npc_level > 2) BEGIN
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featd~ END
+					END
+					PATCH_IF (npc_level > 4) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feate~ END
+					END
+					PATCH_IF (npc_level > 6) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featf~ END
+					END
+					PATCH_IF (npc_level > 8) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featg~ END
+					END
+					PATCH_IF (npc_level > 10) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feath~ END
+					END
+					PATCH_IF (npc_level > 12) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feati~ END
+					END
+					PATCH_IF (npc_level > 14) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featj~ END
+					END
+					PATCH_IF (npc_level > 16) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featk~ END
+					END
+					PATCH_IF (npc_level > 18) BEGIN 
+						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featl~ END
+					END
+				END
+			END
+			PATCH_IF (npc_class = 13) BEGIN
+				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+				REMOVE_MEMORIZED_SPELL ~spcl412~ ~spcl414~
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+			END
+		END
+	END
+BUT_ONLY
+//__________________________________________________________________________________
+
+
+//CHANGE ROGUE HLAS_________________________________________________________________
+//
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL910~ END	
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+//LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_d5_rf3z~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_RR#THL04~ END
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_SPCL928~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL900~ num_allowed = ~16~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_SPCL928~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF85~ num_allowed = ~16~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL906~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL907~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL908~ num_allowed = ~16~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_RR#ALCHT~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL928~ num_allowed = ~16~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~16~ END
+//__________________________________________________________________________________

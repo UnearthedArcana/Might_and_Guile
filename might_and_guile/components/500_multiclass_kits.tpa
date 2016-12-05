@@ -9,7 +9,7 @@
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/mc/d5_multi.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_multi.d5~ ~override~
 //__________________________________________________________________________________
 
 //COPY MARKER FILE_________________________________________________________________
@@ -240,80 +240,11 @@ END
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
-ACTION_FOR_EACH elven_chain IN
-	~chan12~
-	~chan13~
-	~chan14~
-	~chan15~
-	~chan16~
-	~chan19~
-	~clolth~
-	~dwchan01~
-	~a!bchan1~
-	~bsingchn~
-	~c2chan01~
-	~chandrw~
-	~cmarq02~
-	~cmarq12~
-	~cmtuch01~
-	~cota~
-	~dsjearm~
-	~echan01~
-	~echan02~
-	~elfmail~
-	~elvarmx~
-	~fwchan02~
-	~gcmch01~
-	~illas04~
-	~kimchain~
-	~kiyoarm1~
-	~kiyoarm2~
-	~kiyoarm3~
-	~kiyowed1~
-	~mau006~
-	~ntchan04~
-	~rr#chn01~
-	~s!chan02~
-	~scal04~
-	~sgchan2~ 
-	~tzchan01~
-	~u#chan01~
-	~u#chan07~
-	~ucmgch01~
-	~zyplatn8~
-	~chands06~
-	~drowchn1~
-	~drowchn2~
-	~drowchn3~
-	~efml01~
-	~pchan~
-	~AAITM127~
-	~BGSX10~
-	~KOVAWED1~
-	~cmchan02~
-	~elfchan~
-	~kaychai~
-	~ntchan06~
-	~r#aspchn~
-	~tcarmor5~
-	~tcechan~
-	~tcrihar1~
-	~tcrihar2~
-	~tcrivarm~
-	~CMTCH02~
-	~CMTCH03~
-	~CMTCH05~
-	~ESXCHA~
-	~FWCHAN03~
-	~SOAITM01~
-BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~%elven_chain%.itm~ BEGIN
-		COPY_EXISTING ~%elven_chain%.itm~ ~override~
-			WRITE_BYTE 0x2d ("0x00") //blocked: none
-		BUT_ONLY
-	END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
+	INCLUDE ~might_and_guile/lib/archery_feats.tpa~
 END
 //___________________________________________________________________________________
+
 
 //ADD KIT ITEMS______________________________________________________________________
 //
@@ -417,6 +348,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			briefdesc = RESOLVE_STR_REF (@5039)
 		STR_VAR
 			kit_name = D5FILCH
+			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
 			clswpbon = ~0 0 3~
 			thiefskl = ~50 25~
 	END
@@ -596,14 +528,14 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			briefdesc = RESOLVE_STR_REF (@5054)
 		STR_VAR
 			kit_name = D5RANMAGE
-			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
 			clasiskl = ~0 0 0 15 15 0 0~
 			clswpbon = ~1 0 3~
 			thiefskl = ~30 12~
 			thiefscl = ~0 0 100 100 100 100 0 0~
 			traplimt = 0
-			sneakatt = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			crippstr = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			sneakatt = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			crippstr = ~0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 	END
 END
 //____________________________________________________________________________________

@@ -145,7 +145,8 @@ ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~kitlist.2da~ ~override~
-		COUNT_2DA_ROWS ~10~ "rows"
+		COUNT_2DA_COLS cols
+		COUNT_2DA_ROWS cols rows
 		PATCH_IF ( rows > 41 ) BEGIN
 			FOR ( index = 42 ; index < rows ; index = index + 1 ) BEGIN
 				READ_2DA_ENTRY %index% 5 10 modclab

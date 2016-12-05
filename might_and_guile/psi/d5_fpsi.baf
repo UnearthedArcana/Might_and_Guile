@@ -1,0 +1,21 @@
+IF
+	Kit(LastSummonerOf(Myself),D5_PSYPHER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_psyph",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_SOULBLADE)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_soulb",Myself))
+END

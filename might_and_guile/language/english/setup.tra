@@ -30,7 +30,7 @@
 @39  = ~Restrictions:~
 @40  = ~Shapeshift Natural Form~
 @100   = ~Revised Spellcasting Tables~
-@200   = ~Rogue Feats~
+@200   = ~Feat System~
 @205   = ~Psionics~
 @210   = ~Bards are thief kits~
 @220   = ~Revised Movement Bonuses (Quickstride)~
@@ -59,8 +59,8 @@
 @500   = ~Add Multiclass Kits~
 //
 //
-@20000  = ~Rogue~
-@20001  = ~Use this ability to learn a rogue feat~
+@20000  = ~rogue~
+@20001  = ~Rogue~
 @20002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
 
 CLASS FEATURES:
@@ -82,23 +82,25 @@ ROGUE FEATS:
 - Stealth Bonus (HiS/MS)
 - Thieving Bonus (PP/OL)
 - Detection Bonus (FT/DI)
+- Lore Bonus
 - Set Dart Trap
 - Basic Alchemy
- -- Flaming Weapon
+ -- Flaming Weapon (requires Basic Alchemy)
+ -- Set Fire Trap (requires Dart Trap and Alchemy)
 - Armor Class Bonus
- -- Saving Throw Bonus
+ -- Saving Throw Bonus (requires AC Bonus)
 - THAC0 Bonus
- -- Backstab Bonus
- -- Trip Opponent
- -- Disarm Opponent
- -- Blind Opponent
- -- Disrupt Magic
+ -- Backstab Bonus (requires THAC0 Bonus)
+ -- Trip Opponent (requires THAC0 Bonus)
+ -- Disarm Opponent (requires THAC0 Bonus)
+ -- Blind Opponent (requires THAC0 Bonus)
+ -- Disrupt Magic (requires THAC0 Bonus)
 - Grease Jar
 - Smoke Bomb
- -- Illusion Magic (requires 15+ INT)
- -- Shadow Magic (requires 15+ INT)
- -- Use Wands (requires 15+ INT)
- -- Use Scrolls (requires 17+ INT)
+ -- Illusion Magic (requires 15 INT)
+ -- Shadow Magic (requires 15 INT)
+ -- Use Wands (requires 12 INT)
+ -- Use Scrolls (requires 15 INT)
 - Luck Bonus
 
 CLASS RESTRICTIONS:
@@ -112,13 +114,13 @@ Prime Requisite For Dual-Classing: Dexterity
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, THAC0 Bonus, and Melee Trick: Blind Opponent.
 - May learn the Backstab Bonus feat up to three times, reaching a possible maximum multiplier of x7.
-- May learn a special Assassin-only feat: Poison Weapon (Toxin). For each time the assassin chooses this feat, the poison ability may be used one per day.
+- May learn two special Assassin-only feat: Poison Weapon (Toxin) and Poison Trap.
 ~
 @20004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
 
 Abilities:
-- Begins with the following rogue feats at 1st level: Detection Bonus, Spike Trap, and Brew Potions
-- May learn three special feats unique to Hunters: Fire Trap, Web Trap, and Poison Weapon (Paralytic).
+- Begins with the following rogue feats at 1st level: Detection Bonus, Dart Trap, and Basic Alchemy
+- May learn two special feats unique to Hunters: Poison Weapon (Paralytic) and Web Trap.
 ~
 @20005  = ~hunter~
 @20006  = ~Hunter~
@@ -127,7 +129,7 @@ Abilities:
 Abilities:
 - Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Melee Trick: Trip Opponent.
 - May repeat learning the AC Bonus and THAC0 Bonus feats, up to four times each.
-- May learn a special Swashbuckler-only feat: Contingency (Escape). This will allow the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
+- May learn two special Swashbuckler-only feats: Swashbuckling and Escape Artist. Swashbuckling is a temporary ability that increases the Swashbuckler's rate of attack and armor class. Escape Artist allows the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
 - May Specialize (two slots) in any melee weapon available to Thieves.
 - May place 3 slots into Two-Weapon Style.
 
@@ -146,6 +148,8 @@ Disadvantages:
 - -1 to base backstab multiplier compared to an unkitted Thief
 
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
+@20009   = ~Choose a feat~
+@20010   = ~Use this ability to learn a new feat~
 @20011   = ~alchemist~
 @20012   = ~Alchemist~
 @20013   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
@@ -164,7 +168,10 @@ Restrictions:
 - Alchemists have no backstab multiplier by default, and may not raise it via feats.
 - May not learn any combat feats.
 ~
-@20100  = ~Use this ability to choose from among the rogue feats~
+@20097  = ~Pick a different ability~
+@20098  = ~Choose this ability~
+@20099  = ~Choose an ability~
+@20100  = ~Use this ability to learn a new feat~
 @20101  = ~Stealth Bonus~
 @20102  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
 @20103  = ~Thieving Bonus~
@@ -179,17 +186,20 @@ Restrictions:
 @20116  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
 @20117  = ~Web Trap~
 @20118  = ~Web Trap: this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect.~
+@20119  = ~Poison Trap~
+@20120  = ~Poison Trap: this ability sets a trap that, when triggered, fires small poison-tipped darts at everyone within 15 feet. Victims must make a saving throw to avoid taking 2d4 poison damage per round for three rounds.~
 @20129  = ~Maze Trap~
 @20130  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
 @20131  = ~Basic Alchemy~
-@20132  = ~Basic Alchemy: using foraged ingredients, this ability allows the rogue to craft the following potion once per day: one Elixir of Health; one Potion of Strength; one Potion of Perception; one Potion of Fire Resistance; one Potion of Cold Resistance; or two Flaming Oils.~
-@20133  = ~Elixir of Health~
-@20134  = ~Potion of Strength~
-@20135  = ~Potion of Perception~
-@20136  = ~Potion of Fire Resistance~
-@20137  = ~Potion of Cold Resistance~
-@20138  = ~Flaming Oil~
-@20139  = ~Inside of this glass pot is an special mixture of oil and other chemicals. When this mixture is set ablaze, it burns for several seconds at a very hot temperature. Flaming oil is sometimes difficult to use because it takes a long time for the user to properly throw it. Adventurers often carry oil with them to deal with trolls.
+@20132  = ~Basic Alchemy: this ability enables the creation of one of the following potions, once per day: a Potion of Healing; an Antidote; a Potion of Strength; a Potion of Perception; a Potion of Fire Resistance; a Potion of Cold Resistance; or two Flaming Oils.~
+@20133  = ~Potion of Healing~
+@20134  = ~Antidote~
+@20135  = ~Potion of Strength~
+@20136  = ~Potion of Perception~
+@20137  = ~Potion of Fire Resistance~
+@20138  = ~Potion of Cold Resistance~
+@20139  = ~Flaming Oil~
+@20140  = ~Inside of this glass pot is an special mixture of oil and other chemicals. When this mixture is set ablaze, it burns for several seconds at a very hot temperature. Flaming oil is sometimes difficult to use because it takes a long time for the user to properly throw it. Adventurers often carry oil with them to deal with trolls.
 
 STATISTICS:
 
@@ -208,15 +218,16 @@ Weight: 0
 @20173  = ~Brute Fist~
 @20174  = ~Hulking Brute~
 @20181  = ~Advanced Alchemy~
-@20182  = ~Advanced Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
-@20183  = ~Potion of Regeneration~
-@20184  = ~Oil of Speed~
-@20185  = ~Potion of Clarity~
-@20186  = ~Potion of Mind Focusing~
-@20187  = ~Potion of Invisibility~
-@20188  = ~Potion of Fiery Burning~
+@20182  = ~Advanced Alchemy: this ability enables the creation of one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
+@20183  = ~Elixir of Health~
+@20184  = ~Potion of Regeneration~
+@20185  = ~Oil of Speed~
+@20186  = ~Potion of Clarity~
+@20187  = ~Potion of Mind Focusing~
+@20188  = ~Potion of Invisibility~
+@20189  = ~Potion of Fiery Burning~
 @20191  = ~High-Level Alchemy~
-@20192  = ~High-Level Alchemy: using foraged ingredients, this ability allows the rogue to craft one of the following potion once per day: two Potions of Extra-Healing; a Potion of Giant Strength; a Potion of Power; a Potion of Magic Shielding; a Potion of Freedom; or a Potion of Fire Breath.~
+@20192  = ~High-Level Alchemy: this ability enables the creation of one of the following potion once per day: two Potions of Extra-Healing; a Potion of Giant Strength; a Potion of Power; a Potion of Magic Shielding; a Potion of Freedom; or a Potion of Fire Breath.~
 @20193  = ~Potion of Extra Healing~
 @20194  = ~Potion of Giant Strength~
 @20195  = ~Potion of Power~
@@ -224,15 +235,17 @@ Weight: 0
 @20197  = ~Potion of Freedom~
 @20198  = ~Potion Fire Breath~
 @20201  = ~Armor Class Bonus~
-@20202  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class upon the rogue.~
+@20202  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class.~
 @20211  = ~Saving Throws Bonus~
 @20212  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
-@20221  = ~Contingency (Escape)~
-@20222  = ~Contingency (Escape): the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
+@20221  = ~Escape Artist~
+@20222  = ~Escape Artist: the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
 @20229  = ~Finesse~
 @20230  = ~Finesse: this ability applies a bonus to hit based on Dexterity rather than Strength.  This bonus only applies to light melee weapons (daggers, short swords, scimitars, ninja-to, quarterstaves, and clubs).~
-@20231  = ~To-Hit Bonus~
-@20232  = ~To-Hit Bonus: this ability confers a permanent +1 bonus to all attack rolls upon the rogue.~
+@20231  = ~To-Hit Bonus (Melee)~
+@20232  = ~To-Hit Bonus (Melee): this ability confers a permanent +1 bonus to all melee-based attack rolls.~
+@20233  = ~To-Hit Bonus (Ranged)~
+@20234  = ~To-Hit Bonus (Ranged): this ability confers a permanent +1 bonus to all ranged attack rolls.~
 @20241  = ~Backstab Bonus~
 @20242  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
 @20251  = ~Melee Trick (Trip)~
@@ -298,30 +311,32 @@ ROGUE FEATS:
 - Stealth Bonus (HiS/MS)
 - Thieving Bonus (PP/OL)
 - Detection Bonus (FT/DI)
+- Lore Bonus
 - Set Dart Trap
 - Basic Alchemy
- -- Flaming Weapon
+ -- Flaming Weapon (requires Basic Alchemy)
+ -- Set Fire Trap (requires Dart Trap and Alchemy)
 - Armor Class Bonus
- -- Saving Throw Bonus
+ -- Saving Throw Bonus (requires AC Bonus)
 - THAC0 Bonus
- -- Backstab Bonus
- -- Trip Opponent
- -- Disarm Opponent
- -- Blind Opponent
- -- Disrupt Magic
+ -- Backstab Bonus (requires THAC0 Bonus)
+ -- Trip Opponent (requires THAC0 Bonus)
+ -- Disarm Opponent (requires THAC0 Bonus)
+ -- Blind Opponent (requires THAC0 Bonus)
+ -- Disrupt Magic (requires THAC0 Bonus)
 - Grease Jar
 - Smoke Bomb
- -- Illusion Magic (requires 15+ INT)
- -- Shadow Magic (requires 15+ INT)
- -- Use Wands (requires 15+ INT)
- -- Use Scrolls (requires 17+ INT)
+ -- Illusion Magic (requires 15 INT)
+ -- Shadow Magic (requires 15 INT)
+ -- Use Wands (requires 12 INT)
+ -- Use Scrolls (requires 15 INT)
 - Luck Bonus
-- Telepathy (requires 15+ INT)
-- Telekinesis (requires 15+ INT)
-- Pyrokinesis (requires 15+ INT)
-- Biokinesis (requires 15+ INT)
+- Telepathy (requires 15 INT)
+- Telekinesis (requires 15 INT)
+- Pyrokinesis (requires 15 INT)
+- Biokinesis (requires 15 INT)
 
-Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 10); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing 8-point reduction in max hit points. Maintainable powers are interrupted if the rogue is reduced to 25% hit points. Most rogues can only learn psionic powers from a single discipline.
+Psionic powers are physically demanding, costing the rogue a temporary reduction in max hit points (3, 5, 7, or 9); for most powers these hit points are restored at a rate of 1/round. Some powers may be maintained indefinitely at a cost of an ongoing reduction in max hit points. In those cases the hit points re not restored until after the power has been canceled (at the same rate of 1/round). Maintainable powers are interrupted if the rogue is reduced to 25% hit points. Most rogues can only learn psionic powers from a single discipline.
 
 CLASS RESTRICTIONS:
 - Alignment restricted to any except lawful good.
@@ -334,8 +349,8 @@ Prime Requisites For Dual-Classing: Dexterity
 @20503  = ~PSYPHER: the Psypher is someone who (mostly) turns away from larcenous pursuits, and focuses on education and meditation to fully harness the power of the mind and the body. Psyphers are generally very well-educated and very healthy, treating their body as a temple. Through study and discipline, they can learn to use psychic abilities from any psionic discipline.
 
 Abilities:
-- Begins with access to the first power in all four psionic disciplines: Mind Thrust, Hold, Static Transfer, and Adrenaline Rush. The Psion can proceed to learn abilities from any psionic discipline.
-- Gains one extra hit point per level from levels 1 through 9.
+- Begins with access to the first power in all four psionic disciplines: Mind Thrust, Immobilize, Static Discharge, and Adrenaline Rush. The Psion can proceed to learn up to 10 more abilities, from any psionic discipline.
+- Gains one extra hit point on every even level, up to level 20.
 
 Restrictions:
 - May only distribute 12 skill points per level into thief skills.
@@ -346,11 +361,11 @@ Restrictions:
 @20513  = ~SOULBLADE: this warrior uses meditation to harness psychic powers in order to enhance <PRO_HISHER> martial abilities. Often training with Psionicists or Psyphers, the Soulblade can use a select few psionic abilities, generally those which fortify <PRO_HISHER> body or mind against attacks.
 
 Abilities:
-- Begins with access to the Metabolic Boost and Kinetic Ram abilities. May learn another psionic ability every at every third level of experience, up to 18th level. The abilities that a Soulblade may learn include:
- -- from the Telekinesis discipline: Inertial Barrier, Psychic Knife, and Free Action
- -- from the Biokinesis discipline: Camouflage, Carapace, and Bioregeneration
- -- from the Telepathy discipline: Intellect Fortress
- -- from the Pyrokinesis discipline: Energy Shield
+- Begins with access to the Adrenaline Rush and Kinetic Ram abilities. May learn another psionic ability every at every third level of experience, up to 18th level. The abilities that a Soulblade may learn include:
+ -- from the Telekinesis discipline: Immobilize, Inertial Barrier, and Psychic Knife
+ -- from the Biokinesis discipline: Metabolic Boost, Bioregeneration and Carapace
+ -- from the Telepathy discipline: Intellect Fortress (at level 9)
+ -- from the Pyrokinesis discipline: Static Discharge, Energy Absorption
 
 Restrictions:
 - Limited to light armors and weapons.
@@ -358,58 +373,122 @@ Restrictions:
 - Limited to Proficiency (+) with ranged weapons.
 - May not be Chaotic.
 ~
+@20580  = ~Ultrablast~
+@20581  = ~Ultrablast: this is a massive, omnidirectional psionic blast which savagely attacks the minds of the psion's enemies. All such enemies within 20 feet must save vs. Wands with a -3 penalty or be stunned for three rounds. 
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20582  = ~Tower of Iron Will~
+@20583  = ~Tower of Iron Will: this ability is similar to Intellect Fortress, protecting against any mind-affecting magic or psionics. However, in this case the psions can extend that protection to all allies within 20 feet. 
+
+This is a maintainable power; it increases the psion's fatigue, and while in use, it causes a 25-point temporary reduction in <PRO_HISHER> max hit points. These hit points slowly return after the ability is canceled.~
+@20584  = ~Cancel Tower of Iron Will~
+@20585  = ~Earthquake~
+@20586  = ~Earthquake: this ability causes a strong tremor to affect the ground nearby. All creatures in the vicinity take damage over the course of three rounds, and must make a saving throw or fall down in the first round.
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20587  = ~Stasis Field~
+@20588  = ~Stasis Field: this ability freezes all beings in the vicinity, at a molecular level. For twelve seconds the psion alone may move and interact with the frozen world. The stasis field prevents the psion from physically damaging anything during this time, but <PRO_HESHE> may initiate psionic abilities or magical powers, the effects of which will take place once the stasis ends. Beware: beings with godlike characteristics or powers may be immune to the effects of a stasis field.
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20589  = ~Solar Flash~
+@20590  = ~Solar Flash: this ability creates an intense ray of pure light energy to beam out at everyone within a 20-ft. radius of the psion. All enemies within the area of effect take 3d6 points of damage and must save vs. Spell or be blinded for 1 turn. Undead that are hit by the sunray take 20d6 damage.
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20591  = ~Storm of Energy~
+@20592  = ~Storm of Energy: this ability fills the vicinity with a churning storm of fire and electricity. For three rounds, enemies in the storm take 1d8 fire damage and 1d8 electrical damage (save for half).
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20593  = ~Monstrous Evolution~
+@20594  = ~Monstrous Evolution: this ability causes the psion's body to rapidly grow into a hideously powerful, hulking form. The monstrous form has an AC of -5, a THAC0 of 2 and attacks twice per round with powerful fists. These attacks do 3d6 crushing damage plus 2d4 poison damage. In this form the psion is immune to entanglement, web and hold effects, and to all poisons.
+
+Upon resuming <PRO_HISHER> natural form, the psion becomes fatigued and suffers a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20595  = ~monster creature~
+@20596  = ~Attack~
+@20597  = ~Shapeshift natural form~
+@20598  = ~Fission~
+@20599  = ~Fission: this ability creates a fully functioning, fully cognizant clone of the psion. The clone has effectively 60% of the psion's experience and vitality, and operates according to the psion's will (since they are in fact the same person). Maintaining the clone's corporeal integrity involves a supreme act of will; the clone disintegrates after 1 turn.
+
+Using this ability increases the psion's fatigue and causes a 25-point temporary reduction in <PRO_HISHER> max hit points.~
+@20600  = ~Choosing this ability will enable you to choose another psionic ability. In addition, if you have learned at least four abilities in any of the four psionic disciplines, you will be able to learn one of two HLA-level powers from that discipline. The eight HLA-level psionic abilities are:
+
+- Telepathy: Ultrablast. Causes all nearby enemies to make a saving throw or be stunned.
+- Telepathy: Tower of Iron Will. This acts like the Intellect Fortress power, but protects all nearby allies while it is maintained.
+- Telekinesis: Earthquake. This acts like the priest spell of the same name.
+- Telekinesis: Stasis Field. This act's like the wizard spell Time Stop, but the psion cannot physically attack while the stasis field is active.
+- Pyrokinesis: Solar Flash. This acts like the priest spell Sunray, but will not automatically kill undead creatures.
+- Pyrokinesis: Energy Storm. This acts like the priest spell Storm of Vengeance, but with no accid or poison damage.
+- Biokinesis: Monstrous Evolution. This ability transforms the psion into a hulking beast, similar in appearance to a Shambling Mound.
+- Biokinesis: Fission. This acts like the wizard spell Simulacrum.
+
+Unlike lesser psionic powers, these abilities may be used once per day. In each case, using the ability increases the psion's fatigue and causes a temporary reduction of 25 max hit points. Note: you may only learn one of the two ultimate powers in each discipline.~
 @20601  = ~Telepathy~
-@20602  = ~Telepathy: this feat confers the 'Mind Thrust' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
-@20603  = ~Mind Thrust~
-@20604  = ~Mind Thrust: the targeted creature must save vs. wands or collapse for 5 rounds (though they will regain consciousness earlier if jostled or struck). The cost is 3 hit points.~
-@20605  = ~Id Insinuation~
-@20606  = ~Id Insinuation: the rogue attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -3 penalty. The cost is 5 hit points.~
-@20607  = ~Domination~
-@20608  = ~Domination: the rogue takes over the mind of the target for 5 rounds, unless the target makes a saving throw vs. wands. The cost is 7 hit points.~
-@20609  = ~Psychic Crush~
-@20610  = ~Psychic Crush: the rogue initiates a powerful mental attack, stunning the target for 3 rounds unless the target saves vs. wands with a -3 penalty. The cost is 10 hit points.~
-@20611  = ~Intellect Fortress~
-@20612  = ~Intellect Fortress: the rogue erects a powerful mental defense against mental attacks, be they magical or psionic in nature. The cost to maintain the shield is 10 hit points.~
-@20613  = ~Cancel Intellect Fortress~
+@20602  = ~Telepathy: this feat confers the 'Mind Thrust' ability, and allows for learning more psionic abilities within the Telepathy discipline.~
+@20603  = ~Id Insinuation~
+@20604  = ~Id Insinuation: this ability attacks the target's subconscious, causing the target to go mad with fear for 3 rounds unless they save vs. wands with a -2 penalty. At 6th level the save penalty increases to -3, and at 12th level it increases to -4. The cost is 4 hit points.~
+@20605  = ~Cancel Id Insinuation~
+@20606  = ~Ego Repair~
+@20607  = ~Ego Repair: this ability removes the effects of fear, sleep, feeblemindedness, unconsciousness, and intoxication, as well as berserk and confused states of mind. The cost is 5 hit points.~
+@20608  = ~Cancel Ego Repair~
+@20609  = ~Mental Domination~
+@20610  = ~Mental Domination: this ability allows a psion to take over the mind of a creature for 5 rounds, unless the target makes a saving throw vs. wands. At 6th level the save is rolled with a -1 penalty, and at 12th level the penalty increases to -2. The cost is 7 hit points.~
+@20611  = ~Cancel Domination~
+@20612  = ~Intellect Fortress~
+@20613  = ~Intellect Fortress: the psion erects a powerful mental defense against mental attacks, be they magical or psionic in nature. This is a maintainable power. The cost is 9 hit points.~
+@20614  = ~Cancel Intellect Fortress~
+@20615  = ~Psychic Crush~
+@20616  = ~Psychic Crush: this ability initiates a powerful mental attack, stunning a target creature for 3 rounds unless the target saves vs. wands with a -2 penalty. At 6th level the penalty to the saving throw increases to -3, and at 12th level it increases to -4. The cost is 9 hit points.~
+@20617  = ~Cancel Psychic Crush~
 @20621  = ~Telekinesis~
-@20622  = ~Telekinesis: this feat confers the 'Hold' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telekinesis discipline.~
-@20623  = ~Hold~
-@20624  = ~Hold: the target of this power is Held frozen for 1 round upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. The cost is 3 hit points.~
-@20625  = ~Kinetic Ram~
-@20626  = ~Kinetic Ram: the rogue blasts a target with powerful but unfocused telekinetic energy, causing 2d3 crushing damage and, upon a failed save vs. wands, knocking the target back 10 feet. The cost is 5 hit points.~
-@20627  = ~Inertial Barrier~
-@20628  = ~Inertial Barrier: the rogue creates a movable barrier inches from <PRO_HISHER> skin, which has several protective effects: it provides a +2 bonus to AC and 40% damage resistance against crushing and missile attacks; a +1 AC bonus and 20% damage resistance against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the Magic Missile spell. The barrier lasts 5 rounds and costs 7 hit points.~
-@20629  = ~Psychic Knife~
-@20630  = ~Psychic Knife: the rogue can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. The blade lasts 7 rounds and costs 10 hit points.~
-@20631  = ~Free Action~
-@20632  = ~Free Action: while this ability is maintained the rogue is immune to any force that hinders <PRO_HISHER> movement, whether magical or otherwise. The cost of maintenance is 10 hit points.~
-@20633  = ~Cancel Free Action~
+@20622  = ~Telekinesis: this feat confers the 'Immobilize' ability, and allows for learning more psionic abilities within the Telekinesis discipline.~
+@20623  = ~Immobilize~
+@20624  = ~Immobilize: the target of this power is held frozen for 2 rounds upon a failed saving throw vs. wands, and then Slowed for 1 round while struggling to regain control of <PRO_HISHER> body. Even if the save is made, the target is briefly Slowed while fighting off the telekinetic control. At levels 6 and 12, the target's saving throw is rolled with a -1 and -2 penalty, respectively. The cost is 4 hit points.~
+@20625  = ~Cancel Immobilization~
+@20626  = ~Kinetic Ram~
+@20627  = ~Kinetic Ram: this ability blasts a target with powerful but unfocused telekinetic energy, causing 2d3 crushing damage and, upon a failed save vs. wands, knocking the target back 10 feet. At 6th level the damage is 2d4 and the save is rolled with a -1 penalty; at 12th level the damage is 2d6 and the save is rolled with a -2 penalty. The cost is 5 hit points.~
+@20628  = ~Cancel Kinetic Ram~
+@20629  = ~Inertial Barrier~
+@20630  = ~Inertial Barrier: this ability creates a movable barrier inches from the psion's skin, which has several protective effects: it provides a +2 bonus to AC and 40% damage resistance against crushing and missile attacks; a +1 AC bonus and 20% damage resistance against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the Magic Missile spell. This is a maintainable power. The cost is 7 hit points.~
+@20631  = ~Cancel Inertial Barrier~
+@20632  = ~Psychic Knife~
+@20633  = ~Psychic Knife: the psion can focus telekinetic energy into a razor-sharp blade emanating from <PRO_HISHER> hand. This force can be wielded like a sword, as if the rogue had Mastery (+++) in its use, doing 2d3 slashing damage and 2d3 magic damage. This is a maintianable power. The cost is 7 hit points.~
+@20634  = ~Cancel Psychic Knife~
+@20635  = ~Instinctive Freedom~
+@20636  = ~Instinctive Freedom: this ability is unlike most othes. The psion's mastery of the telekinetic discipline enables <PRO_HIMHER> to break free of any bonds; and to initiate the power at an instinctive level, whenever <PRO_HESHE> is helpless. The cost of the ability at the time it is triggered is 9 hit points.~
+@20637  = ~Cancel Free Action~
 @20641  = ~Pyrokinesis~
-@20642  = ~Pyrokinesis: this feat confers the 'Static Transfer' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Telepathy discipline.~
-@20643  = ~Static Transfer~
-@20644  = ~Static Transfer: this ability is similar to the Shacking Grasp wizard spell. The rogue collects static electricity in his hand, and then uses it to attack an enemy. The enemy takes 2d6 points of damage, and must save vs. wands or be stunned for 1 round. The cost if 3 hit points.~
-@20645  = ~Energy Draw~
-@20646  = ~Energy Draw: this ability can draw energy directly from a foe, causing 3d4 cold damage. The stolen energy temporarily augments the rogues own life force, adding 5 hit points to his total for 10 rounds. The rogue can only gain this benefit once every 5 rounds.~
-@20647  = ~Generate Lightning~
-@20648  = ~Generate Lightning: after taking a few moments to collect static energy from the surrounding area, the rogue can discharge it as violent lightning energy. The lightning strikes the target and arcs to any other enemies within 10 feet (the rogue has some measure of control and can protect <PRO_HISHER> companions). The discharge does 4d4 lightning damage, which is halved upon a successful save vs. wands. The cost is 7 hit points.~
+@20642  = ~Pyrokinesis: this feat confers the 'Static Transfer' ability, and allows for learning more psionic abilities within the Telepathy discipline.~
+@20643  = ~Static Discharge~
+@20644  = ~Static Discharge: this ability is similar to the Shocking Grasp wizard spell. The psion collects static electricity in his hand, and then uses it to attack an enemy. The enemy takes 2d4+1 points of damage, and must save vs. wands or be stunned for 1 round. At 6th level the damage is 3d4+2 and the save is rolled with a -1 penalty; at 12th level the damage is 4d4+3 and the save penalty increases to -2. The cost is 4 hit points.~
+@20645  = ~Cancel Static Discharge~
+@20646  = ~Energy Transfer~
+@20647  = ~Energy Transfer: the immediate expenditure of energy to initiate this ability is converted into a steady bloom of positive energy in the target, resulting in a slow healing. At 1st level the target recovers 5 hit points over the cours of 10 rounds. At 6th level the target recovers 10 hit points over the same period, and at 12th level the target recovers 15 hit points over that time. The cost is 5 hit points.~
+@20648  = ~Cancel Energy Transfer~
 @20649  = ~Psychic Combustion~
-@20650  = ~Psychic Combustion: this ability allows the user to spontaneously create a brief but powerful fire in any location. The flames to 5d4+5 fire damage to all enemies within 5 feet of the flames. The cost is 10 hit points.~
-@20651  = ~Energy Barrier~
-@20652  = ~Energy Barrier: while this ability is maintained, it sets the rogue's resistance to energy-based damage (fire, cold, electricity, and magic damage) to 75%. The cost to maintain the barrier is 10 hit points.~
-@20653  = ~Cancel Energy Barrier~
+@20650  = ~Psychic Combustion: this ability allows the psion to spontaneously create a brief but powerful fire in any location. The flames to 3d4+3 fire damage to all enemies within 5 feet of the flames. At 6th level the damage increases to 4d4+4, and at 12th level the damage increases to 5d4+5. The cost is 7 hit points.~
+@20651  = ~Cancel Psychic Combustion~
+@20652  = ~Energy Dispersion~
+@20653  = ~Energy Dispersion: while this ability is maintained, the psion instinctively absorbs and deflects harmful energies. <PRO_HISHER> resistance to energy-based damage (fire, cold, electricity, and magic damage) is set to 75%. The cost to maintain the barrier is 9 hit points.~
+@20654  = ~Cancel Energy Dispersion~
+@20655  = ~Generate Lightning~
+@20656  = ~Generate Lightning: after taking a few moments to collect static energy from the surrounding area, the rogue can discharge it as violent lightning energy. The lightning strikes a chosen target and arcs to any other enemies within 10 feet (the psion has some measure of control over the energy and can protect <PRO_HISHER> companions). The discharge does 2d6 lightning damage, which is halved upon a successful save vs. wands. At 6th level the damage is 3d6 and the save is rolled with a -1 penalty. At 12th level the damage is 4d6 and the save is rolled with a -2 penalty. The cost is 9 hit points.~
+@20657  = ~Cancel Generate Lightning~
 @20661  = ~Biokinesis~
-@20662  = ~Biokinesis: this feat confers the 'Adrenaline Rush' ability upon the rogue, and allows <PRO_HIMHER> to learn more psionic abilities within the Biokinesis discipline.~
+@20662  = ~Biokinesis: this feat confers the 'Adrenaline Rush' ability, and allows for learning more psionic abilities within the Biokinesis discipline.~
 @20663  = ~Adrenaline Rush~
-@20664  = ~Adrenaline Rush: this ability temporarily boosts the rogue's physical stats by 2 points, for 4 rounds. Afterward, the rogue becomes fatigued for 3 rounds. The cost is 3 hit points and the ability may not be used again until the fatigue has worn off.~
-@20665  = ~Metabolic Boost~
-@20666  = ~Metabolic Boost: this ability supercharges the rogue's biological processes for 4 rounds, doubling movement speed and adding an extra attack per round, like the Haste wizard spell. The cost is 5 hit points.~
-@20667  = ~Camouflage~
-@20668  = ~Camouflage: this ability makes the rogue's body blend into the nearby environment like a chameleon. The effect is similar to the Improved Invisibility spell, without actually involving invisibility: the rogue has a -4 bonus to AC, a +40% bonus to stealth, and cannot easily be targeted by spellcasters. The effect lasts 5 rounds and the cost is 7 hit points.~
-@20669  = ~Carapace~
-@20670  = ~Carapace: this ability causes the rogue's skin to harden into a fast-growing, and strong but brittle shell. This provides a -2 bonus to AC, and harmlessly absorbs 1 physical attack each round. The effect lasts 7 rounds and the cost is 10 hit points.~
-@20671  = ~Bioegeneration~
-@20672  = ~Bioregeneration: while maintained, this ability boost the immune system and healing capabilities of the rogue's body, regenerating 1 hit point every 3 seconds. The cost to maintain this ability is 10 hit points.~
-@20673  = ~Cancel Bioregeneration~
+@20664  = ~Adrenaline Rush: this ability temporarily boosts the psion's physical stats by 1 points, for 4 rounds. Afterward, the psion becomes fatigued for 2 rounds. At 6th level the affected stats are increased by 2, and at 12th level they are increased by 3. The cost is 4 hit points, and the ability may not be used again until the fatigue has worn off.~
+@20665  = ~Cancel Adrenaline Rush~
+@20666  = ~Metabolic Boost~
+@20667  = ~Metabolic Boost: this ability supercharges the psion's biological processes for 3 rounds, doubling movement speed and adding an extra attack per round, like the Haste wizard spell. At 6th level the effect lasts for 4 rounds, and at 12th level it lasts for 5 rounds. The cost is 5 hit points.~
+@20668  = ~Cancel Metabolic Boost~
+@20669  = ~Bioregeneration~
+@20670  = ~Bioregeneration: this ability triggers powerful healing responses in the psion's immune system, resulting in the regeneration of 1 extra per round during the 7-round period while the psion recovers from the ability's initial cost. At 6th level the psion regenerates an extra 2 hit points per round during that time (14 total), and at 12th level the psion regenerates an extra 3 hit points per round (21 total). The initial cost is 7 hit points.~
+@20671  = ~Cancel Bioregeneration~
+@20672  = ~Camouflage~
+@20673  = ~Camouflage: this ability makes the psion's body blend into the nearby environment like a chameleon. The effect is similar to the Improved Invisibility spell, without actually involving invisibility: the rogue has a -4 bonus to AC, a +40% bonus to stealth, and cannot easily be targeted by spellcasters. This is a maintainable power. The cost is 9 hit points.~
+@20674  = ~Cancel Camouflage~
+@20675  = ~Carapace~
+@20676  = ~Carapace: this ability causes the rogue's skin to harden into a fast-growing, and strong but brittle shell. This provides a -2 bonus to AC, and harmlessly absorbs 1 physical attack each round. This is a maintainable power. The cost is 9 hit points.~
+@20677  = ~Cancel Carapace~
 //
 //
 @2210   = ~Quickstride~
@@ -454,18 +533,16 @@ Abilities:
 
 ROGUE FEATS:
 - Stealth Bonus
-- Set Spike Trap
-- Set Dart Trap (prerequisite: Spike Trap)
-- Brew Potions
-- Flaming Weapon (prerequisite: Brew Potions)
-- Paralytic Poison (prerequisite: Brew Potions)
-- Backstab Bonus (prerequisite: THAC0 Bonus)
-- Trip Opponent (prerequisite: THAC0 Bonus)
-- Disarm Opponent (prerequisite: THAC0 Bonus)
-- Blind Opponent (prerequisite: THAC0 Bonus)
-- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Set Dart Trap
+- Armor Class Bonus
+- Backstab Bonus
+- Trip Opponent
+- Disarm Opponent
+- Blind Opponent
+- Disrupt Magic
 - Grease Jar
 - Smoke Bomb
+- Shadow Magic
 
 Restrictions:
 - May not wear armor heavier than studded leather.
@@ -477,21 +554,68 @@ Restrictions:
 Advantages:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows and crossbows.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Disadvantages:
 – May only wear leather, studded leather, and hide armors (and elven chain).
 – May only become Proficient (one slot) with melee weapons.
 – May not use the Charm Animal ability.~
+@2302   = ~ARCHER: The Archer is the epitome of skill with the bow, able to make almost any shot, no matter how difficult. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
+
+Advantages:
+- +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
+- Can achieve Grand Mastery (+++++) with bows and crossbows.
+- May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+
+- Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- Available at 1st level: Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.
+- Available at 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- Available at 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
+- Available at 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+
+Disadvantages:
+– May only wear leather, studded leather, and hide armors (and elven chain).
+– May only become Proficient (one slot) with melee weapons.
+– May not use the Charm Animal ability.~
+@23101  = ~Choose a Called Shot~
+@23111  = ~Called Shot: Pin~
+@23112  = ~Called Shot: Pin
+In addition to normal damage, all successful ranged attacks within the next round will pin the target to the spot for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
+@23113  = ~Called Shot: Trip~
+@23114  = ~Called Shot: Trip
+In addition to normal damage, all successful ranged attacks within the next round will cause the target to fall down for one round unless the target makes a successful saving throw vs. breath weapon.~
+@23115  = ~Called Shot: Disarm~
+@23116  = ~Called Shot: Disarm
+In addition to normal damage, all successful ranged attacks within the next round will cause the target to fumble his weapon, becoming unable to make melee attacks for 6 seconds and suffering -3 penalties to thac0 and AC for 12 seconds, unless the target makes a successful saving throw vs. paralyzation.~
+@23117  = ~Called Shot: Hammer Shot~
+@23118  = ~Called Shot: Hammer Shot
+In addition to normal damage, all successful ranged attacks within the next round will cause an extra 1d6 points of crushing damage and have a chance to knock the target back 5-10 feet, unless the target makes a successful saving throw vs. breath weapon.~
+@23119  = ~Called Shot: Crippling Shot~
+@23120  = ~Called Shot: Crippling Shot
+In addition to normal damage, all successful ranged attacks within the next round will cause the target to become Slowed for 12 seconds, unless the target makes a successful saving throw vs. breath weapon.~
+@23121  = ~Called Shot: Blind~
+@23122  = ~Called Shot: Blind
+In addition to normal damage, all successful ranged attacks within the next round will blind the target for 6 seconds unless the target makes a successful saving throw vs. paralyzation.~
+@23123  = ~Called Shot: Stun~
+@23124  = ~Called Shot: Stun
+In addition to normal damage, all successful ranged attacks within the next round will stun the target for 3 seconds unless the target makes a successful saving throw vs. paralyzation.~
+@23131  = ~Called Shot: Entangle~
+@23132  = ~Called Shot: Entangle
+In addition to normal damage, all successful ranged attacks within the next round will Entangle the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.~
+@23133  = ~Called Shot: Sleep~
+@23134  = ~Called Shot: Sleep
+In addition to normal damage, all successful ranged attacks within the next round will put the target to sleep for 12 seconds unless the target makes a successful saving throw vs. spells.~
+@23135  = ~Called Shot: Faerie Fire~
+@23136  = ~Called Shot: Faerie Fire
+In addition to normal damage, all successful ranged attacks within the next round will light up the target with green flame for 24 seconds, preventing invisibility and causing a -3 penalty to AC and thac0, unless the target makes a successful saving throw vs. spells.~
 //
 //
 @2350  = ~BEAST MASTER: This Ranger is a wanderer and is not comfortable in civilized lands. Therefore, Beast Masters maintain a natural affinity for animals. In addition to being able to call normal animals for assistance, Beast Masters may summon a Spirit Wolf and even transform into the form of a wolf.
@@ -1091,10 +1215,10 @@ For four rounds, the character wheels and spins and parries, gaining an Armor Cl
 @3109  = ~CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.
 
 Abilities:
-- +1 bonus to Armor Class every 6 levels.
-- Can achieve Grand Mastery (+++++) with light bladed weapons.
-- Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+- 1-point bonus to Armor Class.
 - +1 bonus to saves vs. Breath for each 5 levels of experience.
+- Can achieve Grand Mastery (+++++) with light bladed weapons.
+- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining +1 attack per round and an Armor Class bonus of -1 per three levels, up to a maximum of -6.
 
 Restrictions:
 - Cannot become proficient with heavy weapons.
@@ -1118,25 +1242,28 @@ Restrictions:
 @3111  = ~CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.
 
 Abilities:
-- Can achieve Grand Mastery (+++++) with light bladed weapons.
-- Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+- 1-point bonus to Armor Class.
 - +1 bonus to saves vs. Breath for each 5 levels of experience.
-- At every odd level from 3 to 19, may choose to learn a Rogue Feat from those available to Swashbucklers:
+- Can achieve Grand Mastery (+++++) with light bladed weapons.
+- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining +1 attack per round and an Armor Class bonus of -1 per three levels, up to a maximum of -6.
+- Every third level from 3 to 18, may choose to learn a feat from the following list:
 
 ROGUE FEATS:
-- Brew Potions
-- Flaming Weapon (prerequisite: Brew Potions)
 - Armor Class Bonus
 - Saving Throw Bonus (prerequisite: AC Bonus)
-- Contingency: Escape (prerequisite: AC Bonus)
-- THAC0 Bonus
-- Trip Opponent (prerequisite: THAC0 Bonus)
-- Disarm Opponent (prerequisite: THAC0 Bonus)
-- Blind Opponent (prerequisite: THAC0 Bonus)
-- Disrupt Magic (prerequisite: THAC0 Bonus)
+- Escape Artist (prerequisite: AC Bonus)
+- Melee THAC0 Bonus
+- Parry
+- Trip Opponent
+- Disarm Opponent
+- Blind Opponent
+- Cutting Blow
+- Fighting Tempo
+- Disrupt Magic
 - Grease Jar
 - Smoke Bomb
-- Miscellaneous: Luck Bonus
+- Flaming Weapon
+- Luck Bonus
 
 Restrictions:
 - Cannot become proficient with heavy weapons.
@@ -1145,26 +1272,6 @@ Restrictions:
 ~
 //
 //
-@3200  = ~ARCHER: The Archer is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
- 
-Abilities:
-- +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
-- Can achieve Grand Mastery (+++++) with bows and crossbows.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
-
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
-
-Restrictions:
-- May reach a lower level of proficiency than normal with melee weapons.
-- May not wear heavier armor than splint mail.
-~
 @3202  = ~marksman~
 @3203  = ~Marksman~
 @3204  = ~MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
@@ -1172,16 +1279,13 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows and crossbows.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May reach a lower level of proficiency than normal with melee weapons.
@@ -1193,37 +1297,20 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows and crossbows.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- Available at 1st level: Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.
+- Available at 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- Available at 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
+- Available at 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
 
 Restrictions:
 - May reach a lower level of proficiency than normal with melee weapons.
 - May not wear heavier armor than splint mail.
 ~
-@3210  = ~Choose a Called Shot~
-@3211  = ~Called Shot: Pin~
-@3212  = ~Called Shot: Pin
-In addition to normal damage, all successful ranged attacks within the next round will pin the target to the spot for 12 seconds unless the target makes a successful saving throw vs. breath weapon.~
-@3213  = ~Called Shot: Trip~
-@3214  = ~Called Shot: Trip
-In addition to normal damage, all successful ranged attacks within the next round will cause the target to fall down for round unless the target makes a successful saving throw vs. breath weapon.~
-@3215  = ~Called Shot: Fumble~
-@3216  = ~Called Shot: Fumble
-In addition to normal damage, all successful ranged attacks within the next round will cause the target to fumble his weapon, resulting in -3 penalties to thac0 and AC for 12 seconds and reduced APR, unless the target makes a successful saving throw vs. paralyzation.~
-@3217  = ~Called Shot: Hammer Shot~
-@3218  = ~Called Shot: Hammer Shot
-In addition to normal damage, all successful ranged attacks within the next round will cause an extra 1d4 points of crushing damage, unless the target makes a successful saving throw vs. breath weapon.~
-@3219  = ~Called Shot: Tangle~
-@3220  = ~Called Shot: Tangle
-In addition to normal damage, all successful ranged attacks within the next round will cause the target to become Slowed for 12 seconds, unless the target makes a successful saving throw vs. breath weapon.~
 //
 //
 @3221  = ~elven archer~
@@ -1233,17 +1320,15 @@ In addition to normal damage, all successful ranged attacks within the next roun
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
-- May learn to use a Called Shot at levels 1, 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
-CALLED SHOTS 
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
-- Entangling Shot: this shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.
-- Sleep Shot: this shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.
-- Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.
+- 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 2nd level: Sleep Shot. This shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.
+- 4th level: Entangling Shot. This shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 8th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- 10th level: Faerie Fire. This shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1254,17 +1339,18 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
-- May learn to use a Called Shot at levels 1, 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use a Called Shot at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
 
-CALLED SHOTS 
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
-- Entangling Shot: this shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.
-- Sleep Shot: this shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.
-- Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.
+- Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- Available at 1st level: Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.
+- Available at 2nd level: Sleep Shot: this shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.
+- Available at 4th level: Entangling Shot: this shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.
+- Available at 4th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- Available at 6th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- Available at 8th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
+- Available at 8th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+- Available at 8th level: Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1272,15 +1358,6 @@ Restrictions:
 - May not use Charm Animal ability.
 ~
 @3225  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.~
-@3231  = ~Called Shot: Entangle~
-@3232  = ~Called Shot: Entangle
-In addition to normal damage, all successful ranged attacks within the next round will Entangle the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.~
-@3233  = ~Called Shot: Sleep~
-@3234  = ~Called Shot: Sleep
-In addition to normal damage, all successful ranged attacks within the next round will put the target to sleep for 12 seconds unless the target makes a successful saving throw vs. spells.~
-@3235  = ~Called Shot: Faerie Fire~
-@3236  = ~Called Shot: Faerie Fire
-In addition to normal damage, all successful ranged attacks within the next round will light up the target with green flame for 24 seconds, preventing invisibility and causing a -3 penalty to AC and thac0, unless the target makes a successful saving throw vs. spells.~
 //
 //
 @3241  = ~slinger~
@@ -1290,16 +1367,13 @@ In addition to normal damage, all successful ranged attacks within the next roun
 Abilities:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1311,37 +1385,31 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May not wear any metal armor.
 - May reach a lower level of proficiency than normal with melee weapons.
-- May not cast druid spells.
 ~
 @3245  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
 Abilities:
 - +1 to hit and damage rolls with missiles weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- Available at 3rd level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- Available at 6th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+- Available at 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May not wear any metal armor.
@@ -1349,9 +1417,6 @@ Restrictions:
 - May not cast druid spells.
 ~
 @3246  = ~The Slinger is the epitome of skill with the sling — the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon.~
-@3251  = ~Called Shot: Stun~
-@3252  = ~Called Shot: Stun
-In addition to normal damage, all successful ranged attacks within the next round will stun the target for 3 seconds unless the target makes a successful saving throw vs. paralyzation.~
 //
 //
 @3503  = ~mage hunter~
@@ -1414,14 +1479,14 @@ Restrictions:
 ~
 //
 //
-@3909  = ~Choose a feat~
-@3910  = ~Use this ability to choose one of the 10 warrior feats~
+@3909  = ~~
+@3910  = ~~
 @3911  = ~Parry~
 @3912  = ~Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points and APR will be 1.~
 @3913  = ~Flurry~
 @3914  = ~Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.~
-@3915  = ~Lunge~
-@3916  = ~Lunge: ~
+@3915  = ~Intimidate~
+@3916  = ~Intimidate: ...~
 @3917  = ~Heroic Resistance~
 @3918  = ~Heroic Resistance: for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.~
 @3919  = ~Heroic Resolve~
@@ -1438,8 +1503,8 @@ Restrictions:
 @3930  = ~Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.~
 @3931  = ~Disrupt~
 @3932  = ~Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.~
-@3933  = ~Tactics~
-@3934  = ~Tactics: this gives the warrior a permanent ability to supervise and direct those around him, resulting in either a +1 AC bonus, or a +1 thac0 bonus, for all party members within 20 feet. The warrior is not affected by this bonus, and may only use one tactical ability at a time.~
+@3933  = ~Group Tactics~
+@3934  = ~Group Tactics: this gives the warrior a permanent ability to supervise and direct those around him, resulting in either a +1 AC bonus, or a +1 thac0 bonus, for all party members within 20 feet. The warrior is not affected by this bonus, and may only use one tactical ability at a time.~
 @3935  = ~Tactics: Formation~
 @3936  = ~Tactics (Formation): the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
 @3937  = ~Tactics: Discipline~
@@ -1452,8 +1517,15 @@ Restrictions:
 
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.
-- Can achieve Mastery (+++) with bows and crossbows
-- Can use use Called Shots once per day per three levels.  Called shots have a chance of pinning, slowing, or blinding the target.
+- Can achieve Mastery (+++) with bows and crossbows.
+- May use the Assassin's Poison Weapon ability once per day at 5th level, and twice per day at 10th level.
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
+
+- 1st level: Pinning Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May only distribute 20 skill points per level among thieving skills.
@@ -1464,16 +1536,16 @@ Restrictions:
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.
 - Can achieve High Mastery (++++) with bows and crossbows.
-- May learn to use a Called Shot at levels 2, 4, 6, 9, 13, 17, and 21. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- Begins with the 'Pinning Shot' Called Shot at level 1.
+- In addition to the Called Shots described below, may choose form the following feats: Stealth Bonus, Thieving Bonus, Detection Bonus, Lore Bonus, Dart Trap, Basic Alchemy, Grease Jar/Smoke Bomb, and (from 10th level) Shadow Magic.
+- May learn to use Called Shots as feats. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
 
-CALLED SHOTS 
-- Trip Shot: aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.
-- Tangling Shot: this shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- Fumbling Shot: this shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- Blinding Shot: aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
-- Stunning Shot: aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Hammer Shot: this shot strikes with unusual force, adding 2d3 crushing damage to the normal missile damage unless the target makes a successful save vs. Breath.
+- Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
+- Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
+- Available at 3rd level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
+- Available at 5th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
+- Available at 7th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
+- Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May only distribute 20 skill points per level among thieving skills.
@@ -1481,9 +1553,6 @@ Restrictions:
 ~
 @4105  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.~
 @4106  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.~
-@4111  = ~Called Shot: Blind~
-@4112  = ~Called Shot: Blind
-In addition to normal damage, all successful ranged attacks within the next round will blind the target for 6 seconds unless the target makes a successful saving throw vs. paralyzation.~
 //
 //
 @4202  = ~scout~

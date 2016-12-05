@@ -1,0 +1,10 @@
+IF
+	Class(LastSummonerOf(Myself),THIEF)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_rogue",Myself))
+END

@@ -109,6 +109,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   LPM remove_blank_lines
   APPEND_FILE ~might_and_guile/thief/sniper_shots.txt~
  BUT_ONLY
+END
 //___________________________________________________________________________________
 
 //FEAT SYSTEM_________________________________________________________________________
@@ -157,7 +158,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	END
    BUT_ONLY
   END
-  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/psi/d5_marks.baf~
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/feats/d5_snipe.baf~
   COMPILE ~might_and_guile/feats/d5_archr.d~
 END
 //___________________________________________________________________________________

@@ -18,32 +18,32 @@ END
 
 IF ~~ THEN BEGIN d5_soulb_1 // immobilize
  SAY @20624
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSB02")~ DO ~RemoveSpellRES("D5PS202")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",1)~ DO ~ApplySpellRES("D5PXB02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_2 // inertial barrier
  SAY @20630
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",3)~ DO ~AddSpecialAbility("D5PSB03")~ DO ~RemoveSpellRES("D5PSB02")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",3)~ DO ~ApplySpellRES("D5PXB03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_3 // psychic knife
  SAY @20633
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",4)~ DO ~AddSpecialAbility("D5PSB04")~ DO ~RemoveSpellRES("D5PSB03")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",4)~ DO ~ApplySpellRES("D5PXB04",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_4 // metabolic boost
  SAY @20667
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",2)~ DO ~AddSpecialAbility("D5PSD02")~ DO ~RemoveSpellRES("D5PS401")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",2)~ DO ~ApplySpellRES("D5PXD02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_5 // bioregeneration
  SAY @20670
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",3)~ DO ~AddSpecialAbility("D5PSD03")~ DO ~RemoveSpellRES("D5PSD02")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",3)~ DO ~ApplySpellRES("D5PXD03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_6 // carapace
  SAY @20676
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",4)~ DO ~AddSpecialAbility("D5PSD04")~ DO ~RemoveSpellRES("D5PSD03")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",4)~ DO ~ApplySpellRES("D5PXD05",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_7 // static discharge

@@ -7,8 +7,7 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_6
 // IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_EVASION","LOCALS",1)~ THEN REPLY ~Evasion~ GOTO d5_stalk_8
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_stalk_10
- IF ~GlobalLT("D5_TRIP","LOCALS",1)~ THEN REPLY @20251 GOTO d5_stalk_12
- IF ~GlobalLT("D5_DISARM","LOCALS",1)~ THEN REPLY @20253 GOTO d5_stalk_14
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_stalk_14
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_stalk_16
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_stalk_18
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_stalk_20
@@ -40,14 +39,9 @@ IF ~~ THEN BEGIN d5_stalk_10 // backstab bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BACKSTAB","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_stalk 
 END 
-IF ~~ THEN BEGIN d5_stalk_12 // trip
- SAY @20252
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_TRIP","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG1",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_stalk 
-END 
-IF ~~ THEN BEGIN d5_stalk_14 // disarm
- SAY @20254
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISARM","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG2",myself)~ EXIT 
+IF ~~ THEN BEGIN d5_stalk_14 // dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_stalk 
 END 
 IF ~~ THEN BEGIN d5_stalk_16 // blind

@@ -1,0 +1,1 @@
+ADD_TRANS_ACTION Raelis BEGIN 85 END BEGIN 0 END ~ GiveItemCreate("d5bd05",Player1,1,0,0)~

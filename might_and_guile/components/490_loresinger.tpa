@@ -139,6 +139,7 @@ COPY_EXISTING ~sppr710.spl~ ~override/d5_cho71.spl~
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr713.spl~ ~override/d5_cho72.spl~
 	WRITE_SHORT 0x1c 1
+/*
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_chori.2da~ ~override~
 		LPM remove_blank_lines
@@ -147,6 +148,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/intelligence_bards.txt~
 	BUT_ONLY
 END
+*/
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_skspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_chori.2da~ ~override~
 		LPM remove_blank_lines
@@ -156,5 +158,41 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_chori.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/bard/baspl2.txt~
+END
+//__________________________________________________________________________________
+
+
+//REPLACE BASE SKALD, UPDATE SONG___________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
+/*
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+  OUTER_SET kit_row -= 2
+  COPY_EXISTING ~K_B_D.2da~ ~override~
+		~K_B_E.2da~ ~override~
+		~K_B_G.2da~ ~override~
+		~K_B_H.2da~ ~override~
+		~K_B_HE.2da~ ~override~
+		~K_B_HL.2da~ ~override~
+		~K_B_HO.2da~ ~override~
+	REPLACE_TEXTUALLY ~15~ ~%kit_row%~
+  BUT_ONLY
+*/
+  COPY_EXISTING ~d5_chori.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_D5_CHOR~ ~****     ~
+//	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bardsong/songs_loresinger.txt~
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5CHORI~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@21806)
+  BUT_ONLY
 END
 //__________________________________________________________________________________

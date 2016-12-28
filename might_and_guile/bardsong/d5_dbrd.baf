@@ -1,0 +1,30 @@
+
+IF
+	Kit(LastSummonerOf(Myself),D5_BLADE)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_blade",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_SKALD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_nskld",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_F_GALLANT)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_galla",Myself))
+END

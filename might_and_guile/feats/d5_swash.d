@@ -11,7 +11,7 @@ SAY @20009
  IF ~GlobalLT("D5_ATTACK","LOCALS",4)~ THEN REPLY @20231 GOTO d5_swash_10
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_swash_11
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_swash_12
- IF ~GlobalLT("D5_DISARM","LOCALS",1)~ THEN REPLY @20253 GOTO d5_swash_13
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_swash_13
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_swash_14
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_swash_15
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_swash_16
@@ -66,9 +66,9 @@ IF ~~ THEN BEGIN d5_swash_12 // backstab bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BACKSTAB","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_swash 
 END 
-IF ~~ THEN BEGIN d5_swash_13 // disarm
- SAY @20254
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISARM","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG2",myself)~ EXIT 
+IF ~~ THEN BEGIN d5_swash_13 // fighting dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_swash 
 END 
 IF ~~ THEN BEGIN d5_swash_14 // blind

@@ -1,0 +1,1910 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED BARDS & BARD SONG
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_bards.d5~ ~override~
+//__________________________________________________________________________________
+
+
+//HANDLE WAND/SCROLL USAGE__________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ COPY ~might_and_guile/feats/d5_rfh3.spl~ ~override~   //           use wands
+ COPY ~might_and_guile/feats/d5_rf83n.spl~ ~override~
+ COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
+ COPY ~might_and_guile/feats/d5_rf84n.spl~ ~override~
+
+ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+
+ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+  READ_BYTE     0x2f current ELSE 0
+  READ_BYTE     0x2b current2 ELSE 0
+  // Analyze items; if:
+  // 1) Have 2 extended headers
+  // 2) one contains ~cast spell~ (0x92 or 0x94) on a wizard spell
+  // 3) The other contains ~Learn Spell~ (0x93) on the same spell
+  // then it's a wizardly spell scroll: update for Use Scrolls!
+  // (also do wands)
+  READ_LONG 0x64 headoffset  ELSE 0
+  READ_SHORT 0x68 headcount  ELSE 0
+  READ_LONG 0x6a effectsoffset  ELSE 0
+//  haslearn = 0
+  hascast = 0
+//  PATCH_IF (headcount = 2) BEGIN
+    FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
+      thishead = 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x1e) effcount  ELSE 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x20) effectsindex  ELSE 0
+      FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
+        READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
+/*
+        PATCH_IF (opcode = 0x93) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_learn  ELSE 0
+          INNER_PATCH_FILE ~%resref_learn%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) BEGIN // spell scroll
+            thishead = 1
+            haslearn = 1
+          END
+        END // PATCH_IF... (opcode = learn spell)
+*/
+        PATCH_IF ((opcode = 0x92) OR (opcode = 0x94)) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_cast  ELSE 0
+          INNER_PATCH_FILE ~%resref_cast%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) OR (type = 2) BEGIN // spell scroll
+            thishead = 1
+            hascast = 1
+          END
+        END // PATCH_IF (opcode = cast spell)
+      END // FOR... effect_cycle
+    END // FOR... header cycle
+//  END // PATCH_IF... have exactly 2 headers
+  PATCH_IF /*(haslearn = 1) AND */(hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b10100101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+  READ_SHORT 0x1c item_type
+  PATCH_IF (item_type = 35) BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b10100101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+  PATCH_IF (item_type = 9) BEGIN
+	READ_BYTE ~0x1f~ ~byte1~
+	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b10100101~)
+	READ_BYTE ~0x20~ ~byte2~
+	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
+//	WRITE_SHORT 0x2f current BOR 0b00100000
+  END
+ BUT_ONLY_IF_IT_CHANGES
+ ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
+	COPY_EXISTING ~clabth01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ BEGIN
+	COPY_EXISTING ~clabfi01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	BUT_ONLY
+ END
+ COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~9~ "rows"
+	FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+		READ_2DA_ENTRY %index% 5 9 modclab
+		READ_2DA_ENTRY %index% 8 9 modclass
+		DEFINE_ASSOCIATIVE_ARRAY d5_feat_array BEGIN "%modclab%" => "%modclass%" END
+	END
+ BUT_ONLY
+ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
+	ACTION_IF (%zo% = 4) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+			APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	END
+	ACTION_IF (%zo% = 2) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+			APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
+	END
+	ACTION_IF (%zo% = 1) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
+		COPY_EXISTING ~%bo%.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/feats/use_wands.txt~
+			APPEND_FILE ~might_and_guile/feats/use_scrolls.txt~
+	END
+  END
+END
+
+END
+//___________________________________________________________________________________
+
+
+//NEW TRUECLASS BARD__________________________________________________________________
+//
+ADD_KIT ~D5_BARD~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_BARD       0 0 0 0 0 0 0 0~
+~D5_BARD       0 0 0 0 0 0 0 0 0 1 1 1 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS__________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BARD    	   0   12  0   13  0   15~
+
+//KIT STAT MODIFIERS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BARD           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT___________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BARD           0   17  0   0   0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BARD  	       0   15  0   0   0   15~
+
+//ALIGNMENT RESTRICTIONS_____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_BARD           0  1  0  1  1  1  1  1  0~
+
+//DUAL CLASS OPTIONS_________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_BARD           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE_____________________________________________________________
+~might_and_guile/bardsong/d5_bard.2da~
+
+//RACIAL KIT AVAILABILITY____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00800000 5~
+
+//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
+~Ba0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @21801
+SAY @21802
+SAY @21803
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21803)
+		STR_VAR
+			kit_name = D5_BARD
+			clswpbon = ~0 0 3~
+	END
+END
+//___________________________________________________________________________________
+
+//BARD ABILITY FILES_________________________________________________________________
+//
+COPY_EXISTING ~clabba01.2da~ ~override/d5_bard.2da~
+//___________________________________________________________________________________
+
+//REPLACE BASE BARD IN MENUS_________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS ~7~ "kit_row"
+OUTER_SET kit_row -= 2
+COPY_EXISTING ~K_B_D.2da~ ~override~
+		~K_B_E.2da~ ~override~
+		~K_B_G.2da~ ~override~
+		~K_B_H.2da~ ~override~
+		~K_B_HE.2da~ ~override~
+		~K_B_HL.2da~ ~override~
+		~K_B_HO.2da~ ~override~
+	REPLACE_TEXTUALLY ~0~ ~%kit_row%~
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+//RENAME BLADE TO JONGLEUR___________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_acbon.spl~ ~override~
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@4506)
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@4506)
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
+	    SET patch_row = %row%
+	  END
+	END
+	SET_2DA_ENTRY %patch_row% 2 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@21811)
+  BUT_ONLY
+END
+COPY_EXISTING ~weapprof.2da~ ~override~
+// Blade
+	SET_2DA_ENTRY_LATER ~#weapprof~ 11 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 12 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 13 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 14 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 15 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 16 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 17 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 18 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 19 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 20 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 21 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 22 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 23 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 24 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 25 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 26 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 27 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 28 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 29 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 30 42 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 31 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 32 42 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 33 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 34 42 3
+// Skald
+	SET_2DA_ENTRY_LATER ~#weapprof~ 11 42 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 12 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 13 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 14 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 15 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 16 44 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 17 44 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 18 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 19 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 20 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 21 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 22 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 23 44 2
+//	SET_2DA_ENTRY_LATER ~#weapprof~ 24 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 25 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 26 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 27 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 28 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 29 44 0
+	SET_2DA_ENTRY_LATER ~#weapprof~ 30 44 1
+	SET_2DA_ENTRY_LATER ~#weapprof~ 31 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 32 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 33 44 2
+	SET_2DA_ENTRY_LATER ~#weapprof~ 34 44 3
+	SET_2DA_ENTRIES_NOW ~#weapprof~ 1
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+
+//ADD BLADE AS DEMIBARD_______________________________________________________________
+//
+ADD_KIT ~D5_BLADE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_BLADE      0 0 0 0 0 0 0 0~
+~D5_BLADE      0 0 0 0 0 0 0 0 0 2 2 2 0 0 3 3 0 1 0 0 0 0 1 1 1 1 2 1 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS__________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BLADE          0   12  0   12  0   12~
+
+//KIT STAT MODIFIERS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BLADE          0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT___________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BLADE          0   17  0   17  0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_BLADE          0   15  0   15  0   15~
+
+//ALIGNMENT RESTRICTIONS_____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_BLADE          0  0  0  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS_________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_BLADE          1  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE_____________________________________________________________
+~might_and_guile/bardsong/d5_blade.2da~
+
+//RACIAL KIT AVAILABILITY____________________________________________________________
+~K_T_E K_T_H K_T_HE K_T_HL~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 4~
+
+//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
+~Th0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @21812
+SAY @21813
+SAY @21814
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21814)
+		STR_VAR
+			kit_name = D5_BLADE
+			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+			clswpbon = ~0 0 3~
+			thiefskl = ~25 15~
+			thiefscl = ~100 100 0 100 100 0 0 0~
+			clsrcreq = ~1 1 1 1 1 1 1~
+	END
+END
+//____________________________________________________________________________________
+
+//BLADE ABILITY FILES_________________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5_blade.2da~ ~override~
+COPY ~might_and_guile/fighter/d5swash.spl~ ~override~
+	SAY NAME1 @3106
+	SAY UNIDENTIFIED_DESC @3107
+//____________________________________________________________________________________
+
+
+//ADD GALLANT AS DEMIBARD_____________________________________________________________
+//
+ADD_KIT ~D5_F_GALLANT~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11           	                        T   S           F   Q             S S
+//10           	L S                     W   C           L   U             W I
+//9            	A M             B L S   O   I   W       A   A             O N
+//8            	R A             A O H   H   M   A       I   R C   S       R G
+//7            	G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            	E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            	S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            	W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            	O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            	R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            	D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_F_GALLANT   0 0 0 0 0 0 0 0~
+~D5_F_GALLANT   0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_F_GALLANT      0   0   12  0   0   15~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_F_GALLANT      0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_F_GALLANT      0   0   17  0   0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_F_GALLANT  	   0   0   15  0   0   15~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_F_GALLANT      1  0  0  1  0  0  1  0  0~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_F_GALLANT      0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE____________________________________________________________
+~might_and_guile/bardsong/d5fgalla.2da~
+
+//RACIAL KIT AVAILABILITY___________________________________________________________
+~K_F_E K_F_H K_F_HE K_F_HL~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Ba0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @4702
+SAY @4703
+SAY @21821
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21821)
+		STR_VAR
+			kit_name = D5_F_GALLANT
+			clswpbon = ~1 0 3~
+			hpclass = ~HPPRS~
+	END
+END
+//___________________________________________________________________________________
+
+//GALLANT ABILITY FILES______________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5fgalla.2da~ ~override~
+COPY ~might_and_guile/misc/d5_jluck.spl~ ~override~
+	SAY NAME1 @3108
+	SAY UNIDENTIFIED_DESC @3108
+COPY ~might_and_guile/misc/d5_dsvbo.spl~ ~override~
+COPY ~might_and_guile/misc/d5_jluck.spl~ ~override~
+COPY ~might_and_guile/bard/d5_galai.spl~ ~override~
+	SAY NAME1 @4706
+	SAY UNIDENTIFIED_DESC @4706
+COPY_EXISTING ~sppr409.spl~ ~override/d5_galdw.spl~
+	LPM spell_to_innate
+//___________________________________________________________________________________
+
+
+//ADD HEXBLADE AS DEMIBARD___________________________________________________________
+//
+ADD_KIT ~D5_HEXBLADE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11           	                        T   S           F   Q             S S
+//10           	L S                     W   C           L   U             W I
+//9            	A M             B L S   O   I   W       A   A             O N
+//8            	R A             A O H   H   M   A       I   R C   S       R G
+//7            	G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            	E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            	S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            	W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            	O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            	R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            	D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_HEXBLADE    0 0 0 0 0 0 0 0~
+~D5_HEXBLADE    0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_HEXBLADE       12  0   0   12  0   15~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_HEXBLADE       0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_HEXBLADE       15  0   0   0   0   15~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_HEXBLADE  	   15  0   0   0   0   15~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_HEXBLADE       0  0  0  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_HEXBLADE       0  0  0  1  0  0~
+
+//KIT ABILITIES 2DA FILE____________________________________________________________
+~might_and_guile/bardsong/d5_hexbl.2da~
+
+//RACIAL KIT AVAILABILITY___________________________________________________________
+~K_F_E K_F_H K_F_HE~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Ba0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @21831
+SAY @21832
+SAY @21833
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21833)
+		STR_VAR
+			kit_name = D5_HEXBLADE
+			clswpbon = ~1 0 3~
+			hpclass = ~HPPRS~
+	END
+END
+//___________________________________________________________________________________
+
+//HEXBLADE ABILITY FILES_____________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5_hexbl.2da~ ~override~
+COPY ~might_and_guile/misc/d5_ssvbo.spl~ ~override~
+//___________________________________________________________________________________
+
+/*
+//ADD SKALD AS DEMIBARD______________________________________________________________
+//
+ADD_KIT ~D5_SKALD~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11           	                        T   S           F   Q             S S
+//10           	L S                     W   C           L   U             W I
+//9            	A M             B L S   O   I   W       A   A             O N
+//8            	R A             A O H   H   M   A       I   R C   S       R G
+//7            	G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            	E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            	S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            	W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            	O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            	R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            	D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_SKALD       0 0 0 0 0 0 0 0~
+~D5_SKALD       0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_SKALD          12  0   0   12  0   15~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_SKALD          0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_SKALD          17  0   0   0   0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_SKALD  	       15  0   0   0   0   15~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_SKALD          1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_SKALD          0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE____________________________________________________________
+~might_and_guile/bardsong/d5_skald.2da~
+
+//RACIAL KIT AVAILABILITY___________________________________________________________
+~K_F_D K_F_H K_F_HE K_F_HO~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Ba0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @21841
+SAY @21842
+SAY @21843
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21843)
+		STR_VAR
+			kit_name = D5_SKALD
+			clswpbon = ~1 0 3~
+			hpclass = ~HPPRS~
+	END
+END
+//___________________________________________________________________________________
+
+//SKALD ABILITY FILES________________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5_skald.2da~ ~override~
+COPY_EXISTING ~sppr406.spl~ ~override/d5skal1~
+	LPM spell_to_innate
+//___________________________________________________________________________________
+*/
+
+END
+
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+
+// revise Blade description
+
+END
+
+// revise Skald description
+
+//ADD LORESINGER_____________________________________________________________________
+//
+INCLUDE ~might_and_guile/components/490_loresinger.tpa~
+//___________________________________________________________________________________
+
+//ADD MEISTERSINGER, CAUSE WHY NOT___________________________________________________
+//
+INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
+//___________________________________________________________________________________
+
+
+ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+
+//GET KIT IDENTIFIERS________________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS k_cols 
+  READ_2DA_ENTRIES_NOW k_rows k_cols 
+  FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN 
+    READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ 
+    PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_BLADE~ BEGIN
+      SET kit_row = %k_row%
+      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_blade_code
+    END
+    PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_F_GALLANT~ BEGIN
+      SET kit_row = %k_row%
+      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_gallant_code
+    END
+    PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_HEXBLADE~ BEGIN
+      SET kit_row = %k_row%
+      READ_2DA_ENTRY_FORMER k_rows kit_row 9 hexblade_code
+    END
+    PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_SKALD~ BEGIN
+      SET kit_row = %k_row%
+      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_skald_code
+    END
+  END
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+//ELF/GNOME BARDS____________________________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	COPY_EXISTING ~clsrcreq.2da~ ~override~
+		SET_2DA_ENTRY 25 2 8 ~1~
+		SET_2DA_ENTRY 25 6 8 ~1~
+	BUT_ONLY
+END
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	COPY_EXISTING ~clsrcreq.2da~ ~override~
+		SET_2DA_ENTRY 5 2 7 ~1~
+		SET_2DA_ENTRY 5 6 7 ~1~
+	BUT_ONLY
+END
+//___________________________________________________________________________________
+
+END
+
+
+//MOVE ALL BARDS TO SKALD USABILITY__________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ cols
+  FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+	PATCH_IF (class_num == 5) BEGIN
+	  TEXT_SPRINT skald_use ~00800000~
+	  SET_2DA_ENTRY_LATER ~s2el_kitlist~ row 7 ~0x%skald_use%~
+	END
+	SET_2DA_ENTRIES_NOW ~s2el_kitlist~ cols
+  END
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+//EXCLUDE SPELLS FROM BARDS__________________________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  READ_SHORT 0x1c spell_type
+  PATCH_IF spell_type = 1 BEGIN
+	READ_BYTE 0x25 spell_school
+	PATCH_IF spell_school = 2 OR 	//	conjuration
+			spell_school = 1 OR 	//	abjuration
+			spell_school = 6 OR 	//	invocation
+			spell_school = 7 OR 	//	necromancy
+			spell_school = 8 OR 	//	alteration
+			spell_school = 9 BEGIN	//	wild
+	  READ_BYTE 0x20 bard_excludes
+	  WRITE_BYTE 0x20 (%bard_excludes% BOR ~0b10000000~)  // unusable by skalds
+	END
+  END
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+//GIVE BARDS 7TH LEVEL SPELLS________________________________________________________
+//
+COPY_EXISTING ~mxsplbrd.2da~ ~override~
+  COUNT_2DA_COLS mxsplbrd_cols
+  COUNT_2DA_ROWS 1 mxsplbrd_rows
+BUT_ONLY
+ACTION_IF (mxsplbrd_cols < 8) BEGIN
+  ACTION_IF (mxsplbrd_rows = 42) BEGIN
+	APPEND_COL ~mxsplbrd.2da~ ~d5 d5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+  END
+  ACTION_IF (mxsplbrd_rows = 43) BEGIN
+	APPEND_COL ~mxsplbrd.2da~ ~d5 d5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+  END
+  ACTION_IF (mxsplbrd_rows = 52) BEGIN
+	APPEND_COL ~mxsplbrd.2da~ ~d5 d5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+  END
+  COPY_EXISTING ~mxsplbrd.2da~ ~override~
+	REPLACE_TEXTUALLY ~d5~ ~ ~
+END
+//___________________________________________________________________________________
+
+
+//ADD SPELLS TO BARDS________________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR ( row = 1 ; row < rows ; row = row + 1 ) BEGIN
+	READ_2DA_ENTRY %row% 5 cols clab
+	READ_2DA_ENTRY %row% 8 cols class
+	DEFINE_ASSOCIATIVE_ARRAY d5_kit_clabs BEGIN "%clab%" => "%class%" END
+  END
+BUT_ONLY
+ACTION_FOR_EACH bard_spell IN ~WIZARD_CHARM_PERSON~ ~CLERIC_SILENCE_15_FEET~ ~WIZARD_DEAFNESS~ ~WIZARD_GLITTERDUST~ ~WIZARD_SECRET_WORD~ ~WIZARD_SHOUT~ ~CLERIC_GREATER_COMMAND~ ~WIZARD_POWER_WORD_SILENCE~ ~WIZARD_POWER_WORD_STUN~ ~CLERIC_EARTHQUAKE~ BEGIN
+  COPY_EXISTING - ~spell.ids~ ~faiths_and_powers/backup~
+    COUNT_REGEXP_INSTANCES ~%bard_spell%~ spell_exists
+  ACTION_IF (spell_exists) BEGIN
+  	LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = EVAL ~%bard_spell%~ RET spell_res spell_num END
+	COPY_EXISTING ~%spell_res%.spl~ ~override~
+	  READ_SHORT 0x1c spell_type
+	  READ_LONG 0x34 spell_level
+	BUT_ONLY
+	ACTION_IF (%spell_type% = 2) BEGIN
+	  COPY_EXISTING ~%spell_res%.spl~ ~override/d5b%spell_num%.spl~ 	
+		WRITE_SHORT 0x1c 1
+		READ_LONG 0x64 abil_offset
+		READ_SHORT 0x68 abil_number
+		READ_BYTE (%abil_offset% + 0x0c) abil_target					
+		READ_LONG 0x6a eff_offset
+		WHILE (%abil_number% > 0) BEGIN
+		  SET abil_number = (%abil_number% - 1)
+		  WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
+		END
+		READ_BYTE (%eff_offset% + 0x02) eff_target
+		LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
+		PATCH_IF (%abil_target% = 4) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+		END
+		ELSE BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%spell_res%~ END
+		END
+	  BUT_ONLY
+	  OUTER_SPRINT ~the_res~ ~D5B%spell_num%~
+	END
+	ACTION_IF (%spell_type% = 1) BEGIN
+	  OUTER_TEXT_SPRINT ~the_res~ ~%spell_res%~
+	END
+	ACTION_PHP_EACH d5_kit_clabs AS yoo => hoo BEGIN
+	  ACTION_IF (%hoo% = 5) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) BEGIN
+		APPEND ~%yoo%.2da~ ~ABILITY    GA_%the_res%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ 
+	  END
+	END
+  END
+END
+COPY ~might_and_guile/bardsong/d5bdvoc.spl~ ~override~
+	SAY NAME1 @21901
+	SAY UNIDENTIFIED_DESC @21902
+COPY ~might_and_guile/bardsong/d5bddis.spl~ ~override~
+	SAY NAME1 @21903
+	SAY UNIDENTIFIED_DESC @21904
+ACTION_PHP_EACH d5_kit_clabs AS yoo => hoo BEGIN
+  ACTION_IF (%hoo% = 5) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) BEGIN
+	APPEND ~%yoo%.2da~ ~ABILITY    GA_D5BDVOC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  
+ABILITY    GA_D5BDDIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+  END
+END
+//___________________________________________________________________________________
+
+
+//INSTALL NEW BARD AURAS_____________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5bd00z.spl~ ~override~			//		blank placeholder, necessary
+COPY ~might_and_guile/bardsong/d5bd00a.spl~ ~override~			//		demibard "switch song" 214 ability
+	SAY NAME1 @21001
+	SAY UNIDENTIFIED_DESC @21001
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusa~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bdmusa.bam~ ~override~			//		song icon
+COPY ~might_and_guile/bardsong/d5bdmusx.bam~ ~override~			//		no song icon
+
+COPY ~might_and_guile/bardsong/d5bd01.spl~ ~override~			//		bard "switch song" target ability
+	SAY NAME1 @21011
+	SAY UNIDENTIFIED_DESC @21012
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd01~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd01w.spl~ ~override~			//		demibard "switch song" target ability
+	SAY NAME1 @21011
+	SAY UNIDENTIFIED_DESC @21012
+COPY ~might_and_guile/bardsong/d5bd01a.spl~ ~override~			//		song ability
+	SAY NAME1 @21011
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd01~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd01b.spl~ ~override~			//		aura triggered by eff
+COPY ~might_and_guile/bardsong/d5bd01b.eff~ ~override~			//		eff triggered by song
+COPY ~might_and_guile/bardsong/d5bd01t.spl~ ~override~			//		demibard ability handling for song cancellation
+COPY ~might_and_guile/bardsong/d5bd01u.spl~ ~override~			//		demibard ability handling for song activation
+COPY ~might_and_guile/bardsong/d5bd01x.spl~ ~override~			//		turn song off
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd01.bam~ ~override~			//		song icon
+COPY ~might_and_guile/bardsong/d5bd01z.spl~ ~override~			//		give song via eff
+COPY ~might_and_guile/bardsong/d5bd01.eff~ ~override~			//		give song to bard
+COPY ~might_and_guile/bardsong/d5bd01w.eff~ ~override~			//		give song to demibard
+
+COPY ~might_and_guile/bardsong/d5bd02.spl~ ~override~			//		morale aura
+	SAY NAME1 @21021
+	SAY UNIDENTIFIED_DESC @21022
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd02~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd02w.spl~ ~override~
+	SAY NAME1 @21021
+	SAY UNIDENTIFIED_DESC @21022
+COPY ~might_and_guile/bardsong/d5bd02a.spl~ ~override~
+	SAY NAME1 @21021
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd02~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd02b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd02.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd02w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd03.spl~ ~override~			//		damage boost
+	SAY NAME1 @21031
+	SAY UNIDENTIFIED_DESC @21032
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd03~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd03w.spl~ ~override~
+	SAY NAME1 @21031
+	SAY UNIDENTIFIED_DESC @21032
+COPY ~might_and_guile/bardsong/d5bd03a.spl~ ~override~
+	SAY NAME1 @21031
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd03~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd03b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd03.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd03w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd05.spl~ ~override~			//	mirror images aura
+	SAY NAME1 @21051
+	SAY UNIDENTIFIED_DESC @21052
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd05~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd05w.spl~ ~override~
+	SAY NAME1 @21051
+	SAY UNIDENTIFIED_DESC @21052
+COPY ~might_and_guile/bardsong/d5bd05a.spl~ ~override~
+	SAY NAME1 @21051
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd05~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd05b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd05.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd05w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd06.spl~ ~override~			//		bless aura
+	SAY NAME1 @21061
+	SAY UNIDENTIFIED_DESC @21062
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd06~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd06w.spl~ ~override~
+	SAY NAME1 @21061
+	SAY UNIDENTIFIED_DESC @21062
+COPY ~might_and_guile/bardsong/d5bd06a.spl~ ~override~
+	SAY NAME1 @21061
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd06~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd06b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd06.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd06w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd07.spl~ ~override~			//		NPP aura
+	SAY NAME1 @21071
+	SAY UNIDENTIFIED_DESC @21072
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd07w.spl~ ~override~
+	SAY NAME1 @21071
+	SAY UNIDENTIFIED_DESC @21072
+COPY ~might_and_guile/bardsong/d5bd07a.spl~ ~override~
+	SAY NAME1 @21071
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd07b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd07.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd07w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd08.spl~ ~override~			//		mind shield aura
+	SAY NAME1 @21081
+	SAY UNIDENTIFIED_DESC @21082
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd08~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd08w.spl~ ~override~
+	SAY NAME1 @21081
+	SAY UNIDENTIFIED_DESC @21082
+COPY ~might_and_guile/bardsong/d5bd08a.spl~ ~override~
+	SAY NAME1 @21081
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd08~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd08b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd08.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd08w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd20.spl~ ~override~			//		miscast aura
+	SAY NAME1 @21201
+	SAY UNIDENTIFIED_DESC @21202
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd20~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd20w.spl~ ~override~
+	SAY NAME1 @21201
+	SAY UNIDENTIFIED_DESC @21202
+COPY ~might_and_guile/bardsong/d5bd20a.spl~ ~override~
+	SAY NAME1 @21201
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd20~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd20b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd20.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd20w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd21.spl~ ~override~			//		combat penalties
+	SAY NAME1 @21212
+	SAY UNIDENTIFIED_DESC @21212
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd21~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd21w.spl~ ~override~
+	SAY NAME1 @21212
+	SAY UNIDENTIFIED_DESC @21212
+COPY ~might_and_guile/bardsong/d5bd21a.spl~ ~override~
+	SAY NAME1 @21212
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd21~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd21b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd21.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd21w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd22.spl~ ~override~			//		luck/save penalties
+	SAY NAME1 @21221
+	SAY UNIDENTIFIED_DESC @21222
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd22~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd22w.spl~ ~override~
+	SAY NAME1 @21221
+	SAY UNIDENTIFIED_DESC @21222
+COPY ~might_and_guile/bardsong/d5bd22a.spl~ ~override~
+	SAY NAME1 @21221
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd22~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd22b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd22.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd22w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd23.spl~ ~override~			//		confusion
+	SAY NAME1 @21231
+	SAY UNIDENTIFIED_DESC @21232
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd23~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd23w.spl~ ~override~
+	SAY NAME1 @21231
+	SAY UNIDENTIFIED_DESC @21232
+COPY ~might_and_guile/bardsong/d5bd23a.spl~ ~override~
+	SAY NAME1 @21231
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd23~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd23b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd23.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd23w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd24.spl~ ~override~			//		hold undead
+	SAY NAME1 @21241
+	SAY UNIDENTIFIED_DESC @21242
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd24~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd24w.spl~ ~override~
+	SAY NAME1 @21241
+	SAY UNIDENTIFIED_DESC @21242
+COPY ~might_and_guile/bardsong/d5bd24a.spl~ ~override~
+	SAY NAME1 @21241
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd24~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd24b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24b2.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd24.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd24w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd25.spl~ ~override~			//		entangle
+	SAY NAME1 @21251
+	SAY UNIDENTIFIED_DESC @21252
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd25~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd25w.spl~ ~override~
+	SAY NAME1 @21251
+	SAY UNIDENTIFIED_DESC @21252
+COPY ~might_and_guile/bardsong/d5bd25a.spl~ ~override~
+	SAY NAME1 @21251
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd25~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd25b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd25.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd25w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd41.spl~ ~override~			//		blur
+	SAY NAME1 @21411
+	SAY UNIDENTIFIED_DESC @21412
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd41~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd41w.spl~ ~override~
+	SAY NAME1 @21411
+	SAY UNIDENTIFIED_DESC @21412
+COPY ~might_and_guile/bardsong/d5bd41a.spl~ ~override~
+	SAY NAME1 @21411
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd41~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+//COPY ~might_and_guile/bardsong/d5bd41a.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd41.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd41w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd42.spl~ ~override~			//		mind blank
+	SAY NAME1 @21421
+	SAY UNIDENTIFIED_DESC @21422
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd42~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd42w.spl~ ~override~
+	SAY NAME1 @21421
+	SAY UNIDENTIFIED_DESC @21422
+COPY ~might_and_guile/bardsong/d5bd42a.spl~ ~override~
+	SAY NAME1 @21421
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd42~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd42t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd42u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd42x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd42.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd42z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd42.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd42w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd43.spl~ ~override~			//		MGOI
+	SAY NAME1 @21431
+	SAY UNIDENTIFIED_DESC @21432
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd43~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd43w.spl~ ~override~
+	SAY NAME1 @21431
+	SAY UNIDENTIFIED_DESC @21432
+COPY ~might_and_guile/bardsong/d5bd43a.spl~ ~override~
+	SAY NAME1 @21431
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd43~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd43t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd43u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd43x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd43.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd43z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd43.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd43w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd46.spl~ ~override~			//		cloak of fear
+	SAY NAME1 @21461
+	SAY UNIDENTIFIED_DESC @21462
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd46~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd46w.spl~ ~override~
+	SAY NAME1 @21461
+	SAY UNIDENTIFIED_DESC @21462
+COPY ~might_and_guile/bardsong/d5bd46a.spl~ ~override~
+	SAY NAME1 @21461
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd46~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd46b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd46.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd46w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd47.spl~ ~override~			//		slow enemies
+	SAY NAME1 @21471
+	SAY UNIDENTIFIED_DESC @21472
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd47~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd47w.spl~ ~override~
+	SAY NAME1 @21471
+	SAY UNIDENTIFIED_DESC @21472
+COPY ~might_and_guile/bardsong/d5bd47a.spl~ ~override~
+	SAY NAME1 @21471
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd47~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd47b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd47.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd47w.eff~ ~override~
+
+COPY ~might_and_guile/bardsong/d5bd48.spl~ ~override~			//		dispel illusions
+	SAY NAME1 @21481
+	SAY UNIDENTIFIED_DESC @21482
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd48~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd48w.spl~ ~override~
+	SAY NAME1 @21481
+	SAY UNIDENTIFIED_DESC @21482
+COPY ~might_and_guile/bardsong/d5bd48a.spl~ ~override~
+	SAY NAME1 @21481
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd48~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd48b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd48.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd48w.eff~ ~override~	
+
+COPY ~might_and_guile/bardsong/d5bd61.spl~ ~override~			//		Maze enemies
+	SAY NAME1 @21611
+	SAY UNIDENTIFIED_DESC @21612
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd61~ END
+	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+	END
+COPY ~might_and_guile/bardsong/d5bd61w.spl~ ~override~
+	SAY NAME1 @21481
+	SAY UNIDENTIFIED_DESC @21482
+COPY ~might_and_guile/bardsong/d5bd61a.spl~ ~override~
+	SAY NAME1 @21481
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd61~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5bd61b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61t.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61u.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61x.spl~ ~override~
+	SAY NAME1 @21003
+	SAY UNIDENTIFIED_DESC @21003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
+	END
+COPY ~might_and_guile/bardsong/d5_bd61.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5bd61w.eff~ ~override~
+
+//___________________________________________________________________________________
+
+
+//ADD NEW AURAS TO CLAB TABLES_______________________________________________________
+//
+COPY_EXISTING ~clabba01.2da~ ~override~
+  REPLACE_TEXTUALLY ~AP_FJBARD~ ~****     ~
+  LPM remove_blank_lines
+  APPEND_FILE ~might_and_guile/bardsong/songs_bard.txt~
+COPY_EXISTING ~d5_bard.2da~ ~override~
+  REPLACE_TEXTUALLY ~AP_FJBARD~ ~****     ~
+  LPM remove_blank_lines
+  APPEND_FILE ~might_and_guile/bardsong/songs_bard.txt~
+COPY_EXISTING ~clabba02.2da~ ~override~
+  REPLACE_TEXTUALLY ~AP_FJBLADE~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_SPCL521~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_SPCL522~ ~****      ~
+  LPM remove_blank_lines
+  APPEND_FILE ~might_and_guile/bardsong/songs_blade.txt~
+COPY_EXISTING ~clabba03.2da~ ~override~
+  REPLACE_TEXTUALLY ~AP_SPCL751~ ~****      ~
+  LPM remove_blank_lines
+  APPEND_FILE ~might_and_guile/bardsong/songs_jester.txt~
+COPY_EXISTING ~clabba04.2da~ ~override~
+//  REPLACE_TEXTUALLY ~AP_SPCL541~ ~****      ~
+//  REPLACE_TEXTUALLY ~AP_SPCL542~ ~****      ~
+  LPM remove_blank_lines
+  APPEND_FILE ~might_and_guile/bardsong/songs_skald.txt~
+COPY_EXISTING ~sppr406.spl~ ~override/d5skal1~
+	LPM spell_to_innate
+//___________________________________________________________________________________
+
+
+//ADD NEW AURAS TO WORLD_____________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5bd05.itm~ ~override~			//		mirror images
+	SAY NAME2 @21051
+	SAY IDENTIFIED_DESC @21052
+	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd05w~ END
+	  END
+	END
+/*
+ACTION_IF FILE_EXISTS_IN_GAME ~pwarden.cre~ BEGIN
+  COPY_EXISTING ~pwarden.cre~ ~override~
+	ADD_CRE_ITEM ~d5bd05~ #1 #0 #0 ~IDENTIFIED~ ~INV~
+END
+*/
+ACTION_IF FILE_EXISTS_IN_GAME ~raelis.dlg~ BEGIN
+  COMPILE ~might_and_guile/bardsong/raelisadd.d~
+END
+
+COPY ~might_and_guile/bardsong/d5bd08.itm~ ~override~			//		mind shield
+	SAY NAME2 @21081
+	SAY IDENTIFIED_DESC @21082
+	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd08w~ END
+	  END
+	END
+ACTION_IF FILE_EXISTS_IN_GAME ~pirmur01.cre~ BEGIN
+  COPY_EXISTING ~pirmur01.cre~ ~override~
+	ADD_CRE_ITEM ~d5bd08~ #1 #0 #0 ~IDENTIFIED~ ~INV~
+END
+
+COPY ~might_and_guile/bardsong/d5bd24.itm~ ~override~			//		hold undead
+	SAY NAME2 @21241
+	SAY IDENTIFIED_DESC @21242
+	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
+	  END
+	END
+ACTION_IF FILE_EXISTS_IN_GAME ~theshal.cre~ BEGIN
+  COPY_EXISTING ~theshal.cre~ ~override~
+	ADD_CRE_ITEM ~d5bd24~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+END
+
+COPY ~might_and_guile/bardsong/d5bd48.itm~ ~override~			//		dispel illusions
+	SAY NAME2 @21481
+	SAY IDENTIFIED_DESC @21482
+	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd48w~ END
+	  END
+	END
+ACTION_IF (FILE_EXISTS_IN_GAME ~stoblack.sto~)THEN BEGIN
+  COPY_EXISTING ~stoblack.sto~ ~override~
+	ADD_STORE_ITEM ~d5bd48~ #0 #0 #0 ~identified~ #1
+END
+//___________________________________________________________________________________
+
+
+//ADD SUPPORT FOR FEAT SYSTEM________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_fbrd.baf~
+  COMPILE ~might_and_guile/feats/d5_bard.d~ 
+  COMPILE ~might_and_guile/feats/d5_blade.d~ 
+  COMPILE ~might_and_guile/feats/d5_skald.d~ 
+  COMPILE ~might_and_guile/feats/d5_nskld.d~ 
+  COMPILE ~might_and_guile/feats/d5_galla.d~ 
+  COPY_EXISTING ~d5_bard.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_nu_bard.txt~
+
+  COPY_EXISTING ~clabba02.2da~ ~override~
+				~clabba03.2da~ ~override~
+				~clabba04.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_bards.txt~
+
+  COPY_EXISTING ~d5_chori.2da~ ~override~
+				~d5_meist.2da~ ~override~
+//	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_bards.txt~
+
+ ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_dbrd.baf~
+  COPY_EXISTING ~d5_blade.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_D5SWASH~ ~****     ~
+//	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_nu_blade.txt~
+  COPY_EXISTING ~d5fgalla.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_nu_gallant.txt~
+//  COPY_EXISTING ~d5_skald.2da~ ~override~
+//	LPM remove_blank_lines
+//	APPEND_FILE ~might_and_guile/feats/feats_nu_gallant.txt~
+ END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
+	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
+		SAY NAME1 @20099
+		SAY UNIDENTIFIED_DESC @20100
+		WRITE_ASCII 0x3a ~d5_feat~ #8
+		LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+  END
+  COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
+  COPY ~might_and_guile/feats/d5_feat.eff~ ~override~ 
+  COPY ~might_and_guile/feats/d5_feat.cre~ ~override~ 
+  COMPILE ~might_and_guile/bardsong/d5_feat.baf~ 
+  COMPILE ~might_and_guile/bardsong/d5_bard.d~ 
+  COPY_EXISTING ~d5_bard.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/bardsong/bard_no_feats.txt~
+END
+//___________________________________________________________________________________
+
+
+//CHANGE SOD BARD'S HAT______________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~bdhelm11.itm~ BEGIN
+  COPY_EXISTING ~bdhelm11.itm~ ~override~
+	SAY IDENTIFIED_DESC @21900
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 99 opcode = 42 parameter1 = 1 parameter2 = 1 END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 99 opcode = 42 parameter1 = 1 parameter2 = 2 END
+END
+//___________________________________________________________________________________
+
+
+//CHANGE BARD HLAS___________________________________________________________________
+//
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_SPCL900~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~AP_TG#EN03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~AP_TG#LI03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_F_GALLANT~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_SPCL907~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_F_GALLANT~ ability = ~GA_SPCL908~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~AP_TG#EN03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~AP_TG#LI03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL907~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL908~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~AP_TG#EN03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~AP_TG#LI03~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL907~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL908~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_LI#EN01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_TG#LI01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_LI#EN01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_TG#LI01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL900~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~AP_TG#EN02~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~AP_TG#LI02~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF85~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~AP_TG#EN03~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~AP_TG#LI03~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL907~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL908~ num_allowed = ~5~ END
+
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL910~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL911~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL912~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL920~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_TG#BRPO~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~AP_LI#EN01~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~AP_TG#LI01~ END
+//LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_TG#ENTH~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~AP_RR#BJS01~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~AP_RR#BSK01~ END
+LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~AP_RR#BDF03~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
+//__________________________________________________________________________________
+
+CLEAR_ARRAYS

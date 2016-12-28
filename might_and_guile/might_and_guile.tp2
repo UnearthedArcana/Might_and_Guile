@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~3.0.6~
+VERSION ~3.1b~
 //README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -78,22 +78,22 @@ INCLUDE ~might_and_guile/components/205_psionics.tpa~
 //__________________________________________________________________________________
 
 
-/*
+
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						   BARDS = THIEVES
+//						REVISED BARDS & SONGS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @210
 DESIGNATED 210
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
-INCLUDE ~might_and_guile/components/210_bard_thieves.tpa~
+INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
 //__________________________________________________________________________________
-*/
+
 
 
 //__________________________________________________________________________________
@@ -213,22 +213,6 @@ INCLUDE ~might_and_guile/components/265_monk_fist.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						REVISED BLADE & SKALD
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @270
-DESIGNATED 270
-//GROUP @22
-
-INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
 //						REVISED SHADOWDANCER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
@@ -236,7 +220,7 @@ INCLUDE ~might_and_guile/components/270_revised_bards.tpa~
 BEGIN @275
 DESIGNATED 275
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
-FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~200~ @1
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
@@ -310,23 +294,6 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________________________________________________________________
 
 
-/*
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						   WARRIOR FEATS
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @390
-DESIGNATED 390
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~enginest.2da~ @1
-//GROUP @22
-
-INCLUDE ~might_and_guile/components/390_warrior_feats.tpa~
-//__________________________________________________________________________________
-*/
-
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
@@ -358,12 +325,13 @@ INCLUDE ~might_and_guile/components/420_scout.tpa~
 //__________________________JONGLEUR________________________________________________
 BEGIN @450
 DESIGNATED 450
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/450_jongleur.tpa~
 //__________________________________________________________________________________
 
-
+/*
 //_________________________LOREMASTER________________________________________________
 BEGIN @460
 DESIGNATED 460
@@ -371,11 +339,12 @@ DESIGNATED 460
 
 INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 //__________________________________________________________________________________
-
+*/
 
 //__________________________GALLANT_________________________________________________
 BEGIN @470
 DESIGNATED 470
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/470_gallant.tpa~
@@ -385,6 +354,7 @@ INCLUDE ~might_and_guile/components/470_gallant.tpa~
 //________________________MEISTERSINGER_____________________________________________
 BEGIN @480
 DESIGNATED 480
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
@@ -394,6 +364,7 @@ INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 //_________________________LORESINGER_______________________________________________
 BEGIN @490
 DESIGNATED 490
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/490_loresinger.tpa~

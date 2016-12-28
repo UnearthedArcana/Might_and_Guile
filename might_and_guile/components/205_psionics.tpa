@@ -232,6 +232,7 @@ END
 
 //PSIONIC ABILITY FILES_____________________________________________________________
 //
+COPY ~might_and_guile/misc/d5_ssvbo.spl~ ~override~
 COPY ~might_and_guile/misc/d5_1hpbo.spl~ ~override~
 	SAY NAME1 @7
 //
@@ -464,6 +465,16 @@ COPY ~might_and_guile/psi/d5_ps4x5.bam~ ~override~
 
 //NU FEAT FILES_____________________________________________________________________
 //
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+  COPY_EXISTING ~d5_feat.bcs~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+	  REPLACE_TEXTUALLY ~SetGlobal("D5_PSI","GLOBAL",0)~ ~SetGlobal("D5_PSI","GLOBAL",1)~
+	END
+  BUT_ONLY
+  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/psi/d5_fpsi.baf~
+  COMPILE ~might_and_guile/psi/d5_soulb.d~ 
+  COMPILE ~might_and_guile/psi/d5_psyph.d~ 
+END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
 	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
@@ -476,16 +487,6 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   COPY ~might_and_guile/feats/d5_feat.eff~ ~override~ 
   COPY ~might_and_guile/feats/d5_feat.cre~ ~override~ 
   COMPILE ~might_and_guile/psi/d5_feat.baf~ 
-  COMPILE ~might_and_guile/psi/d5_soulb.d~ 
-  COMPILE ~might_and_guile/psi/d5_psyph.d~ 
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
-  COPY_EXISTING ~d5_feat.bcs~ ~override~
-	DECOMPILE_AND_PATCH BEGIN
-	  REPLACE_TEXTUALLY ~SetGlobal("D5_PSI","GLOBAL",0)~ ~SetGlobal("D5_PSI","GLOBAL",1)~
-	END
-  BUT_ONLY
-  EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/psi/d5_fpsi.baf~
   COMPILE ~might_and_guile/psi/d5_soulb.d~ 
   COMPILE ~might_and_guile/psi/d5_psyph.d~ 
 END

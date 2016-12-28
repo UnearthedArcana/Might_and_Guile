@@ -32,7 +32,7 @@
 @100   = ~Revised Spellcasting Tables~
 @200   = ~Feat System~
 @205   = ~Psionics~
-@210   = ~Bards are thief kits~
+@210   = ~Bard Class Overhaul~
 @220   = ~Revised Movement Bonuses (Quickstride)~
 @225   = ~Revised Stalker~
 @230   = ~Revised Archer~
@@ -56,7 +56,7 @@
 @470   = ~Add the Gallant (bard kit)~
 @480   = ~Add the Meistersinger (bard kit)~
 @490   = ~Add the Loresinger (bard kit)~
-@500   = ~Add Multiclass Kits~
+@500   = ~Multiclass Kits~
 //
 //
 @20000  = ~rogue~
@@ -251,11 +251,13 @@ Weight: 0
 @20251  = ~Melee Trick (Trip)~
 @20252  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
 @20253  = ~Melee Trick (Disarm)~
-@20254  = ~Melee Trick (Disarm): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
+@20254  = ~Melee Trick (Disarm): upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
 @20255  = ~Melee Trick (Blind)~
-@20256  = ~Melee Trick (Blind): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff.~
+@20256  = ~Melee Trick (Blind): upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.~
 @20257  = ~Melee Trick (Disrupt)~
-@20258  = ~Melee Trick (Disrupt): upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
+@20258  = ~Melee Trick (Disrupt): upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
+@20259  = ~Fighting Dirty~
+@20260  = ~Fighting Dirty: once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.~
 @20271  = ~Smoke Bomb + Grease Jar~
 @20272  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
 @20273  = ~Grease Jar~
@@ -491,6 +493,265 @@ Unlike lesser psionic powers, these abilities may be used once per day. In each 
 @20677  = ~Cancel Carapace~
 //
 //
+@21001  = ~Change Bard Aura~
+@21002  = ~Bard Aura~
+@21003  = ~Stop Bard Aura~
+@21006  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
+
+Abilities:
+- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
+- +1 bonus to Armor Class.
+- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
+
+SWASHBUCKLING:
+For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+
+Restrictions:
+- Only has one half the normal Lore value.
+- Only has one half the normal Pick Pockets skill.
+- May not become proficient in heavy weapons or in sword-and-shield style.
+- Limited to light armors.
+~
+@21007  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
+
+Abilities:
+- May achieve Specialization (++) with long swords, axes, maces, flails, and spears, as well as weapon styles.
+- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
+- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
+- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
+- May use arcane wands and scrolls.
+
+Restrictions:
+- Only has one quarter the normal Pick Pockets score.
+- May not use magical wands.
+- May not cast spells directly from scrolls.
+~
+@21011  = ~Bard Aura: Luck~
+@21012  = ~Bard Aura: Luck
+
+While the bard maintains this aura, all allies within 20 feet benefit from a +1 bonus to Luck and saving throws.~
+@21021  = ~Bard Aura: Morale~
+@21022  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet benefit from increased morale and immunity to magical fear effects.~
+@21031  = ~Bard Aura: Power~
+@21032  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet benefit from +1 to damage rolls for each 5 levels of the bard.~
+@21051  = ~Bard Aura: Reflected Images~
+@21052  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet gain an illusionary double that has a chance to interpose itself and absorb a melee attack. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21061  = ~Bard Aura: Bless~
+@21062  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet benefit from the effects of a Bless spell.~
+@21071  = ~Bard Aura: Negative Plane Protection~
+@21072  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet are immune to negative energy effects such as level drain. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21081  = ~Bard Aura: Mind Shield~
+@21082  = ~Bard Aura: 
+
+While the bard maintains this aura, all allies within 20 feet are immune to mental effects such as Charm, Fear, Confusion, Feeblemind, and Stun. The bard must concentrate to maintain the aura; spellcasting and melee attacks are disabled while the aura is in effect.~
+@21201  = ~Bard Aura: Interference~
+@21202  = ~Bard Aura: 
+
+While the bard maintains this aura, all spellcasters within 20 feet (friends and foes) suffer a 65% chance of casting failure. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21211  = ~Bard Aura: Intimidation~
+@21212  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 20 feet suffer from a 1-point reduction to to-hit and damage rolls.~
+@21221  = ~Bard Aura: Malison~
+@21222  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 20 feet suffer from a 1-point reduction to Luck and saving throws. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21231  = ~Bard Aura: Confusion~
+@21232  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 20 feet must save vs. Spells each round, or suffer from Confusion. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21241  = ~Bard Aura: Hold Undead~
+@21242  = ~Bard Aura: 
+
+While the bard maintains this aura, all undead enemies within 20 feet move more slowly, and must save vs. Spells each round or be Held. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21251  = ~Bard Aura: Entangle~
+@21252  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 20 feet must save vs. Breath each round, or be Entangled and unable to move. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21411  = ~Bard Aura: Blur~
+@21412  = ~Bard Aura: 
+
+While the bard maintains this aura, <PRO_HESHE> benefits from a Blur effect, improving armor class and saving throws. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21421  = ~Bard Aura: Mind Blank~
+@21422  = ~Bard Aura: 
+
+While the bard maintains this aura, <PRO_HESHE> cannot be affected by any hostile mind-altering effects, such as Charm, Fear, Confusion, Feeblemind, or Stun. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21431  = ~Bard Aura: Globe of Invulnerability~
+@21432  = ~Bard Aura: 
+
+While the bard maintains this aura, <PRO_HESHE> is surrounded by a localize Minor Globe of Invulnerability, preventing all spells of 3rd level or less from affecting <PRO_HIMHER>. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21461  = ~Bard Aura: Cloak of Fear~
+@21462  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 3 feet must save vs. Spells each round or suffer from Fear for three rounds. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21471  = ~Bard Aura: Slow~
+@21472  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 3 feet must save vs. Paralysis each round or be Slowed. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21481  = ~Bard Aura: Dispel Illusions~
+@21482  = ~Bard Aura: 
+
+While the bard maintains this aura, once per round, all illusions within 3 feet are dispelled. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21611  = ~Bard Aura: Maze~
+@21612  = ~Bard Aura: 
+
+While the bard maintains this aura, all enemies within 3 feet must save vs. Spells each round or disappear into a small dimensional Maze for three rounds. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21801  = ~bard~
+@21802  = ~Bard~
+@21803  = ~BARD: the Bard is a charming rogue; <PRO_HISHER> main strength is <PRO_HISHER> pleasant personality and ability to entertain. With charm and wit, <PRO_HESHE> makes <PRO_HISHER> way through the world. Furthermore, Bards have an incredible talent for understanding musical harmonies and vibrations... this helps one become a skilled musician but also allows <PRO_HIMHER> to subtly manipulate the air around <PRO_HISHER>, creating aura-like magical effects or even channeling those effects through <PRO_HISHER> own body. Finally, Bards learn a little bit about everything that crosses their path, learning to use wizardly magic and even indulge in petty thievery. While many Bards are scoundrels, their stories and songs are welcome almost everywhere.
+
+CLASS FEATURES:
+
+- May not wear armor heavier than chain mail. (Spells cannot be cast while wearing armor.)
+- May not equip shields larger than bucklers.
+- May only become Proficient (one slot) in any weapon class.
+- Thieving abilities: Pick Pockets.
+- Increased Lore score.
+- May cast arcane spells starting at 2nd level.
+- May use the Bard Aura ability. While active, the Bard traditional Bard Aura provides allies within 20 feet a +1 bonus to Luck and saving throws.
+- Hit Die: d6~
+@21806  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.
+
+Abilities:
+- May cast the following priest spells: Cure Light Wounds, Sanctuary, Find Traps, Silence 15' Radius, Spiritual Hammer, Cure Medium Wounds, Holy Smite, Death Ward, Holy Power, Greater Command, Cure Critical Wounds, and False Dawn.
+- May use a Bless Aura, constantly providing all allies within 20 feet with the benefits of the Bles spell.
+- From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell.
+
+Restrictions:
+- Reduced pickpocketing ability 
+~
+@21807  = ~MEISTERSINGER: These bards wander the woodlands, charming animals with their melodies and helping druids and rangers to protect nature. They are the enemies of ruthless hunters and trappers, striving against such activities with their animal allies, beguiling music, and nature-based magic.
+
+Abilities:
+- May use the ranger's Animal Empathy ability.
+- May cast the following druid spells: Cure Light Wounds, Entangle, Sanctuary, Shillelagh, Barkskin, Charm Person/Mammal, Resist Fire/Cold, Slow Poison, Remove Paralysis, Cure Disease, Zone of Sweet Air, Summon Insects, Cure Serious Wounds, Call Woodland Being, Leser Restoration, Mass Cure, Chaotic Commands, Insect Plague, Animal Summoning III, and False Dawn.
+- May use an Aura of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.
+- From 6th level, may use an Entangling Aura, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.
+
+Restrictions:
+- May only gain proficiency in weapons appropriate for use by druids.
+~
+@21811  = ~JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements. 
+
+Abilities:
+- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
+- +1 bonus to Armor Class.
+- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
+
+SWASHBUCKLING:
+For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+
+Restrictions:
+- Only has one half the normal Lore value.
+- Only has one half the normal Pick Pockets skill.
+- May not become proficient in heavy weapons or in sword-and-shield style.
+- Limited to light armors.
+~
+@21812  = ~blade~
+@21813  = ~Blade~
+@21814  = ~BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.
+
+Advantages:
+- May reach Mastery (+++) in the use of long and short swords, daggers, darts, and two-weapon Style.
+- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
+
+SWASHBUCKLING:
+For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+
+Restrictions:
+- May not become proficient in heavy weapons or in sword-and-shield style.
+- Limited to light armors.
+~
+@21821  = ~GALLANT: This is a Demibard kit. Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.
+
+Abilities:
+- May innately cast the priest spell Aid once per day, and twice per day at 10th level.
+- May radiate an Aura of Luck that affects allies within 20 feet.
+- From 5th level, may innately cast the priest spell Death Ward once per day.
+- From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.
+- Receivies a +1 bonus to saves vs. death for each 6 levels of experience.
+- May use magical wands as a wizard can.
+
+Restrictions:
+- Has the same hit dice as a cleric.
+- Limited to Specialization (++) with all weapons.
+~
+@21831  = ~hexblade~
+@21832  = ~Hexblade~
+@21833  = ~HEXBLADE: This Demibard kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
+
+Abilities:
+- May use an Cursed Aura, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
+- from 6th level, may use an Aura of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
+- May use arcane wands and scrolls.
+
+Restrictions:
+- Has the same hit dice as a cleric.
+- Limited to Specialization (++) with all weapons.
+~
+@21841  = ~skald~
+@21842  = ~Skald~
+@21843  = ~SKALD: This nordic Demibard is a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
+
+Abilities:
+- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
+- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
+- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
+- May use arcane wands and scrolls.
+
+Restrictions:
+- Has the same hit dice as a cleric.
+- Limited to Specialization (++) with all weapons.
+~
+@21900  = ~This ostentatious peacock-blue hat is festooned with green and purple feathers. Once the possession of an unfailingly chipper bard, the hat was stolen when the bard couldn't resist showing off the hat in a seedy tavern and bragging about its magical powers. In truth the hat has only moderate enchantments on it, but its stylish appearance makes it a coveted choice for many bards.
+
+STATISTICS:
+
+Equipped abilities:
+- Immunity to silence and deafness
+- May cast one extra 2nd- and 3rd-level spell
+
+Weight: 0~
+@21901  = ~Declamation~
+@21902  = ~Declamation
+
+Level: 2
+Range: 0
+Duration: 1 turn
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None
+
+The recipient of this spell can cast spells with a verbal component without having to make any noise. Effectively, this spell cancels the effects of Silence and makes the recipient immune to it for the spell's duration.~
+@21903  = ~Word of Revocation~
+@21904  = ~Word of Revocation 
+
+Level: 3
+Range: 40 ft.
+Duration: Instant
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: None
+
+This spell can remove magical effects from one subject. This includes effects given from spells, potions and certain magical items such as wands. It does not, however, affect enchanted magical items or spell protections such as Spell Turning and Spell Deflection. The chance of the dispel succeeding is determined by the level of the caster and the level of the magic being dispelled. The base chance of successfully dispelling is 50%. For every level that the caster of the Dispel Magic is above the original caster, <PRO_HISHER> chance of success increases by 5%. For every level that the caster of Dispel Magic is below the original caster, <PRO_HISHER> chance of success decreases by 10%. However, despite the difference in levels, there is always at least a 5% chance of success or failure. Thus, if a caster is 10 levels higher than the magic <PRO_HESHE> is trying to dispel, there is only a 5% chance of failure. Similarly if the caster is 4 levels lower than the magic <PRO_HESHE> is trying to dispel, there is only a 10% chance of success. Intuitively, this spell is almost useless if the target is 5 or more levels higher than the caster.~
+//
+//
 @2210   = ~Quickstride~
 @2211   = ~Normal Stride~
 //
@@ -563,9 +824,9 @@ Advantages:
 - 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Disadvantages:
-– May only wear leather, studded leather, and hide armors (and elven chain).
-– May only become Proficient (one slot) with melee weapons.
-– May not use the Charm Animal ability.~
+- May only wear leather, studded leather, and hide armors (and elven chain).
+- May only become Proficient (one slot) with melee weapons.
+- May not use the Charm Animal ability.~
 @2302   = ~ARCHER: The Archer is the epitome of skill with the bow, able to make almost any shot, no matter how difficult. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
@@ -582,9 +843,9 @@ Advantages:
 - Available at 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
 
 Disadvantages:
-– May only wear leather, studded leather, and hide armors (and elven chain).
-– May only become Proficient (one slot) with melee weapons.
-– May not use the Charm Animal ability.~
+- May only wear leather, studded leather, and hide armors (and elven chain).
+- May only become Proficient (one slot) with melee weapons.
+- May not use the Charm Animal ability.~
 @23101  = ~Choose a Called Shot~
 @23111  = ~Called Shot: Pin~
 @23112  = ~Called Shot: Pin
@@ -678,17 +939,17 @@ After the effects end, the character becomes winded, suffering a -2 penalty to A
 
 CLASS FEATURES:
 
-– May not wear armor heavier than splint mail.
-– May not exceed Specialization (++) with any weapon class.
-– May achieve Specialization (++) in any fighting style and allocate three slots in Two-Weapon Style.
-– Moves 2 points faster than other characters.
-– Immune to backstab.
-– May use the Rage ability once per day. Gains one use at level 1 and an additional use every 4 levels thereafter.
+- May not wear armor heavier than splint mail.
+- May not exceed Specialization (++) with any weapon class.
+- May achieve Specialization (++) in any fighting style and allocate three slots in Two-Weapon Style.
+- Moves 2 points faster than other characters.
+- Immune to backstab.
+- May use the Rage ability once per day. Gains one use at level 1 and an additional use every 4 levels thereafter.
 
 RAGE: The enraged status lasts for 5 rounds and provides a +4 bonus to Strength and Constitution, and immunity to all charm, hold, fear, stun, and sleep effects.
 
-– 11th level: Gains 10% resistance to crushing, slashing, piercing, and missile damage. An additional 5% is gained at levels 15 and 19.
-– Hit Die: d12
+- 11th level: Gains 10% resistance to crushing, slashing, piercing, and missile damage. An additional 5% is gained at levels 15 and 19.
+- Hit Die: d12
 ~
 @2506   = ~Barbarian Rage
 The character is enraged for 5 rounds, which grants a +4 bonus to Strength and Constitution, as well as immunity to all charm, hold, fear, stun, and sleep effects.
@@ -1085,8 +1346,8 @@ Abilities:
 DEFENSIVE SPIN: During the next 4 rounds, the Blade is rooted to the spot and gains a +1 bonus to Armor Class per level, up to a maximum of +10.
 
 Restrictions:
-– Only has one half the normal Lore value.
-– Only has one half the normal Pick Pockets skill.
+- Only has one half the normal Lore value.
+- Only has one half the normal Pick Pockets skill.
 ~
 @2704  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
 
@@ -1099,8 +1360,8 @@ Abilities:
 DEFENSIVE SPIN: During the next 4 rounds, the Blade is rooted to the spot and gains a +1 bonus to Armor Class per level, up to a maximum of +10.
 
 Restrictions:
-– Only has one half the normal Lore value.
-– Only has one half the normal Pick Pockets skill.
+- Only has one half the normal Lore value.
+- Only has one half the normal Pick Pockets skill.
 ~
 @2705  = ~Blade Dance~
 @2713  = ~SKALD: These nordic Bards is also warriors of great strength, skill, and virtue; their songs are inspiring sagas of battle and valor, and Skald devote their lives to those pursuits.
@@ -1641,7 +1902,7 @@ Abilities:
 Restrictions:
 - Bard Song does not improve over time.
 ~
-@4605  = ~Loremasters are romantically entranced by the past. There is a fine line between Loremaster and sage. So fine that many Lore masters call themselves sages and are rarely questioned about it. However, true sages are knowledge specialists who concentrate their efforts into mastering a specific field such as mushrooms, elven swords, and so on. Loremasters are fond of any aspect of history that makes a good story.~
+@4605  = ~Loremasters are romantically entranced by the past. There is a fine line between Loremaster and sage... so fine that many Lore masters call themselves sages and are rarely questioned about it. However, true sages are knowledge specialists who concentrate their efforts into mastering a specific field such as mushrooms, elven swords, and so on. Loremasters are fond of any aspect of history that makes a good story.~
 //
 //
 @4702  = ~gallant~
@@ -1680,7 +1941,7 @@ This spell protects the Gallant from all forms of death magic for the duration o
 Abilities:
 - The Meistersinger's song brings Luck to allies within earshot.
 - May use the ranger's Animal Empathy ability.
-- Once per day, may summon a swarm of friendly rodents (3 a 1st level, and 3 more for every third level after that).
+//- Once per day, may summon a swarm of friendly rodents (3 a 1st level, and 3 more for //every third level after that).
 - May cast the following druid spells: Cure Light Wounds, Entangle, Sanctuary, Shillelagh, Barkskin, Charm Person/Mammal, Resist Fire/Cold, Slow Poison, Remove Paralysis, Cure Disease, Zone of Sweet Air, Summon Insects, Cure Serious Wounds, Call Woodland Being, Leser Restoration, Mass Cure, Chaotic Commands, Insect Plague, Animal Summoning III, and False Dawn.
 
 Restrictions:
@@ -1784,6 +2045,29 @@ Abilities:
 Restrictions:
 - None
 ~
+@5061   = ~loremaster~
+@5062   = ~Loremaster~
+@5063   = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
+
+Abilities:
+- Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.
+- Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
+
+Restrictions:
+- Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
+- Loremasters do not do extra damage by backstabbing.
+~
+@5064   = ~Dusty Tome of Facts and Sagery~ 
+@5065   = ~There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
+
+Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item. Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
+
+On the other hand, Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps. Loremasters do not do extra damage by backstabbing.
+
+
+Using this Tome will allow the reader to engage in a career as a Loremaster.
+
+[WARNING: activation of this item cannot be reversed.  Save before doing so.]~ 
 @5051   = ~ranger/mage~
 @5052   = ~Ranger/Mage~
 @5053   = ~RANGER/MAGE: While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the pangers. The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
@@ -2005,11 +2289,11 @@ This magic will allow the Spellbender to cast one of the following spells:
 
 Abilities:
 - Wizard Slayers have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.
-– Each successful melee hit bestows a 50% chance of spell failure on the target for one round.
-– May use a special vocalization that can deafen those nearby and impose a chance of spell failure on them.
+- Each successful melee hit bestows a 50% chance of spell failure on the target for one round.
+- May use a special vocalization that can deafen those nearby and impose a chance of spell failure on them.
 
 Restrictions:
-– Elves may not become Wizard Slayers.
+- Elves may not become Wizard Slayers.
 
 The descriptions and instructions in this tome may enable the reader to learn the skills and abilities of a Wizard Slayer.
 

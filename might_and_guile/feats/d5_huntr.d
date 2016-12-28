@@ -16,8 +16,7 @@ IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY 
 IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_huntr_12
 IF ~GlobalLT("D5_RTHAC0","LOCALS",2)~ THEN REPLY @20233 GOTO d5_huntr_13
 IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_huntr_14
-IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_TRIP","LOCALS",1)~ THEN REPLY @20251 GOTO d5_huntr_15
-IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISARM","LOCALS",1)~ THEN REPLY @20253 GOTO d5_huntr_16
+IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20253 GOTO d5_huntr_16
 IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_huntr_17
 IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_huntr_18
 IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_huntr_19
@@ -95,14 +94,9 @@ IF ~~ THEN BEGIN d5_huntr_14 // backstab bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BACKSTAB","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_huntr 
 END 
-IF ~~ THEN BEGIN d5_huntr_15 // trip
- SAY @20252
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_TRIP","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG1",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_huntr 
-END 
-IF ~~ THEN BEGIN d5_huntr_16 // disarm
- SAY @20254
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISARM","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG2",myself)~ EXIT 
+IF ~~ THEN BEGIN d5_huntr_16 // fighting dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_huntr 
 END 
 IF ~~ THEN BEGIN d5_huntr_17 // blind

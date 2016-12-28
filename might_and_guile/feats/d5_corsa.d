@@ -9,8 +9,7 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_ATTACK","LOCALS",3)~ THEN REPLY @20231 GOTO d5_corsa_10
  IF ~GlobalLT("d5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_corsa_12
  IF ~GlobalLT("D5_FPARRY","LOCALS",1)~ THEN REPLY @3911 GOTO d5_corsa_14
- IF ~GlobalLT("D5_TRIP","LOCALS",1)~ THEN REPLY @20251 GOTO d5_corsa_16
- IF ~GlobalLT("D5_DISARM","LOCALS",1)~ THEN REPLY @20253 GOTO d5_corsa_18
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_corsa_18
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_corsa_20
  IF ~GlobalLT("D5_FCUTTING","LOCALS",1)~ THEN REPLY @3927 GOTO d5_corsa_22
  IF ~GlobalLT("D5_FTEMPO","LOCALS",1)~ THEN REPLY @3929 GOTO d5_corsa_24
@@ -57,14 +56,9 @@ IF ~~ THEN BEGIN d5_corsa_14 // parry
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_FPARRY","LOCALS",1)~ DO ~ApplySpellRES("D5_WFC",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
-IF ~~ THEN BEGIN d5_corsa_16 // trip
- SAY @20252
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_TRIP","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG1",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_corsa 
-END 
-IF ~~ THEN BEGIN d5_corsa_18 // disarm
- SAY @20254
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISARM","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG2",myself)~ EXIT 
+IF ~~ THEN BEGIN d5_corsa_18 // dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
 IF ~~ THEN BEGIN d5_corsa_20 // blind

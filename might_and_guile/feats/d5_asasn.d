@@ -16,8 +16,7 @@ SAY @20009
  IF ~GlobalLT("D5_ATTACK","LOCALS",1)~ THEN REPLY @20231 GOTO d5_asasn_12
  IF ~GlobalLT("D5_RTHAC0","LOCALS",2)~ THEN REPLY @20233 GOTO d5_asasn_13
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",3)~ THEN REPLY @20241 GOTO d5_asasn_14
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_TRIP","LOCALS",1)~ THEN REPLY @20251 GOTO d5_asasn_15
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISARM","LOCALS",1)~ THEN REPLY @20253 GOTO d5_asasn_16
+ IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_asasn_16
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_asasn_17
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_asasn_18
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_SHADOW","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @2755 GOTO d5_asasn_19
@@ -95,14 +94,9 @@ IF ~~ THEN BEGIN d5_asasn_14 // backstab bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BACKSTAB","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_asasn 
 END 
-IF ~~ THEN BEGIN d5_asasn_15 // trip
- SAY @20252
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_TRIP","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG1",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_asasn 
-END 
-IF ~~ THEN BEGIN d5_asasn_16 // disarm
- SAY @20254
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISARM","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG2",myself)~ EXIT 
+IF ~~ THEN BEGIN d5_asasn_16 // fighting dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_asasn 
 END 
 IF ~~ THEN BEGIN d5_asasn_17 // disrupt

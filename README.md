@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.0 </strong><br />
+  <p><strong> Version 3.1 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -46,31 +46,31 @@
     <li> [NPC mods]</li>
     <li> [spell mods]</li>
     <li> [kit mods]</li>
-    <li> [tweak mods]</li>
-    <li> Tweaks Anthology</li>
     <li> Might and Guile</li>
+    <li> [tweak mods]</li>
+    <li> Scales of Balance</li>
     <li> SCS</li>
     <li> [end-of-order mods]</li>
   </ul>
 </div>
 <h2>Contents</h2>
-  <h4 class="subheader">Component 200 (EE-only): </h4>
+  <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Feat System and Revised HLAs</em></strong></p>
       <p> This component adds learnable feats, which may be chosen by the player at certain levels in a dialogue-based method. The feats include a few melee techniques for fighters, and many skills of various kinds for thieves. If you install psionics and revised Called Shots, those abilities will be folded into this system.
       <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
 	  <ul>
-	    <li> Parry: for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points.</li>
-	    <li> Flurry: for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
-	    <li> Heroic Resistance: for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
-	    <li> Heroic Resolve: the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
-	    <li> Heroic Willpower: for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
-	    <li> Knockdown: for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
-	    <li> Knockback: for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
-	    <li> Cutting Blow: for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
-	    <li> Tempo: for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
-	    <li> Disrupt: for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
-	    <li> Tactics: making use of strong leadership in combat situations, the warrior develops the permanent ability to confer bonuses upon allies within earshot (20 feet). The warrior can switch back and forth between a +1 AC bonus and a +1 thac0 bonus, but cannot use both tactics at the same time, and the warrior himself does not benefit from the bonus.</li>
+	    <li> <b>Parry:</b> for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points.</li>
+	    <li> <b>Flurry:</b> for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
+	    <li> <b>Heroic Resistance:</b> for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
+	    <li> <b>Heroic Resolve:</b> the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
+	    <li> <b>Heroic Willpower:</b> for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
+	    <li> <b>Knockdown:</b> for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
+	    <li> <b>Knockback:</b> for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
+	    <li> <b>Cutting Blow:</b> for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
+	    <li> <b>Tempo:</b> for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
+	    <li> <b>Disrupt:</b> for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
+	    <li> <b>Tactics:</b> making use of strong leadership in combat situations, the warrior develops the permanent ability to confer bonuses upon allies within earshot (20 feet). The warrior can switch back and forth between a +1 AC bonus and a +1 thac0 bonus, but cannot use both tactics at the same time, and the warrior himself does not benefit from the bonus.</li>
 	  </ul>
       <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
@@ -79,39 +79,39 @@
 	    <li> <b>Skills Mastery - Stealth Bonus:</b> this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
 	    <li> <b>Skills Mastery - Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
 	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
+	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
+	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li><br />
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Requires Dart Trap and Basic Alchemy)</li>
 	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter.</li>
-	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li>
+	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li><br />
 	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
 	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
 	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li>
 	    <li> <b>Alchemy - Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil, once per day. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
 	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
-	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
+	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li><br />
 	    <li> <b>Combat Skills - Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
 	    <li> <b>Combat Skills - Escape Artist:</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
-	    <li> <b>Combat Skills - To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
-	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires To-Hit Bonus)</li></li>
-	    <li> <b>Combat Skills - Trip Opponent:</b> upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
-	    <li> Combat Skills - Disarm Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath. (Requires To-Hit Bonus)</li>
-	    <li> <b>Combat Skills - Blind Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's vision, causing a very brief period of Blindness upon a failed save vs. Rod/Staff. (Requires To-Hit Bonus)</li>
-	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires To-Hit Bonus)</li>
+	    <li> <b>Combat Skills - Melee To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all melee attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> <b>Combat Skills - Ranged To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all ranged attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
+	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires Melee To-Hit Bonus)</li></li>
+	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds. (Requires Melee To-Hit Bonus)</li>
+	    <li> <b>Combat Skills - Blind Opponent:</b> upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath. (Requires Melee To-Hit Bonus)</li>
+	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires Melee To-Hit Bonus)</li><br />
 	    <li> <b>Magical Skills - Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
 	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
 	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
-	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
+	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the rogue to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
 	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Misleading Clone. (Requires Smoke Bomb/Grease Jar)</li>
-	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
-	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li>
 	  </ul>
       <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
       <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since various trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
 	  <ul>
 	    <li> Time Trap becomes Maze Trap.</li>
 	    <li> The Swashbuckler feat 'Escape Artist' wil be available to all thieves as an HLA.</li>
-	    <li> The 'Shadow Pool' feat will be available to all thieves as an HLA.</li>
+	    <li> The 'Shadow Magic' feat will be available to all thieves as an HLA.</li>
 	    <li> The 'Illusion Magic' feat will be available to all thieves as an HLA.</li>
 	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Escape Artist, and Power Attack.</li>
 	    <li> Blades can choose Extra Level 6 Spell, Escape Artist, and Whirlwind.</li>
@@ -122,7 +122,7 @@
       <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) This component is not compatible with Kit Revisions' Revised thief kits.</p>
       <p>Please note that this component will only grant feats to the base five thief kits: Thief, Assassin, Hunter, Swashbuckler, and Shadowdancer, as well as thief kits added by this mod and by the 'Song & Silence' mod. Thief kits from other mods may be used alongside this component... but they will only get their normal kit abilities, no feats.</p>
   </div>
-  <h4 class="subheader">Component 205 (only for EE 2.0+): </h4>
+  <h4 class="subheader">Component 205 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Psionics</em></strong></p>
       <p>To <i>further</i> reflect their cleverness and resourcefulness, thieves will be given the chance to learn psionic abilities.  There are four psionic disciplines: Telepathy, Telekinesis, Pyrokinesis, and Biokinesis.  Each discipline contains five powers, which must be learned in order from the simplest to the most powerful.  Most rogues can only focus on a single discipline; once they choose the first power from one, the other three disciplines are closed off to them. Note: rogues must have 15+ INT in order to choose psionic powers as feats.</p>
@@ -133,29 +133,140 @@
 	    <li> <b>Telepathy - Ego Repair</b> this ability removes the effects of fear, sleep, feeblemindedness, unconsciousness, and intoxication, as well as berserk and confused states of mind. The cost is 5 max hit points.</li>
 	    <li> <b>Telepathy - Domination:</b> this ability causes the target to save vs. wands or become charmed for 5 rounds, at a cost of 7 max hp. (Requires Id Insinuation.)</li>
 	    <li> <b>Telepathy - Intellect Fortress:</b> while maintained (at a cost of 9 max hp), this ability renders the rogue immune to all hostile mental effects, whether psionic or magical. (Requires Domination.)</li>
-	    <li> <b>Telepathy - Psychic Crush:</b> this ability causes the target to save vs. wands with a -3 penalty or be stunned for 3 rounds, at a cost of 9 max hit points. (Requires Domination.)</li>
+	    <li> <b>Telepathy - Psychic Crush:</b> this ability causes the target to save vs. wands with a -3 penalty or be stunned for 3 rounds, at a cost of 9 max hit points. (Requires Domination.)</li><br />
 	    <li> <b>Telekinesis - Immobilization:</b> this ability Slows the target for one round; and causes the target to save vs. wands or be Held for one round and Slowed for a second round. The cost is 4 max hp. </li>
 	    <li> <b>Telekinesis - Kinetic Ram:</b> the target of this telekinetic attack takes 2d3 crushing damage, and must save vs. wands or be knocked back 10 feet. The cost is 5 max hp. (Requires Immobilize.)</li>
 	    <li> <b>Telekinesis - Inertial Barrier:</b> this ability envelops the rogue in a shell of telekinetic energy that absorbs incoming blows. It provides a -2 AC bonus and 4-% DR against crushing or missile attacks; a -1 AC bonus and 20% DR against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the spell 'Magic Missile.' The cost to maintain the barrier is 7 max hp. (Requires Kinetic Ram.)</li>
 	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It lasts for 7 rounds and is wielded as if the user has Mastery (+++) with it. The cost to maintain the blade is 7 max hp. (Requires Inertial Barrier.)</li>
-	    <li> <b>Telekinesis - Free Action:</b> while maintained (at a cost of 10 max hp), this ability renders the rogue immune to all effects that hinder normal movement, whether psionic or magical. (Requires Inertial Barrier.)</li>
+	    <li> <b>Telekinesis - Free Action:</b> while maintained (at a cost of 10 max hp), this ability renders the rogue immune to all effects that hinder normal movement, whether psionic or magical. (Requires Inertial Barrier.)</li><br />
 	    <li> <b>Pyrokinesis - Static Discharge:</b> this ability gathers static electricity into the rogue's hand, like the Shocking Grasp spell. A successful attack then causes 2d6 points of electric damage and the target will be stunned for 1 round on a failed save vs. wands. The cost is 4 max hp.</li>
 	    <li> <b>Pyrokinesis - Energy Transfer:</b> the immediate expenditure of energy to initiate this ability is converted into a steady bloom of positive energy in the target, resulting in a slow healing, at half the rate of the psion's hp recovery. The cost is 5 max hp. (Requires Static Discharge.)</li>
 	    <li> <b>Pyrokinesis - Psychic Combustion:</b> this ability causes a spontaneous plume of fire, causing 3d4+3 damage to all within 5 feet of the target location. The costs is 7 max hit points. (Requires Energy Transfer.)</li>
 	    <li> <b>Pyrokinesis - Energy Dispersion:</b> while maintained (at a cost of 9 max hp), this ability sets the rogues resistance to energy-based damage (fire, cold, electric and magic damage) to 75%. (Requires Psychic Combustion.)</li>
-	    <li> <b>Pyrokinesis - Generate Lightning:</b> this ability sends a powerful arc of electricity to the target and any nearby enemies, causing 2d6+2 electric damage (save vs. wands for half). The cost is 9 max hp. (Requires Psychic Combustion.)</li>
-	    <li> <b>Biokinesis - Adrenaline Rush:</b> this ability causes the rogue's physical stats to increase by 2 for 4 rounds, followed by 2 rounds of fatigue. The cost is 4 max hp.</li>
-	    <li> <b>Biokinesis - Metabolic Boost:</b> this ability causes the to be affected by Haste, increasing movement speed and gaining an extra attack per round. The effect lasts 3 rounds and costs 5 max hit points. (Requires Adrenaline Rush.)</li>
-	    <li> <b>Biokinesis - Bioregeneration:</b> this ability causes the psion to regenerate l hit points lost to wounds as he or she regenerates the max hp from initiating the ability. The cost is 7 max hp. (Requires Metabolic Boost.)</li>
+	    <li> <b>Pyrokinesis - Generate Lightning:</b> this ability sends a powerful arc of electricity to the target and any nearby enemies, causing 2d6+2 electric damage (save vs. wands for half). The cost is 9 max hp. (Requires Psychic Combustion.)</li><br />
+	    <li> <b>Biokinesis - Adrenaline Rush:</b> this ability causes the rogue's physical stats to increase by 1-3 for 4 rounds, followed by 2 rounds of fatigue. The cost is 4 max hp.</li>
+	    <li> <b>Biokinesis - Metabolic Boost:</b> this ability causes the to be affected by Haste, increasing movement speed and gaining 0.5 to 1 extra attacks per round. The effect lasts 3-5 rounds and costs 5 max hit points. (Requires Adrenaline Rush.)</li>
+	    <li> <b>Biokinesis - Bioregeneration:</b> this ability causes the psion to regenerate l-3 hit points per round, as long as the power is maintained. The cost to maintain this power is 7 max hp, and the psions canot engage in physical combat while the regeneration is happening. (Requires Metabolic Boost.)</li>
 	    <li> <b>Biokinesis - Camouflage:</b> this ability causes the rogue to become partially invisible, resulting in a -4 AC bonus, a 40% bonus to stealth, and the inability to be targeted by spells. It costs 9 max hp to maintain this power. (Requires Bioregeneration.)</li>
 	    <li> <b>Biokinesis - Carapace:</b> this ability causes the rogue's skin to become tough and brittle. The carapace confers a -2 AC bonus and absorbs 1 physical attack each round. The cost to maintain this power is 9 max hit points. (Requires Bioregeneration.)</li>
 	  </ul>
       <p> <b>Using psionics:</b> psionic abilities are usable at will, but they are physically demanding; the single-use abilities cause a temporary reduction in the rogue's max hit points (by 3, 5, 7, or 9 points), which are restored at a rate of 1 per round. Maintainable powers cause a reduction in max hit points for as long as they are maintained. Psyphers are the only rogue kit able to learn psionics at level 1 and to learn powers from more than one discipline; they may learn up to 14 of the 20  psionic powers. All other rogues may only learn psionic abilities starting at 3rd level, and may only learn the five abilities in their chosen discipline.</p>
   </div>
-  <h4 class="subheader">Component 210: </h4>
+  <h4 class="subheader">Component 210 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Revised Bards</em></strong></p>
-      <p> Under construction...</p>
+      <p> This component makes a fundamental change to the way the bard songs work. Instead of an aura that stops as soon as you take any other action, bard songs are now passive auras which can now persist while the bard engages in melee combat or casts spells. The number and type of bard songs has also been liberalized: each bard kit will have access to at least two songs, and some can potentially learn many more (especially is you also install the feat system, component #200 above).</p>
+      <p> Songs generally come in three categories: those that provide benefits for allies in an area of effect; those that cause enemies in an area of effect to suffer penalties; and those that only affect the bard or enemies within melee range. Generally, the latter two categories of songs involve more concentration to maintain and thus, while you can still engage in combat, your spellcasting will be disabled. Unlike vanilla bard songs, here you must manually stop the bard song in order to re-enable spellcasting. The list of songs is:</p>
+      <ul>
+        <li><b>Aura of Luck:</b> allies have a bonus to Luck and saving throws.</li>
+        <li><b>Aura of Morale:</b> allies are immune to fear effects.</li>
+        <li><b>Aura of Power:</b> bonus to melee damage for allies (scales with level).</li>
+        <li><b>Aura of Blessing:</b> allies are under the effect of a Bless spell.</li>
+        <li><b>Aura of Positive Energy:</b> allies are under the effect of the spell Negative Plane Protection.</li>
+        <li><b>Aura of Reflections:</b> allies get a single Mirror Image each round, which may absorb a melee attack.</li>
+        <li><b>Aura of Mind Shield:</b> allies are immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura is intense - it disables both spellcasting and combat.)</li>
+        <li><b>Aura of Interference:</b> this aura causes ALL spellcasting in the area of effect (whether by friend or foe) to suffer a 65% chance of failure.</li>
+        <li><b>Aura of Intimidation:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to to-hit and damage rolls.</li>
+        <li><b>Aura of Cursing:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to Luck and saving throws.</li>
+        <li><b>Aura of Confusion:</b> this causes all enemies in an area of effect to save each round or be Confused.</li>
+        <li><b>Aura of Holding Undead:</b> this reduces the movement rate of nearby undead creatures, and causes them to save each round or be Held.</li>
+        <li><b>Entangling Aura:</b> this causes all enemies in an area of effect to save each round or be Entangled.</li>
+        <li><b>Blur Aura:</b> this provides the bard with the effects of the Blur spell.</li>
+        <li><b>Mind Blank Aura:</b> this renders the bard immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc.</li>
+        <li><b>Aura of Invulnerability:</b> this enfolds the bard in a very short-range Minor Globe of Invulnerability, preventing any spells of 1st to 3rd level from having direct effect.</li>
+        <li><b>Aura of Fear:</b> this causes all foes engaging in melee combat against the bard to save each round or be affected by Panic.</li>
+        <li><b>Aura of Slowing:</b> this causes all foes engaging in melee combat against the bard to save each round or be temporarily Slowed.</li>
+        <li><b>Aura of True Vision:</b> this causes all illusions which come into physical contact with the bard (a 3-foot radius around your center) to be dispelled.</li>
+        <li><b>Maze Aura:</b> this HLA aura causes all foes engaging in melee combat against the bard to save each round or be temporarily Mazed.</li>
+      </ul>
+      <p> This component makes some changes to existing bard kits:</p>
+      <div class="kit_description">
+      <p>SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; his songs are inspiring sagas of battle and valor, and the Skald devotes his life to those pursuits.</p>
+      <p>Advantages:<br />
+        &ndash; May achieve Specialization (++) with long swords, axes, maces, flails, and spears, as well as weapon styles.<br />
+        &ndash; May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.<br />
+        &ndash; From 5th level, may innately cast the priest spell Defensive Harmony once per day.<br />
+        &ndash; From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.</p>
+      <p>Disadvantages:<br />
+        &ndash; Only has one quarter the normal Pick Pockets score.<br />
+        &ndash; May not use magical wands.<br />
+        &ndash; May not cast spells directly from scrolls.<br />.</p>
+      </div>
+      <div class="kit_description">
+      <p> The Blade is renamed: </p>
+      <p>JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements.</p>
+      <p>Advantages:<br />
+        &ndash; May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.<br />
+        &ndash; +1 bonus to Armor Class.<br />
+        &ndash; May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.<br />
+        &ndash; From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.<br />
+        &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
+      <p>SWASHBUCKLING: for four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
+      <p>Disadvantages:<br />
+        &ndash; Reduced Lore and pickpocketing ability.<br />
+        &ndash; May not become proficient in heavy weapons or in sword-and-shield style.<br />
+        &ndash; Limited to light armors.<br />.</p>
+    </div>
+    <p> This component also install the Meistersinger and Loresinger kits.</p>
+    <div class="kit_description">
+      <p>MEISTERSINGER: These bards wander the woodlands, charming animals with their melodies and helping druids and rangers to protect nature. They are the enemies of ruthless hunters and trappers, striving against such activities with their animal allies, beguiling music, and nature-based magic.</p>
+      <p>Advantages:<br />
+        &ndash; May use the ranger's Animal Empathy ability.<br />
+        &ndash; May use the 'Summon Rabbit' innate ability.<br />
+        &ndash; May use an Aura of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.<br />
+        &ndash; From 6th level, may use an Entangling Aura, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.<br />
+        &ndash; May cast the following druid spells: Cure Light Wounds, Entangle, Sanctuary, Shillelagh, Barkskin, Charm Person/Mammal, Resist Fire/Cold, Slow Poison, Remove Paralysis, Cure Disease, Zone of Sweet Air, Summon Insects, Cure Serious Wounds, Call Woodland Being, Leser Restoration, Mass Cure, Chaotic Commands, Insect Plague, Animal Summoning III, and False Dawn.</p>
+      <p>Disadvantages:<br />
+        &ndash; May only gain proficiency in weapons appropriate for use by druids.<br />.</p>
+    </div>
+    <div class="kit_description">
+      <p>LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.</p>
+      <p>Advantages:<br />
+        &ndash; May use a Bless Aura, constantly providing all allies within 20 feet with the benefits of the Bles spell.<br />
+        &ndash; From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell.<br />
+        &ndash; May cast the following priest spells: Cure Light Wounds, Sanctuary, Find Traps, Silence 15' Radius, Spiritual Hammer, Cure Medium Wounds, Holy Smite, Death Ward, Holy Power, Greater Command, Cure Critical Wounds, and False Dawn.</p>
+      <p>Disadvantages:<br />
+        &ndash; Reduced pickpocketing ability.<br />.</p>
+    </div>
+    <p> Additionally, on EE games with the 2.0 or higher patch, this component also installs three 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
+    <div class="kit_description">
+      <p>BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.</p>
+      <p>Advantages:<br />
+        &ndash; May Specialize (++) in the use of long and short swords, scimitars, daggers, darts, and one- and two-weapon styles.<br />
+        &ndash; May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.<br />
+        &ndash; From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.<br />
+        &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
+      <p>Disadvantages:<br />
+        &ndash; 
+        &ndash; May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.<br /><br />
+        &ndash; No backstab progression.<br />
+        &ndash; May not set traps.<br />.</p>
+    </div>
+    <div class="kit_description">
+      <p>GALLANT: This is a Demibard kit. Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.</p>
+      <p>Advantages:<br />
+        &ndash; May innately cast the priest spell Aid once per day, and twice per day at 10th level.<br />
+        &ndash; From 5th level, may innately cast the priest spell Death Ward once per day.<br />
+        &ndash; May radiate an Aura of Luck that affects allies within 20 feet.<br />
+        &ndash; From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.<br />
+        &ndash; Receivies a +1 bonus to saves vs. death for each 6 levels of experience.<br />
+        &ndash; May use magical wands as a wizard can.</p>
+      <p>Disadvantages:<br />
+        &ndash; Has the same hit dice as a cleric.<br />
+        &ndash; Limited to Specialization (++) with all weapons.<br />.</p>
+    </div>
+    <div class="kit_description">
+      <p>HEXBLADE: This Demibard kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.</p>
+      <p>Advantages:<br />
+        &ndash; May use an Cursed Aura, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.<br />
+        &ndash; rom 6th level, may use an Aura of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.<br />
+        &ndash; May use arcane wands and cast spells from scrolls.</p>
+      <p>Disadvantages:<br />
+        &ndash; Has the same hit dice as a cleric.<br />
+        &ndash; Limited to Specialization (++) with all weapons.<br />.</p>
+    </div>
+    <p> Finally: on EE games with the 2.0+ patch, this component will allow elves and gnomes to become bards (other demihumans can be demibards). And it allows bards to cast 7th-level spells, starting at 20th level. And it changes bards' HLA tables, removing the old-fashioned Enhanced and Lingering Song HLAs, and removing traps, and instead granting bards a few fighter HLAs (Power Attack, etc.) and a few wizard HLAs (extra 6th level spells), and a new HLA bard aura, which causes all melee opponents to save vs. spells each round or be Mazed.</p>
+  </div>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">
     <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
@@ -564,6 +675,11 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 3.1 - December 2016</strong></p>
+  <ul>
+    <li>added 'fighting dirty' feat</li>
+    <li>added bard overhaul component</li>
+  </ul>
   <p><strong>Version 3.0 - November 2016</strong></p>
   <ul>
     <li>completely rewrote the feat system, merging rogue feats and warrior feats</li>

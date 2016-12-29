@@ -1578,12 +1578,16 @@ COPY_EXISTING ~d5_bard.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_#BARD4~ ~****     ~
   REPLACE_TEXTUALLY ~GA_#BARD5~ ~****     ~
   REPLACE_TEXTUALLY ~GA_#BARD6~ ~****     ~
+  REPLACE_TEXTUALLY ~AP_RR#BDF01~ ~****      ~
+  REPLACE_TEXTUALLY ~AP_RR#BDF02~ ~****      ~
   LPM remove_blank_lines
   APPEND_FILE ~might_and_guile/bardsong/songs_bard.txt~
 COPY_EXISTING ~clabba02.2da~ ~override~
   REPLACE_TEXTUALLY ~AP_FJBLADE~ ~****      ~
   REPLACE_TEXTUALLY ~GA_SPCL521~ ~****      ~
   REPLACE_TEXTUALLY ~GA_SPCL522~ ~****      ~
+  REPLACE_TEXTUALLY ~AP_RR#BBL01~ ~****      ~
+  REPLACE_TEXTUALLY ~AP_RR#BBL02~ ~****      ~
   LPM remove_blank_lines
   APPEND_FILE ~might_and_guile/bardsong/songs_blade.txt~
 COPY_EXISTING ~clabba03.2da~ ~override~

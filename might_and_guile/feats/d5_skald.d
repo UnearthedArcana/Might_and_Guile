@@ -2,13 +2,13 @@ BEGIN ~D5_SKALD~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_skald
  SAY @20009 // ~Choose a feat:~
- IF ~~ THEN REPLY @21021 GOTO d5_skald_2		//	morale aura
- IF ~~ THEN REPLY @21201 GOTO d5_skald_6		//	miscast aura
- IF ~~ THEN REPLY @21211 GOTO d5_skald_8		//	intimidation aura
- IF ~~ THEN REPLY @21221 GOTO d5_skald_10	//	bad luck aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_skald_14		//	mind blank aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_skald_16		//	invulnerability aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_skald_18		//	slow aura
+ IF ~GlobalLT("D5_AUR02","LOCALS",1)~ THEN REPLY @21021 GOTO d5_skald_2		//	morale aura
+ IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_skald_6		//	miscast aura
+ IF ~GlobalLT("D5_AUR21","LOCALS",1)~ THEN REPLY @21211 GOTO d5_skald_8		//	intimidation aura
+ IF ~GlobalLT("D5_AUR22","LOCALS",1)~ THEN REPLY @21221 GOTO d5_skald_10		//	bad luck aura
+ IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_skald_14		//	mind blank aura
+ IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_skald_16		//	invulnerability aura
+ IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_skald_18		//	slow aura
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_skald_22
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_skald_24
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_skald_26
@@ -21,37 +21,37 @@ END
 
 IF ~~ THEN BEGIN d5_skald_2 // morale aura
  SAY @21022
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD02Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR02","LOCALS",1)~ DO ~ApplySpellRES("D5BD02Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END
 IF ~~ THEN BEGIN d5_skald_6 // miscast aura
  SAY @21202
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD20Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR20","LOCALS",1)~ DO ~ApplySpellRES("D5BD20Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END
 IF ~~ THEN BEGIN d5_skald_8 // intimidation
  SAY @21212
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD21Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR21","LOCALS",1)~ DO ~ApplySpellRES("D5BD21Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END
 IF ~~ THEN BEGIN d5_skald_10 // bad luck
  SAY @21222
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD22Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR22","LOCALS",1)~ DO ~ApplySpellRES("D5BD22Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END
 IF ~~ THEN BEGIN d5_skald_14 // mind blank
  SAY @21422
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR42","LOCALS",1)~ DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END 
 IF ~~ THEN BEGIN d5_skald_16 // invulnerability
  SAY @21432
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR43","LOCALS",1)~ DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END 
 IF ~~ THEN BEGIN d5_skald_18 // slow
  SAY @21472
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR47","LOCALS",1)~ DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END 
 IF ~~ THEN BEGIN d5_skald_22 // basic alchemy

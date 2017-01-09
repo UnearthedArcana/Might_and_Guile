@@ -1606,3 +1606,19 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF52~ num_allowed 
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
 //__________________________________________________________________________________
+
+
+//give dirty-fighting feat to AI NPCs_______________________________________________
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	READ_LONG 0x1cc biography
+	PATCH_IF (biography < 0) BEGIN // NOT party-joinable NPC
+	  READ_BYTE 0x273 npc_class
+	  PATCH_IF (npc_class = 4) BEGIN
+		LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 resist_dispel = 0 END
+	  END
+	END
+  END
+BUT_ONLY
+//__________________________________________________________________________________

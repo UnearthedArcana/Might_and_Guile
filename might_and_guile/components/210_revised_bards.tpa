@@ -242,7 +242,7 @@ BUT_ONLY
 //___________________________________________________________________________________
 
 
-//RENAME BLADE TO JONGLEUR___________________________________________________________
+//RENAME BLADE, EDIT KIT DESCRIPTIONS________________________________________________
 //
 COPY ~might_and_guile/misc/d5_acbon.spl~ ~override~
 ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
@@ -252,12 +252,20 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
-	    SET patch_row = %row%
+	    SET blade_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~JESTER~ BEGIN
+	    SET jester_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET skald_row = %row%
 	  END
 	END
-	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4505)
-	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@21811)
-	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %blade_row% 3 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %blade_row% 5 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %blade_row% 4 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %jester_row% 5 cols RESOLVE_STR_REF (@21808)
+	SET_2DA_ENTRY %skald_row% 5 cols RESOLVE_STR_REF (@21809)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
@@ -267,12 +275,20 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
-	    SET patch_row = %row%
+	    SET blade_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~JESTER~ BEGIN
+	    SET jester_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET skald_row = %row%
 	  END
 	END
-	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4505)
-	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@21811)
-	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %blade_row% 3 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %blade_row% 5 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %blade_row% 4 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %jester_row% 5 cols RESOLVE_STR_REF (@21808)
+	SET_2DA_ENTRY %skald_row% 5 cols RESOLVE_STR_REF (@21809)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
@@ -282,12 +298,20 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BLADE~ BEGIN
-	    SET patch_row = %row%
+	    SET blade_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~JESTER~ BEGIN
+	    SET jester_row = %row%
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SKALD~ BEGIN
+	    SET skald_row = %row%
 	  END
 	END
-	SET_2DA_ENTRY %patch_row% 2 cols RESOLVE_STR_REF (@4505)
-	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@4506)
-	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %blade_row% 2 cols RESOLVE_STR_REF (@4505)
+	SET_2DA_ENTRY %blade_row% 3 cols RESOLVE_STR_REF (@4506)
+	SET_2DA_ENTRY %blade_row% 4 cols RESOLVE_STR_REF (@21811)
+	SET_2DA_ENTRY %jester_row% 4 cols RESOLVE_STR_REF (@21808)
+	SET_2DA_ENTRY %skald_row% 4 cols RESOLVE_STR_REF (@21809)
   BUT_ONLY
 END
 COPY_EXISTING ~weapprof.2da~ ~override~
@@ -365,7 +389,7 @@ ADD_KIT ~D5_BLADE~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5_BLADE      0 0 0 0 0 0 0 0~
-~D5_BLADE      0 0 0 0 0 0 0 0 0 2 2 2 0 0 3 3 0 1 0 0 0 0 1 1 1 1 2 1 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5_BLADE      0 0 0 0 0 0 0 0 0 2 2 2 0 0 3 3 0 1 0 0 0 0 1 1 0 1 2 1 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS__________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -426,7 +450,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
 			clswpbon = ~0 0 3~
 			thiefskl = ~25 15~
-			thiefscl = ~100 100 0 100 100 0 0 0~
+			thiefscl = ~100 100 0 100 100 0 0 100~
 			clsrcreq = ~1 1 1 1 1 1 1~
 	END
 END
@@ -438,6 +462,95 @@ COPY ~might_and_guile/bardsong/d5_blade.2da~ ~override~
 COPY ~might_and_guile/fighter/d5swash.spl~ ~override~
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
+//____________________________________________________________________________________
+
+
+//ADD JINXER AS DEMIBARD______________________________________________________________
+//
+ADD_KIT ~D5_JINXER~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_JINXER     0 0 0 0 0 0 0 0~
+~D5_JINXER     0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 1 0 1 0 0 0 0 1 1 0 1 1 1 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS__________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_JINXER          0   12  0   12  0   12~
+
+//KIT STAT MODIFIERS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_JINXER          0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT___________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_JINXER          0   17  0   17  0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_JINXER          0   15  0   15  0   15~
+
+//ALIGNMENT RESTRICTIONS_____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_JINXER          0  0  0  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS_________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_JINXER          1  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE_____________________________________________________________
+~might_and_guile/bardsong/d5_jinx.2da~
+
+//RACIAL KIT AVAILABILITY____________________________________________________________
+~K_T_E K_T_H K_T_HE K_T_G~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 4~
+
+//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
+~Th0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @21851
+SAY @21852
+SAY @21853
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@21853)
+		STR_VAR
+			kit_name = D5_JINXER
+			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+			clswpbon = ~0 0 3~
+			thiefskl = ~25 15~
+			thiefscl = ~100 100 100 100 100 100 0 100~
+			clsrcreq = ~1 1 1 1 1 1 1~
+	END
+END
+//____________________________________________________________________________________
+
+//BLADE ABILITY FILES_________________________________________________________________
+//
 //____________________________________________________________________________________
 
 
@@ -749,6 +862,10 @@ COPY_EXISTING ~kitlist.2da~ ~override~
       SET kit_row = %k_row%
       READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_blade_code
     END
+    PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_JINXER~ BEGIN
+      SET kit_row = %k_row%
+      READ_2DA_ENTRY_FORMER k_rows kit_row 9 jinxer_code
+    END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_F_GALLANT~ BEGIN
       SET kit_row = %k_row%
       READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_gallant_code
@@ -844,6 +961,20 @@ END
 //___________________________________________________________________________________
 
 
+//ADD IWDEE SHOUT (at level 3)_______________________________________________________
+//
+ADD_PROJECTILE ~might_and_guile/bardsong/d5shout.pro~
+COPY ~might_and_guile/bardsong/d5shout.spl~ ~override~
+	SAY NAME1 @21905
+	SAY UNIDENTIFIED_DESC @21906
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5shout% END
+COPY ~might_and_guile/bardsong/#tra_08.wav~ ~override~
+
+ADD_SPELL ~override/d5shout.spl~ 2 3 WIZARD_SHOUT
+
+//___________________________________________________________________________________
+
+
 //ADD SPELLS TO BARDS________________________________________________________________
 //
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -856,7 +987,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 BUT_ONLY
 ACTION_FOR_EACH bard_spell IN ~WIZARD_CHARM_PERSON~ ~CLERIC_SILENCE_15_FEET~ ~WIZARD_DEAFNESS~ ~WIZARD_GLITTERDUST~ ~WIZARD_SECRET_WORD~ ~WIZARD_SHOUT~ ~CLERIC_GREATER_COMMAND~ ~WIZARD_POWER_WORD_SILENCE~ ~WIZARD_POWER_WORD_STUN~ ~CLERIC_EARTHQUAKE~ BEGIN
-  COPY_EXISTING - ~spell.ids~ ~faiths_and_powers/backup~
+  COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
     COUNT_REGEXP_INSTANCES ~%bard_spell%~ spell_exists
   ACTION_IF (spell_exists) BEGIN
   	LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = EVAL ~%bard_spell%~ RET spell_res spell_num END
@@ -913,6 +1044,19 @@ END
 
 //INSTALL NEW BARD AURAS_____________________________________________________________
 //
+APPEND ~splprot.2da~ ~D5_KIT_EQUAL%TAB%152%TAB%-1%TAB%1~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_EQUAL~ BEGIN
+	    SET kit_equal_row = %row%
+	  END
+	END
+BUT_ONLY
+
+
 COPY ~might_and_guile/bardsong/d5bd00z.spl~ ~override~			//		blank placeholder, necessary
 COPY ~might_and_guile/bardsong/d5bd00a.spl~ ~override~			//		demibard "switch song" 214 ability
 	SAY NAME1 @21001
@@ -1604,13 +1748,111 @@ COPY_EXISTING ~sppr406.spl~ ~override/d5skal1~
 //___________________________________________________________________________________
 
 
+//ADD NEW AURAS TO S&S KITS__________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~a!acro.2da~ BEGIN		//		acrobat
+  COPY_EXISTING ~a!acro.2da~ ~override~
+  APPEND_FILE ~might_and_guile/bardsong/songs_blade.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!chor.2da~ BEGIN		//		chorister
+  COPY_EXISTING ~a!chor.2da~ ~override~
+	APPEND_FILE ~might_and_guile/bardsong/songs_loresinger.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!dirge.2da~ BEGIN		//		dirgesinger
+  COPY_EXISTING ~a!dirge.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_A!DS1 ~ ~****      ~
+	APPEND_FILE ~might_and_guile/bardsong/songs_dirge.txt~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!gyp.2da~ BEGIN			//		gypsy
+  COPY_EXISTING ~a!gyp.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_A!GYP1 ~ ~****      ~
+	APPEND_FILE ~might_and_guile/bardsong/songs_gypsy.txt~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 5 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 5 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 5 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 5 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 5 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 5 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 5 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 5 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 4 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 4 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 4 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 4 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+//___________________________________________________________________________________
+
+
 //ADD NEW AURAS TO WORLD_____________________________________________________________
 //
 COPY ~might_and_guile/bardsong/d5bd05.itm~ ~override~			//		mirror images
 	SAY NAME2 @21051
 	SAY IDENTIFIED_DESC @21052
 	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%jinxer_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
 		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd05w~ END
 	  END
 	END
@@ -1632,7 +1874,7 @@ COPY ~might_and_guile/bardsong/d5bd08.itm~ ~override~			//		mind shield
 	SAY NAME2 @21081
 	SAY IDENTIFIED_DESC @21082
 	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%jinxer_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
 		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd08w~ END
 	  END
 	END
@@ -1645,7 +1887,7 @@ COPY ~might_and_guile/bardsong/d5bd24.itm~ ~override~			//		hold undead
 	SAY NAME2 @21241
 	SAY IDENTIFIED_DESC @21242
 	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%jinxer_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
 		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
 	  END
 	END
@@ -1662,7 +1904,7 @@ COPY ~might_and_guile/bardsong/d5bd48.itm~ ~override~			//		dispel illusions
 	SAY NAME2 @21481
 	SAY IDENTIFIED_DESC @21482
 	PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
+	  PATCH_FOR_EACH demibards IN ~%nu_blade_code%~ ~%jinxer_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
 		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd48w~ END
 	  END
 	END
@@ -1679,6 +1921,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_fbrd.baf~
   COMPILE ~might_and_guile/feats/d5_bard.d~ 
   COMPILE ~might_and_guile/feats/d5_blade.d~ 
+  COMPILE ~might_and_guile/feats/d5_jinx.d~ 
   COMPILE ~might_and_guile/feats/d5_skald.d~ 
   COMPILE ~might_and_guile/feats/d5_nskld.d~ 
   COMPILE ~might_and_guile/feats/d5_galla.d~ 
@@ -1697,12 +1940,29 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 //	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_bards.txt~
 
+  ACTION_IF FILE_EXISTS_IN_GAME ~a!acro.2da~ BEGIN		//		acrobat
+	EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_ssacr.baf~
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~a!chor.2da~ BEGIN		//		chorister
+	EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_sscho.baf~
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~a!dirge.2da~ BEGIN		//		dirgesinger
+	EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_ssdrg.baf~
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~a!gyp.2da~ BEGIN		//		gypsy
+	EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_ssgyp.baf~
+  END
+
  ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_dbrd.baf~
   COPY_EXISTING ~d5_blade.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_D5SWASH~ ~****     ~
 //	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_nu_blade.txt~
+  COPY_EXISTING ~d5_jinx.2da~ ~override~
+	APPEND_FILE ~might_and_guile/feats/feats_nu_blade.txt~
+  COPY_EXISTING ~d5_jinx.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_D5SWASH~ ~AP_D5_RFA5 ~
   COPY_EXISTING ~d5fgalla.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_nu_gallant.txt~
@@ -1711,6 +1971,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 //	APPEND_FILE ~might_and_guile/feats/feats_nu_gallant.txt~
  END
 END
+
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
 	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
@@ -1738,6 +1999,92 @@ ACTION_IF FILE_EXISTS_IN_GAME ~bdhelm11.itm~ BEGIN
 	SAY IDENTIFIED_DESC @21900
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 99 opcode = 42 parameter1 = 1 parameter2 = 1 END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 99 opcode = 42 parameter1 = 1 parameter2 = 2 END
+END
+//___________________________________________________________________________________
+
+
+//CHANGE NPC TRUECLASS BARDS_________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 8 rows
+  FOR (row = 3; row < rows; ++row) BEGIN 
+	READ_2DA_ENTRY row 1 8 ~kit_name~
+	PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_BARD~ = 1) BEGIN
+	  SET new_bard = %row% - 1
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	READ_LONG 0x1cc biography
+	PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
+	  READ_BYTE 0x273 npc_class
+	  PATCH_IF (npc_class = 5) BEGIN
+		READ_SHORT 0x246 old_kit
+		PATCH_IF (old_kit = 16384) OR
+		  		(old_kit = 0) BEGIN
+		  WRITE_BYTE 0x234 1 // sets level to 1
+		  WRITE_BYTE 0x235 1
+		  WRITE_BYTE 0x236 1
+		  WRITE_SHORT 0x244 0
+		  WRITE_SHORT 0x246 0x4000 + %new_bard% // changes kit
+		  WRITE_BYTE 0x66 10
+		  WRITE_BYTE 0x6a 20
+	 	  READ_BYTE 0x23d npc_con
+		  PATCH_IF (npc_con < 15) BEGIN
+			WRITE_SHORT 0x24 6
+			WRITE_SHORT 0x26 6
+		  END
+		  PATCH_IF (npc_con = 15) BEGIN
+			WRITE_SHORT 0x24 7
+			WRITE_SHORT 0x26 7
+		  END
+		  PATCH_IF (npc_con > 15) BEGIN
+			WRITE_SHORT 0x24 8
+			WRITE_SHORT 0x26 8
+		  END
+		  PATCH_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5feata~ END
+		  END
+		END
+	  END
+	END
+  END
+BUT_ONLY
+ACTION_IF FILE_EXISTS_IN_GAME ~garric4.cre~ BEGIN
+ COPY_EXISTING ~garric4.cre~ ~override~
+  READ_BYTE 0x273 npc_class
+  PATCH_IF (npc_class = 5) BEGIN
+	READ_SHORT 0x246 old_kit
+	PATCH_IF (old_kit = 16384) OR
+	  		(old_kit = 0) BEGIN
+	  WRITE_BYTE 0x234 1 // sets level to 1
+	  WRITE_BYTE 0x235 1
+	  WRITE_BYTE 0x236 1
+	  WRITE_SHORT 0x244 0
+	  WRITE_SHORT 0x246 0x4000 + %new_bard% // changes kit
+	  WRITE_BYTE 0x66 10
+	  WRITE_BYTE 0x6a 20
+ 	  READ_BYTE 0x23d npc_con
+	  PATCH_IF (npc_con < 15) BEGIN
+		WRITE_SHORT 0x24 6
+		WRITE_SHORT 0x26 6
+	  END
+	  PATCH_IF (npc_con = 15) BEGIN
+		WRITE_SHORT 0x24 7
+		WRITE_SHORT 0x26 7
+	  END
+	  PATCH_IF (npc_con > 15) BEGIN
+		WRITE_SHORT 0x24 8
+		WRITE_SHORT 0x26 8
+	  END
+	  PATCH_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+		LPF ADD_CRE_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5feata~ END
+	  END
+	END
+  END
+ BUT_ONLY
 END
 //___________________________________________________________________________________
 

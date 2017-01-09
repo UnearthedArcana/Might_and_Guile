@@ -10,6 +10,17 @@ THEN
 END
 
 IF
+	Kit(LastSummonerOf(Myself),D5_JINXER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_jinx",Myself))
+END
+
+/*
+IF
 	Kit(LastSummonerOf(Myself),D5_SKALD)
 	NumTimesTalkedTo(0)
 THEN
@@ -18,6 +29,7 @@ THEN
 	SetNumTimesTalkedTo(1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_nskld",Myself))
 END
+*/
 
 IF
 	Kit(LastSummonerOf(Myself),D5_F_GALLANT)

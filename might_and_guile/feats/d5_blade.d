@@ -2,9 +2,9 @@ BEGIN ~D5_BLADE~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_blade
 SAY @20009
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_blade_4		//	mind blank aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_blade_6		//	invulnerability aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_blade_8		//	slow aura
+ IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_blade_4		//	mind blank aura
+ IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_blade_6		//	invulnerability aura
+ IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_blade_8		//	slow aura
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_blade_10
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_blade_12
  IF ~GlobalLT("D5_EVADE","LOCALS",4)~ THEN REPLY @20201 GOTO d5_blade_14
@@ -22,17 +22,17 @@ END
 
 IF ~~ THEN BEGIN d5_blade_4 // mind blank
  SAY @21422
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR42","LOCALS",1)~ DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_blade 
 END 
 IF ~~ THEN BEGIN d5_blade_6 // invulnerability
  SAY @21432
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR43","LOCALS",1)~ DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_blade 
 END 
 IF ~~ THEN BEGIN d5_blade_8 // slow
  SAY @21472
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR47","LOCALS",1)~ DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_blade 
 END 
 IF ~~ THEN BEGIN d5_blade_10 // basic alchemy

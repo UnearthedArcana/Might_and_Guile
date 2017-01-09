@@ -624,8 +624,8 @@ CLASS FEATURES:
 @21806  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.
 
 Abilities:
-- May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bles spell.
-- From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell.
+- May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
+- From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Loresinger cannot cast spells while the Positive Energy Aura is in effect.)
 - May cast the following priest spells: Cure Light Wounds, Sanctuary, Find Traps, Silence 15' Radius, Spiritual Hammer, Cure Medium Wounds, Holy Smite, Death Ward, Holy Power, Greater Command, Cure Critical Wounds, and False Dawn.
 
 Restrictions:
@@ -642,13 +642,33 @@ Abilities:
 Restrictions:
 - May only gain proficiency in weapons appropriate for use by druids.
 ~
+@21808  = ~JESTER: This Bard is well versed in the arts of ridicule and hilarity, and uses <PRO_HISHER> abilities to distract and confuse <PRO_HISHER> enemies, cavorting madly during combat. Do not mistake <PRO_HIMHER> for a true fool, however, as <PRO_HESHE> can also be quite deadly.
+
+Advantages:
+- May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+- From 6th level, may use an Aura of Confusion, which causes all enemies within 20 feet to save vs. Spells each round or become Confused. (The Jester cannot cast spells while the Aura of Confusion is in effect.)
+
+Restrictions:
+– None.
+~
+@21809  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
+
+Advantages:
+– +1 bonus to hit and damage rolls.
+- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
+- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
+- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened. (The Skald cannot cast spells while the Aura of Fear is in effect.)
+
+Disadvantages:
+– Only has one quarter the normal Pick Pockets score.
+~
 @21811  = ~JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements. 
 
 Abilities:
 - May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
 - +1 bonus to Armor Class.
 - May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws. (The Jongleur cannot cast spells while the Blur Aura is in effect.)
 - Once per day per 6 levels of experience, may use the Swashbuckling ability.  
 
 SWASHBUCKLING:
@@ -671,7 +691,7 @@ Advantages:
 - Once per day per 6 levels of experience, may use the Swashbuckling ability. 
 
 SWASHBUCKLING:
-For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
 
 Restrictions:
 - May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.
@@ -719,6 +739,81 @@ Restrictions:
 - Has the same hit dice as a cleric.
 - Limited to Specialization (++) with all weapons.
 ~
+@21851  = ~jinxer~
+@21852  = ~Jinxer~
+@21853  = ~JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.
+
+Abilities:
+- May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+- From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
+
+Restrictions:
+- May only allocate 15 thief skill points per level.
+- Backstab multiplier is one level lower than most thieves.
+- May not gain the Set Traps ability.
+~
+@21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
+
+Advantages:
+-  +1 bonus to Armor Class
+-  +1 bonus to Armor Class vs. missiles every 8 levels
+-  May place up to 2 proficiency points in slings, darts and daggers
+-  May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+-  From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws. (The Acrobat cannot cast spells while the Blur Aura is in effect.)
+
+Disadvantages:
+-  May only place proficiency points in weapons a thief can use
+-  May not wear armor heavier than Studded Leather
+-  Only has one-half normal lore value
+~
+@21892  = ~CHORISTER: Music, whether hymn, symphony or dark chanting intonation, plays an important part in the services of most deities. For aiding in performing rituals or just leading the faithful in worship, most holy places have at least one bard, known as a Chorister.
+
+Choristers are not only to be found within temple walls, however; many faiths use them as missionaries, helping to bring new worshippers into the fold. Many an adventuring bard with a religious bent can also end up as a Chorister, finding their prayers answered by the deity they venerate.
+
+Advantages:
+-  May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
+-  From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Chorister cannot cast spells while the Positive Energy Aura is in effect.)
+-  Knows a small selection of divine spells. These are accessed and memorised as Mage spells:
+Level 1: Armor of Faith, Cure Light Wounds, Doom
+Level 2: Chant, Draw Upon Holy Might, Slow Poison
+Level 3: Cure Medium Wounds, Glyph of Warding
+Level 4: Defensive Harmony, Holy Power
+Level 5: Mass Cure
+Level 6: Bolt of Glory
+
+Disadvantages:
+-  Only has one-half normal Lore value
+-  Only has one-half Pick Pockets percentage
+~
+@21893  = ~DIRGESINGER: Dirgesingers voice melodies not of celebration and joy, but of sorrow and grief. They seek to spread this melancholy outlook far and wide, believing that only those who give in to their sadness can truly understand the world.
+
+These sad wanderers seek to express their grief through songs that teach the hearts of their listeners the meaning of true sorrow. Some of these fallen bards want nothing more than for others to understand the depths of their loss. A few are sinister creatures who believe that, since joy has been extinguished for them, they must in turn extinguish the joy of others by using their powers to teach the folly of love, the futility of hope, and the finality of the grave. Dirgesingers of this last sort often associate themselves with powerful undead; serving in the courts of vampire lords or lich-kings.
+
+Dirgesingers are limited to non-good alignments.
+
+Advantages:
+-  May use an Aura of Weakness, which cause a 1-point penalty to all attack and damage rolls of enemies within 20 feet.
+-  From 6th level, may use an Aura of Weariness, which causes enemies in melee range to save vs. Spells each round or be Slowed. (The Dirgesinger cannot cast spells while the Aura of Weariness is in effect.)
+-  From level 5 may use a Song of Horror 1/day. This has the same effects as the level 2 Wizard spell, Horror
+-  From level 7 may use a Song of Grief 1/day. This has the same effects as the level 4 Wizard spell, Confusion
+-  From level 9 may use a Song of Awakening 1/day. This has the same effects as the level 5 Wizard spell, Animate Dead
+
+Disadvantages:
+-  Only has one-half normal Lore value
+~
+@21894  = ~GYPSY: Gypsies are often called "travelling people" or "forest nomads," typically wandering the lands in caravans comprising of brightly painted carts or wagons.  These people are well-known for their strange music and dances, typically surviving in their wandering lifestyle by entertaining villagers and folk in the places they roam.  Gypsies wander the land, experiencing life as they go.  They travel until they find something of interest, where they establish a temporary camp and remain until the urge to see more of the world overpowers their desire to stay.  Adventuring gypsies may be on a personal quest to locate some unique place or thing or may simply be out to experience the great wonders that appear along the adventuring path.
+
+Gypsies are often misunderstood by others, who classify them as thieves, beggars, carnival people, nomads, or any number of other erroneous names.  They are also very open and welcoming to those who seek to learn their ways and join them in their wandering, garnering for them a reputation for stealing children in the night and then spiriting them off into the wilderness.  It should be noted that not all Gypsies are bards or have bardic abilities; Gypsy bards, known among Gypsy clans as "rawuns," function as the chief storytellers, lore-keepers, fortune tellers, and spiritual advisers of their Gypsy clans.
+
+Advantages:
+-  Has a +1 bonus to saves vs. spells per 8 levels
+-  Can cast Curse once per day. The opposite of a Bless spell, this gives foes a -1 penalty to THAC0 and saves
+-  May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+-  From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. (The Gypsy may not cast spells while the Blank Aura is in effect.)
+
+Disadvantages:
+-  Cannot learn mage spells from the schools of Conjuration, Invocation or Transmutation
+~
 @21900  = ~This ostentatious peacock-blue hat is festooned with green and purple feathers. Once the possession of an unfailingly chipper bard, the hat was stolen when the bard couldn't resist showing off the hat in a seedy tavern and bragging about its magical powers. In truth the hat has only moderate enchantments on it, but its stylish appearance makes it a coveted choice for many bards.
 
 STATISTICS:
@@ -750,6 +845,17 @@ Area of Effect: 1 creature
 Saving Throw: None
 
 This spell can remove magical effects from one subject. This includes effects given from spells, potions and certain magical items such as wands. It does not, however, affect enchanted magical items or spell protections such as Spell Turning and Spell Deflection. The chance of the dispel succeeding is determined by the level of the caster and the level of the magic being dispelled. The base chance of successfully dispelling is 50%. For every level that the caster of the Dispel Magic is above the original caster, <PRO_HISHER> chance of success increases by 5%. For every level that the caster of Dispel Magic is below the original caster, <PRO_HISHER> chance of success decreases by 10%. However, despite the difference in levels, there is always at least a 5% chance of success or failure. Thus, if a caster is 10 levels higher than the magic <PRO_HESHE> is trying to dispel, there is only a 5% chance of failure. Similarly if the caster is 4 levels lower than the magic <PRO_HESHE> is trying to dispel, there is only a 10% chance of success. Intuitively, this spell is almost useless if the target is 5 or more levels higher than the caster.~
+@21905  = ~Shout~
+@21906  = ~Shout
+
+Level: 3
+Range: 0
+Duration: Instant
+Casting Time: 1
+Area of Effect: 35-ft. cone with 15-deg. arc
+Saving Throw: Special
+
+This spell grants the caster tremendous vocal powers, allowing <PRO_HIMHER> to emit an earsplitting roar from <PRO_HISHER> mouth in a cone-shaped area of effect. Any creature within this area is deafened for 9 rounds and suffers 4d6 points of magic damage. A successful Save vs. Spell negates the deafness and reduces the damage by half.~
 //
 //
 @2210   = ~Quickstride~

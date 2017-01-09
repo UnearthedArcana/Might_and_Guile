@@ -2,12 +2,12 @@ BEGIN ~D5_GALLA~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_galla
  SAY @20009 // ~Choose a feat:~
- IF ~~ THEN REPLY @21031 GOTO d5_galla_4		//	skald song
- IF ~~ THEN REPLY @21201 GOTO d5_galla_6		//	miscast aura
- IF ~~ THEN REPLY @21211 GOTO d5_galla_8		//	intimidation aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_galla_14		//	mind blank aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_galla_16		//	invulnerability aura
- IF ~CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_galla_18		//	slow aura
+ IF ~GlobalLT("D5_AUR03","LOCALS",1)~ THEN REPLY @21031 GOTO d5_galla_4		//	skald song
+ IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_galla_6		//	miscast aura
+ IF ~GlobalLT("D5_AUR21","LOCALS",1)~ THEN REPLY @21211 GOTO d5_galla_8		//	intimidation aura
+ IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_galla_14		//	mind blank aura
+ IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_galla_16		//	invulnerability aura
+ IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_galla_18		//	slow aura
  IF ~GlobalLT("D5_FFLURRY","LOCALS",1)~ THEN REPLY @3913 GOTO d5_galla_20
  IF ~GlobalLT("D5_FPARRY","LOCALS",1)~ THEN REPLY @3911 GOTO d5_galla_22
  IF ~GlobalLT("D5_FKNOCKDOWN","LOCALS",1)~ THEN REPLY @3923 GOTO d5_galla_24
@@ -18,32 +18,32 @@ END
 
 IF ~~ THEN BEGIN d5_galla_4 // skald song
  SAY @21032
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD03Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR03","LOCALS",1)~ DO ~ApplySpellRES("D5BD03Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END
 IF ~~ THEN BEGIN d5_galla_6 // miscast aura
  SAY @21202
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD20Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR20","LOCALS",1)~ DO ~ApplySpellRES("D5BD20Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END
 IF ~~ THEN BEGIN d5_galla_8 // intimidation
  SAY @21212
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD21Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR21","LOCALS",1)~ DO ~ApplySpellRES("D5BD21Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END
 IF ~~ THEN BEGIN d5_galla_14 // mind blank
  SAY @21422
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR42","LOCALS",1)~ DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END 
 IF ~~ THEN BEGIN d5_galla_16 // invulnerability
  SAY @21432
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR43","LOCALS",1)~ DO ~ApplySpellRES("D5BD43Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END 
 IF ~~ THEN BEGIN d5_galla_18 // slow
  SAY @21472
- IF ~~ THEN REPLY @20098 DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR47","LOCALS",1)~ DO ~ApplySpellRES("D5BD47Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_galla 
 END 
 IF ~~ THEN BEGIN d5_galla_20 // flurry

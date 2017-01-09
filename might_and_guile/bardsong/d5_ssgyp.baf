@@ -1,0 +1,12 @@
+IF
+	Kit(LastSummonerOf(Myself),A!GYPSY)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_AUR22","LOCALS",1)
+	SetGlobal("D5_AUR42","LOCALS",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_bard",Myself))
+END
+

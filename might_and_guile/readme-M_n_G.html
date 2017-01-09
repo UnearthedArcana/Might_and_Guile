@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.1 </strong><br />
+  <p><strong> Version 3.2 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -193,7 +193,7 @@
         &ndash; May not cast spells directly from scrolls.<br />.</p>
       </div>
       <div class="kit_description">
-      <p> The Blade is renamed: </p>
+      <p> The Blade is changed, and renamed: </p>
       <p>JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements.</p>
       <p>Advantages:<br />
         &ndash; May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.<br />
@@ -228,7 +228,7 @@
       <p>Disadvantages:<br />
         &ndash; Reduced pickpocketing ability.<br />.</p>
     </div>
-    <p> Additionally, on EE games with the 2.0 or higher patch, this component also installs three 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
+    <p> Additionally, on EE games with the 2.0 or higher patch, this component also installs four 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
     <div class="kit_description">
       <p>BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.</p>
       <p>Advantages:<br />
@@ -237,9 +237,18 @@
         &ndash; From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.<br />
         &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
       <p>Disadvantages:<br />
-        &ndash; 
-        &ndash; May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.<br /><br />
+        &ndash; May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.<br />
         &ndash; No backstab progression.<br />
+        &ndash; May not set traps.<br />.</p>
+    </div>
+    <div class="kit_description">
+      <p>JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy/Traveller clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.</p>
+      <p>Advantages:<br />
+        &ndash; May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
+        &ndash; From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.</p>
+      <p>Disadvantages:<br />
+        &ndash; May only allocate 15 thief skill points per level.<br />
+        &ndash; Reduced backstab progression.<br />
         &ndash; May not set traps.<br />.</p>
     </div>
     <div class="kit_description">

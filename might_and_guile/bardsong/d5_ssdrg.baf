@@ -1,0 +1,12 @@
+IF
+	Kit(LastSummonerOf(Myself),A!DIRGESINGER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_AUR21","LOCALS",1)
+	SetGlobal("D5_AUR47","LOCALS",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_bard",Myself))
+END
+

@@ -84,7 +84,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEASTMASTER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
 	  END

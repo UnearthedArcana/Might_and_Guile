@@ -156,5 +156,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
    BUT_ONLY
   END
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/feats/d5_corsa.baf~
+  COMPILE ~might_and_guile/feats/d5_corsa.d~
 END
 //___________________________________________________________________________________

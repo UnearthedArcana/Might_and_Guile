@@ -228,7 +228,7 @@
       <p>Disadvantages:<br />
         &ndash; Reduced pickpocketing ability.<br />.</p>
     </div>
-    <p> Additionally, on EE games with the 2.0 or higher patch, this component also installs four 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
+    <p> Additionally, this component also installs four 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
     <div class="kit_description">
       <p>BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.</p>
       <p>Advantages:<br />

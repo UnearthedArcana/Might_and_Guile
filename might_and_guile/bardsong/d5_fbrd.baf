@@ -4,8 +4,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_FEAT","GLOBAL",1)
-	SetGlobal("D5_AUR01","LOCALS",1)
 	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_AUR01","LOCALS",1))
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_bard",Myself))
 END
 
@@ -25,8 +25,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_FEAT","GLOBAL",1)
-	SetGlobal("D5_AUR22","LOCALS",1)
 	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_AUR22","LOCALS",1))
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_bard",Myself))
 END
 
@@ -46,8 +46,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_FEAT","GLOBAL",1)
-	SetGlobal("D5_AUR01","LOCALS",1)
 	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_AUR01","LOCALS",1))
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_bard",Myself))
 END
 

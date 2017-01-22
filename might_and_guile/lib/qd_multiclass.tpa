@@ -3,22 +3,22 @@
 // For adding existing kits to the multiclass kit selection during chargen.
 // For use with the Enhanced Infinity Engine v2.0 and later. 
 // Author: Aquadrizzt 
-// Version: 0.1 
-// Published: June 7, 2016 
+// Version: 0.2 
+// Published: January 20, 2017 
 //---------------------------------------------
 
-OUTER_SPRINT qd_multiclass#version "0.1"
+OUTER_SPRINT qd_multiclass#version "0.2"
 
-DEFINE_ACTION_FUNCTION qd_multiclass 
-	STR_VAR 
-		kit_name = "" 
-		kit_clab = "" 
-		base_class = ""
-		mc_dir = "" 
-BEGIN 
-	
+<<<<<<<< qd_blank_clab_inline.2da
+2DA V1.0
+****
+
+			1           2           3           4           5           6           7           8           9           10          11          12          13          14          15          16          17          18          19          20     21          22          23          24          25          26          27          28          29          30          31          32          33          34          35          36          37          38          39          40
+ABILITY1    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****
+>>>>>>>>
+
 	ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabma01.2da~ BEGIN
-	  COPY ~%mc_dir%/blankclab.2da~ ~clabma01.2da~
+	  COPY ~qd_blank_clab_inline.2da~ ~override/clabma01.2da~
 	END
 
 	//this will only install the first time a multiclass kit using this macro is installed
@@ -114,7 +114,36 @@ BEGIN
 			APPEND ~CLABRN01.2da~ ~QD_MULTI     AP_QD_MCR01 AP_QD_MCR02 AP_QD_MCR03 AP_QD_MCR04 AP_QD_MCR05 AP_QD_MCR06 AP_QD_MCR07 AP_QD_MCR08 AP_QD_MCR09 AP_QD_MCR10 AP_QD_MCR11 AP_QD_MCR12 AP_QD_MCR13 AP_QD_MCR14 AP_QD_MCR15 AP_QD_MCR16 AP_QD_MCR17 AP_QD_MCR18 AP_QD_MCR19 AP_QD_MCR20 AP_QD_MCR21 AP_QD_MCR22 AP_QD_MCR23 AP_QD_MCR24 AP_QD_MCR25 AP_QD_MCR26 AP_QD_MCR27 AP_QD_MCR28 AP_QD_MCR29 AP_QD_MCR30 AP_QD_MCR31 AP_QD_MCR32 AP_QD_MCR33 AP_QD_MCR34 AP_QD_MCR35 AP_QD_MCR36 AP_QD_MCR37 AP_QD_MCR38 AP_QD_MCR39 AP_QD_MCR40 AP_QD_MCR41 AP_QD_MCR42 AP_QD_MCR43 AP_QD_MCR44 AP_QD_MCR45 AP_QD_MCR46 AP_QD_MCR47 AP_QD_MCR48 AP_QD_MCR49 AP_QD_MCR50~ //cleric
 		END
 		
-		//making the empty multiclass spells	
+<<<<<<<< qd_blank_k_x_x_inline.2da
+2DA V1.0
+****
+
+		KIT
+1		0
+>>>>>>>>
+
+		//making the multiclass K_X_X
+		ACTION_FOR_EACH mc IN ~FM~ ~FC~ ~FT~ ~FMT~ ~MT~ ~CM~ ~CT~ ~FD~ ~FMC~ ~CR~ BEGIN 
+			ACTION_FOR_EACH race IN ~H~ ~D~ ~G~ ~E~ ~HE~ ~HL~ ~HO~ BEGIN 
+				ACTION_IF NOT FILE_EXISTS_IN_GAME ~K_%mc%_%race%.2da~ BEGIN
+					COPY ~qd_blank_k_x_x_inline.2da~ ~override/K_%mc%_%race%.2da~
+				END
+			END
+		END	
+			
+		COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ //multiclass macro identifier file
+	END 
+	
+DEFINE_ACTION_FUNCTION qd_multiclass 
+	STR_VAR 
+		kit_name = "" 
+		kit_clab = "" 
+		base_class = ""
+		mc_dir = "" 
+	BEGIN 
+		
+		ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi_spls.qd~) THEN BEGIN 
+			//making the empty multiclass spells	
 		COPY ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF01.SPL~ 
 			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF02.SPL~ 
 			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCF03.SPL~ 
@@ -420,96 +449,84 @@ BEGIN
 			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR48.SPL~ 
 			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR49.SPL~ 
 			 ~%mc_dir%/QD_MC_01.SPL~ ~override/QD_MCR50.SPL~
-		
-		COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ //multiclass macro identifier file
-	END 
-
-	//getting kit code
-	COPY_EXISTING ~kitlist.2da~ ~override~
-		COUNT_2DA_COLS k_cols // amount of columns
-		READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
-		FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
-		  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
-		  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
-			SET kit_row = %k_row%
-			READ_2DA_ENTRY_FORMER k_rows kit_row 9 kit_code
-		  END
+			 
+			 COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi_spls.qd~ //multiclass macro spells identifier file
 		END
-	BUT_ONLY
-	
-	//read clab
-	COPY_EXISTING ~%kit_clab%.2da~ ~override~ //copy the clab of the base kit 
-		COUNT_2DA_COLS cols // amount of columns
-		READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-		FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
-			FOR (col = 1; col < cols; ++col) BEGIN // iterate over columns
-				READ_2DA_ENTRY_FORMER rows row col ability // read column value
-				// PATCH_PRINT ~%ability%~
-				PATCH_IF (NOT ~%ability%~ STRING_EQUAL ~****~) BEGIN 
-					LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END 
-					SET string_length = (STRING_LENGTH ~%ability%~) - 3
-					LPF SUBSTRING INT_VAR start = 3 length = EVAL ~%string_length%~  STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
-					PATCH_IF (~%string_length%~ > 7) BEGIN 
-						PATCH_PRINT ~Internal ability name too long~
-					END 
-					
-					PATCH_IF (~%string_length%~ <= 7) BEGIN 
-						//passive bonuses
-						PATCH_IF (~%abil_type%~ STRING_EQUAL ~AP_~) BEGIN 
-							//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
-							INNER_ACTION BEGIN 
-								COPY ~%mc_dir%/QD_MC_AP.eff~ ~override/%abil_new%#.eff~
-									WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
-									SET col_length = STRING_LENGTH ~%col%~
-								ACTION_IF (%col_length% = 1) BEGIN 
-									COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
-								END 
-								ACTION_IF (%col_length% = 2) BEGIN
-									COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = ~%abil_new%#~ END  
-								END 
-							END 
-						END
+		
+		//getting kit code
+		COPY_EXISTING ~kitlist.2da~ ~override~
+			COUNT_2DA_COLS k_cols // amount of columns
+			READ_2DA_ENTRIES_NOW k_rows k_cols // read all file into memory  
+			FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN // iterate over rows
+			  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ // read column value
+			  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+				SET kit_row = %k_row%
+				READ_2DA_ENTRY_FORMER k_rows kit_row 9 kit_code
+			  END
+			END
+		BUT_ONLY
+		
+		//read clab
+		COPY_EXISTING ~%kit_clab%.2da~ ~override~ //copy the clab of the base kit 
+			COUNT_2DA_COLS cols // amount of columns
+			READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+			FOR (row = 0; row < rows; ++row) BEGIN // iterate over rows
+				FOR (col = 1; col < cols; ++col) BEGIN // iterate over columns
+					READ_2DA_ENTRY_FORMER rows row col ability // read column value
+					// PATCH_PRINT ~%ability%~
+					PATCH_IF (NOT ~%ability%~ STRING_EQUAL ~****~) BEGIN 
+						LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END 
+						SET string_length = (STRING_LENGTH ~%ability%~) - 3
+						LPF SUBSTRING INT_VAR start = 3 length = EVAL ~%string_length%~  STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
+						PATCH_IF (~%string_length%~ > 7) BEGIN 
+							PATCH_PRINT ~Internal ability name too long~
+						END 
 						
-						//granted abilities
-						PATCH_IF (~%abil_type%~ STRING_EQUAL ~GA_~) BEGIN 
-							//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
-							INNER_ACTION BEGIN 
-								COPY ~%mc_dir%/QD_MC_GA.eff~ ~override/%abil_new%#.eff~
-									WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
-									SET col_length = STRING_LENGTH ~%col%~
-								ACTION_IF (%col_length% = 1) BEGIN 
-									COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+						PATCH_IF (~%string_length%~ <= 7) BEGIN 
+							//passive bonuses
+							PATCH_IF (~%abil_type%~ STRING_EQUAL ~AP_~) BEGIN 
+								//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
+								INNER_ACTION BEGIN 
+									COPY ~%mc_dir%/QD_MC_AP.eff~ ~override/%abil_new%#.eff~
+										WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
+										SET col_length = STRING_LENGTH ~%col%~
+									ACTION_IF (%col_length% = 1) BEGIN 
+										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+									END 
+									ACTION_IF (%col_length% = 2) BEGIN
+										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+									END 
 								END 
-								ACTION_IF (%col_length% = 2) BEGIN
-									COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-										LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = ~%abil_new%#~ END  
+							END
+							
+							//granted abilities
+							PATCH_IF (~%abil_type%~ STRING_EQUAL ~GA_~) BEGIN 
+								//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
+								INNER_ACTION BEGIN 
+									COPY ~%mc_dir%/QD_MC_GA.eff~ ~override/%abil_new%#.eff~
+										WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
+										SET col_length = STRING_LENGTH ~%col%~
+									ACTION_IF (%col_length% = 1) BEGIN 
+										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+									END 
+									ACTION_IF (%col_length% = 2) BEGIN
+										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+									END 
 								END 
-							END 
-						END
+							END
 
-						//exceptions
-						PATCH_IF NOT ((~%abil_type%~ STRING_EQUAL ~GA_~) OR 
-									  (~%abil_type%~ STRING_EQUAL ~AP_~)) BEGIN 
-							PATCH_PRINT ~Error reading kit table~
+							//exceptions
+							PATCH_IF NOT ((~%abil_type%~ STRING_EQUAL ~GA_~) OR 
+										  (~%abil_type%~ STRING_EQUAL ~AP_~)) BEGIN 
+								PATCH_PRINT ~Error reading kit table~
+							END 
 						END 
 					END 
-				END 
-			END 	
-		END 
-END 
+				END 	
+			END 
+	END 
 
-DEFINE_ACTION_FUNCTION qd_multiclass_tables 
-	STR_VAR 
-		mc_dir = ""
-BEGIN 
-	ACTION_FOR_EACH mc IN ~FM~ ~FC~ ~FT~ ~FMT~ ~MT~ ~CM~ ~CT~ ~FD~ ~FMC~ ~CR~ BEGIN 
-		ACTION_FOR_EACH race IN ~H~ ~D~ ~G~ ~E~ ~HE~ ~HL~ ~HO~ BEGIN 
-			ACTION_IF NOT FILE_EXISTS_IN_GAME ~K_%mc%_%race%.2da~ BEGIN
-				COPY ~%mc_dir%/blank_K_X_X.2da~ ~override/K_%mc%_%race%.2da~
-			END
-		END
-	END	
-END 

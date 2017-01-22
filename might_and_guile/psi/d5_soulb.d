@@ -48,7 +48,7 @@ IF ~~ THEN BEGIN d5_soulb_6 // carapace
 END 
 IF ~~ THEN BEGIN d5_soulb_7 // static discharge
  SAY @20644
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PS301")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSC01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_soulb 
 END 
 IF ~~ THEN BEGIN d5_soulb_8 // energy shield

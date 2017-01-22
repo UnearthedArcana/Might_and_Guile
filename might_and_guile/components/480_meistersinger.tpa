@@ -110,7 +110,7 @@ COPY_EXISTING ~sppr212.spl~ ~override/d5_mei23.spl~
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr204.spl~ ~override/d5_mei24.spl~
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr308.spl~ ~override/d5_mei31.spl~
+COPY_EXISTING ~sppr315.spl~ ~override/d5_mei31.spl~
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr317.spl~ ~override/d5_mei32.spl~
 	WRITE_SHORT 0x1c 1
@@ -217,3 +217,43 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
   BUT_ONLY
 END
 //__________________________________________________________________________________
+
+
+//TNB COMPATIBILITY_________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_l1cantrips.qd~ BEGIN
+//  ACTION_IF FILE_EXISTS_IN_GAME ~d5wakeup.spl~ BEGIN
+	COPY_EXISTING ~sppr103.spl~ ~override/d5_mei23.spl~
+	  WRITE_SHORT 0x1c 1
+	  WRITE_LONG 0x34 2
+	COPY_EXISTING ~d5_mei13.spl~ ~override~
+	  WRITE_LONG 0x34 2
+	COPY ~might_and_guile/bard/d5_witr.spl~ ~override/d5_mei12.spl~
+	  SAY NAME1 @4811
+	  SAY UNIDENTIFIED_DESC @4812
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	COPY_EXISTING ~d5_mei14.spl~ ~override~
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	COPY_EXISTING ~sppr212.spl~ ~override/d5_mei11.spl~
+	  WRITE_SHORT 0x1c 1
+	  WRITE_LONG 0x34 1
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+//  END
+END
+//__________________________________________________________________________________
+

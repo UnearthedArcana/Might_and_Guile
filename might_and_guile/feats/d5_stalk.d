@@ -1,7 +1,7 @@
 BEGIN ~D5_STALK~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_stalk
-SAY @20009 // ~Choose a feat:~
+SAY @23101 // ~Choose a feat:~
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20101 GOTO d5_stalk_2
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_stalk_4
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_6

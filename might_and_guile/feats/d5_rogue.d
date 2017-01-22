@@ -170,7 +170,7 @@ IF ~~ THEN BEGIN d5_rogue_24 // luck bonus
 END 
 IF ~~ THEN BEGIN d5_rogue_25 // mind thrust
  SAY @20604
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",1)~ DO ~AddSpecialAbility("D5PS101")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",1)~ DO ~AddSpecialAbility("D5PSA01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
 IF ~~ THEN BEGIN d5_rogue_26 // id insinuation
@@ -205,7 +205,7 @@ IF ~~ THEN BEGIN d5_rogue_31 // psychic crush2
 END
 IF ~~ THEN BEGIN d5_rogue_32 // immobilize
  SAY @20624
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PS201")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSB01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
 IF ~~ THEN BEGIN d5_rogue_33 // kinetic ram
@@ -230,7 +230,7 @@ IF ~~ THEN BEGIN d5_rogue_36 // freedom
 END 
 IF ~~ THEN BEGIN d5_rogue_37 // adrenaline rush
  SAY @20664
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PS401")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSD01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
 IF ~~ THEN BEGIN d5_rogue_38 // metabolic boost
@@ -265,7 +265,7 @@ IF ~~ THEN BEGIN d5_rogue_43 // carapace2
 END 
 IF ~~ THEN BEGIN d5_rogue_44 // static discharge
  SAY @20644
- IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PS301")~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSC01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
 IF ~~ THEN BEGIN d5_rogue_45 // energy transfer

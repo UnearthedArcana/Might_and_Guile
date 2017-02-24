@@ -716,12 +716,30 @@ COPY ~might_and_guile/mc/d5_rama.cre~ ~override~
 COMPILE ~might_and_guile/mc/d5_rama.baf~
 COPY ~might_and_guile/mc/d5_nthf.spl~ ~override~
 	SAY NAME1 @6
+COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
+	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
+COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
 	SAY NAME1 @6
+ACTION_IF GAME_IS ~iwdee~ BEGIN	
+  APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~
+  COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CON_IS~ BEGIN
+	    SET con_row = %row%
+	  END
+	END
+  BUT_ONLY
+  COPY_EXISTING ~d5rmcon.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %con_row% END
+END
+	
 COPY_EXISTING ~sppr207.spl~ ~override/D5RNM01.spl~ // goodberry
 //	WRITE_SHORT 0x1c 1
 //	WRITE_LONG 0x34 1
@@ -758,73 +776,6 @@ COPY ~might_and_guile/mc/d5rmavem.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhf.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhm.eff~ ~override~
 //__________________________________________________________________________________
-
-/*
-//ADD KIT TO MENUS____________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
-  ACTION_FOR_EACH new_menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
-	ACTION_IF NOT FILE_EXISTS_IN_GAME ~%new_menu%.2da~ BEGIN
-	  COPY ~might_and_guile/mc/%new_menu%.2da~ ~override~
-	END
-  END
-  COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~7~ "kit_row"
-  BUT_ONLY
-  OUTER_SET kit_row -= 2
-  ACTION_FOR_EACH menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~%menu%.2da~ BEGIN
-	  APPEND ~%menu%.2da~ ~1	%kit_row%~
-	END
-  END
-END
-//___________________________________________________________________________________
-*/
-
-/*
-//CHECK FOR R/C DRUID SPELLS____________________________________________________________
-//
-ACTION_IF FILE_EXISTS ~%USER_DIRECTORY%/Baldur.lua~ THEN BEGIN
-  COPY - ~%USER_DIRECTORY%/Baldur.lua~ ~%USER_DIRECTORY%~
-	COUNT_REGEXP_INSTANCES ~'Cleric Ranger Spells','1'~ cr_bugfix_enabled
-  ACTION_IF (cr_bugfix_enabled) BEGIN // no druid spells for cleric/rangers
-	PRINT @13
-  END
-  ELSE BEGIN
-	COPY_EXISTING ~sppr401.spl~ ~override/D5RNM41.spl~ // csw
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr402.spl~ ~override/D5RNM42.spl~ // animal summ 1
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr406.spl~ ~override/D5RNM43.spl~ // defensive harmony
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr409.spl~ ~override/D5RNM44.spl~ // death ward
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr501.spl~ ~override/D5RNM51.spl~ // animal summ 2
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr502.spl~ ~override/D5RNM52.spl~ // ccw
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr508.spl~ ~override/D5RNM53.spl~ // chaotic commands
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr602.spl~ ~override/D5RNM61.spl~ // animal summ 3
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr606.spl~ ~override/D5RNM62.spl~ // fire seeds
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr607.spl~ ~override/D5RNM63.spl~ // heal
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr702.spl~ ~override/D5RNM71.spl~ // earth elemental
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr711.spl~ ~override/D5RNM72.spl~ // regeneration
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~sppr717.spl~ ~override/D5RNM73.spl~ // creeping doom
-		WRITE_SHORT 0x1c 1
-	COPY_EXISTING ~d5_rama.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/ranmagespells.txt~
-	BUT_ONLY	
-  END
-END
-//__________________________________________________________________________________
-*/
 
 //ADD KIT ITEMS______________________________________________________________________
 //

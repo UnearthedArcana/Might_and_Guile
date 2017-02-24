@@ -6,6 +6,7 @@ SAY @20009
 // IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20103 GOTO d5_asasn_2
 // IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20105 GOTO d5_asasn_3
  IF ~GlobalLT("D5_LORE","LOCALS",5)~ THEN REPLY @20301 GOTO d5_asasn_4
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_asasn_22
  IF ~GlobalLT("D5_TRAPS","LOCALS",3)~ THEN REPLY @20113 GOTO d5_asasn_5
  IF ~GlobalLT("D5_TPOISON","LOCALS",3)~ THEN REPLY @20161 GOTO d5_asasn_6
  IF ~GlobalGT("D5_DTRAP","LOCALS",0) GlobalGT("D5_TPOISON","LOCALS",0) GlobalLT("D5_PTRAP","LOCALS",3)~ THEN REPLY @20119 GOTO d5_asasn_7
@@ -122,5 +123,10 @@ END
 IF ~~ THEN BEGIN d5_asasn_21 // use scrolls
  SAY @20294
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RSCROLL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH4",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_asasn 
+END 
+IF ~~ THEN BEGIN d5_asasn_22 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_asasn 
 END 

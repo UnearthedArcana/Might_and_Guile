@@ -59,6 +59,51 @@
 @500   = ~Multiclass Kits~
 //
 //
+@1002  = ~- Access to the spheres of:~
+@1003  = ~- Focus access to the spheres of:~
+@1004  = ~- Major access to the spheres of:~
+@1005  = ~- Minor access to the spheres of:~
+@1006  = ~Advantages:~
+@1007  = ~Abilities:~
+@1008  = ~Disadvantages:~
+@1009  = ~Restrictions:~
+//
+//
+@12300  = ~Choose a weapon of focus:~
+@12301  = ~Greatsword~
+@12302  = ~Choose Greatswords as your weapon of focus?~
+@12303  = ~Long Sword~
+@12304  = ~Choose Long Sword as your weapon of focus?~
+@12305  = ~Curved Swords~
+@12306  = ~Choose Curved Swords as your weapon of focus?~
+@12307  = ~Short Sword~
+@12308  = ~Choose Short Sword as your weapon of focus?~
+@12309  = ~Daggers~
+@12310  = ~Choose Daggers as your weapon of focus?~
+@12311  = ~Spears~
+@12312  = ~Choose Spears as your weapon of focus?~
+@12313  = ~Quarterstaff~
+@12314  = ~Choose Quarterstaff as your weapon of focus?~
+@12315  = ~Club~
+@12316  = ~Choose Club as your weapon of focus?~
+@12317  = ~War Hammer~
+@12318  = ~Choose War Hammer as your weapon of focus?~
+@12319  = ~Flail~
+@12320  = ~Choose Flail as your weapon of focus?~
+@12321  = ~Battle Axe~
+@12322  = ~Choose Battle Axe as your weapon of focus?~
+@12323  = ~Bows~
+@12324  = ~Choose Bows as your weapon of focus?~
+@12325  = ~Crossbow~
+@12326  = ~Choose Crossbow as your weapon of focus?~
+@12327  = ~Sling~
+@12328  = ~Choose Sling as your weapon of focus?~
+@12329  = ~Yes.~
+@12330  = ~Choose a different weapon~
+@12331  = ~Mace~
+@12332  = ~Choose Mace as your weapon of focus?~
+//
+//
 @20000  = ~rogue~
 @20001  = ~Rogue~
 @20002  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
@@ -129,7 +174,7 @@ Abilities:
 Abilities:
 - Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Melee Trick: Trip Opponent.
 - May repeat learning the AC Bonus and THAC0 Bonus feats, up to four times each.
-- May learn two special Swashbuckler-only feats: Swashbuckling and Escape Artist. Swashbuckling is a temporary ability that increases the Swashbuckler's rate of attack and armor class. Escape Artist allows the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
+- May learn two special Swashbuckler-only feats: Swashbuckling and Escape Artist. Swashbuckling is a temporary ability that increases the Swashbuckler's armor class. Escape Artist allows the Swashbuckler a chance to escape whenever Held, Webbed, or otherwise helpless.
 - May Specialize (two slots) in any melee weapon available to Thieves.
 - May place 3 slots into Two-Weapon Style.
 
@@ -178,6 +223,7 @@ Restrictions:
 @20104  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
 @20105  = ~Detection Bonus~
 @20106  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
+@20110  = ~Quickstride: this ability allows the rogue to increase <PRO_HISHER> movement rate at will.~
 @20111  = ~Spike Trap~
 @20112  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
 @20113  = ~Dart Trap~
@@ -241,7 +287,7 @@ Weight: 0
 @20221  = ~Escape Artist~
 @20222  = ~Escape Artist: the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
 @20229  = ~Finesse~
-@20230  = ~Finesse: this ability applies a bonus to hit based on Dexterity rather than Strength.  This bonus only applies to light melee weapons (daggers, short swords, scimitars, ninja-to, quarterstaves, and clubs).~
+@20230  = ~Finesse: this ability applies a bonus to hit with melee weapons based on the rogue's Dexterity or Strength, whichever is higher.~
 @20231  = ~To-Hit Bonus (Melee)~
 @20232  = ~To-Hit Bonus (Melee): this ability confers a permanent +1 bonus to all melee-based attack rolls.~
 @20233  = ~To-Hit Bonus (Ranged)~
@@ -290,6 +336,25 @@ When this magic is used, the rogue is briefly affected by an Improved Invisibili
 @20300  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
 @20301  = ~Lore Bonus~
 @20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to the rogue's Lore.~
+@20303  = ~Bardic Magic~
+@20304  = ~Bardic Magic:
+
+This allows the use of any one of the following five abilities:
+  1) Charm Person/Mammal
+  3) Deafness
+  3) Shout (at 7th level)
+  4) Secret Word (at 7th level)
+  5) Greater Command (at 11th level)
+~
+@20304  = ~Bardic Magic:
+
+This allows the use of any one of the following five abilities:
+  1) Charm Person/Mammal
+  3) Sound Burst
+  3) Shout (at 7th level)
+  4) Secret Word (at 7th level)
+  5) Greater Command (at 11th level)
+~
 //
 //
 @20500  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
@@ -496,17 +561,18 @@ Unlike lesser psionic powers, these abilities may be used once per day. In each 
 @21001  = ~Change Bard Aura~
 @21002  = ~Bard Aura~
 @21003  = ~Stop Bard Aura~
-@21006  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
+@21810  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
 
 Abilities:
 - May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
 - +1 bonus to Armor Class.
 - May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
 - From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- May learn to manifest other bardic aura effects.
 - Once per day per 6 levels of experience, may use the Swashbuckling ability.  
 
 SWASHBUCKLING:
-For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
 
 Restrictions:
 - Only has one half the normal Lore value.
@@ -521,6 +587,7 @@ Abilities:
 - May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
 - From 5th level, may innately cast the priest spell Defensive Harmony once per day.
 - From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
+- May learn to manifest other bardic aura effects.
 
 Restrictions:
 - Only has one quarter the normal Pick Pockets score.
@@ -555,6 +622,10 @@ While the bard maintains this aura, all allies within 20 feet are immune to nega
 @21082  = ~Bard Aura: 
 
 While the bard maintains this aura, all allies within 20 feet are immune to mental effects such as Charm, Fear, Confusion, Feeblemind, and Stun. The bard must concentrate to maintain the aura; spellcasting and melee attacks are disabled while the aura is in effect.~
+@21091  = ~Bard Aura: Death Ward~
+@21092  = ~Bard Aura: 
+
+While the bard maintains this aura, the life force of <PRO_HISHER> allies are protected, becoming immune to magical instant death effects such as Power Word: Kill, Disintegrate, etc. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
 @21201  = ~Bard Aura: Interference~
 @21202  = ~Bard Aura: 
 
@@ -578,11 +649,11 @@ While the bard maintains this aura, all undead enemies within 20 feet move more 
 @21251  = ~Bard Aura: Entangle~
 @21252  = ~Bard Aura: 
 
-While the bard maintains this aura, all enemies within 20 feet must save vs. Breath each round, or be Entangled and unable to move. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+While the bard maintains this aura, all enemies within 20 feet must save vs. Breath each round, or be Entangled and unable to move.~
 @21411  = ~Bard Aura: Blur~
 @21412  = ~Bard Aura: 
 
-While the bard maintains this aura, <PRO_HESHE> benefits from a Blur effect, improving armor class and saving throws. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+While the bard maintains this aura, <PRO_HESHE> benefits from a Blur effect, improving armor class and saving throws. At 15th level, the blurring is so severe that it simulates Improved Invisibility, giving a +4 AC bonus and making the bard impossible to target with spells unless the caster can detect invisible objects. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
 @21421  = ~Bard Aura: Mind Blank~
 @21422  = ~Bard Aura: 
 
@@ -620,12 +691,14 @@ CLASS FEATURES:
 - Increased Lore score.
 - May cast arcane spells starting at 2nd level.
 - May use the Bard Aura ability. While active, the Bard traditional Bard Aura provides allies within 20 feet a +1 bonus to Luck and saving throws.
+- May learn to manifest other bardic aura effects.
 - Hit Die: d6~
 @21806  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.
 
 Abilities:
 - May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
 - From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Loresinger cannot cast spells while the Positive Energy Aura is in effect.)
+- May learn to manifest other bardic aura effects.
 - May cast the following priest spells: Cure Light Wounds, Sanctuary, Find Traps, Silence 15' Radius, Spiritual Hammer, Cure Medium Wounds, Holy Smite, Death Ward, Holy Power, Greater Command, Cure Critical Wounds, and False Dawn.
 
 Restrictions:
@@ -637,6 +710,7 @@ Abilities:
 - May use the ranger's Animal Empathy ability.
 - May use an Aura of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.
 - From 6th level, may use an Entangling Aura, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.
+- May learn to manifest other bardic aura effects.
 - May cast the following druid spells: Cure Light Wounds, Entangle, Sanctuary, Shillelagh, Barkskin, Charm Person/Mammal, Resist Fire/Cold, Slow Poison, Remove Paralysis, Cure Disease, Zone of Sweet Air, Summon Insects, Cure Serious Wounds, Call Woodland Being, Leser Restoration, Mass Cure, Chaotic Commands, Insect Plague, Animal Summoning III, and False Dawn.
 
 Restrictions:
@@ -661,6 +735,25 @@ Advantages:
 
 Disadvantages:
 – Only has one quarter the normal Pick Pockets score.
+~
+@21810  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
+
+Abilities:
+- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
+- +1 bonus to Armor Class.
+- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- May learn to manifest other bardic aura effects.
+- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
+
+SWASHBUCKLING:
+For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+
+Restrictions:
+- Only has one half the normal Lore value.
+- Only has one half the normal Pick Pockets skill.
+- May not become proficient in heavy weapons or in sword-and-shield style.
+- Limited to light armors.
 ~
 @21811  = ~JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements. 
 
@@ -687,7 +780,7 @@ Restrictions:
 Advantages:
 - May reach Mastery (+++) in the use of long and short swords, daggers, darts, and one- and two-weapon styles.
 - May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
+- From 6th level, may use a Blur Aura, which improves the Jongleur's armor class and saving throws.
 - Once per day per 6 levels of experience, may use the Swashbuckling ability. 
 
 SWASHBUCKLING:
@@ -705,6 +798,7 @@ Abilities:
 - From 5th level, may innately cast the priest spell Death Ward once per day.
 - May radiate an Aura of Luck that affects allies within 20 feet.
 - From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.
+- May learn to manifest other bardic aura effects.
 - Receivies a +1 bonus to saves vs. death for each 6 levels of experience.
 - May use magical wands as a wizard can.
 
@@ -719,6 +813,7 @@ Restrictions:
 Abilities:
 - May use an Cursed Aura, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
 - From 6th level, may use an Aura of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
+- May learn to manifest other bardic aura effects.
 - May use arcane wands and cast spells from scrolls.
 
 Restrictions:
@@ -733,6 +828,7 @@ Abilities:
 - May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
 - From 5th level, may innately cast the priest spell Defensive Harmony once per day.
 - From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
+- May learn to manifest other bardic aura effects.
 - May use arcane wands and scrolls.
 
 Restrictions:
@@ -745,12 +841,31 @@ Restrictions:
 
 Abilities:
 - May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
-- From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
+- From 6th level, may use a Mind Blank Aura, which causes the Jinxer's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
+- May learn to manifest other bardic aura effects.
+- May cast Greater Malison as an innate ability once per day.
 
 Restrictions:
 - May only allocate 15 thief skill points per level.
 - Backstab multiplier is one level lower than most thieves.
 - May not gain the Set Traps ability.
+~
+@21861  = ~herald~
+@21862  = ~Herald~
+@21863  = ~HERALD: Heralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'd for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territory.
+
+Abilities:
+- +1 bonus to thac0 and damage.
+- May use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
+- May learn to manifest other bardic aura effects.
+- +5 Lore per level compared to thieves.
+- May use arcane wands and scrolls.
+
+Restrictions:
+- May only allocate skill points to the Open Locks, Find Traps, Set Traps, and Detect Illusion thief abilities.
+- May only allocate 15 thief skill points per level.
+- Backstab multiplier is limited to x3.
+- May not use the Stealth ability.
 ~
 @21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
 
@@ -760,6 +875,7 @@ Advantages:
 -  May place up to 2 proficiency points in slings, darts and daggers
 -  May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
 -  From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws. (The Acrobat cannot cast spells while the Blur Aura is in effect.)
+- May learn to manifest other bardic aura effects.
 
 Disadvantages:
 -  May only place proficiency points in weapons a thief can use
@@ -773,6 +889,7 @@ Choristers are not only to be found within temple walls, however; many faiths us
 Advantages:
 -  May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
 -  From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Chorister cannot cast spells while the Positive Energy Aura is in effect.)
+- May learn to manifest other bardic aura effects.
 -  Knows a small selection of divine spells. These are accessed and memorised as Mage spells:
 Level 1: Armor of Faith, Cure Light Wounds, Doom
 Level 2: Chant, Draw Upon Holy Might, Slow Poison
@@ -794,9 +911,10 @@ Dirgesingers are limited to non-good alignments.
 Advantages:
 -  May use an Aura of Weakness, which cause a 1-point penalty to all attack and damage rolls of enemies within 20 feet.
 -  From 6th level, may use an Aura of Weariness, which causes enemies in melee range to save vs. Spells each round or be Slowed. (The Dirgesinger cannot cast spells while the Aura of Weariness is in effect.)
--  From level 5 may use a Song of Horror 1/day. This has the same effects as the level 2 Wizard spell, Horror
--  From level 7 may use a Song of Grief 1/day. This has the same effects as the level 4 Wizard spell, Confusion
--  From level 9 may use a Song of Awakening 1/day. This has the same effects as the level 5 Wizard spell, Animate Dead
+- May learn to manifest other bardic aura effects.
+-  From level 5 may use a Song of Horror ability 1/day. This has the same effects as the level 2 Wizard spell, Horror
+-  From level 7 may use a Song of Grief ability 1/day. This has the same effects as the level 4 Wizard spell, Confusion
+-  From level 9 may use a Song of Awakening ability 1/day. This has the same effects as the level 5 Wizard spell, Animate Dead
 
 Disadvantages:
 -  Only has one-half normal Lore value
@@ -809,18 +927,20 @@ Advantages:
 -  Has a +1 bonus to saves vs. spells per 8 levels
 -  Can cast Curse once per day. The opposite of a Bless spell, this gives foes a -1 penalty to THAC0 and saves
 -  May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
--  From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. (The Gypsy may not cast spells while the Blank Aura is in effect.)
+-  From 6th level, may use a Mind Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. (The Gypsy may not cast spells while the Blank Aura is in effect.)
+- May learn to manifest other bardic aura effects.
 
 Disadvantages:
 -  Cannot learn mage spells from the schools of Conjuration, Invocation or Transmutation
 ~
-@21900  = ~This ostentatious peacock-blue hat is festooned with green and purple feathers. Once the possession of an unfailingly chipper bard, the hat was stolen when the bard couldn't resist showing off the hat in a seedy tavern and bragging about its magical powers. In truth the hat has only moderate enchantments on it, but its stylish appearance makes it a coveted choice for many bards.
+@21900  = ~This ostentatious peacock-blue hat is festooned with green and purple feathers. Once the possession of an unfailingly chipper bard, the hat was stolen when the bard couldn't resist showing off the hat in a seedy tavern and bragging about its magical powers. In truth the hat has only moderate, if functional, enchantments on it. But its stylish appearance makes it a coveted choice for many bards.
 
 STATISTICS:
 
 Equipped abilities:
 - Immunity to silence and deafness
-- May cast one extra 2nd- and 3rd-level spell
+- Emanates a basic Bardic Aura, providing a +1 bonus to allies' Luck, saving throws, and thieving skills
+- The bard wearing this hat may use another Bardic Aura simultaneously
 
 Weight: 0~
 @21901  = ~Declamation~
@@ -864,7 +984,7 @@ This spell grants the caster tremendous vocal powers, allowing <PRO_HIMHER> to e
 //
 @2251  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
-Abilities:
+Advantages:
 - +20% to Move Silently and Hide In Shadows.
 - May achieve one level higher proficiency than normal with short swords and daggers.
 - May set traps, with a success rate that begins at 30% and increases by 3% per level.
@@ -878,7 +998,7 @@ Restrictions:
 - May not use rangers' Charm Animal ability~
 @2252  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
-Abilities:
+Advantages:
 - +20% to Move Silently and Hide In Shadows.
 - May achieve Grand Mastery (+++++) with short swords and daggers.
 - May set traps, with a success rate that begins at 30% and increases by 3% per level.
@@ -892,7 +1012,7 @@ Restrictions:
 - May not use rangers' Charm Animal ability~
 @2253  = ~STALKER: Stalkers serve as covert intelligence-gatherers, comfortable in both wilderness and urban settings. They are spies, informants, and interrogators, and their mastery of stealth makes them deadly opponents.
 
-Abilities:
+Advantages:
 - +20% to Move Silently and Hide In Shadows.
 - May achieve Grand Mastery (+++++) with short swords and daggers.
 - May set traps, with a success rate that begins at 30% and increases by 3% per level.
@@ -1585,7 +1705,7 @@ Abilities:
 - 1-point bonus to Armor Class.
 - +1 bonus to saves vs. Breath for each 5 levels of experience.
 - Can achieve Grand Mastery (+++++) with light bladed weapons.
-- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining +1 attack per round and an Armor Class bonus of -1 per three levels, up to a maximum of -6.
+- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class bonus of -1 per three levels, up to a maximum of -6.
 
 Restrictions:
 - Cannot become proficient with heavy weapons.
@@ -1612,7 +1732,7 @@ Abilities:
 - 1-point bonus to Armor Class.
 - +1 bonus to saves vs. Breath for each 5 levels of experience.
 - Can achieve Grand Mastery (+++++) with light bladed weapons.
-- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining +1 attack per round and an Armor Class bonus of -1 per three levels, up to a maximum of -6.
+- Can use use the skill Swashbuckling once per day for each four levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class bonus of -1 per three levels, up to a maximum of -6.
 - Every third level from 3 to 18, may choose to learn a feat from the following list:
 
 ROGUE FEATS:
@@ -1684,7 +1804,7 @@ Restrictions:
 @3222  = ~Elven Archer~
 @3223  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
-Abilities:
+Advantages:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
 - May learn to use Called Shots at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
@@ -1703,7 +1823,7 @@ Restrictions:
 ~
 @3224  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
-Abilities:
+Advantages:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
 - May learn to use a Called Shot at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
@@ -1731,7 +1851,7 @@ Restrictions:
 @3242  = ~Slinger~
 @3243  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
-Abilities:
+Advantages:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
 - May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
@@ -1749,7 +1869,7 @@ Restrictions:
 ~
 @3244  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
-Abilities:
+Advantages:
 - +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
 - May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
@@ -1766,7 +1886,7 @@ Restrictions:
 ~
 @3245  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
-Abilities:
+Advantages:
 - +1 to hit and damage rolls with missiles weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
 - May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
@@ -1790,7 +1910,7 @@ Restrictions:
 @3504  = ~Mage Hunter~
 @3505  = ~MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.
 
-Abilities:
+Advantages:
 - Mage Hunters have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.
 - Each successful melee hit bestows a 40% chance of spell failure on the target for one round.
 - May use a special vocalization that can deafen those nearby and impose a 40% chance of spell failure on them if they fail a saving throw vs. Petrification.
@@ -1816,7 +1936,7 @@ Mage Hunters have learned to produce a coarse, groaning shout that is of a parti
 @3606  = ~BARBARIAN RANGER: Among barbarian tribes there are hunters of great skill. Spending many days alone in the wild, stalking their prey, they are closer to nature than most men. They are not quite as hardy as their more aggressive brethren, and tend to be loners. Yet they bring uncommon skills to bear both in providing for, and in defending, their tribe.
  
 Abilities:
-- Moves 2 points faster than other characters.
+- Moves faster than other characters.
 - May enter an enraged state, enhancing combat abilities, once per day per six levels.
 - May Charm animals once per day per five levels.
 - Gains 5% physical damage resistance at 11th level, and again at 15th and 19th levels.
@@ -1925,6 +2045,7 @@ Restrictions:
 @4202  = ~scout~
 @4203  = ~Scout~
 @4204  = ~SCOUT: While technically a member of the thief class, a scout does not burgle or murder. Scouts employ the dexterity and ingenuity of thieves for military purposes. They have skill in combat and with traps, but do not employ backstabs against enemies.
+
 Abilities:
 - +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 6 levels.
 - May specialize (++) in weapons.
@@ -1952,7 +2073,7 @@ Abilities:
 - May achieve High Mastery (++++) in light bladed weapons (long sword, scimitar, short sword, dagger, darts).
 - Begins with one proficiency point in Single-Weapon Style, and may add one more.
 - Begins with one proficiency point in Two-Weapon Style, and may add two more.
-- Can use use the skill Swashbuckling once per day at level 1, 3, 6, 10, 15, and 21. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10. The character's movement rate is halved while swashbuckling.
+- Can use use the skill Swashbuckling once per day at level 1, 3, 6, 10, 15, and 21. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
 - Swashbucklers have a +1 bonus to saves vs. Breath for each 5 levels of experience.
 
 Restrictions:

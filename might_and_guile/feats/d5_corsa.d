@@ -2,6 +2,7 @@ BEGIN ~D5_CORSA~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_corsa
 SAY @20009 // ~Choose a feat:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_corsa_1
 // IF ~GlobalLT("D5_FINTIMIDATE","LOCALS",1)~ THEN REPLY @3915 GOTO d5_corsa_2
  IF ~GlobalLT("D5_EVADE","LOCALS",3)~ THEN REPLY @20201 GOTO d5_corsa_4
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_corsa_6
@@ -21,6 +22,11 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_LUCKY","LOCALS",1)~ THEN REPLY @20299 GOTO d5_corsa_36
 END
 
+IF ~~ THEN BEGIN d5_corsa_1 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_corsa 
+END 
 //IF ~~ THEN BEGIN d5_corsa_2 // intimidate
 // SAY @3916
 // IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_FINTIMIDATE","LOCALS",1)~ DO ~ApplySpellRES("D5_WFA",myself)~ EXIT 

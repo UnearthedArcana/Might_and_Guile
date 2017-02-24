@@ -7,6 +7,7 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_jinx
  IF ~GlobalLT("D5_AUR03","LOCALS",1)~ THEN REPLY @21031 GOTO d5_jinx_4		//	skald song
  IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_jinx_6		//	miscast aura
  IF ~GlobalLT("D5_AUR21","LOCALS",1)~ THEN REPLY @21211 GOTO d5_jinx_8		//	intimidation aura
+ IF ~GlobalLT("D5_AUR09","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21091 GOTO d5_jinx_9		//	death ward aura
  IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_jinx_10		//	invulnerability aura
  IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_jinx_12		//	slow aura
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20101 GOTO d5_jinx_14
@@ -19,10 +20,11 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_jinx
  IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_jinx_28
  IF ~GlobalLT("D5_ESCAPE","LOCALS",1)~ THEN REPLY @20221 GOTO d5_jinx_30
  IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_jinx_32
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_jinx_34
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_jinx_36
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_jinx_34
+ IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_jinx_36
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_jinx_38
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_ILLUSION","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20295 GOTO d5_jinx_40
+ IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_BARDMAGIC","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20303 GOTO d5_jinx_42
 END
 
 IF ~~ THEN BEGIN d5_jinx_1 // luck aura
@@ -48,6 +50,11 @@ END
 IF ~~ THEN BEGIN d5_jinx_8 // intimidation
  SAY @21212
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR21","LOCALS",1)~ DO ~ApplySpellRES("D5BD21Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_jinx 
+END
+IF ~~ THEN BEGIN d5_jinx_9 // death ward
+ SAY @21092
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR09","LOCALS",1)~ DO ~ApplySpellRES("D5BD09Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_jinx 
 END
 IF ~~ THEN BEGIN d5_jinx_10 // invulnerability
@@ -128,5 +135,10 @@ END
 IF ~~ THEN BEGIN d5_jinx_40 // illusion magic
  SAY @20296
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_ILLUSION","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_jinx 
+END 
+IF ~~ THEN BEGIN d5_jinx_42 // bardic magic
+ SAY @20304
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BARDMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5BARDZ",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_jinx 
 END 

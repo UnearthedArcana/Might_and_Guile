@@ -222,13 +222,29 @@ END
 //TNB COMPATIBILITY_________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_l1cantrips.qd~ BEGIN
-//  ACTION_IF FILE_EXISTS_IN_GAME ~d5wakeup.spl~ BEGIN
-	COPY_EXISTING ~sppr103.spl~ ~override/d5_mei23.spl~
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
+	  COUNT_REGEXP_INSTANCES ~CLERIC_CURE_MODERATE_WOUNDS~ spell_exists
+	ACTION_IF (spell_exists) BEGIN
+	  LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_CURE_MODERATE_WOUNDS~ RET spell_res END
+	  COPY_EXISTING ~%spell_res%.spl~ ~override/d5_mei23.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 2
+	END
+	ACTION_IF NOT (spell_exists) BEGIN
+	  COPY_EXISTING ~sppr103.spl~ ~override/d5_mei23.spl~
+		WRITE_SHORT 0x1c 1
+		WRITE_LONG 0x34 2
+	END
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+	COPY_EXISTING ~sppr215.spl~ ~override/d5_mei23.spl~
 	  WRITE_SHORT 0x1c 1
 	  WRITE_LONG 0x34 2
-	COPY_EXISTING ~d5_mei13.spl~ ~override~
+  END
+  COPY_EXISTING ~d5_mei13.spl~ ~override~
 	  WRITE_LONG 0x34 2
-	COPY ~might_and_guile/bard/d5_witr.spl~ ~override/d5_mei12.spl~
+  COPY ~might_and_guile/bard/d5_witr.spl~ ~override/d5_mei12.spl~
 	  SAY NAME1 @4811
 	  SAY UNIDENTIFIED_DESC @4812
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
@@ -237,14 +253,14 @@ ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_l1cantrips.qd~ BEGIN
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
-	COPY_EXISTING ~d5_mei14.spl~ ~override~
+  COPY_EXISTING ~d5_mei14.spl~ ~override~
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
-	COPY_EXISTING ~sppr212.spl~ ~override/d5_mei11.spl~
+  COPY_EXISTING ~sppr212.spl~ ~override/d5_mei11.spl~
 	  WRITE_SHORT 0x1c 1
 	  WRITE_LONG 0x34 1
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
@@ -253,7 +269,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_l1cantrips.qd~ BEGIN
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
-//  END
 END
 //__________________________________________________________________________________
 

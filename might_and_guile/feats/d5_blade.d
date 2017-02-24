@@ -18,6 +18,7 @@ SAY @20009
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_blade_30
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_blade_32
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_ILLUSION","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20295 GOTO d5_blade_34
+ IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_BARDMAGIC","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20303 GOTO d5_blade_36
 END
 
 IF ~~ THEN BEGIN d5_blade_4 // mind blank
@@ -98,5 +99,10 @@ END
 IF ~~ THEN BEGIN d5_blade_34 // illusion magic
  SAY @20296
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_ILLUSION","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_blade 
+END 
+IF ~~ THEN BEGIN d5_blade_36 // bardic magic
+ SAY @20304
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BARDMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5BARDZ",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_blade 
 END 

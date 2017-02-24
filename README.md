@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.2 </strong><br />
+  <p><strong> Version 3.3 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -83,7 +83,7 @@
 	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li><br />
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Requires Dart Trap and Basic Alchemy)</li>
-	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter.</li>
+	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter. (Assassin only - requires Dart Trap)</li>
 	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li><br />
 	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
 	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
@@ -96,10 +96,10 @@
 	    <li> <b>Combat Skills - Escape Artist:</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
 	    <li> <b>Combat Skills - Melee To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all melee attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Ranged To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all ranged attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
-	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins only may repeat this feat up to 2 times - requires Melee To-Hit Bonus)</li></li>
-	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds. (Requires Melee To-Hit Bonus)</li>
-	    <li> <b>Combat Skills - Blind Opponent:</b> upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath. (Requires Melee To-Hit Bonus)</li>
-	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells. (Requires Melee To-Hit Bonus)</li><br />
+	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins may take this feat up to 3 times - requires Melee To-Hit Bonus)</li></li>
+	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.</li>
+	    <li> <b>Combat Skills - Blind Opponent:</b> upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.</li>
+	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.</li><br />
 	    <li> <b>Magical Skills - Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
 	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
 	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
@@ -162,21 +162,22 @@
         <li><b>Aura of Morale:</b> allies are immune to fear effects.</li>
         <li><b>Aura of Power:</b> bonus to melee damage for allies (scales with level).</li>
         <li><b>Aura of Blessing:</b> allies are under the effect of a Bless spell.</li>
-        <li><b>Aura of Positive Energy:</b> allies are under the effect of the spell Negative Plane Protection.</li>
-        <li><b>Aura of Reflections:</b> allies get a single Mirror Image each round, which may absorb a melee attack.</li>
-        <li><b>Aura of Mind Shield:</b> allies are immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura is intense - it disables both spellcasting and combat.)</li>
-        <li><b>Aura of Interference:</b> this aura causes ALL spellcasting in the area of effect (whether by friend or foe) to suffer a 65% chance of failure.</li>
+        <li><b>Aura of Positive Energy:</b> allies are under the effect of the spell Negative Plane Protection. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Death Ward:</b> allies are under the effect of a Bless spell. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Reflections:</b> allies get a single Mirror Image each round, which may absorb a melee attack. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Mind Shield:</b> allies are immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura is intense - it disables both spellcasting and combat.)</li><br />
+        <li><b>Aura of Interference:</b> this aura causes ALL spellcasting in the area of effect (whether by friend or foe) to suffer a 65% chance of failure. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura of Intimidation:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to to-hit and damage rolls.</li>
         <li><b>Aura of Cursing:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to Luck and saving throws.</li>
         <li><b>Aura of Confusion:</b> this causes all enemies in an area of effect to save each round or be Confused.</li>
-        <li><b>Aura of Holding Undead:</b> this reduces the movement rate of nearby undead creatures, and causes them to save each round or be Held.</li>
-        <li><b>Entangling Aura:</b> this causes all enemies in an area of effect to save each round or be Entangled.</li>
-        <li><b>Blur Aura:</b> this provides the bard with the effects of the Blur spell.</li>
-        <li><b>Mind Blank Aura:</b> this renders the bard immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc.</li>
-        <li><b>Aura of Invulnerability:</b> this enfolds the bard in a very short-range Minor Globe of Invulnerability, preventing any spells of 1st to 3rd level from having direct effect.</li>
-        <li><b>Aura of Fear:</b> this causes all foes engaging in melee combat against the bard to save each round or be affected by Panic.</li>
-        <li><b>Aura of Slowing:</b> this causes all foes engaging in melee combat against the bard to save each round or be temporarily Slowed.</li>
-        <li><b>Aura of True Vision:</b> this causes all illusions which come into physical contact with the bard (a 3-foot radius around your center) to be dispelled.</li>
+        <li><b>Aura of Holding Undead:</b> this reduces the movement rate of nearby undead creatures, and causes them to save each round or be Held. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Entangling Aura:</b> this causes all enemies in an area of effect to save each round or be Entangled.</li><br />
+        <li><b>Blur Aura:</b> this provides the bard with the effects of the Blur spell. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Mind Blank Aura:</b> this renders the bard immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Invulnerability:</b> this enfolds the bard in a very short-range Minor Globe of Invulnerability, preventing any spells of 1st to 3rd level from having direct effect. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Fear:</b> this causes all foes engaging in melee combat against the bard to save each round or be affected by Panic. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Slowing:</b> this causes all foes engaging in melee combat against the bard to save each round or be temporarily Slowed. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of True Vision:</b> this causes all illusions which come into physical contact with the bard (a 3-foot radius around your center) to be dispelled. (This aura disables the bard's spellcasting.)</li>
         <li><b>Maze Aura:</b> this HLA aura causes all foes engaging in melee combat against the bard to save each round or be temporarily Mazed.</li>
       </ul>
       <p> This component makes some changes to existing bard kits:</p>
@@ -193,8 +194,8 @@
         &ndash; May not cast spells directly from scrolls.<br />.</p>
       </div>
       <div class="kit_description">
-      <p> The Blade is changed, and renamed: </p>
-      <p>JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements.</p>
+      <p> The Blade is changed: </p>
+      <p>BLADE: </p>
       <p>Advantages:<br />
         &ndash; May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.<br />
         &ndash; +1 bonus to Armor Class.<br />
@@ -230,16 +231,18 @@
     </div>
     <p> Additionally, this component also installs four 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
     <div class="kit_description">
-      <p>BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.</p>
+      <p>HERALD: THeralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'd for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territory.</p>
       <p>Advantages:<br />
-        &ndash; May Specialize (++) in the use of long and short swords, scimitars, daggers, darts, and one- and two-weapon styles.<br />
-        &ndash; May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.<br />
-        &ndash; From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.<br />
-        &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
+        &ndash; +1 bonus to thac0 and damage.<br />
+        &ndash; May use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.<br />
+        &ndash; May learn to manifest other bardic aura effects.<br />
+        &ndash; +5 Lore per level compared to thieves.<br />
+        &ndash; May use arcane wands and scrolls.</p>
       <p>Disadvantages:<br />
-        &ndash; May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.<br />
-        &ndash; No backstab progression.<br />
-        &ndash; May not set traps.<br />.</p>
+        &ndash; May only allocate skill points to the Open Locks, Find Traps, Set Traps, and Detect Illusion thief abilities.<br />
+        &ndash; May only allocate 15 thief skill points per level.<br />
+        &ndash; Backstab multiplier is limited to x3.<br />
+        &ndash; May not use the Stealth ability.<br />.</p>
     </div>
     <div class="kit_description">
       <p>JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy/Traveller clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.</p>
@@ -274,6 +277,7 @@
         &ndash; Has the same hit dice as a cleric.<br />
         &ndash; Limited to Specialization (++) with all weapons.<br />.</p>
     </div>
+    <p> In Spear of Dragonspear and BG2EE, the Bard's Hat magic item is modified. Now the hat radiates the basic bardic Luck Aura. The bard wearing the hat can manifest a different aura, allowing you to get the benefit of two bard auras simultaneously.</p>
     <p> Finally: on EE games with the 2.0+ patch, this component will allow elves and gnomes to become bards (other demihumans can be demibards). And it allows bards to cast 7th-level spells, starting at 20th level. And it changes bards' HLA tables, removing the old-fashioned Enhanced and Lingering Song HLAs, and removing traps, and instead granting bards a few fighter HLAs (Power Attack, etc.) and a few wizard HLAs (extra 6th level spells), and a new HLA bard aura, which causes all melee opponents to save vs. spells each round or be Mazed.</p>
   </div>
   <h4 class="subheader">Component 220: </h4>
@@ -684,6 +688,16 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 3.3 - February 2017</strong></p>
+  <ul>
+    <li>added the Herald kit, removed the Blade demibard</li>
+    <li>a ton of little fixes</li>
+  </ul>
+  <p><strong>Version 3.2 - January 2017</strong></p>
+  <ul>
+    <li>added Jinxer kit</li>
+    <li>support for Song & Silence bard kits</li>
+  </ul>
   <p><strong>Version 3.1 - December 2016</strong></p>
   <ul>
     <li>added 'fighting dirty' feat</li>

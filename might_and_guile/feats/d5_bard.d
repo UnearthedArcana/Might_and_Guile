@@ -8,6 +8,7 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_bard
  IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_bard_6		//	miscast aura
  IF ~GlobalLT("D5_AUR21","LOCALS",1)~ THEN REPLY @21211 GOTO d5_bard_8		//	intimidation aura
  IF ~GlobalLT("D5_AUR22","LOCALS",1)~ THEN REPLY @21221 GOTO d5_bard_10		//	bad luck aura
+ IF ~GlobalLT("D5_AUR09","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21091 GOTO d5_bard_12		//	death ward aura
  IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_bard_14		//	mind blank aura
  IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_bard_16		//	invulnerability aura
  IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_bard_18		//	slow aura
@@ -16,8 +17,10 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_bard
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_bard_24
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_bard_26
  IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_bard_28
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_bard_36
  IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_bard_30
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_bard_32
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_bard_32
+ IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_bard_34
 END
 
 IF ~~ THEN BEGIN d5_bard_1 // luck aura
@@ -48,6 +51,11 @@ END
 IF ~~ THEN BEGIN d5_bard_10 // bad luck
  SAY @21222
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR22","LOCALS",1)~ DO ~ApplySpellRES("D5BD22Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_bard 
+END
+IF ~~ THEN BEGIN d5_bard_12 // death ward
+ SAY @21092
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR09","LOCALS",1)~ DO ~ApplySpellRES("D5BD09Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_bard 
 END
 IF ~~ THEN BEGIN d5_bard_14 // mind blank
@@ -98,5 +106,15 @@ END
 IF ~~ THEN BEGIN d5_bard_32 // fighting dirty
  SAY @20260
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_bard 
+END 
+IF ~~ THEN BEGIN d5_bard_34 // disrupt
+ SAY @20258
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISRUPT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG4",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_bard 
+END 
+IF ~~ THEN BEGIN d5_bard_36 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_bard 
 END 

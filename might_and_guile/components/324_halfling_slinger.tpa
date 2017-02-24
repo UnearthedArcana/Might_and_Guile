@@ -267,58 +267,82 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 END
 //___________________________________________________________________________________
 
-
-//FnP SPHERE SYSTEM COMPATIBILITY____________________________________________________
+//DEFINE SPHERE ACCESS______________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
-
-ACTION_IF GAME_IS ~iwdee~ BEGIN
-	OUTER_SPRINT game ~iwd~
-END
-ELSE BEGIN
-	OUTER_SPRINT game ~bg2~
-END
-
-COPY_EXISTING ~d5_sling.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/life_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/protection_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/vigor_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/animal_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/plant_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/air_ranger.txt~
-	APPEND_FILE ~faiths_and_powers/spheres/%game%/light_ranger.txt~
+ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 1 rows
+	READ_2DA_ENTRY (%rows% - 1) 5 1 mod_clab
 BUT_ONLY
-
+LAF ~DEFINE_FNP_KIT_INFO~
+  INT_VAR
+	c_cleric 		= 0   // put a '1' next to the kit's class
+	c_acolyte 		= 0
+	c_fighter_cleric = 0   // only choose ONE of these classes!
+	c_cleric_mage	= 0
+	c_cleric_thief 	= 0
+	c_ranger_cleric	= 0
+    c_druid 		= 0
+    c_mystic 		= 0
+    c_occultist 	= 0
+    c_champion 		= 0
+    c_zealot 		= 0
+    c_ranger 		= 0
+    c_scout 		= 1
+  STR_VAR
+    clab_name = EVAL ~%mod_clab%~
+	race 			= ~all~  // enter 'all' 'human' 'elf' 'dwarf' 'gnome' 'halfling' or 'orc'
+	s_Life 			= ~ranger~   // for chosen spheres, enter 'focus' or 'major' or 'minor'
+	s_Death 		= ~x~   // (or 'paladin' or 'ranger' for those classes)
+	s_Benediction 	= ~x~
+	s_Destruction 	= ~x~
+	s_Protection 	= ~ranger~
+	s_War 			= ~x~
+	s_Knowledge 	= ~x~
+	s_Deception 	= ~x~
+	s_Thought 		= ~x~
+	s_Dread 		= ~x~
+	s_Vigor 		= ~ranger~
+	s_Affliction 	= ~x~
+	s_Animal 		= ~x~
+	s_Plant 		= ~x~
+	s_Earth 		= ~x~
+	s_Water 		= ~x~
+	s_Air 			= ~ranger~
+	s_Fire 			= ~x~
+	s_Light 		= ~x~
+	s_Shadow 		= ~x~
+	s_Magic 		= ~x~
+END
 //__________________________________________________________________________________
 
-OUTER_SPRINT kit_spheres @2599 // ........................KIT SPHERES TRA REF HERE
-
-OUTER_SPRINT this_kit ~D5SLING~ // ..............................KIT NAME HERE
-
-//__________________________________________________________________________________
-
-OUTER_SET strref = (0 - 1)
-
-COPY_EXISTING - ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS num_cols
-	READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
-	FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
-		PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~%this_kit%~) BEGIN
-			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 strref
-		END
-	END
-BUT_ONLY
-
-ACTION_IF (strref >= 0) BEGIN
-	ACTION_GET_STRREF %strref% kit_description 
-	OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
-		REPLACE_TEXTUALLY ~Abilities:~ ~%kit_spheres%~
-	END
-	STRING_SET_EVALUATE %strref% ~%kit_description%~
+//FNP SHPERE ACCESS_________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+  OUTER_SPRINT sphere_access @1002
+  OUTER_SPRINT focus_access @1003
+  OUTER_SPRINT major_access @1004
+  OUTER_SPRINT minor_access @1005
+  OUTER_SPRINT advantages @1006
+  OUTER_SPRINT abilities @1007
+  OUTER_SPRINT disadvantages @1008
+  OUTER_SPRINT restrictions @1009
+  OUTER_TEXT_SPRINT focus_sphere_list ~~
+  OUTER_TEXT_SPRINT major_sphere_list ~~
+  OUTER_TEXT_SPRINT minor_sphere_list ~~
+  OUTER_TEXT_SPRINT paladin_sphere_list ~~
+  OUTER_TEXT_SPRINT ranger_sphere_list ~~
+  OUTER_TEXT_SPRINT total_sphere_list ~~
+  LAM ~READ_FNP_KIT_INFO~
+  INCLUDE ~%MOD_FOLDER%/lib/add_fnp_spheres.tpa~
 END
+//___________________________________________________________________________________
 
+//DON'T USE SCROLLS/WANDS___________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
+	APPEND ~d5_sling.2da~ ~ABILITY    AP_D5_RF84N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+	APPEND ~d5_sling.2da~ ~ABILITY    AP_D5_RF83N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 END
 //__________________________________________________________________________________
 

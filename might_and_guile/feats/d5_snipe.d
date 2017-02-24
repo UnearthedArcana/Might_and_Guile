@@ -2,6 +2,7 @@ BEGIN ~D5_SNIPE~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_snipe
 SAY @23101	//	~Choose a Called Shot:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_snipe_32
  IF ~GlobalLT("D5_CSTRIP","LOCALS",1)~ THEN REPLY @23113 GOTO d5_snipe_2 	//	trip
  IF ~GlobalLT("D5_CSDISARM","LOCALS",1)~ THEN REPLY @23115 GOTO d5_snipe_6 	//	disarm
  IF ~GlobalLT("D5_CSCRIPPLE","LOCALS",1) CheckStatGT(myself,2,LEVEL)~ THEN REPLY @23119 GOTO d5_snipe_8		//	cripple
@@ -86,5 +87,10 @@ END
 IF ~~ THEN BEGIN d5_snipe_30 // shadow magic
  SAY @2756
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SHADOW","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH5",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_snipe 
+END 
+IF ~~ THEN BEGIN d5_snipe_32 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_snipe 
 END 

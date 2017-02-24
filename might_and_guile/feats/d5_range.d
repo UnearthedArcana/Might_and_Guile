@@ -2,6 +2,7 @@ BEGIN ~D5_RANGE~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_range
 SAY @20009 // ~Choose a feat:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_range_1
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_range_2
  IF ~GlobalLT("D5_FFLURRY","LOCALS",1)~ THEN REPLY @3913 GOTO d5_range_4
  IF ~GlobalLT("D5_FPARRY","LOCALS",1)~ THEN REPLY @3911 GOTO d5_range_6
@@ -15,6 +16,11 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_FRESOLVE","LOCALS",1)~ THEN REPLY @3919 GOTO d5_range_22
 END
 
+IF ~~ THEN BEGIN d5_range_1 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_range 
+END 
 IF ~~ THEN BEGIN d5_range_2 // basic alchemy
  SAY @20132
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_ALCHEMY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFC1",myself)~ EXIT 

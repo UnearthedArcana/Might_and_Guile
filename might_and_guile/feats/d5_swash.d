@@ -2,6 +2,7 @@ BEGIN ~D5_SWASH~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_swash
 SAY @20009
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_swash_21
  IF ~GlobalLT("D5_LORE","LOCALS",5)~ THEN REPLY @20301 GOTO d5_swash_4
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_swash_5
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_swash_6
@@ -104,5 +105,10 @@ END
 IF ~~ THEN BEGIN d5_swash_20 // luck bonus
  SAY @20299
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_LUCKY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA5",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_swash 
+END 
+IF ~~ THEN BEGIN d5_swash_21 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_swash 
 END 

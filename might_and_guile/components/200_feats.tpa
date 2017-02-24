@@ -356,6 +356,21 @@ COPY ~might_and_guile/feats/d5_rfa5.spl~ ~override~   // 			luck bonus
 	WRITE_ASCII 0x3a ~d5_rfa5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa5~ END
 
+COPY ~might_and_guile/feats/d5_rfa6.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfa6.spl~ ~override~   // 			quickstride
+	SAY NAME1 @2210
+	SAY UNIDENTIFIED_DESC @20110
+	WRITE_ASCII 0x3a ~d5_rfa5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa6~ END
+COPY ~might_and_guile/misc/d5_stri4ee.spl~ ~override/d5_rf16.spl~
+	SAY NAME1 @2210
+	SAY UNIDENTIFIED_DESC @20110
+	WRITE_ASCII 0x3a ~d5_rfa5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa6~ END
+COPY ~might_and_guile/misc/d5_walk4ee.spl~ ~override/d5_rwlk.spl~
+	SAY NAME1 @2211
+	SAY UNIDENTIFIED_DESC @2211
+
 // mechanical
 
 /*
@@ -466,6 +481,9 @@ COPY ~might_and_guile/feats/d5_rf31e.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf31f.spl~ ~override~
 	SAY NAME1 @20138
 	SAY UNIDENTIFIED_DESC @20138
+COPY ~might_and_guile/feats/d5_rf31g.spl~ ~override~
+	SAY NAME1 @20139
+	SAY UNIDENTIFIED_DESC @20139
 COPY ~might_and_guile/feats/d5_floil.itm~ ~override~
 	SAY NAME1 @20139
 	SAY NAME2 @20139
@@ -784,7 +802,8 @@ COPY ~might_and_guile/feats/d5_rfh5.spl~ ~override~   //           shadow pool
 	SAY UNIDENTIFIED_DESC @2756
 	WRITE_ASCII 0x3a ~d5_rfh5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh5~ END
-COPY ~might_and_guile/feats/d5_rf85.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5_rf85~ END
+COPY_EXISTING ~d5_shad1.spl~ ~override/d5_rf85.spl~
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
 	WRITE_ASCII 0x3a ~d5_rfh5~ #8
@@ -907,7 +926,7 @@ BUT_ONLY_IF_IT_CHANGES
 
 // combat techniques - warrior
 
-// add weapon of focus feat
+// add weapon of focus feat(...? no, this is in the WPO)
 
 // add intimidation as wf01
 // @3915 AND @3916

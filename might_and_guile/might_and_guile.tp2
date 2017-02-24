@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~3.2.5~
+VERSION ~3.3~
 //README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
@@ -16,6 +16,8 @@ ALWAYS
 
 	INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
+	INCLUDE ~might_and_guile/lib/fnp_compat.tpa~
+	
 END
 
 // ASK_EVERY_COMPONENT
@@ -25,23 +27,6 @@ LANGUAGE
   ~english~
   ~might_and_guile/language/english/setup.tra~
 
-
-
-/*
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						SPELL TABLE CHANGES
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @100
-DESIGNATED 100
-//GROUP @22
-
-INCLUDE ~scales_of_balance/components/00_spell_tables.tpa~
-//__________________________________________________________________________________
-*/
 
 
 //__________________________________________________________________________________

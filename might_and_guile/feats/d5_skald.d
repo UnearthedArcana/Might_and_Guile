@@ -6,6 +6,7 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_skald
  IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_skald_6		//	miscast aura
  IF ~GlobalLT("D5_AUR21","LOCALS",1)~ THEN REPLY @21211 GOTO d5_skald_8		//	intimidation aura
  IF ~GlobalLT("D5_AUR22","LOCALS",1)~ THEN REPLY @21221 GOTO d5_skald_10		//	bad luck aura
+ IF ~GlobalLT("D5_AUR09","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21091 GOTO d5_skald_12		//	death ward aura
  IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_skald_14		//	mind blank aura
  IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_skald_16		//	invulnerability aura
  IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_skald_18		//	slow aura
@@ -37,6 +38,11 @@ END
 IF ~~ THEN BEGIN d5_skald_10 // bad luck
  SAY @21222
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR22","LOCALS",1)~ DO ~ApplySpellRES("D5BD22Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_skald 
+END
+IF ~~ THEN BEGIN d5_skald_12 // death ward
+ SAY @21092
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR09","LOCALS",1)~ DO ~ApplySpellRES("D5BD09Z",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_skald 
 END
 IF ~~ THEN BEGIN d5_skald_14 // mind blank

@@ -2,6 +2,7 @@ BEGIN ~D5_STALK~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_stalk
 SAY @23101 // ~Choose a feat:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_stalk_1
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20101 GOTO d5_stalk_2
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_stalk_4
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_6
@@ -14,6 +15,11 @@ SAY @23101 // ~Choose a feat:~
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_SHADOW","LOCALS",1) CheckStatGT(myself,14,INT)~ THEN REPLY @2755 GOTO d5_stalk_22
 END
 
+IF ~~ THEN BEGIN d5_stalk_1 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_stalk 
+END 
 IF ~~ THEN BEGIN d5_stalk_2 // stealth
  SAY @20102
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SKILLS","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA1",myself)~ EXIT 

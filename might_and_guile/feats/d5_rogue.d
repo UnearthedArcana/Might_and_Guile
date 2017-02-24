@@ -6,6 +6,8 @@ SAY @20009
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20103 GOTO d5_rogue_2
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20105 GOTO d5_rogue_3
  IF ~GlobalLT("D5_LORE","LOCALS",5)~ THEN REPLY @20301 GOTO d5_rogue_4
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_rogue_25
+ IF ~GlobalLT("D5_LUCKY","LOCALS",1)~ THEN REPLY @20299 GOTO d5_rogue_24
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_rogue_5
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_rogue_6
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_rogue_7
@@ -16,41 +18,40 @@ SAY @20009
  IF ~GlobalLT("D5_RTHAC0","LOCALS",2)~ THEN REPLY @20233 GOTO d5_rogue_12
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_SWASH","LOCALS",1)~ THEN REPLY @3106 GOTO d5_rogue_13
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_rogue_14
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_rogue_16
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_rogue_17
- IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_rogue_18
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_rogue_16
+ IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_rogue_17
+ IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_rogue_18
  IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_rogue_19
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_SHADOW","LOCALS",2) GlobalLT("D5_ILLUSION","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @2755 GOTO d5_rogue_20
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_ILLUSION","LOCALS",2) GlobalLT("D5_SHADOW","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20295 GOTO d5_rogue_21
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT)~ THEN REPLY @20291 GOTO d5_rogue_22
  IF ~GlobalGT("D5_RWANDS","LOCALS",0) GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT)~ THEN REPLY @20293 GOTO d5_rogue_23
- IF ~GlobalLT("D5_LUCKY","LOCALS",1)~ THEN REPLY @20299 GOTO d5_rogue_24
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20603 GOTO d5_rogue_25	//	mind thrust
- IF ~Global("D5_TELEPATHY","LOCALS",1)~ THEN REPLY @20606 GOTO d5_rogue_26	//	id insinuation
- IF ~Global("D5_TELEPATHY","LOCALS",2)~ THEN REPLY @20609 GOTO d5_rogue_27	//	domination
- IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20612 GOTO d5_rogue_28	//	intellect fortress
- IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20615 GOTO d5_rogue_29	//	psychic crush
- IF ~Global("D5_TELEPATHY","LOCALS",5)~ THEN REPLY @20612 GOTO d5_rogue_30	//	intellect fortress
- IF ~Global("D5_TELEPATHY","LOCALS",4)~ THEN REPLY @20615 GOTO d5_rogue_31	//	psychic crush
- IF ~Global("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20623 GOTO d5_rogue_32	//	immobilize
- IF ~Global("D5_TELEKINESIS","LOCALS",1)~ THEN REPLY @20626 GOTO d5_rogue_33	//	kinetic ram
- IF ~Global("D5_TELEKINESIS","LOCALS",2)~ THEN REPLY @20629 GOTO d5_rogue_34	//	inertial barrier
- IF ~Global("D5_TELEKINESIS","LOCALS",3)~ THEN REPLY @20632 GOTO d5_rogue_35	//	psychic knife
- IF ~Global("D5_TELEKINESIS","LOCALS",4)~ THEN REPLY @20635 GOTO d5_rogue_36	//	freedom
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20663 GOTO d5_rogue_37	//	adrenaline rush
- IF ~Global("D5_BIOKINESIS","LOCALS",1)~ THEN REPLY @20666 GOTO d5_rogue_38	//	metabolic boost
- IF ~Global("D5_BIOKINESIS","LOCALS",2)~ THEN REPLY @20669 GOTO d5_rogue_39	//	bioregeneration
- IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20672 GOTO d5_rogue_40	//	camouflage
- IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20675 GOTO d5_rogue_41	//	carapace
- IF ~Global("D5_BIOKINESIS","LOCALS",5)~ THEN REPLY @20672 GOTO d5_rogue_42	//	camouflage
- IF ~Global("D5_BIOKINESIS","LOCALS",4)~ THEN REPLY @20675 GOTO d5_rogue_43	//	carapace
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20643 GOTO d5_rogue_44	//	static discharge
- IF ~Global("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20646 GOTO d5_rogue_45	//	energy transfer
- IF ~Global("D5_PYROKINESIS","LOCALS",2)~ THEN REPLY @20649 GOTO d5_rogue_46	//	psychic combustion
- IF ~Global("D5_PYROKINESIS","LOCALS",3)~ THEN REPLY @20652 GOTO d5_rogue_47	//	energy shield
- IF ~Global("D5_PYROKINESIS","LOCALS",3)~ THEN REPLY @20655 GOTO d5_rogue_48	//	generate lightning
- IF ~Global("D5_PYROKINESIS","LOCALS",5)~ THEN REPLY @20652 GOTO d5_rogue_49	//	energy shield
- IF ~Global("D5_PYROKINESIS","LOCALS",4)~ THEN REPLY @20655 GOTO d5_rogue_50	//	generate lightning
+ IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20603 GOTO d5_rogue_51	//	mind thrust
+ IF ~Global("D5_TELEPATHY","LOCALS",1)~ THEN REPLY @20606 GOTO d5_rogue_52	//	id insinuation
+ IF ~Global("D5_TELEPATHY","LOCALS",2)~ THEN REPLY @20609 GOTO d5_rogue_53	//	domination
+ IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20612 GOTO d5_rogue_54	//	intellect fortress
+ IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20615 GOTO d5_rogue_55	//	psychic crush
+ IF ~Global("D5_TELEPATHY","LOCALS",5)~ THEN REPLY @20612 GOTO d5_rogue_56	//	intellect fortress
+ IF ~Global("D5_TELEPATHY","LOCALS",4)~ THEN REPLY @20615 GOTO d5_rogue_57	//	psychic crush
+ IF ~Global("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20623 GOTO d5_rogue_61	//	immobilize
+ IF ~Global("D5_TELEKINESIS","LOCALS",1)~ THEN REPLY @20626 GOTO d5_rogue_62	//	kinetic ram
+ IF ~Global("D5_TELEKINESIS","LOCALS",2)~ THEN REPLY @20629 GOTO d5_rogue_63	//	inertial barrier
+ IF ~Global("D5_TELEKINESIS","LOCALS",3)~ THEN REPLY @20632 GOTO d5_rogue_64	//	psychic knife
+ IF ~Global("D5_TELEKINESIS","LOCALS",4)~ THEN REPLY @20635 GOTO d5_rogue_65	//	freedom
+ IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20663 GOTO d5_rogue_71	//	adrenaline rush
+ IF ~Global("D5_BIOKINESIS","LOCALS",1)~ THEN REPLY @20666 GOTO d5_rogue_72	//	metabolic boost
+ IF ~Global("D5_BIOKINESIS","LOCALS",2)~ THEN REPLY @20669 GOTO d5_rogue_73	//	bioregeneration
+ IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20672 GOTO d5_rogue_74	//	camouflage
+ IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20675 GOTO d5_rogue_75	//	carapace
+ IF ~Global("D5_BIOKINESIS","LOCALS",5)~ THEN REPLY @20672 GOTO d5_rogue_86	//	camouflage
+ IF ~Global("D5_BIOKINESIS","LOCALS",4)~ THEN REPLY @20675 GOTO d5_rogue_77	//	carapace
+ IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20643 GOTO d5_rogue_81	//	static discharge
+ IF ~Global("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20646 GOTO d5_rogue_82	//	energy transfer
+ IF ~Global("D5_PYROKINESIS","LOCALS",2)~ THEN REPLY @20649 GOTO d5_rogue_83	//	psychic combustion
+ IF ~Global("D5_PYROKINESIS","LOCALS",3)~ THEN REPLY @20652 GOTO d5_rogue_84	//	energy shield
+ IF ~Global("D5_PYROKINESIS","LOCALS",3)~ THEN REPLY @20655 GOTO d5_rogue_85	//	generate lightning
+ IF ~Global("D5_PYROKINESIS","LOCALS",5)~ THEN REPLY @20652 GOTO d5_rogue_86	//	energy shield
+ IF ~Global("D5_PYROKINESIS","LOCALS",4)~ THEN REPLY @20655 GOTO d5_rogue_87	//	generate lightning
 END
 
 IF ~~ THEN BEGIN d5_rogue_1 // stealth
@@ -168,132 +169,137 @@ IF ~~ THEN BEGIN d5_rogue_24 // luck bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_LUCKY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_25 // mind thrust
+IF ~~ THEN BEGIN d5_rogue_25 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_rogue 
+END 
+IF ~~ THEN BEGIN d5_rogue_51 // mind thrust
  SAY @20604
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",1)~ DO ~AddSpecialAbility("D5PSA01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_26 // id insinuation
+IF ~~ THEN BEGIN d5_rogue_52 // id insinuation
  SAY @20607
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",2)~ DO ~ApplySpellRES("D5PXA02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_27 // domination
+IF ~~ THEN BEGIN d5_rogue_53 // domination
  SAY @20610
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",3)~ DO ~ApplySpellRES("D5PXA03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_28 // intellect fortress
+IF ~~ THEN BEGIN d5_rogue_54 // intellect fortress
  SAY @20613
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",4)~ DO ~ApplySpellRES("D5PXA04",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_29 // psychic crush
+IF ~~ THEN BEGIN d5_rogue_55 // psychic crush
  SAY @20616
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",5)~ DO ~ApplySpellRES("D5PXA05",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_30 // intellect fortress2
+IF ~~ THEN BEGIN d5_rogue_56 // intellect fortress2
  SAY @20613
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",6)~ DO ~ApplySpellRES("D5PXA00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_31 // psychic crush2
+IF ~~ THEN BEGIN d5_rogue_57 // psychic crush2
  SAY @20616
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEPATHY","LOCALS",6)~ DO ~ApplySpellRES("D5PXA00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END
-IF ~~ THEN BEGIN d5_rogue_32 // immobilize
+IF ~~ THEN BEGIN d5_rogue_61 // immobilize
  SAY @20624
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSB01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_33 // kinetic ram
+IF ~~ THEN BEGIN d5_rogue_62 // kinetic ram
  SAY @20627
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",2)~ DO ~ApplySpellRES("D5PXB02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_34 // inertial barrier
+IF ~~ THEN BEGIN d5_rogue_63 // inertial barrier
  SAY @20630
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",3)~ DO ~ApplySpellRES("D5PXB03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_35 // psychic knife
+IF ~~ THEN BEGIN d5_rogue_64 // psychic knife
  SAY @20633
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",4)~ DO ~ApplySpellRES("D5PXB04",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_36 // freedom
+IF ~~ THEN BEGIN d5_rogue_65 // freedom
  SAY @20636
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_TELEKINESIS","LOCALS",5)~ DO ~ApplySpellRES("D5PS205",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_37 // adrenaline rush
+IF ~~ THEN BEGIN d5_rogue_71 // adrenaline rush
  SAY @20664
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSD01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_38 // metabolic boost
+IF ~~ THEN BEGIN d5_rogue_72 // metabolic boost
  SAY @20667
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",2)~ DO ~ApplySpellRES("D5PXD02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_39 // bioregeneration
+IF ~~ THEN BEGIN d5_rogue_73 // bioregeneration
  SAY @20670
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",3)~ DO ~ApplySpellRES("D5PXD03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_40 // camouflage
+IF ~~ THEN BEGIN d5_rogue_74 // camouflage
  SAY @20673
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",4)~ DO ~ApplySpellRES("D5PXD04",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_41 // carapace
+IF ~~ THEN BEGIN d5_rogue_75 // carapace
  SAY @20676
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",5)~ DO ~ApplySpellRES("D5PXD05",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_42 // camouflage2
+IF ~~ THEN BEGIN d5_rogue_76 // camouflage2
  SAY @20673
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",6)~ DO ~ApplySpellRES("D5PXD00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_43 // carapace2
+IF ~~ THEN BEGIN d5_rogue_77 // carapace2
  SAY @20676
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_BIOKINESIS","LOCALS",6)~ DO ~ApplySpellRES("D5PXD00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_44 // static discharge
+IF ~~ THEN BEGIN d5_rogue_81 // static discharge
  SAY @20644
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",1)~ DO ~AddSpecialAbility("D5PSC01")~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_45 // energy transfer
+IF ~~ THEN BEGIN d5_rogue_82 // energy transfer
  SAY @20647
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",2)~ DO ~ApplySpellRES("D5PXC02",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_46 // psychic combustion
+IF ~~ THEN BEGIN d5_rogue_83 // psychic combustion
  SAY @20650
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",3)~ DO ~ApplySpellRES("D5PXC03",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_47 // energy shield
+IF ~~ THEN BEGIN d5_rogue_84 // energy shield
  SAY @20653
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",4)~ DO ~ApplySpellRES("D5PXC04",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_48 // generate lightning
+IF ~~ THEN BEGIN d5_rogue_85 // generate lightning
  SAY @20656
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",5)~ DO ~ApplySpellRES("D5PXC05",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_49 // energy shield2
+IF ~~ THEN BEGIN d5_rogue_86 // energy shield2
  SAY @20653
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",6)~ DO ~ApplySpellRES("D5PXC00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
 END 
-IF ~~ THEN BEGIN d5_rogue_50 // generate lightning2
+IF ~~ THEN BEGIN d5_rogue_87 // generate lightning2
  SAY @20656
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_PYROKINESIS","LOCALS",6)~ DO ~ApplySpellRES("D5PXC00",Myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 

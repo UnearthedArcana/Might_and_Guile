@@ -2,6 +2,7 @@ BEGIN ~D5_FIGHT~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_fight
 SAY @20009 // ~Choose a feat:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_fight_1
 // IF ~GlobalLT("D5_FINTIMIDATE","LOCALS",1)~ THEN REPLY @3915 GOTO d5_fight_2
  IF ~GlobalLT("D5_FFLURRY","LOCALS",1)~ THEN REPLY @3913 GOTO d5_fight_4
  IF ~GlobalLT("D5_FPARRY","LOCALS",1)~ THEN REPLY @3911 GOTO d5_fight_6
@@ -16,6 +17,11 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_FTACTICS","LOCALS",1)~ THEN REPLY @3933 GOTO d5_fight_24
 END
 
+IF ~~ THEN BEGIN d5_fight_1 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_fight 
+END 
 //IF ~~ THEN BEGIN d5_fight_2 // intimidate
 // SAY @3916
 // IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_FINTIMIDATE","LOCALS",1)~ DO ~ApplySpellRES("D5_WFA",myself)~ EXIT 

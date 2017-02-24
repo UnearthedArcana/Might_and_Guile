@@ -30,8 +30,8 @@ END
 ACTION_FOR_EACH walk IN ~d5_walk2~ ~d5_walk3~ ~d5_walk4~ ~d5_walk5~ ~d5_walk6~ ~d5_walkm~ BEGIN
   ACTION_IF ENGINE_IS ~tob bgt~ BEGIN
 	COPY ~might_and_guile/misc/%walk%.spl~ ~override/%walk%.spl~
-	  SAY NAME1 @2210
-	  SAY UNIDENTIFIED_DESC @2210
+	  SAY NAME1 @2211
+	  SAY UNIDENTIFIED_DESC @2211
   END
   ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
 	COPY ~might_and_guile/misc/%walk%ee.spl~ ~override/%walk%.spl~

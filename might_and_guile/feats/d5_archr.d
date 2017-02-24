@@ -2,6 +2,7 @@ BEGIN ~D5_ARCHR~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_archr
 SAY @23101	//	~Choose a Called Shot:~
+ IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_archr_1
  IF ~GlobalLT("D5_CSTRIP","LOCALS",1)~ THEN REPLY @23113 GOTO d5_archr_2 	//	trip
  IF ~GlobalLT("D5_CSPIN","LOCALS",1)~ THEN REPLY @23111 GOTO d5_archr_4 		//	pin
  IF ~GlobalLT("D5_CSDISARM","LOCALS",1)~ THEN REPLY @23115 GOTO d5_archr_6 	//	disarm
@@ -11,6 +12,11 @@ SAY @23101	//	~Choose a Called Shot:~
  IF ~GlobalLT("D5_CSSTUN","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @23123 GOTO d5_archr_14 	//	stun = 9
 END
 
+IF ~~ THEN BEGIN d5_archr_1 // quickstride
+ SAY @20110
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_archr 
+END 
 IF ~~ THEN BEGIN d5_archr_2 // trip
  SAY @23114
  IF ~~ THEN REPLY @20098 DO ~SetGlobal("D5_CSTRIP","LOCALS",1)~ DO ~ApplySpellRES("D5_CSA",myself)~ EXIT 

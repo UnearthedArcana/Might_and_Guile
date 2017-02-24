@@ -1,12 +1,12 @@
 
 IF
-	Kit(LastSummonerOf(Myself),D5_BLADE)
+	Kit(LastSummonerOf(Myself),D5_HERALD)
 	NumTimesTalkedTo(0)
 THEN
 	RESPONSE #100
 	SetGlobal("D5_FEAT","GLOBAL",1)
 	SetNumTimesTalkedTo(1)
-	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_blade",Myself))
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_herald",Myself))
 END
 
 IF

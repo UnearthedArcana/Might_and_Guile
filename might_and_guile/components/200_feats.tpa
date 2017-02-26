@@ -703,7 +703,7 @@ COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override~   // 			fighting dirty
 	SAY UNIDENTIFIED_DESC @20260
 	WRITE_ASCII 0x3a ~d5_rfg2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg5~ END
-APPEND ~splprot.2da~ ~D5_DIRTY%TAB%134%TAB%-1%TAB%1~
+APPEND ~splprot.2da~ ~D5_DIRTY%TAB%134%TAB%-1%TAB%8~
 COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
 	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
@@ -732,20 +732,14 @@ BUT_ONLY
 COPY ~might_and_guile/feats/d5_rf75a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75a.spl~ ~override~
   LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 3 paramater2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 5 paramater2 = %dirty_row% END
 COPY ~might_and_guile/feats/d5_rf75b.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75c.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75c.spl~ ~override~
   LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 3 paramater2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 5 paramater2 = %dirty_row% END
 COPY ~might_and_guile/feats/d5_rf75d.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75e.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75e.spl~ ~override~
   LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 3 paramater2 = %dirty_row% END
-  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 326 paramater1 = 5 paramater2 = %dirty_row% END
 COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~

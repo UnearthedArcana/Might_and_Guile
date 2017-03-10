@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.3 </strong><br />
+  <p><strong> Version 3.4 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -60,18 +60,20 @@
       <p> This component adds learnable feats, which may be chosen by the player at certain levels in a dialogue-based method. The feats include a few melee techniques for fighters, and many skills of various kinds for thieves. If you install psionics and revised Called Shots, those abilities will be folded into this system.
       <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
 	  <ul>
-	    <li> <b>Parry:</b> for the next 2 rounds, the warrior wil have a 4-point AC bonus, and APR will be 0.5. At 7th level and higher, the AC bonus will be 6 points.</li>
-	    <li> <b>Flurry:</b> for the next 2 rounds, the warrior will have a +1 APR bonus, but will suffer a 2-point penalty to THAC0 and AC.</li>
-	    <li> <b>Heroic Resistance:</b> for the next 2 rounds, the warrior's physical resistances will be set to 50%, but will suffer a 50% penalty to movement rate.</li>
-	    <li> <b>Heroic Resolve:</b> the warrior will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless. (Available to fighters at 10th level, and to rangers at 12th level.)</li>
-	    <li> <b>Heroic Willpower:</b> for the next 3 rounds, the warrior has a +3 bonus to saves vs. Spells.</li>
-	    <li> <b>Knockdown:</b> for the next 2 rounds, each successful melee attack will cause the target to save vs. Breath or be knocked to the ground for 3 seconds.</li>
-	    <li> <b>Knockback:</b> for the next 2 rounds, each successful melee attack will cause the target ti save vs. Breath or be knocked 10 feet away from the warrior.</li>
-	    <li> <b>Cutting Blow:</b> for the next 2 rounds, each successful melee attack will cause the target to save vs. Death or suffer a bleeding wound that does 1 point of slashing damage every 3 seconds, for 15 seconds.</li>
-	    <li> <b>Tempo:</b> for the next 3 rounds, each successful melee attack will cause the target to suffer a 1-point AC penalty for 5 rounds.</li>
-	    <li> <b>Disrupt:</b> for the next 2 rounds, each successful hit will cause a ringing in the ears of the target, similar to deafness and causing spellcasters to suffer a non-cumulative 50% chance of casting failure if they fail a save vs. Spells.</li>
-	    <li> <b>Tactics:</b> making use of strong leadership in combat situations, the warrior develops the permanent ability to confer bonuses upon allies within earshot (20 feet). The warrior can switch back and forth between a +1 AC bonus and a +1 thac0 bonus, but cannot use both tactics at the same time, and the warrior himself does not benefit from the bonus.</li>
+	    <li> <b>Health Conditioning:</b> this ability confers a permanent +5 hit points upon the character</li>
+	    <li> <b>Toughness:</b> this ability confers a permanent 10% resistance to physical damage.</li>
+	    <li> <b>Saving Throws Bonus (Mental):</b> this ability confers a permanent -2 bonus to saving throws vs. spells, wands, and psionics.</li>
+	    <li> <b>Saving Throws Bonus (Physical):</b> this ability confers a permanent -2 bonus to saving throws vs. death/poison and petrify/polymorph.</li>
+	    <li> <b>Precise Strike:</b> this ability confers a permanent +5% chance to score a critical hit.</li>
+	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.</li>
+	    <li> <b>Quickstride:</b> this ability allows the warrior to increase his or her movement rate at will.</li>
+	    <li> <b>Fighting Posture (Aggressive):</b> each successful melee hit has a 20% chance to knock the target back 10 feet, and (on a failed saving throw) stun the target for two seconds.</li>
+	    <li> <b>Fighting Posture (Disarming):</b> each successful melee hit has a 20% chance to cause the target to stumble and/or fumble their weapon, resulting in the same penalties as a Slow spell, for one round.</li>
+	    <li> <b>Fighting Posture (Parry):</b> the warrior may focus on fighting and movement techniques designed to maximize the chance of dodging blows from slashing weapons, piercing weapons, or blunt weapons.</li>
+	    <li> <b>Tactics (Discipline):</b> the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet.</li>
+	    <li> <b>Tactics (Formation):</b> the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet.</li>
 	  </ul>
+      <p> Fighters who have learned more than one fighting posture may switch between them at will, but only one can be used at a time. A fighting posture can last all day; after resting, you will need to decide on a posture again. Fighters who have learned group combat tactics must choose one - discipline (offensive) or formation (defensive). Fighters may similarly switch grou tactics at will. </p>
       <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
       <p>The Rogue Feats include:
@@ -81,6 +83,7 @@
 	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
 	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
 	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li><br />
+	    <li> <b>Miscellaneous - Quickstride:</b> this ability allows the rogue to increase his or her movement rate at will.</li>
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Requires Dart Trap and Basic Alchemy)</li>
 	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter. (Assassin only - requires Dart Trap)</li>
@@ -137,8 +140,8 @@
 	    <li> <b>Telekinesis - Immobilization:</b> this ability Slows the target for one round; and causes the target to save vs. wands or be Held for one round and Slowed for a second round. The cost is 4 max hp. </li>
 	    <li> <b>Telekinesis - Kinetic Ram:</b> the target of this telekinetic attack takes 2d3 crushing damage, and must save vs. wands or be knocked back 10 feet. The cost is 5 max hp. (Requires Immobilize.)</li>
 	    <li> <b>Telekinesis - Inertial Barrier:</b> this ability envelops the rogue in a shell of telekinetic energy that absorbs incoming blows. It provides a -2 AC bonus and 4-% DR against crushing or missile attacks; a -1 AC bonus and 20% DR against slashing attacks; 25% resistance to fire, acid, and magic damage; and immunity to the spell 'Magic Missile.' The cost to maintain the barrier is 7 max hp. (Requires Kinetic Ram.)</li>
-	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It lasts for 7 rounds and is wielded as if the user has Mastery (+++) with it. The cost to maintain the blade is 7 max hp. (Requires Inertial Barrier.)</li>
-	    <li> <b>Telekinesis - Free Action:</b> while maintained (at a cost of 10 max hp), this ability renders the rogue immune to all effects that hinder normal movement, whether psionic or magical. (Requires Inertial Barrier.)</li><br />
+	    <li> <b>Telekinesis - Psychic Knife:</b> this ability creates a blade of pure focused telekinetic force, vaguely in the shape of a sword. It is wielded as if the user has Mastery (+++) with it. The cost to maintain the blade is 7 max hp. (Requires Inertial Barrier.)</li>
+	    <li> <b>Telekinesis - Free Action:</b> this is a passive ability that is trggiered instinctively whenever the psion is helpless. In such circumstances, at a cost of 9 max hp, this ability will allow the psion to overcome the bonds or spell effect and move away from the area. (Requires Inertial Barrier.)</li><br />
 	    <li> <b>Pyrokinesis - Static Discharge:</b> this ability gathers static electricity into the rogue's hand, like the Shocking Grasp spell. A successful attack then causes 2d6 points of electric damage and the target will be stunned for 1 round on a failed save vs. wands. The cost is 4 max hp.</li>
 	    <li> <b>Pyrokinesis - Energy Transfer:</b> the immediate expenditure of energy to initiate this ability is converted into a steady bloom of positive energy in the target, resulting in a slow healing, at half the rate of the psion's hp recovery. The cost is 5 max hp. (Requires Static Discharge.)</li>
 	    <li> <b>Pyrokinesis - Psychic Combustion:</b> this ability causes a spontaneous plume of fire, causing 3d4+3 damage to all within 5 feet of the target location. The costs is 7 max hit points. (Requires Energy Transfer.)</li>
@@ -146,7 +149,7 @@
 	    <li> <b>Pyrokinesis - Generate Lightning:</b> this ability sends a powerful arc of electricity to the target and any nearby enemies, causing 2d6+2 electric damage (save vs. wands for half). The cost is 9 max hp. (Requires Psychic Combustion.)</li><br />
 	    <li> <b>Biokinesis - Adrenaline Rush:</b> this ability causes the rogue's physical stats to increase by 1-3 for 4 rounds, followed by 2 rounds of fatigue. The cost is 4 max hp.</li>
 	    <li> <b>Biokinesis - Metabolic Boost:</b> this ability causes the to be affected by Haste, increasing movement speed and gaining 0.5 to 1 extra attacks per round. The effect lasts 3-5 rounds and costs 5 max hit points. (Requires Adrenaline Rush.)</li>
-	    <li> <b>Biokinesis - Bioregeneration:</b> this ability causes the psion to regenerate l-3 hit points per round, as long as the power is maintained. The cost to maintain this power is 7 max hp, and the psions canot engage in physical combat while the regeneration is happening. (Requires Metabolic Boost.)</li>
+	    <li> <b>Biokinesis - Bioregeneration:</b> this ability causes the psion to regenerate l-3 hit points per round, for 7 rounds, at a cost of 7 max hp. (Requires Metabolic Boost.)</li>
 	    <li> <b>Biokinesis - Camouflage:</b> this ability causes the rogue to become partially invisible, resulting in a -4 AC bonus, a 40% bonus to stealth, and the inability to be targeted by spells. It costs 9 max hp to maintain this power. (Requires Bioregeneration.)</li>
 	    <li> <b>Biokinesis - Carapace:</b> this ability causes the rogue's skin to become tough and brittle. The carapace confers a -2 AC bonus and absorbs 1 physical attack each round. The cost to maintain this power is 9 max hit points. (Requires Bioregeneration.)</li>
 	  </ul>
@@ -163,9 +166,9 @@
         <li><b>Aura of Power:</b> bonus to melee damage for allies (scales with level).</li>
         <li><b>Aura of Blessing:</b> allies are under the effect of a Bless spell.</li>
         <li><b>Aura of Positive Energy:</b> allies are under the effect of the spell Negative Plane Protection. (This aura disables the bard's spellcasting.)</li>
-        <li><b>Aura of Death Ward:</b> allies are under the effect of a Bless spell. (This aura disables the bard's spellcasting.)</li>
+        <li><b>Aura of Death Ward:</b> allies are under the effect of a Death Ward spell. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura of Reflections:</b> allies get a single Mirror Image each round, which may absorb a melee attack. (This aura disables the bard's spellcasting.)</li>
-        <li><b>Aura of Mind Shield:</b> allies are immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura is intense - it disables both spellcasting and combat.)</li><br />
+        <li><b>Aura of Mind Shield:</b> allies are immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura is intense - it disables both spellcasting and combat for the bard.)</li><br />
         <li><b>Aura of Interference:</b> this aura causes ALL spellcasting in the area of effect (whether by friend or foe) to suffer a 65% chance of failure. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura of Intimidation:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to to-hit and damage rolls.</li>
         <li><b>Aura of Cursing:</b> this aura causes all enemies in an area of effect to suffer a -1 penalty to Luck and saving throws.</li>
@@ -622,13 +625,12 @@ CALLED SHOTS <br />
         <li> Enables dwarves to be cleric/thieves.</li>
         <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
       </ul>
-      <p>This component also makes rangers unable to dual-class to cleric, unless they first find a special totem of the goddess Mielikki and use it to change their kit to a Woodscout of Mielikki.  Multiclass ranger/clerics will automatically begin as Woodscouts, except elves who begin as Forestwalkers of Solonor Thelandira. (Note, in IWDEE and BG2EE, these ranger/cleric changes will only take effect if baldur.ini is set such that cleric/rangers receive all druid spells.)</p>
-      <p>Finally, this component introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in earlier versions of the games, you must use a totem or item to adopt the kit. The multiclass kits are:</p>
+      <p>This component also introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in versions 1.3-1.4, you must use a tome or similar item to adopt the kit. The multiclass kits are:</p>
       <ul>
         <li> Elven Bladesinger - for elven fighter/mages.</li>
         <li> Spellfilcher - for mage/thieves.</li>
-        <li> Ranger/mage - from mage/thieves.</li>
-        <li> Spellbender - for cleric/mages.</li>
+        <li> Ranger/mage - for mage/thieves.</li>
+        <li> Spellbender - for cleric/mages. (Only if you have <i>not</i> installed Faiths & Powers)</li>
       </ul>
       <div class="kit_description">
         <p>ELVEN BLADESINGER: Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.</p>
@@ -688,6 +690,10 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 3.4 - March 2017</strong></p>
+  <ul>
+    <li>new warrior feats</li>
+  </ul>
   <p><strong>Version 3.3 - February 2017</strong></p>
   <ul>
     <li>added the Herald kit, removed the Blade demibard</li>

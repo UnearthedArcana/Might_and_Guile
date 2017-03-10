@@ -205,7 +205,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
 		REPLACE_TEXTUALLY ~GA_SPCL311 ~ ~****       ~
 		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/thief/rogue_feats_stalker.txt~
+		APPEND_FILE ~might_and_guile/feats/feats_stalker.txt~
   COPY_EXISTING ~backstab.2da~ ~override~
 	COUNT_2DA_COLS cols
 	FOR (col = 2; col < cols; ++col) BEGIN // iterate through columns

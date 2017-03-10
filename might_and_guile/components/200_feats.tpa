@@ -351,8 +351,8 @@ COPY ~might_and_guile/feats/d5_rfa4.spl~ ~override~   // 			lore bonus
 
 COPY ~might_and_guile/feats/d5_rfa5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa5.spl~ ~override~   // 			luck bonus
-	SAY NAME1 @20299
-	SAY UNIDENTIFIED_DESC @20300
+	SAY NAME1 @20303
+	SAY UNIDENTIFIED_DESC @20304
 	WRITE_ASCII 0x3a ~d5_rfa5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa5~ END
 
@@ -370,6 +370,14 @@ COPY ~might_and_guile/misc/d5_stri4ee.spl~ ~override/d5_rf16.spl~
 COPY ~might_and_guile/misc/d5_walk4ee.spl~ ~override/d5_rwlk.spl~
 	SAY NAME1 @2211
 	SAY UNIDENTIFIED_DESC @2211
+
+COPY ~might_and_guile/feats/d5_rfa7.spl~ ~override~   // 			+5 hp
+	SAY NAME1 @20305
+	SAY UNIDENTIFIED_DESC @20306
+
+COPY ~might_and_guile/feats/d5_rfa8.spl~ ~override~   // 			10% DR
+	SAY NAME1 @20307
+	SAY UNIDENTIFIED_DESC @20308
 
 // mechanical
 
@@ -641,6 +649,18 @@ COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override~   // 			save bonuses
 	WRITE_ASCII 0x3a ~d5_rfd5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
 
+COPY ~might_and_guile/feats/d5_rfd6.spl~ ~override~   // 			spell/wand saves
+	SAY NAME1 @20213
+	SAY UNIDENTIFIED_DESC @20214
+	WRITE_ASCII 0x3a ~d5_rfd5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
+
+COPY ~might_and_guile/feats/d5_rfd7.spl~ ~override~   // 			death/polymorph saves
+	SAY NAME1 @20215
+	SAY UNIDENTIFIED_DESC @20216
+	WRITE_ASCII 0x3a ~d5_rfd5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
+
 // combat 
 
 COPY ~might_and_guile/feats/d5_rfe1.bam~ ~override~
@@ -661,9 +681,17 @@ COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
 	WRITE_ASCII 0x3a ~d5_rfe5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe5~ END
 
+COPY ~might_and_guile/feats/d5_rfe6.spl~ ~override~   // 			crit bonus
+	SAY NAME1 @20243
+	SAY UNIDENTIFIED_DESC @20244
+
+COPY ~might_and_guile/feats/d5_rfe7.spl~ ~override~   // 			crit bonus 2
+	SAY NAME1 @20245
+	SAY UNIDENTIFIED_DESC @20246
+
 // combat techniques - rogue
 
-COPY ~might_and_guile/fighter/d5swash.spl~ ~override~	//			swashbuckling
+COPY ~might_and_guile/fighter/d5swash.spl~ ~override~	//			swashbuckling = 58
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
 
@@ -806,25 +834,25 @@ COPY_EXISTING ~d5_shad1.spl~ ~override/d5_rf85.spl~
 
 COPY ~might_and_guile/feats/d5_rfh6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh6.spl~ ~override~   // 		  illusion pool
-	SAY NAME1 @20295
-	SAY UNIDENTIFIED_DESC @20296
+	SAY NAME1 @20283
+	SAY UNIDENTIFIED_DESC @20284
 	WRITE_ASCII 0x3a ~d5_rfh6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh6~ END
 COPY ~might_and_guile/feats/d5_illp.spl~ ~override~
-	SAY NAME1 @20295
-	SAY UNIDENTIFIED_DESC @20296
+	SAY NAME1 @20283
+	SAY UNIDENTIFIED_DESC @20284
 	WRITE_ASCII 0x3a ~d5_rfh6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh6~ END
 COPY ~might_and_guile/feats/d5illpa.2da~ ~override~
 COPY ~might_and_guile/feats/d5illpb.2da~ ~override~
 COPY ~might_and_guile/feats/d5illpc.2da~ ~override~
 COPY ~might_and_guile/feats/d5illp5.spl~ ~override~
-	SAY NAME1 @20297
-	SAY UNIDENTIFIED_DESC @20298
+	SAY NAME1 @20285
+	SAY UNIDENTIFIED_DESC @20286
 COPY ~might_and_guile/feats/d5illp5a.spl~ ~override~
-	SAY NAME1 @20297
+	SAY NAME1 @20285
 COPY ~might_and_guile/feats/d5illp5b.spl~ ~override~
-	SAY NAME1 @20297
+	SAY NAME1 @20285
 COPY ~might_and_guile/feats/d5illp5a.eff~ ~override~
 
 //use scrolls/wands_________________________________________________________________
@@ -918,6 +946,108 @@ BUT_ONLY_IF_IT_CHANGES
 
 //
 
+APPEND ~splprot.2da~ ~D5_TACTICS%TAB%134%TAB%-1%TAB%8~
+APPEND ~splprot.2da~ ~D5_NTACTICS%TAB%134%TAB%-1%TAB%9~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_TACTICS~ BEGIN
+	    SET 134_bit = %row%
+	  END
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_NTACTICS~ BEGIN
+	    SET 134_not = %row%
+	  END
+	END
+BUT_ONLY
+
+COPY ~might_and_guile/feats/d5tacto.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf02.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfa2.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 233 parameter1 = 16 END
+COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			offensive tactics
+	SAY NAME1 @20321
+	SAY UNIDENTIFIED_DESC @20322
+	WRITE_ASCII 0x3a ~d5tacto~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tacto~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not% STR_VAR match_resource = ~d5_wf02~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit% STR_VAR match_resource = ~d5_wf03~ END
+COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf12b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5tactd.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf03.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfa3.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 233 parameter1 = 16 END
+
+COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~		//			defensive tactics
+	SAY NAME1 @20323
+	SAY UNIDENTIFIED_DESC @20324
+	WRITE_ASCII 0x3a ~d5tactd~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tactd~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not% STR_VAR match_resource = ~d5_wf03~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit% STR_VAR match_resource = ~d5_wf02~ END
+COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf13b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5post.bam~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb2.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb3.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb4.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb6.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfb7.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5_wf2a.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2b.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2c.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2d.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2e.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2f.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wf2g.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5posta.2da~ ~override~
+COPY ~might_and_guile/feats/d5postb.2da~ ~override~
+COPY ~might_and_guile/feats/d5postc.2da~ ~override~
+COPY ~might_and_guile/feats/d5postd.2da~ ~override~
+COPY ~might_and_guile/feats/d5poste.2da~ ~override~
+COPY ~might_and_guile/feats/d5postf.2da~ ~override~
+COPY ~might_and_guile/feats/d5postg.2da~ ~override~
+
+COPY ~might_and_guile/feats/d5posta.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf21.spl~ ~override~ 	//			aggressive posture
+	SAY NAME1 @20341
+	SAY UNIDENTIFIED_DESC @20342
+COPY ~might_and_guile/feats/d5_wf21.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf21b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5postd.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf22.spl~ ~override~ 	//			disarming posture
+	SAY NAME1 @20343
+	SAY UNIDENTIFIED_DESC @20344
+COPY ~might_and_guile/feats/d5_wf22.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf22b.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5parrys.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf23.spl~ ~override~ 	//			parry slashing
+	SAY NAME1 @20347
+	SAY UNIDENTIFIED_DESC @20347
+
+COPY ~might_and_guile/feats/d5parryp.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf24.spl~ ~override~ 	//			parry piercing
+	SAY NAME1 @20348
+	SAY UNIDENTIFIED_DESC @20348
+
+COPY ~might_and_guile/feats/d5parryb.bam~ ~override~
+COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~ 	//			parry blunt
+	SAY NAME1 @20349
+	SAY UNIDENTIFIED_DESC @20349
+
+
+/*
 // combat techniques - warrior
 
 // add weapon of focus feat(...? no, this is in the WPO)
@@ -1079,6 +1209,7 @@ COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf13~ END
 COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf13.bam~ ~override~
+*/
 
 //
 
@@ -1101,16 +1232,16 @@ END
 COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
 COPY ~might_and_guile/feats/d5_feat.eff~ ~override~ 
 COPY ~might_and_guile/feats/d5_feat.cre~ ~override~ 
-COMPILE ~might_and_guile/feats/d5_feat.baf~ 
-COMPILE ~might_and_guile/feats/d5_rogue.d~ 
-COMPILE ~might_and_guile/feats/d5_asasn.d~ 
-COMPILE ~might_and_guile/feats/d5_huntr.d~ 
-COMPILE ~might_and_guile/feats/d5_swash.d~ 
-COMPILE ~might_and_guile/feats/d5_shado.d~ 
-COMPILE ~might_and_guile/feats/d5_alchm.d~ 
-COMPILE ~might_and_guile/feats/d5_fight.d~ 
-COMPILE ~might_and_guile/feats/d5_range.d~ 
-COMPILE ~might_and_guile/feats/d5_stalk.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_feat.baf~ 
+COMPILE ~might_and_guile/feats/dialog/d5_rogue.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_asasn.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_huntr.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_swash.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_shado.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_alchm.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_fight.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_range.d~ 
+COMPILE ~might_and_guile/feats/dialog/d5_stalk.d~ 
 
 //__________________________________________________________________________________
 
@@ -1261,6 +1392,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ BEGIN
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~clabrn01.2da~ BEGIN
 	COPY_EXISTING ~clabrn01.2da~ ~override~
+				~clabrn04.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/feats/feats_ranger.txt~
 	BUT_ONLY

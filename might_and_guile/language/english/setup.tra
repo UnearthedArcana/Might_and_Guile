@@ -284,6 +284,10 @@ Weight: 0
 @20202  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class.~
 @20211  = ~Saving Throws Bonus~
 @20212  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
+@20213  = ~Saving Throw Bonus (Mental)~
+@20214  = ~Saving Throws Bonus (Mental): this ability confers a permanent -2 bonus to saving throws vs. spells, wands, and psionics.~
+@20215  = ~Saving Throw Bonus (Physical)~
+@20216  = ~Saving Throws Bonus (Physical): this ability confers a permanent -2 bonus to saving throws vs. death/poison and petrify/polymorph.~
 @20221  = ~Escape Artist~
 @20222  = ~Escape Artist: the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
 @20229  = ~Finesse~
@@ -294,6 +298,10 @@ Weight: 0
 @20234  = ~To-Hit Bonus (Ranged): this ability confers a permanent +1 bonus to all ranged attack rolls.~
 @20241  = ~Backstab Bonus~
 @20242  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
+@20243  = ~Precise Strike~
+@20244  = ~Precise Strike: this ability confers a permanent +5% chance to score a critical hit.~
+@20245  = ~Precise Strike 2~
+@20246  = ~Precise Strike 2: this ability confers a permanent +10% chance to score a critical hit.~
 @20251  = ~Melee Trick (Trip)~
 @20252  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
 @20253  = ~Melee Trick (Disarm)~
@@ -310,12 +318,8 @@ Weight: 0
 @20274  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
 @20275  = ~Smoke Bomb~
 @20276  = ~Smoke Bomb: this ability mimics the effects of the wizard spell Stinking Cloud. Everyone in the area of effect must make a saving throw or be paralyzed with retching and spasms by the noxious gas.~
-@20291  = ~Use Wands~
-@20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
-@20293  = ~Use Scrolls~
-@20294  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
-@20295  = ~Illusion Magic~
-@20296  = ~Illusion Magic:
+@20283  = ~Illusion Magic~
+@20284  = ~Illusion Magic:
 
 This allows the use of any one of the following five abilities:
   1) Color Spray
@@ -324,37 +328,58 @@ This allows the use of any one of the following five abilities:
   4) Mirror Image (at 7th level)
   5) Misleading Clone (at 11th level)
 ~
-@20297  = ~Misleading Clone~
-@20298  = ~Misleading Clone
+@20285  = ~Misleading Clone~
+@20286  = ~Misleading Clone
 
 Duration: 12 rounds
 Casting Time: 1
 
 When this magic is used, the rogue is briefly affected by an Improved Invisibility spell (for a mere two seconds) appears to jump teleported a few feet away from <PRO_HISHER> original position. Meanwhile, an exact image of the rogue is created where <PRO_HESHE> used to be, with exactly the same Hit Points. The image cannot perform any actions at all, such as attacking or casting spells. It can, however, move around and act as a decoy for the invisible wizard. The image will remain under control of the caster until reduced to 0 Hit Points, or until dispelled or revealed by a spell such as True Sight.
 ~
-@20299  = ~Luck Bonus~
-@20300  = ~Luck Bonus: this ability confers a permanent +1 bonus to the rogue's Luck.~
+@20287  = ~Bardic Magic~
+@20288  = ~Bardic Magic:
+
+This allows the use of any one of the following five abilities:
+  1) Charm Person/Mammal
+  2) Deafness
+  3) Shout (at 7th level)
+  4) Secret Word (at 7th level)
+  5) Greater Command (at 11th level)
+~
+@20289  = ~Bardic Magic:
+
+This allows the use of any one of the following five abilities:
+  1) Charm Person/Mammal
+  2) Sound Burst
+  3) Shout (at 7th level)
+  4) Secret Word (at 7th level)
+  5) Greater Command (at 11th level)
+~
+@20291  = ~Use Wands~
+@20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
+@20293  = ~Use Scrolls~
+@20294  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
 @20301  = ~Lore Bonus~
-@20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to the rogue's Lore.~
-@20303  = ~Bardic Magic~
-@20304  = ~Bardic Magic:
-
-This allows the use of any one of the following five abilities:
-  1) Charm Person/Mammal
-  3) Deafness
-  3) Shout (at 7th level)
-  4) Secret Word (at 7th level)
-  5) Greater Command (at 11th level)
-~
-@20305  = ~Bardic Magic:
-
-This allows the use of any one of the following five abilities:
-  1) Charm Person/Mammal
-  3) Sound Burst
-  3) Shout (at 7th level)
-  4) Secret Word (at 7th level)
-  5) Greater Command (at 11th level)
-~
+@20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to Lore.~
+@20303  = ~Luck Bonus~
+@20304  = ~Luck Bonus: this ability confers a permanent +1 bonus to Luck.~
+@20305  = ~Health Conditioning~
+@20306  = ~Health Conditioning: this ability confers a permanent +5 hit points upon the character.~
+@20307  = ~Toughness~
+@20308  = ~Toughness: this ability confers a permanent 10% resistance to physical damage.~
+@20321  = ~Tactics: Discipline~
+@20322  = ~Tactics (Discipline): the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
+@20323  = ~Tactics: Formation~
+@20324  = ~Tactics (Formation): the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
+@20341  = ~Fighting Posture: Aggressive~
+@20342  = ~Fighting Posture (Aggressive): each successful melee hit has a 20% chance to knock the target back 10 feet, and (on a failed saving throw) stun the target for two seconds.~
+@20343  = ~Fighting Posture: Disarming~
+@20344  = ~Fighting Posture (Disarming): each successful melee hit has a 20% chance to cause the target to stumble and/or fumble their weapon, resulting in the same penalties as a Slow spell, for one round.~
+@20345  = ~Fighting Posture: Parry~
+@20346  = ~Fighting Posture (Parry): the warrior may focus on fighting and movement techniques designed to maximize the chance of dodging blows from slashing weapons, piercing weapons, or blunt weapons.~
+@20347  = ~Fighting Posture: Parry Slashing~
+@20348  = ~Fighting Posture: Parry Piercing~
+@20349  = ~Fighting Posture: Parry Blunt~
 //
 //
 @20500  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.

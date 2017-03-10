@@ -758,7 +758,6 @@ COPY ~might_and_guile/misc/d5_jluck.spl~ ~override~
 	SAY NAME1 @3108
 	SAY UNIDENTIFIED_DESC @3108
 COPY ~might_and_guile/misc/d5_dsvbo.spl~ ~override~
-COPY ~might_and_guile/misc/d5_jluck.spl~ ~override~
 COPY ~might_and_guile/bard/d5_galai.spl~ ~override~
 	SAY NAME1 @4706
 	SAY UNIDENTIFIED_DESC @4706
@@ -2189,13 +2188,13 @@ END
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_fbrd.baf~
-  COMPILE ~might_and_guile/feats/d5_bard.d~ 
-  COMPILE ~might_and_guile/feats/d5_blade.d~ 
-  COMPILE ~might_and_guile/feats/d5_jinx.d~ 
-  COMPILE ~might_and_guile/feats/d5_skald.d~ 
-  COMPILE ~might_and_guile/feats/d5_nskld.d~ 
-  COMPILE ~might_and_guile/feats/d5_galla.d~ 
-  COMPILE ~might_and_guile/feats/d5_hrld.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_bard.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_blade.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_jinx.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_skald.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_nskld.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_galla.d~ 
+  COMPILE ~might_and_guile/feats/dialog/d5_hrld.d~ 
 
   APPEND ~d5_bard.2da~ ~ABILITY     AP_D5FEAT1  ****        AP_D5FEAT2  ****        AP_D5FEAT3  ****        AP_D5FEAT4  ****        AP_D5FEAT5  ****        AP_D5FEAT6  ****        AP_D5FEAT7  ****        AP_D5FEAT8  ****        AP_D5FEAT9  ****        AP_D5FEAT10 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
   APPEND ~d5_hrld.2da~ ~ABILITY     AP_D5FEAT1  ****        AP_D5FEAT2  ****        AP_D5FEAT3  ****        AP_D5FEAT4  ****        AP_D5FEAT5  ****        AP_D5FEAT6  ****        AP_D5FEAT7  ****        AP_D5FEAT8  ****        AP_D5FEAT9  ****        AP_D5FEAT10 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~

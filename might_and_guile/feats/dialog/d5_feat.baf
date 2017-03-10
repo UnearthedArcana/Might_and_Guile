@@ -1,0 +1,143 @@
+IF
+	Class(LastSummonerOf(Myself),THIEF)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_rogue",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),ASSASIN)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_asasn",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),BOUNTYHUNTER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_huntr",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),SWASHBUCKLER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_swash",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),SHADOWDANCER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_shado",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5SHADD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_shado",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5ALCHM)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_alchm",Myself))
+END
+
+IF
+	Class(LastSummonerOf(Myself),FIGHTER)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_fight",Myself))
+END
+
+IF
+	Class(LastSummonerOf(Myself),RANGER)
+	Kit(LastSummonerOf(Myself),TRUECLASS)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_range",Myself))
+END
+
+IF
+	Class(LastSummonerOf(Myself),RANGER)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_range",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),FERALAN)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_archr",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),STALKER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetGlobal("D5_PSI","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_stalk",Myself))
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",0)
+	SetNumTimesTalkedTo(0)
+	DestroySelf()               // reset global variable, then destroy self
+END

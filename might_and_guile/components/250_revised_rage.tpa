@@ -92,12 +92,14 @@ COPY ~might_and_guile/fighter/d5_barbr.spl~ ~override/spcl152.spl~
 
 //FIGHTER KIT 2DA FILES___________________________________________________________
 //
+/*
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COPY_EXISTING ~clabfi01.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/fighter/ficlab.txt~
 		BUT_ONLY
 	END
+*/
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
@@ -274,7 +276,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 
 //WARRIOR ABILITY FILES_________________________________________________________
 //
+/*
 COPY ~might_and_guile/fighter/d5_fipr1.spl~ ~override/d5_fipr1.spl~
 	SAY NAME1 @2509
 	SAY UNIDENTIFIED_DESC @2509
+*/
 //_____________________________________________________________________________

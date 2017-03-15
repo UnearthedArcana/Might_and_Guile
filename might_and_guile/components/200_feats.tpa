@@ -731,14 +731,14 @@ COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override~   // 			fighting dirty
 	SAY UNIDENTIFIED_DESC @20260
 	WRITE_ASCII 0x3a ~d5_rfg2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg5~ END
-APPEND ~splprot.2da~ ~D5_DIRTY%TAB%134%TAB%-1%TAB%8~
+APPEND ~splprot.2da~ ~D5_134_BIT1%TAB%134%TAB%1%TAB%8~
 COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
 	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_DIRTY~ BEGIN
-	    SET dirty_row = %row%
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_134_BIT1~ BEGIN
+	    SET 134_bit1 = %row%
 	  END
 	END
 BUT_ONLY
@@ -759,15 +759,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 BUT_ONLY
 COPY ~might_and_guile/feats/d5_rf75a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75a.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %134_bit1% END
 COPY ~might_and_guile/feats/d5_rf75b.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75c.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75c.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %134_bit1% END
 COPY ~might_and_guile/feats/d5_rf75d.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75e.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75e.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %dirty_row% END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 1 parameter2 = %134_bit1% END
 COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~
@@ -946,18 +946,18 @@ BUT_ONLY_IF_IT_CHANGES
 
 //
 
-APPEND ~splprot.2da~ ~D5_TACTICS%TAB%134%TAB%-1%TAB%8~
-APPEND ~splprot.2da~ ~D5_NTACTICS%TAB%134%TAB%-1%TAB%9~
+APPEND ~splprot.2da~ ~D5_134_BIT5%TAB%134%TAB%22%TAB%8~
+APPEND ~splprot.2da~ ~D5_134_NOT5%TAB%134%TAB%22%TAB%9~
 COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
 	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
 	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_TACTICS~ BEGIN
-	    SET 134_bit = %row%
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_134_BIT5~ BEGIN
+	    SET 134_bit5 = %row%
 	  END
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_NTACTICS~ BEGIN
-	    SET 134_not = %row%
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_134_NOT5~ BEGIN
+	    SET 134_not5 = %row%
 	  END
 	END
 BUT_ONLY
@@ -971,8 +971,8 @@ COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			offensive tactics
 	SAY UNIDENTIFIED_DESC @20322
 	WRITE_ASCII 0x3a ~d5tacto~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tacto~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not% STR_VAR match_resource = ~d5_wf02~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit% STR_VAR match_resource = ~d5_wf03~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not5% STR_VAR match_resource = ~d5_wf02~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit5% STR_VAR match_resource = ~d5_wf03~ END
 COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
 COPY ~might_and_guile/feats/d5_wf12b.spl~ ~override~
 
@@ -986,8 +986,8 @@ COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~		//			defensive tactics
 	SAY UNIDENTIFIED_DESC @20324
 	WRITE_ASCII 0x3a ~d5tactd~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tactd~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not% STR_VAR match_resource = ~d5_wf03~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit% STR_VAR match_resource = ~d5_wf02~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_not5% STR_VAR match_resource = ~d5_wf03~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 16 parameter2 = %134_bit5% STR_VAR match_resource = ~d5_wf02~ END
 COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
 COPY ~might_and_guile/feats/d5_wf13b.spl~ ~override~
 
@@ -1045,172 +1045,6 @@ COPY ~might_and_guile/feats/d5parryb.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~ 	//			parry blunt
 	SAY NAME1 @20349
 	SAY UNIDENTIFIED_DESC @20349
-
-
-/*
-// combat techniques - warrior
-
-// add weapon of focus feat(...? no, this is in the WPO)
-
-// add intimidation as wf01
-// @3915 AND @3916
-
-COPY ~might_and_guile/fighter/d5_wfb.spl~ ~override~ 	//			flurry
-	SAY NAME1 @3911
-	SAY UNIDENTIFIED_DESC @3912
-	WRITE_ASCII 0x3a ~d5_wf02~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf02~ END
-COPY ~might_and_guile/feats/d5_wf02.spl~ ~override~
-	SAY NAME1 @3911
-	SAY UNIDENTIFIED_DESC @3912
-	WRITE_ASCII 0x3a ~d5_wf02~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf02~ END
-COPY ~might_and_guile/feats/d5_wf01.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfc.spl~ ~override~ 		//			parry
-	SAY NAME1 @3915
-	SAY UNIDENTIFIED_DESC @3916
-	WRITE_ASCII 0x3a ~d5_wf03~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf03~ END
-COPY ~might_and_guile/feats/d5_wf03.spl~ ~override~
-	SAY NAME1 @3915
-	SAY UNIDENTIFIED_DESC @3916
-	WRITE_ASCII 0x3a ~d5_wf03~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf03~ END
-COPY ~might_and_guile/feats/d5_wf03.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfd.spl~ ~override~ 		//			resistance
-	SAY NAME1 @3917
-	SAY UNIDENTIFIED_DESC @3918
-	WRITE_ASCII 0x3a ~d5_wf04~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf04~ END
-COPY ~might_and_guile/feats/d5_wf04.spl~ ~override~
-	SAY NAME1 @3917
-	SAY UNIDENTIFIED_DESC @3918
-	WRITE_ASCII 0x3a ~d5_wf04~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf04~ END
-COPY ~might_and_guile/feats/d5_wf04.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfe.spl~ ~override~ 		//			resolve
-	SAY NAME1 @3919
-	SAY UNIDENTIFIED_DESC @3920
-	WRITE_ASCII 0x3a ~d5_wf05~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf05~ END
-COPY ~might_and_guile/feats/d5_wf05.spl~ ~override~
-	SAY NAME1 @3919
-	SAY UNIDENTIFIED_DESC @3920
-	WRITE_ASCII 0x3a ~d5_wf05~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf05~ END
-COPY ~might_and_guile/feats/d5_wf05a.spl~ ~override~
-	SAY NAME1 @3919
-COPY ~might_and_guile/feats/d5_wf05.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wff.spl~ ~override~ 		//			willpower
-	SAY NAME1 @3921
-	SAY UNIDENTIFIED_DESC @3922
-	WRITE_ASCII 0x3a ~d5_wf06~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf06~ END
-COPY ~might_and_guile/feats/d5_wf06.spl~ ~override~
-	SAY NAME1 @3921
-	SAY UNIDENTIFIED_DESC @3922
-	WRITE_ASCII 0x3a ~d5_wf06~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf06~ END
-COPY ~might_and_guile/feats/d5_wf06.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfg.spl~ ~override~		//			knockdown
-	SAY NAME1 @3923
-	SAY UNIDENTIFIED_DESC @3924
-	WRITE_ASCII 0x3a ~d5_wf07~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf07~ END
-COPY ~might_and_guile/feats/d5_wf07.spl~ ~override~
-	SAY NAME1 @3923
-	SAY UNIDENTIFIED_DESC @3924
-	WRITE_ASCII 0x3a ~d5_wf07~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf07~ END
-COPY ~might_and_guile/feats/d5_wf07.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf07.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfh.spl~ ~override~		//			knockback
-	SAY NAME1 @3925
-	SAY UNIDENTIFIED_DESC @3926
-	WRITE_ASCII 0x3a ~d5_wf08~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf08~ END
-COPY ~might_and_guile/feats/d5_wf08.spl~ ~override~
-	SAY NAME1 @3925
-	SAY UNIDENTIFIED_DESC @3926
-	WRITE_ASCII 0x3a ~d5_wf08~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf08~ END
-COPY ~might_and_guile/feats/d5_wf08.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf08.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfi.spl~ ~override~ 		//			cutting blow
-	SAY NAME1 @3927
-	SAY UNIDENTIFIED_DESC @3928
-	WRITE_ASCII 0x3a ~d5_wf09~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf09~ END
-COPY ~might_and_guile/feats/d5_wf09.spl~ ~override~
-	SAY NAME1 @3927
-	SAY UNIDENTIFIED_DESC @3928
-	WRITE_ASCII 0x3a ~d5_wf09~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf09~ END
-COPY ~might_and_guile/feats/d5_wf09.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf09a.spl~ ~override~
-	SAY NAME1 @3927
-COPY ~might_and_guile/feats/d5_wf09.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfj.spl~ ~override~ 		//			tempo
-	SAY NAME1 @3929
-	SAY UNIDENTIFIED_DESC @3930
-	WRITE_ASCII 0x3a ~d5_wf10~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf10~ END
-COPY ~might_and_guile/feats/d5_wf10.spl~ ~override~
-	SAY NAME1 @3929
-	SAY UNIDENTIFIED_DESC @3930
-	WRITE_ASCII 0x3a ~d5_wf10~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf10~ END
-COPY ~might_and_guile/feats/d5_wf10.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf10.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfk.spl~ ~override~ 		//			disrupt
-	SAY NAME1 @3931
-	SAY UNIDENTIFIED_DESC @3932
-	WRITE_ASCII 0x3a ~d5_wf11~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf11~ END
-COPY ~might_and_guile/feats/d5_wf11.spl~ ~override~
-	SAY NAME1 @3931
-	SAY UNIDENTIFIED_DESC @3932
-	WRITE_ASCII 0x3a ~d5_wf11~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf11~ END
-COPY ~might_and_guile/feats/d5_wf11.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf11.bam~ ~override~
-
-COPY ~might_and_guile/feats/d5_wfl.spl~ ~override~ 		//			tactics
-	SAY NAME1 @3933
-	SAY UNIDENTIFIED_DESC @3934
-	WRITE_ASCII 0x3a ~d5_wf12~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
-COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			tactics
-	SAY NAME1 @3935
-	SAY UNIDENTIFIED_DESC @3936
-	WRITE_ASCII 0x3a ~d5_wf12~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
-COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
-	WRITE_ASCII 0x3a ~d5_wf12~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf12~ END
-COPY ~might_and_guile/feats/d5_wf12.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf12.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~ 		//			tactics
-	SAY NAME1 @3937
-	SAY UNIDENTIFIED_DESC @3938
-	WRITE_ASCII 0x3a ~d5_wf13~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf13~ END
-COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
-	WRITE_ASCII 0x3a ~d5_wf13~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wf13~ END
-COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf13.bam~ ~override~
-*/
-
 //
 
 //end feat ability files____________________________________________________________

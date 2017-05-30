@@ -16,6 +16,10 @@ COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
 	INCLUDE ~might_and_guile/lib/archery_feats.tpa~
 END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
+	INCLUDE ~might_and_guile/lib/elven_chain.tpa~
+END
 //___________________________________________________________________________________
 
 

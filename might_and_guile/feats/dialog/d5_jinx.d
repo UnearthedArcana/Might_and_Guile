@@ -14,6 +14,7 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_jinx
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20103 GOTO d5_jinx_16
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20105 GOTO d5_jinx_18
  IF ~GlobalLT("D5_LORE","LOCALS",5)~ THEN REPLY @20301 GOTO d5_jinx_20
+ IF ~GlobalLT("D5_LUCKY","LOCALS",1)~ THEN REPLY @20303 GOTO d5_jinx_21
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_jinx_22
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_jinx_24
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_jinx_26
@@ -87,6 +88,11 @@ END
 IF ~~ THEN BEGIN d5_jinx_20 // lore bonus
  SAY @20301
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_LORE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA4",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_jinx 
+END 
+IF ~~ THEN BEGIN d5_jinx_21 // luck bonus
+ SAY @20304
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_LUCKY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_jinx 
 END 
 IF ~~ THEN BEGIN d5_jinx_22 // basic alchemy

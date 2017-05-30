@@ -1186,7 +1186,33 @@ COPY_EXISTING ~backstab.2da~ ~override~
   END
   SET_2DA_ENTRIES_NOW ~#altbackstab~ 1
   PRETTY_PRINT_2DA
-BUT_ONLY
+COPY_EXISTING ~backstab.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+  FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5_LOREMASTER~ BEGIN
+	  SET lorem_row = %row%
+	END
+	PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5RANMAGE~ BEGIN
+	  SET ranma_row = %row%
+	END
+  END
+  FOR (col = 2; col < 10; ++col) BEGIN
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+  END
+  FOR (col = 10; col < 19; ++col) BEGIN
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+  END
+  FOR (col = 19; col < cols; ++col) BEGIN
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+  END
+  SET_2DA_ENTRIES_NOW ~#modbackstab~ 1
+  PRETTY_PRINT_2DA
 //__________________________________________________________________________________
 
 

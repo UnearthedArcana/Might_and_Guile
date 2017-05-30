@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.4 </strong><br />
+  <p><strong> Version 3.5 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -54,11 +54,107 @@
   </ul>
 </div>
 <h2>Contents</h2>
+  <h4 class="subheader">Component 100 (for EE only): </h4>
+  <div class="section">
+    <p><strong><em>Multiclass Kits</em></strong></p>
+      <p>This component liberalizes the multiclassing rules in targeted ways:</p>
+      <ul>
+        <li> Enables humans to multiclass.</li>
+        <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
+        <li> Enables half-elves to be cleric/thieves.</li>
+        <li> Enables dwarves to be cleric/thieves.</li>
+        <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
+      </ul>
+      <p>This component also introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in versions 1.3-1.4, you must use a tome or similar item to adopt the kit. The multiclass kits are:</p>
+      <ul>
+        <li> <b>Bladesinger</b> - for elven fighter/mages.</li>
+        <li> <b>Spellfilcher</b> - for mage/thieves.</li>
+        <li> <b>Loremaster</b> - for mage/thieves.</li>
+        <li> <b>Ranger/Mage</b> - for mage/thieves.</li>
+        <li> <b>Thug</b> - for fighter/thieves.</li>
+        <li> <b>Tomb Runner</b> - for fighter/thieves.</li>
+        <li> <b>Ranger/Thief</b> - for fighter/thieves.</li>
+      </ul>
+      <div class="kit_description">
+        <p>ELVEN BLADESINGER: Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.</p>
+        <p>Abilities:<br />
+          &ndash; Bladesingers begin at level 1 with proficiency in Single-Weapon Style.  At level 7, this automatically increases to specialization.  They may reach grandmastery with long swords, scimitars, and katanas.<br />
+          &ndash; Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which <PRO_HESHE> whirls a blade faster than the eye can follow, blocking incoming attacks and devastating enemies.  Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.<br />
+        <p>Restrictions:<br />
+          &ndash; Bladesingers may only reach basic proficiency with other one-handed weapons and missile weapons.  They may not become proficient with two-handed weapons or in any other fighting style.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.</p>
+        <p>Abilities:<br />
+          &ndash; Any target struck by a Spellfilcher in melee combat must save vs. rods/wands or suffer a 33% chance of miscast magic for 3 rounds.<br />
+          &ndash; Spellfilchers may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells.<br />
+          &ndash; At 5th level, Spellfilchers may cast a special variant of "Spell Turning" which lasts for 12 hours.  It will only turn back a single spell.<br />
+          &ndash; At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-detection."</p>
+        <p>Restrictions:<br />
+          &ndash; None<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.</p>
+        <p>Abilities:<br />
+          &ndash; Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.<br />
+          &ndash; Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.<br />
+          &ndash; Loremasters receive a bonus +5 lore per level.<br />
+        <p>Restrictions:<br />
+          &ndash; Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.<br />
+          &ndash; Loremasters do not do extra damage by backstabbing.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>RANGER/MAGE: Yeah - ranger/mage!  This is an approximation, the best I could do in the 2E Infinity Engine.  You have to start out as a mage/thief, and the thief side of your class will morph to be more like a ranger.</p>
+        <p>Abilities:<br />
+          &ndash; Bonuses to hit points and thac0 to approximate a warrior/mage.<br />
+          &ndash; May cast Goodberry innately, and has 3 druid spells each of levels 1-3 automatically added to the wizard spellbook.</p>
+        <p>Restrictions:<br />
+          &ndash; Limited access to thief abilities: may only use Hide in Shadows, Move Silently, Find Traps, and Detect Illusions.<br />
+          &ndash; Limited to Good alignments.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>THUG: Some rogues find that the application of violence is as effective in the pursuit of their goals as the more refined thieving skills. These may be simple lone muggers, or organized enforcers for a guild. In either case, for most of a peaceful urban populace, the only sure thing is that thugs are to be feared and guarded against.</p>
+        <p>Abilities:<br />
+          &ndash; +1 bonus to Strength.<br />
+          &ndash; +1 bonus to backstab multiplier.<br />
+        <p>Restrictions:<br />
+          &ndash; -2 penalty to Dexterity.<br />
+          &ndash; May not use the Open Locks, Detect Illusion, or Set Traps skills.<br />
+          &ndash; May only distribute 20 skill points each level.<br />
+          &ndash; May not be Lawful or Good alignments.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>TOMB RUNNER: these adventurers are seekers after history, truth, and riches. They love to travel to strange lands, searching for mysterious and ancient ruins. Whether in pursuit of scholarly knowledge, or power and fame (or all of the above!), Tomb Runners are adept at surviving hostile dungeons that often do not *want* to be explored.</p>
+        <p>Abilities:<br />
+          &ndash; Initial 15-point bonus to Find Traps and Detect Illusions.<br />
+          &ndash; +5 bonus to Lore each level.<br />
+          &ndash; +3 bonus to to-hit and damage rolls against undead creatures.</p>
+          &ndash; At level 15, may Use Any Item.<br />
+        <p>Restrictions:<br />
+          &ndash; May not use the Pick Pockets skill.<br />
+          &ndash; May distribute 20 skill points each level.<br />
+          &ndash; Reduced backstab multiplier progression, matching that of a Stalker.<br />
+          &ndash; Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>RANGER/THIEF: Yeah - ranger/thief!  This again is an approximation.  You start as a fighter/thief and you will get some druidic magic like rangers, offset by some limitations to your thief skills, and an XP penalty to reflect rangers' increased XP requirements vs. fighters.</p>
+        <p>Abilities:<br />
+          &ndash; +5 bonus to Hide in Shadows and Move Silently skills with each warrior level-up.<br />
+          &ndash; May use the Animal Empathy ability like other rangers.<br />
+          &ndash; May cast an assortment of druid spells, beginning at 5th level.</p>
+        <p>Restrictions:<br />
+          &ndash; May not use the Pick Pockets or Open Locks skills.<br />
+          &ndash; May only distribute 15 skill points each thief level.<br />
+          &ndash; Reduced backstab multiplier progression, matching that of a Stalker.<br />
+          &ndash; 15% experience point penalty.<br />
+          &ndash; Limited to Good alignments.<br />.</p>
+      </div>
+  </div>
   <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Feat System and Revised HLAs</em></strong></p>
       <p> This component adds learnable feats, which may be chosen by the player at certain levels in a dialogue-based method. The feats include a few melee techniques for fighters, and many skills of various kinds for thieves. If you install psionics and revised Called Shots, those abilities will be folded into this system.
-      <p> To reflect their study of martial disciplines and techniques, single-class unkitted fighters and rangers will be able to choose from among 10 melee feats.  They include:
+      <p> To reflect their study of martial disciplines and techniques, single-class rangers and unkitted fighters will be able to choose from among 11 warrior feats.  Fighters can choose a feat at levels 3, 6, 9, 12, 15, and 18.  Rangers can choose a feat at levels 4, 8, 13, and 18.  The warrior feats include:
 	  <ul>
 	    <li> <b>Health Conditioning:</b> this ability confers a permanent +5 hit points upon the character</li>
 	    <li> <b>Toughness:</b> this ability confers a permanent 10% resistance to physical damage.</li>
@@ -73,8 +169,8 @@
 	    <li> <b>Tactics (Discipline):</b> the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet.</li>
 	    <li> <b>Tactics (Formation):</b> the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet.</li>
 	  </ul>
-      <p> Fighters who have learned more than one fighting posture may switch between them at will, but only one can be used at a time. A fighting posture can last all day; after resting, you will need to decide on a posture again. Fighters who have learned group combat tactics must choose one - discipline (offensive) or formation (defensive). Fighters may similarly switch grou tactics at will. </p>
-      <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
+      <p> Fighters who have learned more than one fighting posture may switch between them at will, but only one can be used at a time. Fighters who have learned group combat tactics may similarly switch group tactics at will, but only use one at a time. You may have any combination of one fighting posture and one style of group tactics active simultaneously.</p>
+      <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit - but trueclass may choose any three) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
       <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
       <p>The Rogue Feats include:
 	  <ul>
@@ -82,8 +178,8 @@
 	    <li> <b>Skills Mastery - Thieving Bonus:</b> this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.</li>
 	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.</li>
 	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. (Trueclass, Hunter, and Shadowdancer only)</li>
-	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li><br />
-	    <li> <b>Miscellaneous - Quickstride:</b> this ability allows the rogue to increase his or her movement rate at will.</li>
+	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li>
+	    <li> <b>Miscellaneous - Quickstride:</b> this ability allows the rogue to increase his or her movement rate at will.</li><br />
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Requires Dart Trap and Basic Alchemy)</li>
 	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter. (Assassin only - requires Dart Trap)</li>
@@ -91,8 +187,8 @@
 	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
 	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
 	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li>
-	    <li> <b>Alchemy - Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil, once per day. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
-	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
+	    <li> <b>Alchemy - Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil, once per day. For 15 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
+	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reaches higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
 	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li><br />
 	    <li> <b>Combat Skills - Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
@@ -103,7 +199,7 @@
 	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.</li>
 	    <li> <b>Combat Skills - Blind Opponent:</b> upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.</li>
 	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.</li><br />
-	    <li> <b>Magical Skills - Smoke Bomb + Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
+	    <li> <b>Magical Skills - Smoke Bomb/Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
 	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
 	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
 	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the rogue to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
@@ -158,7 +254,7 @@
   <h4 class="subheader">Component 210 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Revised Bards</em></strong></p>
-      <p> This component makes a fundamental change to the way the bard songs work. Instead of an aura that stops as soon as you take any other action, bard songs are now passive auras which can now persist while the bard engages in melee combat or casts spells. The number and type of bard songs has also been liberalized: each bard kit will have access to at least two songs, and some can potentially learn many more (especially is you also install the feat system, component #200 above).</p>
+      <p> This component makes a fundamental change to the way the bard songs work. Instead of an aura that stops as soon as you take any other action, bard songs are now passive auras which can now persist while the bard engages in melee combat or casts spells. The number and type of bard songs has also been liberalized: each bard kit will have access to at least two songs, and some can potentially learn many more (especially if you also install the feat system, component #200 above).</p>
       <p> Songs generally come in three categories: those that provide benefits for allies in an area of effect; those that cause enemies in an area of effect to suffer penalties; and those that only affect the bard or enemies within melee range. Generally, the latter two categories of songs involve more concentration to maintain and thus, while you can still engage in combat, your spellcasting will be disabled. Unlike vanilla bard songs, here you must manually stop the bard song in order to re-enable spellcasting. The list of songs is:</p>
       <ul>
         <li><b>Aura of Luck:</b> allies have a bonus to Luck and saving throws.</li>
@@ -203,9 +299,9 @@
         &ndash; May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.<br />
         &ndash; +1 bonus to Armor Class.<br />
         &ndash; May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.<br />
-        &ndash; From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.<br />
+        &ndash; From 6th level, may use an Blur Aura, which improves the Blade's armor class and saving throws.<br />
         &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
-      <p>SWASHBUCKLING: for four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
+      <p>SWASHBUCKLING: for four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
       <p>Disadvantages:<br />
         &ndash; Reduced Lore and pickpocketing ability.<br />
         &ndash; May not become proficient in heavy weapons or in sword-and-shield style.<br />
@@ -224,7 +320,7 @@
         &ndash; May only gain proficiency in weapons appropriate for use by druids.<br />.</p>
     </div>
     <div class="kit_description">
-      <p>LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.</p>
+      <p>LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they often volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.</p>
       <p>Advantages:<br />
         &ndash; May use a Bless Aura, constantly providing all allies within 20 feet with the benefits of the Bles spell.<br />
         &ndash; From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell.<br />
@@ -234,7 +330,7 @@
     </div>
     <p> Additionally, this component also installs four 'demibard' kits. These are kits in the fighter and thief classes, which can use bard songs/auras and may have some ability to use magical wands and scrolls.</p>
     <div class="kit_description">
-      <p>HERALD: THeralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'd for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territory.</p>
+      <p>HERALD: Heralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'D for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command elite troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territory. </p>
       <p>Advantages:<br />
         &ndash; +1 bonus to thac0 and damage.<br />
         &ndash; May use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.<br />
@@ -251,7 +347,7 @@
       <p>JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy/Traveller clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.</p>
       <p>Advantages:<br />
         &ndash; May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
-        &ndash; From 6th level, may use a Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.</p>
+        &ndash; From 6th level, may use a Mind Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.</p>
       <p>Disadvantages:<br />
         &ndash; May only allocate 15 thief skill points per level.<br />
         &ndash; Reduced backstab progression.<br />
@@ -262,8 +358,8 @@
       <p>Advantages:<br />
         &ndash; May innately cast the priest spell Aid once per day, and twice per day at 10th level.<br />
         &ndash; From 5th level, may innately cast the priest spell Death Ward once per day.<br />
-        &ndash; May radiate an Aura of Luck that affects allies within 20 feet.<br />
-        &ndash; From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.<br />
+        &ndash; May radiate an Aura of Luck that benefits nearby allies.<br />
+        &ndash; From 6th level, may radiate an Aura of Courage that protects nearby allies from Fear effects.<br />
         &ndash; Receivies a +1 bonus to saves vs. death for each 6 levels of experience.<br />
         &ndash; May use magical wands as a wizard can.</p>
       <p>Disadvantages:<br />
@@ -575,19 +671,6 @@ CALLED SHOTS <br />
         &ndash; No pickpocketing ability.<br />.</p>
     </div>
    </div>
-  <h4 class="subheader">Component 460: </h4>
-  <div class="section">
-   <p><strong><em>Add the LOREMASTER bard kit</em></strong></p>
-    <div class="kit_description">
-      <p>LOREMASTER: Loremasters are romantically entranced by the past. There is a fine line between Loremaster and sage - so fine that many Lore masters call themselves sages and are rarely questioned about it. However, true sages are knowledge specialists who concentrate their efforts into mastering a specific field such as mushrooms, elven swords, and so on. Loremasters are fond of any aspect of history that makes a good story. Further, Loremasters are likely to go adventuring and exploring, playing the part of an archaeologist or anthropologist, to learn about the world first-hand instead of from dusty tomes.</p>
-      <p>Advantages:<br />
-        &ndash; Through their devoted study of the past, gain a fundamental understanding of many strange magical items not normally usable by the bard class. Thus, they can use any magical item.<br />
-        &ndash; Loremasters' studies enhance their understanding of magic, such much that they cast spells as if they were one level higher.<br />
-        &ndash; Loremasters may cast the Find Traps priest spell as an innate ability.</p>
-      <p>Disadvantages:<br />
-        &ndash; Bard song does not improve over time.<br />.</p>
-    </div>
-  </div>
   <h4 class="subheader">Component 480: </h4>
   <div class="section">
     <p><strong><em>Add the MEISTERSINGER bard kit</em></strong></p>
@@ -614,58 +697,6 @@ CALLED SHOTS <br />
         &ndash; Reduced pickpocketing ability.<br />.</p>
     </div>
   </div>
-  <h4 class="subheader">Component 500: </h4>
-  <div class="section">
-    <p><strong><em>Multiclass Kits</em></strong></p>
-      <p>This component liberalizes the multiclassing rules in targeted ways:</p>
-      <ul>
-        <li> Enables humans to multiclass.</li>
-        <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
-        <li> Enables half-elves to be cleric/thieves.</li>
-        <li> Enables dwarves to be cleric/thieves.</li>
-        <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
-      </ul>
-      <p>This component also introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in versions 1.3-1.4, you must use a tome or similar item to adopt the kit. The multiclass kits are:</p>
-      <ul>
-        <li> Elven Bladesinger - for elven fighter/mages.</li>
-        <li> Spellfilcher - for mage/thieves.</li>
-        <li> Ranger/mage - for mage/thieves.</li>
-        <li> Spellbender - for cleric/mages. (Only if you have <i>not</i> installed Faiths & Powers)</li>
-      </ul>
-      <div class="kit_description">
-        <p>ELVEN BLADESINGER: Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.</p>
-        <p>Abilities:<br />
-          &ndash; Bladesingers begin at level 1 with proficiency in Single-Weapon Style.  At level 7, this automatically increases to specialization.  They may reach grandmastery with long swords, scimitars, and katanas.<br />
-          &ndash; Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which <PRO_HESHE> whirls a blade faster than the eye can follow, blocking incoming attacks and devastating enemies.  Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.<br />
-        <p>Restrictions:<br />
-          &ndash; Bladesingers may only reach basic proficiency with other one-handed weapons and missile weapons.  They may not become proficient with two-handed weapons or in any other fighting style.<br />.</p>
-      </div>
-      <div class="kit_description">
-        <p>SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.</p>
-        <p>Abilities:<br />
-          &ndash; Any target struck by a Spellfilcher in melee combat must save vs. rods/wands or suffer a 33% chance of miscast magic for 3 rounds.<br />
-          &ndash; Spellfilchers may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells.<br />
-          &ndash; At 5th level, Spellfilchers may cast a special variant of "Spell Turning" which lasts for 12 hours.  It will only turn back a single spell.<br />
-          &ndash; At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-detection."</p>
-        <p>Restrictions:<br />
-          &ndash; None<br />.</p>
-      </div>
-      <div class="kit_description">
-        <p>RANGER/MAGE:  Yeah - ranger/mage.  (Hint, you have to start out as a thief/mage.  This component is EE-only!)</p>
-        <p>Abilities:<br />
-          &ndash; Bonuses to hit points and thac0 compared to thief/mages.<br />
-          &ndash; Limited access to thief abilities: may only use Hide in Shadows, Move Silently, Find Traps, and Detect Illusions.<br />
-          &ndash; May cast Goodberry innately, and has 3 druid spells each of levels 1-3 automatically added to the wizard spellbook.</p>
-        <p>Restrictions:<br />
-          &ndash; Limited to Good alignments.<br />.</p>
-      </div>
-      <div class="kit_description">
-        <p>SPELLBENDER: Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics and studying arcane magery, they learn to manipulate the intersection of those two areas of magic. They may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. Some energy is lost in the translation - the improvisational effects must be spells of lower level than the one sacrificed. (It is unknown what happens to the lost energy - some believe this practice has contributed to the recent rise of wild magic and sorcerers. Spellbenders must be wary, as they are apt to be persecuted by Mystra's Monitors.)</p>
-        <p>Abilities:<br />
-          &ndash; Spellbenders receive the "Arcane Weaving" priest spells of levels 2-7, which allow them to cast wizard spells of one level lower.<br />
-          &ndash; Spellbenders receive the "Divine Weaving" wizard spells of levels 2-7, which allow them to cast wizard spells of one level lower.<br />.</p>
-      </div>
-  </div>
 </div>
 <h2>Contact Information</h2>
 <div class="section">
@@ -690,6 +721,11 @@ CALLED SHOTS <br />
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 3.5 - May 2017</strong></p>
+  <ul>
+    <li>new multiclass kits for fighter/thieves - Thug, Tomb Runner, and Ranger/Thief</li>
+    <li>retired the Spellbender... go get Faiths & Powers instead</li>
+  </ul>
   <p><strong>Version 3.4 - March 2017</strong></p>
   <ul>
     <li>new warrior feats</li>

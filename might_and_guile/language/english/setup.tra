@@ -254,7 +254,7 @@ When thrown at a target, the glass pot breaks, spreading flaming oil over everyt
 Weight: 0
 ~
 @20151  = ~Flaming Weapon~
-@20152  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 5 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
+@20152  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 15 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
 @20161  = ~Poison Weapon (Toxin)~
 @20162  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
 @20163  = ~Poison Weapon (Paralytic)~
@@ -2242,6 +2242,11 @@ Restrictions:
 @4907  = ~Song of Warding~
 @4911  = ~~
 //
+// MULTICLASS
+// 
+// F/M = 5100 range
+// M/T = 5200 range
+// F/T = 5300 range
 //
 @5010   = ~CLERIC/RANGER: This character can use the abilities of a Cleric and a Ranger, though weapons are restricted to only those allowed by the Cleric's ethos.  This character may Specialize in any weapon a cleric can use.  Upon starting the game, this character will automatically become a kitted Woodscout of Mielikki, or, if an elf, a Forestwalker of Solonor Thelandira.  With the blessings of these forest deities, the Woodscout or Forestwalker may cast both cleric and druid spells of all levels.~
 @5011   = ~Woodscout of Mielikki~
@@ -2252,21 +2257,26 @@ Woodscouts combine the abilities of rangers and clerics.  It is said that Mielik
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
 @5014   = ~Forestwalker of Solonor Thelandira~
-@5021   = ~The Art of the Bladesong~
-@5022   = ~Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.
+@5111   = ~The Art of the Bladesong~
+@5112   = ~BLADESINGER: Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting.
 
-Bladesingers begin at level 1 with proficiency in Single-Weapon Style.  At level 7, this automatically increases to specialization.  They may reach grandmastery with long swords, scimitars, and katanas, and may only reach basic proficiency with other one-handed weapons and missile weapons.  They may not become proficient with two-handed weapons or in any other fighting style.
+Abilities:
+- Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which a blade is spun and whirled faster than the eye can follow, blocking incoming attacks and devastating enemies.
 
-Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which a blade is spun and whirled faster than the eye can follow, blocking incoming attacks and devastating enemies.  Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.
+BLADESONG:
+- Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.
+
+Restrictions:
+- Must be an elf
 
 The descriptions and instructions in this tome may enable an elf reading it to learn the skills and abilities of a Bladesinger.
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5023   = ~Bladesong~
-@5024   = ~BLADESONG: for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.~
-@5027   = ~bladesinger~
-@5028   = ~Bladesinger~
-@5029   = ~BLADESINGER: Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting.
+@5113   = ~Bladesong~
+@5114   = ~BLADESONG: for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.~
+@5117   = ~bladesinger~
+@5118   = ~Bladesinger~
+@5119   = ~BLADESINGER: Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting.
 
 Abilities:
 - Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which a blade is spun and whirled faster than the eye can follow, blocking incoming attacks and devastating enemies.
@@ -2277,27 +2287,28 @@ BLADESONG:
 Restrictions:
 - Must be an elf
 ~
-@5031   = ~Secrets of the Spellfilchers~
-@5032   = ~The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.
+@5211   = ~Secrets of the Spellfilchers~
+@5212   = ~SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards. Spellfilchers have developed a few special tricks they can employ when confronted by angry mages.
 
-First, they may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells. Of course many wizards know the Vocalize spell to overcome such a disadvantage, but a skilled Spellfilcher knows that the time it takes to do so may make all the difference in the world.
+Abilities:
+- Once per day, Spellfilchers may cast the priest spell "Silence 15' Radius" 
+- At 5th level Spellfilchers can cast a special variant of "Spell Turning" which only turns back a single spell, but lasts for 12 hours.
+- At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-Detection."
+- Every time a Spellfilcher successfully strikes a wizard with a melee attack, the target must save vs. rods/wands or suffer a 33% chance of miscast magic for 2 rounds.
 
-Second, at 5th level Spellfilchers can cast a special variant of "Spell Turning" which lasts for 12 hours.  It will only turn back a single spell, but doing so may give a Spellfilcher the time he or she needs to get better spell protections up if surprised.  Spellfilchers commonly erect this protection every morning, before even brushing their teeth.
-
-Third, at 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-detection," enabling them to use their thiefly abilities to hide even from wizards with powerful scrying magic.
-
-Finally, every time a Spellfilcher successfully strikes a wizard with a melee attack, the target must save vs. rods/wands or suffer a 33% chance of miscast magic for 2 rounds.
+Restrictions:
+- None
 
 The secrets contained in this tome may enable the owner to learn the skills and abilities of a Spellfilcher.
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5033   = ~Silence~
-@5034   = ~All enemies in the area must make a saving throw vs. spell at -1; if the save is failed, then they are silenced for the duration of the spell, unless an affected spellcaster then casts Vocalize.  At the instant the spell is completed, it affects all creatures in a 15 foot radius centered on the point selected by the Spellfilcher.~
-@5035   = ~Spell Turning~
-@5036   = ~This abjuration causes one spell cast against the Spellfilcher to rebound upon the original caster.~
-@5037   = ~spellfilcher~
-@5038   = ~Spellfilcher~
-@5039   = ~SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards. Spellfilchers have developed a few special tricks they can employ when confronted by angry mages.
+@5213   = ~Silence~
+@5214   = ~All enemies in the area must make a saving throw vs. spell at -1; if the save is failed, then they are silenced for the duration of the spell, unless an affected spellcaster then casts Vocalize.  At the instant the spell is completed, it affects all creatures in a 15 foot radius centered on the point selected by the Spellfilcher.~
+@5215   = ~Spell Turning~
+@5216   = ~This abjuration causes one spell cast against the Spellfilcher to rebound upon the original caster.~
+@5217   = ~spellfilcher~
+@5218   = ~Spellfilcher~
+@5219   = ~SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards. Spellfilchers have developed a few special tricks they can employ when confronted by angry mages.
 
 Abilities:
 - Once per day, Spellfilchers may cast the priest spell "Silence 15' Radius" 
@@ -2308,9 +2319,9 @@ Abilities:
 Restrictions:
 - None
 ~
-@5061   = ~loremaster~
-@5062   = ~Loremaster~
-@5063   = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
+@5231   = ~loremaster~
+@5232   = ~Loremaster~
+@5233   = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
 
 Abilities:
 - Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.
@@ -2320,20 +2331,23 @@ Restrictions:
 - Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
 - Loremasters do not do extra damage by backstabbing.
 ~
-@5064   = ~Dusty Tome of Facts and Sagery~ 
-@5065   = ~There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
+@5234   = ~Dusty Tome of Facts and Sagery~ 
+@5235   = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
 
-Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item. Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
+Abilities:
+- Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.
+- Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
 
-On the other hand, Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps. Loremasters do not do extra damage by backstabbing.
-
+Restrictions:
+- Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
+- Loremasters do not do extra damage by backstabbing.
 
 Using this Tome will allow the reader to engage in a career as a Loremaster.
 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~ 
-@5051   = ~ranger/mage~
-@5052   = ~Ranger/Mage~
-@5053   = ~RANGER/MAGE: While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the pangers. The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
+@5271   = ~ranger/mage~
+@5272   = ~Ranger/Mage~
+@5273   = ~RANGER/MAGE: While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the ranger. The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
 
 Abilities:
 - 2 more hit points each level than a standard thief/mage, up to level 10; and 1 extra hit point every level after level that, up to level 20.
@@ -2348,220 +2362,125 @@ Restrictions:
 - May only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.
 - May spend only 12 skill points per level to advance thief abilities.
 ~
-@5054   = ~Ranger/Mage~
-@5055   = ~Tome of Woodland Survival~
-@5056   = ~While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the pangers.  The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
+@5274   = ~Ranger/Mage~
+@5275   = ~Tome of Woodland Magicks~
+@5276   = ~RANGER/MAGE: While initial training to combine arcane magic and stealth tends to be for larcenous ends, some turn toward the natural world and follow the path of the ranger. The tension between wizardly magic and nature magic is never perfectly resolved, but a ranger/mage learns to live with it.
 
-Ranger/mages, unlike thief/mages, can only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.  They may spend 12 skill points per level.  They may not use thieving abilities such as Pick Pockets, Open Locks, Remove Traps, or Set Traps.
+Abilities:
+- 2 more hit points each level than a standard thief/mage, up to level 10; and 1 extra hit point every level after level that, up to level 20.
+- 1-point bonus to thac0 every third level, up to level 18.
+- May use Animal Empathy innately just like any ranger, and can also cast Goodberry innately.
+- Automatically learns the following druid spells in their wizard spellbook:
+Level 1: Entangle, Sanctuary, Shillelagh
+Level 2: Barkskin, Slow Poison, Flame Blade
+Level 3: Cure Disease, Call Lightning, Summon Insects
 
-Ranger/mages get 2 more hit points than a thief/mage up to level 10, and 1 extra hit point every level after level that, up to level 20.  They get a 1-point bonus to thac0 every third level up to level 18.
-
-Ranger/mages can use Animal Empathy innately just like any ranger, and can also cast Goodberry innately.  They automatically learn the following druid spells in their wizard spellbook:
-- Level 1: Entangle, Sanctuary, Shillelagh
-- Level 2: Barkskin, Slow Poison, Flame Blade
-- Level 3: Cure Disease, Call Lightning, Summon Insects
+Restrictions:
+- May only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.
+- May spend only 12 skill points per level to advance thief abilities.
 
 Using this Tome will allow the reader to forsake a career as a thief and instead follow the path of a ranger.
 
-[WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5100  = ~monitor of mystra~
-@5101  = ~Monitor of Mystra~
-@5102  = ~Mystra is known as the Lady of Spells and the Mother of Magic. She tends to the Weave, which enables mortals to cast spells. Mystra's clerics, known as Monitors, watch over the different uses of magic power and prevent magical abuse.~
-@5103  = ~Totem of Mystra~
-@5104  = ~This an ornate carved symbol of the goddess Mystra. Known as the Lady of Spells and the Mother of Magic. She tends to the Weave, which enables mortals to cast spells. Mystra's clerics, known as Monitors, watch over the different uses of magic power and prevent magical abuse. 
-
-Monitors are in tune with magical energies in a way that few spellcasters can match; they can create effects with a power level beyond their nominal experience. They effectively act as if their caster level is one higher than their experience level. This increases by one for each 4 levels of experience they gain.
-
-Monitors may not cast wizard spells from the school of Necromancy.
-
-With a totem such as this, a cleric/mage may devote oneself fully to the worship of Mystra, gaining the power of a Monitor.
-
-[WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5105  = ~Abilities:
-- Focus Access to the sphere of Magic.
-- Major Access to the spheres of Divine Aid, Life, Protection, Destruction, Knowledge, and Light.
-- Minor Access to the spheres of Thought, Dread, Vigor, Air, Fire, Shadow, and Deception.~
-@5110  = ~spellbender~
-@5111  = ~Spellbender~
-@5112  = ~SPELLBENDER: The goddess Mystra rules all magic, and mandates that spellcasters must formulate known spells, and must memorize the patterns of those spells in order to successfully release them. But as with any system, the are gaps and shortcuts that may be used to circumvent the rules. Sorcerers are born with the ability to shape magic directly, though only into a limited number of effects; and wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects. Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics as well as studying arcane magery, they learn to manipulate the intersection of those two areas of magic. 
-
-Abilities:
-- Spellbenders may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. 
-
-Restrictions:
-- None
+[WARNING: activation of this item cannot be reversed. Save before doing so.]
 ~
-@5113  = ~Spellbender's Studies~
-@5114  = ~The goddess Mystra rules the fabled Weave of Faerun, the ethereal conduit that allows mortals to shape magical energies into spells and effects. In order to avoid disasters like that which befell Anauroch, Mystra ensures that the use of those energies is strictly controlled: spellcasters must formulate the Weave into specific, known spells, and must memorize the patterns of those spells in order to successfully release them.
-
-But, as with any rigid system, the are gaps and shortcuts that may be used to circumvent Mystra's rules. Sorcerers are born with the ability to focus the Weave directly, though only into a limited number of effects. Wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects.
-
-Unlike those classes, Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics and studying arcane magery, they learn to manipulate the intersection of those two areas of magic. They may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. Some energy is lost in the translation - the improvisational effects must be spells of lower level than the one sacrificed. (It is unknown what happens to the lost energy - some believe this practice has contributed to the recent rise of wild magic and sorcerers. Spellbenders must be wary, as they are apt to be persecuted by Mystra's Monitors.)
-
-While Spellbenders are not as powerful one-to-one as a Sorcerer or Wild Mage or Monitor, the studious application of their knowledge gives them precise control over the Weave that is unmatched by any other spellcaster.
-
-The secrets contained in this tome may enable the owner to learn the skills and abilities of a Spellbender.
-
-[WARNING: activation of this item cannot be reversed. Save before doing so.]~
-@5115  = ~Arcane Weaving I~
-@5116  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Spook
-- Shield
-- Reflected Image
-- Grease
-- Sleep
-- Chromatic Orb
-- Burning Hands
-- Magic Missile~
-@5117  = ~Arcane Weaving II~
-@5118  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Vocalize
-- Blur
-- Invisibility
-- Horror
-- Web
-- Glitterdust
-- Acid Arrow
-- Knock~
-@5119  = ~Arcane Weaving III~
-@5120  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Dispel Magic
-- Detect Illusion
-- Ghost Armor
-- Protection from Missiles
-- Haste
-- Dire Charm
-- Lightning Bolt
-- Fireball~
-@5121  = ~Arcane Weaving IV~
-@5122  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Minor Globe
-- Stoneskin
-- Polymorph Self
-- Improved Invisibility
-- Secret Word
-- Greater Malison
-- Confusion
-- Ice Storm~
-@5123  = ~Arcane Weaving V~
-@5124  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Oracle
-- Shadow Door
-- Minor Turning
-- Phantom Blade
-- Domination
-- Breach
-- Hold Monster
-- Cloudkill~
-@5125  = ~Arcane Weaving VI~
-@5126  = ~Arcane Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Globe of Invulnerability
-- Spell Deflection
-- Protection from Energy
-- Mislead
-- Tenser's Transformation
-- Pierce Magic
-- Improved Haste
-- Chain Lightning~
-@5127  = ~Divine Weaving I~
-@5128  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Cure Light Wounds
-- Bless
-- Remove Fear
-- Protection from Evil
-- Armor of Faith
-- Sanctuary
-- Command
-- Magic Stone~
-@5129  = ~Divine Weaving II~
-@5130  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Find Traps
-- Chant
-- Resist Fire and Cold
-- Slow Poison
-- Draw Upon Holy Might
-- Silence
-- Hold Person
-- Spiritual Hammer~
-@5131  = ~Divine Weaving III~
-@5132  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Cure Medium Wounds
-- Remove Curse
-- Cure Disease
-- Remove Paralysis
-- Dispel Magic
-- Invisibility Purge
-- Strength of One
-- Holy Smite~
-@5133  = ~Divine Weaving IV~
-@5134  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Cure Serious Wounds
-- Lesser Restoration
-- Protection from Evil 10' Radius
-- Defensive Harmony
-- Death Ward
-- Protection from Lightning
-- Free Action
-- Holy Power~
-@5135  = ~Divine Weaving V~
-@5136  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Cure Critical Wounds
-- Mass Cure
-- Chaotic Commands
-- Magic Resistance
-- Righteous Magic
-- Greater Command
-- Repulse Undead
-- Flame Strike~
-@5137  = ~Divine Weaving VI~
-@5138  = ~Divine Weaving
-
-This magic will allow the Spellbender to cast one of the following spells:
-- Heal
-- Wondrous Recall
-- Aerial Servant
-- Physical mirror
-- Blade Barrier
-- Sol's Searing Orb
-- False Dawn
-- Bolt of Glory~
-@5139  = ~Techniques Against Magic-Users~
-@5140  = ~The Wizard Slayer is a warrior who has been specially trained to excel in hunting and combating spellcasters of all kinds.
+@5331  = ~tomb runner~
+@5332  = ~Tomb Runner~
+@5333  = ~TOMB RUNNER: these adventurers are seekers after history, truth, and riches. They love to travel to strange lands, searching for mysterious and ancient ruins. Whether in pursuit of scholarly knowledge, or power and fame (or all of the above!), Tomb Runners are adept at surviving hostile dungeons that often do not *want* to be explored.
 
 Abilities:
-- Wizard Slayers have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.
-- Each successful melee hit bestows a 50% chance of spell failure on the target for one round.
-- May use a special vocalization that can deafen those nearby and impose a chance of spell failure on them.
+- Initial 15-point bonus to Find Traps and Detect Illusions.
+- +5 bonus to Lore each level.
+- +3 bonus to to-hit and damage rolls against undead creatures.
+- At level 18, may Use Any Item.
 
 Restrictions:
-- Elves may not become Wizard Slayers.
+- May not use the Pick Pockets skill.
+- May distribute 20 skill points each level.
+- Reduced backstab multiplier progression, matching that of a Stalker.
+- Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.
+~
+@5335  = ~Tome of Dungeon Delving~
+@5336  = ~TOMB RUNNER: these adventurers are seekers after history, truth, and riches. They love to travel to strange lands, searching for mysterious and ancient ruins. Whether in pursuit of scholarly knowledge, or power and fame (or all of the above!), Tomb Runners are adept at surviving hostile dungeons that often do not *want* to be explored.
 
-The descriptions and instructions in this tome may enable the reader to learn the skills and abilities of a Wizard Slayer.
+Abilities:
+- Initial 15-point bonus to Find Traps and Detect Illusions.
+- +5 bonus to Lore each level.
+- +3 bonus to to-hit and damage rolls against undead creatures.
+- At level 15, may Use Any Item.
 
-[WARNING: activation of this item cannot be reversed.  Save before doing so.]~
-@5141  = ~Abilities:
-- Major Access to the spheres of Divine Aid, Life, Protection, Destruction, Knowledge, and Light.
-- Minor Access to the spheres of Death, War, Thought, Dread, Vigor, and Magic.~
+Restrictions:
+- May not use the Pick Pockets skill.
+- May distribute 20 skill points each level.
+- Reduced backstab multiplier progression, matching that of a Stalker.
+- Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.
 
+Using this Tome will allow the reader to engage in a career as a Tomb Runner.
+
+[WARNING: activation of this item cannot be reversed. Save before doing so.]
+~
+@5341  = ~thug~
+@5342  = ~Thug~
+@5343  = ~THUG: Some rogues find that the application of violence is as effective in the pursuit of their goals as the more refined thieving skills. These may be simple lone muggers, or organized enforcers for a guild. In either case, for most of a peaceful urban populace, the only sure thing is that thugs are to be feared and guarded against.
+
+Abilities:
+- +1 bonus to Strength.
+- +1 bonus to backstab multiplier.
+
+Restrictions:
+- -2 penalty to Dexterity.
+- May not use the Open Locks, Detect Illusion, or Set Traps skills.
+- May distribute 20 skill points each level.
+- May not be Lawful or Good alignments.
+~
+@5345  = ~Enforcer Contract~
+@5346  = ~THUG: Some rogues find that the application of violence is as effective in the pursuit of their goals as the more refined thieving skills. These may be simple lone muggers, or organized enforcers for a guild. In either case, for most of a peaceful urban populace, the only sure thing is that thugs are to be feared and guarded against.
+
+Abilities:
+- +1 bonus to Strength.
+- +1 bonus to backstab multiplier.
+
+Restrictions:
+- -2 penalty to Dexterity
+- May not use the Open Locks, Detect Illusion, or Set Traps skills.
+- May distribute 20 skill points each level.
+- May not be Lawful or Good alignments.
+
+Using this Tome will allow the reader to engage in a career as a Thug.
+
+[WARNING: activation of this item cannot be reversed. Save before doing so.]
+~
+@5371  = ~ranger/thief~
+@5372  = ~Ranger/Thief~
+@5373  = ~RANGER/THIEF: These wilderness scouts combine the sneaky abilities of a thief with the warrior skills of a ranger. This can be for a number of reasons; it may be necessary to hone guerilla tactics when the land is under hostile occupation, or roguish qualities may simply be in a ranger's nature.
+
+Abilities:
+- +5 bonus to Hide in Shadows and Move Silently skills with each warrior level-up.
+- May use the Animal Empathy ability like other rangers.
+- May cast an assortment of druid spells, beginning at 5th level.
+
+Restrictions:
+- May not use the Pick Pockets or Open Locks skills.
+- May only distribute 15 skill points each thief level.
+- Reduced backstab multiplier progression, matching that of a Stalker.
+- 15% experience point penalty.
+- Limited to Good alignments.
+~
+@5375  = ~Tome of Wilderness Scouting~
+@5376  = ~RANGER/THIEF: These wilderness scouts combine the sneaky abilities of a thief with the warrior skills of a ranger. This can be for a number of reasons; it may be necessary to hone guerilla tactics when the land is under hostile occupation, or roguish qualities may simply be in a ranger's nature.
+
+Abilities:
+- +5 bonus to Hide in Shadows and Move Silently skills with each warrior level-up.
+- May use the Animal Empathy ability like other rangers.
+- May cast an assortment of druid spells, beginning at 5th level.
+
+Restrictions:
+- May not use the Pick Pockets or Open Locks skills.
+- May only distribute 15 skill points each thief level.
+- Reduced backstab multiplier progression, matching that of a Stalker.
+- 15% experience point penalty.
+- Limited to Good alignments.
+
+Using this Tome will allow the reader to engage in a career as a Ranger/Thief.
+
+[WARNING: activation of this item cannot be reversed. Save before doing so.]
+~

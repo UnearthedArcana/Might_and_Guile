@@ -28,26 +28,26 @@ SAY @20009
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_ILLUSION","LOCALS",2) GlobalLT("D5_SHADOW","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20283 GOTO d5_rogue_86
  IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT)~ THEN REPLY @20291 GOTO d5_rogue_83
  IF ~GlobalGT("D5_RWANDS","LOCALS",0) GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT)~ THEN REPLY @20293 GOTO d5_rogue_84
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20603 GOTO d5_rogue_351	//	mind thrust
+ IF ~Global("D5_PSI","LOCALS",1) GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20603 GOTO d5_rogue_351	//	mind thrust
  IF ~Global("D5_TELEPATHY","LOCALS",1)~ THEN REPLY @20606 GOTO d5_rogue_352	//	id insinuation
  IF ~Global("D5_TELEPATHY","LOCALS",2)~ THEN REPLY @20609 GOTO d5_rogue_353	//	domination
  IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20612 GOTO d5_rogue_354	//	intellect fortress
  IF ~Global("D5_TELEPATHY","LOCALS",3)~ THEN REPLY @20615 GOTO d5_rogue_355	//	psychic crush
  IF ~Global("D5_TELEPATHY","LOCALS",5)~ THEN REPLY @20612 GOTO d5_rogue_356	//	intellect fortress
  IF ~Global("D5_TELEPATHY","LOCALS",4)~ THEN REPLY @20615 GOTO d5_rogue_357	//	psychic crush
- IF ~Global("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20623 GOTO d5_rogue_361	//	immobilize
+ IF ~Global("D5_PSI","LOCALS",1) GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20623 GOTO d5_rogue_361	//	immobilize
  IF ~Global("D5_TELEKINESIS","LOCALS",1)~ THEN REPLY @20626 GOTO d5_rogue_362	//	kinetic ram
  IF ~Global("D5_TELEKINESIS","LOCALS",2)~ THEN REPLY @20629 GOTO d5_rogue_363	//	inertial barrier
  IF ~Global("D5_TELEKINESIS","LOCALS",3)~ THEN REPLY @20632 GOTO d5_rogue_364	//	psychic knife
  IF ~Global("D5_TELEKINESIS","LOCALS",4)~ THEN REPLY @20635 GOTO d5_rogue_365	//	freedom
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20663 GOTO d5_rogue_371	//	adrenaline rush
+ IF ~Global("D5_PSI","LOCALS",1) GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20663 GOTO d5_rogue_371	//	adrenaline rush
  IF ~Global("D5_BIOKINESIS","LOCALS",1)~ THEN REPLY @20666 GOTO d5_rogue_372	//	metabolic boost
  IF ~Global("D5_BIOKINESIS","LOCALS",2)~ THEN REPLY @20669 GOTO d5_rogue_373	//	bioregeneration
  IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20672 GOTO d5_rogue_374	//	camouflage
  IF ~Global("D5_BIOKINESIS","LOCALS",3)~ THEN REPLY @20675 GOTO d5_rogue_375	//	carapace
  IF ~Global("D5_BIOKINESIS","LOCALS",5)~ THEN REPLY @20672 GOTO d5_rogue_386	//	camouflage
  IF ~Global("D5_BIOKINESIS","LOCALS",4)~ THEN REPLY @20675 GOTO d5_rogue_377	//	carapace
- IF ~GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20643 GOTO d5_rogue_381	//	static discharge
+ IF ~Global("D5_PSI","LOCALS",1) GlobalLT("D5_TELEPATHY","LOCALS",1) GlobalLT("D5_TELEKINESIS","LOCALS",1) GlobalLT("D5_BIOKINESIS","LOCALS",1) GlobalLT("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20643 GOTO d5_rogue_381	//	static discharge
  IF ~Global("D5_PYROKINESIS","LOCALS",1)~ THEN REPLY @20646 GOTO d5_rogue_382	//	energy transfer
  IF ~Global("D5_PYROKINESIS","LOCALS",2)~ THEN REPLY @20649 GOTO d5_rogue_383	//	psychic combustion
  IF ~Global("D5_PYROKINESIS","LOCALS",3)~ THEN REPLY @20652 GOTO d5_rogue_384	//	energy shield

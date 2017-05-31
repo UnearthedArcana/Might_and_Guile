@@ -351,18 +351,18 @@ END
 //SPELLFILCHER ABILITY FILES__________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_filch.2da~ ~override~
-COPY ~might_and_guile/misc/d5_ssvbo.spl~ ~override~
+COPY ~might_and_guile/misc/d5ssvbo.spl~ ~override~
 	SAY NAME1 @15
-COPY ~might_and_guile/mc/d5_flch1.spl~ ~override~
+COPY ~might_and_guile/mc/d5flch1.spl~ ~override~
 	SAY NAME1 @5213
 	SAY NAME2 @5213
 	SAY UNIDENTIFIED_DESC @5214
-COPY ~might_and_guile/mc/d5_flch2.spl~ ~override~
+COPY ~might_and_guile/mc/d5flch2.spl~ ~override~
 	SAY NAME1 @5215
 	SAY NAME2 @5215
 	SAY UNIDENTIFIED_DESC @5216
-COPY ~might_and_guile/mc/d5_flch3.spl~ ~override~
-COPY ~might_and_guile/mc/d5_flch4.spl~ ~override~
+COPY ~might_and_guile/mc/d5flch3.spl~ ~override~
+COPY ~might_and_guile/mc/d5flch4.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch4.eff~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.eff~ ~override~
@@ -818,7 +818,7 @@ COPY ~might_and_guile/feats/d5_rfe5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
-COPY ~might_and_guile/misc/d5_ntrap.spl~ ~override~
+COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
 
 COPY ~might_and_guile/mc/d5_thug.itm~ ~override~
 	SAY NAME1 @5345

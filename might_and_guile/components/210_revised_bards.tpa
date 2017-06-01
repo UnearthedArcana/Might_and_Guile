@@ -633,9 +633,9 @@ ADD_KIT ~D5_HERALD~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION_________________________________________________
-SAY @21851
-SAY @21852
-SAY @21853
+SAY @21861
+SAY @21862
+SAY @21863
 //___________________________________________________________________________________
 
 //EE KIT EXTRAS______________________________________________________________________
@@ -643,7 +643,7 @@ SAY @21853
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@21853)
+			briefdesc = RESOLVE_STR_REF (@21863)
 		STR_VAR
 			kit_name = D5_HERALD
 			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3~

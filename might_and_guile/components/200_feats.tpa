@@ -1200,16 +1200,28 @@ COPY_EXISTING ~backstab.2da~ ~override~
 	END
   END
   FOR (col = 2; col < 10; ++col) BEGIN
+	PATCH_IF VARIABLE_IS_SET ~lorem_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	END
+	PATCH_IF VARIABLE_IS_SET ~ranma_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+	END
   END
   FOR (col = 10; col < 19; ++col) BEGIN
+	PATCH_IF VARIABLE_IS_SET ~lorem_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	END
+	PATCH_IF VARIABLE_IS_SET ~ranma_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+	END
   END
   FOR (col = 19; col < cols; ++col) BEGIN
+	PATCH_IF VARIABLE_IS_SET ~lorem_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (lorem_row + 3) col 1 
+	END
+	PATCH_IF VARIABLE_IS_SET ~ranma_row~ BEGIN
 	  SET_2DA_ENTRY_LATER ~#modbackstab~ (ranma_row + 3) col 1 
+	END
   END
   SET_2DA_ENTRIES_NOW ~#modbackstab~ 1
   PRETTY_PRINT_2DA

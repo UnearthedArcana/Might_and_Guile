@@ -15,8 +15,8 @@ SAY @23101	//	~Choose a Called Shot:~
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_snipe_16
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_snipe_21
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_snipe_31
- IF ~GlobalLT("D5_RMAGIC","LOCALS",1)~ THEN REPLY @20271 GOTO d5_snipe_81
- IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_SHADOW","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @2755 GOTO d5_snipe_85
+ IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_snipe_81
+ IF ~GlobalLT("D5_SHADOW","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @2755 GOTO d5_snipe_85
 END
 
 IF ~~ THEN BEGIN d5_snipe_1 // trip
@@ -86,7 +86,7 @@ IF ~~ THEN BEGIN d5_snipe_31 // basic alchemy
 END 
 IF ~~ THEN BEGIN d5_snipe_81 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_snipe 
 END 
 IF ~~ THEN BEGIN d5_snipe_85 // shadow magic

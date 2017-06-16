@@ -11,6 +11,7 @@ SAY @20009
  IF ~GlobalLT("D5_WTRAP","LOCALS",3)~ THEN REPLY @20117 GOTO d5_huntr_24
  IF ~GlobalLT("D5_FTRAP","LOCALS",3)~ THEN REPLY @20115 GOTO d5_huntr_23
  IF ~GlobalLT("D5_PPOISON","LOCALS",3)~ THEN REPLY @20163 GOTO d5_huntr_34
+ IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_huntr_81
  IF ~GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_huntr_36
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_huntr_41
  IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_huntr_45
@@ -22,9 +23,8 @@ SAY @20009
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20253 GOTO d5_huntr_75
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_huntr_73
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_huntr_74
- IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_huntr_81
- IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT)~ THEN REPLY @20291 GOTO d5_huntr_83
- IF ~GlobalGT("D5_RWANDS","LOCALS",0) GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT)~ THEN REPLY @20293 GOTO d5_huntr_84
+ IF ~GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20291 GOTO d5_huntr_83
+ IF ~GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20293 GOTO d5_huntr_84
 END
 
 IF ~~ THEN BEGIN d5_huntr_11 // stealth
@@ -129,7 +129,7 @@ IF ~~ THEN BEGIN d5_huntr_74 // disrupt
 END 
 IF ~~ THEN BEGIN d5_huntr_81 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_huntr 
 END 
 IF ~~ THEN BEGIN d5_huntr_83 // use wands

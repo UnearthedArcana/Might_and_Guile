@@ -15,6 +15,7 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_herald
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20105 GOTO d5_herald_18
  IF ~GlobalLT("D5_LORE","LOCALS",5)~ THEN REPLY @20301 GOTO d5_herald_20
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_herald_22
+ IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_herald_38
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_herald_24
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_herald_26
  IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_herald_28
@@ -24,9 +25,8 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_herald
  IF ~Global("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_herald_57
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_herald_34
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_herald_36
- IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_herald_38
- IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_ILLUSION","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20283 GOTO d5_herald_40
- IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_BARDMAGIC","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20287 GOTO d5_herald_42
+ IF ~GlobalLT("D5_ILLUSION","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20283 GOTO d5_herald_40
+ IF ~GlobalLT("D5_BARDMAGIC","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20287 GOTO d5_herald_42
  IF ~GlobalLT("D5_TACTO","LOCALS",1) GlobalLT("D5_TACTD","LOCALS",1)~ THEN REPLY @20321 GOTO d5_herald_1121
  IF ~Global("D5_TACTD","LOCALS",1) GlobalLT("D5_TACTO","LOCALS",1)~ THEN REPLY @20321 GOTO d5_herald_1122
  IF ~GlobalLT("D5_TACTD","LOCALS",1) GlobalLT("D5_TACTO","LOCALS",1)~ THEN REPLY @20323 GOTO d5_herald_1131
@@ -145,7 +145,7 @@ IF ~~ THEN BEGIN d5_herald_36 // disrupt
 END 
 IF ~~ THEN BEGIN d5_herald_38 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_herald 
 END 
 IF ~~ THEN BEGIN d5_herald_40 // illusion magic

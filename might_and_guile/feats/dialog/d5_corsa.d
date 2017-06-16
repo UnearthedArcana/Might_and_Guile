@@ -8,13 +8,14 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_PSAVES","LOCALS",1)~ THEN REPLY @20215 GOTO d5_corsa_47
  IF ~GlobalLT("D5_CRIT","LOCALS",1)~ THEN REPLY @20243 GOTO d5_corsa_56
  IF ~Global("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_corsa_57
+ IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_corsa_75
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_corsa_74
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_corsa_16
  IF ~GlobalLT("D5_EVADE","LOCALS",3)~ THEN REPLY @20201 GOTO d5_corsa_41
  IF ~GlobalLT("D5_ESCAPE","LOCALS",1)~ THEN REPLY @20221 GOTO d5_corsa_42
  IF ~GlobalLT("D5_ATTACK","LOCALS",3)~ THEN REPLY @20231 GOTO d5_corsa_51
  IF ~GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_corsa_58
- IF ~GlobalLT("D5_RMAGIC","LOCALS",1)~ THEN REPLY @20271 GOTO d5_corsa_81
+ IF ~GlobalLT("D5_GASOIL","LOCALS",1)~ THEN REPLY @20271 GOTO d5_corsa_81
  IF ~GlobalLT("D5_FLAMEW","LOCALS",1)~ THEN REPLY @20151 GOTO d5_corsa_36
  IF ~GlobalLT("D5_LUCKY","LOCALS",1)~ THEN REPLY @20303 GOTO d5_corsa_15
 END
@@ -49,6 +50,11 @@ IF ~~ THEN BEGIN d5_corsa_57 // +10% crit
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_CRIT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE7",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
+IF ~~ THEN BEGIN d5_corsa_75 // fighting dirty
+ SAY @20260
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DIRTY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG5",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_corsa 
+END 
 IF ~~ THEN BEGIN d5_corsa_74 // disrupt
  SAY @20258
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISRUPT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG4",myself)~ EXIT 
@@ -81,7 +87,7 @@ IF ~~ THEN BEGIN d5_corsa_58 // swashbuckling
 END 
 IF ~~ THEN BEGIN d5_corsa_81 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
 IF ~~ THEN BEGIN d5_corsa_36 // flaming weapon

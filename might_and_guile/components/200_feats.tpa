@@ -863,7 +863,8 @@ COPY ~might_and_guile/feats/d5_rfh3.spl~ ~override~   //           use wands
 	SAY UNIDENTIFIED_DESC @20292
 	WRITE_ASCII 0x3a ~d5_rfh3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh3~ END
-COPY ~might_and_guile/feats/d5_rf83n.spl~ ~override~
+COPY ~might_and_guile/feats/d5_nwand.spl~ ~override~
+COPY ~might_and_guile/feats/d5_rf83n.eff~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfh4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
@@ -871,104 +872,44 @@ COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
 	SAY UNIDENTIFIED_DESC @20294
 	WRITE_ASCII 0x3a ~d5_rfh4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4~ END
-COPY ~might_and_guile/feats/d5_rf84n.spl~ ~override~
-
-OUTER_SET scroll_count = 0
-OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
-  READ_BYTE     0x2f current ELSE 0
-  READ_BYTE     0x2b current2 ELSE 0
-  // Analyze items; if:
-  // 1) Have 2 extended headers
-  // 2) one contains ~cast spell~ (0x92 or 0x94) on a wizard spell
-  // 3) The other contains ~Learn Spell~ (0x93) on the same spell
-  // then it's a wizardly spell scroll: update for Use Scrolls!
-  // (also do wands)
-  READ_LONG 0x64 headoffset  ELSE 0
-  READ_SHORT 0x68 headcount  ELSE 0
-  READ_LONG 0x6a effectsoffset  ELSE 0
-  haslearn = 0
-  hascast = 0
-  PATCH_IF (headcount = 2) BEGIN
-    FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
-      thishead = 0
-      READ_SHORT (headoffset + (headcyc * 0x38) + 0x1e) effcount  ELSE 0
-      READ_SHORT (headoffset + (headcyc * 0x38) + 0x20) effectsindex  ELSE 0
-      FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
-        READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
-        PATCH_IF (opcode = 0x93) AND (thishead = 0) BEGIN
-          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_learn  ELSE 0
-          INNER_PATCH_FILE ~%resref_learn%.spl~ BEGIN
-            READ_SHORT 0x1c type
-          END
-          PATCH_IF (type = 1) BEGIN // spell scroll
-            thishead = 1
-            haslearn = 1
-          END
-        END // PATCH_IF... (opcode = learn spell)
-        PATCH_IF ((opcode = 0x92) OR (opcode = 0x94)) AND (thishead = 0) BEGIN
-          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_cast  ELSE 0
-          INNER_PATCH_FILE ~%resref_cast%.spl~ BEGIN
-            READ_SHORT 0x1c type
-          END
-          PATCH_IF (type = 1) OR (type = 2) BEGIN // spell scroll
-            thishead = 1
-            hascast = 1
-          END
-        END // PATCH_IF (opcode = cast spell)
-      END // FOR... effect_cycle
-    END // FOR... header cycle
-  END // PATCH_IF... have exactly 2 headers
-  PATCH_IF /*(haslearn = 1) AND */(hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
-	READ_BYTE ~0x1f~ ~byte1~
-	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b10100101~)
-	READ_BYTE ~0x20~ ~byte2~
-	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
-//	WRITE_SHORT 0x2f current BOR 0b00100000
-  END
-  PATCH_IF (haslearn = 1) AND (hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
-	SPRINT $use_scrolls(~%scroll_count%~) ~%SOURCE_RES%~
-	SET ++scroll_count
-  END
-  READ_SHORT 0x1c item_type
-  PATCH_IF (item_type = 35) BEGIN
-	READ_BYTE ~0x1f~ ~byte1~
-	WRITE_BYTE ~0x1f~ (~%byte1%~ BAND ~0b10100101~)
-	READ_BYTE ~0x20~ ~byte2~
-	WRITE_BYTE ~0x20~ (~%byte2%~ BAND ~0b10111101~)
-//	WRITE_SHORT 0x2f current BOR 0b00100000
-  END
-  PATCH_IF (item_type = 9) BEGIN
-	READ_BYTE ~0x1f~ ~byte2~
-	WRITE_BYTE ~0x1f~ (~%byte2%~ BAND ~0b10100101~)
-	READ_BYTE ~0x20~ ~byte3~
-	WRITE_BYTE ~0x20~ (~%byte3%~ BAND ~0b10111101~)
-//	WRITE_SHORT 0x2f current BOR 0b00100000
-  END
-BUT_ONLY_IF_IT_CHANGES
 COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override~
-  PHP_EACH use_scrolls AS _ => spell BEGIN
-	PATCH_IF FILE_EXISTS_IN_GAME ~%spell%.itm~ BEGIN
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 180 parameter1 = (0 - 1) parameter2 = 0 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END
+COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  READ_SHORT 0x1c item_type
+  PATCH_IF item_type = 9 BEGIN					//		make ALL potions usable by thieves
+	WRITE_BYTE 0x1f (THIS BAND 0b11111101)
+	WRITE_BYTE 0x20 (THIS BAND 0b10110100)
+  END
+  PATCH_IF item_type = 11 BEGIN 				//		make green scrolls into "potions"
+	READ_BYTE 0x20 thief_use
+	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
+	  WRITE_SHORT 0x1c 9
 	END
   END
-/*
-APPEND ~splprot.2da~ ~D5_CLASS_EQ%TAB%0x10d%TAB%-1%TAB%1~
-COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CLASS_EQ~ BEGIN
-	    SET class_eq = %row%
-	  END
+  PATCH_IF item_type = 35 BEGIN 				//		make general-use wands into "potions"
+	READ_BYTE 0x20 thief_use
+	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
+	  WRITE_SHORT 0x1c 9
 	END
+  END
 BUT_ONLY
-*/
 
-//end use scrolls/wands_____________________________________________________________
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  READ_SHORT	0x1c item_type
+  PATCH_IF (item_type = 11) BEGIN
+	WRITE_BYTE 0x1f (THIS BAND 0b11110111)
+	WRITE_BYTE 0x20 (THIS BAND 0b10111111)
+   END
+  PATCH_IF (item_type = 35) BEGIN
+	WRITE_BYTE 0x1f (THIS BAND 0b11110111)
+	WRITE_BYTE 0x20 (THIS BAND 0b10111111)
+  END
+BUT_ONLY
 
-//
+//	end use scrolls/wands
+
+// 	splprot.2da: use bit5 of extraproficiency20 for fighter's tactics
 
 APPEND ~splprot.2da~ ~D5_134_BIT5%TAB%134%TAB%22%TAB%8~
 APPEND ~splprot.2da~ ~D5_134_NOT5%TAB%134%TAB%22%TAB%9~

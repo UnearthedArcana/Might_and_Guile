@@ -6,6 +6,7 @@ SAY @20009
  IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_blade_6		//	invulnerability aura
  IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_blade_8		//	slow aura
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_blade_10
+ IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_blade_32
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_blade_12
  IF ~GlobalLT("D5_EVADE","LOCALS",4)~ THEN REPLY @20201 GOTO d5_blade_14
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_blade_16
@@ -18,7 +19,6 @@ SAY @20009
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_blade_26
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_blade_28
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_blade_30
- IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_blade_32
 END
 
 IF ~~ THEN BEGIN d5_blade_4 // mind blank
@@ -103,6 +103,6 @@ IF ~~ THEN BEGIN d5_blade_30 // disrupt
 END 
 IF ~~ THEN BEGIN d5_blade_32 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_blade 
 END 

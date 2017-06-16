@@ -8,16 +8,14 @@ SAY @23101 // ~Choose a feat:~
  IF ~Global("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_stalk_57
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_stalk_74
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_stalk_16
-
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20101 GOTO d5_stalk_11
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_stalk_21
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_41
-
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_stalk_55
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_stalk_75
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_stalk_73
- IF ~GlobalLT("D5_RMAGIC","LOCALS",2)~ THEN REPLY @20271 GOTO d5_stalk_81
- IF ~GlobalGT("D5_RMAGIC","LOCALS",0) GlobalLT("D5_SHADOW","LOCALS",1) CheckStatGT(myself,14,INT)~ THEN REPLY @2755 GOTO d5_stalk_85
+ IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_stalk_81
+ IF ~GlobalLT("D5_SHADOW","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @2755 GOTO d5_stalk_85
 END
 
 IF ~~ THEN BEGIN d5_stalk_17 // extra hp
@@ -93,7 +91,7 @@ IF ~~ THEN BEGIN d5_stalk_73 // blind
 END 
 IF ~~ THEN BEGIN d5_stalk_81 // grease/smoke
  SAY @20272
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RMAGIC","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_GASOIL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_stalk 
 END 
 IF ~~ THEN BEGIN d5_stalk_85 // shadow magic

@@ -981,7 +981,7 @@ ACTION_IF GAME_IS ~iwdee~ BEGIN
 	END
   BUT_ONLY
   COPY_EXISTING ~d5rmcon.spl~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %con_row% END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %con_row% END
 END
 	
 COPY_EXISTING ~sppr207.spl~ ~override/D5RNM01.spl~ // goodberry

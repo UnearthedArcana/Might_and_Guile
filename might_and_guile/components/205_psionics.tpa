@@ -568,7 +568,7 @@ COPY ~might_and_guile/psi/d5ps109.spl~ ~override~ 		//	tower of iron will
   SAY UNIDENTIFIED_DESC @20583
   WRITE_ASCII 0x3a ~d5_ps1x9~ #8
   LPF ALTER_SPELL_HEADER INT_VAR speed = 2 location = 4 STR_VAR icon = ~d5_ps109~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR silent = 1 opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
 
 COPY ~might_and_guile/psi/d5_ps1x9.bam~ ~override~
 COPY ~might_and_guile/psi/d5ps1x9.spl~ ~override~ 		//	cancel resilience
@@ -609,7 +609,7 @@ COPY_EXISTING ~sppr720.spl~ ~override/d5ps208.spl~ 	//	earthquake
   WRITE_SHORT 0x1c 4
   WRITE_ASCII 0x3a ~d5_ps208~ #8
   LPF ALTER_SPELL_HEADER INT_VAR speed = 4 location = 4 STR_VAR icon = ~d5_ps208~ END
-  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 power = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
@@ -678,7 +678,7 @@ COPY ~might_and_guile/psi/d5ps308.spl~ ~override~ 		//	solar flash
 	SAY UNIDENTIFIED_DESC @20590
   WRITE_ASCII 0x3a ~d5_ps308~ #8
   LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps308~ END
-  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 power = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
@@ -717,7 +717,7 @@ COPY ~might_and_guile/psi/d5ps309.spl~ ~override~ 		//	storm of energy
 	SAY UNIDENTIFIED_DESC @20592
   WRITE_ASCII 0x3a ~d5_ps309~ #8
   LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps309~ END
-  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 power = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 8 parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = (0 - 25) parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
@@ -752,7 +752,7 @@ COPY ~might_and_guile/psi/d5ps408.spl~ ~override~ 	//	monstrous evolution
 	SAY UNIDENTIFIED_DESC @20594
   WRITE_ASCII 0x3a ~d5_ps408~ #8
   LPF ALTER_SPELL_HEADER INT_VAR speed = 4 STR_VAR icon = ~d5_ps408~ END
-  LPF ALTER_EFFECT INT_VAR power = 9 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 power = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 1 parameter2 = 0 timing = 4 duration = 6 END
 	
 COPY ~might_and_guile/psi/d5_sham.cre~ ~override~

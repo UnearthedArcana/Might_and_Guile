@@ -1195,7 +1195,7 @@ COPY ~might_and_guile/bardsong/d5bd01.spl~ ~override~			//		bard "switch song" t
 	SAY UNIDENTIFIED_DESC @21012
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd01~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd01w.spl~ ~override~			//		demibard "switch song" target ability
 	SAY NAME1 @21011
@@ -1204,7 +1204,7 @@ COPY ~might_and_guile/bardsong/d5bd01w.spl~ ~override~			//		demibard "switch so
 COPY ~might_and_guile/bardsong/d5bd01a.spl~ ~override~			//		song ability
 	SAY NAME1 @21011
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd01~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1216,7 +1216,7 @@ COPY ~might_and_guile/bardsong/d5bd01x.spl~ ~override~			//		turn song off
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1230,7 +1230,7 @@ COPY ~might_and_guile/bardsong/d5bd02.spl~ ~override~			//		morale aura
 	SAY UNIDENTIFIED_DESC @21022
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd02~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd02w.spl~ ~override~
 	SAY NAME1 @21021
@@ -1239,7 +1239,7 @@ COPY ~might_and_guile/bardsong/d5bd02w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd02a.spl~ ~override~
 	SAY NAME1 @21021
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd02~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1251,7 +1251,7 @@ COPY ~might_and_guile/bardsong/d5bd02x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1265,7 +1265,7 @@ COPY ~might_and_guile/bardsong/d5bd03.spl~ ~override~			//		damage boost
 	SAY UNIDENTIFIED_DESC @21032
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd03~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd03w.spl~ ~override~
 	SAY NAME1 @21031
@@ -1274,7 +1274,7 @@ COPY ~might_and_guile/bardsong/d5bd03w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd03a.spl~ ~override~
 	SAY NAME1 @21031
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd03~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1286,7 +1286,7 @@ COPY ~might_and_guile/bardsong/d5bd03x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1300,7 +1300,7 @@ COPY ~might_and_guile/bardsong/d5bd05.spl~ ~override~			//	mirror images aura
 	SAY UNIDENTIFIED_DESC @21052
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd05~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd05w.spl~ ~override~
 	SAY NAME1 @21051
@@ -1309,7 +1309,7 @@ COPY ~might_and_guile/bardsong/d5bd05w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd05a.spl~ ~override~
 	SAY NAME1 @21051
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd05~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1321,7 +1321,7 @@ COPY ~might_and_guile/bardsong/d5bd05x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1335,7 +1335,7 @@ COPY ~might_and_guile/bardsong/d5bd06.spl~ ~override~			//		bless aura
 	SAY UNIDENTIFIED_DESC @21062
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd06~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd06w.spl~ ~override~
 	SAY NAME1 @21061
@@ -1344,7 +1344,7 @@ COPY ~might_and_guile/bardsong/d5bd06w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd06a.spl~ ~override~
 	SAY NAME1 @21061
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd06~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1356,7 +1356,7 @@ COPY ~might_and_guile/bardsong/d5bd06x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1370,7 +1370,7 @@ COPY ~might_and_guile/bardsong/d5bd07.spl~ ~override~			//		NPP aura
 	SAY UNIDENTIFIED_DESC @21072
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd07w.spl~ ~override~
 	SAY NAME1 @21071
@@ -1379,7 +1379,7 @@ COPY ~might_and_guile/bardsong/d5bd07w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd07a.spl~ ~override~
 	SAY NAME1 @21071
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1391,7 +1391,7 @@ COPY ~might_and_guile/bardsong/d5bd07x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1405,7 +1405,7 @@ COPY ~might_and_guile/bardsong/d5bd08.spl~ ~override~			//		mind shield aura
 	SAY UNIDENTIFIED_DESC @21082
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd08~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd08w.spl~ ~override~
 	SAY NAME1 @21081
@@ -1414,7 +1414,7 @@ COPY ~might_and_guile/bardsong/d5bd08w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd08a.spl~ ~override~
 	SAY NAME1 @21081
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd08~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1426,7 +1426,7 @@ COPY ~might_and_guile/bardsong/d5bd08x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1440,7 +1440,7 @@ COPY ~might_and_guile/bardsong/d5bd09.spl~ ~override~			//		death ward aura
 	SAY UNIDENTIFIED_DESC @21072
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd09w.spl~ ~override~
 	SAY NAME1 @21071
@@ -1449,7 +1449,7 @@ COPY ~might_and_guile/bardsong/d5bd09w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd09a.spl~ ~override~
 	SAY NAME1 @21071
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd07~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1461,7 +1461,7 @@ COPY ~might_and_guile/bardsong/d5bd09x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1475,7 +1475,7 @@ COPY ~might_and_guile/bardsong/d5bd20.spl~ ~override~			//		miscast aura
 	SAY UNIDENTIFIED_DESC @21202
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd20~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd20w.spl~ ~override~
 	SAY NAME1 @21201
@@ -1484,7 +1484,7 @@ COPY ~might_and_guile/bardsong/d5bd20w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd20a.spl~ ~override~
 	SAY NAME1 @21201
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd20~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1496,7 +1496,7 @@ COPY ~might_and_guile/bardsong/d5bd20x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1510,7 +1510,7 @@ COPY ~might_and_guile/bardsong/d5bd21.spl~ ~override~			//		combat penalties
 	SAY UNIDENTIFIED_DESC @21212
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd21~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd21w.spl~ ~override~
 	SAY NAME1 @21211
@@ -1519,7 +1519,7 @@ COPY ~might_and_guile/bardsong/d5bd21w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd21a.spl~ ~override~
 	SAY NAME1 @21211
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd21~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1531,7 +1531,7 @@ COPY ~might_and_guile/bardsong/d5bd21x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1545,7 +1545,7 @@ COPY ~might_and_guile/bardsong/d5bd22.spl~ ~override~			//		luck/save penalties
 	SAY UNIDENTIFIED_DESC @21222
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd22~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd22w.spl~ ~override~
 	SAY NAME1 @21221
@@ -1554,7 +1554,7 @@ COPY ~might_and_guile/bardsong/d5bd22w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd22a.spl~ ~override~
 	SAY NAME1 @21221
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd22~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1566,7 +1566,7 @@ COPY ~might_and_guile/bardsong/d5bd22x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1580,7 +1580,7 @@ COPY ~might_and_guile/bardsong/d5bd23.spl~ ~override~			//		confusion
 	SAY UNIDENTIFIED_DESC @21232
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd23~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd23w.spl~ ~override~
 	SAY NAME1 @21231
@@ -1589,7 +1589,7 @@ COPY ~might_and_guile/bardsong/d5bd23w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd23a.spl~ ~override~
 	SAY NAME1 @21231
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd23~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1601,7 +1601,7 @@ COPY ~might_and_guile/bardsong/d5bd23x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1615,7 +1615,7 @@ COPY ~might_and_guile/bardsong/d5bd24.spl~ ~override~			//		hold undead
 	SAY UNIDENTIFIED_DESC @21242
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd24~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd24w.spl~ ~override~
 	SAY NAME1 @21241
@@ -1624,7 +1624,7 @@ COPY ~might_and_guile/bardsong/d5bd24w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd24a.spl~ ~override~
 	SAY NAME1 @21241
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd24~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1638,7 +1638,7 @@ COPY ~might_and_guile/bardsong/d5bd24x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1652,7 +1652,7 @@ COPY ~might_and_guile/bardsong/d5bd25.spl~ ~override~			//		entangle
 	SAY UNIDENTIFIED_DESC @21252
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd25~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd25w.spl~ ~override~
 	SAY NAME1 @21251
@@ -1661,7 +1661,7 @@ COPY ~might_and_guile/bardsong/d5bd25w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd25a.spl~ ~override~
 	SAY NAME1 @21251
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd25~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1673,7 +1673,7 @@ COPY ~might_and_guile/bardsong/d5bd25x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1687,7 +1687,7 @@ COPY ~might_and_guile/bardsong/d5bd41.spl~ ~override~			//		blur
 	SAY UNIDENTIFIED_DESC @21412
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd41~ END
 	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd41w.spl~ ~override~
 	SAY NAME1 @21411
@@ -1696,7 +1696,7 @@ COPY ~might_and_guile/bardsong/d5bd41w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd41a.spl~ ~override~
 	SAY NAME1 @21411
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd41~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1707,7 +1707,7 @@ COPY ~might_and_guile/bardsong/d5bd41x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1721,7 +1721,7 @@ COPY ~might_and_guile/bardsong/d5bd42.spl~ ~override~			//		mind blank
 	SAY UNIDENTIFIED_DESC @21422
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd42~ END
 	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd42w.spl~ ~override~
 	SAY NAME1 @21421
@@ -1730,7 +1730,7 @@ COPY ~might_and_guile/bardsong/d5bd42w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd42a.spl~ ~override~
 	SAY NAME1 @21421
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd42~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1740,7 +1740,7 @@ COPY ~might_and_guile/bardsong/d5bd42x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1754,7 +1754,7 @@ COPY ~might_and_guile/bardsong/d5bd43.spl~ ~override~			//		MGOI
 	SAY UNIDENTIFIED_DESC @21432
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd43~ END
 	PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd43w.spl~ ~override~
 	SAY NAME1 @21431
@@ -1763,7 +1763,7 @@ COPY ~might_and_guile/bardsong/d5bd43w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd43a.spl~ ~override~
 	SAY NAME1 @21431
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd43~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1773,7 +1773,7 @@ COPY ~might_and_guile/bardsong/d5bd43x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1787,7 +1787,7 @@ COPY ~might_and_guile/bardsong/d5bd46.spl~ ~override~			//		cloak of fear
 	SAY UNIDENTIFIED_DESC @21462
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd46~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd46w.spl~ ~override~
 	SAY NAME1 @21461
@@ -1796,7 +1796,7 @@ COPY ~might_and_guile/bardsong/d5bd46w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd46a.spl~ ~override~
 	SAY NAME1 @21461
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd46~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1808,7 +1808,7 @@ COPY ~might_and_guile/bardsong/d5bd46x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1822,7 +1822,7 @@ COPY ~might_and_guile/bardsong/d5bd47.spl~ ~override~			//		slow enemies
 	SAY UNIDENTIFIED_DESC @21472
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd47~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd47w.spl~ ~override~
 	SAY NAME1 @21471
@@ -1831,7 +1831,7 @@ COPY ~might_and_guile/bardsong/d5bd47w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd47a.spl~ ~override~
 	SAY NAME1 @21471
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd47~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1843,7 +1843,7 @@ COPY ~might_and_guile/bardsong/d5bd47x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1857,7 +1857,7 @@ COPY ~might_and_guile/bardsong/d5bd48.spl~ ~override~			//		dispel illusions
 	SAY UNIDENTIFIED_DESC @21482
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd48~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd48w.spl~ ~override~
 	SAY NAME1 @21481
@@ -1866,7 +1866,7 @@ COPY ~might_and_guile/bardsong/d5bd48w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd48a.spl~ ~override~
 	SAY NAME1 @21481
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd48~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1878,7 +1878,7 @@ COPY ~might_and_guile/bardsong/d5bd48x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1892,7 +1892,7 @@ COPY ~might_and_guile/bardsong/d5bd61.spl~ ~override~			//		Maze enemies
 	SAY UNIDENTIFIED_DESC @21612
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd61~ END
 	PATCH_FOR_EACH all_songs IN ~01b~ ~02b~ ~03b~ ~05b~ ~06b~ ~07b~ ~08b~ ~20b~ ~21b~ ~22b~ ~23b~ ~24b~ ~25b~ ~41a~ ~42a~ ~43a~ ~46b~ ~47b~ ~48b~ ~61b~ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
 	END
 COPY ~might_and_guile/bardsong/d5bd61w.spl~ ~override~
 	SAY NAME1 @21481
@@ -1901,7 +1901,7 @@ COPY ~might_and_guile/bardsong/d5bd61w.spl~ ~override~
 COPY ~might_and_guile/bardsong/d5bd61a.spl~ ~override~
 	SAY NAME1 @21481
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bd61~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -1913,7 +1913,7 @@ COPY ~might_and_guile/bardsong/d5bd61x.spl~ ~override~
 	SAY NAME1 @21003
 	SAY UNIDENTIFIED_DESC @21003
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bdmusx~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %not_class_row% parameter1 = 5 END
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 		LPF DELETE_EFFECT INT_VAR match_opcode = 363 END
 	END
@@ -2079,7 +2079,7 @@ COPY ~might_and_guile/bardsong/d5bd05.itm~ ~override~			//		mirror images
 	SAY NAME2 @21051
 	SAY IDENTIFIED_DESC @21052
 	  PATCH_FOR_EACH demibards IN /*~%nu_blade_code%~*/ ~%jinxer_code%~ ~%herald_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd05w~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd05w~ END
 	  END
 /*
 ACTION_IF FILE_EXISTS_IN_GAME ~pwarden.cre~ BEGIN
@@ -2099,7 +2099,7 @@ COPY ~might_and_guile/bardsong/d5bd08.itm~ ~override~			//		mind shield
 	SAY NAME2 @21081
 	SAY IDENTIFIED_DESC @21082
 	  PATCH_FOR_EACH demibards IN /*~%nu_blade_code%~*/ ~%jinxer_code%~ ~%herald_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd08w~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd08w~ END
 	  END
 ACTION_IF FILE_EXISTS_IN_GAME ~pirmur01.cre~ BEGIN
   COPY_EXISTING ~pirmur01.cre~ ~override~
@@ -2110,7 +2110,7 @@ COPY ~might_and_guile/bardsong/d5bd24.itm~ ~override~			//		hold undead
 	SAY NAME2 @21241
 	SAY IDENTIFIED_DESC @21242
 	  PATCH_FOR_EACH demibards IN /*~%nu_blade_code%~*/ ~%jinxer_code%~ ~%herald_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
 	  END
 ACTION_IF FILE_EXISTS_IN_GAME ~theshal.cre~ BEGIN
   COPY_EXISTING ~theshal.cre~ ~override~
@@ -2125,7 +2125,7 @@ COPY ~might_and_guile/bardsong/d5bd25.itm~ ~override~			//		entangle
 	SAY NAME2 @21241
 	SAY IDENTIFIED_DESC @21242
 	  PATCH_FOR_EACH demibards IN /*~%nu_blade_code%~*/ ~%jinxer_code%~ ~%herald_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd24w~ END
 	  END
 ACTION_IF FILE_EXISTS_IN_GAME ~jugmim01.cre~ BEGIN
   COPY_EXISTING ~jugmim01.cre~ ~override~
@@ -2136,7 +2136,7 @@ COPY ~might_and_guile/bardsong/d5bd48.itm~ ~override~			//		dispel illusions
 	SAY NAME2 @21481
 	SAY IDENTIFIED_DESC @21482
 	  PATCH_FOR_EACH demibards IN /*~%nu_blade_code%~*/ ~%jinxer_code%~ ~%herald_code%~ ~%nu_gallant_code%~ ~%hexblade_code%~ /*~%nu_skald_code%~*/ BEGIN
-		LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd48w~ END
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 parameter1 = %demibards% parameter2 = 9 STR_VAR resource = ~d5bd48w~ END
 	  END
 ACTION_IF (FILE_EXISTS_IN_GAME ~stoblack.sto~)THEN BEGIN
   COPY_EXISTING ~stoblack.sto~ ~override~
@@ -2398,9 +2398,9 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
   BUT_ONLY
 
   COPY ~might_and_guile/profs/d5iprf4.spl~ ~override~
-    LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = %bard_int_prof_1% parameter2 = %int_gteq_row% END
+    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %bard_int_prof_1% parameter2 = %int_gteq_row% END
   COPY ~might_and_guile/profs/d5iprf5.spl~ ~override~
-    LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = %bard_int_prof_2% parameter2 = %int_gteq_row% END
+    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %bard_int_prof_2% parameter2 = %int_gteq_row% END
 
   ACTION_IF FILE_EXISTS_IN_GAME ~clabba01.2da~ BEGIN
 	COPY_EXISTING ~clabba01.2da~ ~override~

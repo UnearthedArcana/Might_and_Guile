@@ -25,16 +25,16 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_SHORT 0x1c item_type
-  PATCH_IF item_type = 11 BEGIN 				//		make green scrolls into "potions"
+  PATCH_IF item_type = 11 BEGIN 				//		make green scrolls into "misc"
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-	  WRITE_SHORT 0x1c 9
+	  WRITE_SHORT 0x1c 0
 	END
   END
-  PATCH_IF item_type = 35 BEGIN 				//		make general-use wands into "potions"
+  PATCH_IF item_type = 35 BEGIN 				//		make general-use wands into "misc"
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-	  WRITE_SHORT 0x1c 9
+	  WRITE_SHORT 0x1c 0
 	END
   END
 BUT_ONLY

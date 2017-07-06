@@ -904,6 +904,58 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	END
   END
 BUT_ONLY
+OUTER_SET scroll_count = 0
+OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+  READ_BYTE     0x2f current ELSE 0
+  READ_BYTE     0x2b current2 ELSE 0
+  READ_LONG 0x64 headoffset  ELSE 0
+  READ_SHORT 0x68 headcount  ELSE 0
+  READ_LONG 0x6a effectsoffset  ELSE 0
+  haslearn = 0
+  hascast = 0
+  PATCH_IF (headcount = 2) BEGIN
+    FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
+      thishead = 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x1e) effcount  ELSE 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x20) effectsindex  ELSE 0
+      FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
+        READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
+        PATCH_IF (opcode = 0x93) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_learn  ELSE 0
+          INNER_PATCH_FILE ~%resref_learn%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) BEGIN // spell scroll
+            thishead = 1
+            haslearn = 1
+          END
+        END // PATCH_IF... (opcode = learn spell)
+        PATCH_IF ((opcode = 0x92) OR (opcode = 0x94)) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_cast  ELSE 0
+          INNER_PATCH_FILE ~%resref_cast%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) OR (type = 2) BEGIN // spell scroll
+            thishead = 1
+            hascast = 1
+          END
+        END // PATCH_IF (opcode = cast spell)
+      END // FOR... effect_cycle
+    END // FOR... header cycle
+  END // PATCH_IF... have exactly 2 headers
+  PATCH_IF (haslearn = 1) AND (hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
+	SPRINT $use_scrolls(~%scroll_count%~) ~%SOURCE_RES%~
+	SET ++scroll_count
+  END
+BUT_ONLY
+ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%scroll%.itm~ BEGIN
+	COPY_EXISTING ~%scroll%.itm~ ~override~
+	  WRITE_SHORT 0x1c 11
+	BUT_ONLY
+  END
+END
 ACTION_FOR_EACH case IN ~bag03~ ~bag03b~ ~bag03c~ ~bag03d~ ~bag03e~ ~bag03f~ ~bag03g~ ~bag03h~ ~bag03i~ BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~%case%.sto~ BEGIN
 	COPY_EXISTING ~%case%.sto~ ~override~

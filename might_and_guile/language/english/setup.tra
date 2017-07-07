@@ -35,7 +35,7 @@
 @210   = ~Bard Class Overhaul~
 @220   = ~Revised Movement Bonuses (Quickstride)~
 @225   = ~Revised Stalker~
-@230   = ~Revised Archer~
+@230   = ~Revised Archery~
 @235   = ~Revised Beastmaster~
 @250   = ~Revised Berserker and Rage~
 @260   = ~Revised Kensai~
@@ -746,18 +746,18 @@ Advantages:
 - From 6th level, may use an Aura of Confusion, which causes all enemies within 20 feet to save vs. Spells each round or become Confused. (The Jester cannot cast spells while the Aura of Confusion is in effect.)
 
 Restrictions:
-– None.
+- None.
 ~
 @21809  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
 
 Advantages:
-– +1 bonus to hit and damage rolls.
+- +1 bonus to hit and damage rolls.
 - From 5th level, may innately cast the priest spell Defensive Harmony once per day.
 - May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
 - From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened. (The Skald cannot cast spells while the Aura of Fear is in effect.)
 
 Disadvantages:
-– Only has one quarter the normal Pick Pockets score.
+- Only has one quarter the normal Pick Pockets score.
 ~
 @21810  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
 
@@ -1784,7 +1784,24 @@ Restrictions:
 //
 @3202  = ~marksman~
 @3203  = ~Marksman~
-@3204  = ~MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
+@3204  = ~The Marksman is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
+
+Advantages:
+- +1 to hit and damage rolls with any missile weapon every 3 levels.
+- May achieve Grand Mastery (5 slots) in longbows, shortbows, and crossbows.
+- May use the Called Shot ability once per day. Gains one use at level 4 and an additional use every 4 levels thereafter.
+
+CALLED SHOT: All successful ranged attacks within the next 10 seconds have the following cumulative effects besides normal damage, according to the level of the Archer:
+ 4th level: -1 penalty to target's THAC0.
+ 8th level: -1 penalty to target's Saving Throws vs. Spell.
+ 12th level: -1 penalty to the target's Strength score.
+ 16th level: +2 bonus to damage roll.
+
+Disadvantages:
+- May not wear heavier armor than splint mail.
+- May only become Specialized (++) with melee weapons.
+~
+@3205  = ~MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
  
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.
@@ -1801,7 +1818,6 @@ Restrictions:
 - May reach a lower level of proficiency than normal with melee weapons.
 - May not wear heavier armor than splint mail.
 ~
-@3205  = ~The Marksman is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.~
 @3206  = ~MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
  
 Abilities:
@@ -1828,6 +1844,24 @@ Restrictions:
 @3223  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
 Advantages:
+- +1 to hit and damage rolls with any missile weapon every 3 levels.
+- May achieve Grand Mastery (5 slots) in longbows and shortbows.
+- May use the Called Shot ability once per day. Gains one use at level 4 and an additional use every 4 levels thereafter.
+
+CALLED SHOT: All successful ranged attacks within the next 10 seconds have the following cumulative effects besides normal damage, according to the level of the Archer:
+ 4th level: -1 penalty to target's THAC0.
+ 8th level: -1 penalty to target's Saving Throws vs. Spell.
+ 12th level: -1 penalty to the target's Strength score.
+ 16th level: +2 bonus to damage roll.
+
+Disadvantages:
+- May not wear any metal armor other than elven chain mail.
+- May only become Proficient (one slot) with melee weapons.
+- May not use the Charm Animal ability.
+~
+@3224  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
+
+Advantages:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with bows.
 - May learn to use Called Shots at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
@@ -1841,10 +1875,10 @@ Advantages:
 - 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
-- May not wear any metal armor.
+- May not wear any metal armor other than elven chain mail.
 - May reach a lower level of proficiency than normal with melee weapons.
 ~
-@3224  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
+@3225  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.
 
 Advantages:
 - +1 to hit and damage rolls with missiles weapon at levels 3, 6, 10, 15, and 21.
@@ -1863,39 +1897,38 @@ Advantages:
 - Available at 8th level: Faerie Fire: this shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.
 
 Restrictions:
-- May not wear any metal armor.
+- May not wear any metal armor other than elven chain mail.
 - May reach a lower level of proficiency than normal with melee weapons.
 - May not use Charm Animal ability.
 ~
-@3225  = ~ELVEN ARCHER: Elves show particular talent for the use of a bow. Those elves who are trained as elite archers display a prowess in ranged combat that is unmatched. Swift and lightly armored, they can use special Called Shots against enemies which are particularly devastating.~
 //
 //
 @3241  = ~slinger~
 @3242  = ~Slinger~
-@3243  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
+@3243  = ~The Slinger is the epitome of skill with the sling — the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon.
 
 Advantages:
-- +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
-- Can achieve Grand Mastery (+++++) with slings.
-- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
+- +1 to hit and damage rolls with any missile weapon every 3 levels.
+- May achieve Grand Mastery (5 slots) in slings.
+- May use the Called Shot ability once per day. Gains one use at level 4 and an additional use every 4 levels thereafter.
 
-- 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
-- 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
-- 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
-- 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
+CALLED SHOT: All successful ranged attacks within the next 10 seconds have the following cumulative effects besides normal damage, according to the level of the Archer:
+ 4th level: -1 penalty to target's THAC0.
+ 8th level: -1 penalty to target's Saving Throws vs. Spell.
+ 12th level: -1 penalty to the target's Strength score.
+ 16th level: +2 bonus to damage roll.
 
-Restrictions:
+Disadvantages:
 - May not wear any metal armor.
-- May reach a lower level of proficiency than normal with melee weapons.
-- May not cast druid spells.
+- May only become Proficient (one slot) with melee weapons.
+- May not use the Charm Animal ability.
 ~
 @3244  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
-- +1 to hit and damage rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
+- +1 to hit rolls with ranged weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
+- May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger learns the following Called Shots:
 
 - 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
 - 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
@@ -1910,9 +1943,9 @@ Restrictions:
 @3245  = ~The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
-- +1 to hit and damage rolls with missiles weapons at levels 3, 6, 10, 15, and 21.
+- +1 to hit rolls with missiles weapons at levels 3, 6, 10, 15, and 21.
 - Can achieve Grand Mastery (+++++) with slings.
-- May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use a Called Shot at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger may choose from among the following Called Shots:
 
 - Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
 - Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
@@ -1924,9 +1957,7 @@ Advantages:
 Restrictions:
 - May not wear any metal armor.
 - May reach a lower level of proficiency than normal with melee weapons.
-- May not cast druid spells.
 ~
-@3246  = ~The Slinger is the epitome of skill with the sling — the result of halflings' natural aptitude with bows as well as their single-minded dedication to training with the weapon.~
 //
 //
 @3503  = ~mage hunter~
@@ -2025,6 +2056,23 @@ Restrictions:
 @4102  = ~Sniper~
 @4103  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
 
+Advantages:
+- +1 to hit and damage rolls with any missile weapon every 3 levels.
+- May achieve Mastery (3 slots) in longbows, shortbows, and crossbows.
+- May use the Called Shot ability once per day. Gains one use at level 4 and an additional use every 4 levels thereafter.
+
+CALLED SHOT: All successful ranged attacks within the next 10 seconds have the following cumulative effects besides normal damage, according to the level of the Archer:
+ 4th level: -1 penalty to target's THAC0.
+ 8th level: -1 penalty to target's Saving Throws vs. Spell.
+ 12th level: -1 penalty to the target's Strength score.
+ 16th level: +2 bonus to damage roll.
+
+Disadvantages:
+- May only distribute 20 skill points per level among thieving skills.
+- Reduced backstab multiplier.
+~
+@4104  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
+
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.
 - Can achieve Mastery (+++) with bows and crossbows.
@@ -2041,7 +2089,7 @@ Restrictions:
 - May only distribute 20 skill points per level among thieving skills.
 - Reduced backstab multiplier.
 ~
-@4104  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
+@4105  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
 
 Abilities:
 - +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.
@@ -2061,7 +2109,6 @@ Restrictions:
 - May only distribute 20 skill points per level among thieving skills.
 - Reduced backstab multiplier.
 ~
-@4105  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.~
 @4106  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.~
 //
 //

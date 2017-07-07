@@ -108,7 +108,7 @@ SAY @3243
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@3246)
+			briefdesc = RESOLVE_STR_REF (@3243)
 		STR_VAR
 			kit_name = D5SLING
 			clswpbon = ~1 0 2~
@@ -184,7 +184,7 @@ ADD_KIT ~D5SLING~
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
 SAY @3241
 SAY @3242
-SAY @3244
+SAY @3243
 //___________________________________________________________________________________
 
 END
@@ -199,26 +199,67 @@ COPY ~might_and_guile/ranger/d5_hnosp.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_hnosp.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
-
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
-	INCLUDE ~might_and_guile/lib/archery_feats.tpa~
-END
 //___________________________________________________________________________________
 
 
-//NO FEATS___________________________________________________________________________
+//REVISED ARCHERY____________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
+  INCLUDE ~might_and_guile/lib/archery_feats.tpa~
+ END
  COPY_EXISTING ~d5_sling.2da~ ~override~
-  LPM remove_blank_lines
-  APPEND_FILE ~might_and_guile/ranger/slinger_shots.txt~
- BUT_ONLY
-END
-//___________________________________________________________________________________
+  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+  REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+ APPEND ~d5_sling.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
-//FEAT SYSTEM_________________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+  COPY_EXISTING ~d5_sling.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/ranger/slinger_shots.txt~
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+   COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+   COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+   COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
+	  END
+	END
+   BUT_ONLY
+  END
+ END
+
+ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   COPY_EXISTING ~d5_sling.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
@@ -264,6 +305,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   END
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/feats/dialog/d5_sling.baf~
   COMPILE ~might_and_guile/feats/dialog/d5_sling.d~
+ END
 END
 //___________________________________________________________________________________
 
@@ -338,6 +380,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
 END
 //___________________________________________________________________________________
 
+/*
 //DON'T USE SCROLLS/WANDS___________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
@@ -345,7 +388,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
 	APPEND ~d5_sling.2da~ ~ABILITY    AP_D5_RF83N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 END
 //__________________________________________________________________________________
-
+*/
 
 //REPLACE BASE RANGER WITH THIS KIT___________________________________________________
 //
@@ -354,7 +397,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ THEN BEGIN
 		COUNT_2DA_ROWS ~7~ "kit_row"
 	OUTER_SET kit_row -= 2
 	COPY_EXISTING ~K_R_HL.2da~ ~override~
-		REPLACE_TEXTUALLY ~0~ ~%kit_row%~
+		REPLACE_TEXTUALLY ~[ %TAB%]0~ ~%TAB%%kit_row%~
 	BUT_ONLY
 END
 //___________________________________________________________________________________

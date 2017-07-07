@@ -66,85 +66,15 @@ END
 //ACTION_IF ENGINE_IS ~tob~ BEGIN
 //  STRING_SET 25211 @2251
 //END
-//__________________________________________________________________________________
-
-
-//SPELL TABLES______________________________________________________________________
-//
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
-  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_spheres.d5~ THEN BEGIN
-	COPY ~might_and_guile/ranger/d5_staspl.d5~ ~override~
-	COPY ~might_and_guile/misc/mxsplra1.2da~ ~override/mxsplran.2da~
-	COPY_EXISTING ~clabrn01.2da~ ~override~
-				~clabrn02.2da~ ~override~
-				~clabrn03.2da~ ~override~
-				~clabrn04.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
-		BUT_ONLY
-	ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabrn05.2da~ THEN BEGIN
-	COPY_EXISTING ~clabrn05.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
-		BUT_ONLY
-	END
-  END
-  ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ THEN BEGIN
-	COPY ~might_and_guile/misc/mxsplra2.2da~ ~override/mxsplran.2da~
-	COPY_EXISTING ~clabrn01.2da~ ~override~
-				~clabrn02.2da~ ~override~
-//				~clabrn03.2da~ ~override~
-				~clabrn04.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
-		BUT_ONLY
-	ACTION_IF NOT FILE_EXISTS_IN_GAME ~clabrn05.2da~ THEN BEGIN
-	COPY_EXISTING ~clabrn05.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
-		BUT_ONLY
-	END
-  END
-END
-COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~9~ "rows"
-	FOR ( index = 22 ; index < rows ; index = index + 1 ) BEGIN
-		READ_2DA_ENTRY %index% 5 9 modclab
-		READ_2DA_ENTRY %index% 8 9 modclass
-		DEFINE_ASSOCIATIVE_ARRAY d5_ranspell_clabs BEGIN "%modclab%" => "%modclass%" END
-	END
-BUT_ONLY
-ACTION_PHP_EACH d5_ranspell_clabs AS moo => shoo BEGIN
-	ACTION_IF (%shoo% = 12) AND (FILE_EXISTS_IN_GAME ~%moo%.2da~) THEN BEGIN
-		ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_spheres.d5~ THEN BEGIN
-			COPY_EXISTING ~%moo%.2da~ ~override~
-				LPM remove_blank_lines
-				APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
-			BUT_ONLY
-		END
-		ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ THEN BEGIN
-			COPY_EXISTING ~%moo%.2da~ ~override~
-				LPM remove_blank_lines
-				APPEND_FILE ~might_and_guile/ranger/raspl2.txt~
-			BUT_ONLY
-		END
-	END
-END
 //____________________________________________________________________________________
 
 
 //2DA MODIFICATIONS___________________________________________________________________
-//COPY ~might_and_guile/ranger/d5_stlk2.2da~ ~override~
+//
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
-	BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~clabrn03.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
 	BUT_ONLY
 END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
@@ -152,14 +82,6 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
 	BUT_ONLY
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
-		COPY_EXISTING ~clabrn03.2da~ ~override~
-			LPM remove_blank_lines
-			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
-		BUT_ONLY
-	END
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~clabrn01.2da~) THEN BEGIN
 	COPY_EXISTING ~clabrn01.2da~ ~override~

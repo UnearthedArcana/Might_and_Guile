@@ -883,6 +883,9 @@ COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
 COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override~
 
+COPY_EXISTING ~scrlzz.itm~ ~override/d5scrlzz.itm~
+COPY_EXISTING ~scrlzy.itm~ ~override/d5scrlzy.itm~
+
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_SHORT 0x1c item_type
 /*
@@ -973,6 +976,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	WRITE_BYTE 0x20 (THIS BAND 0b10111111)
   END
 BUT_ONLY
+
+COPY_EXISTING ~d5scrlzz.itm~ ~override/scrlzz.itm~
+COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
 
 //	end use scrolls/wands
 

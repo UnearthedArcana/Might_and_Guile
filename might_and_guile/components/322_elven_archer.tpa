@@ -79,7 +79,7 @@ SAY @3223
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@3225)
+			briefdesc = RESOLVE_STR_REF (@3223)
 		STR_VAR
 			kit_name = D5EARCH
 			clswpbon = ~1 0 2~
@@ -94,10 +94,6 @@ COPY ~might_and_guile/ranger/d5_earch.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_parch.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
-
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
-	INCLUDE ~might_and_guile/lib/archery_feats.tpa~
-END
 //___________________________________________________________________________________
 
 
@@ -111,22 +107,22 @@ COPY_EXISTING ~K_R_E.2da~ ~override~
 BUT_ONLY
 //___________________________________________________________________________________
 
-//NO FEATS___________________________________________________________________________
-//
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
- COPY_EXISTING ~d5_earch.2da~ ~override~
-  LPM remove_blank_lines
-  APPEND_FILE ~might_and_guile/ranger/elven_archer_shots.txt~
- BUT_ONLY
-END
-//___________________________________________________________________________________
 
-//FEAT SYSTEM_________________________________________________________________________
+//REVISED ARCHERY____________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
+  INCLUDE ~might_and_guile/lib/archery_feats.tpa~
+ END
+ COPY_EXISTING ~d5_earch.2da~ ~override~
+  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+  REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+ APPEND ~d5_earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   COPY_EXISTING ~d5_earch.2da~ ~override~
 	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
+	APPEND_FILE ~might_and_guile/ranger/elven_archer_shots.txt~
   BUT_ONLY
   ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
    COPY_EXISTING ~clastext.2da~ ~override~
@@ -167,8 +163,55 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	END
    BUT_ONLY
   END
+ END
+
+ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+  COPY_EXISTING ~d5_earch.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+   COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+   COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
+	  END
+	END
+   BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+   COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
+	  END
+	END
+   BUT_ONLY
+  END
   EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/feats/dialog/d5_earch.baf~
   COMPILE ~might_and_guile/feats/dialog/d5_earch.d~
+ END
 END
 //___________________________________________________________________________________
 
@@ -223,7 +266,8 @@ END
 
 //FNP SHPERE ACCESS_________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_race.2da~ BEGIN
+ ACTION_IF NOT (FILE_CONTAINS_EVALUATED (~d5_race.2da~ ~%mod_clab%~)) BEGIN
   OUTER_SPRINT sphere_access @1002
   OUTER_SPRINT focus_access @1003
   OUTER_SPRINT major_access @1004
@@ -240,9 +284,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
   OUTER_TEXT_SPRINT total_sphere_list ~~
   LAM ~READ_FNP_KIT_INFO~
   INCLUDE ~%MOD_FOLDER%/lib/add_fnp_spheres.tpa~
+ END
 END
 //___________________________________________________________________________________
 
+/*
 //DON'T USE SCROLLS/WANDS___________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
@@ -250,7 +296,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
 	APPEND ~d5_earch.2da~ ~ABILITY    AP_D5_RF83N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 END
 //__________________________________________________________________________________
-
+*/
 
 //_______________________HLAS________________________________________________________
 //

@@ -114,6 +114,52 @@ BUT_ONLY
 COPY_EXISTING ~d5scrlzz.itm~ ~override/scrlzz.itm~
 COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
  
+	OUTER_SET store_match = 5 
+	ACTION_DEFINE_ASSOCIATIVE_ARRAY d5_buyable_items BEGIN
+	  13 => 0 	// food
+	END
+	OUTER_SET d5_scroll_store = 0
+	COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
+	  SET d5_scroll_store = 0
+	  READ_LONG 0x08 store_type
+	  READ_LONG 0x10 flags
+	  PATCH_IF ((store_type != store_match) AND ((flags & BIT1) = BIT1)) BEGIN 
+	    SET delta = 0
+	    READ_LONG 0x2c purch_off
+	    READ_LONG 0x30 purch_num
+	    FOR (index = 0 ; index < purch_num ; ++index) BEGIN
+	      READ_LONG (purch_off + (index * 0x04)) type
+	      DEFINE_ASSOCIATIVE_ARRAY d5_buyable_items BEGIN "%type%" => 1 END
+	      PATCH_IF type = 11 BEGIN
+			SET d5_scroll_store = 1
+		  END
+	    END
+	    FOR (index = 0 ; index < purch_num ; ++index) BEGIN
+	      PATCH_IF type = 13 BEGIN
+			SET d5_scroll_store = 0
+		  END
+	    END
+	    PATCH_IF (d5_scroll_store = 1) BEGIN
+		  PATCH_PHP_EACH cd_buyable_item_types AS item => val BEGIN
+			PATCH_IF val = 0 BEGIN
+			  SET delta += 1
+			  INSERT_BYTES purch_off 0x04
+			  WRITE_LONG   purch_off item
+			END ELSE BEGIN
+			  DEFINE_ASSOCIATIVE_ARRAY cd_buyable_item_types BEGIN "%item%" => 0 END
+			END
+		  END
+		  WRITE_LONG 0x30 (THIS + delta) 
+		  PATCH_FOR_EACH off IN 0x34 0x4c 0x70 BEGIN
+			READ_LONG off offset
+			PATCH_IF offset >= purch_off BEGIN
+			  WRITE_LONG off (THIS + (delta * 0x04))
+			END
+		  END
+		END
+	  END
+	BUT_ONLY
+
  ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
 	COPY_EXISTING ~clabth01.2da~ ~override~
 		LPM remove_blank_lines
@@ -2283,10 +2329,10 @@ END
 //
 COPY ~might_and_guile/bardsong/bdhelm11.itm~ ~override~
 	SAY IDENTIFIED_DESC @21900
-COPY ~might_and_guile/bardsong/d5bdh11a.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5bdh11.spl~ ~override~
 	SAY NAME1 @7
-COPY ~might_and_guile/bardsong/d5bdh11x.spl~ ~override~
-	SAY NAME1 @7
+COPY ~might_and_guile/bardsong/d5bdh11.eff~ ~override~
+//	SAY NAME1 @7
 //___________________________________________________________________________________
 
 
@@ -2445,6 +2491,13 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
   COPY ~might_and_guile/profs/d5_wepfo.cre~ ~override~
   COMPILE ~might_and_guile/profs/d5_wepfo.baf~
   COMPILE ~might_and_guile/profs/d5_wepfo.d~
+
+  ACTION_IF GAME_IS ~iwdee~ BEGIN
+	COPY_EXISTING ~d5_wepfo.dlg~ ~override~
+	  DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY ~PROFICIENCYCLUB~ ~EXTRAPROFICIENCY1~
+	  END
+  END
 
   APPEND ~splprot.2da~ ~D5_INT_GTEQ%TAB%38%TAB%-1%TAB%4~
 

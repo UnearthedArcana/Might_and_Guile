@@ -14,6 +14,7 @@ SAY @20009
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_rogue_36
  IF ~GlobalGT("D5_DTRAP","LOCALS",0) GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FTRAP","LOCALS",3)~ THEN REPLY @20115 GOTO d5_rogue_23
  IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_rogue_41
+ IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_rogue_43
  IF ~GlobalGT("D5_EVADE","LOCALS",0) GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_rogue_45
  IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_rogue_51
  IF ~GlobalLT("D5_RTHAC0","LOCALS",2)~ THEN REPLY @20233 GOTO d5_rogue_52
@@ -110,6 +111,11 @@ IF ~~ THEN BEGIN d5_rogue_41 // AC bonus
  SAY @20202
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_rogue 
+END 
+IF ~~ THEN BEGIN d5_rogue_43 // artful dodging (iwdee evasion)
+ SAY @20224
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_rogue
 END 
 IF ~~ THEN BEGIN d5_rogue_45 // save bonus
  SAY @20212

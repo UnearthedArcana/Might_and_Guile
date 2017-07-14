@@ -12,7 +12,7 @@ SAY @20009 // ~Choose a feat:~
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_corsa_74
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_corsa_16
  IF ~GlobalLT("D5_EVADE","LOCALS",3)~ THEN REPLY @20201 GOTO d5_corsa_41
- IF ~GlobalLT("D5_ESCAPE","LOCALS",1)~ THEN REPLY @20221 GOTO d5_corsa_42
+ IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_corsa_43
  IF ~GlobalLT("D5_ATTACK","LOCALS",3)~ THEN REPLY @20231 GOTO d5_corsa_51
  IF ~GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_corsa_58
  IF ~GlobalLT("D5_GASOIL","LOCALS",1)~ THEN REPLY @20271 GOTO d5_corsa_81
@@ -70,10 +70,10 @@ IF ~~ THEN BEGIN d5_corsa_41 // AC bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
-IF ~~ THEN BEGIN d5_corsa_42 // escape artist
- SAY @20222
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DTRAP","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD2",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_corsa 
+IF ~~ THEN BEGIN d5_corsa_43 // artful dodging (iwdee evasion)
+ SAY @20224
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_corsa
 END 
 IF ~~ THEN BEGIN d5_corsa_51 // melee thac0 bonus
  SAY @20232

@@ -210,16 +210,21 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
 END
 //__________________________________________________________________________________
 
+
+/*
+	WHAT WAS THE PURPOSE OF THIS???
 //FIX BARB USABILITY__________________________________________________________________
 //
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_BYTE 0x1f "use"
-		READ_BYTE 0x29 "kit"
-		PATCH_IF ((("%kit%" BAND 0b01000000) = 0b01000000) AND 
-				(("%use%" BAND 0b00001000) = 0b00001000)) THEN BEGIN
-			WRITE_BYTE 0x29 ("%kit%" BAND 0b10111111) 
+		READ_BYTE 0x1f class
+		READ_BYTE 0x29 kit
+		PATCH_IF (%kit% BAND 0b01000000 = 0b01000000) BEGIN
+			PATCH_IF (%class% BAND 0b00001000 = 0b00001000) BEGIN
+				WRITE_BYTE 0x29 (%kit% BAND 0b10111111) 
+			END
 		END
 	END
-BUT_ONLY_IF_IT_CHANGES
+BUT_ONLY
 //____________________________________________________________________________________
+*/

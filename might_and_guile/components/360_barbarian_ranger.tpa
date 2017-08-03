@@ -124,6 +124,72 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+
+//DEFINE SPHERE ACCESS______________________________________________________________
+//
+ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 1 rows
+	READ_2DA_ENTRY (%rows% - 1) 5 1 mod_clab
+BUT_ONLY
+
+LAF ~DEFINE_FNP_KIT_INFO~
+  INT_VAR
+	u_leather_armor 	= 1
+	u_chain_armor 		= 1
+	u_plate_armor 		= 0
+	u_basic_weapons 	= 2
+	u_mace_hammer 		= 2
+	u_flails 			= 2
+	u_axes 				= 2
+	u_medium_swords 	= 2
+	u_curved_swords 	= 0
+	u_large_blades 		= 2
+	u_spears 			= 2
+	u_darts 			= 0
+	u_bows 				= 2
+	u_crossbows 		= 0  
+  STR_VAR
+    clab_name 	= EVAL ~%mod_clab%~
+	class 			= ~scout~
+	s_Life 			= ~ranger~
+	s_Death 		= ~x~
+	s_Benediction 	= ~x~
+	s_Destruction 	= ~x~
+	s_Protection 	= ~x~
+	s_War 			= ~x~
+	s_Exploration   = ~ranger~
+	s_Knowledge 	= ~x~
+	s_Deception 	= ~x~
+	s_Thought 		= ~x~
+	s_Dread 		= ~x~
+	s_Vigor 		= ~ranger~
+	s_Affliction 	= ~x~
+	s_Animal 		= ~x~
+	s_Plant 		= ~x~
+	s_Earth 		= ~x~
+	s_Water 		= ~x~
+	s_Air 			= ~x~
+	s_Fire 			= ~x~
+	s_Light 		= ~x~
+	s_Shadow 		= ~x~
+	s_Magic 		= ~x~
+	s_Perdition     = ~x~
+END
+
+LAM ~READ_FNP_KIT_INFO~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+  LAM apply_fnp_spheres
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+  LAM apply_fnp_usability
+END
+//__________________________________________________________________________________
+
+
 //DON'T USE SCROLLS/WANDS___________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN

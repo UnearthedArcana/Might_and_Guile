@@ -28,6 +28,12 @@ COPY_EXISTING ~scrlzy.itm~ ~override/d5scrlzy.itm~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_SHORT 0x1c item_type
+/*
+  PATCH_IF item_type = 9 BEGIN					//		make ALL potions usable by thieves
+	WRITE_BYTE 0x1f (THIS BAND 0b11111101)
+	WRITE_BYTE 0x20 (THIS BAND 0b10110100)
+  END
+*/
   PATCH_IF item_type = 11 BEGIN 				//		make green scrolls into "food"
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
@@ -93,10 +99,29 @@ ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
 	BUT_ONLY
   END
 END
-ACTION_FOR_EACH case IN ~bag03~ ~bag03b~ ~bag03c~ ~bag03d~ ~bag03e~ ~bag03f~ ~bag03g~ ~bag03h~ ~bag03i~ BEGIN
-  ACTION_IF FILE_EXISTS_IN_GAME ~%case%.sto~ BEGIN
-	COPY_EXISTING ~%case%.sto~ ~override~
-	  WRITE_LONG 0x9c 13
+ACTION_FOR_EACH scroll_case IN ~bag03~ ~bag03b~ ~bag03c~ ~bag03d~ ~bag03e~ ~bag03f~ ~bag03g~ ~bag03h~ ~bag03i~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%scroll_case%.sto~ BEGIN
+	COPY_EXISTING ~%scroll_case%.sto~ ~override~
+	  READ_LONG 0x9c thing_1
+	  READ_LONG 0xa0 thing_2
+	  PATCH_IF (%thing_1% = 37) BEGIN
+		WRITE_LONG 0x9c 13
+	  END
+	  PATCH_IF (%thing_2% = 37) BEGIN
+		WRITE_LONG 0xa0 13
+	  END
+/*
+	  READ_LONG 0x2c purchased_offset
+	  READ_LONG 0x30 purchased_num
+	  WHILE (%purchased_num% > 0) BEGIN
+		SET purchased_num = %purchased_num% - 1
+		READ_LONG (%purchased_offset% + (0x04 * %purchased_num%)) thing_1
+		PATCH_IF (%thing_1% = 37)
+		  WRITE_LONG (%purchased_offset% + (0x04 * %purchased_num%)) 13
+		END
+	  END
+*/
+	BUT_ONLY
   END
 END
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
@@ -111,10 +136,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
 BUT_ONLY
 
-COPY_EXISTING ~d5scrlzz.itm~ ~override/scrlzz.itm~
-COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
- 
-	OUTER_SET store_match = 5 
+/*	
+this isn't working... vv
+//	OUTER_SET store_match = 5 
 	ACTION_DEFINE_ASSOCIATIVE_ARRAY d5_buyable_items BEGIN
 	  13 => 0 	// food
 	END
@@ -123,7 +147,8 @@ COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
 	  SET d5_scroll_store = 0
 	  READ_LONG 0x08 store_type
 	  READ_LONG 0x10 flags
-	  PATCH_IF ((store_type != store_match) AND ((flags & BIT1) = BIT1)) BEGIN 
+//	  PATCH_IF ((store_type != store_match) AND ((flags & BIT1) = BIT1)) BEGIN 
+	  PATCH_IF ((flags & BIT1) = BIT1) BEGIN 
 	    SET delta = 0
 	    READ_LONG 0x2c purch_off
 	    READ_LONG 0x30 purch_num
@@ -159,6 +184,10 @@ COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
 		END
 	  END
 	BUT_ONLY
+*/
+
+COPY_EXISTING ~d5scrlzz.itm~ ~override/scrlzz.itm~
+COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
 
  ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
 	COPY_EXISTING ~clabth01.2da~ ~override~

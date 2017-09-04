@@ -357,8 +357,8 @@ This allows the use of any one of the following five abilities:
 ~
 @20291  = ~Use Wands~
 @20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
-@20293  = ~Use Scrolls~
-@20294  = ~Use Scrolls: this ability allows the rogue to cast spells from scrolls, as if a wizard.~
+@20293  = ~Use Magical Devices~
+@20294  = ~Use Magical Devices: this ability allows the rogue to cast magic from wands and scrolls, just like a wizard or bard.~
 @20301  = ~Lore Bonus~
 @20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to Lore.~
 @20303  = ~Luck Bonus~
@@ -825,11 +825,11 @@ Abilities:
 - From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.
 - May learn to manifest other bardic aura effects.
 - Receivies a +1 bonus to saves vs. death for each 6 levels of experience.
-- May use magical wands as a wizard can.
 
 Restrictions:
 - Has the same hit dice as a cleric.
 - Limited to Specialization (++) with all weapons.
+- May not dual-class to mage.
 ~
 @21831  = ~hexblade~
 @21832  = ~Hexblade~
@@ -838,12 +838,13 @@ Restrictions:
 Abilities:
 - May use an Cursed Aura, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
 - From 6th level, may use an Aura of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
-- May learn to manifest other bardic aura effects.
+- May learn to manifest other bardic auras.
 - May use arcane wands and cast spells from scrolls.
 
 Restrictions:
 - Has the same hit dice as a cleric.
 - Limited to Specialization (++) with all weapons.
+- May not dual-class to mage.
 ~
 @21841  = ~skald~
 @21842  = ~Skald~
@@ -869,11 +870,13 @@ Abilities:
 - From 6th level, may use a Mind Blank Aura, which causes the Jinxer's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
 - May learn to manifest other bardic aura effects.
 - May cast Greater Malison as an innate ability once per day.
+- May use arcane wands and scrolls.
 
 Restrictions:
 - May only allocate 15 thief skill points per level.
 - Backstab multiplier is one level lower than most thieves.
 - May not gain the Set Traps ability.
+- May not dual-class to mage.
 ~
 @21861  = ~herald~
 @21862  = ~Herald~
@@ -891,6 +894,7 @@ Restrictions:
 - May only allocate 15 thief skill points per level.
 - Backstab multiplier is limited to x3.
 - May not use the Stealth ability.
+- May not dual-class to mage.
 ~
 @21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
 
@@ -2531,3 +2535,169 @@ Using this Tome will allow the reader to engage in a career as a Ranger/Thief.
 
 [WARNING: activation of this item cannot be reversed. Save before doing so.]
 ~
+@5410  = ~spellbender~
+@5411  = ~Spellbender~
+@5412  = ~SPELLBENDER: The goddess Mystra rules all magic, and mandates that spellcasters must formulate known spells, and must memorize the patterns of those spells in order to successfully release them. But as with any system, the are gaps and shortcuts that may be used to circumvent the rules. Sorcerers are born with the ability to shape magic directly, though only into a limited number of effects; and wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects. Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics as well as studying arcane magery, they learn to manipulate the intersection of those two areas of magic. 
+
+Abilities:
+- Spellbenders may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. 
+
+Restrictions:
+- None
+~
+@5413  = ~Spellbender's Studies~
+@5414  = ~The goddess Mystra rules the fabled Weave of Faerun, the ethereal conduit that allows mortals to shape magical energies into spells and effects. In order to avoid disasters like that which befell Anauroch, Mystra ensures that the use of those energies is strictly controlled: spellcasters must formulate the Weave into specific, known spells, and must memorize the patterns of those spells in order to successfully release them.
+
+But, as with any rigid system, the are gaps and shortcuts that may be used to circumvent Mystra's rules. Sorcerers are born with the ability to focus the Weave directly, though only into a limited number of effects. Wild mages shape spells without discipline, achieving powerful results at the risk of disastrous side-effects.
+
+Unlike those classes, Spellbenders make a science of mapping the ways to bypass Mystra's restrictions. Practicing as generalist clerics and studying arcane magery, they learn to manipulate the intersection of those two areas of magic. They may sacrifice a memorized wizard spell to instead create one of numerous divine effects; and they may sacrifice a memorized cleric spell to create an arcane effect. Some energy is lost in the translation - the improvisational effects must be spells of lower level than the one sacrificed. (It is unknown what happens to the lost energy - some believe this practice has contributed to the recent rise of wild magic and sorcerers. Spellbenders must be wary, as they are apt to be persecuted by Mystra's Monitors.)
+
+While Spellbenders are not as powerful one-to-one as a Sorcerer or Wild Mage or Monitor, the studious application of their knowledge gives them precise control over the Weave that is unmatched by any other spellcaster.
+
+The secrets contained in this tome may enable the owner to learn the skills and abilities of a Spellbender.
+
+[WARNING: activation of this item cannot be reversed. Save before doing so.]~
+@5415  = ~Arcane Weaving I~
+@5416  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Spook
+- Shield
+- Reflected Image
+- Grease
+- Sleep
+- Chromatic Orb
+- Burning Hands
+- Magic Missile~
+@5417  = ~Arcane Weaving II~
+@5418  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Vocalize
+- Blur
+- Invisibility
+- Horror
+- Web
+- Glitterdust
+- Acid Arrow
+- Knock~
+@5419  = ~Arcane Weaving III~
+@5420  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Dispel Magic
+- Detect Illusion
+- Ghost Armor
+- Protection from Missiles
+- Haste
+- Dire Charm
+- Lightning Bolt
+- Fireball~
+@5421  = ~Arcane Weaving IV~
+@5422  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Minor Globe
+- Stoneskin
+- Polymorph Self
+- Improved Invisibility
+- Secret Word
+- Greater Malison
+- Confusion
+- Ice Storm~
+@5423  = ~Arcane Weaving V~
+@5424  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Oracle
+- Shadow Door
+- Minor Turning
+- Phantom Blade
+- Domination
+- Breach
+- Hold Monster
+- Cloudkill~
+@5425  = ~Arcane Weaving VI~
+@5426  = ~Arcane Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Globe of Invulnerability
+- Spell Deflection
+- Protection from Energy
+- Mislead
+- Tenser's Transformation
+- Pierce Magic
+- Improved Haste
+- Chain Lightning~
+@5427  = ~Divine Weaving I~
+@5428  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Cure Light Wounds
+- Bless
+- Remove Fear
+- Protection from Evil
+- Armor of Faith
+- Sanctuary
+- Command
+- Magic Stone~
+@5429  = ~Divine Weaving II~
+@5430  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Find Traps
+- Chant
+- Resist Fire and Cold
+- Slow Poison
+- Draw Upon Holy Might
+- Silence
+- Hold Person
+- Spiritual Hammer~
+@5431  = ~Divine Weaving III~
+@5432  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Cure Medium Wounds
+- Remove Curse
+- Cure Disease
+- Remove Paralysis
+- Dispel Magic
+- Invisibility Purge
+- Strength of One
+- Holy Smite~
+@5433  = ~Divine Weaving IV~
+@5434  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Cure Serious Wounds
+- Lesser Restoration
+- Protection from Evil 10' Radius
+- Defensive Harmony
+- Death Ward
+- Protection from Lightning
+- Free Action
+- Holy Power~
+@5435  = ~Divine Weaving V~
+@5436  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Cure Critical Wounds
+- Mass Cure
+- Chaotic Commands
+- Magic Resistance
+- Righteous Magic
+- Greater Command
+- Repulse Undead
+- Flame Strike~
+@5437  = ~Divine Weaving VI~
+@5438  = ~Divine Weaving
+
+This magic will allow the Spellbender to cast one of the following spells:
+- Heal
+- Wondrous Recall
+- Aerial Servant
+- Physical mirror
+- Blade Barrier
+- Sol's Searing Orb
+- False Dawn
+- Bolt of Glory~

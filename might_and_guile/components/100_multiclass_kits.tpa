@@ -1245,3 +1245,292 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
 END
 //____________________________________________________________________________________
 
+
+
+//ADD SPELLBENDER_____________________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_bendr.2da~ BEGIN
+
+ADD_KIT ~D5BENDR~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5BENDR       0 0 0 0 0 0 0 0~
+~D5BENDR       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5BENDR           0   0   0   14  13  0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5BENDR           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5BENDR           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5BENDR           0   0   0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5BENDR           0  0  0  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5BENDR           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/mc/d5_bendr.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000400 14~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Ma0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @5410
+SAY @5411
+SAY @5412
+//__________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@5412)
+		STR_VAR
+			kit_name = D5BENDR
+			clswpbon = ~0 0 3~
+	END
+END
+//____________________________________________________________________________________
+
+//SPELLBENDER ABILITY FILES___________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_bendr.2da~ ~override~
+COPY ~might_and_guile/mc/d5_bendr.itm~ ~override~
+	SAY NAME1 @5413
+	SAY NAME2 @5413
+	SAY UNIDENTIFIED_DESC @5414
+	SAY IDENTIFIED_DESC @5414
+COPY ~might_and_guile/mc/d5_bendr.spl~ ~override~
+	SAY NAME1 @9
+COPY ~might_and_guile/mc/d5_bendr.cre~ ~override~
+COMPILE ~might_and_guile/mc/d5_bendr.baf~
+//Huge thanks to DreamSlaveOne at forums.gibberlings3.net for providing the .BAMs for the Spellbender's abilities!
+COPY ~might_and_guile/mc/d5arcm1.spl~ ~override~
+	SAY NAME1 @5415
+	SAY UNIDENTIFIED_DESC @5416
+COPY ~might_and_guile/mc/d5_arcm1.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc1b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc1c.bam~ ~override~
+COPY ~might_and_guile/mc/d5arcm2.spl~ ~override~
+	SAY NAME1 @5417
+	SAY UNIDENTIFIED_DESC @5418
+COPY ~might_and_guile/mc/d5_arcm2.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc2b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc2c.bam~ ~override~
+COPY ~might_and_guile/mc/d5arcm3.spl~ ~override~
+	SAY NAME1 @5419
+	SAY UNIDENTIFIED_DESC @5420
+COPY ~might_and_guile/mc/d5_arcm3.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc3b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc3c.bam~ ~override~
+COPY ~might_and_guile/mc/d5arcm4.spl~ ~override~
+	SAY NAME1 @5421
+	SAY UNIDENTIFIED_DESC @5422
+COPY ~might_and_guile/mc/d5_arcm4.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc4b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc4c.bam~ ~override~
+COPY ~might_and_guile/mc/d5arcm5.spl~ ~override~
+	SAY NAME1 @5423
+	SAY UNIDENTIFIED_DESC @5424
+COPY ~might_and_guile/mc/d5_arcm5.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc5b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc5c.bam~ ~override~
+COPY ~might_and_guile/mc/d5arcm6.spl~ ~override~
+	SAY NAME1 @5425
+	SAY UNIDENTIFIED_DESC @5426
+COPY ~might_and_guile/mc/d5_arcm6.2da~ ~override~
+COPY ~might_and_guile/mc/d5_arc6b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_arc6c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm1.spl~ ~override~
+	SAY NAME1 @5427
+	SAY UNIDENTIFIED_DESC @5428
+COPY ~might_and_guile/mc/d5_divm1.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div1b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div1c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm2.spl~ ~override~
+	SAY NAME1 @5429
+	SAY UNIDENTIFIED_DESC @5430
+COPY ~might_and_guile/mc/d5_divm2.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div2b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div2c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm3.spl~ ~override~
+	SAY NAME1 @5431
+	SAY UNIDENTIFIED_DESC @5432
+COPY ~might_and_guile/mc/d5_divm3.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div3b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div3c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm4.spl~ ~override~
+	SAY NAME1 @5433
+	SAY UNIDENTIFIED_DESC @5434
+COPY ~might_and_guile/mc/d5_divm4.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div4b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div4c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm5.spl~ ~override~
+	SAY NAME1 @5435
+	SAY UNIDENTIFIED_DESC @5436
+COPY ~might_and_guile/mc/d5_divm5.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div5b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div5c.bam~ ~override~
+COPY ~might_and_guile/mc/d5divm6.spl~ ~override~
+	SAY NAME1 @5437
+	SAY UNIDENTIFIED_DESC @5438
+COPY ~might_and_guile/mc/d5_divm6.2da~ ~override~
+COPY ~might_and_guile/mc/d5_div6b.bam~ ~override~
+COPY ~might_and_guile/mc/d5_div6c.bam~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_bendr.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
+	BUT_ONLY
+END
+//___________________________________________________________________________________
+
+//MULTICLASS KIT______________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_bendr.2da~ BEGIN
+  LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5BENDR~
+		kit_clab = ~d5_bendr~
+		base_class = ~P~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+  END
+END 
+//___________________________________________________________________________________
+
+//DEFINE SPHERE ACCESS______________________________________________________________
+//
+ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
+
+LAF ~DEFINE_FNP_KIT_INFO~
+  INT_VAR
+// put a '1' next to the types of armor usable by the kit
+// put a number from '1' to '5' next to the weapons the kit can use
+// the number will determine the kit's proficiency limits with those weapons
+	u_leather_armor 	= 1
+	u_chain_armor 		= 0
+	u_plate_armor 		= 0
+	u_club_staff	 	= 1
+	u_hammers	 		= 0
+	u_maces 	 		= 1
+	u_flails 			= 0
+	u_axes 				= 0
+	u_daggers 			= 1
+	u_short_swords		= 1
+	u_long_swords		= 0
+	u_scimitars 		= 0
+	u_katanas 			= 0
+	u_bastard_swords 	= 0
+	u_2hand_swords 		= 0
+	u_halberds 			= 0
+	u_spears 	 		= 0
+	u_darts 			= 1
+	u_slings	 		= 1
+	u_bows 				= 0
+	u_crossbows 		= 1
+  STR_VAR
+// for class, enter 'cleric' 'acolyte' 'druid' 'mystic' 'occultist' 'champion' 'zealot' 'ranger' or 'scout'
+// if multiclass, enter 'fighter_cleric' 'cleric_mage' 'cleric_thief' 'ranger_cleric' or 'fighter_mystic'
+// for selected spheres, enter 'focus' 'major' 'minor' 'paladin' or 'ranger'
+    clab_name 	= EVAL ~d5_bendr~
+	class 			= ~cleric_mage~
+	s_Life 			= ~major~
+	s_Death 		= ~x~
+	s_Benediction 	= ~major~
+	s_Destruction 	= ~major~
+	s_Protection 	= ~major~
+	s_War 			= ~x~
+	s_Exploration   = ~minor~
+	s_Knowledge 	= ~major~
+	s_Deception 	= ~minor~
+	s_Thought 		= ~minor~
+	s_Dread 		= ~minor~
+	s_Vigor 		= ~minor~
+	s_Affliction 	= ~x~
+	s_Animal 		= ~x~
+	s_Plant 		= ~x~
+	s_Earth 		= ~x~
+	s_Water 		= ~x~
+	s_Air 			= ~x~
+	s_Fire 			= ~minor~
+	s_Light 		= ~major~
+	s_Shadow 		= ~minor~
+	s_Magic 		= ~focus~
+	s_Perdition     = ~x~
+END
+
+LAM ~READ_FNP_KIT_INFO~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+  LAM apply_fnp_spheres
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+  LAM apply_fnp_usability
+END
+//__________________________________________________________________________________
+
+//ADD KIT ITEMS______________________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
+	COPY_EXISTING ~tem2601.sto~ ~override~
+		ADD_STORE_ITEM ~d5_bendr~ #0 #0 #0 ~identified~ #1
+	BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~shop08.sto~)THEN BEGIN
+	COPY_EXISTING ~shop08.sto~ ~override~
+		ADD_STORE_ITEM ~d5_bendr~ #0 #0 #0 ~identified~ #1
+	BUT_ONLY
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~kuoswald.sto~) THEN BEGIN
+	COPY_EXISTING ~kuoswald.sto~ ~override~
+		ADD_STORE_ITEM ~d5_bendr~ #0 #0 #0 ~identified~ #1
+	BUT_ONLY
+	COPY_EXISTING ~ehpomab.sto~ ~override~
+		ADD_STORE_ITEM ~d5_bendr~ #0 #0 #0 ~identified~ #1
+	BUT_ONLY
+  END
+END
+//____________________________________________________________________________________
+
+END

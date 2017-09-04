@@ -17,7 +17,6 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_alchm
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_HULK","LOCALS",1)~ THEN REPLY @20171 GOTO d5_alchm_12
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_alchm_13
  IF ~GlobalLT("D5_ILLUSION","LOCALS",2) CheckStatGT(myself,14,INT) CheckStatGT(myself,9,LEVEL)~ THEN REPLY @20283 GOTO d5_alchm_15
- IF ~GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20291 GOTO d5_alchm_16
  IF ~GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20293 GOTO d5_alchm_17
 END
 
@@ -94,11 +93,6 @@ END
 IF ~~ THEN BEGIN d5_alchm_15 // illusion magic
  SAY @20284
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_ILLUSION","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH6",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_alchm 
-END 
-IF ~~ THEN BEGIN d5_alchm_16 // use wands
- SAY @20292
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RWANDS","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH3",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_alchm 
 END 
 IF ~~ THEN BEGIN d5_alchm_17 // use scrolls

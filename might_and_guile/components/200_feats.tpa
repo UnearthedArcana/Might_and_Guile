@@ -1000,6 +1000,7 @@ COPY ~might_and_guile/feats/d5illp5a.eff~ ~override~
 
 //use scrolls/wands_________________________________________________________________
 //
+/*
 COPY ~might_and_guile/feats/d5_rfh3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh3.spl~ ~override~   //           use wands
 	SAY NAME1 @20291
@@ -1008,9 +1009,10 @@ COPY ~might_and_guile/feats/d5_rfh3.spl~ ~override~   //           use wands
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh3~ END
 COPY ~might_and_guile/feats/d5_nwand.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf83n.eff~ ~override~
+*/
 
 COPY ~might_and_guile/feats/d5_rfh4.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           use scrolls
+COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           UMD
 	SAY NAME1 @20293
 	SAY UNIDENTIFIED_DESC @20294
 	WRITE_ASCII 0x3a ~d5_rfh4~ #8
@@ -1024,21 +1026,21 @@ COPY_EXISTING ~scrlzy.itm~ ~override/d5scrlzy.itm~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_SHORT 0x1c item_type
 /*
-  PATCH_IF item_type = 9 BEGIN					//		make ALL potions usable by thieves
+  PATCH_IF item_type = 9 BEGIN						//		make ALL potions usable by thieves
 	WRITE_BYTE 0x1f (THIS BAND 0b11111101)
 	WRITE_BYTE 0x20 (THIS BAND 0b10110100)
   END
 */
-  PATCH_IF item_type = 11 BEGIN 				//		make green scrolls into "food"
+  PATCH_IF item_type = 11 BEGIN 					//		make green scrolls into "wands"
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-	  WRITE_SHORT 0x1c 13
+	  WRITE_SHORT 0x1c 35
 	END
   END
-  PATCH_IF item_type = 35 BEGIN 				//		make general-use wands into "misc"
+  PATCH_IF item_type = 35 BEGIN 					//		make non-general-use wands into "scrolls"
 	READ_BYTE 0x20 thief_use
-	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-	  WRITE_SHORT 0x1c 0
+	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
+	  WRITE_SHORT 0x1c 11
 	END
   END
 BUT_ONLY
@@ -1100,10 +1102,10 @@ ACTION_FOR_EACH scroll_case IN ~bag03~ ~bag03b~ ~bag03c~ ~bag03d~ ~bag03e~ ~bag0
 	  READ_LONG 0x9c thing_1
 	  READ_LONG 0xa0 thing_2
 	  PATCH_IF (%thing_1% = 37) BEGIN
-		WRITE_LONG 0x9c 13
+		WRITE_LONG 0x9c 35
 	  END
 	  PATCH_IF (%thing_2% = 37) BEGIN
-		WRITE_LONG 0xa0 13
+		WRITE_LONG 0xa0 35
 	  END
 /*
 	  READ_LONG 0x2c purchased_offset
@@ -1211,8 +1213,8 @@ COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			offensive tactics
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tacto~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf02~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf03~ END
+COPY ~might_and_guile/feats/d5_wf12.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
-COPY ~might_and_guile/feats/d5_wf12b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5tactd.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wf03.spl~ ~override~
@@ -1226,8 +1228,8 @@ COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~		//			defensive tactics
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tactd~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf03~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf02~ END
+COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
-COPY ~might_and_guile/feats/d5_wf13b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5post.bam~ ~override~
 
@@ -1449,7 +1451,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
 		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/feats/feats_trueclass.txt~
-		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+//		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
 		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
 	BUT_ONLY
 END
@@ -1510,7 +1512,7 @@ ACTION_FOR_EACH mageclab IN ~clabma01~ ~clabma02~ ~clabma03~ ~clabma04~ ~clabma0
 END
 COPY_EXISTING ~clabma01.2da~ ~override~
 	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/use_wands.txt~
+//	APPEND_FILE ~might_and_guile/feats/use_wands.txt~
 	APPEND_FILE ~might_and_guile/feats/use_scrolls.txt~
 BUT_ONLY
 
@@ -1518,7 +1520,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ BEGIN
 	COPY_EXISTING ~clabfi01.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/feats/feats_fighter.txt~
-		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+//		APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
 		APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
 	BUT_ONLY
 END
@@ -1543,19 +1545,19 @@ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
 		COPY_EXISTING ~%bo%.2da~ ~override~
 			LPM remove_blank_lines
 			REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
-			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+//			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
 			APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
 	END
 	ACTION_IF (%zo% = 2) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
 		COPY_EXISTING ~%bo%.2da~ ~override~
 			LPM remove_blank_lines
-			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
+//			APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
 			APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
 	END
 	ACTION_IF (%zo% = 1) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN
 		COPY_EXISTING ~%bo%.2da~ ~override~
 			LPM remove_blank_lines
-			APPEND_FILE ~might_and_guile/feats/use_wands.txt~
+//			APPEND_FILE ~might_and_guile/feats/use_wands.txt~
 			APPEND_FILE ~might_and_guile/feats/use_scrolls.txt~
 	END
 //	ACTION_IF (%zo% = 12) AND (FILE_EXISTS_IN_GAME ~%bo%.2da~) BEGIN

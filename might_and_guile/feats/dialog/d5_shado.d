@@ -17,7 +17,6 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_shado
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_shado_15
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_shado_16
  IF ~GlobalLT("D5_SHADOW","LOCALS",5)~ THEN REPLY @2755 GOTO d5_shado_18
- IF ~GlobalLT("D5_RWANDS","LOCALS",1) CheckStatGT(myself,11,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20291 GOTO d5_shado_19
  IF ~GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20293 GOTO d5_shado_20
 END
 
@@ -94,11 +93,6 @@ END
 IF ~~ THEN BEGIN d5_shado_18 // shadow magic
  SAY @2756
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SHADOW","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH5",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_shado 
-END 
-IF ~~ THEN BEGIN d5_shado_19 // use wands
- SAY @20292
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RWANDS","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH3",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_shado 
 END 
 IF ~~ THEN BEGIN d5_shado_20 // use scrolls

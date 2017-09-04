@@ -1,4 +1,4 @@
-BEGIN ~D5_HERALD~
+BEGIN ~D5_HRLD~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_herald
  SAY @20009 // ~Choose a feat:~

@@ -6,7 +6,7 @@ THEN
 	RESPONSE #100
 	SetGlobal("D5_FEAT","GLOBAL",1)
 	SetNumTimesTalkedTo(1)
-	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_herald",Myself))
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_hrld",Myself))
 END
 
 IF

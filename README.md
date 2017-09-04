@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.6 </strong><br />
+  <p><strong> Version 3.6.3 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -79,7 +79,9 @@
         <p>ELVEN BLADESINGER: Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat.  They master the use of long blades wielded in one hand, keeping the other free for spellcasting.</p>
         <p>Abilities:<br />
           &ndash; Bladesingers begin at level 1 with proficiency in Single-Weapon Style.  At level 7, this automatically increases to specialization.  They may reach grandmastery with long swords, scimitars, and katanas.<br />
-          &ndash; Once per day per 6 levels, a bladesinger may perform the Bladesong, a dance in which <PRO_HESHE> whirls a blade faster than the eye can follow, blocking incoming attacks and devastating enemies.  Upon beginning the Bladesong, for 24 seconds, the bladesinger has a +1 bonus to thac0 per 5 levels, a -2 bonus to AC vs. melee attacks per five levels, one extra attack per round, faster movement rate, and all successful attacks do maximum damage.<br />
+          &ndash; Once per day per 4 levels, a bladesinger may perform the Bladesong, a dance-like series of maneuvers in which a blade is spun and whirled faster than the eye can follow, blocking incoming attacks and devastating enemies.<br />
+        <p>BLADESONG:<br />
+Upon performing the Bladesong, for 30 seconds, the Bladesinger has a -2 bonus to AC vs. melee attacks, a -2 bonus to weapon speed, and faster movement rate. Further, the Bladesinger's weapon resonates with immense energy, which is discharged in the form of 1d4 sonic (crushing) damage upon each successful hit.</p>
         <p>Restrictions:<br />
           &ndash; Bladesingers may only reach basic proficiency with other one-handed weapons and missile weapons.  They may not become proficient with two-handed weapons or in any other fighting style.<br />.</p>
       </div>
@@ -186,24 +188,24 @@
 	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Hunter only - requires Dart Trap)</li><br />
 	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
 	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the rogue to craft one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires taking Basic Alchemy twice)</li>
-	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li>
+	    <li> <b>Alchemy - Smoke Bomb/Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
 	    <li> <b>Alchemy - Flaming Weapon:</b> this ability allows the rogue to coat a weapon in a viscous and highly flammable oil, once per day. For 15 rounds, the weapon will do 1d4 fire damage in addition to normal damage. (Requires Brew Potions)</li>
 	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reaches higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only)</li>
-	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li><br />
+	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only)</li>
+	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only - requires taking Basic Alchemy twice)</li><br />
 	    <li> <b>Combat Skills - Armor Class Bonus:</b> this ability confers a permanent -1 bonus to Armor Class upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Saving Throws Bonus:</b> this ability confers a permanent -1 bonus to all saving throws. (Requires AC Bonus)</li>
-	    <li> <b>Combat Skills - Escape Artist:</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only - requires AC Bonus)</li>
+	    <li> <b>Combat Skills - Artful Dodging:</b> when the rogue is targeted by a spell that can be evaded (Fireball, Lightning Bolt, etc.), the effects may be completely avoided upon a successful save vs. Breath. A helpless rogue (e.g. held, stunned, or asleep) cannot evade such effects, however. (This ability is identical to IWDEE's Evasion. If installed on IWDEE, thieves will not receive Evasion automatically, instead they must choose this feat.)</li>
+	    <li> <b>Combat Skills - Escape Artist:</b> the rogue will be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, or otherwise helpless. (Swashbuckler only)</li>
 	    <li> <b>Combat Skills - Melee To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all melee attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Ranged To-Hit Bonus:</b> this ability confers a permanent +1 bonus to all ranged attack rolls upon the rogue. (Swashbucklers may repeat this feat up to 4 times)</li>
 	    <li> <b>Combat Skills - Backstab Bonus:</b> this ability increases the rogue's backstab multiplier by 1. (Assassins may take this feat up to 3 times - requires Melee To-Hit Bonus)</li></li>
-	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.</li>
+	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain his footing; and strikes with a club can stun the target for three seconds.</li>
 	    <li> <b>Combat Skills - Blind Opponent:</b> upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.</li>
 	    <li> <b>Combat Skills - Disrupt Opponent:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.</li><br />
-	    <li> <b>Magical Skills - Smoke Bomb/Grease Jar:</b> once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
-	    <li> <b>Magical Skills - Use Wands:</b> this ability allows the rogue to use wands normally restricted to wizards. (Requires Smoke Bomb/Grease Jar and Intelligence 15 or higher)</li>
-	    <li> <b>Magical Skills - Use Scrolls:</b> this ability allows the rogue to cast spells from scrolls, as if a wizard. (Requires Use Wands and Intelligence 17 or higher)</li>
-	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the rogue to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Requires Smoke Bomb/Grease Jar, Trueclass and Shadowdancer only)</li>
-	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Misleading Clone. (Requires Smoke Bomb/Grease Jar)</li>
+	    <li> <b>Magical Skills - Use Magical Devices:</b> this ability allows the rogue to cast magic from scrolls and wands, just like a wizard or a bard. (Must be level 8+; requires Intelligence 15 or higher)</li>
+	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the rogue to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Must be level 10+; requires Intelligence 15 or higher)</li>
+	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Misleading Clone. (Must be level 10+; requires Intelligence 15 or higher)</li>
 	  </ul>
       <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
       <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since various trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
@@ -217,7 +219,8 @@
 	    <li> Jesters can choose Extra Level 6 Spell, Escape Artist, and Shadow Pool.</li>
 	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
 	  </ul>
-      <p><b>Finally,</b> this component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
+      <p> This component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
+      <p><b>Finally,</b> this component will grant every enemy thief in the game the 'Dirty Fighting' feat, which means the player will be subject to secondary effects such as being Slowed, tripped, or stunned when struck by thieves.  Additionally, every enemy fighter will be assigned one of the five warrior fighting postures, giving them an AC bonus against one damage type or a chance to Slow or knock back the player.</p>
       <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) This component is not compatible with Kit Revisions' Revised thief kits.</p>
       <p>Please note that this component will only grant feats to the base five thief kits: Thief, Assassin, Hunter, Swashbuckler, and Shadowdancer, as well as thief kits added by this mod and by the 'Song & Silence' mod. Thief kits from other mods may be used alongside this component... but they will only get their normal kit abilities, no feats.</p>
   </div>
@@ -341,17 +344,20 @@
         &ndash; May only allocate skill points to the Open Locks, Find Traps, Set Traps, and Detect Illusion thief abilities.<br />
         &ndash; May only allocate 15 thief skill points per level.<br />
         &ndash; Backstab multiplier is limited to x3.<br />
-        &ndash; May not use the Stealth ability.<br />.</p>
+        &ndash; May not use the Stealth ability.<br />.
+        &ndash; May not dual-class to mage.<br />.</p>
     </div>
     <div class="kit_description">
       <p>JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy/Traveller clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.</p>
       <p>Advantages:<br />
         &ndash; May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
-        &ndash; From 6th level, may use a Mind Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.</p>
+        &ndash; From 6th level, may use a Mind Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.<br />
+        &ndash; May use arcane wands and scrolls.</p>
       <p>Disadvantages:<br />
         &ndash; May only allocate 15 thief skill points per level.<br />
         &ndash; Reduced backstab progression.<br />
-        &ndash; May not set traps.<br />.</p>
+        &ndash; May not set traps.<br />.
+        &ndash; May not dual-class to mage.<br />.</p>
     </div>
     <div class="kit_description">
       <p>GALLANT: This is a Demibard kit. Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.</p>
@@ -364,7 +370,8 @@
         &ndash; May use magical wands as a wizard can.</p>
       <p>Disadvantages:<br />
         &ndash; Has the same hit dice as a cleric.<br />
-        &ndash; Limited to Specialization (++) with all weapons.<br />.</p>
+        &ndash; Limited to Specialization (++) with all weapons.<br />.
+        &ndash; May not dual-class to mage.<br />.</p>
     </div>
     <div class="kit_description">
       <p>HEXBLADE: This Demibard kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.</p>
@@ -374,7 +381,8 @@
         &ndash; May use arcane wands and cast spells from scrolls.</p>
       <p>Disadvantages:<br />
         &ndash; Has the same hit dice as a cleric.<br />
-        &ndash; Limited to Specialization (++) with all weapons.<br />.</p>
+        &ndash; Limited to Specialization (++) with all weapons.<br />.
+        &ndash; May not dual-class to mage.<br />.</p>
     </div>
     <p> In Spear of Dragonspear and BG2EE, the Bard's Hat magic item is modified. Now the hat radiates the basic bardic Luck Aura. The bard wearing the hat can manifest a different aura, allowing you to get the benefit of two bard auras simultaneously.</p>
     <p> Finally: on EE games with the 2.0+ patch, this component will allow elves and gnomes to become bards (other demihumans can be demibards). And it allows bards to cast 7th-level spells, starting at 20th level. And it changes bards' HLA tables, removing the old-fashioned Enhanced and Lingering Song HLAs, and removing traps, and instead granting bards a few fighter HLAs (Power Attack, etc.) and a few wizard HLAs (extra 6th level spells), and a new HLA bard aura, which causes all melee opponents to save vs. spells each round or be Mazed.</p>

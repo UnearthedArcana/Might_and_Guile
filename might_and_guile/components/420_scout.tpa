@@ -249,33 +249,12 @@ COPY ~might_and_guile/fighter/d5swash.spl~ ~override~
 	SAY NAME1 @3106
 	SAY UNIDENTIFIED_DESC @3107
 COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_swash.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
-	BUT_ONLY
-END
 //____________________________________________________________________________________
-
-//IF BARD OVERHAUL___________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
- ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
-  COPY_EXISTING ~d5_swash.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/no_use_wands.txt~
-	APPEND_FILE ~might_and_guile/feats/no_use_scrolls.txt~
-  BUT_ONLY
- END
-END
-//___________________________________________________________________________________
 
 //DON'T USE SCROLLS/WANDS___________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
-	APPEND ~d5_swash.2da~ ~ABILITY    AP_D5_RF84N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-	APPEND ~d5_swash.2da~ ~ABILITY    AP_D5_RF83N ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_nscrl.spl~ BEGIN
+	APPEND ~d5_mageh.2da~ ~ABILITY    AP_D5_NSCRL ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 END
 //__________________________________________________________________________________
 

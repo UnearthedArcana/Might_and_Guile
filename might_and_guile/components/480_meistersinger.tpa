@@ -170,14 +170,6 @@ END
 	COPY_EXISTING ~d5_meist.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/bard/meistsummon.txt~
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_meist.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
-		APPEND_FILE ~might_and_guile/misc/intelligence_bards.txt~
-	BUT_ONLY
-END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_skspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_meist.2da~ ~override~
 		LPM remove_blank_lines

@@ -70,7 +70,7 @@ IF ~~ THEN BEGIN d5_corsa_41 // AC bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa 
 END 
-IF ~~ THEN BEGIN d5_corsa_43 // artful dodging (iwdee evasion)
+IF ~~ THEN BEGIN d5_corsa_43 // spell evasion
  SAY @20224
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_corsa

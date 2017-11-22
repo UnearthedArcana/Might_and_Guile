@@ -193,16 +193,6 @@ COPY ~might_and_guile/mc/d5_bladb.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5_bladb.eff~ ~override~
 	SAY NAME1 @6
-
-COPY ~might_and_guile/mc/d5_blads.itm~ ~override~
-	SAY NAME1 @5111
-	SAY NAME2 @5111
-	SAY UNIDENTIFIED_DESC @5112
-	SAY IDENTIFIED_DESC @5112
-COPY ~might_and_guile/mc/d5_blads.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_blads.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_blads.baf~
 //____________________________________________________________________________________
 
 /*
@@ -233,6 +223,16 @@ END
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_blads.itm~ ~override~
+	SAY NAME1 @5111
+	SAY NAME2 @5111
+	SAY UNIDENTIFIED_DESC @5112
+	SAY IDENTIFIED_DESC @5112
+  COPY ~might_and_guile/mc/d5_blads.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_blads.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_blads.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_blads~ #0 #0 #0 ~identified~ #1
@@ -375,16 +375,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/intelligence_wizards.txt~
 	BUT_ONLY
 END
-
-COPY ~might_and_guile/mc/d5_filch.itm~ ~override~
-	SAY NAME1 @5211
-	SAY NAME2 @5211
-	SAY UNIDENTIFIED_DESC @5212
-	SAY IDENTIFIED_DESC @5212
-COPY ~might_and_guile/mc/d5_filch.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_filch.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_filch.baf~
 //__________________________________________________________________________________
 
 /*
@@ -412,6 +402,16 @@ END
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_filch.itm~ ~override~
+	SAY NAME1 @5211
+	SAY NAME2 @5211
+	SAY UNIDENTIFIED_DESC @5212
+	SAY IDENTIFIED_DESC @5212
+  COPY ~might_and_guile/mc/d5_filch.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_filch.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_filch.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_filch~ #0 #0 #0 ~identified~ #1
@@ -536,24 +536,29 @@ END
 //LOREMASTER ABILITY FILES____________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_lorma.2da~ ~override~
-COPY ~might_and_guile/misc/d5_mglv1.spl~ ~override~
-COPY ~might_and_guile/bard/d5_lorm1.spl~ ~override~
-COPY ~might_and_guile/misc/d5_lor05.spl~ ~override~
-
-COPY ~might_and_guile/mc/d5_lorma.itm~ ~override~
-	SAY NAME1 @5234
-	SAY NAME2 @5234
-	SAY UNIDENTIFIED_DESC @5235
-	SAY IDENTIFIED_DESC @5235
-COPY ~might_and_guile/mc/d5_lorma.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_lorma.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_lorma.baf~
+COPY ~might_and_guile/misc/d5mglv1.spl~ ~override~
+	SAY NAME1 @6
+COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
+	SAY NAME1 @4606
+	SAY UNIDENTIFIED_DESC @4606
+  WRITE_BYTE 0x27 0
+COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
+	SAY NAME1 @6
 //__________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_lorma.itm~ ~override~
+	SAY NAME1 @5234
+	SAY NAME2 @5234
+	SAY UNIDENTIFIED_DESC @5235
+	SAY IDENTIFIED_DESC @5235
+  COPY ~might_and_guile/mc/d5_lorma.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_lorma.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_lorma.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_lorma~ #0 #0 #0 ~identified~ #1
@@ -677,24 +682,24 @@ END
 //TOMB RUNNER ABILITY FILES___________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_tombr.2da~ ~override~
-COPY ~might_and_guile/bard/d5_lorm1.spl~ ~override~
-COPY ~might_and_guile/misc/d5_lor05.spl~ ~override~
+COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
+COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
-
-COPY ~might_and_guile/mc/d5_tombr.itm~ ~override~
-	SAY NAME1 @5335
-	SAY NAME2 @5335
-	SAY UNIDENTIFIED_DESC @5336
-	SAY IDENTIFIED_DESC @5336
-COPY ~might_and_guile/mc/d5_tombr.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_tombr.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_tombr.baf~
 //____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_tombr.itm~ ~override~
+	SAY NAME1 @5335
+	SAY NAME2 @5335
+	SAY UNIDENTIFIED_DESC @5336
+	SAY IDENTIFIED_DESC @5336
+  COPY ~might_and_guile/mc/d5_tombr.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_tombr.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_tombr.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_tombr~ #0 #0 #0 ~identified~ #1
@@ -820,21 +825,21 @@ COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
 COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
-
-COPY ~might_and_guile/mc/d5_thug.itm~ ~override~
-	SAY NAME1 @5345
-	SAY NAME2 @5345
-	SAY UNIDENTIFIED_DESC @5346
-	SAY IDENTIFIED_DESC @5346
-COPY ~might_and_guile/mc/d5_thug.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_thug.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_thug.baf~
 //__________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_thug.itm~ ~override~
+	SAY NAME1 @5345
+	SAY NAME2 @5345
+	SAY UNIDENTIFIED_DESC @5346
+	SAY IDENTIFIED_DESC @5346
+  COPY ~might_and_guile/mc/d5_thug.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_thug.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_thug.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_thug~ #0 #0 #0 ~identified~ #1
@@ -1020,21 +1025,21 @@ COPY ~might_and_guile/mc/d5rmavef.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavem.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhf.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhm.eff~ ~override~
-
-COPY ~might_and_guile/mc/d5_rama.itm~ ~override~
-	SAY NAME1 @5275
-	SAY NAME2 @5275
-	SAY UNIDENTIFIED_DESC @5276
-	SAY IDENTIFIED_DESC @5276
-COPY ~might_and_guile/mc/d5_rama.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_rama.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_rama.baf~
 //__________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_rama.itm~ ~override~
+	SAY NAME1 @5275
+	SAY NAME2 @5275
+	SAY UNIDENTIFIED_DESC @5276
+	SAY IDENTIFIED_DESC @5276
+  COPY ~might_and_guile/mc/d5_rama.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_rama.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_rama.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	ACTION_IF FILE_EXISTS_IN_GAME ~d5_rama.itm~ BEGIN
 		COPY_EXISTING ~tem2601.sto~ ~override~
@@ -1209,21 +1214,21 @@ COPY ~might_and_guile/mc/d5_div3b.bam~ ~override~
 COPY ~might_and_guile/mc/d5rt300.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_div3b~ END
 COPY ~might_and_guile/mc/d5rt300.2da~ ~override~
-
-COPY ~might_and_guile/mc/d5_rath.itm~ ~override~
-	SAY NAME1 @5375
-	SAY NAME2 @5375
-	SAY UNIDENTIFIED_DESC @5376
-	SAY IDENTIFIED_DESC @5376
-COPY ~might_and_guile/mc/d5_rath.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_rath.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_rath.baf~
 //__________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_rath.itm~ ~override~
+	SAY NAME1 @5375
+	SAY NAME2 @5375
+	SAY UNIDENTIFIED_DESC @5376
+	SAY IDENTIFIED_DESC @5376
+  COPY ~might_and_guile/mc/d5_rath.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_rath.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_rath.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_rath~ #0 #0 #0 ~identified~ #1
@@ -1332,15 +1337,6 @@ END
 //SPELLBENDER ABILITY FILES___________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_bendr.2da~ ~override~
-COPY ~might_and_guile/mc/d5_bendr.itm~ ~override~
-	SAY NAME1 @5413
-	SAY NAME2 @5413
-	SAY UNIDENTIFIED_DESC @5414
-	SAY IDENTIFIED_DESC @5414
-COPY ~might_and_guile/mc/d5_bendr.spl~ ~override~
-	SAY NAME1 @9
-COPY ~might_and_guile/mc/d5_bendr.cre~ ~override~
-COMPILE ~might_and_guile/mc/d5_bendr.baf~
 //Huge thanks to DreamSlaveOne at forums.gibberlings3.net for providing the .BAMs for the Spellbender's abilities!
 COPY ~might_and_guile/mc/d5arcm1.spl~ ~override~
 	SAY NAME1 @5415
@@ -1512,6 +1508,16 @@ END
 //ADD KIT ITEMS______________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+  COPY ~might_and_guile/mc/d5_bendr.itm~ ~override~
+	SAY NAME1 @5413
+	SAY NAME2 @5413
+	SAY UNIDENTIFIED_DESC @5414
+	SAY IDENTIFIED_DESC @5414
+  COPY ~might_and_guile/mc/d5_bendr.spl~ ~override~
+	SAY NAME1 @9
+  COPY ~might_and_guile/mc/d5_bendr.cre~ ~override~
+  COMPILE ~might_and_guile/mc/d5_bendr.baf~
+
   ACTION_IF (FILE_EXISTS_IN_GAME ~tem2601.sto~)THEN BEGIN
 	COPY_EXISTING ~tem2601.sto~ ~override~
 		ADD_STORE_ITEM ~d5_bendr~ #0 #0 #0 ~identified~ #1

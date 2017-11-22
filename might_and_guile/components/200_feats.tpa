@@ -650,7 +650,7 @@ COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_rfd2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
 
-COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwdee evasion
+COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwd spell evasion
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
 
@@ -1500,111 +1500,113 @@ CLEAR_ARRAYS
 //
 // need to give some feats directly to thief/mages
 //
-COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+LAM JOINABLE_NPC_ARRAY
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-		READ_LONG 0x1cc biography
-		PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
-			READ_BYTE 0x273 npc_class
-			PATCH_IF (npc_class = 4) BEGIN
-				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
-				READ_LONG 0x244 npc_kit
-				PATCH_IF (npc_kit = 0) BEGIN
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
-				END
-				PATCH_IF (npc_kit = 16384) BEGIN
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
-				END
-				READ_BYTE 0x234 npc_level
-				PATCH_IF (npc_level > 2) BEGIN
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat4~ END
-				END
-				PATCH_IF (npc_level > 4) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat5~ END
-				END
-				PATCH_IF (npc_level > 6) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat6~ END
-				END
-				PATCH_IF (npc_level > 8) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat7~ END
-				END
-				PATCH_IF (npc_level > 10) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat8~ END
-				END
-				PATCH_IF (npc_level > 12) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat9~ END
-				END
-				PATCH_IF (npc_level > 14) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat10~ END
-				END
-				PATCH_IF (npc_level > 16) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat11~ END
-				END
-				PATCH_IF (npc_level > 18) BEGIN 
-					LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat12~ END
-				END
+		READ_BYTE 0x273 npc_class
+		PATCH_IF (npc_class = 4) BEGIN
+			REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+			READ_LONG 0x244 npc_kit
+			PATCH_IF (npc_kit = 0) BEGIN
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
 			END
-			PATCH_IF (npc_class = 9 || npc_class = 15) BEGIN
-				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
-				READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
-				PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
-					READ_LONG 0x244 npc_kit
-					PATCH_IF (npc_kit = 0) BEGIN
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
-					END
-					PATCH_IF (npc_kit = 16384) BEGIN
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
-					END
-					READ_BYTE 0x235 npc_level
-					PATCH_IF (npc_level > 2) BEGIN
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featd~ END
-					END
-					PATCH_IF (npc_level > 4) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feate~ END
-					END
-					PATCH_IF (npc_level > 6) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featf~ END
-					END
-					PATCH_IF (npc_level > 8) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featg~ END
-					END
-					PATCH_IF (npc_level > 10) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feath~ END
-					END
-					PATCH_IF (npc_level > 12) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feati~ END
-					END
-					PATCH_IF (npc_level > 14) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featj~ END
-					END
-					PATCH_IF (npc_level > 16) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featk~ END
-					END
-					PATCH_IF (npc_level > 18) BEGIN 
-						LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featl~ END
-					END
-				END
+			PATCH_IF (npc_kit = 16384) BEGIN
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
 			END
-			PATCH_IF (npc_class = 13) BEGIN
-				REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
-				REMOVE_MEMORIZED_SPELL ~spcl412~ ~spcl414~
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
-				LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+			READ_BYTE 0x234 npc_level
+			PATCH_IF (npc_level > 2) BEGIN
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat4~ END
+			END
+			PATCH_IF (npc_level > 4) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat5~ END
+			END
+			PATCH_IF (npc_level > 6) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat6~ END
+			END
+			PATCH_IF (npc_level > 8) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat7~ END
+			END
+			PATCH_IF (npc_level > 10) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat8~ END
+			END
+			PATCH_IF (npc_level > 12) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat9~ END
+			END
+			PATCH_IF (npc_level > 14) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat10~ END
+			END
+			PATCH_IF (npc_level > 16) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat11~ END
+			END
+			PATCH_IF (npc_level > 18) BEGIN 
+				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat12~ END
 			END
 		END
+		PATCH_IF (npc_class = 9 || npc_class = 15) BEGIN
+			REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+			READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
+			PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
+				READ_LONG 0x244 npc_kit
+				PATCH_IF (npc_kit = 0) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
+				END
+				PATCH_IF (npc_kit = 16384) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
+				END
+				READ_BYTE 0x235 npc_level
+				PATCH_IF (npc_level > 2) BEGIN
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featd~ END
+				END
+				PATCH_IF (npc_level > 4) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feate~ END
+				END
+				PATCH_IF (npc_level > 6) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featf~ END
+				END
+				PATCH_IF (npc_level > 8) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featg~ END
+				END
+				PATCH_IF (npc_level > 10) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feath~ END
+				END
+				PATCH_IF (npc_level > 12) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feati~ END
+				END
+				PATCH_IF (npc_level > 14) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featj~ END
+				END
+				PATCH_IF (npc_level > 16) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featk~ END
+				END
+				PATCH_IF (npc_level > 18) BEGIN 
+					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featl~ END
+				END
+			END
+		END
+		PATCH_IF (npc_class = 13) BEGIN
+			REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
+			REMOVE_MEMORIZED_SPELL ~spcl412~ ~spcl414~
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
+			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
+		END
 	END
-BUT_ONLY
+  BUT_ONLY
+END
 //__________________________________________________________________________________
 
 
@@ -1619,9 +1621,12 @@ LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_RR#
 LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_TG#BRPO~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_SPCL911~ END
@@ -1633,9 +1638,12 @@ LAF action_remove_hla STR_VAR kit_name = ~ASSASIN~ remove_ability = ~GA_TG#BRPO~
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 //LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_SPCL911~ END
@@ -1646,9 +1654,12 @@ LAF action_remove_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ remove_ability = ~GA_TG
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_SPCL911~ END
@@ -1660,8 +1671,11 @@ LAF action_remove_hla STR_VAR kit_name = ~SHADOWDANCER~ remove_ability = ~GA_TG#
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_SPCL911~ END
@@ -1673,8 +1687,11 @@ LAF action_remove_hla STR_VAR kit_name = ~D5SHADD~ remove_ability = ~GA_TG#BRPO~
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_SPCL911~ END
@@ -1686,9 +1703,12 @@ LAF action_remove_hla STR_VAR kit_name = ~D5ALCHM~ remove_ability = ~GA_TG#BRPO~
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_d5_rf3z~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_SPCL911~ END
@@ -1700,9 +1720,12 @@ LAF action_remove_hla STR_VAR kit_name = ~THIEF~ remove_ability = ~GA_TG#BRPO~ E
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
 
 LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_SPCL911~ END
@@ -1712,7 +1735,9 @@ LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_RR
 LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_RR#ALCHT~ END
 LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_TG#BRPO~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 
@@ -1726,7 +1751,9 @@ LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ remove_ability = ~
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 
@@ -1740,7 +1767,9 @@ LAF action_remove_hla STR_VAR kit_name = ~MAGE_THIEF~ remove_ability = ~GA_TG#BR
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 
@@ -1754,7 +1783,9 @@ LAF action_remove_hla STR_VAR kit_name = ~CLERIC_THIEF~ remove_ability = ~GA_TG#
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
-LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 
@@ -1767,7 +1798,8 @@ LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_TG#BRPO~ E
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL900~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 
@@ -1780,7 +1812,8 @@ LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_TG#BRPO~ 
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF85~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 
@@ -1806,7 +1839,8 @@ LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_TG#BRPO~ EN
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
 //__________________________________________________________________________________
@@ -1814,26 +1848,30 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed 
 
 //give dirty-fighting feat to AI NPCs_______________________________________________
 //
-COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	READ_LONG 0x1cc biography
-	PATCH_IF (biography < 0) BEGIN // NOT party-joinable NPC
+LAM JOINABLE_NPC_ARRAY
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  READ_BYTE 0x273 npc_class
 	  PATCH_IF (npc_class = 4) BEGIN
 		LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 resist_dispel = 0 END
 	  END
 	END
-  END
-BUT_ONLY
+  BUT_ONLY
+END
 //__________________________________________________________________________________
 
 
 //give warrior postures to AI NPCs__________________________________________________
 //
-COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	READ_LONG 0x1cc biography
-	PATCH_IF (biography < 0) BEGIN // NOT party-joinable NPC
+LAM JOINABLE_NPC_ARRAY
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  READ_BYTE 0x273 npc_class
 	  PATCH_IF (npc_class = 2) BEGIN
 		SET random_num = RANDOM (1 5)
@@ -1854,6 +1892,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 		END
 	  END
 	END
-  END
-BUT_ONLY
+  BUT_ONLY
+END
 //__________________________________________________________________________________

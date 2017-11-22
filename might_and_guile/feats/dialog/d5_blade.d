@@ -2,6 +2,9 @@ BEGIN ~D5_BLADE~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_blade
 SAY @20009
+ IF ~GlobalLT("D5_AUR01","LOCALS",1)~ THEN REPLY @21011 GOTO d5_blade_1		//	luck aura
+ IF ~GlobalLT("D5_AUR02","LOCALS",1)~ THEN REPLY @21021 GOTO d5_blade_2		//	morale aura
+ IF ~GlobalLT("D5_AUR20","LOCALS",1)~ THEN REPLY @21201 GOTO d5_blade_3		//	miscast aura
  IF ~GlobalLT("D5_AUR42","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21421 GOTO d5_blade_4		//	mind blank aura
  IF ~GlobalLT("D5_AUR43","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21431 GOTO d5_blade_6		//	invulnerability aura
  IF ~GlobalLT("D5_AUR47","LOCALS",1) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @21471 GOTO d5_blade_8		//	slow aura
@@ -10,7 +13,7 @@ SAY @20009
  IF ~GlobalGT("D5_ALCHEMY","LOCALS",0) GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_blade_12
  IF ~GlobalLT("D5_EVADE","LOCALS",4)~ THEN REPLY @20201 GOTO d5_blade_14
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_blade_16
- IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20221 GOTO d5_blade_43
+ IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_blade_43
  IF ~GlobalLT("D5_ATTACK","LOCALS",4)~ THEN REPLY @20231 GOTO d5_blade_20
  IF ~GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_blade_22
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_blade_24
@@ -21,6 +24,21 @@ SAY @20009
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_blade_30
 END
 
+IF ~~ THEN BEGIN d5_blade_1 // luck aura
+ SAY @21012
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR01","LOCALS",1)~ DO ~ApplySpellRES("D5BD01Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_blade 
+END
+IF ~~ THEN BEGIN d5_blade_2 // morale aura
+ SAY @21022
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR02","LOCALS",1)~ DO ~ApplySpellRES("D5BD02Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_blade 
+END
+IF ~~ THEN BEGIN d5_blade_3 // miscast aura
+ SAY @21202
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR20","LOCALS",1)~ DO ~ApplySpellRES("D5BD20Z",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_blade 
+END
 IF ~~ THEN BEGIN d5_blade_4 // mind blank
  SAY @21422
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_AUR42","LOCALS",1)~ DO ~ApplySpellRES("D5BD42Z",Myself)~ EXIT 

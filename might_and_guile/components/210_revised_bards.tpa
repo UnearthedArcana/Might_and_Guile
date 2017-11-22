@@ -1057,16 +1057,45 @@ BUT_ONLY
 //ELF/GNOME BARDS____________________________________________________________________
 //
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~clsrcreq.2da~ BEGIN
 	COPY_EXISTING ~clsrcreq.2da~ ~override~
 		SET_2DA_ENTRY 25 2 8 ~1~
 		SET_2DA_ENTRY 25 6 8 ~1~
 	BUT_ONLY
+	COPY_EXISTING ~kitlist.2da~ ~override~
+	  COUNT_2DA_COLS cols
+	  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ cols
+	  FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 class_name
+		READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+		PATCH_IF (class_num == 5) BEGIN
+		  DEFINE_ASSOCIATIVE_ARRAY d5_bardkit_array BEGIN "%class_name%" => "%class_num%" END
+		END
+	  END
+	BUT_ONLY
+	ACTION_PHP_EACH d5_bardkit_array AS hi => fi BEGIN
+	  COPY_EXISTING ~clsrcreq.2da~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 0 ~name~
+		  PATCH_IF ~%name%~ STRING_EQUAL_CASE ~%hi%~ BEGIN
+		    SET bard_row = %row%
+		  END
+		END
+		SET_2DA_ENTRY %bard_row% 2 8 ~1~
+		SET_2DA_ENTRY %bard_row% 6 8 ~1~
+	  BUT_ONLY
+	END
+  END
 END
 ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~clsrcreq.2da~ BEGIN
 	COPY_EXISTING ~clsrcreq.2da~ ~override~
 		SET_2DA_ENTRY 5 2 7 ~1~
 		SET_2DA_ENTRY 5 6 7 ~1~
 	BUT_ONLY
+  END
 END
 //___________________________________________________________________________________
 
@@ -2327,10 +2356,12 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 BUT_ONLY
 
-COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	READ_LONG 0x1cc biography
-	PATCH_IF (biography > 0 && biography < 2147483647) BEGIN // party-joinable NPC
+LAM JOINABLE_NPC_ARRAY
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  READ_BYTE 0x273 npc_class
 	  PATCH_IF (npc_class = 5) BEGIN
 		READ_SHORT 0x246 old_kit
@@ -2362,8 +2393,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 		END
 	  END
 	END
-  END
-BUT_ONLY
+  BUT_ONLY
+END
+/*
 ACTION_IF FILE_EXISTS_IN_GAME ~garric4.cre~ BEGIN
  COPY_EXISTING ~garric4.cre~ ~override~
   READ_BYTE 0x273 npc_class
@@ -2398,6 +2430,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~garric4.cre~ BEGIN
   END
  BUT_ONLY
 END
+*/
 //___________________________________________________________________________________
 
 
@@ -2561,7 +2594,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~D5_HERALD~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 END
@@ -2582,7 +2617,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~D5_JINXER~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
 END
@@ -2668,7 +2705,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
@@ -2690,7 +2728,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
@@ -2711,7 +2750,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL900~ num_allowed = ~5~ END
@@ -2732,7 +2773,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF85~ num_allowed = ~5~ END
@@ -2754,6 +2796,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~SKALD~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_D5_RF43~ num_allowed = ~3~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~SKALD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
@@ -2775,7 +2818,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_SPCL918~ END
   LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
   LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF52~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+  LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END

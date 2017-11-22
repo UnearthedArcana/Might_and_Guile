@@ -1,11 +1,13 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~3.6.6~
+VERSION ~3.6.7~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
+
+	INCLUDE ~might_and_guile/lib/joinable_npcs.tpa~
 
 	INCLUDE ~might_and_guile/lib/hla_actions.tpa~
 

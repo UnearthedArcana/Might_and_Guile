@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~3.6.7~
+VERSION ~3.6.8~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -16,8 +16,6 @@ ALWAYS
 	INCLUDE ~might_and_guile/lib/spell_to_innate.tpa~
 
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
-
-	INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
 	INCLUDE ~might_and_guile/lib/fnp_compat.tpa~
 	
@@ -43,6 +41,8 @@ BEGIN @500
 DESIGNATED 500
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @23
+
+INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
 INCLUDE ~might_and_guile/components/100_multiclass_kits.tpa~
 //__________________________________________________________________________________

@@ -385,7 +385,14 @@ Upon performing the Bladesong, for 30 seconds, the Bladesinger has a -2 bonus to
         &ndash; May not dual-class to mage.<br />.</p>
     </div>
     <p> In Spear of Dragonspear and BG2EE, the Bard's Hat magic item is modified. Now the hat radiates the basic bardic Luck Aura. The bard wearing the hat can manifest a different aura, allowing you to get the benefit of two bard auras simultaneously.</p>
-    <p> Finally: on EE games with the 2.0+ patch, this component will allow elves and gnomes to become bards (other demihumans can be demibards). And it allows bards to cast 7th-level spells, starting at 20th level. And it changes bards' HLA tables, removing the old-fashioned Enhanced and Lingering Song HLAs, and removing traps, and instead granting bards a few fighter HLAs (Power Attack, etc.) and a few wizard HLAs (extra 6th level spells), and a new HLA bard aura, which causes all melee opponents to save vs. spells each round or be Mazed.</p>
+    <p> Finally, this component makes several other general changes to the bard class: </p>
+      <ul>
+        <li>On EE games with the 2.0+ patch, this component will allow elves and gnomes to become bards. (Other demihumans can be demibards).</li>
+        <li>Bards to cast 7th-level spells, starting at 20th level.</li>
+        <li>Bards can cast spells while wearing leather-type armors.</li>
+        <li>Bards <b>lose access</b> to spells from the schools of Necromancy, Conjuration, and Invocation.</li>
+        <li>Bards no longer get the old-fashioned Enhanced and Lingering Song HLAs, or HLA traps.  Instead they get a few fighter HLAs (Power Attack, etc.) and a few wizard HLAs (extra 6th level spells), and a new HLA bard aura, which causes melee opponents to save vs. spells each round or be Mazed.</li>
+      </ul>
   </div>
   <h4 class="subheader">Component 220: </h4>
   <div class="section">

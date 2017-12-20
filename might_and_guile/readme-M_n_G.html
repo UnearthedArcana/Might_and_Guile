@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.6.3 </strong><br />
+  <p><strong> Version 3.6 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -39,18 +39,24 @@
   <p>See the component descriptions below for more specific information about compatibility.</p>
   <p><strong>Load Order:</strong><br />
     Might and Guile should be installed <strong>after</strong> all other mods that add or change items or kits. It should be installed <strong>after</strong> the "WSPATCK for All" component of <u>tb#Tweaks</u>. It should be installed <strong>before</strong> <u>Refinements</u> and <u>Sword Coast Stratagems</u>.</p>
-  <p>My load order looks roughly like this:
+  <p>My personal install order looks something like this:
   <ul>
-    <li> [item mods]</li>
     <li> [quest mods]</li>
     <li> [NPC mods]</li>
-    <li> [spell mods]</li>
-    <li> [kit mods]</li>
+    <li> [item mods including Item Revisions]</li>
+    <li> [spell mods including Spell Revisions]</li>
+    <li> [small kit mods]</li>
+    <li> Divine Remix</li>
+    <li> Song & Silence</li>
+    <li> Rogue Rebalancing</li>
+    <li> Monastic Orders of Faerun</li>
+    <li> Tome & Blood</li>
+    <li> Faiths & Powers</li>
     <li> Might and Guile</li>
-    <li> [tweak mods]</li>
+    <li> [tweak mods including Tweaks Anthology]</li>
     <li> Scales of Balance</li>
     <li> SCS</li>
-    <li> [end-of-order mods]</li>
+    <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Randomiser, etc.]</li>
   </ul>
 </div>
 <h2>Contents</h2>
@@ -738,7 +744,7 @@ CALLED SHOTS <br />
 <div class="section">
   <p><strong>Version 3.6 - July 2017</strong></p>
   <ul>
-    <li>new feat: IWDEE Evasion</li>
+    <li>new feat: IWDEE Spell Evasion</li>
     <li>enemies get fighting postures</li>
   </ul>
   <p><strong>Version 3.5 - May 2017</strong></p>

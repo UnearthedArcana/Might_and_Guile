@@ -1136,29 +1136,29 @@ BUT_ONLY
 COPY ~might_and_guile/feats/d5tacto.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wf02.spl~ ~override~
 COPY ~might_and_guile/feats/d5_wfa2.spl~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (8 << 24) END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (2 << 24) END
 COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~		//			offensive tactics
 	SAY NAME1 @20321
 	SAY UNIDENTIFIED_DESC @20322
 	WRITE_ASCII 0x3a ~d5tacto~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tacto~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf02~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf03~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf02~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf03~ END
 COPY ~might_and_guile/feats/d5_wf12.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5tactd.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wf03.spl~ ~override~
 COPY ~might_and_guile/feats/d5_wfa3.spl~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (8 << 24) END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (2 << 24) END
 
 COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~		//			defensive tactics
 	SAY NAME1 @20323
 	SAY UNIDENTIFIED_DESC @20324
 	WRITE_ASCII 0x3a ~d5tactd~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tactd~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf03~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (8 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf02~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf03~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf02~ END
 COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
 

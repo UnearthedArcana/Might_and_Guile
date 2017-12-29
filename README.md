@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="http://www.gibberlings3.net">Home page</a></strong> and <strong><a href="http://forums.gibberlings3.net/index.php?showtopic=26838">discussion forum</a></strong></p>
-  <p><strong> Version 3.6 </strong><br />
+  <p><strong> Version 3.7 </strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -506,6 +506,8 @@ CALLED SHOTS <br />
   <h4 class="subheader">Component 320: </h4>
   <div class="section">
     <p><strong><em>Add the MARKSMAN fighter kit</em></strong></p>
+    <p>This is a fighter kit which mimics the Archer ranger kit in almost every way, except this kit can reach specialization with melee weapons instead of mere proficiency.</p>
+    <p>However, if you have installed component #230, "Revised Archers," then this kit will use the new Called Shot system: </p>
     <div class="kit_description">
       <p>MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the Marksman has had to sacrifice some proficiency with melee weapons and armor.</p>
       <p>Advantages:<br />

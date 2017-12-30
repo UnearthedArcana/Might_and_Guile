@@ -1085,31 +1085,6 @@ COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override~
   WRITE_LONG 0x1c %nscrl_specific%
 
-/*
-ACTION_IF FILES_EXISTS_IN_GAME ~scrlzz.itm~ BEGIN
-  COPY_EXISTING ~scrlzz.itm~ ~override/d5scrlzz.itm~
-END
-ACTION_IF FILES_EXISTS_IN_GAME ~scrlzy.itm~ BEGIN
-  COPY_EXISTING ~scrlzy.itm~ ~override/d5scrlzy.itm~
-END
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  READ_SHORT 0x1c item_type
-  PATCH_IF item_type = 11 BEGIN 					//		make green scrolls into "wands"
-	READ_BYTE 0x20 thief_use
-	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-	  WRITE_SHORT 0x1c 35
-	END
-  END
-  PATCH_IF item_type = 35 BEGIN 					//		make non-general-use wands into "scrolls"
-	READ_BYTE 0x20 thief_use
-	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
-	  WRITE_SHORT 0x1c 11
-	END
-  END
-BUT_ONLY
-*/
-
 OUTER_SET scroll_count = 0
 OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
@@ -1176,93 +1151,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	END
   END
 BUT_ONLY
-
-/*
-ACTION_FOR_EACH scroll_case IN ~bag03~ ~bag03b~ ~bag03c~ ~bag03d~ ~bag03e~ ~bag03f~ ~bag03g~ ~bag03h~ ~bag03i~ BEGIN
-  ACTION_IF FILE_EXISTS_IN_GAME ~%scroll_case%.sto~ BEGIN
-	COPY_EXISTING ~%scroll_case%.sto~ ~override~
-	  READ_LONG 0x9c thing_1
-	  READ_LONG 0xa0 thing_2
-	  PATCH_IF (%thing_1% = 37) BEGIN
-		WRITE_LONG 0x9c 35
-	  END
-	  PATCH_IF (%thing_2% = 37) BEGIN
-		WRITE_LONG 0xa0 35
-	  END
-	BUT_ONLY
-  END
-END
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  READ_SHORT	0x1c item_type
-  PATCH_IF (item_type = 11) BEGIN
-	WRITE_BYTE 0x1f (THIS BAND 0b11110111)
-	WRITE_BYTE 0x20 (THIS BAND 0b10111111)
-   END
-  PATCH_IF (item_type = 35) BEGIN
-	WRITE_BYTE 0x1f (THIS BAND 0b11110111)
-	WRITE_BYTE 0x20 (THIS BAND 0b10111111)
-  END
-BUT_ONLY
-
-COPY_EXISTING_REGEXP	~.*\.sto~	override
-	READ_SHORT	0x8	type
-	READ_LONG	0x2c	buy_off
-	READ_LONG	0x30	buy_num
-	SET	buy_add = 0	//	Number of categories to add, to update offsets
-	SET	add_category = 0	//	Initialize check variable
-	FOR	(i = 0; i < 3; ++i)	BEGIN	SET $add_category(~%i%~) = 1	END	//	Initialize check variable
-	FOR	(i = 0; i < buy_num; ++i)	BEGIN
-		READ_BYTE	(buy_off + i * 0x4)	category
-		PATCH_MATCH	category WITH
-			11 WHEN add_category = 0	BEGIN	// Match Scroll Category
-				++add_category
-			END
-			0	BEGIN	//	Match siMc Category / No Unnecessary Duplication
-				SET add_category_0 = 0
-			END
-			DEFAULT
-		END
-	END
-	//	Add categories
-	PATCH_IF	add_category	BEGIN
-		PATCH_IF	add_category_0	BEGIN
-			INSERT_BYTES	(buy_off + buy_num * 0x4)	0x4
-			WRITE_BYTE	(buy_off + buy_num * 0x4)	69
-			++buy_add
-		END
-		//	Update offsets
-		WRITE_LONG	0x30	(THIS + buy_add)
-		READ_LONG	0x34	items_off
-		PATCH_IF	items_off >= buy_off	BEGIN	
-			WRITE_LONG	0x34	(THIS + buy_add)
-		END
-		READ_LONG	0x4c	drink_off
-		PATCH_IF	drink_off >= buy_off	BEGIN
-			WRITE_LONG	0x4c	(THIS + buy_add)
-		END
-		READ_LONG	0x70	cures_off
-		PATCH_IF	cures_off >= buy_off	BEGIN
-			WRITE_LONG	0x70	(THIS + buy_add)
-		END
-	END
-BUT_ONLY
-/*
-ACTION_IF FILE_EXISTS_IN_GAME ~wandcase.sto~ BEGIN
-  COPY_EXISTING ~wandcase.sto~ ~override~
-	READ_LONG 0x0c wandcase_strref
-  COPY_EXISTING ~bag03.sto~ ~override/wandcase.sto~
-	WRITE_LONG 0x0c %wandcase_strref%
-	WRITE_LONG 0x40 0
-  BUT_ONLY
-END
-*/
-ACTION_IF FILES_EXISTS_IN_GAME ~d5scrlzz.itm~ BEGIN
-  COPY_EXISTING ~d5scrlzz.itm~ ~override/scrlzz.itm~
-END
-ACTION_IF FILES_EXISTS_IN_GAME ~d5scrlzy.itm~ BEGIN
-  COPY_EXISTING ~d5scrlzy.itm~ ~override/scrlzy.itm~
-END
-*/
 
 //	end use scrolls/wands
 
@@ -1993,34 +1881,34 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed 
 //__________________________________________________________________________________
 
 
-//give dirty-fighting feat to AI NPCs_______________________________________________
+//apply feats to AI thieves & fighters______________________________________________
 //
-LAM JOINABLE_NPC_ARRAY
-
-ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
-  PRINT ~%cre% => %dv%~ 
-  COPY_EXISTING ~%cre%~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	  READ_BYTE 0x273 npc_class
-	  PATCH_IF (npc_class = 4) BEGIN
-		LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 resist_dispel = 0 END
-	  END
+//Generate arrays with non-joinable NPC cre files
+COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+  READ_BYTE 0x273 class
+  PATCH_IF (class = 2) BEGIN
+	READ_ASCII DEATHVAR "dv" (32) NULL
+	TO_UPPER dv
+	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_FIGHTER_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
 	END
-  BUT_ONLY
-END
-//__________________________________________________________________________________
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+  READ_BYTE 0x273 class
+  PATCH_IF (class = 4) BEGIN
+	READ_ASCII DEATHVAR "dv" (32) NULL
+	TO_UPPER dv
+	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_THIEF_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+	END
+  END
+BUT_ONLY
 
-
-//give warrior postures to AI NPCs__________________________________________________
-//
-LAM JOINABLE_NPC_ARRAY
-
-ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
-  PRINT ~%cre% => %dv%~ 
-  COPY_EXISTING ~%cre%~ ~override~
+ACTION_PHP_EACH NON_JOINABLE_FIGHTER_ARRAY AS fcre => dv BEGIN
+  PRINT ~%fcre% => %dv%~ 
+  COPY_EXISTING ~%fcre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	  READ_BYTE 0x273 npc_class
-	  PATCH_IF (npc_class = 2) BEGIN
 		SET random_num = RANDOM (1 5)
 		PATCH_IF (%random_num% = 1) BEGIN
 		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf21~ END
@@ -2037,8 +1925,18 @@ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 		PATCH_IF (%random_num% = 5) BEGIN
 		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
 		END
-	  END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	END
+  BUT_ONLY
+END
+ACTION_PHP_EACH NON_JOINABLE_THIEF_ARRAY AS tcre => dv BEGIN
+  PRINT ~%tcre% => %dv%~ 
+  COPY_EXISTING ~%tcre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
 	END
   BUT_ONLY
 END
 //__________________________________________________________________________________
+

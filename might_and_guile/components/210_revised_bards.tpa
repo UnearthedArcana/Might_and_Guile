@@ -29,7 +29,7 @@ DEFINE_ACTION_FUNCTION d5_resolve_specific INT_VAR index=0 delete=0 STR_VAR new_
   new_specific_ind=0
   found=0
   READ_2DA_ENTRIES_NOW stats 2
-  FOR (row=0;row<stats;row+=1) BEGIN
+  FOR (row=1;row<stats;row+=1) BEGIN
     READ_2DA_ENTRY_FORMER stats row 0 ind
     READ_2DA_ENTRY_FORMER stats row 1 str
     SET $stat("%row%") = ind

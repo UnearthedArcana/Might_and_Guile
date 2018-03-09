@@ -2403,8 +2403,7 @@ COPY ~might_and_guile/bardsong/d5bdh11.eff~ ~override~
 //ARMORED CASTING FOR BARDS__________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb_acbards.qd~ BEGIN 
-  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5arcal.eff~ BEGIN
-
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
 	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
 		READ_SHORT 0x1c type
@@ -2431,26 +2430,25 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb_acbards.qd~ BEGIN
 	COPY ~might_and_guile/misc/d5arca1.eff~ ~override~
 	COPY ~might_and_guile/misc/d5arca2.eff~ ~override~
 	COPY ~might_and_guile/misc/d5arca3.eff~ ~override~
-	
-	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_SHORT 0x1c type
-		READ_LONG 0x22 appearance
-		PATCH_IF (type = 2) BEGIN // armor
-		  PATCH_IF (appearance = 16690) BEGIN // leather appearance
-			LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca1~ END
-		  END
-//		  PATCH_IF (appearance = 16691) BEGIN // chain appearance
-//			LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca2~ END
-//		  END
-//		  PATCH_IF (appearance = 16692) BEGIN // plate appearance
-//		 	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca3~ END
-//		  END
-		END
-	  END
-	BUT_ONLY
-
+	COPY ~might_and_guile/lib/markers/d5_armcast.d5~ ~override~
   END
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+  	  READ_SHORT 0x1c type
+	  READ_LONG 0x22 appearance
+	  PATCH_IF (type = 2) BEGIN // armor
+		PATCH_IF (appearance = 16690) BEGIN // leather appearance
+		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca1~ END
+		END
+//		PATCH_IF (appearance = 16691) BEGIN // chain appearance
+//		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca2~ END
+//		END
+//		PATCH_IF (appearance = 16692) BEGIN // plate appearance
+//		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca3~ END
+//		END
+  	  END
+    END
+  BUT_ONLY
 END
 //___________________________________________________________________________________
 

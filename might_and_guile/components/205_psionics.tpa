@@ -456,6 +456,8 @@ COPY ~might_and_guile/psi/d5ps101.spl~ ~override~   //  			id insinuation
 	SAY UNIDENTIFIED_DESC @20604
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst4~ END
 COPY ~might_and_guile/psi/d5ps101a.spl~ ~override~
+	SAY NAME1 @20603
+	SAY UNIDENTIFIED_DESC @20604
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 5 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps101a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps101.bam~ ~override~
@@ -465,6 +467,8 @@ COPY ~might_and_guile/psi/d5ps102.spl~ ~override~   //  			ego repair
 	SAY UNIDENTIFIED_DESC @20607
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst6~ END
 COPY ~might_and_guile/psi/d5ps102a.spl~ ~override~
+	SAY NAME1 @20606
+	SAY UNIDENTIFIED_DESC @20607
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 7 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps102a~ END
 COPY ~might_and_guile/psi/d5_ps102.bam~ ~override~
 
@@ -473,6 +477,8 @@ COPY ~might_and_guile/psi/d5ps103.spl~ ~override~   // 				domination
 	SAY UNIDENTIFIED_DESC @20610
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst6~ END
 COPY ~might_and_guile/psi/d5ps103a.spl~ ~override~
+	SAY NAME1 @20609
+	SAY UNIDENTIFIED_DESC @20610
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 7 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps103a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps103.bam~ ~override~
@@ -496,6 +502,8 @@ COPY ~might_and_guile/psi/d5ps105.spl~ ~override~   // 				psychic crush
 	SAY UNIDENTIFIED_DESC @20616
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst9~ END
 COPY ~might_and_guile/psi/d5ps105a.spl~ ~override~
+	SAY NAME1 @20615
+	SAY UNIDENTIFIED_DESC @20616
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 10 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps105a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps105.bam~ ~override~
@@ -522,6 +530,8 @@ COPY ~might_and_guile/psi/d5ps201.spl~ ~override~   // 				immobilize
 	SAY UNIDENTIFIED_DESC @20624
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst4~ END
 COPY ~might_and_guile/psi/d5ps201a.spl~ ~override~
+	SAY NAME1 @20623
+	SAY UNIDENTIFIED_DESC @20624
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 5 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps201a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps201.bam~ ~override~
@@ -531,6 +541,8 @@ COPY ~might_and_guile/psi/d5ps202.spl~ ~override~   // 				kinetic ram
 	SAY UNIDENTIFIED_DESC @20627
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst4~ END
 COPY ~might_and_guile/psi/d5ps202a.spl~ ~override~
+	SAY NAME1 @20626
+	SAY UNIDENTIFIED_DESC @20627
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 5 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps202a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps202.bam~ ~override~
@@ -571,6 +583,8 @@ COPY ~might_and_guile/psi/d5ps205.spl~ ~override~   // 				instinctive freedom
 	SAY NAME1 @20635
 	SAY UNIDENTIFIED_DESC @20636
 COPY ~might_and_guile/psi/d5ps205a.spl~ ~override~
+	SAY NAME1 @20635
+	SAY UNIDENTIFIED_DESC @20636
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 1 parameter1 = 10 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps205a~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 insert_point = 0 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst9~ END
 COPY ~might_and_guile/psi/d5_ps205.bam~ ~override~
@@ -614,6 +628,8 @@ COPY ~might_and_guile/psi/d5ps302.spl~ ~override~   //  			energy transfer
 	SAY UNIDENTIFIED_DESC @20647
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst6~ END
 COPY ~might_and_guile/psi/d5ps302a.spl~ ~override~
+	SAY NAME1 @20646
+	SAY UNIDENTIFIED_DESC @20647
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 7 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps302a~ END
 COPY ~might_and_guile/psi/d5_ps302.bam~ ~override~
 
@@ -654,6 +670,8 @@ COPY ~might_and_guile/psi/d5ps305.spl~ ~override~   // 				generate lightning
 	SAY UNIDENTIFIED_DESC @20656
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5psst9~ END
 COPY ~might_and_guile/psi/d5ps305a.spl~ ~override~
+	SAY NAME1 @20655
+	SAY UNIDENTIFIED_DESC @20656
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 9 parameter1 = 10 parameter2 = %maxhp_lt% timing = 0 duration = 1 STR_VAR resource = ~d5ps305a~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_savingthrow = 8 savingthrow = 16 END
 COPY ~might_and_guile/psi/d5_ps305.bam~ ~override~

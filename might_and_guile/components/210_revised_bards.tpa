@@ -13,6 +13,9 @@ COPY ~might_and_guile/lib/markers/d5_bards.d5~ ~override~
 //__________________________________________________________________________________
 
 
+LAM JOINABLE_NPC_ARRAYS
+
+
 //HANDLE WAND/SCROLL USAGE__________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
@@ -168,20 +171,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
 BUT_ONLY
 
-//Generate array with non-joinable NPC cre files
-COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-  READ_BYTE 0x273 class
-  PATCH_IF (class = 2) OR (class = 4) BEGIN
-	READ_ASCII DEATHVAR "dv" (32) NULL
-	TO_UPPER dv
-	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-	END
-  END
-BUT_ONLY
-
 ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
-  PRINT ~%cre% => %dv%~ 
+//  PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
@@ -1251,32 +1242,34 @@ ACTION_FOR_EACH bard_spell IN ~WIZARD_CHARM_PERSON~ ~CLERIC_COMMAND~ ~CLERIC_SIL
 	COPY_EXISTING ~%spell_res%.spl~ ~override~
 	  READ_SHORT 0x1c spell_type
 	  READ_LONG 0x34 spell_level
+	  PATCH_IF (%spell_type% = 2) BEGIN
+		INNER_ACTION BEGIN
+ 		  COPY_EXISTING ~%spell_res%.spl~ ~override/d5b%spell_num%.spl~ 	
+ 			WRITE_SHORT 0x1c 1
+			READ_LONG 0x64 abil_offset
+			READ_SHORT 0x68 abil_number
+			READ_BYTE (%abil_offset% + 0x0c) abil_target					
+			READ_LONG 0x6a eff_offset
+			WHILE (%abil_number% > 0) BEGIN
+			  SET abil_number = (%abil_number% - 1)
+			  WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
+			END
+			READ_BYTE (%eff_offset% + 0x02) eff_target
+			LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
+			PATCH_IF (%abil_target% = 4) BEGIN
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+			END
+			ELSE BEGIN
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%spell_res%~ END
+			END
+		  BUT_ONLY
+		  OUTER_SPRINT ~the_res~ ~D5B%spell_num%~
+		END
+	  END
+	  PATCH_IF (%spell_type% = 1) BEGIN
+		TEXT_SPRINT ~the_res~ ~%spell_res%~
+	  END
 	BUT_ONLY
-	ACTION_IF (%spell_type% = 2) BEGIN
-	  COPY_EXISTING ~%spell_res%.spl~ ~override/d5b%spell_num%.spl~ 	
-		WRITE_SHORT 0x1c 1
-		READ_LONG 0x64 abil_offset
-		READ_SHORT 0x68 abil_number
-		READ_BYTE (%abil_offset% + 0x0c) abil_target					
-		READ_LONG 0x6a eff_offset
-		WHILE (%abil_number% > 0) BEGIN
-		  SET abil_number = (%abil_number% - 1)
-		  WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
-		END
-		READ_BYTE (%eff_offset% + 0x02) eff_target
-		LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
-		PATCH_IF (%abil_target% = 4) BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
-		END
-		ELSE BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%spell_res%~ END
-		END
-	  BUT_ONLY
-	  OUTER_SPRINT ~the_res~ ~D5B%spell_num%~
-	END
-	ACTION_IF (%spell_type% = 1) BEGIN
-	  OUTER_TEXT_SPRINT ~the_res~ ~%spell_res%~
-	END
 	ACTION_PHP_EACH d5_kit_clabs AS yoo => hoo BEGIN
 	  ACTION_IF (%hoo% = 5) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) BEGIN
 		APPEND ~%yoo%.2da~ ~ABILITY    GA_%the_res%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ 
@@ -2465,8 +2458,6 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 BUT_ONLY
 
-LAM JOINABLE_NPC_ARRAY
-
 ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
   PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
@@ -2504,42 +2495,6 @@ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 	END
   BUT_ONLY
 END
-/*
-ACTION_IF FILE_EXISTS_IN_GAME ~garric4.cre~ BEGIN
- COPY_EXISTING ~garric4.cre~ ~override~
-  READ_BYTE 0x273 npc_class
-  PATCH_IF (npc_class = 5) BEGIN
-	READ_SHORT 0x246 old_kit
-	PATCH_IF (old_kit = 16384) OR
-	  		(old_kit = 0) BEGIN
-	  WRITE_BYTE 0x234 1 // sets level to 1
-	  WRITE_BYTE 0x235 1
-	  WRITE_BYTE 0x236 1
-	  WRITE_SHORT 0x244 0
-	  WRITE_SHORT 0x246 0x4000 + %new_bard% // changes kit
-	  WRITE_BYTE 0x66 10
-	  WRITE_BYTE 0x6a 20
- 	  READ_BYTE 0x23d npc_con
-	  PATCH_IF (npc_con < 15) BEGIN
-		WRITE_SHORT 0x24 6
-		WRITE_SHORT 0x26 6
-	  END
-	  PATCH_IF (npc_con = 15) BEGIN
-		WRITE_SHORT 0x24 7
-		WRITE_SHORT 0x26 7
-	  END
-	  PATCH_IF (npc_con > 15) BEGIN
-		WRITE_SHORT 0x24 8
-		WRITE_SHORT 0x26 8
-	  END
-	  PATCH_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
-		LPF ADD_CRE_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5feata~ END
-	  END
-	END
-  END
- BUT_ONLY
-END
-*/
 //___________________________________________________________________________________
 
 

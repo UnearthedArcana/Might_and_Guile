@@ -72,10 +72,14 @@ COPY ~might_and_guile/monk/d5_nofst.spl~ ~override~
 	SAY NAME1 @2655
 	SAY UNIDENTIFIED_DESC @2656
 
-COPY_EXISTING ~clabmo01.2da~ ~override~
+ACTION_FOR_EACH monk_kit IN ~clabmo01~ ~QDMONK~ ~QDMONKSS~ ~QDMONKDM~ ~QDMONKHF~ ~QDMONKSH~ ~QDMONKLD~ ~QDMONKBO~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%monk_kit%.2da~ BEGIN
+	  COPY_EXISTING ~%monk_kit%.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/monk/mfist.txt~
-		BUT_ONLY
+	  BUT_ONLY
+	END
+END
 
 COPY_EXISTING ~kitlist.2da~ ~override~
 	COUNT_2DA_ROWS ~10~ "rows"
@@ -84,13 +88,13 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 		READ_2DA_ENTRY %index% 8 10 modclass
 		DEFINE_ASSOCIATIVE_ARRAY d5_monk_clabs BEGIN "%modclab%" => "%modclass%" END
 	END
-	BUT_ONLY
+BUT_ONLY
 ACTION_PHP_EACH d5_monk_clabs AS woo => soo BEGIN
 	ACTION_IF (%soo% = 20) AND (FILE_EXISTS_IN_GAME ~%woo%.2da~) THEN BEGIN
 		COPY_EXISTING ~%woo%.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/monk/mfist.txt~
-			BUT_ONLY
+		BUT_ONLY
 	END
 END
 //__________________________________________________________________________________
@@ -163,7 +167,7 @@ END
 //__________________________________________________________________________________
 
 
-//FAERUNIAN MONASTIC ORDERS COMPATIBILITY________________________________________
+//MONASTIC ORDERS OF FAERUN 0.3 COMPATIBILITY_______________________________________
 // 
 ACTION_IF FILE_EXISTS_IN_GAME ~qdmnk02.spl~ THEN BEGIN
 	COPY_EXISTING ~clabmo01.2da~ ~override~

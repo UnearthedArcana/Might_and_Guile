@@ -14,6 +14,9 @@ COPY ~might_and_guile/lib/markers/d5_wfeat.d5~ ~override~
 //__________________________________________________________________________________
 
 
+LAM JOINABLE_NPC_ARRAYS
+
+
 //IMPROVE THAC0 TABLE_______________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
@@ -654,115 +657,9 @@ COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwd spell evasion
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
 
-ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
-  ACTION_FOR_EACH evade_spell IN ~abzaway~
-								~balshld2~
-								~bdbarbde~
-								~bdbelblz~
-								~bdbelinf~
-								~bdbow05~
-								~bdcaela4~
-								~bddagg05~
-								~bdmepwat~
-								~bdpflame~
-								~bdsha12a~
-								~bdspl01~
-								~bdunslgu~
-								~bdvenoms~
-								~bdwyrmb~
-								~ohbdrag1~
-								~ohbeflam~
-								~ohbicew~
-								~ohbwi304~
-								~ohbwi308~
-								~ohdmask~
-								~spblun29~
-								~spcl237d~
-								~spcl722~
-								~spctmd01~
-								~spdd03~
-								~spdr201~
-								~spdr301~
-								~spdr601~
-								~spimix01~
-								~spin132~
-								~spin134~
-								~spin160~
-								~spin169~
-								~spin175~
-								~firau3d6~
-								~spin935~
-								~spogre01~
-								~sppr105~
-								~sppr302~
-								~sppr304~
-								~sppr323d~
-								~sppr324~
-								~sppr419~
-								~sppr426~
-								~sppr427~
-								~sppr503~
-								~sppr519~
-								~sppr603d~
-								~sppr616~
-								~sppr618~
-								~sppr619~
-								~sppr698d~
-								~sppr705~
-								~sppr720~
-								~sppr725d~
-								~sppr901~
-								~sppr984~
-								~sppr985~
-								~sppr987~
-								~spwi001~
-								~spwi002~
-								~spwi017~
-								~spwi021~
-								~spwi025~
-								~spwi026~
-								~spwi027~
-								~spwi033~
-								~spwi034~
-								~spwi101~
-								~spwi103~
-								~spwi105~
-								~spwi112~
-								~spwi204~
-								~spwi211~
-								~spwi215~
-								~spwi304~ 
-								~spwi299~
-								~spwi308~
-								~spwi313~
-								~spwi327~
-								~spwi399~
-								~sppr951d~
-								~spwi404~
-								~sppr952d~
-								~spwi430~
-								~spwi503~
-								~spwi523~
-								~spwi524~
-								~spwi615~
-								~spwi628~
-								~spwi709~
-								~spwi712~
-								~spwi714~
-								~spwi724~
-								~spwi812~
-								~spwi818~
-								~spwi911~
-								~spwi918~ 
-								~spwi922~
-								~spwi925~ BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~%evade_spell%.spl~ BEGIN
-	  COPY_EXISTING ~%evade_spell%.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 324 insert_point = 0 target = 2 parameter2 = 63 timing = 0 duration = 1 resist_dispel = 2 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	  BUT_ONLY
-	END
-  END
-END
+OUTER_SET optional_evade = 1
+
+INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
 
 ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
   COPY_EXISTING ~clabth01.2da~ ~override~
@@ -1535,8 +1432,6 @@ CLEAR_ARRAYS
 //
 // need to give some feats directly to thief/mages
 //
-LAM JOINABLE_NPC_ARRAY
-
 ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
   PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
@@ -1642,6 +1537,101 @@ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 	END
   BUT_ONLY
 END
+//__________________________________________________________________________________
+
+
+//apply feats to AI thieves & fighters______________________________________________
+//
+ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+//  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  READ_BYTE 0x273 npc_class
+	  PATCH_IF (npc_class = 4) BEGIN
+		LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
+		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	  END
+	  PATCH_IF (npc_class = 2) BEGIN
+		SET random_num = RANDOM (1 5)
+		PATCH_IF (%random_num% = 1) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf21~ END
+		END
+		PATCH_IF (%random_num% = 2) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf22~ END
+		END
+		PATCH_IF (%random_num% = 3) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 8 timing = 0 duration = 126144000 END
+		END
+		PATCH_IF (%random_num% = 4) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 4 timing = 0 duration = 126144000 END
+		END
+		PATCH_IF (%random_num% = 5) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
+		END
+		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	  END
+	END
+  BUT_ONLY
+END
+
+
+/*
+//Generate arrays with non-joinable NPC cre files
+COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+  READ_BYTE 0x273 class
+  PATCH_IF (class = 2) BEGIN
+	READ_ASCII DEATHVAR "dv" (32) NULL
+	TO_UPPER dv
+	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_FIGHTER_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+  READ_BYTE 0x273 class
+  PATCH_IF (class = 4) BEGIN
+	READ_ASCII DEATHVAR "dv" (32) NULL
+	TO_UPPER dv
+	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_THIEF_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+	END
+  END
+BUT_ONLY
+
+ACTION_PHP_EACH NON_JOINABLE_FIGHTER_ARRAY AS fcre => dv BEGIN
+  PRINT ~%fcre% => %dv%~ 
+  COPY_EXISTING ~%fcre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+		SET random_num = RANDOM (1 5)
+		PATCH_IF (%random_num% = 1) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf21~ END
+		END
+		PATCH_IF (%random_num% = 2) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf22~ END
+		END
+		PATCH_IF (%random_num% = 3) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 8 timing = 0 duration = 126144000 END
+		END
+		PATCH_IF (%random_num% = 4) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 4 timing = 0 duration = 126144000 END
+		END
+		PATCH_IF (%random_num% = 5) BEGIN
+		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
+		END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	END
+  BUT_ONLY
+END
+ACTION_PHP_EACH NON_JOINABLE_THIEF_ARRAY AS tcre => dv BEGIN
+  PRINT ~%tcre% => %dv%~ 
+  COPY_EXISTING ~%tcre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	END
+  BUT_ONLY
+END
+*/
 //__________________________________________________________________________________
 
 
@@ -1878,65 +1868,5 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF42~ num_allowed 
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
-//__________________________________________________________________________________
-
-
-//apply feats to AI thieves & fighters______________________________________________
-//
-//Generate arrays with non-joinable NPC cre files
-COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-  READ_BYTE 0x273 class
-  PATCH_IF (class = 2) BEGIN
-	READ_ASCII DEATHVAR "dv" (32) NULL
-	TO_UPPER dv
-	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_FIGHTER_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-	END
-  END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-  READ_BYTE 0x273 class
-  PATCH_IF (class = 4) BEGIN
-	READ_ASCII DEATHVAR "dv" (32) NULL
-	TO_UPPER dv
-	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_THIEF_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-	END
-  END
-BUT_ONLY
-
-ACTION_PHP_EACH NON_JOINABLE_FIGHTER_ARRAY AS fcre => dv BEGIN
-  PRINT ~%fcre% => %dv%~ 
-  COPY_EXISTING ~%fcre%~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-		SET random_num = RANDOM (1 5)
-		PATCH_IF (%random_num% = 1) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf21~ END
-		END
-		PATCH_IF (%random_num% = 2) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf22~ END
-		END
-		PATCH_IF (%random_num% = 3) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 8 timing = 0 duration = 126144000 END
-		END
-		PATCH_IF (%random_num% = 4) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 4 timing = 0 duration = 126144000 END
-		END
-		PATCH_IF (%random_num% = 5) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
-		END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
-	END
-  BUT_ONLY
-END
-ACTION_PHP_EACH NON_JOINABLE_THIEF_ARRAY AS tcre => dv BEGIN
-  PRINT ~%tcre% => %dv%~ 
-  COPY_EXISTING ~%tcre%~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	  LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
-	END
-  BUT_ONLY
-END
 //__________________________________________________________________________________
 

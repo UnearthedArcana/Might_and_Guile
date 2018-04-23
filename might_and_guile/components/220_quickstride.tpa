@@ -13,6 +13,9 @@ COPY ~might_and_guile/misc/d5_strid.d5~ ~override~
 //__________________________________________________________________________________
 
 
+LAM JOINABLE_NPC_ARRAYS
+
+
 //WARRIOR ABILITY FILES_________________________________________________________
 //
 ACTION_FOR_EACH stride IN ~d5_stri2~ ~d5_stri3~ ~d5_stri4~ ~d5_stri5~ ~d5_stri6~ ~d5_strim~ BEGIN
@@ -44,6 +47,42 @@ COPY ~might_and_guile/misc/d5_nstr3.spl~ ~override~
 COPY ~might_and_guile/misc/d5_nstr4.spl~ ~override~
 COPY ~might_and_guile/misc/d5_nstr5.spl~ ~override~
 
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  LPF DELETE_CRE_EFFECT INT_VAR opcode_to_delete = 176 END
+	END
+  BUT_ONLY
+END
+
+COPY_EXISTING ~spcl151.spl~ ~override~
+			  ~spcl812.spl~ ~override~
+  LPF DELETE_EFFECT INT_VAR silent = 1 match_probability1 = 100 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~d5_stri4~ END
+
+COPY_EXISTING ~clabmo01.2da~ ~override~
+  REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+BUT_ONLY
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 33 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 cols clab
+	READ_2DA_ENTRY row 8 cols class
+	PATCH_IF (class = 20) BEGIN
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~%clab%.2da~ ~override~
+		  REPLACE_TEXTUALLY ~AP_SPCL813~ ~****      ~
+		BUT_ONLY
+	  END
+	END
+  END
+BUT_ONLY
+
+	
+/*
 COPY_EXISTING ~clabfi05.2da~ ~override~
 	REPLACE_TEXTUALLY ~AP_SPCL151 ~ ~****       ~
 	LPM remove_blank_lines
@@ -111,6 +150,8 @@ ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 		END
 		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
 			COPY_EXISTING ~%yoo%.2da~ ~override~
+				REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+				REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
 				LPM remove_blank_lines
 				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
 				BUT_ONLY
@@ -137,6 +178,8 @@ ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
 		END
 		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
 			COPY_EXISTING ~%yoo%.2da~ ~override~
+				REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+				REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
 				LPM remove_blank_lines
 				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
 				BUT_ONLY
@@ -164,6 +207,8 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 		END
 		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
 			COPY_EXISTING ~%yoo%.2da~ ~override~
+				REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+				REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
 				LPM remove_blank_lines
 				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
 				BUT_ONLY
@@ -190,11 +235,16 @@ ACTION_IF GAME_IS ~tob bgt tutu~ THEN BEGIN
 		END
 		ACTION_IF (%hoo% = 20) AND (FILE_EXISTS_IN_GAME ~%yoo%.2da~) THEN BEGIN
 			COPY_EXISTING ~%yoo%.2da~ ~override~
+				REPLACE_TEXTUALLY ~AP_SPCL812 ~ ~****       ~
+				REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
 				LPM remove_blank_lines
 				APPEND_FILE ~might_and_guile/misc/strimonk.txt~
 				BUT_ONLY
 		END
 	END
 END
+*/
+
 //______________________________________________________________________________
+
 CLEAR_ARRAYS

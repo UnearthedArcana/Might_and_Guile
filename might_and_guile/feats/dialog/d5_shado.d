@@ -8,9 +8,9 @@ IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_shado
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_shado_5
  IF ~GlobalLT("D5_ALCHEMY","LOCALS",1)~ THEN REPLY @20131 GOTO d5_shado_6
  IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_shado_17
- IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_shado_9
+ IF ~GlobalLT("D5_DODGE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_shado_9
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_shado_10
- IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_shado_43
+ IF ~GlobalLT("D5_EVADE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_shado_43
  IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_shado_11
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_shado_12
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_shado_14
@@ -47,7 +47,7 @@ IF ~~ THEN BEGIN d5_shado_6 // basic alchemy
 END 
 IF ~~ THEN BEGIN d5_shado_9 // AC bonus
  SAY @20202
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_shado 
 END 
 IF ~~ THEN BEGIN d5_shado_10 // save bonus
@@ -55,9 +55,9 @@ IF ~~ THEN BEGIN d5_shado_10 // save bonus
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_shado 
 END 
-IF ~~ THEN BEGIN d5_shado_43 // artful dodging (iwdee evasion)
+IF ~~ THEN BEGIN d5_shado_43 // spell evasion
  SAY @20224
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_shado
 END 
 IF ~~ THEN BEGIN d5_shado_11 // melee thac0 bonus

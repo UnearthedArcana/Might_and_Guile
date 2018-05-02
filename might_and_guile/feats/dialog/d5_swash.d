@@ -10,6 +10,7 @@ SAY @20009
  IF ~GlobalLT("D5_GASOIL","LOCALS",2)~ THEN REPLY @20271 GOTO d5_swash_81
  IF ~GlobalLT("D5_DODGE","LOCALS",4)~ THEN REPLY @20201 GOTO d5_swash_41
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_swash_45
+ IF ~GlobalLT("D5_EVADE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_swash_43
  IF ~GlobalLT("D5_ESCAPE","LOCALS",1)~ THEN REPLY @20221 GOTO d5_swash_42
  IF ~GlobalLT("D5_ATTACK","LOCALS",4)~ THEN REPLY @20231 GOTO d5_swash_51
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_swash_58
@@ -56,6 +57,11 @@ END
 IF ~~ THEN BEGIN d5_swash_45 // save bonus
  SAY @20212
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD5",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_swash 
+END 
+IF ~~ THEN BEGIN d5_swash_43 // spell evasion
+ SAY @20224
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_swash 
 END 
 IF ~~ THEN BEGIN d5_swash_42 // escape artist

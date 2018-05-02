@@ -15,6 +15,7 @@ SAY @20009
  IF ~GlobalLT("D5_FLAMEW","LOCALS",3)~ THEN REPLY @20151 GOTO d5_huntr_36
  IF ~GlobalLT("D5_DODGE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_huntr_41
  IF ~GlobalLT("D5_SAVES","LOCALS",1)~ THEN REPLY @20211 GOTO d5_huntr_45
+ IF ~GlobalLT("D5_EVADE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_huntr_43
  IF ~GlobalLT("D5_ATTACK","LOCALS",2)~ THEN REPLY @20231 GOTO d5_huntr_51
  IF ~GlobalLT("D5_RTHAC0","LOCALS",2)~ THEN REPLY @20233 GOTO d5_huntr_52
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_huntr_55
@@ -85,6 +86,11 @@ IF ~~ THEN BEGIN d5_huntr_45 // save bonus
  SAY @20212
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_SAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD5",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_huntr 
+END 
+IF ~~ THEN BEGIN d5_huntr_43 // spell evasion
+ SAY @20224
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_huntr
 END 
 IF ~~ THEN BEGIN d5_huntr_51 // melee thac0 bonus
  SAY @20232

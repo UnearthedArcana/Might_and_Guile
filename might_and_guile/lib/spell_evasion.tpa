@@ -7,19 +7,21 @@
 //__________________________________________________________________________________
 
 
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
+
 //spell to set evasion state________________________________________________________
 //
-COPY_EXISTING ~spcl221.spl~ ~override/d5evade.spl~
+  COPY_EXISTING ~spcl221.spl~ ~override/d5evade.spl~
 	SAY NAME1 ~ ~
 	SAY UNIDENTIFIED_DESC ~ ~
 	LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 parameter2 = 252 timing = 9 special = 1 END
-BUT_ONLY
+  BUT_ONLY
 //__________________________________________________________________________________
 
 //patch spells for evasion__________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
+ OUTER_SET evadable_ind = 1
  ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
   ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN		
 	spcl722 		=> 1
@@ -69,14 +71,26 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
 	  COPY_EXISTING ~%evaded_spell%.spl~ ~override~
 		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 72 match_parameter1 = 4 match_duration = 0 END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 324 insert_point = 0 target = 2 parameter2 = 63 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 insert_point = 0 target = 2 parameter2 = 3 parameter1 = 4 timing = 0 duration = 0 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 insert_point = 0 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 savingthrow = 2 STR_VAR resource = EVAL ~d5ev%evadable_ind%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 insert_point = 0 target = 2 parameter1 = (0 - 1) parameter2 = 0 timing = 0 duration = 1 savingthrow = 2 STR_VAR resource = EVAL ~d5ev%evadable_ind%~ END
 	  BUT_ONLY
+	  CREATE EFF ~d5ev%evadable_ind%~
+		WRITE_LONG 0x10 324
+		WRITE_LONG 0x14 2
+		WRITE_LONG 0x1c 252
+		WRITE_LONG 0x20 110
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%evaded_spell%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~d5ev%evadable_ind%~ #8
 	END
+	OUTER_SET evadable_ind = (evadable_ind + 1)
   END
  END
  ACTION_IF (optional_evade = 1) BEGIN
-  ACTION_DEFINE_ASSOCIATIVE_ARRAY optional_evades BEGIN		
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY optional_evades BEGIN
 	abzaway 		=> 1
 	balshld2 		=> 1
 	bdbarbde 		=> 1
@@ -121,17 +135,31 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
 	sppr987 		=> 1
 	spwi001 		=> 1
 	spwi002 		=> 1
+	spwi003 		=> 1
+	spwi005 		=> 1
+	spwi006 		=> 1
+	spwi007 		=> 1
+	spwi008 		=> 1
+	spwi009 		=> 1
+	spwi010 		=> 1
+	spwi011 		=> 1
+	spwi012 		=> 1
+	spwi013 		=> 1
+	spwi015 		=> 1
 	spwi017 		=> 1
 	spwi021 		=> 1
+	spwi024 		=> 1
 	spwi025 		=> 1
 	spwi026 		=> 1
 	spwi027 		=> 1
 	spwi033 		=> 1
 	spwi034 		=> 1
 	spwi101 		=> 1
+	spwi112 		=> 1
 	spwi211 		=> 1
 	spwi215 		=> 1
 	spwi299 		=> 1
+	spwi303 		=> 1
 	spwi308 		=> 1
 	spwi313 		=> 1
 	spwi327 		=> 1
@@ -154,13 +182,24 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
 	  COPY_EXISTING ~%optional_evaded%.spl~ ~override~
 		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 72 match_parameter1 = 4 match_duration = 0 END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 324 insert_point = 0 target = 2 parameter2 = 63 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 insert_point = 0 target = 2 parameter2 = 3 parameter1 = 4 timing = 0 duration = 0 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 insert_point = 0 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5ev%evadable_ind%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 insert_point = 0 target = 2 parameter1 = (0 - 1) parameter2 = 0 timing = 0 duration = 1 savingthrow = 2 STR_VAR resource = EVAL ~d5ev%evadable_ind%~ END
 	  BUT_ONLY
+	  CREATE EFF ~d5ev%evadable_ind%~
+		WRITE_LONG 0x10 324
+		WRITE_LONG 0x14 2
+		WRITE_LONG 0x1c 252
+		WRITE_LONG 0x20 110
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%optional_evaded%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~d5ev%evadable_ind%~ #8
 	END
+	OUTER_SET evadable_ind = (evadable_ind + 1)
   END
  END
-END
 //___________________________________________________________________________________
 
 
@@ -168,3 +207,5 @@ END
 //
 COPY_EXISTING ~sw1h04.itm~ ~override/d5_evasion.d5~
 //__________________________________________________________________________________
+
+END

@@ -12,7 +12,6 @@ SAY @23101	//	~Choose a Called Shot:~
  IF ~GlobalLT("D5_TOUGH","LOCALS",1)~ THEN REPLY @20307 GOTO d5_sling_18
  IF ~GlobalLT("D5_MSAVES","LOCALS",1)~ THEN REPLY @20213 GOTO d5_sling_46
  IF ~GlobalLT("D5_PSAVES","LOCALS",1)~ THEN REPLY @20215 GOTO d5_sling_47
- IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_sling_43
  IF ~GlobalLT("D5_CRIT","LOCALS",1)~ THEN REPLY @20243 GOTO d5_sling_56
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_sling_16
 END
@@ -66,11 +65,6 @@ IF ~~ THEN BEGIN d5_sling_47 // death/polymorph saves
  SAY @20216
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_PSAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD7",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_sling 
-END 
-IF ~~ THEN BEGIN d5_sling_43 // artful dodging (iwdee evasion)
- SAY @20224
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_sling
 END 
 IF ~~ THEN BEGIN d5_sling_56 // +5% crit
  SAY @20244

@@ -652,7 +652,7 @@ COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @20222
 	WRITE_ASCII 0x3a ~d5_rfd2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
-
+/*
 COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwd spell evasion
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
@@ -681,7 +681,7 @@ ACTION_PHP_EACH d5_evasion_array AS fo => sho BEGIN
 	BUT_ONLY
   END
 END
-
+*/
 COPY ~might_and_guile/feats/d5_rfd5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override~   // 			save bonuses
 	SAY NAME1 @20211

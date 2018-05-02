@@ -10,8 +10,7 @@ SAY @23101 // ~Choose a feat:~
  IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_stalk_16
  IF ~GlobalLT("D5_SKILLS","LOCALS",5)~ THEN REPLY @20101 GOTO d5_stalk_11
  IF ~GlobalLT("D5_DTRAP","LOCALS",3)~ THEN REPLY @20113 GOTO d5_stalk_21
- IF ~GlobalLT("D5_EVADE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_41
- IF ~GlobalLT("D5_DODGE","LOCALS",1)~ THEN REPLY @20223 GOTO d5_stalk_43
+ IF ~GlobalLT("D5_DODGE","LOCALS",2)~ THEN REPLY @20201 GOTO d5_stalk_41
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_stalk_55
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_stalk_75
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_stalk_73
@@ -71,13 +70,8 @@ IF ~~ THEN BEGIN d5_stalk_21 // dart trap
 END 
 IF ~~ THEN BEGIN d5_stalk_41 // AC bonus
  SAY @20202
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_EVADE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_stalk 
-END 
-IF ~~ THEN BEGIN d5_stalk_43 // artful dodging (iwdee evasion)
- SAY @20224
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DODGE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD3",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_stalk
 END 
 IF ~~ THEN BEGIN d5_stalk_55 // backstab bonus
  SAY @20242

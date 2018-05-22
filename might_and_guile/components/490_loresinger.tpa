@@ -139,46 +139,12 @@ COPY_EXISTING ~sppr710.spl~ ~override/d5_cho71.spl~
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr713.spl~ ~override/d5_cho72.spl~
 	WRITE_SHORT 0x1c 1
-/*
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_chori.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
-		APPEND_FILE ~might_and_guile/misc/intelligence_bards.txt~
-	BUT_ONLY
-END
-*/
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_skspl.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_chori.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_chori.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/bard/baspl2.txt~
-END
 //__________________________________________________________________________________
 
 
-//REPLACE BASE SKALD, UPDATE SONG___________________________________________________
+//UPDATE SONGS______________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
-/*
-  COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~7~ "kit_row"
-  OUTER_SET kit_row -= 2
-  COPY_EXISTING ~K_B_D.2da~ ~override~
-		~K_B_E.2da~ ~override~
-		~K_B_G.2da~ ~override~
-		~K_B_H.2da~ ~override~
-		~K_B_HE.2da~ ~override~
-		~K_B_HL.2da~ ~override~
-		~K_B_HO.2da~ ~override~
-	REPLACE_TEXTUALLY ~15~ ~%kit_row%~
-  BUT_ONLY
-*/
   COPY_EXISTING ~d5_chori.2da~ ~override~
 	REPLACE_TEXTUALLY ~AP_D5_CHOR~ ~****     ~
 //	LPM remove_blank_lines
@@ -194,6 +160,29 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
 	END
 	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@21806)
   BUT_ONLY
+  APPEND ~d5_chori.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL910~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL911~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL912~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_SPCL920~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_TG#BRPO~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_LI#EN01~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_TG#LI01~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BJS01~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BSK01~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BDF03~ END
+  ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
+    LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL918~ END
+    LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
+    LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
+    LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+    LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
+  END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
+  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
 END
 //__________________________________________________________________________________
 

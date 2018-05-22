@@ -13,7 +13,7 @@ COPY ~might_and_guile/lib/markers/d5_multi.d5~ ~override~
 //__________________________________________________________________________________
 
 
-//FnP KIT DESCRIPTION PATCHING__________________________________________________________
+//FnP KIT DESCRIPTION PATCHING_______________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spheres.d5~) BEGIN
 	OUTER_SPRINT focus_access @33
@@ -27,7 +27,7 @@ END
 //__________________________________________________________________________________
 
 
-//ENABLE MORE MULTICLASSES___________________________________________________________
+//ENABLE MORE MULTICLASSES__________________________________________________________
 //
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	COPY_EXISTING ~CLSRCREQ.2da~ ~override~
@@ -84,7 +84,7 @@ END
 //
 ADD_KIT ~D5BLADS~
 
-//WEAPON PROFICIENCIES________________________________________________________________
+//WEAPON PROFICIENCIES_______________________________________________________________
 //11                                   T   S           F   Q             S S
 //10           L S                     W   C           L   U             W I
 //9            A M             B L S   O   I   W       A   A             O N
@@ -107,7 +107,7 @@ ADD_KIT ~D5BLADS~
 //                 STR DEX CON INT WIS CHR
 ~D5BLADS           0   0   0   0   0   0~
 
-//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
 //                 STR DEX CON INT WIS CHR
 ~D5BLADS           15  15  0   0   0   0~
 
@@ -123,10 +123,10 @@ ADD_KIT ~D5BLADS~
 //                 FT CL MA TH DR RA
 ~D5BLADS           0  0  0  0  0  0~
 
-//KIT ABILITIES 2DA FILE______________________________________________________________
+//KIT ABILITIES 2DA FILE_____________________________________________________________
 ~might_and_guile/mc/d5_blads.2da~
 
-//RACIAL KIT AVAILABILITY_____________________________________________________________
+//RACIAL KIT AVAILABILITY____________________________________________________________
 ~K_FM_E~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________

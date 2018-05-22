@@ -1052,19 +1052,6 @@ END
 //__________________________________________________________________________________
 */
 
-
-//ADD LORESINGER_____________________________________________________________________
-//
-INCLUDE ~might_and_guile/components/490_loresinger.tpa~
-//___________________________________________________________________________________
-
-
-//ADD MEISTERSINGER, CAUSE WHY NOT___________________________________________________
-//
-INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
-//___________________________________________________________________________________
-
-
 //GET KIT IDENTIFIERS________________________________________________________________
 //
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -2332,8 +2319,8 @@ ABILITY     AP_D5IFEAT  ****        ****        ****        ****        ****    
   APPEND ~clabba03.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
   APPEND ~clabba04.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 
-  APPEND ~d5_chori.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-  APPEND ~d5_meist.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+//  APPEND ~d5_chori.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+//  APPEND ~d5_meist.2da~ ~ABILITY     AP_D5IFEAT  ****        AP_D5FEAT1  ****        ****        AP_D5FEAT2  ****        ****         AP_D5FEAT3  ****        ****        AP_D5FEAT4  ****        ****        AP_D5FEAT5  ****        ****        AP_D5FEAT6  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 
   ACTION_IF FILE_EXISTS_IN_GAME ~a!acro.2da~ BEGIN		//		acrobat
 	EXTEND_TOP ~d5_feat.bcs~ ~might_and_guile/bardsong/d5_ssacr.baf~
@@ -2418,56 +2405,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  END
 	END
 BUT_ONLY
-/*
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdtnb_acbards.qd~ BEGIN 
-  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
-	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_SHORT 0x1c type
-		READ_LONG 0x22 appearance
-		PATCH_IF (type = 2) BEGIN // armor
-		  PATCH_IF (appearance = 16690) BEGIN // leather appearance
-			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcal~ END
-		  END
-		  PATCH_IF (appearance = 16691) BEGIN // chain appearance
-			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcac~ END
-		  END
-		  PATCH_IF (appearance = 16692) BEGIN // plate appearance
-			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcap~ END
-		  END
-		END
-	  END
-	BUT_ONLY
-	COPY ~might_and_guile/misc/d5arcal.eff~ ~override~
-	COPY ~might_and_guile/misc/d5arcac.eff~ ~override~
-	COPY ~might_and_guile/misc/d5arcap.eff~ ~override~
-	COPY ~might_and_guile/misc/d5arca1.spl~ ~override~
-	COPY ~might_and_guile/misc/d5arca2.spl~ ~override~
-	COPY ~might_and_guile/misc/d5arca3.spl~ ~override~
-	COPY ~might_and_guile/misc/d5arca1.eff~ ~override~
-	COPY ~might_and_guile/misc/d5arca2.eff~ ~override~
-	COPY ~might_and_guile/misc/d5arca3.eff~ ~override~
-	COPY ~might_and_guile/lib/markers/d5_armcast.d5~ ~override~
-  END
-  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-  	  READ_SHORT 0x1c type
-	  READ_LONG 0x22 appearance
-	  PATCH_IF (type = 2) BEGIN // armor
-		PATCH_IF (appearance = 16690) BEGIN // leather appearance
-		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca1~ END
-		END
-//		PATCH_IF (appearance = 16691) BEGIN // chain appearance
-//		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca2~ END
-//		END
-//		PATCH_IF (appearance = 16692) BEGIN // plate appearance
-//		  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca3~ END
-//		END
-  	  END
-    END
-  BUT_ONLY
-END
-*/
 //___________________________________________________________________________________
 
 
@@ -2780,52 +2717,6 @@ LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL907~ num_allo
 LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL908~ num_allowed = ~5~ END
 */
 
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL910~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL911~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL912~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_SPCL920~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_TG#BRPO~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_LI#EN01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_TG#LI01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BJS01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BSK01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BDF03~ END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
-  LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL918~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
-END
-LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
-LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
-LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
-LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
-
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL910~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL911~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL912~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_SPCL920~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_TG#BRPO~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_LI#EN01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_TG#LI01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BJS01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BSK01~ END
-LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~AP_RR#BDF03~ END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
-  LAF action_remove_hla STR_VAR kit_name = ~D5MEIST~ remove_ability = ~GA_SPCL918~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
-  LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
-END
-LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_SPCL929~ num_allowed = ~3~ prerequisite = ~AP_SPCL928~ END
-LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
-LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
-LAF action_add_hla STR_VAR kit_name = ~D5MEIST~ ability = ~AP_D5BD61Z~ num_allowed = ~1~ END
-
 LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL910~ END
 LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL911~ END
 LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_SPCL912~ END
@@ -2919,3 +2810,14 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5BD61Z~ num_allowed 
 //__________________________________________________________________________________
 
 CLEAR_ARRAYS
+
+
+//ADD LORESINGER_____________________________________________________________________
+//
+INCLUDE ~might_and_guile/components/490_loresinger.tpa~
+//___________________________________________________________________________________
+
+//AND MEISTERSINGER, CAUSE WHY NOT___________________________________________________
+//
+INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
+//___________________________________________________________________________________

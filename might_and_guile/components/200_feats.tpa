@@ -659,7 +659,13 @@ COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwd spell evasion
 
 OUTER_SET optional_evade = 1
 
-INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+INCLUDE ~%MOD_FOLDER%/lib/spell_evasion/spell_evasion.tpa~
+
+//ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
+  ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN 
+    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_spell = EVAL ~%evadable_spell%~ evade_prefix = ~d5ev~ END
+  END
+//END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
   COPY_EXISTING ~clabth01.2da~ ~override~
@@ -682,6 +688,8 @@ ACTION_PHP_EACH d5_evasion_array AS fo => sho BEGIN
 	BUT_ONLY
   END
 END
+
+//COPY_EXISTING ~sw1h04.itm~ ~override/d5_evasion.d5~
 
 COPY ~might_and_guile/feats/d5_rfd5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override~   // 			save bonuses

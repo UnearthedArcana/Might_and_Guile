@@ -1054,34 +1054,34 @@ END
 
 //GET KIT IDENTIFIERS________________________________________________________________
 //
-COPY_EXISTING ~kitlist.2da~ ~override~
+COPY_EXISTING ~kit.ids~ ~override~
   COUNT_2DA_COLS k_cols 
   READ_2DA_ENTRIES_NOW k_rows k_cols 
   FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN 
     READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~ 
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_BLADE~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_blade_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 nu_blade_code
     END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_JINXER~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 jinxer_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 jinxer_code
     END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_HERALD~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 herald_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 herald_code
     END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_F_GALLANT~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_gallant_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 nu_gallant_code
     END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_HEXBLADE~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 hexblade_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 hexblade_code
     END
     PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_SKALD~ BEGIN
       SET kit_row = %k_row%
-      READ_2DA_ENTRY_FORMER k_rows kit_row 9 nu_skald_code
+      READ_2DA_ENTRY_FORMER k_rows kit_row 0 nu_skald_code
     END
   END
 BUT_ONLY

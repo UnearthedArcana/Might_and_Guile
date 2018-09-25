@@ -15,8 +15,7 @@ SAY @20009
  IF ~GlobalLT("D5_ATTACK","LOCALS",4)~ THEN REPLY @20231 GOTO d5_swash_51
  IF ~GlobalGT("D5_ATTACK","LOCALS",0) GlobalLT("D5_SWASH","LOCALS",3)~ THEN REPLY @3106 GOTO d5_swash_58
  IF ~GlobalLT("D5_BACKSTAB","LOCALS",1)~ THEN REPLY @20241 GOTO d5_swash_55
- IF ~GlobalLT("D5_CRIT","LOCALS",1)~ THEN REPLY @20243 GOTO d5_swash_56
- IF ~Global("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_swash_57
+ IF ~GlobalLT("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_swash_57
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20259 GOTO d5_swash_75
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_swash_73
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_swash_74
@@ -82,11 +81,6 @@ END
 IF ~~ THEN BEGIN d5_swash_55 // backstab bonus
  SAY @20242
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_BACKSTAB","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE5",myself)~ EXIT 
- IF ~~ THEN REPLY @20097 GOTO d5_swash 
-END 
-IF ~~ THEN BEGIN d5_swash_56 // +5% crit
- SAY @20244
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_CRIT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_swash 
 END 
 IF ~~ THEN BEGIN d5_swash_57 // +10% crit

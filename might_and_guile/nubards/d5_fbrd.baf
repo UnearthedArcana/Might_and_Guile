@@ -1,0 +1,90 @@
+IF
+	Kit(LastSummonerOf(Myself),D5_BARD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_AUR01","LOCALS",1))
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fbard",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_BLADE)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fblade",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_JESTER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fjstr",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_SKALD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fskld",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_GALLANT)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fglnt",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_HERALD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fhrld",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_MEISTER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fmstr",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_JINXER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5fjinx",Myself))
+END
+
+IF
+	Kit(LastSummonerOf(Myself),D5_LORESINGER)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5flors",Myself))
+END

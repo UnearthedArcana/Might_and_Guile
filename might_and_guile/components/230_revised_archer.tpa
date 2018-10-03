@@ -67,13 +67,13 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
  END
  ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
   COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2301)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2301)
 	  END
 	END
   BUT_ONLY
@@ -116,13 +116,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2302)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2302)
 	  END
 	END
    BUT_ONLY
@@ -172,13 +172,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ THEN BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3224)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3224)
 	  END
 	END
    BUT_ONLY
@@ -218,13 +218,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ THEN BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3225)
 	  END
 	END
    BUT_ONLY
@@ -277,13 +277,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ THEN BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3244)
 	  END
 	END
    BUT_ONLY
@@ -323,13 +323,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ THEN BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3245)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3245)
 	  END
 	END
    BUT_ONLY
@@ -356,10 +356,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
   OUTER_TEXT_SPRINT total_sphere_list ~~
   LAM ~READ_FNP_KIT_INFO~
   COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 4; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 5 ~clab~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 10
+	FOR (row = 4; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 5 ~clab~
 	  PATCH_IF ~%clab%~ STRING_EQUAL_CASE ~CLABRN02~ BEGIN
 		SET kit_index = %row%
 		READ_2DA_ENTRY_FORMER rows kit_index 5 kit_clab

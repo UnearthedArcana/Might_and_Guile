@@ -204,12 +204,12 @@ COPY_EXISTING ~kit.ids~ ~override~
 	FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN
 	  READ_2DA_ENTRY_FORMER k_rows k_row 1 ~k_kit~
 	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_PSYPHER~ BEGIN
-	    SET ps_row = %k_row%
-	    READ_2DA_ENTRY_FORMER k_rows ps_row 0 ps_code
+	    SET al_row = %k_row%
+	    READ_2DA_ENTRY_FORMER k_rows al_row 0 ps_code
 	  END
 	  PATCH_IF ~%k_kit%~ STRING_EQUAL_CASE ~D5_SOULBLADE~ BEGIN
-	    SET sb_row = %k_row%
-	    READ_2DA_ENTRY_FORMER k_rows sb_row 0 sb_code
+	    SET al_row = %k_row%
+	    READ_2DA_ENTRY_FORMER k_rows al_row 0 sb_code
 	  END
 	END
 BUT_ONLY

@@ -21,18 +21,18 @@
 @22   = ~Tweak Components~
 @23   = ~New Kit Components~
 @30   = ~Would you like to view new kits? (y/n)~
-@33  = ~- Focus access to the spheres of: ~
-@34  = ~- Major access to the spheres of: ~
-@35  = ~- Minor access to the spheres of: ~
-@36  = ~Advantages:~
-@37  = ~Abilities:~
-@38  = ~Disadvantages:~
-@39  = ~Restrictions:~
-@40  = ~Shapeshift Natural Form~
+@33   = ~- Focus access to the spheres of: ~
+@34   = ~- Major access to the spheres of: ~
+@35   = ~- Minor access to the spheres of: ~
+@36   = ~Advantages:~
+@37   = ~Abilities:~
+@38   = ~Disadvantages:~
+@39   = ~Restrictions:~
+@40   = ~Shapeshift Natural Form~
 @100   = ~Revised Spellcasting Tables~
 @200   = ~Feat System~
 @205   = ~Psionics~
-@210   = ~Bard Class Overhaul~
+@210   = ~3E-Inspired Bard Overhaul & Multiclass Bards~
 @220   = ~Revised Movement Bonuses (Quickstride)~
 @225   = ~Revised Stalker~
 @230   = ~Revised Archery~
@@ -135,9 +135,7 @@ ROGUE FEATS:
 - Set Fire Trap (requires Dart Trap and Alchemy)
 - Armor Class Bonus
 - Saving Throw Bonus (requires AC Bonus)
-- Spell Evasion
 - THAC0 Bonus
-- Precise Strike
 - Backstab Bonus (requires THAC0 Bonus)
 - Fighting Dirty
 - Blind Opponent
@@ -154,22 +152,28 @@ CLASS RESTRICTIONS:
 
 Prime Requisite For Dual-Classing: Dexterity
 ~
-@20003  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
+@20003  = ~fighter/rogue~
+@20004  = ~Fighter/Rogue~
+@20005  = ~cleric/rogue~
+@20006  = ~Cleric/Rogue~
+@20007  = ~2e bard~
+@20008  = ~2E Bard~
+@20073  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, THAC0 Bonus, and Melee Trick: Blind Opponent.
 - May learn the Backstab Bonus feat up to three times, reaching a possible maximum multiplier of x7.
 - May learn two special Assassin-only feats: Poison Weapon (Toxin) and Poison Trap.
 ~
-@20004  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
+@20074  = ~HUNTER: This rogue is skilled in tracking and capturing quarry - both beasts, and humanoids. Hunters are specially trained at their task and make fearsome opponents. They have honed their trap-making abilities well beyond that of the average rogue.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Detection Bonus, Dart Trap, and Basic Alchemy
 - May learn two special feats unique to Hunters: Poison Weapon (Paralytic) and Web Trap.
 ~
-@20005  = ~hunter~
-@20006  = ~Hunter~
-@20007  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
+@20075  = ~hunter~
+@20076  = ~Hunter~
+@20077  = ~SWASHBUCKLER: This rogue is part acrobat, part swords<PRO_MANWOMAN>, and part wit: the epitome of charm and grace.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: AC Bonus, THAC0 Bonus, and Precise Strike (+5% crit chance).
@@ -182,7 +186,7 @@ Disadvantages:
 - Swashbucklers have no backstab multipliers by default; they may raise it to a maximum of x2 by choosing the Backstab Bonus feat.
 - May not learn any trap-setting feats.
 ~
-@20008  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
+@20078  = ~SHADOWDANCER: Shadowdancers can harness the power of shadow magic to increase their stealth abilities. Enigmatic and dangerous, these uniquely skilled rogues are able to blend seamlessly into the shadows in ways that a normal thief cannot, striking without warning—sometimes with supernatural speed.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Stealth Bonus, Smoke Bomb, Grease Jar, and Saving Throws Bonus.
@@ -195,9 +199,9 @@ Disadvantages:
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
 @20009   = ~Choose a feat~
 @20010   = ~Use this ability to learn a new feat~
-@20011   = ~alchemist~
-@20012   = ~Alchemist~
-@20013   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
+@20081   = ~alchemist~
+@20082   = ~Alchemist~
+@20083   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
 
 Abilities:
 - Begins with the following rogue feats at 1st level: Basic Alchemy, Flaming Weapon, and Grease Jar/Smoke Bomb.
@@ -301,9 +305,9 @@ Weight: 0
 @20241  = ~Backstab Bonus~
 @20242  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
 @20243  = ~Precise Strike~
-@20244  = ~Precise Strike: this ability confers a permanent +5% chance to score a critical hit.~
+@20244  = ~Precise Strike: this feat causes critical hits to occur on rolls of 19 or 20.~
 @20245  = ~Precise Strike 2~
-@20246  = ~Precise Strike 2: this ability confers a permanent +10% chance to score a critical hit.~
+@20246  = ~Precise Strike 2: this feat causes critical hits to occur on rolls of 18, 19, or 20.~
 @20251  = ~Melee Trick (Trip)~
 @20252  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
 @20253  = ~Melee Trick (Disarm)~
@@ -585,317 +589,259 @@ Unlike lesser psionic powers, these abilities may be used once per day. In each 
 @20677  = ~Cancel Carapace~
 //
 //
-@21001  = ~Change Bard Aura~
-@21002  = ~Bard Aura~
-@21003  = ~Stop Bard Aura~
-@21810  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
-
-Abilities:
-- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
-- +1 bonus to Armor Class.
-- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
-- May learn to manifest other bardic aura effects.
-- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
-
-SWASHBUCKLING:
-For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
-
-Restrictions:
-- Only has one half the normal Lore value.
-- Only has one half the normal Pick Pockets skill.
-- May not become proficient in heavy weapons or in sword-and-shield style.
-- Limited to light armors.
-~
-@21007  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
-
-Abilities:
-- May achieve Specialization (++) with long swords, axes, maces, flails, and spears, as well as weapon styles.
-- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
-- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
-- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
-- May learn to manifest other bardic aura effects.
-
-Restrictions:
-- Only has one quarter the normal Pick Pockets score.
-- May not use magical wands.
-- May not cast spells directly from scrolls.
-~
-@21011  = ~Bard Aura: Luck~
-@21012  = ~Bard Aura: Luck
+@21001  = ~Change Bard Song~
+@21002  = ~Bard Song~
+@21003  = ~Stop Bard Song~
+@21011  = ~Inspiration: Luck~
+@21012  = ~Inspiration: Luck
 
 While the bard maintains this aura, all allies within 20 feet benefit from a +1 bonus to Luck and saving throws.~
-@21021  = ~Bard Aura: Morale~
-@21022  = ~Bard Aura: 
+@21021  = ~Inspiration: Courage~
+@21022  = ~Inspiration: Courage
 
 While the bard maintains this aura, all allies within 20 feet benefit from increased morale and immunity to magical fear effects.~
-@21031  = ~Bard Aura: Power~
-@21032  = ~Bard Aura: 
+@21031  = ~Inspiration: Power~
+@21032  = ~Inspiration: Power
 
 While the bard maintains this aura, all allies within 20 feet benefit from +1 to damage rolls for each 5 levels of the bard.~
-@21051  = ~Bard Aura: Reflected Images~
-@21052  = ~Bard Aura: 
+@21051  = ~Inspiration: Reflected Images~
+@21052  = ~Inspiration: Reflected Images
 
 While the bard maintains this aura, all allies within 20 feet gain an illusionary double that has a chance to interpose itself and absorb a melee attack. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21061  = ~Bard Aura: Bless~
-@21062  = ~Bard Aura: 
+@21061  = ~Inspiration: Bless~
+@21062  = ~Inspiration: Bless
 
 While the bard maintains this aura, all allies within 20 feet benefit from the effects of a Bless spell.~
-@21071  = ~Bard Aura: Negative Plane Protection~
-@21072  = ~Bard Aura: 
+@21071  = ~Inspiration: Negative Plane Protection~
+@21072  = ~Inspiration: Negative Plane Protection
 
 While the bard maintains this aura, all allies within 20 feet are immune to negative energy effects such as level drain. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21081  = ~Bard Aura: Mind Shield~
-@21082  = ~Bard Aura: 
+@21081  = ~Inspiration: Mind Shield~
+@21082  = ~Inspiration: Mind Shield
 
-While the bard maintains this aura, all allies within 20 feet are immune to mental effects such as Charm, Fear, Confusion, Feeblemind, and Stun. The bard must concentrate to maintain the aura; spellcasting and melee attacks are disabled while the aura is in effect.~
-@21091  = ~Bard Aura: Death Ward~
-@21092  = ~Bard Aura: 
+While the bard maintains this aura, all allies within 20 feet are immune to mental effects such as Charm, Fear, Confusion, Feeblemind, and Stun. The bard must concentrate very hard to maintain the aura; spellcasting and melee attacks are disabled while the aura is in effect.~
+@21091  = ~Inspiration: Death Ward~
+@21092  = ~Inspiration: Death Ward
 
 While the bard maintains this aura, the life force of <PRO_HISHER> allies are protected, becoming immune to magical instant death effects such as Power Word: Kill, Disintegrate, etc. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21201  = ~Bard Aura: Interference~
-@21202  = ~Bard Aura: 
+@21201  = ~Emanation: Interference~
+@21202  = ~Emanation: Interference
 
 While the bard maintains this aura, all spellcasters within 20 feet (friends and foes) suffer a 65% chance of casting failure. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21211  = ~Bard Aura: Intimidation~
-@21212  = ~Bard Aura: 
+@21211  = ~Emanation: Intimidate~
+@21212  = ~Emanation: Intimidate
 
 While the bard maintains this aura, all enemies within 20 feet suffer from a 1-point reduction to to-hit and damage rolls.~
-@21221  = ~Bard Aura: Malison~
-@21222  = ~Bard Aura: 
+@21221  = ~Emanation: Malison~
+@21222  = ~Emanation: Malison
 
 While the bard maintains this aura, all enemies within 20 feet suffer from a 1-point reduction to Luck and saving throws. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21231  = ~Bard Aura: Confusion~
-@21232  = ~Bard Aura: 
+@21231  = ~Emanation: Confusion~
+@21232  = ~Emanation: Confusion
 
 While the bard maintains this aura, all enemies within 20 feet must save vs. Spells each round, or suffer from Confusion. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21241  = ~Bard Aura: Hold Undead~
-@21242  = ~Bard Aura: 
+@21241  = ~Emanation: Hold Undead~
+@21242  = ~Emanation: Hold Undead
 
 While the bard maintains this aura, all undead enemies within 20 feet move more slowly, and must save vs. Spells each round or be Held. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21251  = ~Bard Aura: Entangle~
-@21252  = ~Bard Aura: 
+@21251  = ~Emanation: Entangle~
+@21252  = ~Emanation: Entangle
 
 While the bard maintains this aura, all enemies within 20 feet must save vs. Breath each round, or be Entangled and unable to move.~
-@21411  = ~Bard Aura: Blur~
-@21412  = ~Bard Aura: 
+@21411  = ~Aura: Blur~
+@21412  = ~Aura: Blur
 
 While the bard maintains this aura, <PRO_HESHE> benefits from a Blur effect, improving armor class by 3 and saving throws by 1. At 15th level, the blurring is so severe that it simulates Improved Invisibility, giving a +4 AC bonus and making the bard impossible to target with spells unless the caster can detect invisible objects. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21421  = ~Bard Aura: Mind Blank~
-@21422  = ~Bard Aura: 
+@21421  = ~Aura: Mind Blank~
+@21422  = ~Aura: Mind Blank
 
 While the bard maintains this aura, <PRO_HESHE> cannot be affected by any hostile mind-altering effects, such as Charm, Fear, Confusion, Feeblemind, or Stun. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21431  = ~Bard Aura: Globe of Invulnerability~
-@21432  = ~Bard Aura: 
+@21431  = ~Aura: Globe of Invulnerability~
+@21432  = ~Aura: Globe of Invulnerability
 
 While the bard maintains this aura, <PRO_HESHE> is surrounded by a localize Minor Globe of Invulnerability, preventing all spells of 3rd level or less from affecting <PRO_HIMHER>. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21461  = ~Bard Aura: Cloak of Fear~
-@21462  = ~Bard Aura: 
+@21461  = ~Aura: Cloak of Fear~
+@21462  = ~Aura: Cloak of Fear
 
 While the bard maintains this aura, all enemies within 3 feet must save vs. Spells each round or suffer from Fear for three rounds. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21471  = ~Bard Aura: Slow~
-@21472  = ~Bard Aura: 
+@21471  = ~Aura: Slow~
+@21472  = ~Aura: Slow
 
 While the bard maintains this aura, all enemies within 3 feet must save vs. Paralysis each round or be Slowed. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21481  = ~Bard Aura: Dispel Illusions~
-@21482  = ~Bard Aura: 
+@21481  = ~Aura: Dispel Illusions~
+@21482  = ~Aura: Dispel Illusions
 
 While the bard maintains this aura, once per round, all illusions within 3 feet are dispelled. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
-@21611  = ~Bard Aura: Maze~
-@21612  = ~Bard Aura: 
+@21611  = ~Aura: Maze~
+@21612  = ~Aura: Maze
 
 While the bard maintains this aura, all enemies within 3 feet must save vs. Spells each round or disappear into a small dimensional Maze for three rounds. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
 @21801  = ~bard~
 @21802  = ~Bard~
-@21803  = ~BARD: the Bard is a charming rogue; <PRO_HISHER> main strength is <PRO_HISHER> pleasant personality and ability to entertain. With charm and wit, <PRO_HESHE> makes <PRO_HISHER> way through the world. Furthermore, Bards have an incredible talent for understanding musical harmonies and vibrations... this helps one become a skilled musician but also allows <PRO_HIMHER> to subtly manipulate the air around <PRO_HISHER>, creating aura-like magical effects or even channeling those effects through <PRO_HISHER> own body. Finally, Bards learn a little bit about everything that crosses their path, learning to use wizardly magic and even indulge in petty thievery. While many Bards are scoundrels, their stories and songs are welcome almost everywhere.
+@21803  = ~BARD: the Bard is a charming rogue; their main strength is pleasant personality and the ability to entertain, but they are not above indulging in occasional thievery. Bards have an incredible talent for understanding musical harmonies and vibrations... this not only makes them skilled musicians, but allows them to transmit pseudo-magical effects through their music. This affinity for the patterns and harmonies gives bards an instinctive knack for using magical spells, especially in the Illusion and Enchantment categories. They can learn and cast a limited selection of spells in a manner similar to sorcerers. While many Bards are scoundrels, their stories and songs are welcome almost everywhere, and the unparalleled breadth of their skill set often allows them to escape trouble.
 
-CLASS FEATURES:
-
-- May not wear armor heavier than chain mail. (Spells cannot be cast while wearing armor.)
-- May not equip shields larger than bucklers.
-- May only become Proficient (one slot) in any weapon class.
-- Thieving abilities: Pick Pockets.
-- Increased Lore score.
-- May cast arcane spells starting at 2nd level.
-- May use the Bard Aura ability. While active, the Bard traditional Bard Aura provides allies within 20 feet a +1 bonus to Luck and saving throws.
-- May learn to manifest other bardic aura effects.
-- Hit Die: d6~
-@21806  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. More bard than priest, they volunteer their talents as cantors for churches. Loresingers may use a mix of divine and arcane magic, but may not turn undead like most priests.
+BARD SONG: bard song effects fall into three categories. Harmonious "Inspirations" provide bonuses to allies near the bard; dissonant "Emanations" create effects that penalize nearby enemies; and personal "Auras" create focused effects, beneficial or dangerous, that cling to the bard's body like armor.  Bards' aptitude for music allows them to learn several bard songs over time, and they can discover more via special musical scrolls around the world.
 
 Abilities:
-- May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
-- From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Loresinger cannot cast spells while the Positive Energy Aura is in effect.)
-- May learn to manifest other bardic aura effects.
-- May cast the following priest spells: Cure Light Wounds, Sanctuary, Find Traps, Silence 15' Radius, Spiritual Hammer, Cure Medium Wounds, Holy Smite, Death Ward, Holy Power, Greater Command, Cure Critical Wounds, and False Dawn.
+- Lore increased by 5 points per level compared to thieves.
+- May cast spells starting at 2nd level.
+- May use the Bardic Inspiration ability. While active, this provides allies with a +1 bonus to Luck and saving throws.
+- May learn to manifest other Bard Song effects.
+- May use magical wands and cast spells directly from scrolls.
+- Automatically gains knowledge of the following spells: Vocalize, Deafness, Shout, Secret Word, Greater Command, Power Word: Silence, and Great Shout. These spells do not count against the bard's 'known spells' limit.
 
 Restrictions:
-- Reduced pickpocketing ability 
+- Thieving abilities limited to Pick Pockets, Open Locks, Detect Illusions.
+- No backstab damage multiplier.
 ~
-@21807  = ~MEISTERSINGER: These bards wander the woodlands, charming animals with their melodies and helping druids and rangers to protect nature. They are the enemies of ruthless hunters and trappers, striving against such activities with their animal allies, beguiling music, and nature-based magic.
+@21806  = ~blade~
+@21807  = ~Blade~
+@21808  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear even more intimidating and fearsome than <PRO_HESHE> already is. This bard's fighting style is flashy and entertaining, but can also be lethally dangerous.
 
 Abilities:
-- May use the ranger's Animal Empathy ability.
-- May use an Aura of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.
-- From 6th level, may use an Entangling Aura, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.
-- May learn to manifest other bardic aura effects.
-- May cast the following druid spells: Cure Light Wounds, Entangle, Sanctuary, Shillelagh, Barkskin, Charm Person/Mammal, Resist Fire/Cold, Slow Poison, Remove Paralysis, Cure Disease, Zone of Sweet Air, Summon Insects, Cure Serious Wounds, Call Woodland Being, Leser Restoration, Mass Cure, Chaotic Commands, Insect Plague, Animal Summoning III, and False Dawn.
-
-Restrictions:
-- May only gain proficiency in weapons appropriate for use by druids.
-~
-@21808  = ~JESTER: This Bard is well versed in the arts of ridicule and hilarity, and uses <PRO_HISHER> abilities to distract and confuse <PRO_HISHER> enemies, cavorting madly during combat. Do not mistake <PRO_HIMHER> for a true fool, however, as <PRO_HESHE> can also be quite deadly.
-
-Advantages:
-- May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
-- From 6th level, may use an Aura of Confusion, which causes all enemies within 20 feet to save vs. Spells each round or become Confused. (The Jester cannot cast spells while the Aura of Confusion is in effect.)
-
-Restrictions:
-- None.
-~
-@21809  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
-
-Advantages:
-- +1 bonus to hit and damage rolls.
-- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
-- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
-- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened. (The Skald cannot cast spells while the Aura of Fear is in effect.)
-
-Disadvantages:
-- Only has one quarter the normal Pick Pockets score.
-~
-@21810  = ~BLADE: The Blade is an expert fighter and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. This Bard's fighting style is flashy and entertaining, but is also lethally dangerous.
-
-Abilities:
-- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
-- +1 bonus to Armor Class.
-- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws.
-- May learn to manifest other bardic aura effects.
+- May achieve Specialization (++) with long swords, short swords, scimitars, and daggers.
+- May use Emanation: Intimidate, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+- From 6th level, may use a Blur Aura, which improves the Blade's armor class and saving throws.
+- May learn to manifest other Bard Song effects.
 - Once per day per 6 levels of experience, may use the Swashbuckling ability.  
 
 SWASHBUCKLING:
 For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
 
 Restrictions:
-- Only has one half the normal Lore value.
-- Only has one half the normal Pick Pockets skill.
-- May not become proficient in heavy weapons or in sword-and-shield style.
-- Limited to light armors.
+- No Lore bonus.
+- Thieving abilities limited to Pick Pockets, Move Silently, Hide In Shadows, and Set Traps.
+- May not use magical wands or cast spells directly from scrolls.
+- May cast one fewer spell per day at each spell level, compared to other bards.
+- May not learn healing spells.
+- Backstab damage limited to a 2x multiplier.
 ~
-@21811  = ~JONGLEUR: These agile bards are master acrobats and jugglers. Their skill in flipping, vaulting and balancing is matched only by their accuracy with hurled knives and other implements. 
-
-Abilities:
-- May achieve Specialization (++) with long swords, short swords, scimitars, daggers, and darts, as well as the single-weapon and two-weapon styles.
-- +1 bonus to Armor Class.
-- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws. (The Jongleur cannot cast spells while the Blur Aura is in effect.)
-- Once per day per 6 levels of experience, may use the Swashbuckling ability.  
-
-SWASHBUCKLING:
-For four rounds, the Jongleur wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
-
-Restrictions:
-- Only has one half the normal Lore value.
-- Only has one half the normal Pick Pockets skill.
-- May not become proficient in heavy weapons or in sword-and-shield style.
-- Limited to light armors.
-~
-@21812  = ~blade~
-@21813  = ~Blade~
-@21814  = ~BLADE: The Blade is a Demibard kit, a rogue and adventurer whose bardic acting abilities make <PRO_HIMHER> appear more intimidating and fearsome. The Blade's fighting style is flashy and entertaining, but is also lethally dangerous.
+@21811  = ~jester~
+@21812  = ~Jester~
+@21813  = ~JESTER: This Bard is well versed in the arts of ridicule and hilarity, and uses <PRO_HISHER> abilities to distract and confuse <PRO_HISHER> enemies, cavorting madly during combat. Do not mistake <PRO_HIMHER> for a true fool, however, as <PRO_HESHE> can also be quite deadly.
 
 Advantages:
-- May reach Mastery (+++) in the use of long and short swords, daggers, darts, and one- and two-weapon styles.
-- May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use a Blur Aura, which improves the Jongleur's armor class and saving throws.
-- Once per day per 6 levels of experience, may use the Swashbuckling ability. 
-
-SWASHBUCKLING:
-For four rounds, the Blade wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.
+- Lore increased by 5 points per level.
+- May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+- From 6th level, may use an Emanation of Confusion, which causes all enemies within 20 feet to save vs. Spells each round or become Confused. (The Jester cannot cast spells while the Aura of Confusion is in effect.)
+- May learn to manifest other Bard Song effects.
+- May use magical wands and cast spells directly from scrolls.
 
 Restrictions:
-- May only use the following thief skills: Open Locks, Pick Pockets, and Stealth.
-- No backstab progression.
-- May not set traps.
+- Thieving abilities limited to Pick Pockets, Open Locks, and Detect Illusions.
+- Limited to one-handed weapons.
+- No backstab damage multiplier.
 ~
-@21821  = ~GALLANT: This is a Demibard kit. Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.
+@21816  = ~skald~
+@21817  = ~Skald~
+@21818  = ~SKALD: This nordic Bard is also a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
 
 Abilities:
-- May innately cast the priest spell Aid once per day, and twice per day at 10th level.
+- May use Inspiration: Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
+- From 6th level, may radiate an Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
+- May learn to manifest other Bard Song effects.
+
+Restrictions:
+- No Lore bonus.
+- May not use magical wands or cast spells directly from scrolls.
+- Thieving abilities limited to Detect Illusions.
+- No backstab damage multiplier.
+~
+@21821  = ~gallant~
+@21822  = ~Gallant~
+@21823  = ~GALLANT: Part charming aesthete, part dashing warrior, gallants travel the land in search of beauty, love, and adventure. They steal the hearts of the young, and lift the spirits of the elderly. Their code, similar to a paladin's, requires that they defend the innocent and members of the opposite sex, and aid the needy in times of trouble and danger.
+
+Abilities:
+- May use Inspiration: Courage which protects allies within 20 feet from Fear effects.
+- May learn to manifest other Bard Song effects.
 - From 5th level, may innately cast the priest spell Death Ward once per day.
-- May radiate an Aura of Luck that affects allies within 20 feet.
-- From 6th level, may radiate an Aura of Courage that protects allies within 20 feet from Fear effects.
-- May learn to manifest other bardic aura effects.
 - Receivies a +1 bonus to saves vs. death for each 6 levels of experience.
 
 Restrictions:
-- Has the same hit dice as a cleric.
-- Limited to Specialization (++) with all weapons.
-- May not dual-class to mage.
+- No Lore bonus.
+- May not use magical wands or cast spells directly from scrolls.
+- Cannot use thieving abilities.
+- No backstab damage multiplier.
 ~
-@21831  = ~hexblade~
-@21832  = ~Hexblade~
-@21833  = ~HEXBLADE: This Demibard kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
+@21826  = ~herald~
+@21827  = ~Herald~
+@21828  = ~HERALD: Heralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'd for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territories.
 
 Abilities:
-- May use an Cursed Aura, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
-- From 6th level, may use an Aura of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
-- May learn to manifest other bardic auras.
+- May use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. A Herald cannot cast spells while this aura is active.
+- May learn to manifest other Bard Song effects.
+- +5 Lore per level compared to thieves.
+- May use magical wands and cast spells directly from scrolls.
+
+Restrictions:
+- May cast one fewer spell per day at each spell level, compared to other bards.
+- Thieving abilities limited to Open Locks, Find Traps, and Detect Illusion.
+- No backstab damage multiplier.
+~
+@21831  = ~meistersinger~
+@21832  = ~Meistersinger~
+@21833  = ~MEISTERSINGER: These bards wander the woodlands, charming animals with their melodies and helping druids and rangers to protect nature. They are the enemies of ruthless hunters and trappers, striving against such activities with their animal allies, beguiling music, and nature-based magic.
+
+Abilities:
+- May use the ranger's Animal Empathy ability.
+- May use Inspiration: Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.
+- From 6th level, may use an Entangling Emanation, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.
+- May learn to manifest other Bard Song effects.
+- Automatically gains knowledge of druidic Animal Summoning spells. These spells do not count against the bard's 'known spells' limit.
+- May learn various other druid spells not available to other bards.
+
+Restrictions:
+- No Lore bonus.
+- Thieving abilities limited to Move Silently, and Hide in Shadows, and Find Traps.
+- May not use magical wands or cast spells directly from scrolls.
+- May only gain proficiency in weapons appropriate for use by druids. (???)
+- No backstab damage multiplier.
+~
+@21836  = ~jinxer~
+@21837  = ~Jinxer~
+@21838  = ~JINXER: This roguish bard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.
+
+Abilities:
+- May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+- From 6th level, may use a Mind Blank Aura, which causes the Jinxer's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. A Jinxer cannot cast spells while this aura is active.
+- May learn to manifest other bard song effects.
+- May use magical wands and cast spells directly from scrolls.
+- Automatically gains knowledge of the following spells: Curse, Doom, Remove Curse, and Greater Malison. These spells do not count against the bard's 'known spells' limit.
+
+Restrictions:
+- Thieving abilities limited to Pick Pockets, Open locks, Find Traps, and Detect Illusions.
+- May cast one fewer spell per day at each spell level, compared to other bards.
+- Backstab damage limited to a 2x multiplier.
+~
+@21841  = ~loresinger~
+@21842  = ~Loresinger~
+@21843  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches. Loresingers may use a mix of divine and bardic magic, but may not turn undead like most priests.
+
+Abilities:
+- Lore increased by 5 points per level.
+- May use Inspiration: Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
+- From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. The Loresinger cannot cast spells while the Positive Energy Inspiration is in effect.
+- May learn to manifest other bard song effects.
+- May use magical wands and cast spells directly from scrolls.
+
+Restrictions:
+- May not turn undead.
+- Thieving abilities limited to Open Locks and Detect Illusions.
+- No backstab damage multiplier.
+~
+@21846  = ~hexblade~
+@21847  = ~Hexblade~
+@21848  = ~HEXBLADE: This kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
+
+Abilities:
+- May use an Hex Emanation, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
+- From 6th level, may use an Emanation of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
+- May learn to manifest other bard song effects.
 - May use arcane wands and cast spells from scrolls.
 
 Restrictions:
 - Has the same hit dice as a cleric.
 - Limited to Specialization (++) with all weapons.
-- May not dual-class to mage.
-~
-@21841  = ~skald~
-@21842  = ~Skald~
-@21843  = ~SKALD: This nordic Demibard is a warrior of great strength, skill, and virtue; <PRO_HISHER> songs are inspiring sagas of battle and valor, and the Skald devotes <PRO_HISHER> life to those pursuits.
-
-Abilities:
-- May use an Aura of Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.
-- From 5th level, may innately cast the priest spell Defensive Harmony once per day.
-- From 6th level, may radiate a personal Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.
-- May learn to manifest other bardic aura effects.
-- May use arcane wands and scrolls.
-
-Restrictions:
-- Has the same hit dice as a cleric.
-- Limited to Specialization (++) with all weapons.
-~
-@21851  = ~jinxer~
-@21852  = ~Jinxer~
-@21853  = ~JINXER: This roguish demibard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents.
-
-Abilities:
-- May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
-- From 6th level, may use a Mind Blank Aura, which causes the Jinxer's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
-- May learn to manifest other bardic aura effects.
-- May cast Greater Malison as an innate ability once per day.
-- May use arcane wands and scrolls.
-
-Restrictions:
-- May only allocate 15 thief skill points per level.
-- Backstab multiplier is one level lower than most thieves.
-- May not gain the Set Traps ability.
-- May not dual-class to mage.
-~
-@21861  = ~herald~
-@21862  = ~Herald~
-@21863  = ~HERALD: Heralds are agents working on behalf of kings, nobles, or some other established authorities. Able spies, they mix skills from the fighter, thief, and bard classes to perform their duties. A herald might act as Maitre'd for a ball, using <PRO_HISHER> enhanced to lore to announce guests... and then might break into a guest's room to investigate possible threats... and then might command troops in battle. Some heralds remain close to their liege, but others take to the road, extending their influence into foreign territory.
-
-Abilities:
-- +1 bonus to thac0 and damage.
-- May use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. 
-- May learn to manifest other bardic aura effects.
-- +5 Lore per level compared to thieves.
-- May use arcane wands and scrolls.
-
-Restrictions:
-- May only allocate skill points to the Open Locks, Find Traps, Set Traps, and Detect Illusion thief abilities.
-- May only allocate 15 thief skill points per level.
-- Backstab multiplier is limited to x3.
-- May not use the Stealth ability.
 - May not dual-class to mage.
 ~
 @21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
@@ -904,9 +850,9 @@ Advantages:
 -  +1 bonus to Armor Class
 -  +1 bonus to Armor Class vs. missiles every 8 levels
 -  May place up to 2 proficiency points in slings, darts and daggers
--  May use an Aura of Intimidation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
--  From 6th level, may use an Blur Aura, which improves the Jongleur's armor class and saving throws. (The Acrobat cannot cast spells while the Blur Aura is in effect.)
-- May learn to manifest other bardic aura effects.
+-  May use Emanation: Intimidate, which causes penalties to the attack and damage rolls of enemies within 20 feet.
+-  From 6th level, may use a Blur Aura, which improves the Acrobat's armor class and saving throws. (The Acrobat cannot cast spells while the Blur Aura is in effect.)
+- May learn to manifest other bard song effects.
 
 Disadvantages:
 -  May only place proficiency points in weapons a thief can use
@@ -918,9 +864,9 @@ Disadvantages:
 Choristers are not only to be found within temple walls, however; many faiths use them as missionaries, helping to bring new worshippers into the fold. Many an adventuring bard with a religious bent can also end up as a Chorister, finding their prayers answered by the deity they venerate.
 
 Advantages:
--  May use an Aura of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
--  From 6th level, may use a Positive Energy Aura, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Chorister cannot cast spells while the Positive Energy Aura is in effect.)
-- May learn to manifest other bardic aura effects.
+-  May use an Inspiration of Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
+-  From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. (The Chorister cannot cast spells while the Positive Energy Inspiration is in effect.)
+- May learn to manifest other bard song effects.
 -  Knows a small selection of divine spells. These are accessed and memorised as Mage spells:
 Level 1: Armor of Faith, Cure Light Wounds, Doom
 Level 2: Chant, Draw Upon Holy Might, Slow Poison
@@ -940,9 +886,9 @@ These sad wanderers seek to express their grief through songs that teach the hea
 Dirgesingers are limited to non-good alignments.
 
 Advantages:
--  May use an Aura of Weakness, which cause a 1-point penalty to all attack and damage rolls of enemies within 20 feet.
--  From 6th level, may use an Aura of Weariness, which causes enemies in melee range to save vs. Spells each round or be Slowed. (The Dirgesinger cannot cast spells while the Aura of Weariness is in effect.)
-- May learn to manifest other bardic aura effects.
+-  May use an Emanation of Weakness, which cause a 1-point penalty to all attack and damage rolls of enemies within 20 feet.
+-  From 6th level, may use an Emanation of Weariness, which causes enemies in melee range to save vs. Spells each round or be Slowed. (The Dirgesinger cannot cast spells while the Aura of Weariness is in effect.)
+- May learn to manifest other bard song effects.
 -  From level 5 may use a Song of Horror ability 1/day. This has the same effects as the level 2 Wizard spell, Horror
 -  From level 7 may use a Song of Grief ability 1/day. This has the same effects as the level 4 Wizard spell, Confusion
 -  From level 9 may use a Song of Awakening ability 1/day. This has the same effects as the level 5 Wizard spell, Animate Dead
@@ -957,7 +903,7 @@ Gypsies are often misunderstood by others, who classify them as thieves, beggars
 Advantages:
 -  Has a +1 bonus to saves vs. spells per 8 levels
 -  Can cast Curse once per day. The opposite of a Bless spell, this gives foes a -1 penalty to THAC0 and saves
--  May use a Hex Aura, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+-  May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
 -  From 6th level, may use a Mind Blank Aura, which causes the Gypsy's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. (The Gypsy may not cast spells while the Blank Aura is in effect.)
 - May learn to manifest other bardic aura effects.
 
@@ -970,8 +916,8 @@ STATISTICS:
 
 Equipped abilities:
 - Immunity to silence and deafness
-- Emanates a basic Bardic Aura, providing a +1 bonus to allies' Luck, saving throws, and thieving skills
-- The bard wearing this hat may use another Bardic Aura simultaneously
+- Radiates a basic Bardic Inspiration, providing a +1 bonus to allies' Luck, saving throws, and thieving skills
+- The bard wearing this hat may use a different Bard Song effect simultaneously
 
 Weight: 0~
 @21901  = ~Declamation~
@@ -985,17 +931,19 @@ Area of Effect: 1 creature
 Saving Throw: None
 
 The recipient of this spell can cast spells with a verbal component without having to make any noise. Effectively, this spell cancels the effects of Silence and makes the recipient immune to it for the spell's duration.~
-@21903  = ~Word of Revocation~
-@21904  = ~Word of Revocation 
+@21903  = ~Curse~
+@21904  = ~Curse
+(Conjuration/Summoning)
 
-Level: 3
-Range: 40 ft.
-Duration: Instant
-Casting Time: 5
-Area of Effect: 1 creature
+Level: 1
+Sphere: All
+Range: Visual range of the caster
+Duration: 6 rounds
+Casting Time: 9
+Area of Effect: 15-ft. radius
 Saving Throw: None
 
-This spell can remove magical effects from one subject. This includes effects given from spells, potions and certain magical items such as wands. It does not, however, affect enchanted magical items or spell protections such as Spell Turning and Spell Deflection. The chance of the dispel succeeding is determined by the level of the caster and the level of the magic being dispelled. The base chance of successfully dispelling is 50%. For every level that the caster of the Dispel Magic is above the original caster, <PRO_HISHER> chance of success increases by 5%. For every level that the caster of Dispel Magic is below the original caster, <PRO_HISHER> chance of success decreases by 10%. However, despite the difference in levels, there is always at least a 5% chance of success or failure. Thus, if a caster is 10 levels higher than the magic <PRO_HESHE> is trying to dispel, there is only a 5% chance of failure. Similarly if the caster is 4 levels lower than the magic <PRO_HESHE> is trying to dispel, there is only a 10% chance of success. Intuitively, this spell is almost useless if the target is 5 or more levels higher than the caster.~
+When uttering the Curse spell, the caster lowers the morale of enemy creatures and any Saving Throws and attack rolls they make by 1. At the instant the spell is completed, it affects all creatures in a 15-ft. radius centered on the point selected by the caster. Affected creatures leaving the area are still subject to the spell's effect; those entering the area after the casting is completed are not.~
 @21905  = ~Shout~
 @21906  = ~Shout
 
@@ -1007,6 +955,64 @@ Area of Effect: 35-ft. cone with 15-deg. arc
 Saving Throw: Special
 
 This spell grants the caster tremendous vocal powers, allowing <PRO_HIMHER> to emit an earsplitting roar from <PRO_HISHER> mouth in a cone-shaped area of effect. Any creature within this area is deafened for 9 rounds and suffers 4d6 points of magic damage. A successful Save vs. Spell negates the deafness and reduces the damage by half.~
+@21907  = ~Great Shout~
+@21908  = ~Great Shout
+
+Level: 7
+Range: 0
+Duration: Instant
+Casting Time: 1
+Area of Effect: 35-ft. cone with 15-deg. arc
+Saving Throw: Special
+
+Great Shout
+Upon uttering the Great Shout, the caster releases a stunning force from <PRO_HISHER> mouth in a 17-ft. cone. The Great Shout is extremely taxing and dangerous to the user. The shout drains 2d4 Hit Points from the caster, and <PRO_HESHE> must make a Save vs. Spell or fall unconscious for 1 turn. Creatures 5 Hit Dice and under caught within the Great Shout instantly die. All other creatures within the area of effect must roll a saving throw; those who fail the save are stunned for 2 rounds, deafened for 4 rounds, and suffer 4d12 points of damage. Those who make the save are stunned for 1 round, deafened for 2 rounds, and suffer 2d12 points of magic damage.~
+@21911  = ~1st-level spells~
+@21912  = ~2nd-level spells~
+@21913  = ~3rd-level spells~
+@21914  = ~4th-level spells~
+@21915  = ~5th-level spells~
+@21916  = ~6th-level spells~
+@21917  = ~7th-level spells~
+@21918  = ~8th-level spells~
+@21919  = ~9th-level spells~
+@21921  = ~Spell Knowledge
+
+This ability allows you to select your spells known for each spell level.~
+@21923 = ~Learn this spell.~
+@21924 = ~View other spells of the same level.~
+@21925 = ~Select a different spell level.~
+@21926 = ~End.~
+@21927 = ~Return to level selection.~ 
+@21928 = ~You can learn more spells of the following levels.~
+@21931 = ~First level spells~
+@21932 = ~Second level spells~
+@21933 = ~Third level spells~
+@21934 = ~Fourth level spells~
+@21935 = ~Fifth level spells~
+@21936 = ~Sixth level spells~
+@21937 = ~Seventh level spells~
+@21938 = ~Eighth level spells~
+@21939 = ~Ninth level spells~
+@21941 = ~You can select new 1st level spells from the following list.~
+@21942 = ~You can select new 2nd level spells from the following list.~
+@21943 = ~You can select new 3rd level spells from the following list.~
+@21944 = ~You can select new 4th level spells from the following list.~
+@21945 = ~You can select new 5th level spells from the following list.~
+@21946 = ~You can select new 6th level spells from the following list.~
+@21947 = ~You can select new 7th level spells from the following list.~
+@21948 = ~You can select new 8th level spells from the following list.~
+@21949 = ~You can select new 9th level spells from the following list.~
+
+@21991 = ~Extra first level spell~
+@21992 = ~Extra second level spell~
+@21993 = ~Extra third level spell~
+@21994 = ~Extra fourth level spell~
+@21995 = ~Extra fifth level spell~
+@21996 = ~Extra sixth level spell~
+@21997 = ~Extra seventh level spell~
+@21998 = ~Declamation~
+@21999 = ~Declamation: when a bard chooses this ability, <PRO_HESHE> become permanently Vocalized, immune to any antagonistic effects that might hinder <PRO_HISHER> ability to speak, sing, or play music. Thus any spells or effects such as Silence or Deafness will not affect the bard. Further, any allies within 15 feet of the bard fall under this protection as well. This immunity cannot be dispelled or overcome by any known technique.~
 //
 //
 @2210   = ~Quickstride~

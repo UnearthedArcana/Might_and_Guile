@@ -24,7 +24,7 @@ SAY @20009
  IF ~GlobalLT("D5_DIRTY","LOCALS",1)~ THEN REPLY @20253 GOTO d5_huntr_75
  IF ~GlobalLT("D5_BLIND","LOCALS",1)~ THEN REPLY @20255 GOTO d5_huntr_73
  IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_huntr_74
- IF ~GlobalLT("D5_RSCROLL","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20293 GOTO d5_huntr_84
+ IF ~GlobalLT("D5_UMD","LOCALS",1) CheckStatGT(myself,14,INT) CheckStatGT(myself,7,LEVEL)~ THEN REPLY @20293 GOTO d5_huntr_84
 END
 
 IF ~~ THEN BEGIN d5_huntr_11 // stealth
@@ -139,6 +139,6 @@ IF ~~ THEN BEGIN d5_huntr_81 // grease/smoke
 END 
 IF ~~ THEN BEGIN d5_huntr_84 // use scrolls
  SAY @20294
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_RSCROLL","LOCALS",1)~ DO ~ApplySpellRES("D5_RFH4",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_UMD","LOCALS",1)~ DO ~ApplySpellRES("D5_UMD",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_huntr 
 END 

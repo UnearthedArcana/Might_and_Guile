@@ -1,0 +1,26 @@
+IF 
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),Rest())
+		SetGlobal("d5_brd_cur_1","GLOBAL",0)
+		SetGlobal("d5_brd_cur_2","GLOBAL",0)
+		SetGlobal("d5_brd_cur_3","GLOBAL",0)
+		SetGlobal("d5_brd_cur_4","GLOBAL",0)
+		SetGlobal("d5_brd_cur_5","GLOBAL",0)
+		SetGlobal("d5_brd_cur_6","GLOBAL",0)
+		SetGlobal("d5_brd_cur_7","GLOBAL",0)
+		SetGlobal("d5_brd_cur_8","GLOBAL",0)
+		SetGlobal("d5_brd_cur_9","GLOBAL",0)
+		SetGlobal("d5_brd_max_1","GLOBAL",0)
+		SetGlobal("d5_brd_max_2","GLOBAL",0)
+		SetGlobal("d5_brd_max_3","GLOBAL",0)
+		SetGlobal("d5_brd_max_4","GLOBAL",0)
+		SetGlobal("d5_brd_max_5","GLOBAL",0)
+		SetGlobal("d5_brd_max_6","GLOBAL",0)
+		SetGlobal("d5_brd_max_7","GLOBAL",0)
+		SetGlobal("d5_brd_max_8","GLOBAL",0)
+		SetGlobal("d5_brd_max_9","GLOBAL",0)
+		Continue() 
+END 
+

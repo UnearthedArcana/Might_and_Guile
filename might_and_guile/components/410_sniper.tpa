@@ -143,13 +143,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SNIPE~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4104)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@4104)
 	  END
 	END
    BUT_ONLY
@@ -190,13 +190,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
   END
   ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
    COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SNIPE~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4105)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@4105)
 	  END
 	END
    BUT_ONLY

@@ -66,11 +66,11 @@ COPY_EXISTING ~clabmo01.2da~ ~override~
 BUT_ONLY
 
 COPY_EXISTING ~kitlist.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
+//  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols 9
   FOR (row = 33 ; row < rows ; ++row ) BEGIN
-	READ_2DA_ENTRY row 5 cols clab
-	READ_2DA_ENTRY row 8 cols class
+	READ_2DA_ENTRY row 5 9 clab
+	READ_2DA_ENTRY row 8 9 class
 	PATCH_IF (class = 20) BEGIN
 	  INNER_ACTION BEGIN
 		COPY_EXISTING ~%clab%.2da~ ~override~

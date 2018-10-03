@@ -1,0 +1,18 @@
+IF
+	Kit(LastSummonerOf(Myself),D5_BARD)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5vbard",Myself))
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+	SetGlobal("D5_FEAT","GLOBAL",0)
+	SetNumTimesTalkedTo(0)
+	DestroySelf()               // reset global variable, then destroy self
+END

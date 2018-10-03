@@ -45,17 +45,17 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
   COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2505)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2505)
 	  END
 	END
   BUT_ONLY

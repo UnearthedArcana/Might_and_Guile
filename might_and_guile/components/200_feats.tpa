@@ -198,9 +198,9 @@ ADD_KIT ~D5ALCHM~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @20011
-SAY @20012
-SAY @20013
+SAY @20081
+SAY @20082
+SAY @20083
 //___________________________________________________________________________________
 
 //EE KIT EXTRAS_____________________________________________________________________
@@ -208,7 +208,7 @@ SAY @20013
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@20013)
+			briefdesc = RESOLVE_STR_REF (@20083)
 		STR_VAR
 			kit_name = D5ALCHM
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
@@ -255,12 +255,12 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@20000)
 	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
 	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@20001)
-	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
-	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
-	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
-	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
@@ -276,41 +276,41 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	SET_2DA_ENTRY %patch_row% 3 cols RESOLVE_STR_REF (@20000)
 	SET_2DA_ENTRY %patch_row% 4 cols RESOLVE_STR_REF (@20002)
 	SET_2DA_ENTRY %patch_row% 5 cols RESOLVE_STR_REF (@20001)
-	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20003)
-	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20004)
-	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20005)
-	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20006)
-	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20007)
-	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20008)
+	SET_2DA_ENTRY (%patch_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+	SET_2DA_ENTRY (%patch_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+	SET_2DA_ENTRY (%patch_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+	SET_2DA_ENTRY (%patch_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+	SET_2DA_ENTRY (%patch_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+	SET_2DA_ENTRY (%patch_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
   COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~ASSASIN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20003)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@20073)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20004)
-		SET_2DA_ENTRY (%patch_row%) 2 cols RESOLVE_STR_REF (@20005)
-		SET_2DA_ENTRY (%patch_row%) 3 cols RESOLVE_STR_REF (@20006)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%patch_row%) 2 9 RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%patch_row%) 3 9 RESOLVE_STR_REF (@20076)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SWASHBUCKLER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20007)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@20077)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SHADOWDANCER~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@20078)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@20008)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@20078)
 	  END
 	END
   BUT_ONLY
@@ -336,6 +336,7 @@ COPY ~might_and_guile/feats/d5_rfa1.spl~ ~override~   // 			stealth bonus
 	SAY UNIDENTIFIED_DESC @20102
 	WRITE_ASCII 0x3a ~d5_rfa1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa1~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5_SKILLS~ END
 
 COPY ~might_and_guile/feats/d5_rfa2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa2.spl~ ~override~   // 			thieving bonus
@@ -343,6 +344,7 @@ COPY ~might_and_guile/feats/d5_rfa2.spl~ ~override~   // 			thieving bonus
 	SAY UNIDENTIFIED_DESC @20104
 	WRITE_ASCII 0x3a ~d5_rfa2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa2~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5_SKILLS~ END
 
 COPY ~might_and_guile/feats/d5_rfa3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa3.spl~ ~override~   // 			detection bonus
@@ -350,6 +352,7 @@ COPY ~might_and_guile/feats/d5_rfa3.spl~ ~override~   // 			detection bonus
 	SAY UNIDENTIFIED_DESC @20106
 	WRITE_ASCII 0x3a ~d5_rfa3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa3~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5_SKILLS~ END
 
 // miscellaneous
 
@@ -909,89 +912,24 @@ COPY ~might_and_guile/feats/d5illp5a.eff~ ~override~
 //use scrolls/wands_________________________________________________________________
 //
 COPY ~might_and_guile/feats/d5_rfh4.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override~   //           UMD
+COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5_umd.spl~   //           UMD
 	SAY NAME1 @20293
 	SAY UNIDENTIFIED_DESC @20294
 	WRITE_ASCII 0x3a ~d5_rfh4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_numd~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
 
-DEFINE_ACTION_FUNCTION d5_resolve_specific INT_VAR index=0 delete=0 STR_VAR new_specific_id = ~blah~ RET new_specific_ind BEGIN
- OUTER_SET min_new=1
- COPY_EXISTING ~specific.ids~ override
-  new_specific_ind=0
-  found=0
-  READ_2DA_ENTRIES_NOW stats 2
-  FOR (row=1;row<stats;row+=1) BEGIN
-    READ_2DA_ENTRY_FORMER stats row 0 ind
-    READ_2DA_ENTRY_FORMER stats row 1 str
-    SET $stat("%row%") = ind
-    PATCH_IF index BEGIN
-      PATCH_IF ind=index BEGIN
-        REMOVE_2DA_ROW row 2
-        found=1
-        PATCH_IF delete=0 BEGIN
-          INSERT_2DA_ROW row 2 ~%index% %new_specific_id%~
-        END
-        row=stats
-      END
-    END ELSE BEGIN
-      PATCH_IF ~%str%~ STRING_EQUAL_CASE ~%new_specific_id%~ BEGIN
-        new_specific_ind=ind
-        found=1
-     /* row=stats */ // don't stop looking, the same ID may be assigned to a greater index, which takes priority when compiling
-      END
-    END
-  END
-  PATCH_IF found=0 BEGIN
-    new_specific_ind=min_new
-    PHP_EACH stat AS row => ind BEGIN
-      PATCH_IF found=0 && (row+1 < stats) BEGIN // not at the end of file
-        next_row = row+1
-        next_ind = EVAL $stat("%next_row%")
-        PATCH_IF index BEGIN
-          PATCH_IF index<next_ind && index>ind BEGIN
-            INSERT_2DA_ROW next_row 2 ~%index% %new_specific_id%~
-            found=1
-          END
-        END ELSE BEGIN
-          PATCH_IF new_specific_ind<next_ind BEGIN
-            PATCH_IF ind<new_specific_ind BEGIN
-              INSERT_2DA_ROW next_row 2 ~%new_specific_ind% %new_specific_id%~
-              found=1
-            END ELSE BEGIN
-              new_specific_ind+=1
-              PATCH_IF new_specific_ind<next_ind BEGIN
-                INSERT_2DA_ROW next_row 2 ~%new_specific_ind% %new_specific_id%~
-                found=1
-              END
-            END
-          END
-        END
-      END ELSE BEGIN // at the end of file
-        PATCH_IF found=0 BEGIN
-          PATCH_IF index BEGIN
-            INSERT_2DA_ROW stats 2 ~%index% %new_specific_id%~
-          END ELSE BEGIN
-            PATCH_IF new_specific_ind>ind BEGIN
-              INSERT_2DA_ROW stats 2 ~%new_specific_ind% %new_specific_id%~
-            END ELSE BEGIN
-              new_specific_ind+=1
-              INSERT_2DA_ROW stats 2 ~%new_specific_ind% %new_specific_id%~
-            END
-          END
-        END
-      END
-    END // PHP_EACH
-  END
-END
+LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
 
-LAF d5_resolve_specific STR_VAR new_specific_id = ~NO_SCROLLS~ RET new_specific_ind END
+OUTER_SET no_umd_specific = %new_specific_ind%
 
-OUTER_SET nscrl_specific = %new_specific_ind%
-
-COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override~
-COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override~
-  WRITE_LONG 0x1c %nscrl_specific%
+COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END
+COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
+  WRITE_LONG 0x1c %no_umd_specific%
+  WRITE_LONG 0x90 1
+  WRITE_EVALUATED_ASCII 0x94 ~D5_NUMD~ #8
 
 OUTER_SET scroll_count = 0
 OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
@@ -1044,7 +982,7 @@ ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
 	COPY_EXISTING ~%scroll%.itm~ ~override~
 	  WRITE_BYTE 0x1f (THIS BAND 0b11110111)
 	  WRITE_BYTE 0x20 (THIS BAND 0b10111111)
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %nscrl_specific% timing = 2 END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	BUT_ONLY
   END
 END
@@ -1055,7 +993,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
 	  WRITE_BYTE 0x1f (THIS BAND 0b11110111)
 	  WRITE_BYTE 0x20 (THIS BAND 0b10111111)
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %nscrl_specific% timing = 2 END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	END
   END
 BUT_ONLY
@@ -1170,7 +1108,7 @@ ACTION_FOR_EACH abil IN ~d5feat1~ ~d5feat2~ ~d5feat3~ ~d5feat4~ ~d5feat5~ ~d5fea
 	COPY ~might_and_guile/feats/%abil%.spl~ ~override~ 
 	COPY ~might_and_guile/feats/%abil%.eff~ ~override~ 
 END
-ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ BEGIN
+ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ ~d5feat0~ BEGIN
 	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
 		SAY NAME1 @20099
 		SAY UNIDENTIFIED_DESC @20100
@@ -1560,7 +1498,8 @@ ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 	  READ_BYTE 0x273 npc_class
 	  PATCH_IF (npc_class = 4) BEGIN
 		LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
-		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+		LPF ADD_CRE_EFFECT INT_VAR opcode = 328 target = 1 parameter2 = 252 timing = 9 special = 1 END
+		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
 	  END
 	  PATCH_IF (npc_class = 2) BEGIN
 		SET random_num = RANDOM (1 5)
@@ -1579,7 +1518,7 @@ ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 		PATCH_IF (%random_num% = 5) BEGIN
 		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
 		END
-		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+		LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
 	  END
 	END
   BUT_ONLY
@@ -1629,7 +1568,7 @@ ACTION_PHP_EACH NON_JOINABLE_FIGHTER_ARRAY AS fcre => dv BEGIN
 		PATCH_IF (%random_num% = 5) BEGIN
 		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
 		END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
 	END
   BUT_ONLY
 END
@@ -1638,7 +1577,7 @@ ACTION_PHP_EACH NON_JOINABLE_THIEF_ARRAY AS tcre => dv BEGIN
   COPY_EXISTING ~%tcre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_nscrl~ END
+	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
 	END
   BUT_ONLY
 END

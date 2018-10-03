@@ -1468,6 +1468,7 @@ COPY ~might_and_guile/nubards/d5xsong.itm~ ~override~			//		stop song .itm
   PATCH_FOR_EACH all_songs IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~61a~ BEGIN
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 21 opcode = 321 target = 1 STR_VAR resource = EVAL ~d5bd%all_songs%~ END
   END
+  LPF ADD_ITEM_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 13 timing = 1 END
 
 COPY ~might_and_guile/nubards/d5_bd01.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bd01a.spl~ ~override~			//		luck inspiration
@@ -1513,6 +1514,7 @@ COPY ~might_and_guile/nubards/d5bd05a.spl~ ~override~			//		RI inspiration
 	SAY NAME1 @21051
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd05~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd05b.spl~ ~override~
@@ -1552,6 +1554,7 @@ COPY ~might_and_guile/nubards/d5bd08a.spl~ ~override~			//		mind shield inspirat
 	SAY NAME1 @21081
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd08~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd08b.spl~ ~override~
@@ -1578,6 +1581,7 @@ COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference
 	SAY NAME1 @21201
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd20~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd20b.spl~ ~override~
@@ -1604,6 +1608,7 @@ COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emana
 	SAY NAME1 @21221
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd22~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd22b.spl~ ~override~
@@ -1617,6 +1622,7 @@ COPY ~might_and_guile/nubards/d5bd23a.spl~ ~override~			//		confusion emanation
 	SAY NAME1 @21231
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd23~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd23b.spl~ ~override~
@@ -1630,6 +1636,7 @@ COPY ~might_and_guile/nubards/d5bd24a.spl~ ~override~			//		hold undead emanatio
 	SAY NAME1 @21241
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd24~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd24b.spl~ ~override~
@@ -1656,6 +1663,7 @@ COPY ~might_and_guile/nubards/d5bd41a.spl~ ~override~			//		blur aura
 	SAY NAME1 @21411
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd41~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 //COPY ~might_and_guile/nubards/d5bd41a.eff~ ~override~
@@ -1670,6 +1678,7 @@ COPY ~might_and_guile/nubards/d5bd42a.spl~ ~override~			//		mind blank aura
 	SAY NAME1 @21421
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd42~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd42b.spl~ ~override~
@@ -1683,6 +1692,7 @@ COPY ~might_and_guile/nubards/d5bd43a.spl~ ~override~			//		MGOI aura
 	SAY NAME1 @21431
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd43~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd43b.spl~ ~override~
@@ -1696,6 +1706,7 @@ COPY ~might_and_guile/nubards/d5bd46a.spl~ ~override~			//		fear aura
 	SAY NAME1 @21461
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd46~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd46b.spl~ ~override~
@@ -1709,6 +1720,7 @@ COPY ~might_and_guile/nubards/d5bd47a.spl~ ~override~			//		slow aura
 	SAY NAME1 @21471
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd47~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd47b.spl~ ~override~
@@ -1722,6 +1734,7 @@ COPY ~might_and_guile/nubards/d5bd48a.spl~ ~override~			//		dispel illusions aur
 	SAY NAME1 @21481
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd48~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd48b.spl~ ~override~
@@ -1735,6 +1748,7 @@ COPY ~might_and_guile/nubards/d5bd61a.spl~ ~override~			//		maze aura
 	SAY NAME1 @21611
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd61~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd61b.spl~ ~override~

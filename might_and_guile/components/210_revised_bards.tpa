@@ -3259,6 +3259,7 @@ ACTION_FOR_EACH char IN ~garric~ ~garric2~ ~garric4~ ~garric6~ BEGIN
 	  WRITE_BYTE 0x273 9												// sets class
 	  WRITE_SHORT 0x244 0
 	  WRITE_SHORT 0x246 %nu_gallant_code% 								// changes kit
+	  READ_BYTE 0x23d npc_con
 	  PATCH_IF (npc_con < 15) BEGIN
 		WRITE_SHORT 0x24 8
 		WRITE_SHORT 0x26 8

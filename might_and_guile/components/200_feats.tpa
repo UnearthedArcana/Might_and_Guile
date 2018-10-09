@@ -1333,13 +1333,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clabfi01.2da~ BEGIN
 		APPEND_FILE ~might_and_guile/feats/no_umd.txt~
 	BUT_ONLY
 END
-ACTION_FOR_EACH ranger in ~clabrn01~ ~clabrn04~ ~d5rfor~ ~d5rmou~ ~d5rdes~ ~d5rjun~ ~d5rarc~ BEGIN
+ACTION_FOR_EACH ranger IN ~clabrn01~ ~clabrn04~ ~d5rfor~ ~d5rmou~ ~d5rdes~ ~d5rjun~ ~d5rarc~ BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~%ranger%.2da~ BEGIN
-	COPY_EXISTING ~%ranger.2da~ ~override~
+	COPY_EXISTING ~%ranger%.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/feats/feats_ranger.txt~
 	BUT_ONLY
-  #NE
+  END
 END
 
 COPY_EXISTING ~kitlist.2da~ ~override~

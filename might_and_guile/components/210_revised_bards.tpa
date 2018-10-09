@@ -10,35 +10,12 @@
 plan: make 'em all thieves
 
 still to do: 
-/- make spellcasting system
-/- make bard songs from item
-/- finish item use
-/- TEST basic bard
-/- restrict thief abilities
-/- restrict skill points
-/- disable thief skill buttons
-/- remove real bards from menus
-/- change class name to rogue
-/- install kits
-/- TEST
-/- fix HLAs and HLA tables
-/- set strongholds
-/- change joinable NPCs
-/- test spell slot bonuses
-- fix +spell slot items - make .EFFs
-- fix feat dialogues (it's triggering the spell dialogue atm)
+- make innate ability toa dd bardsong .itm
 - make music a quickslot ability, not item ability..??
 
-FOR EACH KIT:
-- get kitids code
-- omit from AP_D5TNUSE append
-- add 326 applying 1st bard song to d5bsong.itm
-- append column to d5brdspl
-- add d5brdthf table to clab
 
 thiefscl:
 PP	OL	FT	MS	HiS	DI	ST	Stealth
-
 */
 
 //COPY MARKER FILE_________________________________________________________________
@@ -510,19 +487,6 @@ END
 COPY ~might_and_guile/nubards/d5_skld.2da~ ~override~
 //___________________________________________________________________________________
 
-//QD_MULTICLASS______________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_skld.2da~ BEGIN
-  LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_SKALD~ 
-		kit_clab = ~d5_skld~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-  END
-END 
-//___________________________________________________________________________________
-
 
 //ADD GALLANT AS FIGHTER/THIEF_______________________________________________________
 //
@@ -618,20 +582,6 @@ COPY_EXISTING ~sppr409.spl~ ~override/d5galdw.spl~
 //___________________________________________________________________________________
 
 
-//QD_MULTICLASS______________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_glnt.2da~ BEGIN
-  LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_GALLANT~ 
-		kit_clab = ~d5_glnt~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-  END
-END 
-//___________________________________________________________________________________
-
-
 //ADD HERALD AS FIGHTER/THIEF________________________________________________________
 //
 ADD_KIT ~D5_HERALD~
@@ -715,19 +665,6 @@ ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
 			clsrcreq = ~1 1 1 0 0 0 0~
 	END
 END
-//___________________________________________________________________________________
-
-//QD_MULTICLASS______________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_hrld.2da~ BEGIN
-  LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_HERALD~ 
-		kit_clab = ~d5_hrld~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-  END
-END 
 //___________________________________________________________________________________
 
 //HERALD ABILITY FILES_______________________________________________________________
@@ -972,7 +909,7 @@ ADD_KIT ~D5_LORESINGER~
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
-~0x00004000 2~
+~0x00004000 15~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
 ~D5BRD~
@@ -1068,19 +1005,6 @@ END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
   LAM apply_fnp_usability
 END
-//__________________________________________________________________________________
-
-//QD_MULTICLASS_______________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_lors.2da~ BEGIN
-  LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_LORESINGER~ 
-		kit_clab = ~d5_lors~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-  END
-END 
 //__________________________________________________________________________________
 
 
@@ -1451,16 +1375,6 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
 COPY ~might_and_guile/nubards/d5bdmusa.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bsong.itm~ ~override~			//		bard song .itm
   LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5bdmusa~ END
-// ***** add 326 effect for each bard kit's 1st song
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_bard_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_blade_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd21~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_jester_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd22~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_skald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd03~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_gallant_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd02~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_herald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd42~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_meister_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_jinxer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd22~ END
-  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_loresinger_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd06~ END
 
 COPY ~might_and_guile/nubards/d5bdmusx.bam~ ~override~			//		no song icon
 COPY ~might_and_guile/nubards/d5xsong.itm~ ~override~			//		stop song .itm
@@ -1470,13 +1384,31 @@ COPY ~might_and_guile/nubards/d5xsong.itm~ ~override~			//		stop song .itm
   END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 13 timing = 1 END
 
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
+  SAY NAME1 @21001
+  SAY IDENTIFIED_DESC @21001
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bdmusa~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_bard_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_blade_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd21~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_jester_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd22~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_skald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd03~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_gallant_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_herald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd02~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_meister_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_jinxer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd22~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_loresinger_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd06~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5bsong~ END
+
+
 COPY ~might_and_guile/nubards/d5_bd01.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bd01a.spl~ ~override~			//		luck inspiration
-  SAY NAME1 @21011
-  LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd01~ END
-  WRITE_SHORT 0x1c 1
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
+	SAY NAME1 @21011
+	SAY IDENTIFIED_DESC @21012
+	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd01~ END
+	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd01b.eff~ ~override~			//		232 eff triggered by song
 COPY ~might_and_guile/nubards/d5bd01b.spl~ ~override~			//		aura triggered by 232 eff
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd01.spl~	//		give song
@@ -1486,6 +1418,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd01.spl~	//		give song
 COPY ~might_and_guile/nubards/d5_bd02.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd02a.spl~ ~override~			//		morale inspiration
 	SAY NAME1 @21021
+	SAY IDENTIFIED_DESC @21022
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd02~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1499,6 +1432,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd02.spl~
 COPY ~might_and_guile/nubards/d5_bd03.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd03a.spl~ ~override~			//		power inspiration
 	SAY NAME1 @21031
+	SAY IDENTIFIED_DESC @21032
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd03~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1512,6 +1446,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd03.spl~
 COPY ~might_and_guile/nubards/d5_bd05.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd05a.spl~ ~override~			//		RI inspiration
 	SAY NAME1 @21051
+	SAY IDENTIFIED_DESC @21052
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd05~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1526,6 +1461,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd05.spl~
 COPY ~might_and_guile/nubards/d5_bd06.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd06a.spl~ ~override~			//		bless inspiration
 	SAY NAME1 @21061
+	SAY IDENTIFIED_DESC @21062
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd06~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1539,6 +1475,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd06.spl~
 COPY ~might_and_guile/nubards/d5_bd07.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd07a.spl~ ~override~			//		NPP inspiration
 	SAY NAME1 @21071
+	SAY IDENTIFIED_DESC @21072
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd07~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1552,6 +1489,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd07.spl~
 COPY ~might_and_guile/nubards/d5_bd08.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd08a.spl~ ~override~			//		mind shield inspiration
 	SAY NAME1 @21081
+	SAY IDENTIFIED_DESC @21082
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd08~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1565,8 +1503,9 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd08.spl~
 
 COPY ~might_and_guile/nubards/d5_bd09.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd09a.spl~ ~override~			//		death ward inspiration
-	SAY NAME1 @21071
-	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd07~ END
+	SAY NAME1 @21091
+	SAY IDENTIFIED_DESC @21092
+	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd09~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
@@ -1579,6 +1518,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd09.spl~
 COPY ~might_and_guile/nubards/d5_bd20.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference emanation
 	SAY NAME1 @21201
+	SAY IDENTIFIED_DESC @21202
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd20~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1593,6 +1533,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd20.spl~
 COPY ~might_and_guile/nubards/d5_bd21.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd21a.spl~ ~override~			//		combat penalties emanation
 	SAY NAME1 @21211
+	SAY IDENTIFIED_DESC @21212
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd21~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1606,6 +1547,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd21.spl~
 COPY ~might_and_guile/nubards/d5_bd22.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emanation
 	SAY NAME1 @21221
+	SAY IDENTIFIED_DESC @21222
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd22~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1620,6 +1562,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd22.spl~
 COPY ~might_and_guile/nubards/d5_bd23.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd23a.spl~ ~override~			//		confusion emanation
 	SAY NAME1 @21231
+	SAY IDENTIFIED_DESC @21232
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd23~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1634,6 +1577,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd23.spl~
 COPY ~might_and_guile/nubards/d5_bd24.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd24a.spl~ ~override~			//		hold undead emanation
 	SAY NAME1 @21241
+	SAY IDENTIFIED_DESC @21242
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd24~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1648,6 +1592,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd24.spl~
 COPY ~might_and_guile/nubards/d5_bd25.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd25a.spl~ ~override~			//		entangle emanation
 	SAY NAME1 @21251
+	SAY IDENTIFIED_DESC @21252
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd25~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
@@ -1661,6 +1606,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd25.spl~
 COPY ~might_and_guile/nubards/d5_bd41.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd41a.spl~ ~override~			//		blur aura
 	SAY NAME1 @21411
+	SAY IDENTIFIED_DESC @21412
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd41~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1676,6 +1622,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd41.spl~
 COPY ~might_and_guile/nubards/d5_bd42.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd42a.spl~ ~override~			//		mind blank aura
 	SAY NAME1 @21421
+	SAY IDENTIFIED_DESC @21422
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd42~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1690,6 +1637,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd42.spl~
 COPY ~might_and_guile/nubards/d5_bd43.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd43a.spl~ ~override~			//		MGOI aura
 	SAY NAME1 @21431
+	SAY IDENTIFIED_DESC @21432
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd43~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1704,6 +1652,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd43.spl~
 COPY ~might_and_guile/nubards/d5_bd46.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd46a.spl~ ~override~			//		fear aura
 	SAY NAME1 @21461
+	SAY IDENTIFIED_DESC @21462
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd46~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1718,6 +1667,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd46.spl~
 COPY ~might_and_guile/nubards/d5_bd47.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd47a.spl~ ~override~			//		slow aura
 	SAY NAME1 @21471
+	SAY IDENTIFIED_DESC @21472
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd47~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1732,6 +1682,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd47.spl~
 COPY ~might_and_guile/nubards/d5_bd48.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd48a.spl~ ~override~			//		dispel illusions aura
 	SAY NAME1 @21481
+	SAY IDENTIFIED_DESC @21482
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd48~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -1746,6 +1697,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd48.spl~
 COPY ~might_and_guile/nubards/d5_bd61.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd61a.spl~ ~override~			//		maze aura
 	SAY NAME1 @21611
+	SAY IDENTIFIED_DESC @21612
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd61~ END
 	WRITE_SHORT 0x1c 1
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
@@ -2170,7 +2122,13 @@ END
 
 //INCLUDE ~might_and_guile/nubards/nubard_kit_arrays.tpa~
 
-//COPY_EXISTING ~might_and_guile/nubards/d5_bard.2da~ ~override/d5brdspl.2da~
+COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override/d5brdspl.2da~
+  PATCH_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~142~ BEGIN
+	REPLACE_TEXTUALLY ~WIZARD_SLEEP~ ~WIZARD_SLEEP_TNB~
+	REPLACE_TEXTUALLY ~CLERIC_COMMAND~ ~WIZARD_DROWSE_TNB~
+  END
+
+//COPY ~might_and_guile/nubards/d5_bard.2da~ ~override/d5brdthf.2da~
 <<<<<<<< d5/d5brdthf.2da
 
 BARDSPLS    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
@@ -2471,7 +2429,7 @@ SPLRES
 COPY ~d5/d5bclons.2da~ ~override/d5bclons.2da~ 
 
 
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
   FOR (col = 2; col < cols; ++col) BEGIN
@@ -2481,7 +2439,7 @@ COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
 		REPLACE_TEXTUALLY ~BEGIN D5MBARD~ ~BEGIN %kit_2da%~
 	END
   END
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
   FOR (row = 1; row < rows; ++row) BEGIN
@@ -2634,7 +2592,7 @@ COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
 	  END
 	END
   END
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
   FOR (col = 2; col < cols; ++col) BEGIN
@@ -2729,7 +2687,7 @@ COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
 
 //finish spell learning dialogues______________________________________________________
 //
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   FOR (col = 2; col < cols; ++col) BEGIN
 	READ_2DA_ENTRY 0 col cols ~kit_2da~
@@ -2752,7 +2710,7 @@ COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
   END
 BUT_ONLY
 
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
   FOR (col = 2; col < cols; ++col) BEGIN
@@ -2820,7 +2778,7 @@ END
 //metamagic scrolls___________________________________________________________________
 // ...make sequencer/contingency scrolls unusable by bards
 //
-COPY ~might_and_guile/nubards/d5brdspl.2da~ ~override~
+COPY_EXISTING ~d5brdspl.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
   FOR (col = 2; col < cols; ++col) BEGIN
@@ -2874,6 +2832,7 @@ COPY_EXISTING ~d5_bard.2da~ ~override~
 			  ~d5_jinx.2da~ ~override~
 			  ~d5_lors.2da~ ~override~
 // ***** et al.
+  LPM remove_blank_lines
   APPEND_FILE ~override/d5brdthf.2da~
 
 
@@ -3286,6 +3245,50 @@ ACTION_FOR_EACH char IN ~garric~ ~garric2~ ~garric4~ ~garric6~ BEGIN
 	BUT_ONLY
   END
 END
+//___________________________________________________________________________________
+
+
+//QD_MULTICLASS______________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_skld.2da~ BEGIN
+  LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_SKALD~ 
+		kit_clab = ~d5_skld~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+  END
+END 
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_glnt.2da~ BEGIN
+  LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_GALLANT~ 
+		kit_clab = ~d5_glnt~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+  END
+END 
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_hrld.2da~ BEGIN
+  LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_HERALD~ 
+		kit_clab = ~d5_hrld~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+  END
+END 
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_lors.2da~ BEGIN
+  LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_LORESINGER~ 
+		kit_clab = ~d5_lors~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+  END
+END 
+/*
+put hexblade here, if hexblade is added
+*/
 //___________________________________________________________________________________
 
 

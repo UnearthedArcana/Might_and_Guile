@@ -200,7 +200,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_BARD
 			clswpbon = ~0 0 3~
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			thiefskl = ~15 7~
+			thiefskl = ~15 9~
 			thiefscl = ~100 100 0 0 0 100 0 0~
 			clsrcreq = ~1 1 1 0 0 1 0~
 	END
@@ -384,7 +384,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_JESTER
 			clswpbon = ~0 0 3~
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			thiefskl = ~15 7~
+			thiefskl = ~15 9~
 			thiefscl = ~100 100 0 0 0 100 0 0~
 			clsrcreq = ~1 1 1 0 0 1 0~
 	END
@@ -475,7 +475,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			clswpbon = ~1 0 3~
 			hpclass = ~HPFT~
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			thiefskl = ~15 7~
+			thiefskl = ~0 5~
 			thiefscl = ~0 0 0 0 0 100 0 0~
 			clsrcreq = ~1 1 1 0 0 0 0~
 	END
@@ -660,7 +660,7 @@ ACTION_IF GAME_IS ~bgee sod bg2ee eet iwdee~ THEN BEGIN
 			clswpbon = ~1 0 3~
 			hpclass = ~HPFT~
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			thiefskl = ~15 7~
+			thiefskl = ~15 9~
 			thiefscl = ~0 100 100 0 0 100 0 0~
 			clsrcreq = ~1 1 1 0 0 0 0~
 	END
@@ -750,7 +750,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_MEISTER
 			clswpbon = ~0 0 3~
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
-			thiefskl = ~15 7~
+			thiefskl = ~15 9~
 			thiefscl = ~0 0 100 100 100 0 0 0~
 			clsrcreq = ~1 1 1 0 1 1 0~
 	END
@@ -923,6 +923,9 @@ SAY @21842
 SAY @21843
 //___________________________________________________________________________________
 
+thiefscl:
+PP	OL	FT	MS	HiS	DI	ST	Stealth
+
 //EE KIT EXTRAS______________________________________________________________________
 // 
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
@@ -933,6 +936,10 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_LORESINGER
 			clswpbon = ~0 0 3~
 			hpclass = ~HPCT~
+			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			thiefskl = ~15 9~
+			thiefscl = ~0 100 100 0 0 100 0 0~
+			clsrcreq = ~1 1 1 0 0 0 0~
 	END
 END
 //___________________________________________________________________________________

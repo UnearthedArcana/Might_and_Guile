@@ -1375,6 +1375,7 @@ BUT_ONLY
 
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5bsong~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5TNUSE~ END
 
 COPY ~might_and_guile/nubards/d5bdmusa.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bsong.itm~ ~override~			//		bard song .itm

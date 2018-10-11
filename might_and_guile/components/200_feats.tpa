@@ -1104,17 +1104,46 @@ COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~ 	//			parry blunt
 
 //NU FEAT FILES_____________________________________________________________________
 //
-ACTION_FOR_EACH abil IN ~d5feat1~ ~d5feat2~ ~d5feat3~ ~d5feat4~ ~d5feat5~ ~d5feat6~ ~d5feat7~ ~d5feat8~ ~d5feat9~ ~d5feat10~ ~d5feat11~ ~d5feat12~ ~d5feat13~ ~d5feat14~ ~d5feat15~ ~d5feat16~ ~d5feat17~ ~d5feat18~ ~d5feat19~ ~d5feat20~ BEGIN
-	COPY ~might_and_guile/feats/%abil%.spl~ ~override~ 
-	COPY ~might_and_guile/feats/%abil%.eff~ ~override~ 
+ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
+	1	=> a
+	2	=> b
+	3	=> c
+	4	=> d
+	5	=> e
+	6	=> f
+	7	=> g
+	8	=> h
+	9	=> i
+	10	=> j
+	11	=> k
+	12	=> l
+	13	=> m
+	14	=> n
+	15	=> o
+	16	=> p
+	17	=> q
+	18	=> r
+	19	=> s
+	20	=> t
 END
-ACTION_FOR_EACH feat IN ~d5feata~ ~d5featb~ ~d5featc~ ~d5featd~ ~d5feate~ ~d5featf~ ~d5featg~ ~d5feath~ ~d5feati~ ~d5featj~ ~d5featk~ ~d5featl~ ~d5featm~ ~d5featn~ ~d5feato~ ~d5featp~ ~d5featq~ ~d5featr~ ~d5feats~ ~d5featt~ ~d5feat0~ BEGIN
-	COPY ~might_and_guile/feats/%feat%.spl~ ~override~
-		SAY NAME1 @20099
-		SAY UNIDENTIFIED_DESC @20100
-		WRITE_ASCII 0x3a ~d5_feat~ #8
-		LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+
+ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
+  COPY ~might_and_guile/feats/d5feat%num%.spl~ ~override~ 
+	LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
+  COPY ~might_and_guile/feats/d5feat%num%.eff~ ~override~ 
+  COPY ~might_and_guile/feats/d5feat%let%.spl~ ~override~
+	SAY NAME1 @20099
+	SAY UNIDENTIFIED_DESC @20100
+	WRITE_ASCII 0x3a ~d5_feat~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
 END
+COPY ~might_and_guile/feats/d5feat0.spl~ ~override~
+	SAY NAME1 @20099
+	SAY UNIDENTIFIED_DESC @20100
+	WRITE_ASCII 0x3a ~d5_feat~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_feat~ END
+
 ACTION_IF GAME_IS ~iwdee~ BEGIN
   APPEND ~splprot.2da~ ~D5_MIN_INT%TAB%38%TAB%-1%TAB%4~
   COPY_EXISTING ~splprot.2da~ ~override~

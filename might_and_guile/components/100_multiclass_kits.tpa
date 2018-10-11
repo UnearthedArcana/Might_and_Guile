@@ -160,17 +160,6 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5BLADS~ 
-		kit_clab = ~d5_blads~
-		base_class = ~F~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-END 
-//____________________________________________________________________________________
-
 //BLADESINGER ABILITY FILES_____________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_blads.2da~ ~override~
@@ -195,23 +184,16 @@ COPY ~might_and_guile/mc/d5_bladb.eff~ ~override~
 	SAY NAME1 @6
 //____________________________________________________________________________________
 
-/*
-//ADD KIT TO MENUS____________________________________________________________________
+//MULTICLASS KIT______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
-  ACTION_IF NOT FILE_EXISTS_IN_GAME ~K_FM_E.2da~ BEGIN
-	COPY ~might_and_guile/mc/K_FM_E.2da~ ~override~
-  END
-  COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~7~ "kit_row"
-  BUT_ONLY
-  OUTER_SET kit_row -= 2
-  ACTION_IF FILE_EXISTS_IN_GAME ~K_FM_E.2da~ BEGIN
-	APPEND ~K_FM_E.2da~ ~1	%kit_row%~
-  END
-END
-//___________________________________________________________________________________
-*/
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5BLADS~ 
+		kit_clab = ~d5_blads~
+		base_class = ~F~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
@@ -338,17 +320,6 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5FILCH~ 
-		kit_clab = ~d5_filch~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-END 
-//____________________________________________________________________________________
-
 //SPELLFILCHER ABILITY FILES__________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_filch.2da~ ~override~
@@ -377,27 +348,16 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 END
 //__________________________________________________________________________________
 
-/*
-//ADD KIT TO MENUS____________________________________________________________________
+//MULTICLASS KIT______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
-  ACTION_FOR_EACH new_menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
-	ACTION_IF NOT FILE_EXISTS_IN_GAME ~%new_menu%.2da~ BEGIN
-	  COPY ~might_and_guile/mc/%new_menu%.2da~ ~override~
-	END
-  END
-  COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~7~ "kit_row"
-  BUT_ONLY
-  OUTER_SET kit_row -= 2
-  ACTION_FOR_EACH menu IN ~K_MT_D~ ~K_MT_E~ ~K_MT_G~ ~K_MT_H~ ~K_MT_HE~ ~K_MT_HL~ ~K_MT_HO~ BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~%menu%.2da~ BEGIN
-	  APPEND ~%menu%.2da~ ~1	%kit_row%~
-	END
-  END
-END
-//___________________________________________________________________________________
-*/
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5FILCH~ 
+		kit_clab = ~d5_filch~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
@@ -522,17 +482,6 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_LOREMASTER~ 
-		kit_clab = ~d5_lorma~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-END 
-//____________________________________________________________________________________
-
 //LOREMASTER ABILITY FILES____________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_lorma.2da~ ~override~
@@ -545,6 +494,17 @@ COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
 COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 	SAY NAME1 @6
 //__________________________________________________________________________________
+
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_LOREMASTER~ 
+		kit_clab = ~d5_lorma~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
@@ -668,6 +628,14 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+//TOMB RUNNER ABILITY FILES___________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_tombr.2da~ ~override~
+COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
+COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
+COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
+//____________________________________________________________________________________
+
 //MULTICLASS KIT______________________________________________________________________
 //
 LAF qd_multiclass
@@ -677,14 +645,6 @@ LAF qd_multiclass
 		base_class = ~T~
 		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
-//____________________________________________________________________________________
-
-//TOMB RUNNER ABILITY FILES___________________________________________________________
-//
-COPY ~might_and_guile/mc/d5_tombr.2da~ ~override~
-COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
-COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
-COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
 //____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
@@ -806,6 +766,16 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
+//THUG ABILITY FILES__________________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_thug.2da~ ~override~
+COPY ~might_and_guile/feats/d5_rfe5.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
+	SAY NAME1 @20241
+	SAY UNIDENTIFIED_DESC @20242
+COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
+//__________________________________________________________________________________
+
 //MULTICLASS KIT______________________________________________________________________
 //
 LAF qd_multiclass
@@ -816,16 +786,6 @@ LAF qd_multiclass
 		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
-
-//THUG ABILITY FILES__________________________________________________________________
-//
-COPY ~might_and_guile/mc/d5_thug.2da~ ~override~
-COPY ~might_and_guile/feats/d5_rfe5.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
-	SAY NAME1 @20241
-	SAY UNIDENTIFIED_DESC @20242
-COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
-//__________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
@@ -950,17 +910,6 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5RANMAGE~ 
-		kit_clab = ~d5_rama~
-		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-END 
-//____________________________________________________________________________________
-
 //RANGER/MAGE ABILITY FILES___________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_rama.2da~ ~override~
@@ -973,6 +922,8 @@ COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
 COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
+	SAY NAME1 @6
+COPY ~might_and_guile/mc/d5_numat.spl~ ~override~
 	SAY NAME1 @6
 ACTION_IF GAME_IS ~iwdee~ BEGIN	
   APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~
@@ -1026,6 +977,17 @@ COPY ~might_and_guile/mc/d5rmavem.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhf.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhm.eff~ ~override~
 //__________________________________________________________________________________
+
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANMAGE~ 
+		kit_clab = ~d5_rama~
+		base_class = ~T~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //
@@ -1155,17 +1117,6 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5RANTHIEF~ 
-		kit_clab = ~d5_rath~
-		base_class = ~F~
-		mc_dir = ~might_and_guile/lib/qd_mc~
-END 
-//____________________________________________________________________________________
-
 //RANGER/THIEF ABILITY FILES__________________________________________________________
 //
 COPY ~might_and_guile/mc/d5_rath.2da~ ~override~
@@ -1215,6 +1166,17 @@ COPY ~might_and_guile/mc/d5rt300.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_div3b~ END
 COPY ~might_and_guile/mc/d5rt300.2da~ ~override~
 //__________________________________________________________________________________
+
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANTHIEF~ 
+		kit_clab = ~d5_rath~
+		base_class = ~F~
+		mc_dir = ~might_and_guile/lib/qd_mc~
+END 
+//____________________________________________________________________________________
 
 //ADD KIT ITEMS______________________________________________________________________
 //

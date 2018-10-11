@@ -923,7 +923,7 @@ COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
 	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
 	SAY NAME1 @6
-COPY ~might_and_guile/mc/d5_numat.spl~ ~override~
+COPY ~might_and_guile/misc/d5_numat.spl~ ~override~
 	SAY NAME1 @6
 ACTION_IF GAME_IS ~iwdee~ BEGIN	
   APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~

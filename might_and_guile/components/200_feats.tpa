@@ -668,7 +668,7 @@ INCLUDE ~%MOD_FOLDER%/lib/spell_evasion/spell_evasion.tpa~
 
 //ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
   ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN 
-    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_spell = EVAL ~%evadable_spell%~ evade_prefix = ~d5ev~ END
+    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_spell = EVAL ~%evadable_spell%~ evade_prefix = ~D5EV~ END
   END
 //END
 

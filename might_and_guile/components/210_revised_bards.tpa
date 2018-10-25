@@ -1373,10 +1373,6 @@ COPY_EXISTING ~splprot.2da~ ~override~
 	END
 BUT_ONLY
 
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5bsong~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5TNUSE~ END
-
 COPY ~might_and_guile/nubards/d5bdmusa.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bsong.itm~ ~override~			//		bard song .itm
   LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5bdmusa~ END
@@ -1389,6 +1385,27 @@ COPY ~might_and_guile/nubards/d5xsong.itm~ ~override~			//		stop song .itm
   END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 13 timing = 1 END
 
+
+//remove all wizard spells____________________________________________________________
+//
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bnwspl.spl~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  PATCH_IF FILE_EXISTS_IN_GAME ~%SOURCE_RES%.spl~ BEGIN
+	SPRINT wiz_spell_res ~%SOURCE_RES%~
+	READ_SHORT 0x1c spell_type 
+	PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) BEGIN
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~d5bnwspl.spl~ ~override~
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~%wiz_spell_res%~ END
+		BUT_ONLY
+	  END
+	END
+  END
+BUT_ONLY
+
+//bard inspirations___________________________________________________________________
+//
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
   SAY NAME1 @21001
   SAY IDENTIFIED_DESC @21001
@@ -1402,10 +1419,18 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsong.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_meister_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd01~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_jinxer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd22~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 2 parameter1 = %nu_loresinger_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bd06~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5bsong~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5TNUSE~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5B206~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5BLOTZ~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5bnwspl~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5MBARD~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~spcl412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 
 
+//bard inspirations___________________________________________________________________
+//
 COPY ~might_and_guile/nubards/d5_bd01.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bd01a.spl~ ~override~			//		luck inspiration
 	SAY NAME1 @21011
@@ -1555,7 +1580,6 @@ COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emana
 	SAY IDENTIFIED_DESC @21222
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd22~ END
 	WRITE_SHORT 0x1c 1
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd22b.spl~ ~override~
@@ -1600,6 +1624,7 @@ COPY ~might_and_guile/nubards/d5bd25a.spl~ ~override~			//		entangle emanation
 	SAY IDENTIFIED_DESC @21252
 	LPF ALTER_SPELL_HEADER INT_VAR location = 2 STR_VAR icon = ~d5_bd25~ END
 	WRITE_SHORT 0x1c 1
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 13 timing = 1 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5bsong~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsong~ END
 COPY ~might_and_guile/nubards/d5bd25b.spl~ ~override~
@@ -1996,11 +2021,11 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ BEGIN
   APPEND ~splprot.2da~ ~D5_INT_GTEQ%TAB%38%TAB%-1%TAB%4~
 
   COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	COUNT_2DA_ROWS cols rows // amount of rows
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-      READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+	COUNT_2DA_COLS cols 
+	COUNT_2DA_ROWS cols rows 
+	READ_2DA_ENTRIES_NOW rows cols   
+	FOR (row = 1; row < rows; ++row) BEGIN 
+      READ_2DA_ENTRY_FORMER rows row 0 ~stat~ 
       PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_INT_GTEQ~ BEGIN
     	SET int_gteq_row = %row%
       END
@@ -2727,22 +2752,26 @@ COPY_EXISTING ~d5brdspl.2da~ ~override~
   END
 BUT_ONLY
 
-APPEND ~d5brdthf.2da~ ~LEARNSPLS   GA_D5MBARD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//APPEND ~d5brdthf.2da~ ~LEARNSPLS   GA_D5MBARD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//
+// commented out, doing this in d5bsong.spl instead
 
 
 //apply EFF protections_______________________________________________________________
 //
-APPEND ~d5brdthf.2da~ ~NOSPELLS    AP_D5B206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~clabth01.2da~ ~NOSPELLS    AP_D5B206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
+//APPEND ~d5brdthf.2da~ ~NOSPELLS    AP_D5B206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//APPEND ~clabth01.2da~ ~NOSPELLS    AP_D5B206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//
+// commented out, doing this in d5bsong.spl instead
 
 //daily spell slot refresh____________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5slotz.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5blotz.spl~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5blotz.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5blots~ END
-END
-APPEND ~d5brdthf.2da~ ~SPLSLOTS    AP_D5BLOTZ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+//APPEND ~d5brdthf.2da~ ~SPLSLOTS    AP_D5BLOTZ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//
+// commented out, doing this in d5bsong.spl instead
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5blots.eff~ BEGIN
   CREATE EFF ~d5blots~
@@ -2901,7 +2930,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
   END  
 END
-APPEND ~d5_mstr.2da~ ~BARDSPLS    AP_D5MEIZ1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5_mstr.2da~ ~MSTRSPLS    AP_D5MEIZ1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 // *****
 // ... and curse/doom/malison for jinxer
@@ -2918,7 +2947,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5jnxz1.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
   END
   
-APPEND ~d5_jinx.2da~ ~BARDSPLS    AP_D5JNXZ1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5_jinx.2da~ ~JINXSPLS    AP_D5JNXZ1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 //____________________________________________________________________________________
 
 
@@ -3619,6 +3648,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ BEGIN
   BUT_ONLY
 END
 
+/* don't think need to do this.  also why did I limit it to humans??
 ACTION_FOR_EACH multi IN ~FT~ ~CT~ BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~K_%multi%_H.2da~ BEGIN
 	COPY_EXISTING ~K_%multi%_H.2da~ ~override~
@@ -3635,6 +3665,7 @@ ACTION_FOR_EACH multi IN ~FT~ ~CT~ BEGIN
 	BUT_ONLY
   END
 END
+*/
 //____________________________________________________________________________________
 
 

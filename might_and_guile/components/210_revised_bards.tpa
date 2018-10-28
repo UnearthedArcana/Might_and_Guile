@@ -2478,11 +2478,11 @@ COPY_EXISTING ~d5brdspl.2da~ ~override~
 	PATCH_IF (IDS_OF_SYMBOL ("spell" "%spont_spell%") > 0) BEGIN
 	  LPF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = EVAL ~%spont_spell%~ RET spell_res END
 	  PATCH_IF FILE_EXISTS_IN_GAME ~%spell_res%.spl~ BEGIN
+		SET spell_level = %spont_spell_level%
 		INNER_ACTION BEGIN
 		  COPY_EXISTING ~%spell_res%.spl~ ~override~
 			READ_STRREF NAME1 spell_name
 			READ_STRREF UNIDENTIFIED_DESC spell_description
-			SET spell_level = %spont_spell_level%
 			SNPRINT (0 - 3) spell_num ~%spell_res%~
 			PATCH_IF (~%spell_res%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-9][0-9]~ = 0) BEGIN
 			  INNER_PATCH_SAVE 206_spell ~%spell_res%~ BEGIN

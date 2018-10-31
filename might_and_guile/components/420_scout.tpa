@@ -134,10 +134,7 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	BUT_ONLY
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_adven.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/strirang.txt~
-		BUT_ONLY
+	APPEND ~d5_adven.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~spcl922.spl~ THEN BEGIN
 	COPY_EXISTING ~d5_adven.2da~ ~override~

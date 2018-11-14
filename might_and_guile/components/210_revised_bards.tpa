@@ -1238,8 +1238,8 @@ COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
   ACTION_IF FILE_EXISTS_IN_GAME ~%scroll%.itm~ BEGIN
 	PRINT ~%scroll% is a wizard scroll~
 	COPY_EXISTING ~%scroll%.itm~ ~override~
-	  WRITE_BYTE 0x1f (THIS BAND 0b11110111)
-	  WRITE_BYTE 0x20 (THIS BAND 0b10111111)
+	  WRITE_BYTE 0x1f (THIS BAND 0b11110101)
+	  WRITE_BYTE 0x20 (THIS BAND 0b10111101)
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	BUT_ONLY
   END
@@ -1249,8 +1249,8 @@ COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
   PATCH_IF (item_type = 35) BEGIN
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
-	  WRITE_BYTE 0x1f (THIS BAND 0b11110111)
-	  WRITE_BYTE 0x20 (THIS BAND 0b10111111)
+	  WRITE_BYTE 0x1f (THIS BAND 0b11110101)
+	  WRITE_BYTE 0x20 (THIS BAND 0b10111101)
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	END
   END

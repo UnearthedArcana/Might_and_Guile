@@ -926,10 +926,24 @@ OUTER_SET no_umd_specific = %new_specific_ind%
 
 COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
   LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END
+// add .eff setting local variable
+  LPF CLONE_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5numdlv~ END
+
 COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
   WRITE_LONG 0x1c %no_umd_specific%
   WRITE_LONG 0x90 1
   WRITE_EVALUATED_ASCII 0x94 ~D5_NUMD~ #8
+
+// make an .eff to set D5NOUMD local variable
+CREATE EFF ~d5numdlv~
+	WRITE_LONG 0x10 309
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 9
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~D5NOUMD~ #8
 
 OUTER_SET scroll_count = 0
 OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
@@ -998,6 +1012,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
 BUT_ONLY
 
+ ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+  COPY_EXISTING dplayer2.bcs override
+	DECOMPILE_AND_PATCH BEGIN
+	  REPLACE_TEXTUALLY ~THEN[%WNL%%LNL%%MNL%%TAB% ]+RESPONSE[%TAB% ]+#100[%WNL%%LNL%%MNL%%TAB% ]+ChangeSpecifics(Myself,\(1\|NORMAL\))~
+    ~
+  !Specifics(Myself,D5_NO_UMD)
+  Switch("D5NOUMD","locals")
+THEN
+  RESPONSE #0
+    ChangeSpecifics(Myself,NORMAL)
+    SetGlobal("bd_joined","locals",0)
+    SetGlobal("bd_npc_camp","locals",0)
+  RESPONSE #1
+    ChangeSpecifics(Myself,D5_NO_UMD)~
+	END
+  BUT_ONLY
+ END
+ 
 //	end use scrolls/wands
 
 COPY_EXISTING ~splprot.2da~ ~override~
@@ -1415,6 +1447,9 @@ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
   PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+/*
+patch kit = 0 to kit = 0x4000
+*/
 		READ_BYTE 0x273 npc_class
 		PATCH_IF (npc_class = 4) BEGIN
 			REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~

@@ -10,7 +10,7 @@
 plan: make 'em all thieves
 
 still to do: 
-- make innate ability toa dd bardsong .itm
+- make innate ability to add bardsong .itm
 - make music a quickslot ability, not item ability..??
 
 
@@ -1184,10 +1184,24 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_umd.spl~ BEGIN
 */
  COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
   LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END
-COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
+// add .eff setting local variable
+  LPF CLONE_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5numdlv~ END
+
+ COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
   WRITE_LONG 0x1c %no_umd_specific%
   WRITE_LONG 0x90 1
   WRITE_EVALUATED_ASCII 0x94 ~D5_NUMD~ #8
+
+// make an .eff to set D5NOUMD local variable
+CREATE EFF ~d5numdlv~
+	WRITE_LONG 0x10 309
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 9
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~D5NOUMD~ #8
 
  OUTER_SET scroll_count = 0
  OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
@@ -1277,6 +1291,24 @@ COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
 	END
  END
 
+ ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+  COPY_EXISTING dplayer2.bcs override
+	DECOMPILE_AND_PATCH BEGIN
+	  REPLACE_TEXTUALLY ~THEN[%WNL%%LNL%%MNL%%TAB% ]+RESPONSE[%TAB% ]+#100[%WNL%%LNL%%MNL%%TAB% ]+ChangeSpecifics(Myself,\(1\|NORMAL\))~
+    ~
+  !Specifics(Myself,D5_NO_UMD)
+  Switch("D5NOUMD","locals")
+THEN
+  RESPONSE #0
+    ChangeSpecifics(Myself,NORMAL)
+    SetGlobal("bd_joined","locals",0)
+    SetGlobal("bd_npc_camp","locals",0)
+  RESPONSE #1
+    ChangeSpecifics(Myself,D5_NO_UMD)~
+	END
+  BUT_ONLY
+ END
+ 
 END
 //	end use scrolls/wands
 //____________________________________________________________________________________
@@ -2091,36 +2123,42 @@ END
 ADD_PROJECTILE ~might_and_guile/nubards/d5shout.pro~
 
 // IWD Shout:
-COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
-  COUNT_REGEXP_INSTANCES ~WIZARD_SHOUT~ shout_exists
-ACTION_IF NOT (shout_exists) BEGIN
-  COPY ~might_and_guile/nubards/d5shout.spl~ ~override~
+COPY ~might_and_guile/nubards/d5shout.spl~ ~override~
 	SAY NAME1 @21905
 	SAY UNIDENTIFIED_DESC @21906
 	WRITE_ASCII 0x3a ~SPWI431C~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5shout% STR_VAR icon = ~SPWI431B~ END
-  COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
-  COPY ~might_and_guile/nubards/spwi431c.bam~ ~override~
-  COPY ~might_and_guile/nubards/spwi431b.bam~ ~override~
+COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
+COPY ~might_and_guile/nubards/spwi431c.bam~ ~override~
+COPY ~might_and_guile/nubards/spwi431b.bam~ ~override~
+ADD_SPELL ~override/d5shout.spl~ 4 3 BARD_SHOUT
 
-  ADD_SPELL ~override/d5shout.spl~ 4 3 WIZARD_SHOUT
+/*
+COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
+  COUNT_REGEXP_INSTANCES ~WIZARD_SHOUT~ shout_exists
+ACTION_IF (shout_exists) BEGIN
+// find RES and overwrite BARD_SHOUT with the wizard one
 END
+*/
 
 // IWD Great Shout:
-COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
-  COUNT_REGEXP_INSTANCES ~WIZARD_GREAT_SHOUT~ great_shout_exists
-ACTION_IF NOT (great_shout_exists) BEGIN
-  COPY ~might_and_guile/nubards/d5gshou.spl~ ~override~
+COPY ~might_and_guile/nubards/d5gshou.spl~ ~override~
 	SAY NAME1 @21905
 	SAY UNIDENTIFIED_DESC @21906
 	WRITE_ASCII 0x3a ~SPWI806C~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5shout% STR_VAR icon = ~SPWI806B~ END
-  COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
-  COPY ~might_and_guile/nubards/spwi806c.bam~ ~override~
-  COPY ~might_and_guile/nubards/spwi806b.bam~ ~override~
-  ADD_SPELL ~override/d5gshou.spl~ 4 7 WIZARD_GREAT_SHOUT
-END
+COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
+COPY ~might_and_guile/nubards/spwi806c.bam~ ~override~
+COPY ~might_and_guile/nubards/spwi806b.bam~ ~override~
+ADD_SPELL ~override/d5gshou.spl~ 4 7 BARD_GREAT_SHOUT
 
+/*
+COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
+  COUNT_REGEXP_INSTANCES ~WIZARD_GREAT_SHOUT~ great_shout_exists
+ACTION_IF NOT (great_shout_exists) BEGIN
+// find RES and overwrite BARD_GREAT_SHOUT with the wizard one
+END
+*/
 /* add_spell this and give it to true bards in place of Vocalize
 // Declamation (targetable Vocalize):
 COPY ~might_and_guile/nubards/d5bdvoc.spl~ ~override~
@@ -2893,7 +2931,7 @@ BUT_ONLY
 
 //base known spells for SOME bards____________________________________________________
 //
-LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_SHOUT~ RET spell_res END
+LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~BARD_SHOUT~ RET spell_res END
 OUTER_SPRINT shout_res ~%spell_res%~
 //OUTER_SPRINT shout_num ~%spell_num%~
 //OUTER_SNPRINT 1 shout_type ~%shout_num%~
@@ -2901,7 +2939,7 @@ OUTER_INNER_PATCH_SAVE 206_shout ~%shout_res%~ BEGIN
   REPLACE_TEXTUALLY ~[Ss][Pp][Cc][Ll]~ ~d5c6~
   REPLACE_TEXTUALLY ~[Ss][Pp][Ww][Ii]~ ~d5b6~
 END
-  LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_GREAT_SHOUT~ RET spell_res END
+  LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~BARD_GREAT_SHOUT~ RET spell_res END
 OUTER_SPRINT great_shout_res spell_res
 OUTER_INNER_PATCH_SAVE 206_great_shout ~%great_shout_res%~ BEGIN
   REPLACE_TEXTUALLY ~[Ss][Pp][Cc][Ll]~ ~d5c6~

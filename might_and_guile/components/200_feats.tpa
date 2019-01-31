@@ -14,9 +14,6 @@ COPY ~might_and_guile/lib/markers/d5_wfeat.d5~ ~override~
 //__________________________________________________________________________________
 
 
-LAM JOINABLE_NPC_ARRAYS
-
-
 //IMPROVE THAC0 TABLE_______________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
@@ -661,16 +658,13 @@ COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override~   //			iwd spell evasion
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
-
 OUTER_SET optional_evade = 1
-
-INCLUDE ~%MOD_FOLDER%/lib/spell_evasion/spell_evasion.tpa~
-
-//ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_evasion.d5~ BEGIN
-  ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN 
-    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_spell = EVAL ~%evadable_spell%~ evade_prefix = ~D5EV~ END
+INCLUDE ~%MOD_FOLDER%/lib/spell_evasion.tpa~
+ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN
+  ACTION_IF (%ind% = 1) BEGIN
+    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_res = EVAL ~%evadable_spell%~ evade_prefix = ~D5EV~ END
   END
-//END
+END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
   COPY_EXISTING ~clabth01.2da~ ~override~
@@ -1435,32 +1429,33 @@ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
 //	END
 END
 
-CLEAR_ARRAYS
 //__________________________________________________________________________________
-
 
 //add feat abilities to joinable NPCs_______________________________________________
 //
 // need to give some feats directly to thief/mages
 //
+LAM JOINABLE_NPC_ARRAYS
+
 ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
   PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-/*
-patch kit = 0 to kit = 0x4000
-*/
+	  READ_LONG 0x244 npc_kit
+	  PATCH_IF (npc_kit = 0) BEGIN
+		WRITE_SHORT 0x244 0
+		WRITE_SHORT 0x246 0x4000
+	  END
+	END
+  BUT_ONLY
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 		READ_BYTE 0x273 npc_class
+		READ_LONG 0x244 npc_kit
 		PATCH_IF (npc_class = 4) BEGIN
 			REMOVE_KNOWN_SPELL ~spcl412~ ~spcl414~
 			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl412~ END
 			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
-			READ_LONG 0x244 npc_kit
-			PATCH_IF (npc_kit = 0) BEGIN
-				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
-				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
-				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat3~ END
-			END
 			PATCH_IF (npc_kit = 16384) BEGIN
 				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat1~ END
 				LPF ADD_CRE_EFFECT INT_VAR opcode=146 target=1 timing=9 power=1 STR_VAR resource=~d5feat2~ END
@@ -1501,12 +1496,6 @@ patch kit = 0 to kit = 0x4000
 			LPF ADD_CRE_EFFECT INT_VAR opcode=172 target=1 timing=9 power=1 STR_VAR resource=~spcl414~ END
 			READ_BYTE 0x10 ~oc_thief~ // reads the byte containing the original class
 			PATCH_IF ((~%oc_thief%~ BAND ~0b01000000~) = ~0b01000000~) BEGIN // if original class = thief
-				READ_LONG 0x244 npc_kit
-				PATCH_IF (npc_kit = 0) BEGIN
-					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
-					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featc~ END
-				END
 				PATCH_IF (npc_kit = 16384) BEGIN
 					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5feata~ END
 					LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5featb~ END
@@ -1885,3 +1874,4 @@ LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed 
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END
 //__________________________________________________________________________________
 
+CLEAR_ARRAYS

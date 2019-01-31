@@ -16,12 +16,12 @@ SAVES:
 */
 
 // TO DO:
-// - apply evasion to items
 // - set amul25 (amul of spell warding) to provide evasion...? oO
 
 //patch spells for evasion__________________________________________________________
 //
-DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_spell = ~this_spell~ evade_prefix = ~prefix~ BEGIN
+DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_res = ~this_spell~ evade_prefix = ~prefix~ BEGIN
+  ACTION_TO_UPPER %evade_prefix%
   ACTION_IF FILE_EXISTS_IN_GAME ~evade%evasion_spellstate%.2da~ BEGIN
 	COPY_EXISTING ~evade%evasion_spellstate%.2da~ ~override~
 	  COUNT_2DA_ROWS 2 rows
@@ -29,9 +29,13 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 	BUT_ONLY
 	OUTER_SET evasion_ind = %last_entry%
   END
-  ACTION_TO_UPPER %evade_prefix%
   ACTION_IF NOT FILE_EXISTS_IN_GAME ~evade%evasion_spellstate%.2da~ BEGIN
-	COPY ~%MOD_FOLDER%/lib/spell_evasion/evasion.2da~ ~override/evade%evasion_spellstate%.2da~
+<<<<<<<< d5/evasion.2da
+2DA V1.0
+0
+
+>>>>>>>> 
+	COPY ~d5/evasion.2da~ ~override/evade%evasion_spellstate%.2da~
 	OUTER_SET evasion_ind = 0
   END
   COPY_EXISTING ~splprot.2da~ ~override~
@@ -44,29 +48,38 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 	  END
 	END
   BUT_ONLY
-  ACTION_IF FILE_EXISTS_IN_GAME ~%evade_spell%.spl~ BEGIN
-	ACTION_IF NOT FILE_CONTAINS_EVALUATED (~evade%evasion_spellstate%.2da~ ~%evade_spell%~) BEGIN
-	OUTER_SET evasion_ind = (evasion_ind + 1)
-	  COPY_EXISTING ~%evade_spell%.spl~ ~override~
+/*
+  OUTER_SET no_evasion_state = 0x00000001 BOR 0x00000002 BOR 0x00000004 BOR 0x00000008 BOR 0x00000020 BOR 0x00002000 BOR 0x00010000 BOR 0x00040000 BOR 0x00100000
+  LAF TO_HEX_NUMBER INT_VAR value = my_custom_state RET hexNumber END
+  OUTER_TEXT_SPRINT no_evade_ids_value ~0x%hexNumber%~
+  APPEND ~STATE.IDS~ ~%no_evade_ids_value% NO_EVASION_STATE~
+*/
+  ACTION_IF FILE_EXISTS_IN_GAME ~%evade_res%.spl~ BEGIN
+	ACTION_IF NOT FILE_CONTAINS_EVALUATED (~evade%evasion_spellstate%.2da~ ~%evade_res%~) BEGIN
+	  OUTER_SET evasion_ind = (evasion_ind + 1)
+	  COPY_EXISTING ~%evade_res%.spl~ ~override~
 		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
-		LPF DELETE_EFFECT INT_VAR match_opcode = 72 match_parameter1 = 4 match_duration = 0 END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 parameter2 = 0 timing = 0 duration = 1 savingthrow = %evasion_save% STR_VAR resource = EVAL ~%evade_prefix%%evasion_ind%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 // 	if traditional evasion, do not evade when helpless
 		PATCH_IF %evasion_spellstate% = 252 BEGIN	
 		  LPF DELETE_EFFECT INT_VAR match_opcode = 318 match_parameter2 = 136 END
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 2 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 		// berserk
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 262144 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END	// blind
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 8192 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 	// charmed
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 0x80000000 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END // confused
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 1048576 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END	// feebleminded
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 32 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 		// helpless
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 4 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 		// panicked
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 1 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 		// sleeping
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 65536 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 	// slowed
-		  LPF CLONE_EFFECT INT_VAR match_opcode = 318 match_duration = 1 match_savingthrow = %evasion_save% parameter1 = 8 parameter2 = %state_row% savingthrow = 0 STR_VAR insert = ~first~ END 		// stunned
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		END
-	  CREATE EFF ~%evade_prefix%%evasion_ind%~
+	  CREATE EFF ~%evade_prefix%A%evasion_ind%~
+		WRITE_LONG 0x10 318
+		WRITE_LONG 0x14 2
+		WRITE_LONG 0x1c %evasion_spellstate%
+		WRITE_LONG 0x20 110
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_BYTE 0x40 %evasion_save%
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%evade_prefix%B%evasion_ind%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%A%evasion_ind%~ #8
+	  CREATE EFF ~%evade_prefix%B%evasion_ind%~
 		WRITE_LONG 0x10 324
 		WRITE_LONG 0x14 2
 		WRITE_LONG 0x1c %evasion_spellstate%
@@ -74,10 +87,49 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 		WRITE_LONG 0x24 0
 		WRITE_LONG 0x28 1
 		WRITE_SHORT 0x2c 100
-		WRITE_EVALUATED_ASCII 0x30 ~%evade_spell%~ #8
+		WRITE_EVALUATED_ASCII 0x30 ~%evade_res%~ #8
 		WRITE_LONG 0x90 1
-		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%%evasion_ind%~ #8
-	  APPEND ~evade%evasion_spellstate%.2da~ ~%evasion_ind%%TAB%%evade_spell%%TAB%%evade_prefix%_%evasion_ind%~
+		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%B%evasion_ind%~ #8
+	  APPEND ~evade%evasion_spellstate%.2da~ ~%evasion_ind%%TAB%%evade_res%%TAB%%evade_prefix%_%evasion_ind%~
+	END
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~%evade_res%.itm~ BEGIN
+	ACTION_IF NOT FILE_CONTAINS_EVALUATED (~evade%evasion_spellstate%.2da~ ~%evade_res%~) BEGIN
+	  OUTER_SET evasion_ind = (evasion_ind + 1)
+	  COPY_EXISTING ~%evade_res%.itm~ ~override~
+		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
+		LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+// 	if traditional evasion, do not evade when helpless
+		PATCH_IF %evasion_spellstate% = 252 BEGIN	
+		  LPF DELETE_EFFECT INT_VAR match_opcode = 318 match_parameter2 = 136 END
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		END
+	  CREATE EFF ~%evade_prefix%A%evasion_ind%~
+		WRITE_LONG 0x10 318
+		WRITE_LONG 0x14 2
+		WRITE_LONG 0x1c %evasion_spellstate%
+		WRITE_LONG 0x20 110
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_BYTE 0x40 %evasion_save%
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%evade_prefix%B%evasion_ind%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%A%evasion_ind%~ #8
+	  CREATE EFF ~%evade_prefix%B%evasion_ind%~
+		WRITE_LONG 0x10 324
+		WRITE_LONG 0x14 2
+		WRITE_LONG 0x1c %evasion_spellstate%
+		WRITE_LONG 0x20 110
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%evade_res%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%B%evasion_ind%~ #8
+	  APPEND ~evade%evasion_spellstate%.2da~ ~%evasion_ind%%TAB%%evade_res%%TAB%%evade_prefix%_%evasion_ind%~
 	END
   END
 END
@@ -235,7 +287,7 @@ ACTION_IF (optional_evade = 1) BEGIN
 	  wand11			=> 1
 	END
   END
-  ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_items BEGIN		
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN		
 	amul01 			=> 1
 	arow06 			=> 1
 	frag01 			=> 1
@@ -249,7 +301,7 @@ ACTION_IF (optional_evade = 1) BEGIN
 	ttwand 			=> 1
   END
   ACTION_IF NOT MOD_IS_INSTALLED ~item_rev~ ~0~ BEGIN
-    ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_items BEGIN		
+    ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN		
 	  fireseed			=> 1
 	  potn13 			=> 1
 	  potn26 			=> 1

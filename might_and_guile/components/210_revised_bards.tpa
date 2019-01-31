@@ -2590,7 +2590,8 @@ COPY_EXISTING ~d5brdspl.2da~ ~override~
 			  LPF ALTER_SPELL_HEADER INT_VAR location = 4 END
 // ***** exempt lvl 1 if lv1 1 cantrips
 			  PATCH_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~142~ BEGIN
-			   PATCH_IF NOT (%spell_level%) = 1 BEGIN
+//			   PATCH_IF NOT (%spell_level%) = 1 BEGIN
+			   PATCH_IF (%spell_level% > 1) BEGIN
 				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
 			   END
 			  END

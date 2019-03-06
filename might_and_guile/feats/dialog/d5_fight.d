@@ -2,14 +2,17 @@ BEGIN ~D5_FIGHT~
 
 IF ~Global("D5_FEAT","GLOBAL",1)~ THEN BEGIN d5_fight
 SAY @20009 // ~Choose a feat:~
- IF ~GlobalLT("D5_HEALTH","LOCALS",1)~ THEN REPLY @20305 GOTO d5_fight_17
+ IF ~GlobalLT("D5_HLTHY","LOCALS",1)~ THEN REPLY @20305 GOTO d5_fight_17
  IF ~GlobalLT("D5_TOUGH","LOCALS",1)~ THEN REPLY @20307 GOTO d5_fight_18
- IF ~GlobalLT("D5_MSAVES","LOCALS",1)~ THEN REPLY @20213 GOTO d5_fight_46
- IF ~GlobalLT("D5_PSAVES","LOCALS",1)~ THEN REPLY @20215 GOTO d5_fight_47
+ IF ~GlobalLT("D5_IFORT","LOCALS",1)~ THEN REPLY @20309 GOTO d5_fight_61
+ IF ~GlobalLT("D5_MSAVE","LOCALS",1)~ THEN REPLY @20213 GOTO d5_fight_46
+ IF ~GlobalLT("D5_PSAVE","LOCALS",1)~ THEN REPLY @20215 GOTO d5_fight_47
+ IF ~GlobalLT("D5_DTRMN","LOCALS",1)~ THEN REPLY @20219 GOTO d5_fight_49
+ IF ~GlobalLT("D5_ATACK","LOCALS",3)~ THEN REPLY @20231 GOTO d5_fight_51
  IF ~GlobalLT("D5_CRIT","LOCALS",1)~ THEN REPLY @20243 GOTO d5_fight_56
  IF ~Global("D5_CRIT","LOCALS",1)~ THEN REPLY @20245 GOTO d5_fight_57
- IF ~GlobalLT("D5_DISRUPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_fight_74
- IF ~GlobalLT("D5_STRIDE","LOCALS",1)~ THEN REPLY @2210 GOTO d5_fight_16
+ IF ~GlobalLT("D5_DSRPT","LOCALS",1)~ THEN REPLY @20257 GOTO d5_fight_74
+ IF ~GlobalLT("D5_STRID","LOCALS",1)~ THEN REPLY @2210 GOTO d5_fight_16
  IF ~GlobalLT("D5_POSTA","LOCALS",1) GlobalLT("D5_POSTD","LOCALS",1) GlobalLT("D5_POSTP","LOCALS",1)~ THEN REPLY @20341 GOTO d5_fight_121
  IF ~GlobalLT("D5_POSTA","LOCALS",1) GlobalLT("D5_POSTD","LOCALS",1) GlobalLT("D5_POSTP","LOCALS",1)~ THEN REPLY @20343 GOTO d5_fight_122
  IF ~GlobalLT("D5_POSTA","LOCALS",1) GlobalLT("D5_POSTD","LOCALS",1) GlobalLT("D5_POSTP","LOCALS",1)~ THEN REPLY @20345 GOTO d5_fight_123
@@ -30,7 +33,7 @@ END
 
 IF ~~ THEN BEGIN d5_fight_17 // extra hp
  SAY @20306
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_HEALTH","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA7",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_HLTHY","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA7",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
 IF ~~ THEN BEGIN d5_fight_18 // DR
@@ -38,14 +41,29 @@ IF ~~ THEN BEGIN d5_fight_18 // DR
  IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_TOUGH","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA8",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
+IF ~~ THEN BEGIN d5_fight_61 // poison/disease evasion
+ SAY @20310
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_IFORT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFF1",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_fight 
+END 
 IF ~~ THEN BEGIN d5_fight_46 // spells/wands saves
  SAY @20214
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_MSAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_MSAVE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
 IF ~~ THEN BEGIN d5_fight_47 // death/polymorph saves
  SAY @20216
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_PSAVES","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD7",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_PSAVE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD7",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_fight 
+END 
+IF ~~ THEN BEGIN d5_fight_49 // unflagging determination
+ SAY @20220
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DTRMN","LOCALS",1)~ DO ~ApplySpellRES("D5_RFD9",myself)~ EXIT 
+ IF ~~ THEN REPLY @20097 GOTO d5_fight 
+END 
+IF ~~ THEN BEGIN d5_fight_51 // melee thac0 bonus
+ SAY @20232
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_ATACK","LOCALS",1)~ DO ~ApplySpellRES("D5_RFE1",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
 IF ~~ THEN BEGIN d5_fight_56 // +5% crit
@@ -60,12 +78,12 @@ IF ~~ THEN BEGIN d5_fight_57 // +10% crit
 END 
 IF ~~ THEN BEGIN d5_fight_74 // disrupt
  SAY @20258
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DISRUPT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG4",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_DSRPT","LOCALS",1)~ DO ~ApplySpellRES("D5_RFG4",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
 IF ~~ THEN BEGIN d5_fight_16 // quickstride
  SAY @20110
- IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRIDE","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
+ IF ~~ THEN REPLY @20098 DO ~IncrementGlobal("D5_STRID","LOCALS",1)~ DO ~ApplySpellRES("D5_RFA6",myself)~ EXIT 
  IF ~~ THEN REPLY @20097 GOTO d5_fight 
 END 
 IF ~~ THEN BEGIN d5_fight_121 // aggressive posture 1

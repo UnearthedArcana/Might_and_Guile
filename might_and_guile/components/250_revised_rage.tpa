@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						REVISED RAGE
+//						REVISED BERSERKERS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -274,11 +274,74 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 //_____________________________________________________________________________
 
 
-//WARRIOR ABILITY FILES_________________________________________________________
-//
 /*
-COPY ~might_and_guile/fighter/d5_fipr1.spl~ ~override/d5_fipr1.spl~
-	SAY NAME1 @2509
-	SAY UNIDENTIFIED_DESC @2509
-*/
+// new: passive charm evasion_________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+
+INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+
+<<<<<<<< d5/d5ragres.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+
+COPY ~d5/d5ragres.2da~ ~override/d5ragres.2da~ 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 5) || (fx_type = 24) || (fx_type = 213) || (fx_type = 175) || (fx_type = 128) || (fx_type = 39) || (fx_type = 109) || (fx_type = 76) || (fx_type = 106) || (fx_type = 23 /*|| (fx_type = 45) || (fx_type = 216) || (fx_type = 211)*/ BEGIN
+		  PATCH_PRINT "%SOURCE_RES% can evaded by rage"
+		  INNER_ACTION BEGIN
+			APPEND ~d5ragres.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 5) || (fx_type = 24) || (fx_type = 213) || (fx_type = 175) || (fx_type = 128) || (fx_type = 39) || (fx_type = 109) || (fx_type = 76) || (fx_type = 106) || (fx_type = 23) /*|| (fx_type = 45) || (fx_type = 216) || (fx_type = 211)*/ BEGIN
+		  PATCH_PRINT "%SOURCE_RES% can evaded by rage"
+		  INNER_ACTION BEGIN
+			APPEND ~d5ragres.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~d5ragres.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols rage_resist_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%rage_resist_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_??? = ??? evasion_save = 16 STR_VAR evade_condition = ~???~ evade_res = EVAL ~%rage_resist_res%~ evade_prefix = ~D5RG~ END
+	  END
+	END
+  END
+BUT_ONLY
+
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+
+// give determination and slippery mind to berserker
+
+END
+
+// now modify SPCL321 and SPCL152 to be purely battle-oriented
+
 //_____________________________________________________________________________
+*/

@@ -242,9 +242,15 @@ COPY ~might_and_guile/misc/d5bsvbo.spl~ ~override~
 	SAY NAME1 @17
 COPY ~might_and_guile/misc/d5_thac0.spl~ ~override~
 COPY ~might_and_guile/misc/d5_acbon.spl~ ~override~
-COPY ~might_and_guile/fighter/d5swash.spl~ ~override~
-	SAY NAME1 @3106
-	SAY UNIDENTIFIED_DESC @3107
+COPY ~might_and_guile/misc/d5swash.spl~ ~override~				//	swashbuckling ability
+	SAY NAME1 @3112
+	SAY UNIDENTIFIED_DESC @3113
+COPY ~might_and_guile/misc/d5swshb.eff~ ~override~
+COPY ~might_and_guile/misc/d5swshc.spl~ ~override~
+COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
+	SAY NAME1 @3114
+	SAY UNIDENTIFIED_DESC @3114
+COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
 COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
 //____________________________________________________________________________________
 

@@ -1,0 +1,166 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//							IMPROVED RANGERS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+// copy marker file__________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_beastmaster.d5~ ~override/d5_imp_rangers.d5~
+//___________________________________________________________________________________
+
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+
+// just apply feats if already installed______________________________________________
+// 
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 3 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 9 clab
+	READ_2DA_ENTRY row 8 9 class
+	PATCH_IF (class = 12) BEGIN
+	  INNER_ACTION BEGIN
+		APPEND ~%clab%.2da~ ~FEATS       AP_D5IRVAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+		APPEND ~%clab%.2da~ ~FEATS       AP_D5_RFF1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+		ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+		  APPEND ~%clab%.2da~ ~FEATS       AP_D5_RFA9  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+		END
+	  END
+	END
+  END
+BUT_ONLY
+
+//___________________________________________________________________________________
+
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+
+// give tracking at level 1__________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~spcl922.spl~ BEGIN
+
+  ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+
+	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+
+	COPY_EXISTING ~kitlist.2da~ ~override~
+// 	  COUNT_2DA_COLS cols
+	  COUNT_2DA_ROWS 9 rows
+	  FOR (row = 3 ; row < rows ; ++row ) BEGIN
+		READ_2DA_ENTRY row 5 9 clab
+		READ_2DA_ENTRY row 8 9 class
+		PATCH_IF (class = 12) BEGIN
+		  INNER_ACTION BEGIN
+			APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+		  END
+		END
+	  END
+	BUT_ONLY
+
+	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
+	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
+	BUT_ONLY
+
+  END
+  
+END
+
+
+// give poison/disease/nausea evasion________________________________________________
+// 
+INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+
+<<<<<<<< d5/d5poisev.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+
+COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF fx_type = 25 BEGIN 							// poison
+		PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES% is a poison spell"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+		END
+	  END
+	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
+    	READ_SHORT fx_off + 0xa damage_type
+		PATCH_IF damage_type = 32 BEGIN
+		  PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
+//			PATCH_PRINT "%SOURCE_RES% is a poison spell"
+			INNER_ACTION BEGIN
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			END
+		  END
+		END
+	  END
+	  PATCH_IF fx_type = 78 BEGIN 							// disease
+//		  PATCH_PRINT "%SOURCE_RES% is a disease spell"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF fx_type = 25 BEGIN 							// poison
+//		  PATCH_PRINT "%SOURCE_RES% is a poison item"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
+    	READ_SHORT fx_off + 0xa damage_type
+		PATCH_IF damage_type = 32 BEGIN
+//			PATCH_PRINT "%SOURCE_RES% is a poison item"
+			INNER_ACTION BEGIN
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			END
+		END
+	  END
+	  PATCH_IF fx_type = 78 BEGIN 							// disease
+//		  PATCH_PRINT "%SOURCE_RES% is a disease item"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~d5poisev.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+//  READ_2DA_ENTRIES_NOW ~r2en_ranres~ cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols resist_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_class = 12 evasion_save = 4 STR_VAR evade_condition = ~class~ evade_res = EVAL ~%resist_res%~ evade_prefix = ~D5RR~ END
+	  END
+	END
+  END
+BUT_ONLY
+//___________________________________________________________________________________
+
+END

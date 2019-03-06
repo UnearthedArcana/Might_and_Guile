@@ -390,6 +390,10 @@ COPY ~might_and_guile/feats/d5_rfa8.spl~ ~override~   // 			10% DR
 	SAY NAME1 @20307
 	SAY UNIDENTIFIED_DESC @20308
 
+COPY ~might_and_guile/feats/d5_rfa9.spl~ ~override~   // 			tracking
+	SAY NAME1 @20107
+	SAY UNIDENTIFIED_DESC @20108
+
 // mechanical
 
 /*
@@ -690,6 +694,30 @@ END
 
 //COPY_EXISTING ~sw1h04.itm~ ~override/d5_evasion.d5~
 
+COPY ~might_and_guile/feats/d5_rfd4.spl~ ~override~   // 			missile snaring
+	SAY NAME1 @20203
+	SAY UNIDENTIFIED_DESC @20204
+CREATE EFF ~d5_rfd4~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 9
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~d5_rf44~ #8
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_SNAREARROW~ RET new_state_ind END
+OUTER_SET missile_snaring_state = %new_state_ind%
+OUTER_SET nada = RESOLVE_STR_REF (~ ~)
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~7eyes.2da~ BEGIN
+	COPY ~might_and_guile/misc/7eyes.2da~ ~override~
+END
+APPEND ~7eyes.2da~ ~SNARE_ARROW  %missile_snaring_state%         %nada%         12*0x800000 *           *           *            *            *          *          *          * ~
+COPY_EXISTING ~7eyes.2da~ ~override~
+  COUNT_2DA_ROWS 4 7eyes_rows
+BUT_ONLY
+COPY ~might_and_guile/feats/d5_rf44.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 335 parameter1 = %missile_snaring_state% parameter2 = %7eyes_rows% END
+
 COPY ~might_and_guile/feats/d5_rfd5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override~   // 			save bonuses
 	SAY NAME1 @20211
@@ -708,6 +736,116 @@ COPY ~might_and_guile/feats/d5_rfd7.spl~ ~override~   // 			death/polymorph save
 	SAY UNIDENTIFIED_DESC @20216
 	WRITE_ASCII 0x3a ~d5_rfd5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
+
+// slippery mind: 5 Charm, 128 Confusion, 76 feeblemind, 213 Maze
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_CHARMEVADE~ RET new_state_ind END
+OUTER_SET charm_evasion_state = %new_state_ind%
+COPY ~might_and_guile/feats/d5_rfd8.spl~ ~override~   // 			charm evasion
+	SAY NAME1 @20217
+	SAY UNIDENTIFIED_DESC @20218
+	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %charm_evasion_state% END
+<<<<<<<< d5/d5chrmev.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+COPY ~d5/d5chrmev.2da~ ~override/d5chrmev.2da~ 
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 5) || (fx_type = 128) || (fx_type = 76) || (fx_type = 213) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES%.spl subject to Slippery Mind"
+		  INNER_ACTION BEGIN
+			APPEND ~d5chrmev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 5) || (fx_type = 128) || (fx_type = 76) || (fx_type = 213) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES%.itm subject to Slippery Mind"
+		  INNER_ACTION BEGIN
+			APPEND ~d5chrmev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING ~d5chrmev.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols charm_evade_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%charm_evade_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %charm_evasion_state% evasion_save = 1 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%charm_evade_res%~ evade_prefix = ~D5VC~ END
+	  END
+	END
+  END
+BUT_ONLY
+
+// determination: 39 Sleep, 217 PW Sleep, 109 Hold, 175 Hold2, 24 Horror, 106 Morale Break, 23 Morale change, 45 Stun, 210 PW Stun
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_STUNEVADE~ RET new_state_ind END
+OUTER_SET stun_evasion_state = %new_state_ind%
+COPY ~might_and_guile/feats/d5_rfd9.spl~ ~override~   // 			stun evasion
+	SAY NAME1 @20219
+	SAY UNIDENTIFIED_DESC @20220
+	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %stun_evasion_state% END
+<<<<<<<< d5/d5stunev.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+COPY ~d5/d5stunev.2da~ ~override/d5stunev.2da~ 
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 24) || (fx_type = 175) || (fx_type = 39) || (fx_type = 109) || (fx_type = 106) || (fx_type = 23) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES%.spl is subject to Determination"
+		  INNER_ACTION BEGIN
+			APPEND ~d5stunev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 24) || (fx_type = 175) || (fx_type = 39) || (fx_type = 109) || (fx_type = 106) || (fx_type = 23) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES%.itm is subject to Determination"
+		  INNER_ACTION BEGIN
+			APPEND ~d5stunev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING ~d5stunev.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols stun_evade_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%stun_evade_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %stun_evasion_state% evasion_save = 16 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%stun_evade_res%~ evade_prefix = ~D5VS~ END
+	  END
+	END
+  END
+BUT_ONLY
 
 // combat 
 
@@ -739,9 +877,103 @@ COPY ~might_and_guile/feats/d5_rfe7.spl~ ~override~   // 			crit bonus 2
 
 // combat techniques - rogue
 
-COPY ~might_and_guile/fighter/d5swash.spl~ ~override~	//			swashbuckling = 58
-	SAY NAME1 @3106
-	SAY UNIDENTIFIED_DESC @3107
+COPY ~might_and_guile/misc/d5swash.spl~ ~override~				//	swashbuckling = 58
+	SAY NAME1 @3112
+	SAY UNIDENTIFIED_DESC @3113
+COPY ~might_and_guile/misc/d5swshb.eff~ ~override~
+COPY ~might_and_guile/misc/d5swshc.spl~ ~override~
+COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
+	SAY NAME1 @3114
+	SAY UNIDENTIFIED_DESC @3114
+COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
+
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_POISONEVADE~ RET new_state_ind END
+OUTER_SET poison_evasion_state = %new_state_ind%
+COPY ~might_and_guile/feats/d5_rff1.spl~ ~override~   // 			poison/disease evasion
+	SAY NAME1 @20309
+	SAY UNIDENTIFIED_DESC @20310
+	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %poison_evasion_state% END
+<<<<<<<< d5/d5poisev.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF fx_type = 25 BEGIN 							// poison
+		PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
+//		  PATCH_PRINT "%SOURCE_RES% is a poison spell"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+		END
+	  END
+	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
+    	READ_SHORT fx_off + 0xa damage_type
+		PATCH_IF damage_type = 32 BEGIN
+		  PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
+//			PATCH_PRINT "%SOURCE_RES% is a poison spell"
+			INNER_ACTION BEGIN
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			END
+		  END
+		END
+	  END
+	  PATCH_IF fx_type = 78 BEGIN 							// disease
+//		  PATCH_PRINT "%SOURCE_RES% is a disease spell"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF fx_type = 25 BEGIN 							// poison
+//		  PATCH_PRINT "%SOURCE_RES% is a poison item"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
+    	READ_SHORT fx_off + 0xa damage_type
+		PATCH_IF damage_type = 32 BEGIN
+//			PATCH_PRINT "%SOURCE_RES% is a poison item"
+			INNER_ACTION BEGIN
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			END
+		END
+	  END
+	  PATCH_IF fx_type = 78 BEGIN 							// disease
+//		  PATCH_PRINT "%SOURCE_RES% is a disease item"
+		  INNER_ACTION BEGIN
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+COPY_EXISTING ~d5poisev.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols poison_evade_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
+	  END
+	END
+  END
+BUT_ONLY
 
 /*
 COPY ~might_and_guile/feats/d5_rfg1.bam~ ~override~
@@ -772,6 +1004,32 @@ COPY ~might_and_guile/feats/d5_rf72a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf72b.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf72c.eff~ ~override~
 */
+
+COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override~   // 			blind
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
+	WRITE_ASCII 0x3a ~d5_rfg3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
+COPY ~might_and_guile/feats/d5_rf73.spl~ ~override~
+	SAY NAME1 @20255
+	SAY UNIDENTIFIED_DESC @20256
+	WRITE_ASCII 0x3a ~d5_rfg3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
+COPY ~might_and_guile/feats/d5_rf73.eff~ ~override~
+
+COPY ~might_and_guile/feats/d5_rfg4.bam~ ~override~
+COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override~   // 			disrupt
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
+	WRITE_ASCII 0x3a ~d5_rfg4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
+COPY ~might_and_guile/feats/d5_rf74.spl~ ~override~
+	SAY NAME1 @20257
+	SAY UNIDENTIFIED_DESC @20258
+	WRITE_ASCII 0x3a ~d5_rfg4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
+COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfg5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override~   // 			fighting dirty
@@ -817,32 +1075,6 @@ COPY ~might_and_guile/feats/d5_rf75e.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75e.spl~ ~override~
   LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (1 << 24) parameter2 = %134_dirty% END
 COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~
-
-COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override~   // 			blind
-	SAY NAME1 @20255
-	SAY UNIDENTIFIED_DESC @20256
-	WRITE_ASCII 0x3a ~d5_rfg3~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
-COPY ~might_and_guile/feats/d5_rf73.spl~ ~override~
-	SAY NAME1 @20255
-	SAY UNIDENTIFIED_DESC @20256
-	WRITE_ASCII 0x3a ~d5_rfg3~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
-COPY ~might_and_guile/feats/d5_rf73.eff~ ~override~
-
-COPY ~might_and_guile/feats/d5_rfg4.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override~   // 			disrupt
-	SAY NAME1 @20257
-	SAY UNIDENTIFIED_DESC @20258
-	WRITE_ASCII 0x3a ~d5_rfg4~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
-COPY ~might_and_guile/feats/d5_rf74.spl~ ~override~
-	SAY NAME1 @20257
-	SAY UNIDENTIFIED_DESC @20258
-	WRITE_ASCII 0x3a ~d5_rfg4~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
-COPY ~might_and_guile/fighter/d5_wf11.eff~ ~override~
 
 // pseudo-magical
 
@@ -1206,6 +1438,34 @@ COMPILE ~might_and_guile/feats/dialog/d5_fight.d~
 COMPILE ~might_and_guile/feats/dialog/d5_range.d~ 
 COMPILE ~might_and_guile/feats/dialog/d5_stalk.d~ 
 
+APPEND ~splprot.2da~ ~D5_KIT_NOT%TAB%152%TAB%-1%TAB%5~ UNLESS ~D5_KIT_NOT~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_NOT~ BEGIN
+	    SET kit_not_row = %row%
+	  END
+	END
+BUT_ONLY
+
+COPY ~might_and_guile/feats/d5mfeat1.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 318 parameter2 = %kit_not_row% END
+COPY ~might_and_guile/feats/d5mfeat1.eff~ ~override~
+
+ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
+  ACTION_IF (num > 1) && (num < 10) BEGIN
+	COPY_EXISTING ~d5mfeat1.eff~ ~override/d5mfeat%num%.eff~
+	  WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
+	BUT_ONLY
+	COPY_EXISTING ~d5mfeat1.spl~ ~override/d5mfeat%num%.spl~
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 318 STR_VAR resource = ~d5mfeat%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5mfeat%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = ~d5mfeat%num%~ END
+	BUT_ONLY
+  END
+END
 //__________________________________________________________________________________
 
 COPY ~might_and_guile/misc/d5_thac1.spl~ ~override~
@@ -1318,6 +1578,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
 		REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/feats/feats_trueclass.txt~
+		APPEND_FILE ~might_and_guile/feats/feats_multithief.txt~
 		APPEND_FILE ~might_and_guile/feats/no_umd.txt~
 	BUT_ONLY
 END

@@ -1,0 +1,84 @@
+//ARMORED CASTING MACRO__________________________________________________________
+//
+//	v2.0
+//
+DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
+	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+		READ_SHORT 0x1c type
+		READ_LONG 0x22 appearance
+		PATCH_IF (type = 2) BEGIN // armor
+		  PATCH_IF (appearance = 16690) BEGIN // leather appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcal~ END
+		  END
+		  PATCH_IF (appearance = 16691) BEGIN // chain appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcac~ END
+		  END
+		  PATCH_IF (appearance = 16692) BEGIN // plate appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcap~ END
+		  END
+		END
+	  END
+	BUT_ONLY
+	CREATE EFF ~d5arcal~											// 	disable casting, leather armors
+		WRITE_LONG 0x10 145
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x20 0
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_LONG 0x90 1
+		WRITE_ASCII 0x94 ~d5arcal~ #8
+	CREATE EFF ~d5arcac~											// 	disable casting, chain armors
+		WRITE_LONG 0x10 145
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x20 0
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_LONG 0x90 1
+		WRITE_ASCII 0x94 ~d5arcac~ #8
+	CREATE EFF ~d5arcap~											// 	disable casting, plate armors
+		WRITE_LONG 0x10 145
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x20 0
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_LONG 0x90 1
+		WRITE_ASCII 0x94 ~d5arcap~ #8
+	CREATE EFF ~d5arca1~											// 	immunity to d5arcaL
+		WRITE_LONG 0x10 206
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_ASCII 0x30 ~d5arcal~ #8
+	CREATE EFF ~d5arca2~											// 	immunity to d5arcaC
+		WRITE_LONG 0x10 206
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_ASCII 0x30 ~d5arcac~ #8
+	CREATE EFF ~d5arca3~											// 	immunity to d5arcaP
+		WRITE_LONG 0x10 206
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x24 2
+		WRITE_SHORT 0x2c 100
+		WRITE_ASCII 0x30 ~d5arcap~ #8
+	COPY_EXISTING ~spcl221.spl~ ~override/d5arca1.spl~				// 	immunity to d5arcaL
+		SAY NAME1 ~ ~
+		SAY UNIDENTIFIED_DESC ~ ~
+		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcal~ END
+	COPY_EXISTING ~spcl221.spl~ ~override/d5arca2.spl~				// 	immunity to d5arcaC
+		SAY NAME1 ~ ~
+		SAY UNIDENTIFIED_DESC ~ ~
+		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcac~ END
+	COPY_EXISTING ~spcl221.spl~ ~override/d5arca3.spl~				// 	immunity to d5arcaP
+		SAY NAME1 ~ ~
+		SAY UNIDENTIFIED_DESC ~ ~
+		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcap~ END
+	COPY_EXISTING ~sw1h04.itm~ ~override/d5_armcast.d5~				// 	marker file
+  END
+END
+//__________________________________________________________________________________

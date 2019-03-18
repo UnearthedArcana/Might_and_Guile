@@ -19,7 +19,7 @@ SAVES:
 
 //patch spells for evasion__________________________________________________________
 //
-DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_class = 0 evasion_kit = 0 evasion_save = 2 STR_VAR evade_condition = ~spellstate~ evade_res = ~this_spell~ evade_prefix = ~prefix~ BEGIN
+DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_class = 0 evasion_kit = 0 evasion_save = 2 evasion_chance = 100 STR_VAR evade_condition = ~spellstate~ evade_res = ~this_spell~ evade_prefix = ~prefix~ BEGIN
   ACTION_TO_UPPER %evade_prefix%
   APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
   APPEND ~splprot.2da~ ~D5_KIT_NOT%TAB%152%TAB%-1%TAB%5~ UNLESS ~D5_KIT_NOT~
@@ -42,6 +42,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 	OUTER_SET evade_cond = %evasion_spellstate%
 	OUTER_SET evade_type = 110
 	OUTER_SET not_evade = 111
+	OUTER_SET evade_prob = 100
   END
   ACTION_IF (~%evade_condition%~ STRING_EQUAL_CASE ~class~) BEGIN
 	OUTER_SPRINT evade_suffix ~c~
@@ -49,6 +50,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 	OUTER_SET evade_cond = %evasion_class%
 	OUTER_SET evade_type = 105
 	OUTER_SET not_evade = 115
+	OUTER_SET evade_prob = 100
   END
   ACTION_IF (~%evade_condition%~ STRING_EQUAL_CASE ~kit~) BEGIN
 	OUTER_SPRINT evade_suffix ~k~
@@ -56,6 +58,15 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 	OUTER_SET evade_cond = %evasion_kit%
 	OUTER_SET evade_type = %kit_is_row%
 	OUTER_SET not_evade = %kit_not_row%
+	OUTER_SET evade_prob = 100
+  END
+  ACTION_IF (~%evade_condition%~ STRING_EQUAL_CASE ~percent~) BEGIN
+	OUTER_SPRINT evade_suffix ~p~
+	OUTER_SET evade_list = %evasion_chance%
+	OUTER_SET evade_cond = 0
+	OUTER_SET evade_type = %kit_is_row%
+	OUTER_SET not_evade = 0
+	OUTER_SET evade_prob = %evasion_chance%
   END
   ACTION_IF FILE_EXISTS_IN_GAME ~evad%evade_suffix%%evade_list%.2da~ BEGIN
 	COPY_EXISTING ~evad%evade_suffix%%evade_list%.2da~ ~override~
@@ -110,7 +121,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 		WRITE_LONG 0x24 0
 		WRITE_LONG 0x28 1
 		WRITE_BYTE 0x40 %evasion_save%
-		WRITE_SHORT 0x2c 100
+		WRITE_SHORT 0x2c %evade_prob% 
 		WRITE_EVALUATED_ASCII 0x30 ~%evade_prefix%B%evasion_ind%~ #8
 		WRITE_LONG 0x90 1
 		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%A%evasion_ind%~ #8
@@ -155,7 +166,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell INT_VAR evasion_spellstate = 252 evasion_
 		WRITE_LONG 0x24 0
 		WRITE_LONG 0x28 1
 		WRITE_BYTE 0x40 %evasion_save%
-		WRITE_SHORT 0x2c 100
+		WRITE_SHORT 0x2c %evade_prob%
 		WRITE_EVALUATED_ASCII 0x30 ~%evade_prefix%B%evasion_ind%~ #8
 		WRITE_LONG 0x90 1
 		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%A%evasion_ind%~ #8

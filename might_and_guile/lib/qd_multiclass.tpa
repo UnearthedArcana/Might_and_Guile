@@ -252,27 +252,34 @@ ABILITY1    ****        ****        ****        ****        ****        ****    
 		COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ //multiclass macro identifier file
 	END 
 
-	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi_spls.qd~) THEN BEGIN 
+//	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi_spls.qd~) THEN BEGIN 
 			//making the empty multiclass spells and effects	
-		
+
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_AP.EFF~) BEGIN
 		CREATE EFF ~QD_MC_AP~ 
 			WRITE_LONG   0x10 146 //cast spell
 			WRITE_LONG   0x14 2   //preset target 
 			WRITE_LONG   0x20 1   //cast instantly (ignore level) 
 			WRITE_SHORT  0x24 1   //permament until death
 			WRITE_SHORT  0x2c 100 //probability 100% 
-			
+	  END
+		
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_GA.EFF~) BEGIN
 		CREATE EFF ~QD_MC_GA~ 
 			WRITE_LONG   0x10 171 //give spell
 			WRITE_LONG   0x14 2   //preset target 
 			WRITE_SHORT  0x24 1   //permament until death
 			WRITE_SHORT  0x2c 100 //probability 100% 
+	  END
 			
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_01.SPL~) BEGIN
 		CREATE SPL ~QD_MC_01~
 
 		COPY_EXISTING ~QD_MC_01.SPL~ ~override~ 
 			LPF ADD_SPELL_HEADER END   
+	  END
 						
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MCF01.SPL~) BEGIN
 		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MCF01.SPL~ 
 			 ~QD_MC_01.SPL~ ~override/QD_MCF02.SPL~ 
 			 ~QD_MC_01.SPL~ ~override/QD_MCF03.SPL~ 

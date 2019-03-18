@@ -122,33 +122,40 @@ CLASS FEATURES:
   Level 9-17: x3
   Level 18+: x4
 - May learn 'Rogue Feats' which provide the rogue with special abilities or passive bonuses. Rogues begin with three Rogue Feats, and may choose another at every odd level, up to level 19.
+- Hit Die: d6
 
 ROGUE FEATS: 
-- Stealth Bonus (HiS/MS)
-- Thieving Bonus (PP/OL)
-- Detection Bonus (FT/DI)
-- Lore Bonus
+- Stealth Mastery
+- Thieving Mastery
+- Detection Mastery
+- Lore Mastery
+- Tracking
 - Set Dart Trap
+- Set Fire Trap
 - Basic Alchemy
 - Grease Jar/Smoke Bomb
-- Flaming Weapon (requires Basic Alchemy)
-- Set Fire Trap (requires Dart Trap and Alchemy)
-- Armor Class Bonus
-- Saving Throw Bonus (requires AC Bonus)
-- THAC0 Bonus
-- Backstab Bonus (requires THAC0 Bonus)
+- Flaming Weapon
+- Dodge
+- Missile Snaring
+- Spell Evasion
+- Mental Resilience
+- Physical Resilience
+- Slippery Mind
+- Combat Training
+- Ranged Accuracy
+- Precise Strike
+- Weapon Focus
+- Enhanced Backstab
 - Fighting Dirty
 - Blind Opponent
 - Disrupt Magic
-- Illusion Magic (requires 15 INT, level 10+)
-- Shadow Magic (requires 15 INT, level 10+)
-- Use Wands (requires 12 INT, level 8+)
-- Use Scrolls (requires 15 INT, level 8+)
+- Illusion Magic (level 9+)
+- Shadow Magic (level 9+)
+- Use Magical Device (level 9+)
 - Luck Bonus
 
 CLASS RESTRICTIONS:
 - Alignment restricted to any except lawful good.
-- Hit Die: d6
 
 Prime Requisite For Dual-Classing: Dexterity
 ~
@@ -158,6 +165,114 @@ Prime Requisite For Dual-Classing: Dexterity
 @20006  = ~Cleric/Rogue~
 @20007  = ~2e bard~
 @20008  = ~2E Bard~
+@20009  = ~Choose a feat~
+@20010  = ~Use this ability to learn a new feat~
+@20011  = ~Feat Selection~
+@20012  = ~1 = Warrior/Misc; 2 = Combat; 3 = Archer/Bard~
+@20013  = ~4 = at 9th level~
+@20014  = ~~
+@20015  = ~FIGHTER: The Fighter is a champion, swords<PRO_MANWOMAN>, soldier, and brawler who lives or dies by <PRO_HISHER> knowledge of weapons and tactics. Fighters can be found at the front of any battle, contesting toe-to-toe with monsters and villains. A good Fighter needs to be strong and healthy if <PRO_HESHE> hopes to survive.
+
+CLASS FEATURES:
+
+- May wear helmets.
+- May wear any armor and use any weapon.
+- May achieve Grand Mastery (five slots) with any weapon class.
+- May achieve Specialization (two slots) in any fighting style and allocate three slots in Two-Weapon Style.
+- May learn 'Warrior Feats' which provide the Fighter with special abilities or passive bonuses. Fighters may choose a feat at every third level, up to level 18.
+- Hit Die: d10
+
+WARRIOR FEATS: 
+- Health Conditioning
+- Toughness
+- Intestinal Fortitude
+- Unflagging Determination
+- Mental Resilience
+- Physical Resilience
+- Dodge
+- Combat Training
+- Ranged Accuracy
+- Precise Strike
+- Group Tactics: Discipline
+- Group Tactics: Formation
+- Fighting Posture: Aggressive
+- Fighting Posture: Disarming
+- Fighting Posture: Parry Slashing
+- Fighting Posture: Parry Piercing
+- Fighting Posture: Parry Blunt
+
+Prime Requisites For Dual-Classing: Strength~
+@20016  = ~RANGER: The Ranger is a warrior and a woods<PRO_MANWOMAN> who is skilled with weapons and is knowledgeable in the ways of the forest. The Ranger often protects and guides lost travelers and honest peasant-folk. A Ranger needs to be strong and wise to the ways of nature to live a full life.
+
+CLASS FEATURES:
+
+- May wear helmets.
+- May wear any armor and use any weapon.
+- May not exceed Specialization (two slots) in any weapon class.
+- May achieve Specialization (two slots) in any fighting style.
+- Begins Specialized (two slots) in Two-Weapon Style and may place a third slot into it. 
+- May select a racial enemy, which grants a +4 bonus to hit and damage rolls against the selected enemy race.
+- May use the Charm Animal ability once per day. Gains one use at level 1 and an additional use every 2 levels thereafter.
+- May use the Hide In Shadows ability while wearing no armor, leather armor, or studded leather armor.
+- May cast druidic spells starting at level 8.
+- Alignment restricted to good.
+- May learn 'Warrior Feats' which provide special abilities or passive bonuses. Rangers may choose a feat at every third level, up to level 18.
+- Hit Die: d10
+
+RANGER FEATS: 
+- Tracking
+- Quickstride
+- Health Conditioning
+- Toughness
+- Intestinal Fortitude
+- Unflagging Determination
+- Mental Resilience
+- Physical Resilience
+- Dodge
+- Combat Training
+- Weapon Focus
+- Ranged Accuracy
+- Precise Strike
+- Enhanced Backstab
+- Fighting Posture: Aggressive
+- Fighting Posture: Disarming
+- Fighting Posture: Parry Slashing
+- Fighting Posture: Parry Piercing
+- Fighting Posture: Parry Blunt
+
+Prime Requisites For Dual-Classing: Strength, Dexterity, Wisdom~
+@20017  = ~BARBARIAN: A Barbarian can be an excellent warrior. While not as disciplined or as skilled as a Fighter, the Barbarian can willingly throw <PRO_HIMHER>self into a berserker rage, becoming a tougher and stronger opponent.
+
+CLASS FEATURES:
+
+- May not wear armor heavier than splint mail.
+- May not exceed Specialization (two slots) with any weapon class.
+- May achieve Specialization (two slots) in any fighting style and allocate three slots in Two-Weapon Style.
+- May learn 'Warrior Feats' which provide special abilities or passive bonuses. Barbarians may choose a feat at every third level, up to level 18.
+- Moves 2 points faster than other characters.
+- Immune to backstab.
+- Gains an extra chance to roll a saving throw to resist spells and abilities that involve Sleep, Hold, Charm, Domination, Confusion, Feeblemind, Stun, and Maze effects.
+- May use the Rage ability once per day. Gains one use at level 1 and an additional use every 4 levels thereafter.
+
+RAGE: The enraged status lasts for 5 rounds and provides a +4 bonus to Strength and Constitution, a -2 penalty to Armor Class and a +2 bonus to Saving Throws vs. Spell, as well as immunity to all panic and fear effects.
+
+- 11th level: Gains 10% resistance to crushing, slashing, piercing, and missile damage.
+- Hit Die: d12
+
+BARBARIAN FEATS: 
+- Tracking
+- Health Conditioning
+- Toughness
+- Intestinal Fortitude
+- Mental Resilience
+- Physical Resilience
+- Dodge
+- Combat Training
+- Ranged Accuracy
+- Fighting Posture: Aggressive
+~
+@20018  = ~Barbarian Rage
+The character is enraged for 5 rounds, which grants <PRO_HIMHER> a +4 bonus to Strength and Constitution, a -2 penalty to Armor Class, and a +2 bonus to Saving Throws vs. Spell, as well as immunity to all panic and fear effects.~
 @20073  = ~ASSASSIN: This is a killer trained in discreet and efficient murder, relying on anonymity and surprise to perform <PRO_HISHER> task.
 
 Abilities:
@@ -197,8 +312,6 @@ Disadvantages:
 - -1 to base backstab multiplier compared to an unkitted Thief
 
 Prime Requisites For Dual-Classing: Strength, Dexterity, Charisma~
-@20009   = ~Choose a feat~
-@20010   = ~Use this ability to learn a new feat~
 @20081   = ~alchemist~
 @20082   = ~Alchemist~
 @20083   = ~ALCHEMIST: This is someone who focuses on pursuits of the mind more than of the body, achieving mastery over herbs and chemicals. Alchemists may learn to brew more, and more useful, potions than most rogues, and may even use their knowledge to alter their own physiology.
@@ -221,12 +334,12 @@ Restrictions:
 @20098  = ~Choose this ability~
 @20099  = ~Choose an ability~
 @20100  = ~Use this ability to learn a new feat~
-@20101  = ~Stealth Bonus~
-@20102  = ~Stealth Bonus: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each.~
-@20103  = ~Thieving Bonus~
-@20104  = ~Thieving Bonus: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each.~
-@20105  = ~Detection Bonus~
-@20106  = ~Detection Bonus: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each.~
+@20101  = ~Stealth Skills~
+@20102  = ~Stealth Skills: this ability increase the rogue's Hide in Shadows and Move Silently skills by 10% each. This feat may be chosen up to three times.~
+@20103  = ~Thieving Skills~
+@20104  = ~Thieving Skills: this ability increase the rogue's Pick Pockets and Open Locks skills by 10% each. This feat may be chosen up to three times.~
+@20105  = ~Detection Skills~
+@20106  = ~Detection Skills: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each. This feat may be chosen up to three times.~
 @20107  = ~Tracking~
 @20108  = ~Tracking: the Tracking ability gives one a general idea of what creatures are in an area and which direction they are. Red arrows at the edge of the screen will point in the general direction of the creatures in the area.~
 @20309  = ~Quickstride~
@@ -234,7 +347,7 @@ Restrictions:
 @20111  = ~Spike Trap~
 @20112  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
 @20113  = ~Dart Trap~
-@20114  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.~
+@20114  = ~Dart Trap: this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter. This feat may be chosen up to three times.~
 @20115  = ~Fire Trap~
 @20116  = ~Fire Trap: this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast.~
 @20117  = ~Web Trap~
@@ -244,7 +357,9 @@ Restrictions:
 @20129  = ~Maze Trap~
 @20130  = ~This powerful trap combines an advanced thief's mechanical abilities with a mastery over shadow magic.  When triggered by an enemy, the victim will be shunted into pocket of the Plane of Shadow. How long they are trapped in that place depends on the victim's intelligence score, as outlined in the 8th level wizard spell 'Maze.'~
 @20131  = ~Basic Alchemy~
-@20132  = ~Basic Alchemy: this ability enables the creation of one of the following potions, once per day: a Potion of Healing; an Antidote; a Potion of Strength; a Potion of Perception; a Potion of Fire Resistance; a Potion of Cold Resistance; or two Flaming Oils.~
+@20132  = ~Basic Alchemy: this ability enables the creation of one of the following potions, once per day: a Potion of Healing; an Antidote; a Potion of Strength; a Potion of Perception; a Potion of Fire Resistance; a Potion of Cold Resistance; or two Flaming Oils. 
+
+An Alchemist may choose this feat a second time, thereby learning the Advanced Alchemy feat. Advanced Alchemy enables the creation of one of the following potion once per day: a Potion of Regeneration; an Oil of Speed; a Potion of Clarity; a Potion of Mind Focusing; a Potion of Invisibility; or a Potion of Fiery Burning.~
 @20133  = ~Potion of Healing~
 @20134  = ~Antidote~
 @20135  = ~Potion of Strength~
@@ -261,11 +376,11 @@ When thrown at a target, the glass pot breaks, spreading flaming oil over everyt
 Weight: 0
 ~
 @20151  = ~Flaming Weapon~
-@20152  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 15 rounds, the weapon will do 1d4 fire damage in addition to normal damage.~
+@20152  = ~Flaming Weapon: this ability allows the rogue to coat a weapon in a viscous and highly flammable oil. For 15 rounds, the weapon will do 1d4 fire damage in addition to normal damage. This feat may be chosen up to three times.~
 @20161  = ~Poison Weapon (Toxin)~
-@20162  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round.~
+@20162  = ~Poison Weapon (Toxin): this ability allows the Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reached higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. This feat may be chosen by Assassins up to three times.~
 @20163  = ~Poison Weapon (Paralytic)~
-@20164  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds.~
+@20164  = ~Poison Weapon (Paralytic): this ability allows the Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. After being applied, its potency lasts for 5 rounds. This feat may be chosen by Hunters up to three times.~
 @20171  = ~Hulking Transformation~
 @20172  = ~Hulking Transformation: by taking this feat, the Alchemist causes changes in <PRO_HISHER> own body. This enables the ability to trigger a change causing the Alchemist to grow to monstrous proportions, with brutish strength and a tough leathery hide, for one turn once per day. But there is a long-term cost, a toll on the Alchemist's health that manifests as a permanent -1 penalty to Strength and Constitution.~
 @20173  = ~Brute Fist~
@@ -287,16 +402,16 @@ Weight: 0
 @20196  = ~Potion of Magic Shielding~
 @20197  = ~Potion of Freedom~
 @20198  = ~Potion Fire Breath~
-@20201  = ~Armor Class Bonus~
-@20202  = ~Armor Class Bonus: this ability confers a permanent -1 bonus to Armor Class.~
+@20201  = ~Dodge~
+@20202  = ~Dodge: this ability confers a permanent -1 bonus to Armor Class.  This feat may be chosen twice; Swashbucklers may choose it up to six times.~
 @20203  = ~Missile Snaring~
-@20204  = ~Missile Snaring: this ability enables the rogue to deflect the base (missile) damage from an incoming ranged attack, once per round.~
-@20211  = ~Saving Throws Bonus~
-@20212  = ~Saving Throws Bonus: this ability confers a permanent -1 bonus to all saving throws.~
-@20213  = ~Saving Throw Bonus (Mental)~
-@20214  = ~Saving Throws Bonus (Mental): this ability confers a permanent -2 bonus to saving throws vs. spells, wands, and psionics.~
-@20215  = ~Saving Throw Bonus (Physical)~
-@20216  = ~Saving Throws Bonus (Physical): this ability confers a permanent -2 bonus to saving throws vs. death/poison and petrify/polymorph.~
+@20204  = ~Missile Snaring: this ability enables the deflection of base (missile) damage from an incoming ranged attack, once per round.~
+@20211  = ~General Resilience~
+@20212  = ~General Resilience: this ability confers a permanent -1 bonus to all saving throws.~
+@20213  = ~Mental Resilience~
+@20214  = ~Mental Resilience: this ability confers a permanent -2 bonus to saving throws vs. spells, wands, and psionics.~
+@20215  = ~Physical Resilience~
+@20216  = ~Physical Resilience: this ability confers a permanent -2 bonus to saving throws vs. death/poison and petrify/polymorph.~
 @20217  = ~Slippery Mind~
 @20218  = ~Slippery Mind: this ability allows an extra saving throw vs. Spells to avoid Charm/Domination, Confusion, Feeblemind and Maze effects.~
 @20219  = ~Unflagging Determination~
@@ -305,30 +420,30 @@ Weight: 0
 @20222  = ~Escape Artist: the rogue will be affected by the spell Remove Paralysis whenever Held, Webbed, or otherwise helpless.~
 @20223  = ~Spell Evasion~
 @20224  = ~Spell Evasion: when the rogue is targeted by a spell that can be evaded (Fireball, Lightning Bolt, etc.), the effects may be completely avoided upon a successful save vs. Breath. A helpless rogue (e.g. held, stunned, or asleep) cannot evade such effects, however.~
-@20229  = ~Finesse~
-@20230  = ~Finesse: this ability applies a bonus to hit with melee weapons based on the rogue's Dexterity or Strength, whichever is higher.~
-@20231  = ~To-Hit Bonus (Melee)~
-@20232  = ~To-Hit Bonus (Melee): this ability confers a permanent +1 bonus to all melee-based attack rolls.~
-@20233  = ~To-Hit Bonus (Ranged)~
-@20234  = ~To-Hit Bonus (Ranged): this ability confers a permanent +1 bonus to all ranged attack rolls.~
-@20241  = ~Backstab Bonus~
-@20242  = ~Backstab Bonus: this ability increases the rogue's backstab multiplier by 1.~
+@20229  = ~[+APR?]~
+@20230  = ~[+APR?]: ~
+@20231  = ~Combat Training~
+@20232  = ~Combat Training: this ability confers a permanent +1 bonus to all melee-based attack rolls. This feat may be chosen twice; Swashbucklers may choose it up to six times.~
+@20233  = ~Ranged Accuracy~
+@20234  = ~Ranged Accuracy: this ability confers a permanent +1 bonus to all ranged attack rolls.  This feat may be chosen up to three times.~
+@20241  = ~Enhanced Backstab~
+@20242  = ~Enhanced Backstab: this ability increases one's backstab multiplier by 1.  Assassins may choose this feat up to three times.~
 @20243  = ~Precise Strike~
-@20244  = ~Precise Strike: this feat causes critical hits to occur on rolls of 19 or 20.~
+@20244  = ~Precise Strike: this feat causes critical hits to occur on rolls of 19 or 20. Fighter and certain other may take a second rank in this feat; critical hits will then occur on rolls of 18, 19, and 20.~
 @20245  = ~Precise Strike 2~
 @20246  = ~Precise Strike 2: this feat causes critical hits to occur on rolls of 18, 19, or 20.~
 @20251  = ~Melee Trick (Trip)~
 @20252  = ~Melee Trick (Trip): upon using ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will knock the target to the ground upon a failed save vs. Breath.~
 @20253  = ~Melee Trick (Disarm)~
 @20254  = ~Melee Trick (Disarm): upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks will disarm to target and cause a -4 penalty to THAC0 upon a failed save vs. Breath.~
-@20255  = ~Melee Trick (Blind)~
-@20256  = ~Melee Trick (Blind): upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.~
-@20257  = ~Melee Trick (Disrupt)~
-@20258  = ~Melee Trick (Disrupt): upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
+@20255  = ~Dirty Trick (Blind)~
+@20256  = ~Dirty Trick (Blind): upon using this ability, the rogue throws sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.~
+@20257  = ~Dirty Trick (Disrupt)~
+@20258  = ~Dirty Trick (Disrupt): upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.~
 @20259  = ~Fighting Dirty~
-@20260  = ~Fighting Dirty: once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it causes debilitating secondary effects upon a failed save vs. Breath. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.~
+@20260  = ~Fighting Dirty: up to once per round, successful melee attacks with certain weapons cause debilitating secondary effects if the target fails a save vs. Breath Weapon. Strikes with a dagger or short sword will cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; strikes with a staff can trip the target, who must spend one round fumbling to regain <PRO_HISHER> footing; and strikes with a club can stun the target for three seconds.~
 @20271  = ~Smoke Bomb + Grease Jar~
-@20272  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).~
+@20272  = ~Smoke Bomb + Grease Jar: once per day, the rogue may attack enemies with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud). This feat may be chosen up to three times.~
 @20273  = ~Grease Jar~
 @20274  = ~Grease Jar: this ability mimics the effects of the wizard spell Grease. Everyone in the area of effect finds it difficult to stay standing and has their movement rate reduced.~
 @20275  = ~Smoke Bomb~
@@ -388,6 +503,7 @@ This allows the use of any one of the following five abilities:
 @20322  = ~Tactics (Discipline): the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
 @20323  = ~Tactics: Formation~
 @20324  = ~Tactics (Formation): the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet. The warrior may only use one tactical ability at a time.~
+@20340  = ~Choose a Fighting Posture~
 @20341  = ~Fighting Posture: Aggressive~
 @20342  = ~Fighting Posture (Aggressive): each successful melee hit has a 20% chance to knock the target back 10 feet, and (on a failed saving throw) stun the target for two seconds.~
 @20343  = ~Fighting Posture: Disarming~
@@ -397,6 +513,135 @@ This allows the use of any one of the following five abilities:
 @20347  = ~Fighting Posture: Parry Slashing~
 @20348  = ~Fighting Posture: Parry Piercing~
 @20349  = ~Fighting Posture: Parry Blunt~
+//
+@20351  = ~Advance to Proficiency (+) with Bastard Swords~
+@20352  = ~Advance to Proficiency (+) with Long Swords~
+@20353  = ~Advance to Proficiency (+) with Short Swords~
+@20354  = ~Advance to Proficiency (+) with Battle Axes~
+@20355  = ~Advance to Proficiency (+) with Two-Handed Swords~
+@20356  = ~Advance to Proficiency (+) with Katanas~
+@20357  = ~Advance to Proficiency (+) with Scimitars~
+@20358  = ~Advance to Proficiency (+) with Daggers~
+@20359  = ~Advance to Proficiency (+) with War Hammers~
+@20360  = ~Advance to Proficiency (+) with Spears~
+@20361  = ~Advance to Proficiency (+) with Halberds~
+@20362  = ~Advance to Proficiency (+) with Flails~
+@20363  = ~Advance to Proficiency (+) with Maces~
+@20364  = ~Advance to Proficiency (+) with Clubs~
+@20365  = ~Advance to Proficiency (+) with Quarterstaff~
+@20366  = ~Advance to Proficiency (+) with Crossbows~
+@20367  = ~Advance to Proficiency (+) with Long Bows~
+@20368  = ~Advance to Proficiency (+) with Short Bows~
+@20369  = ~Advance to Proficiency (+) with Darts~
+@20370  = ~Advance to Proficiency (+) with Slings~
+@20371  = ~Advance to Proficiency (+) in Two-Handed Style~
+@20372  = ~Advance to Proficiency (+) in Shield-Fighting Style~
+@20373  = ~Advance to Proficiency (+) in Single-Weapon Style~
+@20374  = ~Advance to Proficiency (+) in Two-Weapon Style~
+//
+@20381  = ~Advance to Specialization (++) with Bastard Swords~
+@20382  = ~Advance to Specialization (++) with Long Swords~
+@20383  = ~Advance to Specialization (++) with Short Swords~
+@20384  = ~Advance to Specialization (++) with Battle Axes~
+@20385  = ~Advance to Specialization (++) with Two-Handed Swords~
+@20386  = ~Advance to Specialization (++) with Katanas~
+@20387  = ~Advance to Specialization (++) with Scimitars~
+@20388  = ~Advance to Specialization (++) with Daggers~
+@20389  = ~Advance to Specialization (++) with War Hammers~
+@20390  = ~Advance to Specialization (++) with Spears~
+@20391  = ~Advance to Specialization (++) with Halberds~
+@20392  = ~Advance to Specialization (++) with Flails~
+@20393  = ~Advance to Specialization (++) with Maces~
+@20394  = ~Advance to Specialization (++) with Clubs~
+@20395  = ~Advance to Specialization (++) with Quarterstaff~
+@20396  = ~Advance to Specialization (++) with Crossbows~
+@20397  = ~Advance to Specialization (++) with Long Bows~
+@20398  = ~Advance to Specialization (++) with Short Bows~
+@20399  = ~Advance to Specialization (++) with Darts~
+@20400  = ~Advance to Specialization (++) with Slings~
+@20401  = ~Advance to Specialization (++) in Two-Handed Style~
+@20402  = ~Advance to Specialization (++) in Shield-Fighting Style~
+@20403  = ~Advance to Specialization (++) in Single-Weapon Style~
+@20404  = ~Advance to Specialization (++) in Two-Weapon Style~
+//
+@20411  = ~Advance to Mastery (+++) with Bastard Swords~
+@20412  = ~Advance to Mastery (+++) with Long Swords~
+@20413  = ~Advance to Mastery (+++) with Short Swords~
+@20414  = ~Advance to Mastery (+++) with Battle Axes~
+@20415  = ~Advance to Mastery (+++) with Two-Handed Swords~
+@20416  = ~Advance to Mastery (+++) with Katanas~
+@20417  = ~Advance to Mastery (+++) with Scimitars~
+@20418  = ~Advance to Mastery (+++) with Daggers~
+@20419  = ~Advance to Mastery (+++) with War Hammers~
+@20420  = ~Advance to Mastery (+++) with Spears~
+@20421  = ~Advance to Mastery (+++) with Halberds~
+@20422  = ~Advance to Mastery (+++) with Flails~
+@20423  = ~Advance to Mastery (+++) with Maces~
+@20424  = ~Advance to Mastery (+++) with Clubs~
+@20425  = ~Advance to Mastery (+++) with Quarterstaff~
+@20426  = ~Advance to Mastery (+++) with Crossbows~
+@20427  = ~Advance to Mastery (+++) with Long Bows~
+@20428  = ~Advance to Mastery (+++) with Short Bows~
+@20429  = ~Advance to Mastery (+++) with Darts~
+@20430  = ~Advance to Mastery (+++) with Slings~
+@20431  = ~Advance to Mastery (+++) in Two-Handed Style~
+@20432  = ~Advance to Mastery (+++) in Shield-Fighting Style~
+@20433  = ~Advance to Mastery (+++) in Single-Weapon Style~
+@20434  = ~Advance to Mastery (+++) in Two-Weapon Style~
+//
+@20441  = ~Advance to High Mastery (++++) with Bastard Swords~
+@20442  = ~Advance to High Mastery (++++) with Long Swords~
+@20443  = ~Advance to High Mastery (++++) with Short Swords~
+@20444  = ~Advance to High Mastery (++++) with Battle Axes~
+@20445  = ~Advance to High Mastery (++++) with Two-Handed Swords~
+@20446  = ~Advance to High Mastery (++++) with Katanas~
+@20447  = ~Advance to High Mastery (++++) with Scimitars~
+@20448  = ~Advance to High Mastery (++++) with Daggers~
+@20449  = ~Advance to High Mastery (++++) with War Hammers~
+@20450  = ~Advance to High Mastery (++++) with Spears~
+@20451  = ~Advance to High Mastery (++++) with Halberds~
+@20452  = ~Advance to High Mastery (++++) with Flails~
+@20453  = ~Advance to High Mastery (++++) with Maces~
+@20454  = ~Advance to High Mastery (++++) with Clubs~
+@20455  = ~Advance to High Mastery (++++) with Quarterstaff~
+@20456  = ~Advance to High Mastery (++++) with Crossbows~
+@20457  = ~Advance to High Mastery (++++) with Long Bows~
+@20458  = ~Advance to High Mastery (++++) with Short Bows~
+@20459  = ~Advance to High Mastery (++++) with Darts~
+@20460  = ~Advance to High Mastery (++++) with Slings~
+@20461  = ~Advance to High Mastery (++++) in Two-Handed Style~
+@20462  = ~Advance to High Mastery (++++) in Shield-Fighting Style~
+@20463  = ~Advance to High Mastery (++++) in Single-Weapon Style~
+@20464  = ~Advance to High Mastery (++++) in Two-Weapon Style~
+//
+@20471  = ~Advance to Grandmastery (+++++) with Bastard Swords~
+@20472  = ~Advance to Grandmastery (+++++) with Long Swords~
+@20473  = ~Advance to Grandmastery (+++++) with Short Swords~
+@20474  = ~Advance to Grandmastery (+++++) with Battle Axes~
+@20475  = ~Advance to Grandmastery (+++++) with Two-Handed Swords~
+@20476  = ~Advance to Grandmastery (+++++) with Katanas~
+@20477  = ~Advance to Grandmastery (+++++) with Scimitars~
+@20478  = ~Advance to Grandmastery (+++++) with Daggers~
+@20479  = ~Advance to Grandmastery (+++++) with War Hammers~
+@20480  = ~Advance to Grandmastery (+++++) with Spears~
+@20481  = ~Advance to Grandmastery (+++++) with Halberds~
+@20482  = ~Advance to Grandmastery (+++++) with Flails~
+@20483  = ~Advance to Grandmastery (+++++) with Maces~
+@20484  = ~Advance to Grandmastery (+++++) with Clubs~
+@20485  = ~Advance to Grandmastery (+++++) with Quarterstaff~
+@20486  = ~Advance to Grandmastery (+++++) with Crossbows~
+@20487  = ~Advance to Grandmastery (+++++) with Long Bows~
+@20488  = ~Advance to Grandmastery (+++++) with Short Bows~
+@20489  = ~Advance to Grandmastery (+++++) with Darts~
+@20490  = ~Advance to Grandmastery (+++++) with Slings~
+@20491  = ~Advance to Grandmastery (+++++) in Two-Handed Style~
+@20492  = ~Advance to Grandmastery (+++++) in Shield-Fighting Style~
+@20493  = ~Advance to Grandmastery (+++++) in Single-Weapon Style~
+@20494  = ~Advance to Grandmastery (+++++) in Two-Weapon Style~
+@20496  = ~Weapon Focus~
+@20497  = ~Weapon Focus: this feat allows advancement one step past the rogue's normal proficiency limits for a single weapon.~
+@20498  = ~Advance weapon proficiency~
+@20499  = ~Choose a different weapon~
 //
 //
 @20500  = ~ROGUE: To accomplish <PRO_HISHER> goals, for good or ill, the typical Rogue is a skilled pilferer. Cunning, nimbleness, and stealth are <PRO_HISHER> hallmarks. Whether <PRO_HESHE> turns <PRO_HISHER> talent against innocent passersby and wealthy merchants or oppressors and monsters is a choice for the Rogue to make.
@@ -683,6 +928,14 @@ While the bard maintains this aura, all enemies within 3 feet must save vs. Para
 @21482  = ~Aura: Dispel Illusions
 
 While the bard maintains this aura, once per round, all illusions within 3 feet are dispelled. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21491  = ~Aura: Hex~
+@21492  = ~Aura: Hex
+
+While the bard maintains this aura, all enemies within 3 feet suffer a 1-point penalty to Luck and saving throws. In addition, each time the bard strikes an enemy (up to once per round), the enemy must save vs. spells or this penalty is increased by one more point, for three rounds. The bard must concentrate to maintain the aura; spellcasting is disabled while the aura is in effect.~
+@21511  = ~Bladesong~
+@21512  = ~Bladesong
+
+While the bard maintains this aura, <PRO_HESHE> ~
 @21611  = ~Aura: Maze~
 @21612  = ~Aura: Maze
 
@@ -716,7 +969,7 @@ Abilities:
 - May use the Swashbuckling skill.  
 - Lore increased by 5 points every other level.
 - May use an Intimidating Emanation, which causes penalties to the attack and damage rolls of enemies within 20 feet.
-- From 6th level, may use a Blur Aura, which improves the Blade's armor class and saving throws.
+- From 6th level, may use a Blur Aura, which improves the Blade's armor class and saving throws. The Blade cannot cast spells while under the effect of the Blur Aura.
 - May learn to manifest other Bard Song effects.
 - While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.
 
@@ -773,8 +1026,8 @@ Restrictions:
 
 Abilities:
 - Lore increased by 5 points per level.
-- May use Inspiration of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.
-- From 3rd level, may use Inspiration of Courage which protects allies within 20 feet from Fear effects.
+- May use Inspiration of Blessing, providing the effects of the Bless spell to all allies.
+- From 6th level, may use a Positive Energy Inspiration, providing nearby allies with the benefits of the Negative Plane Protection priest spell. The Gallant cannot cast spells while the Positive Energy Inspiration is in effect.
 - May learn to manifest other Bard Song effects.
 - From 5th level, may innately cast the priest spell Death Ward once per day.
 - Receivies a +1 bonus to saves vs. death for each 6 levels of experience.
@@ -832,7 +1085,7 @@ Restrictions:
 Abilities:
 - Lore increased by 5 points per level.
 - May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
-- From 6th level, may use a Mind Blank Aura, which causes the Jinxer's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. A Jinxer cannot cast spells while this aura is active.
+- From 6th level, may use a focused Hex Aura, which causes enemies within melee range to suffer a 1-point penalty to Luck and saving throws; additionally, every melee hit the Jinxer lands against enemies (up to once per round) will increase this penalty by one more point. A Jinxer cannot cast spells while this aura is active.
 - May learn to manifest other bard song effects.
 - While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.
 - Automatically gains knowledge of the following spells: Curse, Doom, Miscast Magic, Spiritual Clarity, Remove Curse, and Greater Malison.
@@ -845,18 +1098,20 @@ Restrictions:
 ~
 @21841  = ~loresinger~
 @21842  = ~Loresinger~
-@21843  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches. Loresingers may use a mix of divine and bardic magic, but may not turn undead like most priests.
+@21843  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches as they travel. Loresingers are charged by Milil with spreading the cultural gifts of music, art, and literature, and seeking out foreign sources of them. Such exploration can lead to dangerous situations; as such, many Loresingers supplement their musical and priestly talents with more utilitarian roguish skills.
 
 Abilities:
 - Lore increased by 5 points per level.
 - May use Inspiration: Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
 - From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. The Loresinger cannot cast spells while the Positive Energy Inspiration is in effect.
 - May learn to manifest other bard song effects.
-- May use magical wands and cast spells directly from scrolls.
+- While Loresingers memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.
 
 Restrictions:
 - May not turn undead.
-- Thieving abilities limited to Open Locks and Detect Illusions.
+- May cast spells one level later than a cleric.
+- May not cast 7th-level spells.
+- May only spend 15 thief skill points per level
 - No backstab damage multiplier.
 ~
 @21846  = ~hexblade~
@@ -864,15 +1119,17 @@ Restrictions:
 @21848  = ~HEXBLADE: This kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
 
 Abilities:
-- May use an Hex Emanation, which causes enemies within 20 feet to suffer a -1 penalty to Luck and saving throws.
-- From 6th level, may use an Emanation of Confusion, causing enemies within 20 feet to save vs. Spells every round or be confused.
+- Lore increased by 5 points per level.
+- May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.
+- From 6th level, may use a focused Hex Aura, which causes enemies within melee range to suffer a 1-point penalty to Luck and saving throws; additionally, every melee hit the Hexblade lands against enemies (up to once per round) will increase this penalty by one more point. A Hexblade cannot cast spells while this aura is active.
 - May learn to manifest other bard song effects.
-- May use arcane wands and cast spells from scrolls.
+- While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.
 
 Restrictions:
-- Has the same hit dice as a cleric.
-- Limited to Specialization (++) with all weapons.
-- May not dual-class to mage.
+- May cast spells one level later than a wizard.
+- May not learn spells from the Evocation, Conjuration, or Necromancy schools of magic.
+- May not learn 8th- or 9th-level spells.
+- May cast one fewer spell per day at each spell level, compared to other bards.
 ~
 @21851  = ~agent~
 @21852  = ~Agent~
@@ -889,6 +1146,26 @@ Restrictions:
 - May not learn spells from the Evocation, Conjuration, or Necromancy schools of magic.
 - May not learn 8th- or 9th-level spells.
 - Backstab damage limited to a 2x multiplier.
+~
+@21856  = ~bladesinger~
+@21857  = ~Bladesinger~
+@21858  = ~BLADESINGER: Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting. Name notwithstanding, Bladesingers can actually use many different weapons; most elven armies and societies have different units devoted to particular weapons. Bladesingers can choose their weapon of focus at 9th level.  (These are exclusively melee weapons; the Bladesong is specific to hand-to-hand combat. If a Bladesinger needs to attack from range, <PRO_HESHE> uses magic to do so.
+
+Abilities:
+- Lore increased by 5 points every other level.
+- May use a Blur Aura, which improves armor class and saving throws. The Bladesinger cannot cast spells while under the effect of the Blur Aura.
+- From 6th level, may perform the Bladesong while fighting, at will. The Bladesong allows the Bladesinger to merge the acts of spellcasting and attacking; spells are cast with a -5 bonus to casting time, while 1 fewer attack can be made per two combat rounds. (Note: Improved Alacrity will interrupt these effects.)
+- At 9th level, may choose a Weapon of Focus. The Bladesinger can advance to Mastery with this weapon category, and can make one more attack every two rounds when using it.
+- May learn to manifest other Bard Song effects.
+- While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.
+
+Restrictions:
+- Must be an elf
+- May not be Chaotic.
+- May not become proficient in ranged weapons.
+- May cast spells one level later than a wizard.
+- May not learn 8th- or 9th-level spells.
+- May cast one fewer spell per day at each spell level, compared to other bards.
 ~
 @21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
 
@@ -1039,7 +1316,7 @@ Casting Time: 3
 Area of Effect: 17-ft. cone with 90-deg. arc
 Saving Throw: 1/2
 
-By means of this spell, the caster can cause a spray of barbs, spikes, thorns, and spines to spring forth from <PRO_HISHER> hand. The thorn spray covers a 17-ft.-long cone, inflicting 2d10 points of piercing damage to all creatures within the area of effect, or 1d10 points of damage if a Save vs. Death is successful.
+By means of this spell, the caster can cause a spray of barbs, spikes, thorns, and spines to spring forth from <PRO_HISHER> hand. The thorn spray covers a 17-ft.-long cone, inflicting 4d8 points of piercing damage to all creatures within the area of effect, or 1d10 points of damage if a Save vs. Death is successful.
 ~
 @21913  = ~Spike Growth~
 @21914  = ~Spike Growth
@@ -2175,7 +2452,6 @@ Abilities:
 - Available at 3rd level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.
 - Available at 5th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.
 - Available at 7th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.
-- Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.
 
 Restrictions:
 - May only distribute 20 skill points per level among thieving skills.

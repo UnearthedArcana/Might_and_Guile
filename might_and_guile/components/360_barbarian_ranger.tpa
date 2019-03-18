@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						WARRIOR KITS
+//								WARRIOR KITS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -125,6 +125,92 @@ END
 //____________________________________________________________________________________
 
 
+//FEAT SYSTEM_________________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+
+  INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+
+  APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
+  COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW r2en_splprot cols
+	FOR (row = 1; row < r2en_splprot; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER r2en_splprot row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
+	    SET kit_is_row = %row%
+	  END
+	END
+  BUT_ONLY
+
+  COPY_EXISTING ~d5_rbarb.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_ranger.txt~
+  BUT_ONLY
+
+  OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
+  OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
+  OUTER_SPRINT feat_title_string @20012 
+  OUTER_SPRINT feat_label_string @20013 
+
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	READ_2DA_ENTRIES_NOW r2en_kitlist 10
+	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
+	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_rbarb~) BEGIN
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
+		GET_STRREF %kitlist_name% kit_name_strref
+		SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
+		SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
+		SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
+		SET kit_seq_index = %kitlist_index% 
+		INNER_ACTION BEGIN
+		  COPY_EXISTING ~d5flstf.2da~ ~override~
+			COUNT_2DA_COLS cols
+			COUNT_2DA_ROWS cols rows
+			FOR (col = 1; col < (cols - 1); ++col) BEGIN
+			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
+			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5_rbarb~) BEGIN
+				SET this_col = %col%
+				INNER_ACTION BEGIN
+				  LAF CREATE_SEQUENCER_MENU 
+				   INT_VAR 
+					name = %kit_seq_name%
+					tip = %kit_seq_tip%
+					desc = RESOLVE_STR_REF (~blah~) 
+					column = %this_col% 
+					class = 2
+				   STR_VAR 
+					resref = EVAL ~d5ft%kit_seq_index%~
+					icon = ~spcl919b~
+					spelltable = ~d5ftskn~ 
+					spelllist = ~d5flstf~
+					title = EVAL ~%feat_title_string%~
+					label = EVAL ~%feat_label_string%~
+				  END
+				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
+					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
+				  BUT_ONLY IF_EXISTS
+				END
+			  END
+			END
+		  BUT_ONLY
+		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+			COPY_EXISTING ~d5feat%letter%.spl~ ~override~
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
+			IF_EXISTS BUT_ONLY
+		  END
+		END
+	  END
+	END
+  BUT_ONLY
+
+END
+//____________________________________________________________________________________
+
+
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
 ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
@@ -189,14 +275,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
 END
 //__________________________________________________________________________________
 
-/*
-//DON'T USE SCROLLS/WANDS___________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_nscrl.spl~ BEGIN
-	APPEND ~d5_rbarb.2da~ ~ABILITY    AP_D5_NSCRL ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-END
-//__________________________________________________________________________________
-*/
 
 /*
 	WHAT WAS THE PURPOSE OF THIS???

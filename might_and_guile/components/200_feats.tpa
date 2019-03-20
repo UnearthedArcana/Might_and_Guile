@@ -2054,7 +2054,7 @@ COPY_EXISTING ~d5flstf.2da~ ~override~
   FOR (row = 1; row < rows; ++row) BEGIN
   	READ_2DA_ENTRY row 0 cols spellbook_feat
 	SNPRINT 3 book_feat_prefix ~%spellbook_feat%~
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][WwRr][Ff][AaBbCc][0-9]~ = 0) BEGIN
+	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][WwRr][Ff][AaBbCcHh][0-9]~ = 0) BEGIN
 	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
 		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5_~
 	  END
@@ -2071,7 +2071,7 @@ COPY_EXISTING ~d5flstf.2da~ ~override~
 	   END
 	  END
 	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Rr][Ff][DdEeFfGgHh][0-9]~ = 0) BEGIN
+	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Rr][Ff][DdEeFfGg][0-9]~ = 0) BEGIN
 	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
 		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5_~
 	  END

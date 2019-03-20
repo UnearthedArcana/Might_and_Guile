@@ -11,7 +11,6 @@
 // FJ_SPL_ITM_REINDEX and ADD_SPELL_HEADER (by Ardanis, etc.)
 //---------------------------------------------------------------
 DEFINE_PATCH_FUNCTION ~FJ_SPL_ITM_REINDEX~ BEGIN
-
 PATCH_IF !(~%SOURCE_FILE%~ STRING_MATCHES_REGEXP ~^.+\.spl~) BEGIN
   hs = 0x28
   WRITE_LONG 0xc ~-1~ //Identified name
@@ -56,10 +55,8 @@ END
 PATCH_IF (SOURCE_SIZE > (0x72 + (hs * hc) + (0x30 * fc))) BEGIN
   DELETE_BYTES (0x72 + (hs * hc) + (0x30 * fc)) (SOURCE_SIZE - (0x72 + (hs * hc) + (0x30 * fc)))
 END
-
 // added by Ardanis
 WRITE_SHORT 0x6e 0
-
 END // end of function
 
 DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
@@ -72,8 +69,6 @@ DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
     required_level=1
     speed=0
     projectile=1
-
-
     copy_header=0
     insert_point=~-1~
   STR_VAR
@@ -81,17 +76,13 @@ DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
   RET
     insert_point
 BEGIN
-  LPF ~FJ_SPL_ITM_REINDEX~ END
+//  LPF ~FJ_SPL_ITM_REINDEX~ END
   hs=0x28
-
-
   READ_LONG 0x64 ho
   READ_SHORT 0x68 hc
   READ_LONG 0x6a eo
   insert_point = (insert_point>hc || insert_point<0) ? hc : insert_point
   copy_header = (copy_header<0) ? 0 : copy_header
-
-
   PATCH_IF copy_header>hc BEGIN
     PATCH_WARN ~Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
   END ELSE BEGIN
@@ -107,16 +98,12 @@ BEGIN
     END
     WRITE_SHORT 0x68 hc
     WRITE_LONG 0x6a eo
-
-
     READ_SHORT 0x70 ei // technically, it is a counter
     FOR (i=ho;i<ho+hc*hs;i+=hs) BEGIN
       READ_SHORT i+0x1e ec
       WRITE_SHORT i+0x20 ei
       ei+=ec
     END
-
-
     PATCH_IF copy_header BEGIN
       READ_SHORT ho+insert_point*hs+0x1e ec
       READ_SHORT ho+insert_point*hs+0x20 ei
@@ -265,27 +252,34 @@ ABILITY1    ****        ****        ****        ****        ****        ****    
 		COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ //multiclass macro identifier file
 	END 
 
-	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi_spls.qd~) THEN BEGIN 
+//	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi_spls.qd~) THEN BEGIN 
 			//making the empty multiclass spells and effects	
-		
+
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_AP.EFF~) BEGIN
 		CREATE EFF ~QD_MC_AP~ 
 			WRITE_LONG   0x10 146 //cast spell
 			WRITE_LONG   0x14 2   //preset target 
 			WRITE_LONG   0x20 1   //cast instantly (ignore level) 
 			WRITE_SHORT  0x24 1   //permament until death
 			WRITE_SHORT  0x2c 100 //probability 100% 
-			
+	  END
+		
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_GA.EFF~) BEGIN
 		CREATE EFF ~QD_MC_GA~ 
 			WRITE_LONG   0x10 171 //give spell
 			WRITE_LONG   0x14 2   //preset target 
 			WRITE_SHORT  0x24 1   //permament until death
 			WRITE_SHORT  0x2c 100 //probability 100% 
+	  END
 			
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_01.SPL~) BEGIN
 		CREATE SPL ~QD_MC_01~
 
 		COPY_EXISTING ~QD_MC_01.SPL~ ~override~ 
 			LPF ADD_SPELL_HEADER END   
+	  END
 						
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MCF01.SPL~) BEGIN
 		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MCF01.SPL~ 
 			 ~QD_MC_01.SPL~ ~override/QD_MCF02.SPL~ 
 			 ~QD_MC_01.SPL~ ~override/QD_MCF03.SPL~ 
@@ -601,7 +595,6 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 		kit_clab = "" 
 		base_class = ""
 	BEGIN 
-/*
 		//getting kit code
 		COPY_EXISTING ~kitlist.2da~ ~override~
 			COUNT_2DA_COLS k_cols // amount of columns
@@ -614,7 +607,7 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 			  END
 			END
 		BUT_ONLY
-*/		
+		
 		//read clab
 		COPY_EXISTING ~%kit_clab%.2da~ ~override~ //copy the clab of the base kit 
 			COUNT_2DA_COLS cols // amount of columns
@@ -624,8 +617,7 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 					READ_2DA_ENTRY_FORMER rows row col ability // read column value
 					// PATCH_PRINT ~%ability%~
 					PATCH_IF (NOT ~%ability%~ STRING_EQUAL ~****~) BEGIN 
-						SNPRINT 3 abil_type ~%ability%~
-//						LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END 
+						LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END 
 						SET string_length = (STRING_LENGTH ~%ability%~) - 3
 						LPF SUBSTRING INT_VAR start = 3 length = EVAL ~%string_length%~  STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
 						PATCH_IF (~%string_length%~ > 7) BEGIN 
@@ -634,7 +626,7 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 						
 						PATCH_IF (~%string_length%~ <= 7) BEGIN 
 							//passive bonuses
-							PATCH_IF (~%abil_type%~ STRING_EQUAL_CASE ~AP_~) BEGIN 
+							PATCH_IF (~%abil_type%~ STRING_EQUAL ~AP_~) BEGIN 
 								//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
 								INNER_ACTION BEGIN 
 									COPY_EXISTING ~QD_MC_AP.eff~ ~override/%abil_new%#.eff~
@@ -642,17 +634,17 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 										SET col_length = STRING_LENGTH ~%col%~
 									ACTION_IF (%col_length% = 1) BEGIN 
 										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 									ACTION_IF (%col_length% = 2) BEGIN
 										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 								END 
 							END
 							
 							//granted abilities
-							PATCH_IF (~%abil_type%~ STRING_EQUAL_CASE ~GA_~) BEGIN 
+							PATCH_IF (~%abil_type%~ STRING_EQUAL ~GA_~) BEGIN 
 								//PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
 								INNER_ACTION BEGIN 
 									COPY_EXISTING ~QD_MC_GA.eff~ ~override/%abil_new%#.eff~
@@ -660,11 +652,11 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 										SET col_length = STRING_LENGTH ~%col%~
 									ACTION_IF (%col_length% = 1) BEGIN 
 										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 									ACTION_IF (%col_length% = 2) BEGIN
 										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 								END 
 							END

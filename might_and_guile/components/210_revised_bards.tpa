@@ -2723,7 +2723,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
   IF_EXISTS BUT_ONLY
  END
 
-  APPEND ~d5_bard.2da~ ~D5SONGS     ****        ****        GA_D5FEATD  ****        ****        GA_D5FEATE  ****        ****        GA_D5FEATF  ****        ****        GA_D5FEATG  ****        ****        GA_D5FEATH  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+  APPEND ~d5_bard.2da~ ~D5_SONGS    ****        ****        GA_D5FEATD  ****        ****        GA_D5FEATE  ****        ****        GA_D5FEATF  ****        ****        GA_D5FEATG  ****        ****        GA_D5FEATH  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 
 END
 
@@ -2793,7 +2793,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
 	APPEND_FILE ~might_and_guile/feats/feats_multibard.txt~
   IF_EXISTS BUT_ONLY
  END
- APPEND ~d5_bard.2da~ ~SONGS       GA_D5FEATK  ****        ****        ****        GA_D5FEATL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+ APPEND ~d5_bard.2da~ ~D5_SONGS      GA_D5FEATK  ****        ****        ****        GA_D5FEATL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 
 END
 
@@ -3512,7 +3512,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SPL_PREP~)) BEGIN
   BUT_ONLY
 END
 /*
-ACTION_IF !(FILE CONTAINS (~splstate.ids~ ~D5_SPL_PREP~)) BEGIN
+ACTION_IF !(FILE FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SPL_PREP~)) BEGIN
   LAF d5_resolve_state STR_VAR new_state_id = ~D5_SPL_PREP~ RET new_state_ind END
   OUTER_SET prepared_spells_state = %new_state_ind%
 END
@@ -4181,13 +4181,18 @@ APPEND ~d5nubard.2da~ ~NO_QUICK    AP_D5BRDNQ  ****        ****        ****     
 
 // initialize songs and casting_______________________________________________________
 //
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd144.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 2 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 145 timing = 9 END
+
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd000.spl~	//		apply 206 spells
 //  SAY NAME1 @6  											// ~~
 //  SAY UNIDENTIFIED_DESC @6 								// ~~
-  PATCH_FOR_EACH nu_song_z IN ~01z~ ~02z~ ~03z~ ~05z~ ~06z~ ~07z~ ~08z~ ~20z~ ~21z~ ~22z~ ~23z~ ~24z~ ~25z~ ~41z~ ~42z~ ~43z~ ~46z~ ~47z~ ~48z~ ~61z~ BEGIN
+  PATCH_FOR_EACH nu_song_z IN ~01z~ ~02z~ ~03z~ ~05z~ ~06z~ ~07z~ ~08z~ ~20z~ ~21z~ ~22z~ ~23z~ ~24z~ ~25z~ ~41z~ ~42z~ ~43z~ ~46z~ ~47z~ ~48z~ ~49z~ ~51z~ ~61z~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song_z%~ END
   END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~spcl412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5bd144~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5prepb~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bcast~ END
 
@@ -4204,6 +4209,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bcast.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5BLOTZ~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5prepb~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bcast~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd144~ END
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 

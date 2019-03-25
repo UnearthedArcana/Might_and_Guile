@@ -125,7 +125,7 @@ END
 //REVISED KITS______________________________________________________________________
 //
 ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~225~ BEGIN
-	INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
+	INCLUDE ~might_and_guile/components/230_revised_stalker.tpa~
 END
 ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~275~ BEGIN
 	INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
@@ -682,31 +682,6 @@ COPY ~might_and_guile/feats/d5_rf2zb.spl~ ~override~
 // alchemical
 
 COPY ~might_and_guile/feats/d5_rfc1.bam~ ~override~
-/*
-COPY ~might_and_guile/feats/d5_rfc0.spl~ ~override/d5urc0.spl~   // 			basic alchemy
-	SAY NAME1 @20131
-	SAY UNIDENTIFIED_DESC @20132
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 1
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_rfc1~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 parameter1 = %alchemist_ids% parameter2 = %kit_is_row% END
-CREATE EFF ~D5_RFC0Z~
-	WRITE_LONG 0x10 206
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x20 999999
-	WRITE_LONG 0x24 9
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_rfc2~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_RFC0Z~ #8
-COPY_EXISTING  ~d5urc0.spl~ ~override/d5vrc0.spl~ 
-	WRITE_SHORT 0x1c 1
-*/
 COPY ~might_and_guile/feats/d5_rfc1.spl~ ~override/d5urc1.spl~  		// 			basic alchemy
 	SAY NAME1 @20131
 	SAY UNIDENTIFIED_DESC @20132
@@ -797,13 +772,6 @@ COPY ~might_and_guile/feats/d5_rf32f.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf32g.spl~ ~override~
 	SAY NAME1 @20189
 	SAY UNIDENTIFIED_DESC @20189
-
-/*
-COPY ~might_and_guile/feats/d5_rfc0.spl~ ~override~
-	SAY NAME1 @20181
-	SAY UNIDENTIFIED_DESC @20182
-	WRITE_ASCII 0x3a ~d5_rfc2~ #8
-*/
 
 COPY ~might_and_guile/feats/d5_rfc3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfc3.spl~ ~override/d5urc3.spl~   // 			toxic poison
@@ -2795,15 +2763,6 @@ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
   COPY ~might_and_guile/feats/d5feat1.spl~ ~override/d5feat%num%.spl~ 
 	LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5feat1~ resource = EVAL ~d5feat%num%~ END
-/* 177 already handles this, don't need	
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 7 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 8 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 9 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 13 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 15 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 10 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 17 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = EVAL ~d5feat%num%~ END
-*/
   COPY ~might_and_guile/feats/d5feat1.eff~ ~override/d5feat%num%.eff~ 
 	WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
 
@@ -3094,7 +3053,7 @@ END
 LAM JOINABLE_NPC_ARRAYS
 
 ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
-  PRINT ~%cre% => %dv%~ 
+//  PRINT ~%cre% => %dv%~ 
   COPY_EXISTING ~%cre%~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
 	  READ_LONG 0x244 npc_kit
@@ -3269,64 +3228,6 @@ ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 	END
   BUT_ONLY
 END
-
-/*
-//Generate arrays with non-joinable NPC cre files
-COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-  READ_BYTE 0x273 class
-  PATCH_IF (class = 2) BEGIN
-	READ_ASCII DEATHVAR "dv" (32) NULL
-	TO_UPPER dv
-	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_FIGHTER_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-	END
-  END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-  READ_BYTE 0x273 class
-  PATCH_IF (class = 4) BEGIN
-	READ_ASCII DEATHVAR "dv" (32) NULL
-	TO_UPPER dv
-	PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-		DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_THIEF_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-	END
-  END
-BUT_ONLY
-
-ACTION_PHP_EACH NON_JOINABLE_FIGHTER_ARRAY AS fcre => dv BEGIN
-  PRINT ~%fcre% => %dv%~ 
-  COPY_EXISTING ~%fcre%~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-		SET random_num = RANDOM (1 5)
-		PATCH_IF (%random_num% = 1) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf21~ END
-		END
-		PATCH_IF (%random_num% = 2) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5_wf22~ END
-		END
-		PATCH_IF (%random_num% = 3) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 8 timing = 0 duration = 126144000 END
-		END
-		PATCH_IF (%random_num% = 4) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 4 timing = 0 duration = 126144000 END
-		END
-		PATCH_IF (%random_num% = 5) BEGIN
-		  LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 3 parameter2 = 1 timing = 0 duration = 126144000 END
-		END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
-	END
-  BUT_ONLY
-END
-ACTION_PHP_EACH NON_JOINABLE_THIEF_ARRAY AS tcre => dv BEGIN
-  PRINT ~%tcre% => %dv%~ 
-  COPY_EXISTING ~%tcre%~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
-	  LPF ADD_CRE_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 134 timing = 9 END
-	  LPF ADD_CRE_EFFECT INT_VAR opcode=206 target=1 timing=9 parameter1=(0 - 1) STR_VAR resource=~d5_numd~ END
-	END
-  BUT_ONLY
-END
-*/
 //__________________________________________________________________________________
 
 

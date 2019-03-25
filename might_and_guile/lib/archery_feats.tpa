@@ -254,39 +254,6 @@ COPY ~might_and_guile/fighter/d5_csj.spl~ ~override/d5ucsj.spl~		//	give faerie 
 COPY_EXISTING ~d5ucsj.spl~ ~override/d5vcsj.spl~
 	WRITE_SHORT 0x1c 1
 
-/*
-COPY ~might_and_guile/fighter/d5_rafx.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_rafy.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_rafz.spl~ ~override~
-	SAY NAME1 @7
-COPY ~might_and_guile/fighter/d5_raf1.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-COPY ~might_and_guile/fighter/d5_rafa.spl~ ~override~
-	SAY NAME1 @7
-
-COPY ~might_and_guile/fighter/d5_raf.bam~ ~override~
-ACTION_FOR_EACH shotclab IN ~d5_rafa~ ~d5_rafb~ ~d5_rafc~ ~d5_rafd~ ~d5_rafe~ ~d5_raff~ ~d5_rafg~ ~d5_refh~ ~d5_refa~ ~d5_refb~ ~d5_refc~ ~d5_refd~ ~d5_refe~ ~d5_reff~ ~d5_refg~ ~d5_refh~ BEGIN
-  COPY ~might_and_guile/fighter/%shotclab%.spl~ ~override~
-	SAY NAME1 @7
-	SAY UNIDENTIFIED_DESC @7
-	WRITE_ASCII 0x3a ~d5_raf~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_raf~ END
-END
-ACTION_FOR_EACH shoteff IN ~d5_raf1~ ~d5_raf2~ ~d5_raf3~ ~d5_raf4~ ~d5_raf5~ ~d5_raf6~ ~d5_raf7~ ~d5_ref1~ ~d5_ref2~ ~d5_ref3~ ~d5_ref4~ ~d5_ref5~ ~d5_ref6~ ~d5_ref7~ ~d5_ref8~ BEGIN
-  COPY ~might_and_guile/fighter/%shoteff%.eff~ ~override~
-END
-ACTION_FOR_EACH shotspell IN ~d5_raf1~ ~d5_raf2~ ~d5_raf3~ ~d5_raf4~ ~d5_raf5~ ~d5_raf6~ ~d5_raf7~ ~d5_ref1~ ~d5_ref2~ ~d5_ref3~ ~d5_ref4~ ~d5_ref5~ ~d5_ref6~ ~d5_ref7~ ~d5_ref8~ BEGIN
-  COPY ~might_and_guile/fighter/%shotspell%.spl~ ~override~
-	SAY NAME1 @3210
-	SAY UNIDENTIFIED_DESC @3210
-	WRITE_ASCII 0x3a ~d5_raf~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_raf~ END
-END
-*/
-
 //__________________________________________________________________________________
 
 ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
@@ -342,44 +309,6 @@ OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
 OUTER_SPRINT feat_title_string @20012 
 OUTER_SPRINT feat_label_string @20013 
 
-/*
-COPY_EXISTING ~d5flsta.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (row = 1; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols ~book_feat~
-	SNPRINT 3 book_feat_prefix ~%book_feat%~
-	PATCH_IF (~%book_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Cc][Ss][AaBbCcDdEeFfGgHhIiJj]~ = 0) BEGIN
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		COPY_EXISTING ~%book_feat%.spl~ ~override~
-		  WRITE_LONG 0x34 3
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-		  LPF DELETE_EFFECT END
-		IF_EXISTS
-	  END
-	END
-  END
-BUT_ONLY
-*/
-
-/*
-ACTION_FOR_EACH high_level_feat IN 
-	~d5ucsf~ 
-	~d5vcsf~ 
-	~d5ucsg~ 
-	~d5vcsg~ BEGIN
-  COPY_EXISTING ~%high_level_feat%.spl~ ~override~
-	WRITE_LONG 0x34 4
-  IF_EXISTS BUT_ONLY
-END
-*/
 
 //NO FEATS YET________________________________________________________________________
 //
@@ -431,7 +360,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
  COPY_EXISTING ~d5flsta.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
-  FOR (row = 1; row < rows; ++row) BEGIN
+  FOR (row = 0; row < rows; ++row) BEGIN
   	READ_2DA_ENTRY row 0 cols ~book_feat~
 	INNER_ACTION BEGIN
 	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
@@ -469,6 +398,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 
 END
 //___________________________________________________________________________________
+
 
 //FEATS ALREADY______________________________________________________________________
 //
@@ -521,7 +451,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
  COPY_EXISTING ~d5flstaf.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
-  FOR (row = 1; row < rows; ++row) BEGIN
+  FOR (row = 0; row < rows; ++row) BEGIN
   	READ_2DA_ENTRY row 0 cols ~book_feat~
 	INNER_ACTION BEGIN
 	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~

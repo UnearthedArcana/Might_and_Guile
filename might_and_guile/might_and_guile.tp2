@@ -1,11 +1,29 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~3.9.3~
+VERSION ~4b1~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
 ALWAYS
+
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_mng_settings.ini~) BEGIN
+  	  INCLUDE ~override/d5_mng_settings.ini~
+  	END
+
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_mng_settings.ini~) BEGIN
+  	  INCLUDE ~might_and_guile/d5_mng_settings.ini~
+	END
+  	
+// eliminate #bonecir.spl from IWDEE
+	ACTION_IF GAME_IS ~iwdee~ BEGIN
+	  ACTION_IF FILE_EXISTS_IN_GAME "#bonecir.spl" BEGIN
+		DISABLE_FROM_KEY "#bonecir.spl"
+	  END
+	  ACTION_IF FILE_EXISTS "override/#bonecir.spl" BEGIN
+		DELETE "override/#bonecir.spl"
+	  END
+	END
 
 	INCLUDE ~might_and_guile/lib/joinable_npcs.tpa~
 
@@ -37,26 +55,7 @@ LANGUAGE
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						 	MULTICLASS KITS
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @500
-DESIGNATED 500
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
-//GROUP @23
-
-INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
-
-INCLUDE ~might_and_guile/components/100_multiclass_kits.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						   FEATS & HLAs
+//						  	 	FEATS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -73,18 +72,15 @@ INCLUDE ~might_and_guile/components/200_feats.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						  	PSIONICS
+//						 	REVISED ARCHERY
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @205
-DEPRECATED @205
 DESIGNATED 205
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
-//REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ @5
 //GROUP @22
 
-INCLUDE ~might_and_guile/components/205_psionics.tpa~
+INCLUDE ~might_and_guile/components/205_revised_archer.tpa~
 //__________________________________________________________________________________
 
 
@@ -92,15 +88,37 @@ INCLUDE ~might_and_guile/components/205_psionics.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						   QUICKSTRIDE
+//							REVISED BARDS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @210
+DESIGNATED 210
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+//GROUP @22
+
+INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
+
+INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
+//__________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						 	MULTICLASS KITS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @220
 DESIGNATED 220
-//GROUP @22
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+//GROUP @23
 
-INCLUDE ~might_and_guile/components/220_quickstride.tpa~
+INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
+
+INCLUDE ~might_and_guile/components/220_multiclass_kits.tpa~
 //__________________________________________________________________________________
 
 
@@ -108,32 +126,16 @@ INCLUDE ~might_and_guile/components/220_quickstride.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						 REVISED STALKER
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @225
-DESIGNATED 225
-FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
-//GROUP @22
-
-INCLUDE ~might_and_guile/components/225_revised_stalker.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//						 REVISED ARCHER
+//							REVISED STALKER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @230
 DESIGNATED 230
+FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
 //GROUP @22
 
-INCLUDE ~might_and_guile/components/230_revised_archer.tpa~
+INCLUDE ~might_and_guile/components/230_revised_stalker.tpa~
 //__________________________________________________________________________________
 
 
@@ -168,6 +170,25 @@ REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_imp_rangers.d5~ @5
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/240_improved_rangers.tpa~
+//__________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						   QUICKSTRIDE
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @245
+DESIGNATED 245
+//GROUP @22
+
+INCLUDE ~might_and_guile/components/245_quickstride.tpa~
+
+LAF 245_quickstride END
+
 //__________________________________________________________________________________
 
 
@@ -261,6 +282,7 @@ INCLUDE ~might_and_guile/components/310_corsair.tpa~
 //________________________MARKSMAN__________________________________________________
 BEGIN @320
 DESIGNATED 320
+FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/320_marksman.tpa~
@@ -270,6 +292,7 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 //______________________ELVEN ARCHER________________________________________________
 BEGIN @322
 DESIGNATED 322
+FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_earch.2da~ @5
 //GROUP @23
 
@@ -280,6 +303,8 @@ INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 //________________________SLINGER__________________________________________________
 BEGIN @324
 DESIGNATED 324
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_sling.2da~ @5
 //GROUP @23
 
@@ -319,6 +344,7 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________SNIPER__________________________________________________
 BEGIN @410
 DESIGNATED 410
+FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/410_sniper.tpa~
@@ -332,25 +358,6 @@ FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/420_scout.tpa~
-//__________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//							REVISED BARDS
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @210
-DESIGNATED 210
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
-//GROUP @22
-
-INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
-
-INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
 //__________________________________________________________________________________
 
 
@@ -412,4 +419,5 @@ FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 
 INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 //__________________________________________________________________________________
+
 

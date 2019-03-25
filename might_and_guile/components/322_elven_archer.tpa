@@ -24,7 +24,7 @@ ADD_KIT ~D5EARCH~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5EARCH       0 0 0 0 0 0 0 0~
-~D5EARCH       0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 0 0 0 1 0 1 5 5 1 1 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5EARCH       0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 1 1 0 0 0 1 0 1 5 5 1 1 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -94,7 +94,13 @@ COPY ~might_and_guile/ranger/d5_earch.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_parch.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
-//___________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+// get kit identifiers________________________________________________________________
+//
+OUTER_SET elven_archer_code = (0x4000 + %D5EARCH%)
+//____________________________________________________________________________________
 
 
 //ADD ELVEN ARCHER TO MENUS__________________________________________________________
@@ -107,7 +113,7 @@ COPY_EXISTING ~K_R_E.2da~ ~override~
 BUT_ONLY
 //___________________________________________________________________________________
 
-
+/*
 //REVISED ARCHERY____________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
@@ -219,17 +225,31 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 				  END
 				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
 					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
-				  BUT_ONLY IF_EXISTS
+				  IF_EXISTS BUT_ONLY 
+				  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+					COPY_EXISTING ~d5feat%letter%.spl~ ~override~
+					  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %elven_archer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
+					IF_EXISTS BUT_ONLY
+				  END
 				END
 			  END
 			END
 		  BUT_ONLY
-		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
-			COPY_EXISTING ~d5feat%letter%.spl~ ~override~
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
-			IF_EXISTS BUT_ONLY
-		  END
 		END
+	  END
+	END
+   BUT_ONLY
+   COPY_EXISTING ~d5flsta.2da~ ~override~
+	COUNT_2DA_COLS cols
+	COUNT_2DA_ROWS cols rows
+	FOR (row = 1; row < rows; ++row) BEGIN
+  	  READ_2DA_ENTRY row 0 cols ~book_feat~
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		  WRITE_SHORT 0x1c 4
+		  WRITE_LONG 0x34 1
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+		IF_EXISTS BUT_ONLY
 	  END
 	END
    BUT_ONLY
@@ -266,7 +286,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 					tip = %kit_seq_tip%
 					desc = RESOLVE_STR_REF (~blah~) 
 					column = %this_col% 
-					class = 2
+					class = 1
 				   STR_VAR 
 					resref = EVAL ~d5ft%kit_seq_index%~
 					icon = ~spcl919b~
@@ -277,17 +297,31 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 				  END
 				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
 					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
-				  BUT_ONLY IF_EXISTS
+				  IF_EXISTS BUT_ONLY
+				  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+					COPY_EXISTING ~d5feat%letter%.spl~ ~override~
+					  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %elven_archer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
+					IF_EXISTS BUT_ONLY
+				  END
 				END
 			  END
 			END
 		  BUT_ONLY
-		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
-			COPY_EXISTING ~d5feat%letter%.spl~ ~override~
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
-			IF_EXISTS BUT_ONLY
-		  END
 		END
+	  END
+	END
+   BUT_ONLY
+   COPY_EXISTING ~d5flstaf.2da~ ~override~
+	COUNT_2DA_COLS cols
+	COUNT_2DA_ROWS cols rows
+	FOR (row = 1; row < rows; ++row) BEGIN
+  	  READ_2DA_ENTRY row 0 cols ~book_feat~
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		  WRITE_SHORT 0x1c 4
+		  WRITE_LONG 0x34 1
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+		IF_EXISTS BUT_ONLY
 	  END
 	END
    BUT_ONLY
@@ -295,6 +329,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 
 END
 //___________________________________________________________________________________
+*/
 
 //DEFINE SPHERE ACCESS______________________________________________________________
 //

@@ -13,7 +13,7 @@ COPY ~might_and_guile/lib/markers/d5_beastmaster.d5~ ~override/d5_imp_rangers.d5
 //___________________________________________________________________________________
 
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
 
 // just apply feats if already installed______________________________________________
 // 
@@ -164,3 +164,35 @@ BUT_ONLY
 //___________________________________________________________________________________
 
 END
+
+//more ranger alignments_____________________________________________________________
+//
+COPY_EXISTING ~kitlist.2da~ ~override~
+//	  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows 9
+  FOR (row = 2; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 5 ~clab~
+	READ_2DA_ENTRY_FORMER rows row 8 ~class~
+	PATCH_IF (%class% = 12) BEGIN
+	  SET kit_index = %row%
+	  READ_2DA_ENTRY_FORMER rows kit_index 1 kit_label
+	  INNER_ACTION BEGIN
+		APPEND ~fallen.2da~ ~%kit_label%%TAB%0~
+		COPY_EXISTING ~alignmnt.2da~ ~override~
+		  COUNT_2DA_COLS num_cols
+		  READ_2DA_ENTRIES_NOW ~r2en_align~ num_cols
+		  FOR (row = 3; row < r2en_align; row += 1) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_align~ row 0 align_name
+			PATCH_IF (~%align_name%~ STRING_EQUAL_CASE ~%kit_label%~) BEGIN
+			  FOR (col = 1; col < num_cols; col += 1) BEGIN
+				SET_2DA_ENTRY_LATER ~s2el_align~ row col 1 // more alignments
+			  END
+			END
+		  END
+		  SET_2DA_ENTRIES_NOW ~s2el_align~ num_cols
+		BUT_ONLY
+	  END
+	END
+  END
+BUT_ONLY
+//__________________________________________________________________________________

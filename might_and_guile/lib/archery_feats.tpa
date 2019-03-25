@@ -30,8 +30,8 @@ should do:
 //
 COPY ~might_and_guile/fighter/d5_artrp.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_artrp.spl~ ~override~ 	//	called shot: trip
-	SAY NAME1 @23113
-	SAY UNIDENTIFIED_DESC @23114
+	SAY NAME1 @20513
+	SAY UNIDENTIFIED_DESC @20514
 	WRITE_ASCII 0x3a ~d5_artrp~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_artrp~ END
 COPY ~might_and_guile/fighter/d5_artrp.bam~ ~override~
@@ -39,8 +39,8 @@ COPY ~might_and_guile/fighter/d5_artrp.bam~ ~override~
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~	//	called shot: pin
-	SAY NAME1 @23111
-	SAY UNIDENTIFIED_DESC @23112
+	SAY NAME1 @20511
+	SAY UNIDENTIFIED_DESC @20512
 	WRITE_ASCII 0x3a ~d5_armov~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_armov~ END
 COPY ~might_and_guile/fighter/d5_armov.bam~ ~override~
@@ -49,8 +49,8 @@ COPY ~might_and_guile/fighter/d5_arsl1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arsl2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arsl3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~	//	called shot: cripple
-	SAY NAME1 @23119
-	SAY UNIDENTIFIED_DESC @23120
+	SAY NAME1 @20519
+	SAY UNIDENTIFIED_DESC @20520
 	WRITE_ASCII 0x3a ~d5_arslo~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslo~ END
 COPY ~might_and_guile/fighter/d5_arslo.bam~ ~override~
@@ -59,16 +59,16 @@ COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~	//	called shot: disarm
-	SAY NAME1 @23115
-	SAY UNIDENTIFIED_DESC @23116
+	SAY NAME1 @20515
+	SAY UNIDENTIFIED_DESC @20516
 	WRITE_ASCII 0x3a ~d5_ardis~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ardis~ END
 COPY ~might_and_guile/fighter/d5_ardis.bam~ ~override~
 
 COPY ~might_and_guile/fighter/d5_arbli.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~	//	called shot: blind
-	SAY NAME1 @23121
-	SAY UNIDENTIFIED_DESC @23122
+	SAY NAME1 @20521
+	SAY UNIDENTIFIED_DESC @20522
 	WRITE_ASCII 0x3a ~d5_arbli~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arbli~ END
 COPY ~might_and_guile/fighter/d5_arbli.bam~ ~override~
@@ -77,16 +77,16 @@ COPY ~might_and_guile/fighter/d5_arhm1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arhm2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arhm3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~	//	called shot: hammer
-	SAY NAME1 @23117
-	SAY UNIDENTIFIED_DESC @23118
+	SAY NAME1 @20517
+	SAY UNIDENTIFIED_DESC @20518
 	WRITE_ASCII 0x3a ~d5_arham~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arham~ END
 COPY ~might_and_guile/fighter/d5_arham.bam~ ~override~
 
 COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~	//	called shot: stun
-	SAY NAME1 @23123
-	SAY UNIDENTIFIED_DESC @23124
+	SAY NAME1 @20523
+	SAY UNIDENTIFIED_DESC @20524
 	WRITE_ASCII 0x3a ~d5_arstn~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arstn~ END
 COPY ~might_and_guile/fighter/d5_arstn.bam~ ~override~
@@ -94,16 +94,16 @@ COPY ~might_and_guile/fighter/d5_arstn.bam~ ~override~
 COPY ~might_and_guile/fighter/d5_arnt1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arnt2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~	//	called shot: entangle
-	SAY NAME1 @23131
-	SAY UNIDENTIFIED_DESC @23132
+	SAY NAME1 @20531
+	SAY UNIDENTIFIED_DESC @20532
 	WRITE_ASCII 0x3a ~d5_arent~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arent~ END
 COPY ~might_and_guile/fighter/d5_arent.bam~ ~override~
 
 COPY ~might_and_guile/fighter/d5_arslp.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~	//	called shot: sleep
-	SAY NAME1 @23133
-	SAY UNIDENTIFIED_DESC @23134
+	SAY NAME1 @20533
+	SAY UNIDENTIFIED_DESC @20534
 	WRITE_ASCII 0x3a ~d5_arslp~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslp~ END
 COPY ~might_and_guile/fighter/d5_arslp.bam~ ~override~
@@ -116,73 +116,143 @@ COPY ~might_and_guile/fighter/d5_arff4.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff5.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
 COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~	//	called shot: faerie fire
-	SAY NAME1 @23135
-	SAY UNIDENTIFIED_DESC @23136
+	SAY NAME1 @20535
+	SAY UNIDENTIFIED_DESC @20536
 	WRITE_ASCII 0x3a ~d5_arffi~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arffi~ END
 COPY ~might_and_guile/fighter/d5_arffi.bam~ ~override~
 
 
 COPY ~might_and_guile/fighter/d5_csa.spl~ ~override/d5ucsa.spl~		//	give trip
-	SAY NAME1 @23113
-	SAY UNIDENTIFIED_DESC @23114
+	SAY NAME1 @20513
+	SAY UNIDENTIFIED_DESC @20514
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_artrp~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_artrp~ END
 COPY_EXISTING ~d5ucsa.spl~ ~override/d5vcsa.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csb.spl~ ~override/d5ucsb.spl~		//	give pin
-	SAY NAME1 @23111
-	SAY UNIDENTIFIED_DESC @23112
+	SAY NAME1 @20511
+	SAY UNIDENTIFIED_DESC @20512
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_armov~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_armov~ END
 COPY_EXISTING ~d5ucsb.spl~ ~override/d5vcsb.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csc.spl~ ~override/d5ucsc.spl~		//	give cripple
-	SAY NAME1 @23119
-	SAY UNIDENTIFIED_DESC @23120
+	SAY NAME1 @20519
+	SAY UNIDENTIFIED_DESC @20520
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arslo~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslo~ END
 COPY_EXISTING ~d5ucsc.spl~ ~override/d5vcsc.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csd.spl~ ~override/d5ucsd.spl~		//	give disarm
-	SAY NAME1 @23115
-	SAY UNIDENTIFIED_DESC @23116
+	SAY NAME1 @20515
+	SAY UNIDENTIFIED_DESC @20516
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_ardis~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ardis~ END
 COPY_EXISTING ~d5ucsd.spl~ ~override/d5vcsd.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_cse.spl~ ~override/d5ucse.spl~		//	give blind
-	SAY NAME1 @23121
-	SAY UNIDENTIFIED_DESC @23122
+	SAY NAME1 @20521
+	SAY UNIDENTIFIED_DESC @20522
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arbli~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arbli~ END
 COPY_EXISTING ~d5ucse.spl~ ~override/d5vcse.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csf.spl~ ~override/d5ucsf.spl~		//	give hammer
-	SAY NAME1 @23117
-	SAY UNIDENTIFIED_DESC @23118
+	SAY NAME1 @20517
+	SAY UNIDENTIFIED_DESC @20518
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arham~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arham~ END
 COPY_EXISTING ~d5ucsf.spl~ ~override/d5vcsf.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csg.spl~ ~override/d5ucsg.spl~		//	give stun
-	SAY NAME1 @23123
-	SAY UNIDENTIFIED_DESC @23124
+	SAY NAME1 @20523
+	SAY UNIDENTIFIED_DESC @20524
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arstn~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arstn~ END
 COPY_EXISTING ~d5ucsg.spl~ ~override/d5vcsg.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csh.spl~ ~override/d5ucsh.spl~		//	give entangle
-	SAY NAME1 @23131
-	SAY UNIDENTIFIED_DESC @23132
+	SAY NAME1 @20531
+	SAY UNIDENTIFIED_DESC @20532
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arent~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arent~ END
 COPY_EXISTING ~d5ucsh.spl~ ~override/d5vcsh.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csi.spl~ ~override/d5ucsi.spl~		//	give sleep
-	SAY NAME1 @23133
-	SAY UNIDENTIFIED_DESC @23134
+	SAY NAME1 @20533
+	SAY UNIDENTIFIED_DESC @20534
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arslp~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arslp~ END
 COPY_EXISTING ~d5ucsi.spl~ ~override/d5vcsi.spl~
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/fighter/d5_csj.spl~ ~override/d5ucsj.spl~		//	give faerie fire
-	SAY NAME1 @23135
-	SAY UNIDENTIFIED_DESC @23136
+	SAY NAME1 @20535
+	SAY UNIDENTIFIED_DESC @20536
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_arffi~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_arffi~ END
 COPY_EXISTING ~d5ucsj.spl~ ~override/d5vcsj.spl~
+	WRITE_SHORT 0x1c 1
 
 /*
 COPY ~might_and_guile/fighter/d5_rafx.spl~ ~override~
@@ -259,7 +329,12 @@ BUT_ONLY
 COPY ~might_and_guile/feats/d5flsta.2da~ ~override~
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5ftskn.2da~) BEGIN
+ ACTION_IF !(GAME_IS ~iwdee~) BEGIN
   COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~
+ END
+ ACTION_IF (GAME_IS ~iwdee~) BEGIN
+  COPY ~might_and_guile/feats/d5ftskn_iwd.2da~ ~override/d5ftskn.2da~
+ END
 END
 
 OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
@@ -267,6 +342,7 @@ OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
 OUTER_SPRINT feat_title_string @20012 
 OUTER_SPRINT feat_label_string @20013 
 
+/*
 COPY_EXISTING ~d5flsta.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
@@ -291,7 +367,9 @@ COPY_EXISTING ~d5flsta.2da~ ~override~
 	END
   END
 BUT_ONLY
+*/
 
+/*
 ACTION_FOR_EACH high_level_feat IN 
 	~d5ucsf~ 
 	~d5vcsf~ 
@@ -301,6 +379,7 @@ ACTION_FOR_EACH high_level_feat IN
 	WRITE_LONG 0x34 4
   IF_EXISTS BUT_ONLY
 END
+*/
 
 //NO FEATS YET________________________________________________________________________
 //
@@ -345,6 +424,21 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 		  END
 		END
 	  BUT_ONLY
+	END
+  END
+ BUT_ONLY
+ 
+ COPY_EXISTING ~d5flsta.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+  	READ_2DA_ENTRY row 0 cols ~book_feat~
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		WRITE_SHORT 0x1c 4
+		WRITE_LONG 0x34 1
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+	  IF_EXISTS BUT_ONLY
 	END
   END
  BUT_ONLY
@@ -407,7 +501,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 				tip = %kit_seq_tip%
 				desc = RESOLVE_STR_REF (~blah~) 
 				column = %col% 
-				class = 2
+				class = 1
 			   STR_VAR 
 				resref = EVAL ~d5ft%kit_seq_index%~
 				icon = ~spcl919b~
@@ -420,6 +514,21 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 		  END
 		END
 	  BUT_ONLY
+	END
+  END
+ BUT_ONLY
+
+ COPY_EXISTING ~d5flstaf.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+  	READ_2DA_ENTRY row 0 cols ~book_feat~
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		WRITE_SHORT 0x1c 4
+		WRITE_LONG 0x34 1
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+	  IF_EXISTS BUT_ONLY
 	END
   END
  BUT_ONLY

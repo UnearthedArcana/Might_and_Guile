@@ -1,0 +1,82 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								QUICKSTRIDE
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION 245_quickstride BEGIN
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_strid.d5~ ~override~
+//__________________________________________________________________________________
+
+
+LAM JOINABLE_NPC_ARRAYS
+
+
+LAM d5_quickstride_speed
+
+COPY ~might_and_guile/misc/d5strid.spl~ ~override~
+	SAY NAME1 @2450
+	SAY UNIDENTIFIED_DESC @20110
+	WRITE_ASCII 0x3a ~d5_wfc1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 176 parameter1 = %d5_quickstride_bonus% END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5swalk~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5strid~ END
+
+COPY ~might_and_guile/misc/d5swalk.spl~ ~override~
+	SAY NAME1 @2451
+	SAY UNIDENTIFIED_DESC @2451
+	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5strid~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5strid~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5swalk~ END
+
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+//  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  LPF DELETE_CRE_EFFECT INT_VAR opcode_to_delete = 176 END
+	END
+  BUT_ONLY
+END
+
+
+COPY_EXISTING ~spcl151.spl~ ~override~
+			  ~spcl812.spl~ ~override~
+	LPF DELETE_EFFECT INT_VAR silent = 1 match_probability1 = 100 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~d5strid~ END
+
+ACTION_FOR_EACH stride_kit IN ~clabrn01~ ~clabmo01~ ~QDMONK~ ~QDMONKSS~ ~QDMONKDM~ ~QDMONKHF~ ~QDMONKSH~ ~QDMONKLD~ ~QDMONKBO~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%stride_kit%.2da~ BEGIN
+	COPY_EXISTING ~%stride_kit%.2da~ ~override~
+	  REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+	BUT_ONLY
+	APPEND ~%stride_kit%.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+  END
+END
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+//  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 3 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 9 clab
+	READ_2DA_ENTRY row 8 9 class
+	PATCH_IF (class = 20) OR (class = 12) BEGIN
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~%clab%.2da~ ~override~
+		  REPLACE_TEXTUALLY ~AP_SPCL813~ ~****      ~
+		BUT_ONLY
+		APPEND ~%clab%.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+	  END
+	END
+  END
+BUT_ONLY
+
+
+END // end function

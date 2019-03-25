@@ -15,30 +15,70 @@ COPY ~might_and_guile/lib/markers/d5_rarchery.d5~ ~override~
 
 //PRELIMINARIES_____________________________________________________________________
 //
+LAM d5_revised_archery_kits
+
+ACTION_IF (%d5_archery_include_marksman% = 1) BEGIN
+  INCLUDE ~might_and_guile/components/320_marksman.tpa~
+END
+ACTION_IF (%d5_archery_include_elf_archer% = 1) BEGIN
+  INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
+END
+ACTION_IF (%d5_archery_include_slinger% = 1) BEGIN
+  INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
+END
+ACTION_IF (%d5_archery_include_sniper% = 1) BEGIN
+  INCLUDE ~might_and_guile/components/410_sniper.tpa~
+END
+//__________________________________________________________________________________
+
+
+//PATCH KIT ABILITIES_________________________________________________________________
+//
+COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+
 COPY_EXISTING ~clabrn02.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
   REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 APPEND ~clabrn02.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ THEN BEGIN
- COPY_EXISTING ~d5_earch.2da~ ~override~
-  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-  REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_marks.2da~ BEGIN
+  COPY_EXISTING ~d5_marks.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
+  APPEND ~d5_marks.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ BEGIN
+  COPY_EXISTING ~d5_earch.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
  APPEND ~d5_earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ THEN BEGIN
- COPY_EXISTING ~d5_sling.2da~ ~override~
-  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-  REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
- APPEND ~d5_sling.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
+  COPY_EXISTING ~d5_sling.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
+  APPEND ~d5_sling.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
-COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
+  COPY_EXISTING ~d5_snipe.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
+	APPEND_FILE ~might_and_guile/feats/no_umd.txt~
+  APPEND ~d5_snipe.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
 
-//ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_archy.d5~ BEGIN
-	INCLUDE ~might_and_guile/lib/archery_feats.tpa~
-//END
+INCLUDE ~might_and_guile/lib/archery_feats.tpa~
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
 	INCLUDE ~might_and_guile/lib/elven_chain.tpa~
@@ -46,114 +86,26 @@ END
 //___________________________________________________________________________________
 
 
-/* 
-//NO FEATS___________________________________________________________________________
+//TEXT DESCRIPTIONS_________________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
- COPY_EXISTING ~clabrn02.2da~ ~override~
-  LPM remove_blank_lines
-  APPEND_FILE ~might_and_guile/ranger/called_shots.txt~
- BUT_ONLY
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ THEN BEGIN
-  COPY_EXISTING ~d5_earch.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/ranger/elven_archer_shots.txt~
-  BUT_ONLY
- END
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ THEN BEGIN
-  COPY_EXISTING ~d5_sling.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/ranger/slinger_shots.txt~
-  BUT_ONLY
- END
- ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-  COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows cols
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2301)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3224)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
-	  END
-	END
-  BUT_ONLY
- END
- ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-  COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2301)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3224)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3244)
-	  END
-	END
-  BUT_ONLY
- END
- ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
-  COPY_EXISTING ~kitlist.2da~ ~override~
-//	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows 9
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2301)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3224)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3244)
-	  END
-	END
-  BUT_ONLY
- END
-END
-//___________________________________________________________________________________
-*/
-
-
-//FEAT SYSTEM_________________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   COPY_EXISTING ~clabrn02.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
   BUT_ONLY
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ THEN BEGIN
+ ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ BEGIN
   COPY_EXISTING ~d5_earch.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
   BUT_ONLY
  END
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ THEN BEGIN
+ ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
   COPY_EXISTING ~d5_sling.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
   BUT_ONLY
  END
- ACTION_IF FILE_EXISTS_IN_GAME ~a!sharp.2da~ THEN BEGIN
+ ACTION_IF FILE_EXISTS_IN_GAME ~a!sharp.2da~ BEGIN
   COPY_EXISTING ~a!sharp.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
@@ -167,7 +119,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2302)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2052)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3206)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -176,6 +132,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SLING~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3245)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SNIPE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4105)
 	  END
 	END
    BUT_ONLY
@@ -188,7 +148,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2302)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2052)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3206)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -198,18 +162,25 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3245)
 	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SNIPE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@4105)
+	  END
 	END
    BUT_ONLY
   END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
-   COPY_EXISTING ~kitlist.2da~ ~override~
+  COPY_EXISTING ~kitlist.2da~ ~override~
 //	COUNT_2DA_COLS cols
 	READ_2DA_ENTRIES_NOW rows 9
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FERALAN~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2302)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2052)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3206)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -219,9 +190,12 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3245)
 	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SNIPE~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@4105)
+	  END
 	END
-   BUT_ONLY
-  END
+  BUT_ONLY
 END
 //___________________________________________________________________________________
 
@@ -247,7 +221,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
 	READ_2DA_ENTRIES_NOW rows 10
 	FOR (row = 4; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 5 ~clab~
-	  PATCH_IF ~%clab%~ STRING_EQUAL_CASE ~CLABRN02~ BEGIN
+	  PATCH_IF (~%clab%~ STRING_EQUAL_CASE ~CLABRN02~) || (~%clab%~ STRING_EQUAL_CASE ~d5_earch~) || (~%clab%~ STRING_EQUAL_CASE ~d5_sling~) BEGIN
 		SET kit_index = %row%
 		READ_2DA_ENTRY_FORMER rows kit_index 5 kit_clab
 		READ_2DA_ENTRY_FORMER rows kit_index 1 kit_name

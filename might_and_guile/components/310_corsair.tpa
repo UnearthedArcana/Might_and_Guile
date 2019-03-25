@@ -109,6 +109,13 @@ COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
 COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
 //____________________________________________________________________________________
 	
+
+// get kit identifiers________________________________________________________________
+//
+OUTER_SET corsair_code = (0x4000 + %D5CORSA%)
+//____________________________________________________________________________________
+
+
 //FEAT SYSTEM_________________________________________________________________________
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
@@ -221,17 +228,32 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 				  END
 				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
 					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
-				  BUT_ONLY IF_EXISTS
+				  IF_EXISTS BUT_ONLY
+				  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+					COPY_EXISTING ~d5feat%letter%.spl~ ~override~
+					  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %corsair_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
+					IF_EXISTS BUT_ONLY
+				  END
 				END
 			  END
 			END
 		  BUT_ONLY
-		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
-			COPY_EXISTING ~d5feat%letter%.spl~ ~override~
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
-			IF_EXISTS BUT_ONLY
-		  END
 		END
+	  END
+	END
+  BUT_ONLY
+
+  COPY_EXISTING ~d5flstf.2da~ ~override~
+	COUNT_2DA_COLS cols
+	COUNT_2DA_ROWS cols rows
+	FOR (row = 1; row < rows; ++row) BEGIN
+  	  READ_2DA_ENTRY row 0 cols ~book_feat~
+	  INNER_ACTION BEGIN
+		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		  WRITE_SHORT 0x1c 4
+		  WRITE_LONG 0x34 1
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+		IF_EXISTS BUT_ONLY
 	  END
 	END
   BUT_ONLY

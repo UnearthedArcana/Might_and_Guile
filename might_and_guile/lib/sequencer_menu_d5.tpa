@@ -412,7 +412,7 @@
 		STR_VAR	resref = ~~	icon = ~~	title = ~~	action = ~~	spelltable = ~~	spelllist = ~~	attribute = ~~	attrtable = ~~	custom = ~~	subspell = ~L~	blacklist = ~~
 	BEGIN
 		OUTER_SPRINT $ EVAL ~%blacklist%~(~-1~) ~DEFAULT~
-		PRINT ~Running CREATE_SEQUENCER_MENU version#: 0.%version%~
+		PRINT ~Running CREATE_SEQUENCER_MENU version#: 0.55~
 		ACTION_TO_UPPER resref	ACTION_TO_UPPER spelltable	ACTION_TO_UPPER spelllist	ACTION_TO_UPPER attribute	ACTION_TO_UPPER attrtable	ACTION_TO_UPPER subspell
 		LAF	SETUP_SEQUENCER_MENU	END
 		ACTION_IF	! (~%custom%~ STRING_EQUAL ~~)	BEGIN

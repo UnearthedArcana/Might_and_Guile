@@ -71,12 +71,14 @@ END
 
 //2DA MODIFICATIONS___________________________________________________________________
 //
+/*
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 	BUT_ONLY
 END
+*/
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines

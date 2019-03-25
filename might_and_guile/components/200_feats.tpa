@@ -429,6 +429,12 @@ COPY ~might_and_guile/feats/d5_rfa1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa1.spl~ ~override/d5ura1.spl~   // 			stealth bonus
 	SAY NAME1 @20101
 	SAY UNIDENTIFIED_DESC @20102
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfa1a~ END
@@ -443,11 +449,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfa1b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vra1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfa1b~ END
 COPY_EXISTING  ~d5ura1.spl~ ~override/d5vra1.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfa2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa2.spl~ ~override/d5ura2.spl~   // 			thieving bonus
 	SAY NAME1 @20103
 	SAY UNIDENTIFIED_DESC @20104
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfa2a~ END
@@ -462,11 +475,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfa2b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vra2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfa2b~ END
 COPY_EXISTING  ~d5ura2.spl~ ~override/d5vra2.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfa3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa3.spl~ ~override/d5ura3.spl~   // 			detection bonus
 	SAY NAME1 @20105
 	SAY UNIDENTIFIED_DESC @20106
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa3~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfa3a~ END
@@ -481,11 +501,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfa3b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vra3~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfa3b~ END
 COPY_EXISTING  ~d5ura3.spl~ ~override/d5vra3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfa4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa4.spl~ ~override/d5ura4.spl~   // 			lore bonus
 	SAY NAME1 @20301
 	SAY UNIDENTIFIED_DESC @20302
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa4~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfa4a~ END
@@ -500,28 +527,43 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfa4b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vra4~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfa4b~ END
 COPY_EXISTING  ~d5ura4.spl~ ~override/d5vra4.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfa5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa5.spl~ ~override/d5ura5.spl~   // 			luck bonus
 	SAY NAME1 @20303
 	SAY UNIDENTIFIED_DESC @20304
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa5~ END
 COPY_EXISTING  ~d5ura5.spl~ ~override/d5vra5.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfa9.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfa9.spl~ ~override/d5ura9.spl~   // 			tracking
 	SAY NAME1 @20107
 	SAY UNIDENTIFIED_DESC @20108
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfa9~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa9~ END
 COPY_EXISTING  ~d5ura9.spl~ ~override/d5vra9.spl~ 
+	WRITE_SHORT 0x1c 1
 
 // mechanical
 
 /*
 ADD_PROJECTILE ~might_and_guile/thief/d5trspik.pro~
-COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~   // 			spike trap
+COPY ~might_and_guile/thief/d5_rfb1.spl~ ~override~   		// 			spike trap
 	SAY NAME1 @20111
 	SAY UNIDENTIFIED_DESC @20112
 COPY ~might_and_guile/thief/d5_rfb1x.spl~ ~override~
@@ -536,6 +578,12 @@ COPY ~might_and_guile/feats/d5_rfb1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfb1.spl~ ~override/d5urb1.spl~   // 			dart trap
 	SAY NAME1 @20113
 	SAY UNIDENTIFIED_DESC @20114
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfb1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfb1a~ END
@@ -556,12 +604,19 @@ COPY ~might_and_guile/feats/d5_rf21.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb1~ END
 COPY ~might_and_guile/feats/d5_rf21b.spl~ ~override~
 COPY_EXISTING  ~d5urb1.spl~ ~override/d5vrb1.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfb3.bam~ ~override~
 ADD_PROJECTILE ~might_and_guile/feats/d5trfire.pro~
 COPY ~might_and_guile/feats/d5_rfb3.spl~ ~override/d5urb3.spl~   // 			fire trap
 	SAY NAME1 @20115
 	SAY UNIDENTIFIED_DESC @20116
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfb3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb3~ END
 COPY ~might_and_guile/feats/d5_rf23.spl~ ~override~
@@ -572,12 +627,19 @@ COPY ~might_and_guile/feats/d5_rf23.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf23b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trfire% END
 COPY_EXISTING  ~d5urb3.spl~ ~override/d5vrb3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfb4.bam~ ~override~
 ADD_PROJECTILE ~might_and_guile/feats/d5trweb.pro~
 COPY ~might_and_guile/feats/d5_rfb4.spl~ ~override/d5urb4.spl~   // 			web trap
 	SAY NAME1 @20117
 	SAY UNIDENTIFIED_DESC @20118
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfb4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb4~ END
 COPY ~might_and_guile/feats/d5_rf24.spl~ ~override~
@@ -588,11 +650,18 @@ COPY ~might_and_guile/feats/d5_rf24.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf24b.spl~ ~override~
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5trweb% END
 COPY_EXISTING  ~d5urb4.spl~ ~override/d5vrb4.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfb5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfb5.spl~ ~override/d5urb5.spl~   // 			poison trap
 	SAY NAME1 @20119
 	SAY UNIDENTIFIED_DESC @20120
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfb1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb5~ END
 COPY ~might_and_guile/feats/d5_rf25.spl~ ~override~
@@ -602,8 +671,9 @@ COPY ~might_and_guile/feats/d5_rf25.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfb5~ END
 COPY ~might_and_guile/feats/d5_rf25b.spl~ ~override~
 COPY_EXISTING  ~d5urb5.spl~ ~override/d5vrb5.spl~ 
+	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/feats/d5_rf2z.spl~ ~override~   // 			maze trap
+COPY ~might_and_guile/feats/d5_rf2z.spl~ ~override~  		 // 			maze trap
 	SAY NAME1 @20129
 	SAY UNIDENTIFIED_DESC @20130
 COPY ~might_and_guile/feats/d5_rf2z.bam~ ~override~
@@ -612,12 +682,19 @@ COPY ~might_and_guile/feats/d5_rf2zb.spl~ ~override~
 // alchemical
 
 COPY ~might_and_guile/feats/d5_rfc1.bam~ ~override~
+/*
 COPY ~might_and_guile/feats/d5_rfc0.spl~ ~override/d5urc0.spl~   // 			basic alchemy
 	SAY NAME1 @20131
 	SAY UNIDENTIFIED_DESC @20132
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 318 parameter1 = %alchemist_ids% parameter2 = %kit_is_row% STR_VAR resource = ~D5_RFC8~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 parameter1 = %alchemist_ids% parameter2 = %kit_is_row% END
 CREATE EFF ~D5_RFC0Z~
 	WRITE_LONG 0x10 206
 	WRITE_LONG 0x14 1
@@ -628,18 +705,27 @@ CREATE EFF ~D5_RFC0Z~
 	WRITE_LONG 0x90 1
 	WRITE_EVALUATED_ASCII 0x94 ~D5_RFC0Z~ #8
 COPY_EXISTING  ~d5urc0.spl~ ~override/d5vrc0.spl~ 
-
-COPY ~might_and_guile/feats/d5_rfc1.spl~ ~override~   // 			basic alchemy
+	WRITE_SHORT 0x1c 1
+*/
+COPY ~might_and_guile/feats/d5_rfc1.spl~ ~override/d5urc1.spl~  		// 			basic alchemy
 	SAY NAME1 @20131
 	SAY UNIDENTIFIED_DESC @20132
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = 16384 parameter1 = %alchemist_ids% STR_VAR resource = ~D5_RFC8~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 parameter1 = %alchemist_ids% parameter2 = %kit_is_row% END
 COPY ~might_and_guile/feats/d5_rf31.spl~ ~override~
 	SAY NAME1 @20131
 	SAY UNIDENTIFIED_DESC @20132
 	WRITE_ASCII 0x3a ~d5_rfc1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc1~ END
+COPY_EXISTING  ~d5urc1.spl~ ~override/d5vrc1.spl~ 
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/feats/d5_rf31.2da~ ~override~
 COPY ~might_and_guile/feats/d5_rf31a.spl~ ~override~
 	SAY NAME1 @20133
@@ -671,9 +757,15 @@ COPY ~might_and_guile/feats/d5_floil.itm~ ~override~
 COPY ~might_and_guile/feats/d5_floil.bam~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfc2.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfc2.spl~ ~override~   // 			advanced alchemy
+COPY ~might_and_guile/feats/d5_rfc2.spl~ ~override/d5urc2.spl~   // 			advanced alchemy
 	SAY NAME1 @20181
 	SAY UNIDENTIFIED_DESC @20182
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc2~ END
 COPY ~might_and_guile/feats/d5_rf32.spl~ ~override~
@@ -681,6 +773,8 @@ COPY ~might_and_guile/feats/d5_rf32.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @20182
 	WRITE_ASCII 0x3a ~d5_rfc2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc2~ END
+COPY_EXISTING  ~d5urc2.spl~ ~override/d5vrc2.spl~ 
+	WRITE_SHORT 0x1c 1
 COPY ~might_and_guile/feats/d5_rf32.2da~ ~override~
 COPY ~might_and_guile/feats/d5_rf32a.spl~ ~override~
 	SAY NAME1 @20183
@@ -715,6 +809,12 @@ COPY ~might_and_guile/feats/d5_rfc3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfc3.spl~ ~override/d5urc3.spl~   // 			toxic poison
 	SAY NAME1 @20161
 	SAY UNIDENTIFIED_DESC @20162
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc3~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %assassin_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfc3a~ END
@@ -734,11 +834,18 @@ COPY_EXISTING ~spcl423.spl~ ~override/d5_rf33.spl~
 	WRITE_ASCII 0x3a ~d5_rfc3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc3~ END
 COPY_EXISTING  ~d5urc3.spl~ ~override/d5vrc3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfc4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfc4.spl~ ~override/d5urc4.spl~   // 			paralytic poison
 	SAY NAME1 @20163
 	SAY UNIDENTIFIED_DESC @20164
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc4~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %hunter_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfc4a~ END
@@ -762,11 +869,18 @@ COPY ~might_and_guile/feats/d5_rf34a.spl~ ~override~
 	SAY NAME1 @20163
 	SAY UNIDENTIFIED_DESC @20164
 COPY_EXISTING  ~d5urc4.spl~ ~override/d5vrc4.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfc6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfc6.spl~ ~override/d5urc6.spl~   // 			flaming weapon
 	SAY NAME1 @20151
 	SAY UNIDENTIFIED_DESC @20152
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc6~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfc6a~ END
@@ -787,11 +901,18 @@ COPY ~might_and_guile/feats/d5_rf36.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc6~ END
 COPY ~might_and_guile/feats/d5_rf36.eff~ ~override~
 COPY_EXISTING  ~d5urc6.spl~ ~override/d5vrc6.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfc7.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfc7.spl~ ~override/d5urc7.spl~   // 		  hulking transformation
 	SAY NAME1 @20171
 	SAY UNIDENTIFIED_DESC @20172
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfc7~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfc7~ END
 COPY ~might_and_guile/feats/d5_rf37.spl~ ~override~
@@ -808,8 +929,9 @@ COPY ~might_and_guile/feats/d5_clalc.itm~ ~override~
 COPY ~might_and_guile/feats/d5_alch.cre~ ~override~
 	SAY NAME1 @20174
 COPY_EXISTING  ~d5urc7.spl~ ~override/d5vrc7.spl~ 
+	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/feats/d5_rf3z.spl~ ~override~   	 // 			high-level alchemy
+COPY ~might_and_guile/feats/d5_rf3z.spl~ ~override~   		 // 			high-level alchemy
 	SAY NAME1 @20191
 	SAY UNIDENTIFIED_DESC @20192
 COPY ~might_and_guile/feats/d5_rf3z.2da~ ~override~
@@ -838,6 +960,12 @@ COPY ~might_and_guile/feats/d5_rfd1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd1.spl~ ~override/d5urd1.spl~    // 			AC bonus
 	SAY NAME1 @20201
 	SAY UNIDENTIFIED_DESC @20202
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %swashbuckler_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfd1a~ END
@@ -852,10 +980,17 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfd1b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vrd1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfd1b~ END
 COPY_EXISTING  ~d5urd1.spl~ ~override/d5vrd1.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfd1.spl~ ~override/d5urd0.spl~    // 			AC bonus
 	SAY NAME1 @20201
 	SAY UNIDENTIFIED_DESC @20202
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %swashbuckler_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfd0a~ END
@@ -870,11 +1005,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfd0b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vrd0~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfd0b~ END
 COPY_EXISTING  ~d5urd0.spl~ ~override/d5vrd0.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfd2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd2.spl~ ~override/d5urd2.spl~   // 			escape artist
 	SAY NAME1 @20221
 	SAY UNIDENTIFIED_DESC @20222
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
 COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
@@ -883,11 +1025,18 @@ COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
 	WRITE_ASCII 0x3a ~d5_rfd2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2~ END
 COPY_EXISTING  ~d5urd2.spl~ ~override/d5vrd2.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfd3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override/d5urd3.spl~   //			iwd spell evasion
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd3~ END
 OUTER_SET optional_evade = 1
@@ -898,6 +1047,7 @@ ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN
   END
 END
 COPY_EXISTING  ~d5urd3.spl~ ~override/d5vrd3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 ACTION_IF FILE_EXISTS_IN_GAME ~clabth01.2da~ BEGIN
   COPY_EXISTING ~clabth01.2da~ ~override~
@@ -927,6 +1077,12 @@ COPY ~might_and_guile/feats/d5_rfd4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd4.spl~ ~override/d5urd4.spl~   // 			missile snaring
 	SAY NAME1 @20203
 	SAY UNIDENTIFIED_DESC @20204
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd4~ END
 CREATE EFF ~d5_rfd4~
@@ -938,6 +1094,7 @@ CREATE EFF ~d5_rfd4~
 	WRITE_SHORT 0x2c 100
 	WRITE_EVALUATED_ASCII 0x30 ~d5_rf44~ #8
 COPY_EXISTING  ~d5urd4.spl~ ~override/d5vrd4.spl~ 
+	WRITE_SHORT 0x1c 1
 
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_SNAREARROW~ RET new_state_ind END
 OUTER_SET missile_snaring_state = %new_state_ind%
@@ -956,25 +1113,46 @@ COPY ~might_and_guile/feats/d5_rfd5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override/d5urd5.spl~   // 			save bonuses
 	SAY NAME1 @20211
 	SAY UNIDENTIFIED_DESC @20212
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd5~ END
 COPY_EXISTING  ~d5urd5.spl~ ~override/d5vrd5.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfd6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd6.spl~ ~override/d5urd6.spl~   // 			spell/wand saves
 	SAY NAME1 @20213
 	SAY UNIDENTIFIED_DESC @20214
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd6~ END
 COPY_EXISTING  ~d5urd6.spl~ ~override/d5vrd6.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfd7.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd7.spl~ ~override/d5urd7.spl~   // 			death/polymorph saves
 	SAY NAME1 @20215
 	SAY UNIDENTIFIED_DESC @20216
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd7~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd7~ END
 COPY_EXISTING  ~d5urd7.spl~ ~override/d5vrd7.spl~ 
+	WRITE_SHORT 0x1c 1
 
 // slippery mind: 5 Charm, 128 Confusion, 76 feeblemind, 213 Maze
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_CHARMEVADE~ RET new_state_ind END
@@ -983,10 +1161,17 @@ COPY ~might_and_guile/feats/d5_rfd8.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd8.spl~ ~override/d5urd8.spl~   // 			charm evasion
 	SAY NAME1 @20217
 	SAY UNIDENTIFIED_DESC @20218
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 2
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfd8~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd8~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %charm_evasion_state% END
 COPY_EXISTING  ~d5urd8.spl~ ~override/d5vrd8.spl~ 
+	WRITE_SHORT 0x1c 1
 <<<<<<<< d5/d5chrmev.2da
 2DA V1.0 
 RES
@@ -1041,6 +1226,12 @@ COPY ~might_and_guile/feats/d5_rfe1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe1.spl~ ~override/d5ure1.spl~  	 // 			melee thac0
 	SAY NAME1 @20231
 	SAY UNIDENTIFIED_DESC @20232
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %swashbuckler_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfe1a~ END
@@ -1055,10 +1246,17 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfe1b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vre1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfe1b~ END
 COPY_EXISTING  ~d5ure1.spl~ ~override/d5vre1.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfe1.spl~ ~override/d5ure0.spl~   // 			melee thac0
 	SAY NAME1 @20231
 	SAY UNIDENTIFIED_DESC @20232
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %swashbuckler_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfe0a~ END
@@ -1073,11 +1271,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfe0b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vre0~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfe0b~ END
 COPY_EXISTING  ~d5ure0.spl~ ~override/d5vre0.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfe3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe3.spl~ ~override/d5ure3.spl~   // 			ranged thac0
 	SAY NAME1 @20233
 	SAY UNIDENTIFIED_DESC @20234
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe3~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfe3a~ END
@@ -1092,11 +1297,18 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfe3b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vre3~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfe3b~ END
 COPY_EXISTING  ~d5ure3.spl~ ~override/d5vre3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfe5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override/d5ure5.spl~   // 			backstab bonus
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe5~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %assassin_ids% parameter2 = %kit_is_row% timing = 9 duration = 0 STR_VAR resource = ~d5_rfe5a~ END
@@ -1111,14 +1323,36 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfe5b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vre5~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfe5b~ END
 COPY_EXISTING  ~d5ure5.spl~ ~override/d5vre5.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfe6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe6.spl~ ~override/d5ure6.spl~   // 			crit bonus
 	SAY NAME1 @20243
 	SAY UNIDENTIFIED_DESC @20244
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe6~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5ure7~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vre7~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5URFE7~ END
 COPY_EXISTING  ~d5ure6.spl~ ~override/d5vre6.spl~ 
+	WRITE_SHORT 0x1c 1
+
+CREATE EFF ~d5urfe7~
+	WRITE_LONG 0x10 171
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x24 9
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~d5ure7~ #8
+	WRITE_LONG 0x90 1
+	WRITE_EVALUATED_ASCII 0x94 ~D5URFE7~ #8
+/*
 CREATE EFF ~D5_RFE6Z~
 	WRITE_LONG 0x10 206
 	WRITE_LONG 0x14 1
@@ -1128,9 +1362,23 @@ CREATE EFF ~D5_RFE6Z~
 	WRITE_EVALUATED_ASCII 0x30 ~d5_rfe6b~ #8
 	WRITE_LONG 0x90 1
 	WRITE_EVALUATED_ASCII 0x94 ~D5_RFE6Z~ #8
-COPY ~might_and_guile/feats/d5_rfe6b.spl~ ~override~  	 // 			crit bonus 2
+COPY ~might_and_guile/feats/d5_rfe6.spl~ ~override~  		 // 			crit bonus 1
+	SAY NAME1 @20243
+	SAY UNIDENTIFIED_DESC @20244
+*/
+COPY ~might_and_guile/feats/d5_rfe7.spl~ ~override/d5ure7.spl~  		 // 			crit bonus 2
 	SAY NAME1 @20245
 	SAY UNIDENTIFIED_DESC @20246
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_rfe6~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe6~ END
+COPY_EXISTING  ~d5ure7.spl~ ~override/d5vre7.spl~ 
+	WRITE_SHORT 0x1c 1
 
 // combat techniques
 
@@ -1138,6 +1386,12 @@ COPY ~might_and_guile/feats/d5_rfe8.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 //				swashbuckling
 	SAY NAME1 @3112
 	SAY UNIDENTIFIED_DESC @3113
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfe8~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe8~ END
 COPY ~might_and_guile/misc/d5swash.spl~ ~override~
@@ -1154,12 +1408,19 @@ COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5swshx~ END
 COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
 COPY_EXISTING  ~d5ure8.spl~ ~override/d5vre8.spl~ 
+	WRITE_SHORT 0x1c 1
 
 INCLUDE ~might_and_guile/lib/extra_prof_dialogue.tpa~
 COPY ~might_and_guile/feats/d5_rfe9.bam~ ~override~
 COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 //		extra prof
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfe9~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9~ END
 COPY ~might_and_guile/feats/d5ftprof.spl~ ~override~
@@ -1170,6 +1431,7 @@ COPY ~might_and_guile/feats/d5ftprof.spl~ ~override~
 COPY ~might_and_guile/feats/d5ftprof.eff~ ~override~
 COPY ~might_and_guile/feats/d5ftprof.cre~ ~override~
 COPY_EXISTING  ~d5ure9.spl~ ~override/d5vre9.spl~ 
+	WRITE_SHORT 0x1c 1
 
 /*
 COPY ~might_and_guile/feats/d5_rfg1.bam~ ~override~
@@ -1205,6 +1467,12 @@ COPY ~might_and_guile/feats/d5_rfg3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override/d5urg3.spl~   // 			blind
 	SAY NAME1 @20255
 	SAY UNIDENTIFIED_DESC @20256
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfg3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
 COPY ~might_and_guile/feats/d5_rf73.spl~ ~override~
@@ -1214,11 +1482,18 @@ COPY ~might_and_guile/feats/d5_rf73.spl~ ~override~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg3~ END
 COPY ~might_and_guile/feats/d5_rf73.eff~ ~override~
 COPY_EXISTING  ~d5urg3.spl~ ~override/d5vrg3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfg4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override/d5urg4.spl~   // 			disrupt
 	SAY NAME1 @20257
 	SAY UNIDENTIFIED_DESC @20258
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfg4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
 COPY ~might_and_guile/feats/d5_rf74.spl~ ~override~
@@ -1226,17 +1501,25 @@ COPY ~might_and_guile/feats/d5_rf74.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @20258
 	WRITE_ASCII 0x3a ~d5_rfg4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg4~ END
-COPY ~might_and_guile/feats/d5_wf11.eff~ ~override~
+COPY ~might_and_guile/feats/d5_rf74.eff~ ~override~
 COPY_EXISTING  ~d5urg4.spl~ ~override/d5vrg4.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfg5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   // 			fighting dirty
 	SAY NAME1 @20259
 	SAY UNIDENTIFIED_DESC @20260
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 3
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfg5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg5~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (1 << 24) END
 COPY_EXISTING  ~d5urg5.spl~ ~override/d5vrg5.spl~ 
+	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols
 	READ_2DA_ENTRIES_NOW rows cols 
@@ -1282,6 +1565,12 @@ COPY ~might_and_guile/feats/d5_rfh2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh1.spl~ ~override/d5urh1.spl~   //          grease jar/smoke bomb
 	SAY NAME1 @20271
 	SAY UNIDENTIFIED_DESC @20272
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_rfh2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfh2a~ END
@@ -1296,6 +1585,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfh2b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vrh2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfh2b~ END
 COPY_EXISTING  ~d5urh1.spl~ ~override/d5vrh1.spl~ 
+	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~  	 //            grease jar
 	SAY NAME1 @20273 
 	SAY UNIDENTIFIED_DESC @20274
@@ -1313,6 +1603,12 @@ COPY ~might_and_guile/feats/d5_rfh5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh5.spl~ ~override/d5urh5.spl~   //           shadow pool
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfh5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh5~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 171 STR_VAR resource = ~d5_rf85~ END
@@ -1334,11 +1630,18 @@ COPY_EXISTING ~d5_shad1.spl~ ~override/d5_rf85.spl~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh5~ END
 //COPY ~might_and_guile/feats/d5_shad1.2da~ ~override~
 COPY_EXISTING  ~d5urh5.spl~ ~override/d5vrh5.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfh6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh6.spl~ ~override/d5urh6.spl~   // 		  illusion pool
 	SAY NAME1 @20283
 	SAY UNIDENTIFIED_DESC @20284
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfh6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh6~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_rfh6a~ END
@@ -1369,6 +1672,7 @@ COPY ~might_and_guile/feats/d5illp5b.spl~ ~override~
 	SAY NAME1 @20285
 COPY ~might_and_guile/feats/d5illp5a.eff~ ~override~
 COPY_EXISTING  ~d5urh6.spl~ ~override/d5vrh6.spl~ 
+	WRITE_SHORT 0x1c 1
 
 //use scrolls/wands_________________________________________________________________
 //
@@ -1376,12 +1680,21 @@ COPY ~might_and_guile/feats/d5_rfh4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5urh4.spl~   //           UMD
 	SAY NAME1 @20293
 	SAY UNIDENTIFIED_DESC @20294
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
 	WRITE_ASCII 0x3a ~d5_rfh4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_numd~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
 COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
+	WRITE_SHORT 0x1c 1
 COPY_EXISTING  ~d5urh4.spl~ ~override/d5_umd.spl~ 
+	WRITE_SHORT 0x1c 4
+	WRITE_LONG 0x34 1
 
 LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
 
@@ -1513,225 +1826,430 @@ BUT_ONLY
 //
 // group tactics
 
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5tactno.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF12Y~ END
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5tactnd.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF13Y~ END
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf11n.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF11~ END
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf12n.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF12~ END
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf13n.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF13~ END
 
-COPY ~might_and_guile/feats/d5_wfa2.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfa2.spl~ ~override/d5uwa2.spl~		//			offensive tactics
-COPY ~might_and_guile/feats/d5_wf12.spl~ ~override~
+COPY ~might_and_guile/feats/d5_wfa1.bam~ ~override~
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa1.spl~	//			offensive tactics
 	SAY NAME1 @20321
 	SAY UNIDENTIFIED_DESC @20322
-	WRITE_ASCII 0x3a ~d5tacto~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tacto~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf02~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf03~ END
-COPY ~might_and_guile/feats/d5_wf12.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
-CREATE EFF ~d5_wf12y~
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfa1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF11N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf11~ END
+COPY_EXISTING  ~d5uwa1.spl~ ~override/d5vwa1.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF11~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf12~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF11~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF12Y~ #8
-COPY_EXISTING  ~d5uwa2.spl~ ~override/d5vwa2.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF11~ #8
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf11.spl~
+	SAY NAME1 @20321
+	SAY UNIDENTIFIED_DESC @20322
+	WRITE_ASCII 0x3a ~d5_wfa1~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF11A~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF13~ END
+COPY ~might_and_guile/feats/d5_wf11a.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf11a.spl~ ~override~
 
-COPY ~might_and_guile/feats/d5_wfa3.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfa3.spl~ ~override/d5uwa3.spl~	//			defensive tactics
-COPY ~might_and_guile/feats/d5_wf13.spl~ ~override~	
+COPY ~might_and_guile/feats/d5_wfa2.bam~ ~override~
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa2.spl~	//			defensive tactics
 	SAY NAME1 @20323
 	SAY UNIDENTIFIED_DESC @20324
-	WRITE_ASCII 0x3a ~d5tactd~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5tactd~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_ntactics% STR_VAR match_resource = ~d5_wf03~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (2 << 24) parameter2 = %134_tactics% STR_VAR match_resource = ~d5_wf02~ END
-COPY ~might_and_guile/feats/d5_wf13.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
-CREATE EFF ~d5_wf13y~
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfa2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa2~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF12N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf12~ END
+COPY_EXISTING  ~d5uwa2.spl~ ~override/d5vwa2.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF12~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf13~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF12~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF13Y~ #8
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF12~ #8
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf12.spl~
+	SAY NAME1 @20323
+	SAY UNIDENTIFIED_DESC @20324
+	WRITE_ASCII 0x3a ~d5_wfa2~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa2~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF12A~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF13~ END
+COPY ~might_and_guile/feats/d5_wf12a.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
+
+COPY ~might_and_guile/feats/d5_wfa3.bam~ ~override~
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa3.spl~	//			efficient tactics
+	SAY NAME1 @20325
+	SAY UNIDENTIFIED_DESC @20326
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfa3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa3~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF13N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf13~ END
 COPY_EXISTING  ~d5uwa3.spl~ ~override/d5vwa3.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF13~
+	WRITE_LONG 0x10 171
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x24 9
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF13~ #8
+	WRITE_LONG 0x90 1
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF13~ #8
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf13.spl~
+	SAY NAME1 @20325
+	SAY UNIDENTIFIED_DESC @20326
+	WRITE_ASCII 0x3a ~d5_wfa2~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfa3~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF13A~ END
+COPY ~might_and_guile/feats/d5_wf13a.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
 
 // melee postures
 
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf21n.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF21Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF21~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf22n.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF22Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF22~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf23n.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF23Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF23~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf24n.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF24Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF24~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf25n.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF25Y~ END
-
-COPY ~might_and_guile/feats/d5_postf.bam~ ~override~
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5postn.spl~
-	SAY NAME1 @20340
-	SAY UNIDENTIFIED_DESC @20340
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5postn~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF25~ END
 
 COPY ~might_and_guile/feats/d5_wfb1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override/d5uwb1.spl~	//			aggressive posture
 	SAY NAME1 @20341
 	SAY UNIDENTIFIED_DESC @20342
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_wfb1~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb1~ END
-COPY ~might_and_guile/feats/d5_wf21.spl~ ~override~
-	SAY NAME1 @20341
-	SAY UNIDENTIFIED_DESC @20342
-	WRITE_ASCII 0x3a ~d5_wfb1~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb1~ END
-COPY ~might_and_guile/feats/d5_wf21.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf21b.spl~ ~override~
-CREATE EFF ~d5_wf21y~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf21~ END
+COPY_EXISTING  ~d5uwb1.spl~ ~override/d5vwb1.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF21~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf21~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF21~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF21Y~ #8
-COPY_EXISTING  ~d5uwb1.spl~ ~override/d5vwb1.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF21~ #8
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf21.spl~
+	SAY NAME1 @20341
+	SAY UNIDENTIFIED_DESC @20342
+	WRITE_ASCII 0x3a ~d5_wfb1~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126244000 STR_VAR resource = ~D5_WF21b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 21 timing = 0 duration = 126244000 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
+COPY ~might_and_guile/feats/d5_wf21b.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf21b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfb2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfb2.spl~ ~override/d5uwb2.spl~	//			disarming posture
 	SAY NAME1 @20343
 	SAY UNIDENTIFIED_DESC @20344
-	WRITE_ASCII 0x3a ~d5_wfb2~
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfb2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb2~ END
-COPY ~might_and_guile/feats/d5_wf22.spl~ ~override~ 
-	SAY NAME1 @20343
-	SAY UNIDENTIFIED_DESC @20344
-	WRITE_ASCII 0x3a ~d5_wfb2~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb2~ END
-COPY ~might_and_guile/feats/d5_wf22.eff~ ~override~
-COPY ~might_and_guile/feats/d5_wf22b.spl~ ~override~
-CREATE EFF ~d5_wf22y~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf22~ END
+COPY_EXISTING  ~d5uwb2.spl~ ~override/d5vwb2.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF22~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf22~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF22~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF22Y~ #8
-COPY_EXISTING  ~d5uwb2.spl~ ~override/d5vwb2.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF22~ #8
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf22.spl~
+	SAY NAME1 @20343
+	SAY UNIDENTIFIED_DESC @20344
+	WRITE_ASCII 0x3a ~d5_wfb2~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb2~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126244000 STR_VAR resource = ~D5_WF22b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 82 timing = 0 duration = 126244000 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
+COPY ~might_and_guile/feats/d5_wf22b.eff~ ~override~
+COPY ~might_and_guile/feats/d5_wf22b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfb3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfb3.spl~ ~override/d5uwb3.spl~	//			parry slashing
-	SAY NAME1 @20347
-	SAY UNIDENTIFIED_DESC @20347
-	WRITE_ASCII 0x3a ~d5_wfb3~
+	SAY NAME1 @20345
+	SAY UNIDENTIFIED_DESC @20346
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfb3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb3~ END
-COPY ~might_and_guile/feats/d5_wf23.spl~ ~override~
-	SAY NAME1 @20347
-	SAY UNIDENTIFIED_DESC @20347
-	WRITE_ASCII 0x3a ~d5_wfb3~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb3~ END
-CREATE EFF ~d5_wf23y~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf23~ END
+COPY_EXISTING  ~d5uwb3.spl~ ~override/d5vwb3.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF23~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf23~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF23~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF23Y~ #8
-COPY_EXISTING  ~d5uwb3.spl~ ~override/d5vwb3.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF23~ #8
+COPY ~might_and_guile/feats/d5_wf23.spl~ ~override~
+	SAY NAME1 @20345
+	SAY UNIDENTIFIED_DESC @20346
+	WRITE_ASCII 0x3a ~d5_wfb3~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb3~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 
 COPY ~might_and_guile/feats/d5_wfb4.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfb4.spl~ ~override/d5uwb4.spl~	//			parry piercing
-	SAY NAME1 @20348
+	SAY NAME1 @20347
 	SAY UNIDENTIFIED_DESC @20348
-	WRITE_ASCII 0x3a ~d5_wfb4~
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfb4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb4~ END
-COPY ~might_and_guile/feats/d5_wf24.spl~ ~override~
-	SAY NAME1 @20348
-	SAY UNIDENTIFIED_DESC @20348
-	WRITE_ASCII 0x3a ~d5_wfb4~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb4~ END
-CREATE EFF ~d5_wf24y~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf24~ END
+COPY_EXISTING  ~d5uwb4.spl~ ~override/d5vwb4.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF24~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf24~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF24~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF24Y~ #8
-COPY_EXISTING  ~d5uwb4.spl~ ~override/d5vwb4.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF24~ #8
+COPY ~might_and_guile/feats/d5_wf24.spl~ ~override~
+	SAY NAME1 @20347
+	SAY UNIDENTIFIED_DESC @20348
+	WRITE_ASCII 0x3a ~d5_wfb4~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb4~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 
 COPY ~might_and_guile/feats/d5_wfb5.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override/d5uwb5.spl~	//			parry blunt
+COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override/d5uwb5.spl~	//			parry crushing
 	SAY NAME1 @20349
-	SAY UNIDENTIFIED_DESC @20349
-	WRITE_ASCII 0x3a ~d5_wfb5~
+	SAY UNIDENTIFIED_DESC @20350
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfb5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb5~ END
-COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~
-	SAY NAME1 @20349
-	SAY UNIDENTIFIED_DESC @20349
-	WRITE_ASCII 0x3a ~d5_wfb5~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb5~ END
-CREATE EFF ~d5_wf25y~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25N~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_wf25~ END
+COPY_EXISTING  ~d5uwb5.spl~ ~override/d5vwb5.spl~ 
+	WRITE_SHORT 0x1c 1
+CREATE EFF ~D5_WF25~
 	WRITE_LONG 0x10 171
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x24 9
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5_wf25~ #8
+	WRITE_EVALUATED_ASCII 0x30 ~D5_WF25~ #8
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5_WF25Y~ #8
-COPY_EXISTING  ~d5uwb5.spl~ ~override/d5vwb5.spl~ 
+	WRITE_EVALUATED_ASCII 0x94 ~D5_WF25~ #8
+COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~
+	SAY NAME1 @20349
+	SAY UNIDENTIFIED_DESC @20350
+	WRITE_ASCII 0x3a ~d5_wfb5~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfb5~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
 
 // misc warrior
 
+LAM d5_quickstride_speed
 COPY ~might_and_guile/feats/d5_wfc1.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfc1.spl~ ~override/d5uwc1.spl~   // 			quickstride
-	SAY NAME1 @2210
+	SAY NAME1 @2450
+	SAY UNIDENTIFIED_DESC @20110
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
+	WRITE_ASCII 0x3a ~d5_wfc1~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1~ END
+COPY ~might_and_guile/misc/d5strid.spl~ ~override/d5_wf31.spl~
+	SAY NAME1 @2450
 	SAY UNIDENTIFIED_DESC @20110
 	WRITE_ASCII 0x3a ~d5_wfc1~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1~ END
-COPY ~might_and_guile/misc/d5_stri4ee.spl~ ~override/d5_wf31.spl~
-	SAY NAME1 @2210
-	SAY UNIDENTIFIED_DESC @20110
-	WRITE_ASCII 0x3a ~d5_wfc1~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 176 parameter1 = %d5_quickstride_bonus% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5_rwlk~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5_wf31~ END
-COPY ~might_and_guile/misc/d5_walk4ee.spl~ ~override/d5_rwlk.spl~
-	SAY NAME1 @2211
-	SAY UNIDENTIFIED_DESC @2211
+COPY ~might_and_guile/misc/d5swalk.spl~ ~override/d5_rwlk.spl~
+	SAY NAME1 @2451
+	SAY UNIDENTIFIED_DESC @2451
 	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_wf31~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5_wf31~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5_rwlk~ END
 COPY_EXISTING  ~d5uwc1.spl~ ~override/d5vwc1.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_wfc2.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfc2.spl~ ~override/d5uwc2.spl~   // 			+5 hp
 	SAY NAME1 @20305
 	SAY UNIDENTIFIED_DESC @20306
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_wfc2~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 duration = 0 STR_VAR resource = ~d5_wfc2a~ END
@@ -1746,14 +2264,22 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wfc2b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 duration = 0 STR_VAR resource = ~d5vwc2~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_wfc2b~ END
 COPY_EXISTING  ~d5uwc2.spl~ ~override/d5vwc2.spl~ 
+	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_wfc3.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfc3.spl~ ~override/d5uwc3.spl~   // 			10% DR
 	SAY NAME1 @20307
 	SAY UNIDENTIFIED_DESC @20308
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_wfc3~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc3~ END
 COPY_EXISTING  ~d5uwc3.spl~ ~override/d5vwc3.spl~ 
+	WRITE_SHORT 0x1c 1
 
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_POISONEVADE~ RET new_state_ind END
 OUTER_SET poison_evasion_state = %new_state_ind%
@@ -1761,10 +2287,17 @@ COPY ~might_and_guile/feats/d5_wfc5.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfc5.spl~ ~override/d5uwc5.spl~   // 			poison/disease evasion
 	SAY NAME1 @20309
 	SAY UNIDENTIFIED_DESC @20310
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_wfc5~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc5~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %poison_evasion_state% END
 COPY_EXISTING  ~d5uwc5.spl~ ~override/d5vwc5.spl~ 
+	WRITE_SHORT 0x1c 1
 <<<<<<<< d5/d5poisev.2da
 2DA V1.0 
 RES
@@ -1854,10 +2387,17 @@ COPY ~might_and_guile/feats/d5_wfc6.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfc6.spl~ ~override/d5uwc6.spl~   // 			stun evasion
 	SAY NAME1 @20219
 	SAY UNIDENTIFIED_DESC @20220
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 1
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 1
+	END
 	WRITE_ASCII 0x3a ~d5_wfc6~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc6~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %stun_evasion_state% END
 COPY_EXISTING  ~d5uwc6.spl~ ~override/d5vwc6.spl~ 
+	WRITE_SHORT 0x1c 1
 <<<<<<<< d5/d5stunev.2da
 2DA V1.0 
 RES
@@ -1937,7 +2477,12 @@ END
 //
 COPY ~might_and_guile/feats/d5flstf.2da~ ~override~ 
 
-COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~
+ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+  COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+  COPY ~might_and_guile/feats/d5ftskn_iwd.2da~ ~override/d5ftskn.2da~
+END
 
 INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
 
@@ -1946,79 +2491,7 @@ OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
 OUTER_SPRINT feat_title_string @20012 
 OUTER_SPRINT feat_label_string @20013 
 
-COPY_EXISTING ~d5flstf.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (row = 1; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols ~book_feat~
-	SNPRINT 3 book_feat_prefix ~%book_feat%~
-	PATCH_IF (~%book_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][WwRr][Ff][AaBbCc][0-9]~ = 0) BEGIN
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		COPY_EXISTING ~%book_feat%.spl~ ~override~
-		  WRITE_LONG 0x34 1
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-		  LPF DELETE_EFFECT END
-		IF_EXISTS
-	  END
-	END
-	PATCH_IF (~%book_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Rr][Ff][DdEeFfGgHh][0-9]~ = 0) BEGIN
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		COPY_EXISTING ~%book_feat%.spl~ ~override~
-		  WRITE_LONG 0x34 2
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-		  LPF DELETE_EFFECT END
-		IF_EXISTS
-	  END
-	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Cc][Ss][AaBbCcDdEeFfGgHhIiJj]~ = 0) BEGIN
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		COPY_EXISTING ~%book_feat%.spl~ ~override~
-		  WRITE_LONG 0x34 3
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-		  LPF DELETE_EFFECT END
-		IF_EXISTS
-	  END
-	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Bb][Dd][0-6][0-9]~ = 0) BEGIN
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		COPY_EXISTING ~%book_feat%.spl~ ~override~
-		  WRITE_LONG 0x34 3
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-		  LPF DELETE_EFFECT END
-		IF_EXISTS
-	  END
-	END
-  END
-BUT_ONLY
-
+/*
 ACTION_FOR_EACH high_level_feat IN 
 	~d5urb3~ 
 	~d5vrb3~ 
@@ -2046,95 +2519,28 @@ ACTION_FOR_EACH high_level_feat IN
 	WRITE_LONG 0x34 4
   IF_EXISTS BUT_ONLY
 END
+*/
 
 COPY_EXISTING ~d5flstf.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
-/*
-  FOR (row = 1; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols spellbook_feat
-	SNPRINT 3 book_feat_prefix ~%spellbook_feat%~
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][WwRr][Ff][AaBbCcHh][0-9]~ = 0) BEGIN
-	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
-		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5_~
-	  END
-	  PATCH_IF FILE_EXISTS_IN_GAME ~%learn_spell%.spl~ BEGIN
-	   INNER_ACTION BEGIN
-		COPY_EXISTING ~%learn_spell%.spl~ ~override/%spellbook_feat%.spl~
-		  WRITE_LONG 0x34 1
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-	   END
-	  END
-	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Rr][Ff][DdEeFfGg][0-9]~ = 0) BEGIN
-	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
-		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5_~
-	  END
-	  PATCH_IF FILE_EXISTS_IN_GAME ~%learn_spell%.spl~ BEGIN
-	   INNER_ACTION BEGIN
-		COPY_EXISTING ~%learn_spell%.spl~ ~override/%spellbook_feat%.spl~
-		  WRITE_LONG 0x34 2
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-	   END
-	  END
-	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Bb][Dd][0-6][0-9]~ = 0) BEGIN
-	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
-		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5~
-	  END
-	  PATCH_IF FILE_EXISTS_IN_GAME ~%learn_spell%.spl~ BEGIN
-	   INNER_ACTION BEGIN
-		COPY_EXISTING ~%learn_spell%.spl~ ~override/%spellbook_feat%.spl~
-		  WRITE_LONG 0x34 3
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-	   END
-	  END
-	END
-	PATCH_IF (~%spellbook_feat%~ STRING_MATCHES_REGEXP ~[Dd]5[UuVv][Cc][Ss][AaBbCcDdEeFfGgHhIiJj]~ = 0) BEGIN
-	  INNER_PATCH_SAVE learn_spell ~%spellbook_feat%~ BEGIN
-		REPLACE_TEXTUALLY ~[Dd]5[UuVv]~ ~d5_a~
-	  END
-	  PATCH_IF FILE_EXISTS_IN_GAME ~%learn_spell%.spl~ BEGIN
-	   INNER_ACTION BEGIN
-		COPY_EXISTING ~%learn_spell%.spl~ ~override/%spellbook_feat%.spl~
-		  WRITE_LONG 0x34 3
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5u~) BEGIN
-			WRITE_SHORT 0x1c 2
-		  END
-		  PATCH_IF (~%book_feat_prefix%~ STRING_EQUAL_CASE ~d5v~) BEGIN
-			WRITE_SHORT 0x1c 1
-		  END
-	   END
-	  END
-	END
-  END
-*/
   FOR (col = 1; col < (cols - 1); ++col) BEGIN
 	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
 	INNER_ACTION BEGIN
 	  COPY_EXISTING ~kitlist.2da~ ~override~
 		READ_2DA_ENTRIES_NOW rows 9
 		FOR (row = 1; row < rows; ++row) BEGIN
-	      READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
-	      READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
-	      READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
-	      READ_2DA_ENTRY_FORMER rows row 9 kitids_num
-	      PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
+		  READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
+		  READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
+		  READ_2DA_ENTRY_FORMER rows row 8 kitlist_class
+		  READ_2DA_ENTRY_FORMER rows row 9 kitids_num
+		  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) BEGIN
+			PATCH_IF (%kitlist_class% = 3) OR (%kitlist_class% = 6) OR (%kitlist_class% = 8) OR (%kitlist_class% = 11) OR (%kitlist_class% = 12) OR (%kitlist_class% = 15) OR (%kitlist_class% = 16) OR (%kitlist_class% = 18) BEGIN
+			  SET feat_spell_class = 1
+			END ELSE BEGIN
+			  SET feat_spell_class = 2
+			END
 	        SPRINT $feat_kit_list(~%kitlist_index%~)~%kitids_num%~
 			GET_STRREF %kitlist_name% kit_name_strref
 //			SPRINT feat_select_string /* @___ */ ~Feat Selection~
@@ -2150,7 +2556,7 @@ COPY_EXISTING ~d5flstf.2da~ ~override~
 				tip = %kit_seq_tip%
 				desc = RESOLVE_STR_REF (~blah~) 
 				column = %col% 
-				class = 2
+				class = %feat_spell_class%
 			   STR_VAR 
 				resref = EVAL ~d5ft%kit_seq_index%~
 				icon = ~spcl919b~
@@ -2260,6 +2666,21 @@ LAF CREATE_SEQUENCER_MENU
 	title = EVAL ~%feat_title_string%~
 	label = EVAL ~%feat_label_string%~
 END
+
+COPY_EXISTING ~d5flstf.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 0; row < rows; ++row) BEGIN
+  	READ_2DA_ENTRY row 0 cols ~book_feat~
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		WRITE_SHORT 0x1c 4
+		WRITE_LONG 0x34 1
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+	  IF_EXISTS BUT_ONLY
+	END
+  END
+BUT_ONLY
 
 //__________________________________________________________________________________
 
@@ -2399,6 +2820,7 @@ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %ids% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%ind%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0x4000 parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5feattc~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 2 parameter2 = 5 timing = 9 STR_VAR resource = ~d5urfe7~ END
 //	LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5_feat~ END
 END
 
@@ -2442,8 +2864,9 @@ COPY ~might_and_guile/feats/d5ifeat.spl~ ~override~
   PATCH_FOR_EACH letter IN ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5_feat%letter%~ END
   END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5tactno~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5tactnd~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf11n~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf12n~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf13n~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf21n~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf22n~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5_wf23n~ END
@@ -2515,9 +2938,9 @@ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
 	  WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
 	BUT_ONLY
 	COPY_EXISTING ~d5mcft1.spl~ ~override/d5mcft%num%.spl~
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 318 STR_VAR resource = ~d5mcft%num%~ END
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5mcft%num%~ END
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 318 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~d5mcft%num%~ END
 	BUT_ONLY
   END
 END
@@ -2846,7 +3269,6 @@ ACTION_PHP_EACH NON_JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 	END
   BUT_ONLY
 END
-
 
 /*
 //Generate arrays with non-joinable NPC cre files

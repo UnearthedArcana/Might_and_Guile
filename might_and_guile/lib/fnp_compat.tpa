@@ -444,6 +444,14 @@ DEFINE_ACTION_MACRO apply_fnp_spheres BEGIN
 			  SET string_length = (STRING_LENGTH ~%ability%~) - 3
 			  LPF SUBSTRING INT_VAR start = 3 length = EVAL %string_length% STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
 			  INNER_ACTION BEGIN 
+				ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_AP.eff~) BEGIN
+				  CREATE EFF ~QD_MC_AP~ 
+					WRITE_LONG   0x10 146 //cast spell
+					WRITE_LONG   0x14 2   //preset target 
+					WRITE_LONG   0x20 1   //cast instantly (ignore level) 
+					WRITE_SHORT  0x24 1   //permament until death
+					WRITE_SHORT  0x2c 100 //probability 100% 
+				END
 				COPY_EXISTING ~QD_MC_AP.eff~ ~override/%abil_new%#.eff~
 				  WRITE_EVALUATED_ASCII 0x30 ~%abil_new%~
 				  SET col_length = STRING_LENGTH ~%col%~

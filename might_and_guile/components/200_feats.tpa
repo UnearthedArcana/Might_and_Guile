@@ -1656,7 +1656,7 @@ COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5urh4.spl~   //           UM
 	END
 	WRITE_ASCII 0x3a ~d5_rfh4~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_numd~ END
+//	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_numd~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
 COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
 	WRITE_SHORT 0x1c 1
@@ -1776,19 +1776,6 @@ THEN
  
 //	end use scrolls/wands
 
-COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows cols  
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_134_FEATS~ BEGIN
-	    SET 134_tactics = %row%
-	  END
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_134_NFEATS~ BEGIN
-	    SET 134_ntactics = %row%
-	  END
-	END
-BUT_ONLY
 
 // warrior feats______________________________________________________________________
 //

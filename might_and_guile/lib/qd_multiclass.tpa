@@ -3,7 +3,7 @@
 // For adding existing kits to the multiclass kit selection during chargen.
 // For use with the Enhanced Infinity Engine v2.0 and later. 
 // Author: Aquadrizzt
-// Version: 0.5
+// Version: 0.6
 // Published: November 26, 2017 
 //---------------------------------------------
 
@@ -295,6 +295,7 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 		  ACTION_FOR_EACH class IN ~D~ ~F~ ~M~ ~P~ ~R~ ~T~ BEGIN
 			ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC%class%0%num%.spl~) BEGIN 
 			  COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MC%class%0%num%.spl~
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~QD_MC%class%0%num%~ END
 			END
 		  END
 		END
@@ -302,6 +303,7 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 		  ACTION_FOR_EACH class IN ~D~ ~F~ ~M~ ~P~ ~R~ ~T~ BEGIN
 			ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC%class%%num%.spl~) BEGIN 
 			  COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MC%class%%num%.spl~
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~QD_MC%class%%num%~ END
 			END
 		  END
 		END
@@ -333,11 +335,11 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 										SET col_length = STRING_LENGTH ~%col%~
 									ACTION_IF (%col_length% = 1) BEGIN 
 										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 									ACTION_IF (%col_length% = 2) BEGIN
 										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 								END 
 							END
@@ -351,11 +353,11 @@ DEFINE_ACTION_FUNCTION qd_multiclass
 										SET col_length = STRING_LENGTH ~%col%~
 									ACTION_IF (%col_length% = 1) BEGIN 
 										COPY_EXISTING ~override/QD_MC%base_class%0%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 									ACTION_IF (%col_length% = 2) BEGIN
 										COPY_EXISTING ~override/QD_MC%base_class%%col%.spl~ ~override~ 
-											LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+											LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL (~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 									END 
 								END 
 							END

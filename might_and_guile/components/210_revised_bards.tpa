@@ -4682,7 +4682,7 @@ SPLRES
 //	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%learn_spell%.spl~ BEGIN
 		COPY ~might_and_guile/misc/d5_base.spl~ ~override/%learn_spell%.spl~
 	  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
+//		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
 //	  END
 // add 172 to d5csplz
 	  COPY_EXISTING ~d5csplz.spl~ ~override~

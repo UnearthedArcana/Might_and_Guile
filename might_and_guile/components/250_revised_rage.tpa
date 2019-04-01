@@ -11,34 +11,26 @@
 // 
 ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2505)
 	  END
 	END
   BUT_ONLY
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
   COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
-	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2505)
 	  END
 	END
   BUT_ONLY
@@ -53,10 +45,6 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
 	  END
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2505)
-	  END
 	END
   BUT_ONLY
 END
@@ -64,29 +52,15 @@ END
 ACTION_IF ENGINE_IS ~tob~ BEGIN
 	STRING_SET 24284 @2502
 	STRING_SET 25201 @2503
-	STRING_SET 45869 @2505
 END
 
 ACTION_IF GAME_IS ~bgee~ THEN BEGIN
 	STRING_SET 32235 @2504
-	STRING_SET 32234 @2506
-END
-
-ACTION_IF ENGINE_IS ~bg2ee eet~ THEN BEGIN
-	STRING_SET 100362 @2506
-END
-
-ACTION_IF ENGINE_IS ~iwdee~ THEN BEGIN
-	STRING_SET 35995 @2506
 END
 
 COPY ~might_and_guile/fighter/d5_barbr.spl~ ~override/spcl321.spl~
 	SAY NAME1 @2508
 	SAY UNIDENTIFIED_DESC @2504
-
-COPY ~might_and_guile/fighter/d5_barbr.spl~ ~override/spcl152.spl~
-	SAY NAME1 @2507
-	SAY UNIDENTIFIED_DESC @2506
 //________________________________________________________________________________
 
 
@@ -101,7 +75,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	END
 */
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_profs.d5~) THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
 		SET_2DA_ENTRY 3 30 1 ~3~ // Berserker
 		SET_2DA_ENTRY 4 30 1 ~3~
@@ -130,6 +104,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 		SET_2DA_ENTRY 32 30 1 ~0~
 		SET_2DA_ENTRY 33 30 1 ~0~
 		SET_2DA_ENTRY 34 30 1 ~3~
+/*
 		SET_2DA_ENTRY 3 31 1 ~3~ // WS
 		SET_2DA_ENTRY 4 31 1 ~3~
 		SET_2DA_ENTRY 5 31 1 ~3~
@@ -269,6 +244,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 		SET_2DA_ENTRY 24 20 1 ~3~
 		SET_2DA_ENTRY 25 20 1 ~3~
 		SET_2DA_ENTRY 30 20 1 ~3~
+*/
 		BUT_ONLY
 	END
 //_____________________________________________________________________________

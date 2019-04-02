@@ -45,8 +45,8 @@ COPY ~might_and_guile/feats/d5_rfe8b.bam~ ~override~
 COPY ~might_and_guile/misc/d5swash.spl~ ~override~				//	swashbuckling ability
 	SAY NAME1 @3112
 	SAY UNIDENTIFIED_DESC @3113
-	WRITE_ASCII 0x3a ~d5_rfe8~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe8~ END
+	WRITE_ASCII 0x3a ~d5_rfe8b~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe8b~ END
 COPY ~might_and_guile/misc/d5swshb.eff~ ~override~
 COPY ~might_and_guile/misc/d5swshc.spl~ ~override~
 COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
@@ -1628,7 +1628,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
 
 //bard inspirations___________________________________________________________________
 //
-COPY ~might_and_guile/nubards/d5_bd01.bam~ ~override~			//		song icon
+COPY ~might_and_guile/nubards/d5_bd01b.bam~ ~override~			//		song icon
 COPY ~might_and_guile/nubards/d5bd01a.spl~ ~override~			//		luck inspiration
 	SAY NAME1 @21011
 	SAY UNIDENTIFIED_DESC @21012
@@ -1668,7 +1668,7 @@ CREATE EFF ~d5bd01y~											// 		give song
 COPY_EXISTING ~d5ub01.spl~ ~override/d5vb01.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd02.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd02b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd02a.spl~ ~override~			//		courage inspiration
 	SAY NAME1 @21021
 	SAY UNIDENTIFIED_DESC @21022
@@ -1708,7 +1708,7 @@ CREATE EFF ~d5bd02y~
 COPY_EXISTING ~d5ub02.spl~ ~override/d5vb02.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd03.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd03b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd03a.spl~ ~override~			//		power inspiration
 	SAY NAME1 @21031
 	SAY UNIDENTIFIED_DESC @21032
@@ -1748,7 +1748,7 @@ CREATE EFF ~d5bd03y~
 COPY_EXISTING ~d5ub03.spl~ ~override/d5vb03.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd05.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd05b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd05a.spl~ ~override~			//		RI inspiration
 	SAY NAME1 @21051
 	SAY UNIDENTIFIED_DESC @21052
@@ -1788,7 +1788,7 @@ CREATE EFF ~d5bd05y~
 COPY_EXISTING ~d5ub05.spl~ ~override/d5vb05.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd06.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd06b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd06a.spl~ ~override~			//		bless inspiration
 	SAY NAME1 @21061
 	SAY UNIDENTIFIED_DESC @21062
@@ -1828,7 +1828,7 @@ CREATE EFF ~d5bd06y~
 COPY_EXISTING ~d5ub06.spl~ ~override/d5vb06.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd07.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd07b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd07a.spl~ ~override~			//		NPP inspiration
 	SAY NAME1 @21071
 	SAY UNIDENTIFIED_DESC @21072
@@ -1868,7 +1868,7 @@ CREATE EFF ~d5bd07y~
 COPY_EXISTING ~d5ub07.spl~ ~override/d5vb07.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd08.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd08b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd08a.spl~ ~override~			//		mind shield inspiration
 	SAY NAME1 @21081
 	SAY UNIDENTIFIED_DESC @21082
@@ -1908,7 +1908,7 @@ CREATE EFF ~d5bd08y~
 COPY_EXISTING ~d5ub08.spl~ ~override/d5vb08.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd09.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd09b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd09a.spl~ ~override~			//		death ward inspiration
 	SAY NAME1 @21091
 	SAY UNIDENTIFIED_DESC @21092
@@ -1948,7 +1948,7 @@ CREATE EFF ~d5bd09y~
 COPY_EXISTING ~d5ub09.spl~ ~override/d5vb09.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd20.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd20b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference emanation
 	SAY NAME1 @21201
 	SAY UNIDENTIFIED_DESC @21202
@@ -1988,7 +1988,7 @@ CREATE EFF ~d5bd20y~
 COPY_EXISTING ~d5ub20.spl~ ~override/d5vb20.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd21.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd21b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd21a.spl~ ~override~			//		combat penalties emanation
 	SAY NAME1 @21211
 	SAY UNIDENTIFIED_DESC @21212
@@ -2028,7 +2028,7 @@ CREATE EFF ~d5bd21y~
 COPY_EXISTING ~d5ub21.spl~ ~override/d5vb21.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd22.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd22b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emanation
 	SAY NAME1 @21221
 	SAY UNIDENTIFIED_DESC @21222
@@ -2068,7 +2068,7 @@ CREATE EFF ~d5bd22y~
 COPY_EXISTING ~d5ub22.spl~ ~override/d5vb22.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd23.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd23b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd23a.spl~ ~override~			//		confusion emanation
 	SAY NAME1 @21231
 	SAY UNIDENTIFIED_DESC @21232
@@ -2108,7 +2108,7 @@ CREATE EFF ~d5bd23y~
 COPY_EXISTING ~d5ub23.spl~ ~override/d5vb23.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd24.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd24b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd24a.spl~ ~override~			//		hold undead emanation
 	SAY NAME1 @21241
 	SAY UNIDENTIFIED_DESC @21242
@@ -2148,7 +2148,7 @@ CREATE EFF ~d5bd24y~
 COPY_EXISTING ~d5ub24.spl~ ~override/d5vb24.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd25.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd25b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd25a.spl~ ~override~			//		entangle emanation
 	SAY NAME1 @21251
 	SAY UNIDENTIFIED_DESC @21252
@@ -2188,7 +2188,7 @@ CREATE EFF ~d5bd25y~
 COPY_EXISTING ~d5ub25.spl~ ~override/d5vb25.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd41.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd41b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd41a.spl~ ~override~			//		blur aura
 	SAY NAME1 @21411
 	SAY UNIDENTIFIED_DESC @21412
@@ -2229,7 +2229,7 @@ CREATE EFF ~d5bd41y~
 COPY_EXISTING ~d5ub41.spl~ ~override/d5vb41.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd42.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd42b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd42a.spl~ ~override~			//		mind blank aura
 	SAY NAME1 @21421
 	SAY UNIDENTIFIED_DESC @21422
@@ -2269,7 +2269,7 @@ CREATE EFF ~d5bd42y~
 COPY_EXISTING ~d5ub42.spl~ ~override/d5vb42.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd43.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd43b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd43a.spl~ ~override~			//		MGOI aura
 	SAY NAME1 @21431
 	SAY UNIDENTIFIED_DESC @21432
@@ -2309,7 +2309,7 @@ CREATE EFF ~d5bd43y~
 COPY_EXISTING ~d5ub43.spl~ ~override/d5vb43.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd46.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd46b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd46a.spl~ ~override~			//		fear aura
 	SAY NAME1 @21461
 	SAY UNIDENTIFIED_DESC @21462
@@ -2349,7 +2349,7 @@ CREATE EFF ~d5bd46y~
 COPY_EXISTING ~d5ub46.spl~ ~override/d5vb46.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd47.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd47b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd47a.spl~ ~override~			//		slow aura
 	SAY NAME1 @21471
 	SAY UNIDENTIFIED_DESC @21472
@@ -2389,7 +2389,7 @@ CREATE EFF ~d5bd47y~
 COPY_EXISTING ~d5ub47.spl~ ~override/d5vb47.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd48.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd48b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd48a.spl~ ~override~			//		dispel illusions aura
 	SAY NAME1 @21481
 	SAY UNIDENTIFIED_DESC @21482
@@ -2429,7 +2429,7 @@ CREATE EFF ~d5bd48y~
 COPY_EXISTING ~d5ub48.spl~ ~override/d5vb48.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd49.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd49b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd49a.spl~ ~override~			//		hex aura
 	SAY NAME1 @21491
 	SAY UNIDENTIFIED_DESC @21492
@@ -2471,7 +2471,7 @@ CREATE EFF ~d5bd49y~
 COPY_EXISTING ~d5ub49.spl~ ~override/d5vb49.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd51.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd51b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd51a.spl~ ~override~			//		bladesong
 	SAY NAME1 @21511
 	SAY UNIDENTIFIED_DESC @21512
@@ -2512,7 +2512,7 @@ CREATE EFF ~d5bd51y~
 COPY_EXISTING ~d5ub51.spl~ ~override/d5vb51.spl~
 	WRITE_SHORT 0x1c 1
 
-COPY ~might_and_guile/nubards/d5_bd61.bam~ ~override~
+COPY ~might_and_guile/nubards/d5_bd61b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd61a.spl~ ~override~			//		maze aura
 	SAY NAME1 @21611
 	SAY UNIDENTIFIED_DESC @21612
@@ -3715,9 +3715,9 @@ END
 
 //add spell slot stat checks to SPLPROT______________________________________________
 //
-APPEND ~splprot.2da~ ~D5_SLOTS_1_4%TAB%106%TAB%-1%TAB%7~
+APPEND ~splprot.2da~ ~D5_SLOTS_1_4%TAB%134%TAB%-1%TAB%7~
   UNLESS ~D5_SLOTS_1_4~
-APPEND ~splprot.2da~ ~D5_SLOTS_5_9%TAB%107%TAB%-1%TAB%7~
+APPEND ~splprot.2da~ ~D5_SLOTS_5_9%TAB%108%TAB%-1%TAB%7~
   UNLESS ~D5_SLOTS_5_9~
 APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~
   UNLESS ~D5_FATIGUE_0~
@@ -3855,72 +3855,72 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsplz.spl~
 
 //assign stats for spell slots to each spell level____________________________________
 //
-// level 1 = (106 << 16)
-// level 2 = (106 << 20)
-// level 3 = (106 << 24)
-// level 4 = (106 << 28)
-// level 5 = (107 << 8)
-// level 6 = (107 << 12)
-// level 7 = (107 << 16)
-// [ level 8 = (107 << 20) ]
-// [ level 9 = (107 << 24) ]
+// level 1 = (134 << 8)
+// level 2 = (134 << 12)
+// level 3 = (134 << 16)
+// level 4 = (134 << 20)
+// level 5 = (108 << 8)
+// level 6 = (108 << 12)
+// level 7 = (108 << 16)
+// [ level 8 = (108 << 20) ]
+// [ level 9 = (108 << 24) ]
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1.spl~ BEGIN
   COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (106 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (106 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (106 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (106 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (107 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (107 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (107 + (0x10000 * 1)) timing = 9 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 END
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-1.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-1.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (106 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-2.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-2.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (106 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-3.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-3.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (106 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-4.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-4.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (106 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-5.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-5.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (107 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-6.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-6.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (107 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-7.spl~ BEGIN
  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-7.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (107 + (0x10000 * 1)) timing = 1 END
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 
 
@@ -4402,6 +4402,79 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bcast.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd144~ END
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+
+
+//stat-based bonus spells_____________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
+
+  COPY_EXISTING ~d5slot1.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_blade_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_jester_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_skald_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_gallant_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_herald_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_meister_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_jinxer_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_agent_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_hexblade_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+  IF_EXISTS BUT_ONLY
+
+  APPEND ~d5nubard.2da~  ~STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC5   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+~
+
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_mcsrc.qd~) BEGIN
+  COPY_EXISTING ~d5chrsl.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsm.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsn.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrso.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsp.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsq.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsr.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrss.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrst.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsu.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsv.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsw.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsx.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~d5chrsy.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+ END
+
+END
+//____________________________________________________________________________________
 
 
 //append nubard.2da to clab tables____________________________________________________
@@ -4904,6 +4977,28 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bccst.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bccst~ END
 
 APPEND ~d5clbard.2da~ ~BARD_INIT   AP_D5BDC00  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+
+
+//stat-based bonus spells_____________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
+
+  COPY_EXISTING ~d5slot1.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %nu_loresinger_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5slots~ END
+  IF_EXISTS BUT_ONLY
+
+  APPEND ~d5clbard.2da~  ~STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC5   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+~
+END
+
 
 //append d5clbard.2da to clab table(s)________________________________________________
 //
@@ -6371,8 +6466,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src1e~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 16)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (1 << 8)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6380,8 +6475,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src2e~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 20)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (1 << 12)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6389,8 +6484,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src3e~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 24)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (1 << 16)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6398,8 +6493,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src4e~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 28)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (1 << 20)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6408,7 +6503,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (1 << 8)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6417,7 +6512,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (1 << 12)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6426,7 +6521,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (1 << 16)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6435,7 +6530,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (1 << 20)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6444,7 +6539,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (1 << 24)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6452,8 +6547,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src1f~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 16)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (2 << 8)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6461,8 +6556,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src2f~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 20)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (2 << 12)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6470,8 +6565,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src3f~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 24)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (2 << 16)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6479,8 +6574,8 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   CREATE EFF ~d5src4f~
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 28)
-	WRITE_LONG 0x20 (106 + (0x10000 * 1))
+	WRITE_LONG 0x1c (2 << 20)
+	WRITE_LONG 0x20 (134 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6489,7 +6584,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (2 << 8)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6498,7 +6593,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (2 << 12)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6507,7 +6602,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (2 << 16)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6516,7 +6611,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (2 << 20)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6525,7 +6620,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_LONG 0x10 233
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c (2 << 24)
-	WRITE_LONG 0x20 (107 + (0x10000 * 1))
+	WRITE_LONG 0x20 (108 + (0x10000 * 1))
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
@@ -6870,7 +6965,6 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
  END
 
 END // end if not already done
-// ***** need to update other versions (TnB) to match this
 //___________________________________________________________________________________
 
 

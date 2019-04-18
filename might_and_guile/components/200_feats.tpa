@@ -1465,7 +1465,7 @@ COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   // 			fighting 
 	END
 	WRITE_ASCII 0x3a ~d5_rfg5b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg5b~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (1 << 24) END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (4 << 24) END
 COPY_EXISTING  ~d5urg5.spl~ ~override/d5vrg5.spl~ 
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~splprot.2da~ ~override~
@@ -1488,7 +1488,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 BUT_ONLY
 COPY ~might_and_guile/feats/d5_rf75a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_rf75a.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (1 << 24) parameter2 = %134_dirty% END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (4 << 24) parameter2 = %134_dirty% END
 COPY ~might_and_guile/feats/d5_rf75b.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75d.spl~ ~override~
 COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~

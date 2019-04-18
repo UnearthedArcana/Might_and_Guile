@@ -1,6 +1,6 @@
 
 	//	UI-based Spell Learning tool for Sorcerers/Shamans
-	//	v0.55
+	//	v0.56
 	
 	//	This function is designed to implement a UI-based Spell selection system, as an alternative to dialog-based Spell Selection, utilizing
 	//		the Sequencer/Contingency spell selection menu to learn arcane or divine spells.  Innate abilities "can" be learned this way as well,
@@ -163,7 +163,7 @@
 		if type(SequencerMenu[contingencyResRef]) == 'function' then
 			SequencerMenu[contingencyResRef]()
 		else
-			--SequencerMenu['DEFAULT']()
+			SequencerMenu['DEFAULT']()
 		end
 		return bookSpells
 	end
@@ -412,7 +412,7 @@
 		STR_VAR	resref = ~~	icon = ~~	title = ~~	action = ~~	spelltable = ~~	spelllist = ~~	attribute = ~~	attrtable = ~~	custom = ~~	subspell = ~L~	blacklist = ~~
 	BEGIN
 		OUTER_SPRINT $ EVAL ~%blacklist%~(~-1~) ~DEFAULT~
-		PRINT ~Running CREATE_SEQUENCER_MENU version#: 0.55~
+		PRINT ~Running CREATE_SEQUENCER_MENU version#: 0.%version%~
 		ACTION_TO_UPPER resref	ACTION_TO_UPPER spelltable	ACTION_TO_UPPER spelllist	ACTION_TO_UPPER attribute	ACTION_TO_UPPER attrtable	ACTION_TO_UPPER subspell
 		LAF	SETUP_SEQUENCER_MENU	END
 		ACTION_IF	! (~%custom%~ STRING_EQUAL ~~)	BEGIN
@@ -579,7 +579,6 @@
 								END
 							END
 							ACTION_IF	FILE_EXISTS_IN_GAME	~%spell_res%.spl~	BEGIN
-							  ACTION_IF	!FILE_EXISTS_IN_GAME	~%spell_res%%postfix%.spl~	BEGIN
 								COPY_EXISTING	~%spell_res%.spl~	~override\%spell_res%%postfix%.spl~
 									PATCH_IF	!FILE_EXISTS_IN_GAME	~%spell_res%%postfix%.spl~	BEGIN
 										WRITE_LONG	0x18	0	LPF	ALTER_SPELL_HEADER	INT_VAR	range = 32767	projectile = 1	END	LPF	DELETE_EFFECT	END
@@ -598,22 +597,6 @@
 										END
 									END
 								BUT_ONLY
-							  END
-							  ACTION_IF	FILE_EXISTS_IN_GAME	~%spell_res%%postfix%.spl~	BEGIN
-								COPY_EXISTING	~%spell_res%%postfix%.spl~	~override~
-									READ_LONG	0x34	level
-									PATCH_IF	level > 0 AND level <= maxlevel	BEGIN
-										INNER_ACTION	BEGIN
-											APPEND	~%resref%X.2DA~	~Default			%spell_res%	3~
-											ACTION_IF	global BEGIN
-												COPY_EXISTING	~%resref%.spl~	override	LPF	ADD_SPELL_EFFECT	INT_VAR insert_point = 0	opcode = 265	target = 1	timing = 9	STR_VAR resource = EVAL ~%spell_res%~	END
-												OUTER_SPRINT	script ~%script%%WNL%IF%WNL%NextTriggerObject(LastSummonerOf(Myself))%WNL%Global("%spell_res%","LOCALS",%global%)%WNL%THEN%WNL%RESPONSE #100
-													SetGlobal("%spell_res%","GLOBAL",%global%)%WNL%Continue()%WNL%END~
-											END
-										END
-									END
-								BUT_ONLY
-							  END
 							END
 						END
 					END

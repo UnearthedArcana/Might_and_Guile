@@ -3584,7 +3584,7 @@ OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these meistersinger spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zmstr.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5B105P~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP105~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP207~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP202~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP318~ END
@@ -4176,7 +4176,7 @@ COPY ~d5/inline_script.baf~ ~might_and_guile/temp/d5blotr.baf~
 COPY_EXISTING ~d5bclons.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_bclons~ cols
-  FOR (row = 1; row < r2en_bclons; ++row) BEGIN
+  FOR (row = 0; row < r2en_bclons; ++row) BEGIN
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 0 original_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 2 learn_spell
 	INNER_ACTION BEGIN
@@ -4257,7 +4257,7 @@ END
 COPY_EXISTING ~d5bclons.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_bclons~ cols
-  FOR (row = 1; row < r2en_bclons; ++row) BEGIN
+  FOR (row = 0; row < r2en_bclons; ++row) BEGIN
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 0 book_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 1 206_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 2 learn_spell
@@ -4315,6 +4315,8 @@ COPY_EXISTING ~d5bclons.2da~ ~override~
 //	  END
 // make .EFFs adding the innate spell
 //	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%spell_eff%.eff~ BEGIN
+	  OUTER_SET string_length = (STRING_LENGTH ~%spell_eff%~)
+	  ACTION_IF (%string_length% < 8) BEGIN
 		CREATE EFF ~%spell_eff%~
 		 WRITE_LONG 0x10 171
 		 WRITE_LONG 0x14 1
@@ -4324,6 +4326,7 @@ COPY_EXISTING ~d5bclons.2da~ ~override~
 		 WRITE_EVALUATED_ASCII 0x30 ~%innate_spell%~ #8
 		 WRITE_LONG 0x90 1
 		 WRITE_EVALUATED_ASCII 0x94 ~%spell_eff%~ #8
+	  END
 //	  END
 // make 206 spells preventing the .EFF
 //	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%206_spell%.spl~ BEGIN
@@ -4461,9 +4464,9 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bcast.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bsplz~ END
+/*
   PATCH_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
-/*
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
@@ -4475,8 +4478,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bcast.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5abspw~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5abspw~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~d5abspm~ END
-*/
   END
+*/
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 //APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D5BD144  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
@@ -4634,7 +4637,9 @@ SPLRES
   PATCH_IF spell_type = 2 BEGIN
    PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[SsDd][Pp5][PpFfMm][RrPpWwLlNnSsBb85][1-7][0-5][0-9]~ = 0) BEGIN
 	TEXT_SPRINT the_spell ~%SOURCE_RES%~
-	PATCH_IF (~%the_spell%~ STRING_MATCHES_REGEXP ~[Dd]5[PpFfMm][PpWwLlNnSsBb85][1-7][0-5][0-9]~ = 0) BEGIN
+	SET string_length = (STRING_LENGTH ~%the_spell%~)
+	PATCH_IF (%string_length% < 8) BEGIN
+	 PATCH_IF (~%the_spell%~ STRING_MATCHES_REGEXP ~[Dd]5[PpFfMm][PpWwLlNnSsBb85][1-7][0-5][0-9]~ = 0) BEGIN
 	  INNER_PATCH_SAVE spell_to_cast ~%the_spell%~ BEGIN
 		REPLACE_TEXTUALLY ~^[Dd]5[PpFfMm][Pp]~ ~sppr~
 		REPLACE_TEXTUALLY ~^[Dd]5[PpFfMm][Ww]~ ~spwi~
@@ -4645,15 +4650,16 @@ SPLRES
 		REPLACE_TEXTUALLY ~^[Dd]5[PpFfMm]8~ ~b_pr~
 		REPLACE_TEXTUALLY ~^[Dd]5[PpFfMm]5~ ~d5fnp~
 	  END
-	END ELSE BEGIN
+	 END ELSE BEGIN
 	  TEXT_SPRINT spell_to_cast ~%the_spell%~
-	END
-	TEXT_SPRINT 206_spell ~d5c6%priest_spell_ind%~
-	TEXT_SPRINT learn_spell ~D5CX%priest_spell_ind%~
-	TEXT_SPRINT spell_eff ~D5CV%priest_spell_ind%~
-	TEXT_SPRINT innate_spell ~d5c4%priest_spell_ind%~
-	INNER_ACTION BEGIN
+	 END
+	 TEXT_SPRINT 206_spell ~d5c6%priest_spell_ind%~
+	 TEXT_SPRINT learn_spell ~D5CX%priest_spell_ind%~
+	 TEXT_SPRINT spell_eff ~D5CV%priest_spell_ind%~
+	 TEXT_SPRINT innate_spell ~d5c4%priest_spell_ind%~
+	 INNER_ACTION BEGIN
 	  APPEND ~d5cclons.2da~ ~%the_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%spell_to_cast% ~
+	 END
 	END
 	SET ++priest_spell_ind
    END
@@ -4663,7 +4669,7 @@ SPLRES
  COPY_EXISTING ~d5cclons.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_bclons~ cols
-  FOR (row = 1; row < r2en_bclons; ++row) BEGIN
+  FOR (row = 0; row < r2en_bclons; ++row) BEGIN
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 0 book_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 1 206_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 2 learn_spell
@@ -4706,12 +4712,19 @@ SPLRES
 				END
 			  END
 			  ELSE BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
 			  END
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5csplz~ END
 			END
 		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-1~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-2~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-3~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-4~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-5~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-6~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5src-7~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5csplz~ END
 //	  END
 // make .EFFs adding the innate spell
 //	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%spell_eff%.eff~ BEGIN
@@ -4842,7 +4855,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5clotr.bcs~) BEGIN
  COPY_EXISTING ~d5cclons.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_bclons~ cols
-  FOR (row = 1; row < r2en_bclons; ++row) BEGIN
+  FOR (row = 0; row < r2en_bclons; ++row) BEGIN
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 0 book_spell
 	READ_2DA_ENTRY_FORMER ~r2en_bclons~ row 2 learn_spell
 	INNER_ACTION BEGIN

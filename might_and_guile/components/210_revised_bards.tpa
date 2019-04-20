@@ -938,7 +938,7 @@ ADD_KIT ~D5_LORESINGER~
 ~might_and_guile/nubards/d5_lors.2da~
 
 //RACIAL KIT AVAILABILITY___________________________________________________________
-~K_CT_H K_CT_HE K_CT_G~
+~~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -1379,7 +1379,7 @@ BUT_ONLY
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdnuse.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 7 parameter2 = 105 timing = 9 STR_VAR resource = ~d5fmnuse~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 13 parameter2 = 105 timing = 9 STR_VAR resource = ~d5mtnuse~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 15 parameter2 = 105 timing = 9 STR_VAR resource = ~d5ctnuse~ END
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 15 parameter2 = 105 timing = 9 STR_VAR resource = ~d5ctnuse~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5fmnuse.spl~
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5mtnuse.spl~
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ctnuse.spl~
@@ -1445,9 +1445,9 @@ ACTION_FOR_EACH usability_spell IN ~d5fmnuse~ ~d5mtnuse~ ~d5ctnuse~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
 END
 
-APPEND ~clabfi01.2da~ ~BARD_USE    AP_D5FMNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~clabth01.2da~ ~BARD_USE    AP_D5MTNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~clabth01.2da~ ~BARD_USE    AP_D5CTNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~clabfi01.2da~ ~BARD_USE    AP_D5BDNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~clabth01.2da~ ~BARD_USE    AP_D5BDNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//APPEND ~clabth01.2da~ ~BARD_USE    AP_D5CTNUSE ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 /* don't need to do this since only worried about multiclasses (for now?)
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -5656,6 +5656,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_agnt.2da~ BEGIN
 		base_class = ~M~
   END
 END 
+/*
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_lors.2da~ BEGIN
   LAF qd_multiclass
 	STR_VAR
@@ -5664,6 +5665,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_lors.2da~ BEGIN
 		base_class = ~P~
   END
 END 
+*/
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_blads.2da~ BEGIN
   LAF qd_multiclass
 	STR_VAR

@@ -16,62 +16,50 @@ COPY ~might_and_guile/monk/d5_mfist.d5~ ~override~
 //CHANGE MONK FISTS_________________________________________________________________
 //
 COPY ~might_and_guile/monk/mfist1.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist2.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist3.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist4.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist5.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist6.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist7.itm~ ~override~
-	SAY NAME1 @2655
-	SAY NAME2 @2655
 COPY ~might_and_guile/monk/mfist8.itm~ ~override~
+/*
 	SAY NAME1 @2655
 	SAY NAME2 @2655
+*/
 
-COPY ~might_and_guile/monk/d5mfist1.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist2.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist3.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist4.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist5.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist6.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist7.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
-COPY ~might_and_guile/monk/d5mfist8.itm~ ~override~
-	SAY NAME1 @2653
-	SAY NAME2 @2653
+COPY ~might_and_guile/monk/d5mfst.bam~ ~override~
 
-COPY ~might_and_guile/monk/d5_mfist.spl~ ~override~
+COPY ~might_and_guile/monk/d5mfst1.spl~ ~override~
+COPY ~might_and_guile/monk/d5mfst2.spl~ ~override~
+COPY ~might_and_guile/monk/d5mfst3.spl~ ~override~
+COPY ~might_and_guile/monk/d5mfst4.spl~ ~override~
+COPY ~might_and_guile/monk/d5mfst1.eff~ ~override~
+COPY ~might_and_guile/monk/d5mfst2.eff~ ~override~
+COPY ~might_and_guile/monk/d5mfst3.eff~ ~override~
+COPY ~might_and_guile/monk/d5mfst4.eff~ ~override~
+/*
 	SAY NAME1 @2653
 	SAY UNIDENTIFIED_DESC @2654
-COPY ~might_and_guile/monk/d5_nofst.spl~ ~override~
+*/
+COPY ~might_and_guile/monk/d5nfist.spl~ ~override~
 	SAY NAME1 @2655
 	SAY UNIDENTIFIED_DESC @2656
 
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+	READ_BYTE 0x31 prof
+	PATCH_IF (prof = 89) || (prof = 90) || (prof = 91) || (prof = 91) || (prof = 93) || (prof = 94) || (prof = 95) || (prof = 96) || (prof = 97) || (prof = 98) || (prof = 99) || (prof = 100) || (prof = 101) || (prof = 102) || (prof = 103) || (prof = 104) || (prof = 105) || (prof = 106) || (prof = 107) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5mfst1~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5mfst2~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5mfst3~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5mfst4~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5nfist~ END
+	END
+  END
+BUT_ONLY
+
+/*
 ACTION_FOR_EACH monk_kit IN ~clabmo01~ ~QDMONK~ ~QDMONKSS~ ~QDMONKDM~ ~QDMONKHF~ ~QDMONKSH~ ~QDMONKLD~ ~QDMONKBO~ BEGIN
 	ACTION_IF FILE_EXISTS_IN_GAME ~%monk_kit%.2da~ BEGIN
 	  COPY_EXISTING ~%monk_kit%.2da~ ~override~
@@ -97,6 +85,7 @@ ACTION_PHP_EACH d5_monk_clabs AS woo => soo BEGIN
 		BUT_ONLY
 	END
 END
+*/
 //__________________________________________________________________________________
 
 

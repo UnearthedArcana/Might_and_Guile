@@ -13,6 +13,120 @@ COPY ~might_and_guile/fighter/d5_kensai.d5~ ~override~
 //___________________________________________________________________________________
 
 
+
+// get kit identifiers________________________________________________________________
+//
+OUTER_SET kensai_code = 0x4003
+
+APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
+	    SET kit_is_row = %row%
+	  END
+	END
+BUT_ONLY
+//___________________________________________________________________________________
+
+
+// kensai weapon focus gives... what?_________________________________________________
+//
+// patch all weapons to have 177 targeting bladesinger
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_BYTE 0x31 proficiency
+	PATCH_IF (proficiency = 89) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5bswob~ END
+	END
+	PATCH_IF (proficiency = 90) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5lswob~ END
+	END
+	PATCH_IF (proficiency = 91) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5sswob~ END
+	END
+	PATCH_IF (proficiency = 93) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d52swob~ END
+	END
+	PATCH_IF (proficiency = 92) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5baxeb~ END
+	END
+	PATCH_IF (proficiency = 94) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5katab~ END
+	END
+	PATCH_IF (proficiency = 95) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5scimb~ END
+	END
+	PATCH_IF (proficiency = 96) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5daggb~ END
+	END
+	PATCH_IF (proficiency = 97) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5hammb~ END
+	END
+	PATCH_IF (proficiency = 98) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5speab~ END
+	END
+	PATCH_IF (proficiency = 99) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5halbb~ END
+	END
+	PATCH_IF (proficiency = 100) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5flaib~ END
+	END
+	PATCH_IF (proficiency = 101) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5maceb~ END
+	END
+	PATCH_IF (proficiency = 115) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5clubb~ END
+	END
+	PATCH_IF (proficiency = 102) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5stafb~ END
+	END
+  END
+BUT_ONLY
+
+// make EFFs giving extra APR
+ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  CREATE EFF ~d5%prof%b~
+	WRITE_LONG 0x10 1
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 6
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 2
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_LONG 0x90 1
+	WRITE_EVALUATED_ASCII 0x94 ~D5%PROF%B~ #8
+END
+
+// make spells with 206 against those EFFs
+ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5%prof%6.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5%PROF%B~ END
+  BUT_ONLY
+END
+
+// have weapon focus spells cancel those 206 spells
+ACTION_FOR_EACH spec IN ~a~ ~b~ ~c~ ~d~ ~e~ BEGIN
+  ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	COPY_EXISTING ~d5%spec%%prof%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+	IF_EXISTS BUT_ONLY
+  END
+END
+
+// make spell to cast those 206 spells
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bs206.spl~
+  PATCH_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+  END
+BUT_ONLY
+
+//___________________________________________________________________________________
+
+/*
+
 //___________________________________________________________________________________
 ADD_KIT ~D5KLSWO~
 
@@ -1419,3 +1533,4 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
 	COPY_EXISTING ~LUFI0.2da~ ~override/LUFI4.2da~	
 END
 //__________________________________________________________________________________
+*/

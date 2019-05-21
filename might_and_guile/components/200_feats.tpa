@@ -1356,6 +1356,14 @@ COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
 COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
 COPY_EXISTING  ~d5ure8.spl~ ~override/d5vre8.spl~ 
 	WRITE_SHORT 0x1c 1
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+	READ_BYTE 0x31 prof
+	PATCH_IF (prof = 103) || (prof = 104) || (prof = 105) || (prof = 106) || (prof = 107) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5_rfh2b~ END
+	END
+  END
+BUT_ONLY
 
 INCLUDE ~might_and_guile/lib/extra_prof_dialogue.tpa~
 COPY ~might_and_guile/feats/d5_rfe9b.bam~ ~override~
@@ -2153,9 +2161,12 @@ COPY ~might_and_guile/misc/d5strid.spl~ ~override/d5_wf31.spl~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 176 parameter1 = %d5_quickstride_bonus% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5_rwlk~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5_wf31~ END
+COPY ~might_and_guile/misc/d5_rwlkb.bam~ ~override~
 COPY ~might_and_guile/misc/d5swalk.spl~ ~override/d5_rwlk.spl~
 	SAY NAME1 @2451
 	SAY UNIDENTIFIED_DESC @2451
+	WRITE_ASCII 0x3a ~d5_rwlkb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rwlkb~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_wf31~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5_wf31~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5_rwlk~ END

@@ -198,7 +198,6 @@ LAF qd_multiclass
 		kit_name = ~D5FILCH~ 
 		kit_clab = ~d5_filch~
 		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 
@@ -311,7 +310,6 @@ LAF qd_multiclass
 		kit_name = ~D5_LOREMASTER~ 
 		kit_clab = ~d5_lorma~
 		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 
@@ -479,7 +477,6 @@ LAF qd_multiclass
 		kit_name = ~D5RANMAGE~ 
 		kit_clab = ~d5_rama~
 		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 
@@ -541,7 +538,7 @@ ADD_KIT ~D5RANTHIEF~
 ~0x00004000 9~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~FM0~
+~FT0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
@@ -581,12 +578,12 @@ COPY_EXISTING ~sppr103.spl~ ~override/d5rt103.spl~ // CLW
 	LPM spell_to_innate
 COPY_EXISTING ~sppr105.spl~ ~override/d5rt105.spl~ // entangle
 	LPM spell_to_innate
+COPY_EXISTING ~sppr106.spl~ ~override/d5rt106.spl~ // magic stone
+	LPM spell_to_innate
 COPY_EXISTING ~sppr109.spl~ ~override/d5rt109.spl~ // sanctuary
 	LPM spell_to_innate
 COPY_EXISTING ~sppr110.spl~ ~override/d5rt110.spl~ // shillelagh
 	LPM spell_to_innate
-//COPY_EXISTING ~sppr116.spl~ ~override/d5rt116.spl~ // faerie fire
-//	LPM spell_to_innate
 COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
 	LPM spell_to_innate
 COPY_EXISTING ~sppr204.spl~ ~override/d5rt204.spl~ // charm mammal
@@ -607,17 +604,23 @@ COPY_EXISTING ~sppr317.spl~ ~override/d5rt317.spl~ // cure disease
 	LPM spell_to_innate
 COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
 	LPM spell_to_innate
-COPY ~might_and_guile/mc/d5_div1b.bam~ ~override~
+COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
 COPY ~might_and_guile/mc/d5rt100.spl~ ~override~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_div1b~ END
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr1~ END
 COPY ~might_and_guile/mc/d5rt100.2da~ ~override~
-COPY ~might_and_guile/mc/d5_div2b.bam~ ~override~
+COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
 COPY ~might_and_guile/mc/d5rt200.spl~ ~override~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_div2b~ END
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr2~ END
 COPY ~might_and_guile/mc/d5rt200.2da~ ~override~
-COPY ~might_and_guile/mc/d5_div3b.bam~ ~override~
+COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
 COPY ~might_and_guile/mc/d5rt300.spl~ ~override~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_div3b~ END
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr3~ END
 COPY ~might_and_guile/mc/d5rt300.2da~ ~override~
 //__________________________________________________________________________________
 
@@ -628,7 +631,6 @@ LAF qd_multiclass
 		kit_name = ~D5RANTHIEF~ 
 		kit_clab = ~d5_rath~
 		base_class = ~F~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 
@@ -735,7 +737,6 @@ LAF qd_multiclass
 		kit_name = ~D5_TOMBRUNNER~ 
 		kit_clab = ~d5_tombr~
 		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 
@@ -841,7 +842,6 @@ LAF qd_multiclass
 		kit_name = ~D5_THUG~ 
 		kit_clab = ~d5_thug~
 		base_class = ~T~
-		mc_dir = ~might_and_guile/lib/qd_mc~
 END 
 //____________________________________________________________________________________
 

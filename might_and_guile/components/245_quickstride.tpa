@@ -20,18 +20,22 @@ LAM JOINABLE_NPC_ARRAYS
 
 LAM d5_quickstride_speed
 
+COPY ~might_and_guile/feats/d5_wfc1b.bam~ ~override~
 COPY ~might_and_guile/misc/d5strid.spl~ ~override~
 	SAY NAME1 @2450
 	SAY UNIDENTIFIED_DESC @20110
-	WRITE_ASCII 0x3a ~d5_wfc1~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1~ END
+	WRITE_ASCII 0x3a ~d5_wfc1b~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_wfc1b~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 176 parameter1 = %d5_quickstride_bonus% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5swalk~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5strid~ END
 
+COPY ~might_and_guile/misc/d5_rwlkb.bam~ ~override~
 COPY ~might_and_guile/misc/d5swalk.spl~ ~override~
 	SAY NAME1 @2451
 	SAY UNIDENTIFIED_DESC @2451
+	WRITE_ASCII 0x3a ~d5_rwlkb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rwlkb~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5strid~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5strid~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5swalk~ END

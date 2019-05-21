@@ -7,6 +7,9 @@
 //__________________________________________________________________________________
 
 
+INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
+
+
 //___________________________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ THEN BEGIN
@@ -28,7 +31,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ THEN BEGIN
 
 END
 
-//ADD SLINGER RANGER_________________________________________________________________
+//ADD SLINGER F/T____________________________________________________________________
 
 ADD_KIT ~D5SLING~
 
@@ -65,7 +68,7 @@ ADD_KIT ~D5SLING~
 
 //ALIGNMENT RESTRICTIONS____________________________________________________________
 //                 LG LN LE NG TN NE CG CN CE
-~D5SLING           1  0  0  1  0  0  1  0  0~
+~D5SLING           1  1  1  1  1  1  1  1  1~
 
 //DUAL CLASS OPTIONS________________________________________________________________
 //                 FT CL MA TH DR RA
@@ -75,13 +78,13 @@ ADD_KIT ~D5SLING~
 ~might_and_guile/ranger/d5_sling.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
-~~
+~K_FT_HL~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
-~0x00008000 12~
+~0x00008000 9~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
 ~Ra2~
@@ -127,7 +130,7 @@ COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 OUTER_SET slinger_code = (0x4000 + %D5SLING%)
 //____________________________________________________________________________________
 
-/*
+/* ...why is this commented out?? - EDIT - because this is already done by the archery component
 //REVISED ARCHERY____________________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
@@ -345,6 +348,17 @@ END
 //___________________________________________________________________________________
 */
 
+//MULTICLASS KIT______________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5SLING~ 
+		kit_clab = ~d5_sling~
+		base_class = ~T~
+END 
+//____________________________________________________________________________________
+
+/*
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
 ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
@@ -409,7 +423,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
 END
 //__________________________________________________________________________________
 
-
 //REPLACE BASE RANGER WITH THIS KIT___________________________________________________
 //
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -424,3 +437,4 @@ BUT_ONLY
 COPY ~might_and_guile/ranger/K_R_HL.2da~ ~override~
 	REPLACE_TEXTUALLY ~[ %TAB%]0~ ~%TAB%%sling_row%~
 //___________________________________________________________________________________
+*/

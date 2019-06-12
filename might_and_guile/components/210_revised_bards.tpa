@@ -3160,17 +3160,41 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
  BUT_ONLY
 
  ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
+/*
   COPY_EXISTING ~d5feat%num%.spl~ ~override~
-	PATCH_FOR_EACH nu_bard_kit IN ~%nu_bard_code%~ ~%nu_blade_code%~ ~%nu_jester_code%~ ~%nu_skald_code%~ ~%nu_gallant_code%~ ~%nu_herald_code%~ ~%nu_meister_code%~ ~%nu_jinxer_code%~ ~%nu_agent_code%~ ~%nu_hexblade_code%~ ~%nu_loresinger_code%~ ~%nu_bladesinger_code%~ BEGIN
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bard_kit% parameter2 = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
+	PATCH_FOR_EACH nu_bard_kit IN ~%nu_bard_code%~ ~%nu_blade_code%~ ~%nu_jester_code%~ ~%nu_skald_code%~ ~%nu_gallant_code%~ ~%nu_herald_code%~ ~%nu_meister_code%~ ~%nu_jinxer_code%~ ~%nu_agent_code%~ ~%nu_hexblade_code%~ ~%nu_bladesinger_code%~ BEGIN
+	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %nu_bard_kit% parameter2 = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
 	END
   IF_EXISTS BUT_ONLY
+*/
   COPY_EXISTING ~d5feat%let%.spl~ ~override~
 	PHP_EACH feat_bard_list AS ind => ids BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %ids% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%ind%~ END
 	END
   IF_EXISTS BUT_ONLY
  END
+
+COPY ~might_and_guile/feats/d5mcft1.spl~ ~override/d5mcfb1.spl~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 318 parameter2 = %kit_is_row% END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_parameter1 = 15 parameter1 = 10 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 177 match_parameter1 = 9 parameter1 = 7 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = ~d5mcfb1~ END
+COPY ~might_and_guile/feats/d5mcft1.eff~ ~override~
+
+ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
+  ACTION_IF (num > 1) && (num < 10) BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5mcft%num%.eff~) BEGIN
+	  COPY_EXISTING ~d5mcft1.eff~ ~override/d5mcft%num%.eff~
+		WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
+	  BUT_ONLY
+	END
+	COPY_EXISTING ~d5mcfb1.spl~ ~override/d5mcfb%num%.spl~
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 318 STR_VAR resource = EVAL ~d5mcfb%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~d5mcfb%num%~ END
+	BUT_ONLY
+  END
+END
 
  ACTION_PHP_EACH feat_bard_list AS ind => ids BEGIN
   COPY_EXISTING ~d5ft%ind%.spl~ ~override~
@@ -3650,6 +3674,8 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~)) 
   COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp427.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 3
+	WRITE_ASCII 0x3a ~sppr427b~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~sppr427b~ END
   COPY_EXISTING ~%spell_res%.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 12 dicenumber = 4 decesize = 8 END
 END
@@ -3661,6 +3687,8 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~))
 	SAY UNIDENTIFIED_DESC @21912
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 3
+	WRITE_ASCII 0x3a ~sppr427b~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~sppr427b~ END
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %IDPRO303% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 12 dicenumber = 4 decesize = 8 END
   COPY ~might_and_guile/nubards/sppr427b.bam~ ~override~
@@ -4497,8 +4525,7 @@ COPY_EXISTING ~d5bclons.2da~ ~override~
 				LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
 			  END
 			  PATCH_IF (%abil_range% < 5) BEGIN
-//			 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// what the hell??  why did I do this??
-				LPF ALTER_SPELL_HEADER INT_VAR range = 2 END	// maybe this is what I meant to do
+			 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// might need to carve out exceptions, e.g. burning hands
 			  END
 			END
 		  END
@@ -4911,8 +4938,7 @@ SPLRES
 					LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
 				  END
 				  PATCH_IF (%abil_range% < 5) BEGIN
-//				 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// what the hell??  why did I do this??
-					LPF ALTER_SPELL_HEADER INT_VAR range = 2 END	// maybe this is what I meant to do
+				 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// might need to carve out exceptions, e.g. burning hands
 				  END
 				END
 			  END
@@ -5394,6 +5420,9 @@ COPY_EXISTING ~d5_bard.2da~ ~override~
 			  ~d5_blads.2da~ ~override~
   LPM remove_blank_lines
   APPEND_FILE ~override/d5nubard.2da~
+
+COPY_EXISTING ~d5_lors.2da~ ~override~
+  REPLACE_TEXTUALLY ~GA_D5FEAT[aAbBcCdDeEfFgGhHiIjJkKllmMnNoopPqQrRsStT]~ ~****      ~
 
 
 //remove one slot from some kits______________________________________________________

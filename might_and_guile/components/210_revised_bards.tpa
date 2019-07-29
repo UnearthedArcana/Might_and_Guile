@@ -796,10 +796,10 @@ END
 //AGENT ABILITY FILES_________________________________________________________________
 //
 COPY ~might_and_guile/nubards/d5_agnt.2da~ ~override~
-
 //____________________________________________________________________________________
 
 
+/*
 //ADD LORESINGER AS CLERIC/MAGE_______________________________________________________
 //
 // ***** change this to simple C/T with songs? - basically, a demibard
@@ -952,6 +952,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
   LAM apply_fnp_usability
 END
 //__________________________________________________________________________________
+*/
 
 
 //ADD HEXBLADE AS F/M________________________________________________________________
@@ -1392,7 +1393,7 @@ OUTER_SET nu_meister_code = (0x4000 + %D5_MEISTER%)
 OUTER_SET nu_jinxer_code = (0x4000 + %D5_JINXER%)
 OUTER_SET nu_agent_code = (0x4000 + %D5_AGENT%)
 OUTER_SET nu_hexblade_code = (0x4000 + %D5_HEXBLADE%)
-OUTER_SET nu_loresinger_code = (0x4000 + %D5_LORESINGER%)
+//OUTER_SET nu_loresinger_code = (0x4000 + %D5_LORESINGER%)
 OUTER_SET nu_bladesinger_code = (0x4000 + %D5_BLADESINGER%)
 
 APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
@@ -1575,7 +1576,7 @@ ACTION_FOR_EACH usability_spell IN ~d5fmnuse~ ~d5mtnuse~ ~d5ctnuse~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_jinxer_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_agent_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_hexblade_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_loresinger_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_loresinger_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = EVAL ~%usability_spell%~ END
 END
 
@@ -2770,7 +2771,7 @@ COPY ~might_and_guile/nubards/d5bd05.itm~ ~override~			//		mirror images
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd05a~
 	WRITE_LONG 0x10 146
@@ -2806,7 +2807,7 @@ COPY ~might_and_guile/nubards/d5bd08.itm~ ~override~			//		mind shield
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd08a~
 	WRITE_LONG 0x10 146
@@ -2834,7 +2835,7 @@ COPY ~might_and_guile/nubards/d5bd24.itm~ ~override~			//		hold undead
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd24a~
 	WRITE_LONG 0x10 146
@@ -2866,7 +2867,7 @@ COPY ~might_and_guile/nubards/d5bd25.itm~ ~override~			//		entangle
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd25a~
 	WRITE_LONG 0x10 146
@@ -2894,7 +2895,7 @@ COPY ~might_and_guile/nubards/d5bd48.itm~ ~override~			//		dispel illusions
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd48a~
 	WRITE_LONG 0x10 146
@@ -2923,7 +2924,7 @@ COPY ~might_and_guile/nubards/d5bd51.itm~ ~override~			//		bladesong
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 CREATE EFF ~d5bd51a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -3202,7 +3203,7 @@ END
   IF_EXISTS BUT_ONLY
  END
 
- ACTION_FOR_EACH nubard_kit IN ~d5_bard~ ~d5_blade~ ~d5_jstr~ ~d5_skld~ ~d5_glnt~ ~d5_hrld~ ~d5_mstr~ ~d5_jinx~ ~d5_hxbl~ ~d5_agnt~ ~d5_lors~ ~d5_blads~ BEGIN
+ ACTION_FOR_EACH nubard_kit IN ~d5_bard~ ~d5_blade~ ~d5_jstr~ ~d5_skld~ ~d5_glnt~ ~d5_hrld~ ~d5_mstr~ ~d5_jinx~ ~d5_hxbl~ ~d5_agnt~ /*~d5_lors~*/ ~d5_blads~ BEGIN
   COPY_EXISTING ~%nubard_kit%.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_multibard.txt~
@@ -4272,11 +4273,13 @@ ACTION_PHP_EACH scroll_spells AS ind => arcane_spell BEGIN
 			REPLACE_TEXTUALLY ~[Ss][Pp][Ww][Ii]~ ~d5b4~
 		  END
 		  TEXT_SPRINT real_spell ~%arcane_spell%~
+		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
+			INNER_ACTION BEGIN
+			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+			END
+		  END
 		END
 	  BUT_ONLY
-	  ACTION_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
-		APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
-	  END
 	END
   END
 END
@@ -4301,6 +4304,11 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 		  INNER_PATCH_SAVE real_spell ~%bard_spell%~ BEGIN
 			REPLACE_TEXTUALLY ~[Dd]5[Bb][Pp]~ ~sppr~
 		  END
+		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
+			INNER_ACTION BEGIN
+			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+			END
+		  END
 		END
 		PATCH_IF (~%bard_spell%~ STRING_MATCHES_REGEXP ~[Dd]5[Bb][Ii][1-9][0-9][0-9]~ = 0) BEGIN
 		  INNER_PATCH_SAVE 206_spell ~%bard_spell%~ BEGIN
@@ -4316,11 +4324,13 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 			REPLACE_TEXTUALLY ~[Dd]5[Bb][Ii]~ ~d5i4~
 		  END
 		  TEXT_SPRINT real_spell ~%bard_spell%~
+		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
+			INNER_ACTION BEGIN
+			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+			END
+		  END
 		END
 	  BUT_ONLY
-	  ACTION_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%bard_spell%~)) BEGIN
-		APPEND ~d5bclons.2da~ ~%bard_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
-	  END
 	END
   END
 END
@@ -5414,16 +5424,19 @@ COPY_EXISTING ~d5_bard.2da~ ~override~
 			  ~d5_glnt.2da~ ~override~
 			  ~d5_mstr.2da~ ~override~
 			  ~d5_jinx.2da~ ~override~
-			  ~d5_lors.2da~ ~override~
+//			  ~d5_lors.2da~ ~override~
 			  ~d5_hxbl.2da~ ~override~
 			  ~d5_agnt.2da~ ~override~
 			  ~d5_blads.2da~ ~override~
   LPM remove_blank_lines
   APPEND_FILE ~override/d5nubard.2da~
+IF_EXISTS
 
+/*
 COPY_EXISTING ~d5_lors.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_D5FEAT[aAbBcCdDeEfFgGhHiIjJkKllmMnNoopPqQrRsStT]~ ~****      ~
-
+IF_EXISTS
+*/
 
 //remove one slot from some kits______________________________________________________
 //
@@ -5580,12 +5593,14 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
+/*
 LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_907~ num_allowed = ~1~ END			//	resist magic
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END	//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END	//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END	//	extra feats
 END
+*/
 
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_907~ num_allowed = ~1~ END				//	resist magic
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_904~ num_allowed = ~1~ END				//	hardiness
@@ -5606,7 +5621,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~RR#BHL01.SPL~ BEGIN
-  ACTION_FOR_EACH bard_kit IN ~D5_BARD~ ~D5_BLADE~ ~D5_JESTER~ ~D5_SKALD~ ~D5_GALLANT~ ~D5_HERALD~ ~D5_MEISTER~ ~D5_JINXER~ ~D5_HEXBLADE~ ~D5_AGENT~ ~D5_LORESINGER~ ~D5_BLADESINGER~ BEGIN
+  ACTION_FOR_EACH bard_kit IN ~D5_BARD~ ~D5_BLADE~ ~D5_JESTER~ ~D5_SKALD~ ~D5_GALLANT~ ~D5_HERALD~ ~D5_MEISTER~ ~D5_JINXER~ ~D5_HEXBLADE~ ~D5_AGENT~ /*~D5_LORESINGER~*/ ~D5_BLADESINGER~ BEGIN
 // replace spcl921 with RR magic flute
 	LAF action_replace_hla STR_VAR kit_name = ~D5_BARD~ remove_ability = ~GA_SPCL921~ ability = ~GA_RR#BHL07~ END
 // add other RR HLAs
@@ -5933,7 +5948,7 @@ EXTEND_BOTTOM RAELIS 71
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-		Kit(Player1,D5_LORESINGER)
+//		Kit(Player1,D5_LORESINGER)
 ~ THEN DO ~EraseJournalEntry(4685)
 EraseJournalEntry(46846)
 EraseJournalEntry(46847)
@@ -5962,7 +5977,7 @@ EXTEND_BOTTOM RAELIS 72
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-		Kit(Player1,D5_LORESINGER)
+//		Kit(Player1,D5_LORESINGER)
   ~ THEN GOTO 73
 END
 
@@ -5978,7 +5993,7 @@ EXTEND_BOTTOM HAERDA 99
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-		Kit(Player1,D5_LORESINGER)
+//		Kit(Player1,D5_LORESINGER)
   ~ THEN EXTERN ~RAELIS~ 59
 END
 >>>>>>>> 
@@ -5992,14 +6007,15 @@ ADD_TRANS_TRIGGER RENAL 7 ~!Kit(Player1,D5_BARD)
 		!Kit(Player1,D5_BLADE)
 		!Kit(Player1,D5_JESTER)
 		!Kit(Player1,D5_MEISTER)
-		!Kit(Player1,D5_LORESINGER)~ DO 1
+//		!Kit(Player1,D5_LORESINGER)~ DO 1
 EXTEND_BOTTOM RENAL 7
   IF ~OR(5)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
 		Kit(Player1,D5_JESTER)
 		Kit(Player1,D5_MEISTER)
-		Kit(Player1,D5_LORESINGER)~ THEN REPLY #21233 GOTO 18
+//		Kit(Player1,D5_LORESINGER)
+  ~ THEN REPLY #21233 GOTO 18
 END
 >>>>>>>> 
 
@@ -6046,7 +6062,7 @@ ACTION_IF GAME_IS ~iwdee~ BEGIN
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
 		Kit(LastTalkedToBy,D5_AGENT)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 ~
 	END
   BUT_ONLY
@@ -6065,7 +6081,7 @@ EXTEND_BOTTOM DELISIA 0
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5153 
 	DO ~SetGlobal("Bard_Greeting","GLOBAL",1)
@@ -6085,7 +6101,7 @@ EXTEND_BOTTOM DELISIA 0
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 		Kit(LastTalkedToBy,D5_AGENT)~ 
 	THEN REPLY #5157 
 	EXIT
@@ -6103,7 +6119,7 @@ EXTEND_BOTTOM DELISIA 1
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5153 
 	DO ~SetGlobal("Bard_Greeting","GLOBAL",1)
@@ -6121,7 +6137,7 @@ EXTEND_BOTTOM DELISIA 1
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5157 
 	EXIT
@@ -6139,7 +6155,7 @@ EXTEND_BOTTOM DELISIA 10
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_LORESINGER)
+//		Kit(LastTalkedToBy,D5_LORESINGER)
 		Kit(LastTalkedToBy,D5_AGENT)~ 
 	THEN REPLY #34554 
 	GOTO 13
@@ -6168,7 +6184,7 @@ IF ~CheckStatGT(Player1,12,CHR)
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #54887  EXTERN ~bdmaxwel~ 2
 
@@ -6183,7 +6199,7 @@ IF ~CheckStatLT(Player1,13,CHR)
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #54887  GOTO 4
 END
@@ -6203,7 +6219,7 @@ EXTEND_BOTTOM BDAUTINN 1
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44392  GOTO 9
 END
@@ -6222,7 +6238,7 @@ EXTEND_BOTTOM BDBFORT4 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #43682 DO ~GiveItemCreate("bdscrl3b",Player1,0,0,0)
 ~ GOTO 9
@@ -6242,7 +6258,7 @@ EXTEND_BOTTOM BDCORWIJ 82
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #52066  GOTO 84
 END
@@ -6261,7 +6277,7 @@ EXTEND_BOTTOM BDDELEND 14
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44605 DO ~SetGlobal("BD_SDD117_PLAY","BD0108",1)
 ~ GOTO 24
@@ -6278,7 +6294,7 @@ EXTEND_BOTTOM BDDELEND 28
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44640  GOTO 37
 END
@@ -6306,7 +6322,7 @@ EXTEND_BOTTOM BDDENELD 18
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #48995  GOTO 20
 END
@@ -6322,7 +6338,7 @@ EXTEND_BOTTOM BDDENELD 36
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #62096  GOTO 37
 END
@@ -6341,7 +6357,7 @@ EXTEND_BOTTOM BDDREON 5
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #61237  GOTO 7
 END
@@ -6356,7 +6372,7 @@ EXTEND_BOTTOM BDDREON 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #61246  GOTO 9
 END
@@ -6375,7 +6391,7 @@ EXTEND_BOTTOM BDDSSEN 2
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44056  GOTO 4
 END
@@ -6391,7 +6407,7 @@ EXTEND_BOTTOM BDDSSEN 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58567  GOTO 10
 END
@@ -6412,7 +6428,7 @@ EXTEND_BOTTOM BDFAMARI 2
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58488  GOTO 3
 END
@@ -6432,7 +6448,7 @@ EXTEND_BOTTOM BDGUAR20 18
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #64235  GOTO 19
 END
@@ -6452,7 +6468,7 @@ EXTEND_BOTTOM BDHESTER 6
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47990  GOTO 14
 
@@ -6470,7 +6486,7 @@ EXTEND_BOTTOM BDHESTER 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47998  GOTO 14
 END
@@ -6491,7 +6507,7 @@ EXTEND_BOTTOM BDJENKS 3
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58765  GOTO 4
 END
@@ -6511,7 +6527,7 @@ EXTEND_BOTTOM BDJOSPIL 23
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44809  DO ~SetGlobal("bd_wah029","LOCALS",1)
 	IncrementGlobal("bd_jospil_score","LOCALS",2)
@@ -6533,7 +6549,7 @@ EXTEND_BOTTOM BDKATHEE 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #57619  GOTO 9
 END
@@ -6555,7 +6571,7 @@ EXTEND_BOTTOM BDKHALID 36
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #57945  GOTO 37
 END
@@ -6575,7 +6591,7 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47853  EXTERN ~BDVALIS~ 24
 END
@@ -6592,7 +6608,7 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47854  EXTERN ~BDCORINT~ 21
 END
@@ -6610,7 +6626,7 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47856  GOTO 28
 END
@@ -6628,7 +6644,7 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47856  GOTO 27
 END
@@ -6649,7 +6665,7 @@ EXTEND_BOTTOM BDRASAAD 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #34589  DO ~SetGlobal("BD_Spoken_Rasaad","GLOBAL",1)
 SetGlobal("bd_invited_rasaad","bd0111",1)
@@ -6669,7 +6685,7 @@ EXTEND_BOTTOM BDRASAAD 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #34589  DO ~SetGlobal("BD_Spoken_Rasaad","GLOBAL",1)
 SetGlobal("bd_invited_rasaad","bd0111",1)
@@ -6691,7 +6707,7 @@ EXTEND_BOTTOM BDRIGAH 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #52579  GOTO 21
 END
@@ -6711,7 +6727,7 @@ EXTEND_BOTTOM BDSHAPUR 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #41754  GOTO 14
 END
@@ -6728,7 +6744,7 @@ EXTEND_BOTTOM BDSHAPUR 25
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 		OR(2)
 	PartyHasItem("bdinsigc")
@@ -6751,7 +6767,7 @@ EXTEND_BOTTOM BDSIMONE 14
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #50976  GOTO 15
 END
@@ -6771,7 +6787,7 @@ EXTEND_BOTTOM BDSKIE 41
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44078  GOTO 47
 END
@@ -6788,7 +6804,7 @@ EXTEND_BOTTOM BDSKIE 45
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 	CheckStatGT(Player1,14,INT)
 	CheckStatGT(Player1,14,WIS)
@@ -6810,7 +6826,7 @@ EXTEND_BOTTOM BDTAKOS 21
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #42957  GOTO 23
 END
@@ -6827,7 +6843,7 @@ EXTEND_BOTTOM BDTAKOS 22
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #42962  GOTO 23
 END
@@ -6848,8 +6864,8 @@ EXTEND_BOTTOM BDULORI 3
 		Kit(Player1,D5_MEISTER)
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
-		Kit(Player1,D5_LORESINGER)
-	Kit(Player1,D5_AGENT)
+//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_AGENT)
 ~ THEN REPLY #49207  GOTO 4
 END
 
@@ -6866,7 +6882,7 @@ EXTEND_BOTTOM BDULORI 3
 		Kit(Player1,D5_MEISTER)
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//		Kit(Player1,D5_LORESINGER)
 		Kit(Player1,D5_AGENT)
 ~ THEN REPLY #49207  GOTO 8
 END
@@ -6887,7 +6903,7 @@ EXTEND_BOTTOM BDWAIZAH 1
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-	Kit(Player1,D5_LORESINGER)
+//	Kit(Player1,D5_LORESINGER)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #48805  GOTO 0
 END

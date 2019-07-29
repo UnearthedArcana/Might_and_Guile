@@ -430,6 +430,7 @@ COPY ~might_and_guile/feats/d5_rfa1.spl~ ~override/d5ura1.spl~   // 			stealth b
 	SAY NAME1 @20101
 	SAY UNIDENTIFIED_DESC @20102
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -456,6 +457,7 @@ COPY ~might_and_guile/feats/d5_rfa2.spl~ ~override/d5ura2.spl~   // 			thieving 
 	SAY NAME1 @20103
 	SAY UNIDENTIFIED_DESC @20104
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -482,6 +484,7 @@ COPY ~might_and_guile/feats/d5_rfa3.spl~ ~override/d5ura3.spl~   // 			detection
 	SAY NAME1 @20105
 	SAY UNIDENTIFIED_DESC @20106
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -508,6 +511,7 @@ COPY ~might_and_guile/feats/d5_rfa4.spl~ ~override/d5ura4.spl~   // 			lore bonu
 	SAY NAME1 @20301
 	SAY UNIDENTIFIED_DESC @20302
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -534,6 +538,7 @@ COPY ~might_and_guile/feats/d5_rfa5.spl~ ~override/d5ura5.spl~   // 			luck bonu
 	SAY NAME1 @20303
 	SAY UNIDENTIFIED_DESC @20304
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -549,6 +554,7 @@ COPY ~might_and_guile/feats/d5_rfa9.spl~ ~override/d5ura9.spl~   // 			tracking
 	SAY NAME1 @20107
 	SAY UNIDENTIFIED_DESC @20108
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -591,6 +597,7 @@ COPY ~might_and_guile/feats/d5_rfb1.spl~ ~override/d5urb1.spl~   // 			dart trap
 	SAY NAME1 @20113
 	SAY UNIDENTIFIED_DESC @20114
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -624,6 +631,7 @@ COPY ~might_and_guile/feats/d5_rfb3.spl~ ~override/d5urb3.spl~   // 			fire trap
 	SAY NAME1 @20115
 	SAY UNIDENTIFIED_DESC @20116
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -647,6 +655,7 @@ COPY ~might_and_guile/feats/d5_rfb4.spl~ ~override/d5urb4.spl~   // 			web trap
 	SAY NAME1 @20117
 	SAY UNIDENTIFIED_DESC @20118
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -669,6 +678,7 @@ COPY ~might_and_guile/feats/d5_rfb5.spl~ ~override/d5urb5.spl~   // 			poison tr
 	SAY NAME1 @20119
 	SAY UNIDENTIFIED_DESC @20120
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -698,6 +708,7 @@ COPY ~might_and_guile/feats/d5_rfc1.spl~ ~override/d5urc1.spl~  		// 			basic al
 	SAY NAME1 @20131
 	SAY UNIDENTIFIED_DESC @20132
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -748,6 +759,7 @@ COPY ~might_and_guile/feats/d5_rfc2.spl~ ~override/d5urc2.spl~   // 			advanced 
 	SAY NAME1 @20181
 	SAY UNIDENTIFIED_DESC @20182
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -790,6 +802,7 @@ COPY ~might_and_guile/feats/d5_rfc3.spl~ ~override/d5urc3.spl~   // 			toxic poi
 	SAY NAME1 @20161
 	SAY UNIDENTIFIED_DESC @20162
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -821,6 +834,7 @@ COPY ~might_and_guile/feats/d5_rfc4.spl~ ~override/d5urc4.spl~   // 			paralytic
 	SAY NAME1 @20163
 	SAY UNIDENTIFIED_DESC @20164
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -856,6 +870,7 @@ COPY ~might_and_guile/feats/d5_rfc6.spl~ ~override/d5urc6.spl~   // 			flaming w
 	SAY NAME1 @20151
 	SAY UNIDENTIFIED_DESC @20152
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -888,6 +903,7 @@ COPY ~might_and_guile/feats/d5_rfc7.spl~ ~override/d5urc7.spl~   // 		  hulking 
 	SAY NAME1 @20171
 	SAY UNIDENTIFIED_DESC @20172
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -941,6 +957,7 @@ COPY ~might_and_guile/feats/d5_rfd1.spl~ ~override/d5urd1.spl~    // 			AC bonus
 	SAY NAME1 @20201
 	SAY UNIDENTIFIED_DESC @20202
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -966,6 +983,7 @@ COPY ~might_and_guile/feats/d5_rfd1.spl~ ~override/d5urd0.spl~    // 			AC bonus
 	SAY NAME1 @20201
 	SAY UNIDENTIFIED_DESC @20202
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -992,6 +1010,7 @@ COPY ~might_and_guile/feats/d5_rfd2.spl~ ~override/d5urd2.spl~   // 			escape ar
 	SAY NAME1 @20221
 	SAY UNIDENTIFIED_DESC @20222
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1012,6 +1031,7 @@ COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override/d5urd3.spl~   //			iwd spell 
 	SAY NAME1 @20223
 	SAY UNIDENTIFIED_DESC @20224
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1058,6 +1078,7 @@ COPY ~might_and_guile/feats/d5_rfd4.spl~ ~override/d5urd4.spl~   // 			missile s
 	SAY NAME1 @20203
 	SAY UNIDENTIFIED_DESC @20204
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1094,6 +1115,7 @@ COPY ~might_and_guile/feats/d5_rfd5.spl~ ~override/d5urd5.spl~   // 			save bonu
 	SAY NAME1 @20211
 	SAY UNIDENTIFIED_DESC @20212
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1109,6 +1131,7 @@ COPY ~might_and_guile/feats/d5_rfd6.spl~ ~override/d5urd6.spl~   // 			spell/wan
 	SAY NAME1 @20213
 	SAY UNIDENTIFIED_DESC @20214
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1124,6 +1147,7 @@ COPY ~might_and_guile/feats/d5_rfd7.spl~ ~override/d5urd7.spl~   // 			death/pol
 	SAY NAME1 @20215
 	SAY UNIDENTIFIED_DESC @20216
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1142,6 +1166,7 @@ COPY ~might_and_guile/feats/d5_rfd8.spl~ ~override/d5urd8.spl~   // 			charm eva
 	SAY NAME1 @20217
 	SAY UNIDENTIFIED_DESC @20218
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 2
 	END ELSE BEGIN
@@ -1207,6 +1232,7 @@ COPY ~might_and_guile/feats/d5_rfe1.spl~ ~override/d5ure1.spl~  	 // 			melee th
 	SAY NAME1 @20231
 	SAY UNIDENTIFIED_DESC @20232
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1232,6 +1258,7 @@ COPY ~might_and_guile/feats/d5_rfe1.spl~ ~override/d5ure0.spl~   // 			melee tha
 	SAY NAME1 @20231
 	SAY UNIDENTIFIED_DESC @20232
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1258,6 +1285,7 @@ COPY ~might_and_guile/feats/d5_rfe3.spl~ ~override/d5ure3.spl~   // 			ranged th
 	SAY NAME1 @20233
 	SAY UNIDENTIFIED_DESC @20234
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1284,6 +1312,7 @@ COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override/d5ure5.spl~   // 			backstab 
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1310,6 +1339,7 @@ COPY ~might_and_guile/feats/d5_rfe6.spl~ ~override/d5ure6.spl~   	//	 			crit bo
 	SAY NAME1 @20243
 	SAY UNIDENTIFIED_DESC @20244
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1328,6 +1358,7 @@ COPY ~might_and_guile/feats/d5_rfe7.spl~ ~override/d5ure7.spl~  	 // 			crit bon
 	SAY NAME1 @20245
 	SAY UNIDENTIFIED_DESC @20246
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -1346,6 +1377,7 @@ COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 //				swashbuckl
 	SAY NAME1 @3112
 	SAY UNIDENTIFIED_DESC @3113
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -1383,6 +1415,7 @@ COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 //		extra prof
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -1435,6 +1468,7 @@ COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override/d5urg3.spl~   // 			blind
 	SAY NAME1 @20255
 	SAY UNIDENTIFIED_DESC @20256
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1456,6 +1490,7 @@ COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override/d5urg4.spl~   // 			disrupt
 	SAY NAME1 @20257
 	SAY UNIDENTIFIED_DESC @20258
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1478,6 +1513,7 @@ COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   // 			fighting 
 	SAY NAME1 @20259
 	SAY UNIDENTIFIED_DESC @20260
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 3
 	END ELSE BEGIN
@@ -1521,6 +1557,7 @@ COPY ~might_and_guile/feats/d5_rfh1.spl~ ~override/d5urh1.spl~   //          gre
 	SAY NAME1 @20271
 	SAY UNIDENTIFIED_DESC @20272
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -1559,6 +1596,7 @@ COPY ~might_and_guile/feats/d5_rfh5.spl~ ~override/d5urh5.spl~   //           sh
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -1592,6 +1630,7 @@ COPY ~might_and_guile/feats/d5_rfh6.spl~ ~override/d5urh6.spl~   // 		  illusion
 	SAY NAME1 @20283
 	SAY UNIDENTIFIED_DESC @20284
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 4
 	END ELSE BEGIN
@@ -1780,6 +1819,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa1.spl~	//			offensive tac
 	SAY NAME1 @20321
 	SAY UNIDENTIFIED_DESC @20322
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -1822,6 +1862,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa2.spl~	//			defensive tac
 	SAY NAME1 @20323
 	SAY UNIDENTIFIED_DESC @20324
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -1864,6 +1905,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa3.spl~	//			efficient tac
 	SAY NAME1 @20325
 	SAY UNIDENTIFIED_DESC @20326
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -1919,6 +1961,7 @@ COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override/d5uwb1.spl~	//			aggressive p
 	SAY NAME1 @20341
 	SAY UNIDENTIFIED_DESC @20342
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -1968,6 +2011,7 @@ COPY ~might_and_guile/feats/d5_wfb2.spl~ ~override/d5uwb2.spl~	//			disarming po
 	SAY NAME1 @20343
 	SAY UNIDENTIFIED_DESC @20344
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2017,6 +2061,7 @@ COPY ~might_and_guile/feats/d5_wfb3.spl~ ~override/d5uwb3.spl~	//			parry slashi
 	SAY NAME1 @20345
 	SAY UNIDENTIFIED_DESC @20346
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2063,6 +2108,7 @@ COPY ~might_and_guile/feats/d5_wfb4.spl~ ~override/d5uwb4.spl~	//			parry pierci
 	SAY NAME1 @20347
 	SAY UNIDENTIFIED_DESC @20348
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2109,6 +2155,7 @@ COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override/d5uwb5.spl~	//			parry crushi
 	SAY NAME1 @20349
 	SAY UNIDENTIFIED_DESC @20350
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2158,6 +2205,7 @@ COPY ~might_and_guile/feats/d5_wfc1.spl~ ~override/d5uwc1.spl~   // 			quickstri
 	SAY NAME1 @2450
 	SAY UNIDENTIFIED_DESC @20110
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2190,6 +2238,7 @@ COPY ~might_and_guile/feats/d5_wfc2.spl~ ~override/d5uwc2.spl~   // 			+5 hp
 	SAY NAME1 @20305
 	SAY UNIDENTIFIED_DESC @20306
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2216,6 +2265,7 @@ COPY ~might_and_guile/feats/d5_wfc3.spl~ ~override/d5uwc3.spl~   // 			10% DR
 	SAY NAME1 @20307
 	SAY UNIDENTIFIED_DESC @20308
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2233,6 +2283,7 @@ COPY ~might_and_guile/feats/d5_wfc5.spl~ ~override/d5uwc5.spl~   // 			poison/di
 	SAY NAME1 @20309
 	SAY UNIDENTIFIED_DESC @20310
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN
@@ -2333,6 +2384,7 @@ COPY ~might_and_guile/feats/d5_wfc6.spl~ ~override/d5uwc6.spl~   // 			hold/stun
 	SAY NAME1 @20219
 	SAY UNIDENTIFIED_DESC @20220
 	WRITE_SHORT 0x1c 2
+	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
 	  WRITE_LONG 0x34 1
 	END ELSE BEGIN

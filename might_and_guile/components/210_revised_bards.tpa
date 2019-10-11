@@ -1772,6 +1772,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
   PATCH_FOR_EACH nu_song_y IN ~01y~ ~02y~ ~03y~ ~05y~ ~06y~ ~07y~ ~08y~ ~20y~ ~21y~ ~22y~ ~23y~ ~24y~ ~25y~ ~41y~ ~42y~ ~43y~ ~46y~ ~47y~ ~48y~ ~49y~ ~51a~ ~61y~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song_y%~ END
   END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bdxxx~ END
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
@@ -4304,7 +4305,7 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 		  INNER_PATCH_SAVE real_spell ~%bard_spell%~ BEGIN
 			REPLACE_TEXTUALLY ~[Dd]5[Bb][Pp]~ ~sppr~
 		  END
-		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
+		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%bard_spell%~)) BEGIN
 			INNER_ACTION BEGIN
 			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
 			END
@@ -4324,7 +4325,7 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 			REPLACE_TEXTUALLY ~[Dd]5[Bb][Ii]~ ~d5i4~
 		  END
 		  TEXT_SPRINT real_spell ~%bard_spell%~
-		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%arcane_spell%~)) BEGIN
+		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%bard_spell%~)) BEGIN
 			INNER_ACTION BEGIN
 			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
 			END
@@ -5526,27 +5527,27 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_JESTER~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END		//	extra feats
 END
 
-LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
-LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_902~ num_allowed = ~3~ END				//	death blow
-LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_908~ num_allowed = ~3~ END				//	war cry
-LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_321~ num_allowed = ~1~ END				//	zerk rage
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL902~ num_allowed = ~3~ END				//	death blow
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
+LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL321~ num_allowed = ~1~ END				//	zerk rage
 LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL913~ END					//	no evasion
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
-LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
-LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_904~ num_allowed = ~1~ END				//	resist magic
-LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_211~ num_allowed = ~1~ END				//	lay on hands
-LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_233~ num_allowed = ~3~ END				//	pro. evil 10' radius
+LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
+LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL904~ num_allowed = ~1~ END				//	resist magic
+LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL211~ num_allowed = ~1~ END				//	lay on hands
+LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL233~ num_allowed = ~3~ END				//	pro. evil 10' radius
 LAF action_remove_hla STR_VAR kit_name = ~D5_GALLANT~ remove_ability = ~GA_SPCL913~ END					//	no evasion
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END		//	extra feats
 END
 
-LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_907~ num_allowed = ~1~ END				//	resist magic
-LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_904~ num_allowed = ~1~ END				//	hardiness
-LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_908~ num_allowed = ~3~ END				//	war cry
+LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL907~ num_allowed = ~1~ END				//	resist magic
+LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL904~ num_allowed = ~1~ END				//	hardiness
+LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
@@ -5574,10 +5575,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
-LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
-LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_902~ num_allowed = ~3~ END				//	death blow
-LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_908~ num_allowed = ~3~ END				//	war cry
-LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_321~ num_allowed = ~1~ END				//	zerk rage
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL909~ num_allowed = ~3~ prerequisite = ~AP_SPCL905~ END	//	smite
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL902~ num_allowed = ~3~ END				//	death blow
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
+LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL321~ num_allowed = ~1~ END				//	zerk rage
 LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL913~ END					//	no evasion
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
@@ -5594,7 +5595,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 END
 
 /*
-LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_907~ num_allowed = ~1~ END			//	resist magic
+LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_SPCL907~ num_allowed = ~1~ END			//	resist magic
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END	//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END	//	spell evasion
@@ -5602,9 +5603,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 END
 */
 
-LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_907~ num_allowed = ~1~ END				//	resist magic
-LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_904~ num_allowed = ~1~ END				//	hardiness
-LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_908~ num_allowed = ~3~ END				//	war cry
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL907~ num_allowed = ~1~ END				//	resist magic
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL904~ num_allowed = ~1~ END				//	hardiness
+LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion

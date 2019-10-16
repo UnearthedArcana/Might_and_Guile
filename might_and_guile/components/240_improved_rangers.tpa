@@ -156,7 +156,12 @@ COPY_EXISTING ~d5poisev.2da~ ~override~
 	READ_2DA_ENTRY row 0 cols resist_res
 	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
 	  INNER_ACTION BEGIN
-		LAF add_evade_spell INT_VAR evasion_class = 12 evasion_save = 4 STR_VAR evade_condition = ~class~ evade_res = EVAL ~%resist_res%~ evade_prefix = ~D5RR~ END
+		LAF add_evade_spell INT_VAR evasion_class = 12 evasion_save = 4 STR_VAR evade_ext = ~spl~ evade_condition = ~class~ evade_res = EVAL ~%resist_res%~ evade_prefix = ~D5RR~ END
+	  END
+	END
+	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.itm~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_class = 12 evasion_save = 4 STR_VAR evade_ext = ~itm~ evade_condition = ~class~ evade_res = EVAL ~%resist_res%~ evade_prefix = ~D5RR~ END
 	  END
 	END
   END

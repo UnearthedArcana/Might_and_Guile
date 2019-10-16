@@ -1041,9 +1041,14 @@ COPY ~might_and_guile/feats/d5_rfd3.spl~ ~override/d5urd3.spl~   //			iwd spell 
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd3b~ END
 OUTER_SET optional_evade = 1
 INCLUDE ~%MOD_FOLDER%/lib/spell_evasion.tpa~
-ACTION_PHP_EACH evade_spells AS evadable_spell => ind BEGIN
-  ACTION_IF (%ind% = 1) BEGIN
-    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_res = EVAL ~%evadable_spell%~ evade_prefix = ~D5EV~ END
+ACTION_PHP_EACH evade_spells AS evadable_spell => val BEGIN
+  ACTION_IF (%val% = 1) BEGIN
+    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_ext = ~spl~ evade_res = EVAL ~%evadable_spell%~ evade_prefix = ~D5EV~ END
+  END
+END
+ACTION_PHP_EACH evade_items AS evadable_item => val BEGIN
+  ACTION_IF (%val% = 1) BEGIN
+    LAF add_evade_spell INT_VAR evasion_spellstate = 252 evasion_save = 2 STR_VAR evade_ext = ~itm~ evade_res = EVAL ~%evadable_item%~ evade_prefix = ~D5EV~ END
   END
 END
 COPY_EXISTING  ~d5urd3.spl~ ~override/d5vrd3.spl~ 
@@ -1219,7 +1224,12 @@ COPY_EXISTING ~d5chrmev.2da~ ~override~
 	READ_2DA_ENTRY row 0 cols charm_evade_res
 	PATCH_IF FILE_EXISTS_IN_GAME ~%charm_evade_res%.spl~ BEGIN
 	  INNER_ACTION BEGIN
-		LAF add_evade_spell INT_VAR evasion_spellstate = %charm_evasion_state% evasion_save = 1 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%charm_evade_res%~ evade_prefix = ~D5VC~ END
+		LAF add_evade_spell INT_VAR evasion_spellstate = %charm_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~spl~ evade_condition = ~spellstate~ evade_res = EVAL ~%charm_evade_res%~ evade_prefix = ~D5VC~ END
+	  END
+	END
+	PATCH_IF FILE_EXISTS_IN_GAME ~%charm_evade_res%.itm~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %charm_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~itm~ evade_condition = ~spellstate~ evade_res = EVAL ~%charm_evade_res%~ evade_prefix = ~D5VC~ END
 	  END
 	END
   END
@@ -2370,7 +2380,12 @@ COPY_EXISTING ~d5poisev.2da~ ~override~
 	READ_2DA_ENTRY row 0 cols poison_evade_res
 	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
 	  INNER_ACTION BEGIN
-		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
+		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~spl~ evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
+	  END
+	END
+	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.itm~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~itm~ evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
 	  END
 	END
   END
@@ -2437,7 +2452,12 @@ COPY_EXISTING ~d5stunev.2da~ ~override~
 	READ_2DA_ENTRY row 0 cols stun_evade_res
 	PATCH_IF FILE_EXISTS_IN_GAME ~%stun_evade_res%.spl~ BEGIN
 	  INNER_ACTION BEGIN
-		LAF add_evade_spell INT_VAR evasion_spellstate = %stun_evasion_state% evasion_save = 16 STR_VAR evade_condition = ~spellstate~ evade_res = EVAL ~%stun_evade_res%~ evade_prefix = ~D5VS~ END
+		LAF add_evade_spell INT_VAR evasion_spellstate = %stun_evasion_state% evasion_save = 16 STR_VAR evade_ext = ~spl~ evade_condition = ~spellstate~ evade_res = EVAL ~%stun_evade_res%~ evade_prefix = ~D5VS~ END
+	  END
+	END
+	PATCH_IF FILE_EXISTS_IN_GAME ~%stun_evade_res%.itm~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_spellstate = %stun_evasion_state% evasion_save = 16 STR_VAR evade_ext = ~itm~ evade_condition = ~spellstate~ evade_res = EVAL ~%stun_evade_res%~ evade_prefix = ~D5VS~ END
 	  END
 	END
   END

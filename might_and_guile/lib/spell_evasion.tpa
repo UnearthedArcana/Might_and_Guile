@@ -6,7 +6,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-// Version: 3.2
+// Version: 3.4
 
 /*
 SAVES:
@@ -28,6 +28,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell
 	evasion_save = 2 
 	evasion_chance = 100
   STR_VAR 
+    evade_ext = ~spl~
 	evade_condition = ~spellstate~ 
 	evade_res = ~this_spell~ 
 	evade_prefix = ~prefix~ 
@@ -103,69 +104,32 @@ DEFINE_ACTION_FUNCTION add_evade_spell
 	  END
 	END
   BUT_ONLY
-  ACTION_IF FILE_EXISTS_IN_GAME ~%evade_res%.spl~ BEGIN
-	ACTION_IF NOT FILE_CONTAINS_EVALUATED (~evad%evade_suffix%%evade_list%.2da~ ~%evade_res%~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%evade_res%.%evade_ext%~) BEGIN
+	ACTION_IF !(FILE_CONTAINS_EVALUATED (~evad%evade_suffix%%evade_list%.2da~ ~%evade_res%~)) BEGIN
 	  OUTER_SET evasion_ind = (evasion_ind + 1)
-	  COPY_EXISTING ~%evade_res%.spl~ ~override~
+	  COPY_EXISTING ~%evade_res%.%evade_ext%~ ~override~
 		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		LPF DELETE_EFFECT INT_VAR match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		PATCH_IF (~%evade_ext%~ STRING_EQUAL_CASE ~spl~) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		END
+		PATCH_IF (~%evade_ext%~ STRING_EQUAL_CASE ~itm~) BEGIN
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		END
 // 	if traditional evasion, do not evade when helpless
 		PATCH_IF %evade_cond% = 252 BEGIN	
 		  LPF DELETE_EFFECT INT_VAR match_opcode = 318 match_parameter2 = 136 END
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		END
-	  CREATE EFF ~%evade_prefix%A%evasion_ind%~
-		WRITE_LONG 0x10 318
-		WRITE_LONG 0x14 2
-		WRITE_LONG 0x1c %evade_cond%
-		WRITE_LONG 0x20 %evade_type%
-		WRITE_LONG 0x24 0
-		WRITE_LONG 0x28 1
-		WRITE_BYTE 0x40 %evasion_save%
-		WRITE_SHORT 0x2c %evade_prob_1%
-		WRITE_EVALUATED_ASCII 0x30 ~%evade_prefix%B%evasion_ind%~ #8
-		WRITE_LONG 0x90 1
-		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%A%evasion_ind%~ #8
-	  CREATE EFF ~%evade_prefix%B%evasion_ind%~
-		WRITE_LONG 0x10 324
-		WRITE_LONG 0x14 2
-		WRITE_LONG 0x1c %evade_cond%
-		WRITE_LONG 0x20 %evade_type%
-		WRITE_LONG 0x24 0
-		WRITE_LONG 0x28 1
-		WRITE_SHORT 0x2c %evade_prob_2%
-		WRITE_EVALUATED_ASCII 0x30 ~%evade_res%~ #8
-		WRITE_LONG 0x90 1
-		WRITE_EVALUATED_ASCII 0x94 ~%evade_prefix%B%evasion_ind%~ #8
-	  APPEND ~evad%evade_suffix%%evade_list%.2da~ ~%evasion_ind%%TAB%%evade_res%%TAB%%evade_prefix%_%evasion_ind%~
-	END
-  END
-  ACTION_IF FILE_EXISTS_IN_GAME ~%evade_res%.itm~ BEGIN
-	ACTION_IF NOT FILE_CONTAINS_EVALUATED (~evad%evade_suffix%%evade_list%.2da~ ~%evade_res%~) BEGIN
-	  OUTER_SET evasion_ind = (evasion_ind + 1)
-	  COPY_EXISTING ~%evade_res%.itm~ ~override~
-		LPF DELETE_EFFECT INT_VAR match_opcode = 324 match_parameter2 = 63 END
-		LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF DELETE_EFFECT INT_VAR match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		LPF DELETE_EFFECT INT_VAR match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-// 	if traditional evasion, do not evade when helpless
-		PATCH_IF %evade_cond% = 252 BEGIN	
-		  LPF DELETE_EFFECT INT_VAR match_opcode = 318 match_parameter2 = 136 END
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 match_savingthrow = %evasion_save% parameter1 = 0x0015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		END
 	  CREATE EFF ~%evade_prefix%A%evasion_ind%~
 		WRITE_LONG 0x10 318
@@ -337,7 +301,7 @@ ACTION_IF (optional_evade = 1) BEGIN
 	cdstaf12		=> 1
 // add all beholder abilities???
   END
-  ACTION_IF MOD_IS_INSTALLED ~item_rev~ ~0~ BEGIN
+  ACTION_IF (MOD_IS_INSTALLED ~item_rev.tp2~ ~0~) BEGIN
 	ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN
 	  potn26			=> 1
 	  potn27			=> 1
@@ -351,7 +315,7 @@ ACTION_IF (optional_evade = 1) BEGIN
 	  wand11			=> 1
 	END
   END
-  ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN		
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_items BEGIN		
 	amul01 			=> 1
 	arow06 			=> 1
 	frag01 			=> 1
@@ -364,8 +328,8 @@ ACTION_IF (optional_evade = 1) BEGIN
 	ring20 			=> 1
 	ttwand 			=> 1
   END
-  ACTION_IF NOT MOD_IS_INSTALLED ~item_rev~ ~0~ BEGIN
-    ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN		
+  ACTION_IF !(MOD_IS_INSTALLED ~item_rev.tp2~ ~0~) BEGIN
+    ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_items BEGIN		
 	  fireseed			=> 1
 	  potn13 			=> 1
 	  potn26 			=> 1

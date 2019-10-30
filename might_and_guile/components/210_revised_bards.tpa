@@ -1200,7 +1200,7 @@ ADD_KIT ~D5_HERALD~
 ~might_and_guile/nubards/d5_hrld.2da~
 
 //RACIAL KIT AVAILABILITY____________________________________________________________
-~K_FM_E K_FM_H K_FM_HE~
+~K_FT_D K_FT_E K_FT_H K_FT_HE K_FT_G K_FT_HL K_FT_HO~
 
 //UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
@@ -1497,7 +1497,7 @@ END
 // make spell to cast those 206 spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bs206.spl~
   PATCH_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5%prof%6~ END
   END
 BUT_ONLY
 
@@ -3017,7 +3017,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
 		SAY NAME1 @20099
 		SAY UNIDENTIFIED_DESC @20100
 		WRITE_ASCII 0x3a ~d5_feat~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5_feat~ END
+		LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5_feat~ END
 		LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5feat%let%~ END
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
 	END
@@ -3110,7 +3110,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
 	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
 	INNER_ACTION BEGIN
 	  COPY_EXISTING ~kitlist.2da~ ~override~
-		READ_2DA_ENTRIES_NOW rows 9
+		READ_2DA_ENTRIES_NOW rows 10
 		FOR (row = 1; row < rows; ++row) BEGIN
 	      READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
 	      READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
@@ -3694,6 +3694,7 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~))
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %IDPRO303% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 12 dicenumber = 4 decesize = 8 END
   COPY ~might_and_guile/nubards/sppr427b.bam~ ~override~
+  COPY ~might_and_guile/nubards/sppr427c.bam~ ~override~
   COPY ~might_and_guile/nubards/tsprayt.bam~ ~override~
   COPY ~might_and_guile/nubards/#tra_61.wav~ ~override~
 END
@@ -3721,6 +3722,7 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH$~)
 	WRITE_LONG 0x34 4
 	LPF ALTER_SPELL_HEADER INT_VAR projectile = %IDPRO300% END
   COPY ~might_and_guile/nubards/sppr324b.bam~ ~override~
+  COPY ~might_and_guile/nubards/sppr324c.bam~ ~override~
   COPY ~might_and_guile/nubards/sgrowta.bam~ ~override~
   COPY ~might_and_guile/nubards/sgrowtx.bam~ ~override~
 END
@@ -4113,45 +4115,52 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bsplz.spl~
 // [ level 9 = (108 << 24) ]
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src1a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src2a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src2%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src3a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src3%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src4a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src4%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src5a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src5%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src6a~ END
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src6%let%~ END
+  END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7a.spl~ BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src7a~ END
-END
-ACTION_FOR_EACH lev IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ BEGIN
-  ACTION_FOR_EACH let IN ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY_EXISTING ~d5src%lev%a.spl~ ~override/d5src%lev%%let%.spl~
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR match_resource = EVAL ~d5src%lev%a.spl~ resource = EVAL ~d5src%lev%%let%~ END
-	IF_EXISTS
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src7%let%~ END
   END
 END
 
@@ -4307,7 +4316,7 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 		  END
 		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%bard_spell%~)) BEGIN
 			INNER_ACTION BEGIN
-			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+			  APPEND ~d5bclons.2da~ ~%bard_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
 			END
 		  END
 		END
@@ -4327,7 +4336,7 @@ ACTION_PHP_EACH nu_bard_spells AS ind => bard_spell BEGIN
 		  TEXT_SPRINT real_spell ~%bard_spell%~
 		  PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~d5bclons.2da~ ~%bard_spell%~)) BEGIN
 			INNER_ACTION BEGIN
-			  APPEND ~d5bclons.2da~ ~%arcane_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+			  APPEND ~d5bclons.2da~ ~%bard_spell%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
 			END
 		  END
 		END
@@ -7445,6 +7454,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~CLSRCREQ.2da~ BEGIN
 	FOR (row = 0 ; row < rows ; ++row) BEGIN
       READ_2DA_ENTRY row 0 8 entry
       PATCH_IF ("%entry%" STRING_COMPARE_CASE "FIGHTER_MAGE"      = 0) OR
+                ("%entry%" STRING_COMPARE_CASE "FIGHTER_THIEF" 	 = 0) OR
                 ("%entry%" STRING_COMPARE_CASE "MAGE_THIEF" 	 = 0) OR
                 ("%entry%" STRING_COMPARE_CASE "CLERIC_THIEF" 	 = 0) BEGIN
     	SET_2DA_ENTRY  row 1 8 1

@@ -1,278 +1,499 @@
 //---------------------------------------------
-// qd_multiclass 
+// qd_multiclass
 // For adding existing kits to the multiclass kit selection during chargen.
-// For use with the Enhanced Infinity Engine v2.0 and later. 
+// For use with the Enhanced Infinity Engine v2.0 and later.
 // Author: Aquadrizzt (updated by Subtledoctor, improved by Argent77)
-// Version: 0.8
-// Published: November 26, 2017 
+// Version: 0.10
+// Published: November 26, 2017
 //---------------------------------------------
 
+<<<<<<<< .../inlined/qd_blank.file
+>>>>>>>>
 
-DEFINE_PATCH_FUNCTION ~ADD_NEW_EMPTY_SPELL_HEADER~
-  INT_VAR
-    type=1
-    location=4
-    target=1
-    target_count=0
-    range=0
-    required_level=1
-    speed=0
-    projectile=1
-    copy_header=0
-    insert_point=~-1~
-  STR_VAR
-    icon=~~
-  RET
-    insert_point
+<<<<<<<< .../inlined/qd_table.file
+2DA V1.0
+>>>>>>>>
+
+
+// Add new ability header to current spell resource
+DEFINE_PATCH_FUNCTION QD_ADD_EMPTY_SPELL_HEADER
+INT_VAR
+  type            = 1
+  location        = 4
+  target          = 1
+  target_count    = 0
+  range           = 0
+  required_level  = 1
+  speed           = 0
+  projectile      = 1
+  copy_header     = 0
+  insert_point    = ~-1~
+STR_VAR
+  icon            = ~~
+RET
+  insert_point
 BEGIN
-  hs=0x28
+  SET hs = 0x28
   READ_LONG 0x64 ho
   READ_SHORT 0x68 hc
   READ_LONG 0x6a eo
-  insert_point = (insert_point>hc || insert_point<0) ? hc : insert_point
-  copy_header = (copy_header<0) ? 0 : copy_header
-  PATCH_IF copy_header>hc BEGIN
-    PATCH_WARN ~Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  SET insert_point = (insert_point > hc || insert_point < 0) ? hc : insert_point
+  SET copy_header = (copy_header < 0) ? 0 : copy_header
+  PATCH_IF (copy_header > hc) BEGIN
+    PATCH_WARN ~WARNING: Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
   END ELSE BEGIN
-    INSERT_BYTES ho+insert_point*hs hs
-    hc+=1
-    eo+=hs
-    PATCH_IF copy_header BEGIN
-      READ_SHORT ho+(copy_header - 1)*hs+0x1e ec
-      READ_SHORT ho+(copy_header - 1)*hs+0x20 ei
-      READ_ASCII eo+ei*0x30 effs (ec*0x30)
-      READ_ASCII ho+(copy_header - 1)*hs copy (hs)
-      WRITE_ASCIIE ho+insert_point*hs ~%copy%~ (hs)
+    INSERT_BYTES (ho + insert_point * hs) hs
+    SET hc += 1
+    SET eo += hs
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x1e) ec
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x20) ei
+      READ_ASCII (eo + ei * 0x30) effs (ec * 0x30)
+      READ_ASCII (ho + (copy_header - 1) * hs) copy (hs)
+      WRITE_ASCIIE (ho + insert_point * hs) ~%copy%~ (hs)
     END
     WRITE_SHORT 0x68 hc
     WRITE_LONG 0x6a eo
     READ_SHORT 0x70 ei // technically, it is a counter
-    FOR (i=ho;i<ho+hc*hs;i+=hs) BEGIN
-      READ_SHORT i+0x1e ec
-      WRITE_SHORT i+0x20 ei
-      ei+=ec
+    FOR (i = ho; i < ho + hc * hs; i += hs) BEGIN
+      READ_SHORT (i + 0x1e) ec
+      WRITE_SHORT (i + 0x20) ei
+      SET ei += ec
     END
-    PATCH_IF copy_header BEGIN
-      READ_SHORT ho+insert_point*hs+0x1e ec
-      READ_SHORT ho+insert_point*hs+0x20 ei
-      INSERT_BYTES eo+ei*0x30 ec*0x30
-      WRITE_ASCIIE eo+ei*0x30 ~%effs%~ (ec*0x30)
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + insert_point * hs + 0x1e) ec
+      READ_SHORT (ho + insert_point * hs + 0x20) ei
+      INSERT_BYTES (eo + ei * 0x30) (ec * 0x30)
+      WRITE_ASCIIE (eo + ei * 0x30) ~%effs%~ (ec * 0x30)
     END ELSE BEGIN
-      off=ho+insert_point*hs
+      SET off = ho + insert_point * hs
       WRITE_BYTE off type
-      WRITE_BYTE off+0x2 location
-      WRITE_ASCIIE off+0x4 ~%icon%~ (8)
-      WRITE_BYTE off+0xc target
-      WRITE_BYTE off+0xd target_count
-      WRITE_SHORT off+0xe range
-      WRITE_SHORT off+0x10 required_level
-      WRITE_LONG off+0x12 speed
-      WRITE_SHORT off+0x26 projectile
+      WRITE_BYTE (off + 0x2) location
+      WRITE_ASCIIE (off + 0x4) ~%icon%~ (8)
+      WRITE_BYTE (off + 0xc) target
+      WRITE_BYTE (off + 0xd) target_count
+      WRITE_SHORT (off + 0xe) range
+      WRITE_SHORT (off + 0x10) required_level
+      WRITE_LONG (off + 0x12) speed
+      WRITE_SHORT (off + 0x26) projectile
     END
   END
-END	
+END
+
+
+// Ensure CLAB table of given name exists
+DEFINE_ACTION_FUNCTION QD_ENSURE_CLAB_TABLE
+STR_VAR
+  resref = ~~
+BEGIN
+  ACTION_IF !(~%resref%~ STR_EQ ~~ OR
+              FILE_EXISTS_IN_GAME ~%resref%.2DA~) BEGIN
+    OUTER_TEXT_SPRINT default ~****~
+    OUTER_TEXT_SPRINT hdr ~~
+    OUTER_TEXT_SPRINT data ~~
+    OUTER_FOR (i = 1; i < 51; ++i) BEGIN
+      OUTER_TEXT_SPRINT hdr ~%hdr% %i%~
+      OUTER_TEXT_SPRINT data ~%data% %default%~
+    END
+    COPY ~.../inlined/qd_table.file~ ~override/%resref%.2DA~
+    APPEND ~%resref%.2DA~ ~%default%~
+    APPEND ~%resref%.2DA~ ~%hdr%~
+    OUTER_FOR (i = 1; i < 7; ++i) BEGIN
+      APPEND ~%resref%.2DA~ ~ABILITY%i% %data%~
+    END
+    COPY_EXISTING ~%resref%.2DA~ ~override~
+      PRETTY_PRINT_2DA
+    BUT_ONLY
+  END
+END
+
+
+// Pad specified CLAB table up to 50 data columns
+DEFINE_ACTION_FUNCTION QD_PAD_CLAB_TABLE
+STR_VAR
+  resref = ""
+BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%resref%.2DA~) BEGIN
+    OUTER_SET columns = 0
+    COPY_EXISTING ~%resref%.2DA~ ~override~
+      READ_2DA_ENTRIES_NOW rows 1
+      READ_2DA_ENTRY_FORMER rows 1 0 default
+      FOR (col = 41; col < 51; ++col) BEGIN // assuming first 40 columns are always defined
+        TEXT_SPRINT string ~$ $~ // header and default row are ignored
+        SET col2 = col - 1  // compensate for data header row being short by one entry
+        PATCH_IF (VARIABLE_IS_SET $rows(~2~ ~%col2%~)) BEGIN
+          TEXT_SPRINT string ~%string% $~
+        END ELSE BEGIN
+          TEXT_SPRINT string ~%string% %col%~
+        END
+        FOR (row = 3; row < rows; ++row) BEGIN
+          PATCH_IF (VARIABLE_IS_SET $rows(~%row%~ ~%col%~)) BEGIN
+            TEXT_SPRINT string ~%string% $~
+          END ELSE BEGIN
+            SET col2 = col - 10 // cloning a previous entry to keep table data consistent
+            TEXT_SPRINT value $rows(~%row%~ ~%col2%~)
+            TEXT_SPRINT string ~%string% %value%~
+          END
+        END
+        // checking whether column has to be added
+        PATCH_IF (INDEX(~[^ %TAB%$]~ ~%string%~) >= 0) BEGIN
+          TEXT_SPRINT $columns(~%columns%~) ~%string%~
+          SET columns += 1
+        END
+      END
+    BUT_ONLY
+
+    OUTER_FOR (col = 0; col < columns; ++col) BEGIN
+      OUTER_TEXT_SPRINT string $columns(~%col%~)
+      APPEND_COL ~%resref%.2DA~ ~%string%~
+    END
+  END
+END
+
+
+// Ensure helper spells for multiclass abilities are available
+DEFINE_ACTION_FUNCTION QD_ENSURE_QDMC_SPL
+STR_VAR
+  base_class = ""
+BEGIN
+  ACTION_IF (~%base_class%~ STRING_MATCHES_REGEXP ~[DFMPRT]~ = 0 &&
+             NOT FILE_EXISTS_IN_GAME ~QD_MC%base_class%01.SPL~) BEGIN
+    ACTION_IF (NOT FILE_EXISTS ~.../inlined/QD_MC_01.SPL~) BEGIN
+      // create template SPL file for internal use
+      COPY - ~.../inlined/qd_blank.file~ ~.../inlined/QD_MC_01.SPL~
+        INSERT_BYTES 0 0x72
+        WRITE_ASCII  0x00 "SPL V1  " (8)
+        PATCH_FOR_EACH ofs IN ~0x08~ ~0x0c~ ~0x50~ ~0x54~ BEGIN
+          WRITE_LONG ofs "-1"
+        END
+        WRITE_LONG   0x64 0x72 // ability offset
+        WRITE_LONG   0x6a 0x72 // effects offset
+        LPF QD_ADD_EMPTY_SPELL_HEADER END
+    END
+
+    // generate ability spells
+    OUTER_FOR (col = 1; col < 51; ++col) BEGIN
+      ACTION_IF (col < 10) BEGIN
+        OUTER_TEXT_SPRINT resref1 ~QD_MC%base_class%0%col%~
+        OUTER_TEXT_SPRINT resref2 ~QD#MC%base_class%0%col%~
+      END ELSE BEGIN
+        OUTER_TEXT_SPRINT resref1 ~QD_MC%base_class%%col%~
+        OUTER_TEXT_SPRINT resref2 ~QD#MC%base_class%%col%~
+      END
+      ACTION_IF !(FILE_EXISTS_IN_GAME ~%resref1%.SPL~) BEGIN
+        COPY ~.../inlined/QD_MC_01.SPL~ ~override/%resref1%.SPL~
+          LPF ADD_SPELL_EFFECT
+            INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 9
+            STR_VAR resource = EVAL ~%resref2%~
+          END
+      END
+      ACTION_IF !(FILE_EXISTS_IN_GAME ~%resref2%.SPL~) BEGIN
+        COPY ~.../inlined/QD_MC_01.SPL~ ~override/%resref2%.SPL~
+          LPF ADD_SPELL_EFFECT
+            INT_VAR opcode = 206 target = 1 parameter1 = "-1" timing = 9
+            STR_VAR resource = EVAL ~%resref1%~
+          END
+      END
+    END
+  END
+END
+
+
+// Ensure specified base class CLAB contains multiclass helper entries
+DEFINE_ACTION_FUNCTION QD_ENSURE_BASE_CLAB
+STR_VAR
+  base_class  = "" // base class token
+RET
+  success
+  clab_resref
+BEGIN
+  OUTER_SET success = 0
+  OUTER_TEXT_SPRINT clab_resref ~~
+  ACTION_IF (~%base_class%~ STRING_MATCHES_REGEXP ~[DFMPRT]~ = 0) BEGIN
+    // getting corresponding base class CLAB resref
+    ACTION_DEFINE_ASSOCIATIVE_ARRAY base_clabs BEGIN
+      ~D~ => ~CLABDR01~
+      ~F~ => ~CLABFI01~
+      ~M~ => ~CLABMA01~
+      ~P~ => ~CLABPR01~
+      ~R~ => ~CLABRN01~
+      ~T~ => ~CLABTH01~
+    END
+    OUTER_TEXT_SPRINT clab_resref $base_clabs(~%base_class%~)
+
+    // make sure base CLAB table exists
+    LAF QD_ENSURE_CLAB_TABLE STR_VAR resref = EVAL ~%clab_resref%~ END
+
+    ACTION_IF (NOT FILE_CONTAINS_EVALUATED(~%clab_resref%.2DA~ ~^[ %TAB%]*QD_MULTI[ %TAB%]~)) BEGIN
+      // padding CLAB table
+      LAF QD_PAD_CLAB_TABLE STR_VAR resref = EVAL ~%clab_resref%~ END
+
+      // adding QD_MULTI row
+      OUTER_TEXT_SPRINT line ~QD_MULTI ~
+      OUTER_FOR (i = 1; i < 51; ++i) BEGIN
+        ACTION_IF (i < 10) BEGIN
+          OUTER_TEXT_SPRINT line ~%line% AP_QD_MC%base_class%0%i%~
+        END ELSE BEGIN
+          OUTER_TEXT_SPRINT line ~%line% AP_QD_MC%base_class%%i%~
+        END
+      END
+      APPEND ~%clab_resref%.2DA~ ~%line%~
+      COPY_EXISTING ~%clab_resref%.2DA~ ~override~
+        PRETTY_PRINT_2DA
+      BUT_ONLY
+    END
+    OUTER_SET success = 1
+  END
+END
+
+
+// Ensure kittable tables of given class exist
+DEFINE_ACTION_FUNCTION QD_ENSURE_KITTABLE
+STR_VAR
+  class = ~~  // leave empty to create all multiclass tables at once
+BEGIN
+  COPY_EXISTING ~kittable.2da~ ~override~
+    READ_2DA_ENTRIES_NOW kittable 1
+    FOR (row = 3; row < kittable; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER kittable row 0 name
+      PATCH_IF (~%name%~ STR_EQ ~%class%~ OR
+                (~%class%~ STR_EQ ~~ AND INDEX(~_~ ~%name%~) >= 0)) BEGIN
+        FOR (col = 1; VARIABLE_IS_SET $kittable(~%row%~ ~%col%~); ++col) BEGIN
+          READ_2DA_ENTRY_FORMER kittable row col resref
+          PATCH_IF !(FILE_EXISTS_IN_GAME ~%resref%.2DA~) BEGIN
+            INNER_ACTION BEGIN
+              COPY ~.../inlined/qd_table.file~ ~override/%resref%.2DA~
+              APPEND ~%resref%.2DA~ ~*~
+              APPEND ~%resref%.2DA~ ~     KIT~
+              APPEND ~%resref%.2DA~ ~1    0~
+            END
+          END
+        END
+        PATCH_IF !(~%class%~ STR_EQ ~~) BEGIN
+          SET row = kittable
+        END
+      END
+    END
+  BUT_ONLY
+END
 
 
 //---------------------------------------------------------------
 // QD_MULTICLASS (by Aquadrizzt, etc.)
 //---------------------------------------------------------------
-OUTER_SPRINT qd_multiclass#version "0.8"
+OUTER_SPRINT qd_multiclass#version "0.10"
 
-<<<<<<<< .../inlined/qd_blank_clab_inline.2da
-2DA V1.0
-****
-            1           2           3           4           5           6           7           8           9           10          11          12          13          14          15          16          17          18          19          20     21          22          23          24          25          26          27          28          29          30          31          32          33          34          35          36          37          38          39          40
-ABILITY1    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****
->>>>>>>>
-
-ACTION_IF (NOT FILE_EXISTS_IN_GAME ~CLABMA01.2DA~) BEGIN
-  COPY ~.../inlined/qd_blank_clab_inline.2da~ ~override/CLABMA01.2DA~
+// All base class CLAB tables should exist before calling ADD_KIT
+ACTION_FOR_EACH resref IN ~CLABDR01~ ~CLABFI01~ ~CLABMA01~ ~CLABPR01~ ~CLABRN01~ ~CLABTH01~ BEGIN
+  LAF QD_ENSURE_CLAB_TABLE STR_VAR resref END
 END
 
-// this will only install the first time a multiclass kit using this macro is installed
-ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qd_multi.qd~) BEGIN
-  // make sure qdmulti row exists in each base class CLAB
-  ACTION_DEFINE_ASSOCIATIVE_ARRAY base_clabs BEGIN
-    ~CLABFI01~ => ~F~
-    ~CLABTH01~ => ~T~
-    ~CLABDR01~ => ~D~
-    ~CLABMA01~ => ~M~
-    ~CLABPR01~ => ~P~
-    ~CLABRN01~ => ~R~
-  END
-  ACTION_PHP_EACH base_clabs AS resref => type BEGIN
-    ACTION_IF (NOT FILE_CONTAINS_EVALUATED (~%resref%.2DA~ ~^QD_MULTI[ %TAB%]~)) BEGIN
-      // padding table so that number of CLAB columns is consistent for each row
-      OUTER_SET columns = 0
-      COPY_EXISTING ~%resref%.2DA~ ~override~
-        READ_2DA_ENTRIES_NOW rows 1
-        READ_2DA_ENTRY_FORMER rows 1 0 default
-        FOR (col = 41; col < 51; ++col) BEGIN // assuming first 40 columns are always defined
-          TEXT_SPRINT string ~$ $~ // header and default row are ignored
-          SET col2 = col - 1  // compensate for data header row being short by one entry
-          PATCH_IF (VARIABLE_IS_SET $rows(~2~ ~%col2%~)) BEGIN
-            TEXT_SPRINT string ~%string% $~
-          END ELSE BEGIN
-            TEXT_SPRINT string ~%string% %col%~
-          END
-          FOR (row = 3; row < rows; ++row) BEGIN
-            PATCH_IF (VARIABLE_IS_SET $rows(~%row%~ ~%col%~)) BEGIN
-              TEXT_SPRINT string ~%string% $~
-            END ELSE BEGIN
-              SET col2 = col - 10 // cloning a previous entry to keep table data consistent
-              TEXT_SPRINT value $rows(~%row%~ ~%col2%~)
-              TEXT_SPRINT string ~%string% %value%~
-            END
-          END
-          // checking whether column has to be added
-          PATCH_IF (INDEX(~[^ %TAB%$]~ ~%string%~) >= 0) BEGIN
-            TEXT_SPRINT $columns(~%columns%~) ~%string%~
-            SET columns += 1
-          END
-        END
-      BUT_ONLY
-
-      OUTER_FOR (col = 0; col < columns; ++col) BEGIN
-        OUTER_TEXT_SPRINT string $columns(~%col%~)
-        APPEND_COL ~%resref%.2DA~ ~%string%~
-      END
-
-      // adding QD_MULTI row
-      OUTER_TEXT_SPRINT line ~QD_MULTI   ~
-      OUTER_FOR (i = 1; i < 51; ++i) BEGIN
-        ACTION_IF (i < 10) BEGIN
-          OUTER_TEXT_SPRINT line ~%line% AP_QD_MC%type%0%i%~
-        END ELSE BEGIN
-          OUTER_TEXT_SPRINT line ~%line% AP_QD_MC%type%%i%~
-        END
-      END
-      APPEND ~%resref%.2DA~ ~%line%~
-
-      COPY_EXISTING ~%resref%.2DA~ ~override~
-        PRETTY_PRINT_2DA
-      BUT_ONLY
-    END
-  END
-
-<<<<<<<< .../inlined/qd_blank_k_x_x_inline.2da
-2DA V1.0
-*
-     KIT
-1    0
->>>>>>>>
-
-  // making the multiclass K_X_X
-  ACTION_FOR_EACH mc IN ~FM~ ~FC~ ~FT~ ~FMT~ ~MT~ ~CM~ ~CT~ ~FD~ ~FMC~ ~CR~ BEGIN
-    ACTION_FOR_EACH race IN ~H~ ~D~ ~G~ ~E~ ~HE~ ~HL~ ~HO~ BEGIN
-      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~K_%mc%_%race%.2da~) BEGIN
-        COPY ~.../inlined/qd_blank_k_x_x_inline.2da~ ~override/K_%mc%_%race%.2da~
-      END
-    END
-  END
-
-  COPY_EXISTING ~sw1h01.itm~ ~override/qd_multi.qd~ // multiclass macro identifier file
-END
+// All multiclass kittable files should exist before calling ADD_KIT
+LAF QD_ENSURE_KITTABLE END
 
 
 DEFINE_ACTION_FUNCTION qd_multiclass
 STR_VAR
-  kit_name   = ""
-  kit_clab   = ""
-  base_class = ""
+  kit_name   = "" // (mandatory) symbolic kit name
+  kit_clab   = "" // (optional) resref of CLAB table (without extension); leave empty to use entry from kitlist.2da
+  base_class = "" // (optional) can be a token (D,F,M,P,R,T), valid class name (e.g. FIGHTER) or numeric class value (e.g. 2 for FIGHTER)
 BEGIN
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_AP.eff~) BEGIN
-    CREATE EFF ~QD_MC_AP~
-      WRITE_LONG   0x10 146 // cast spell
-      WRITE_LONG   0x14 2   // preset target
-      WRITE_LONG   0x20 1   // cast instantly (ignore level)
-      WRITE_SHORT  0x24 1   // permament until death
-      WRITE_SHORT  0x2c 100 // probability 100%
+  // basic kit name check
+  OUTER_SET kit_id = IDS_OF_SYMBOL(~kit~ ~%kit_name%~)
+  ACTION_IF (kit_id < 0) BEGIN
+    FAIL ~ERROR: Kit name does not exist [%kit_name%]~
   END
 
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_GA.eff~) BEGIN
-    CREATE EFF ~QD_MC_GA~
-      WRITE_LONG   0x10 171 // give spell
-      WRITE_LONG   0x14 2   // preset target
-      WRITE_SHORT  0x24 1   // permament until death
-      WRITE_SHORT  0x2c 100 // probability 100%
+  // parent multiclass check
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY multiclass_entries BEGIN
+    ~7~   => ~FIGHTER_MAGE~
+    ~8~   => ~FIGHTER_CLERIC~
+    ~9~   => ~FIGHTER_THIEF~
+    ~10~  => ~FIGHTER_MAGE_THIEF~
+    ~13~  => ~MAGE_THIEF~
+    ~14~  => ~CLERIC_MAGE~
+    ~15~  => ~CLERIC_THIEF~
+    ~16~  => ~FIGHTER_DRUID~
+    ~17~  => ~FIGHTER_MAGE_CLERIC~
+    ~18~  => ~CLERIC_RANGER~
   END
-
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC_01.spl~) BEGIN
-    CREATE SPL ~QD_MC_01~
-    COPY_EXISTING ~QD_MC_01.SPL~ ~override~
-      LPF ADD_NEW_EMPTY_SPELL_HEADER END
-  END
-
-  OUTER_FOR (num = 1; num < 10; ++num) BEGIN
-	ACTION_FOR_EACH class IN ~D~ ~F~ ~M~ ~P~ ~R~ ~T~ BEGIN
-	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC%class%0%num%.spl~) BEGIN 
-		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MC%class%0%num%.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~QD#MC%class%0%num%~ END
-	  END
-	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD#MC%class%0%num%.spl~) BEGIN 
-		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD#MC%class%0%num%.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~QD_MC%class%0%num%~ END
-	  END
-	END
-  END
-  OUTER_FOR (num = 10; num < 51; ++num) BEGIN
-	ACTION_FOR_EACH class IN ~D~ ~F~ ~M~ ~P~ ~R~ ~T~ BEGIN
-	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_MC%class%%num%.spl~) BEGIN 
-		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD_MC%class%%num%.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~QD#MC%class%%num%~ END
-	  END
-	  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD#MC%class%%num%.spl~) BEGIN 
-		COPY_EXISTING ~QD_MC_01.SPL~ ~override/QD#MC%class%%num%.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~QD_MC%class%%num%~ END
-	  END
-	END
-  END
-
-  // read clab
-  COPY_EXISTING ~%kit_clab%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    READ_2DA_ENTRIES_NOW rows 1
-    READ_2DA_ENTRY_FORMER rows 1 0 default
-    FOR (row = 3; row < rows; ++row) BEGIN
-      FOR (col = 1; col < cols; ++col) BEGIN
-        READ_2DA_ENTRY_FORMER rows row col ability
-        TO_UPPER ~ability~
-        // PATCH_PRINT ~%ability%~
-        PATCH_IF (NOT ~%ability%~ STR_EQ ~%default%~) BEGIN
-          // SNPRINT 3 abil_type ~%ability%~
-          LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END
-          SET string_length = (STRING_LENGTH ~%ability%~) - 3
-          LPF SUBSTRING INT_VAR start = 3 length = string_length STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
-          PATCH_IF (string_length <= 7) BEGIN
-            DEFINE_ASSOCIATIVE_ARRAY abil_types BEGIN
-              ~AP_~ => ~QD_MC_AP~
-              ~GA_~ => ~QD_MC_GA~
-            END
-            PATCH_IF (VARIABLE_IS_SET $abil_types(~%abil_type%~)) BEGIN
-              // granted abilities or bonuses
-              TEXT_SPRINT qdmc_eff_resref $abil_types(~%abil_type%~)
-              // PATCH_PRINT ~%ability% > %abil_new% , LVL %col%~
-              INNER_ACTION BEGIN
-                COPY_EXISTING ~%qdmc_eff_resref%.EFF~ ~override/%abil_new%#.EFF~
-                  WRITE_ASCIIE 0x30 ~%abil_new%~
-                  SET col_length = STRING_LENGTH ~%col%~
-                ACTION_IF (col < 10) BEGIN
-                  OUTER_TEXT_SPRINT qdmc_spl_resref ~QD_MC%base_class%0%col%~
-                END ELSE BEGIN
-                  OUTER_TEXT_SPRINT qdmc_spl_resref ~QD_MC%base_class%%col%~
-                END
-                COPY_EXISTING ~override/%qdmc_spl_resref%.SPL~ ~override~
-                  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = IDS_OF_SYMBOL(~Kit~ ~%kit_name%~) parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END
-              END
-            END ELSE BEGIN
-              // exceptions
-              PATCH_WARN ~Error reading kit table.~
-            END
-          END ELSE BEGIN
-            PATCH_WARN ~Internal ability name too long.~
+  OUTER_SET parent_class_id = 0
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    READ_2DA_ENTRIES_NOW kitlist 1
+    READ_2DA_ENTRY_FORMER kitlist 1 0 default
+    FOR (row = 3; row < kitlist; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER kitlist row 1 name
+      PATCH_IF (~%name%~ STR_EQ ~%kit_name%~) BEGIN
+        READ_2DA_ENTRY_FORMER kitlist row 8 value
+        PATCH_IF (IS_AN_INT ~value~) BEGIN
+          SET parent_class_id = value
+        END
+        PATCH_IF (~%kit_clab%~ STR_EQ ~~) BEGIN
+          READ_2DA_ENTRY_FORMER kitlist row 5 resref
+          PATCH_IF !(~%resref%~ STR_EQ ~%default%~) BEGIN
+            TEXT_SPRINT kit_clab ~%resref%~
           END
         END
+        SET row = kitlist
       END
     END
   BUT_ONLY
+  ACTION_IF !(VARIABLE_IS_SET $multiclass_entries(~%parent_class_id%~)) BEGIN
+    FAIL ~ERROR: Invalid or unsupported parent class of kit [%kit_name%]~
+  END
+
+  // determine whether "kit_clab" points to a base class table
+  OUTER_SET skip = 0
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY base_clabs BEGIN
+    ~DRUID~   => ~CLABDR01~
+    ~FIGHTER~ => ~CLABFI01~
+    ~MAGE~    => ~CLABMA01~
+    ~CLERIC~  => ~CLABPR01~
+    ~RANGER~  => ~CLABRN01~
+    ~THIEF~   => ~CLABTH01~
+  END
+  OUTER_TEXT_SPRINT class_name $multiclass_entries(~%parent_class_id%~)
+  OUTER_PATCH ~%class_name%~ BEGIN
+    REPLACE_EVALUATE
+      ~[^_]+~
+      BEGIN
+        PATCH_IF (NOT skip && VARIABLE_IS_SET $base_clabs(~%MATCH0%~)) BEGIN
+          TEXT_SPRINT clab $base_clabs(~%MATCH0%~)
+          PATCH_IF (~%clab%~ STR_EQ ~%kit_clab%~) BEGIN
+            // no need to process entries from a base class clab: will be applied automatically by the engine
+            SET skip = 1
+          END
+        END
+      END
+      ~~
+  END
+
+  ACTION_IF (NOT skip) BEGIN
+    // resolve base class type
+    ACTION_DEFINE_ASSOCIATIVE_ARRAY class_table BEGIN
+      ~DRUID~   => ~D~
+      ~FIGHTER~ => ~F~
+      ~MAGE~    => ~M~
+      ~CLERIC~  => ~P~
+      ~RANGER~  => ~R~
+      ~THIEF~   => ~T~
+    END
+    ACTION_IF (~%base_class%~ STR_EQ ~~) BEGIN
+      // Determine automatically from parent class
+      OUTER_TEXT_SPRINT parent_class_name $multiclass_entries(~%parent_class_id%~)
+      OUTER_PATCH_SAVE base_class ~%parent_class_name%~ BEGIN REPLACE_TEXTUALLY ~_.*~ ~~ END
+    END
+    ACTION_TO_UPPER ~base_class~
+    ACTION_IF (IS_AN_INT ~base_class~) BEGIN
+      OUTER_PATCH ~~ BEGIN LOOKUP_IDS_SYMBOL_OF_INT base_class ~class~ base_class END
+    END
+    ACTION_IF (VARIABLE_IS_SET $class_table(~%base_class%~)) BEGIN
+      OUTER_TEXT_SPRINT base_class $class_table(~%base_class%~)
+    END ELSE ACTION_IF (STRING_LENGTH ~%base_class%~ != 1 OR
+                        INDEX(~%base_class%~ ~DFMPRT~) < 0) BEGIN
+      FAIL ~ERROR: Unsupported argument "base_class" [%base_class%]~
+    END
+
+    // create template EFF files for internal use
+    ACTION_IF (NOT FILE_EXISTS ~.../inlined/QD_MC_AP.EFF~) BEGIN
+      COPY - ~.../inlined/qd_blank.file~ ~.../inlined/QD_MC_AP.EFF~
+        INSERT_BYTES 0 0x110
+        WRITE_ASCII  0x00 "EFF V2.0EFF V2.0" (16)
+        PATCH_FOR_EACH ofs IN ~0x80~ ~0x84~ ~0x88~ ~0x8c~ BEGIN
+          WRITE_LONG ofs "-1"
+        END
+        WRITE_LONG   0x10 146 // cast spell
+        WRITE_LONG   0x14 2   // preset target
+        WRITE_LONG   0x20 1   // cast instantly (ignore level)
+        WRITE_SHORT  0x24 1   // permament until death
+        WRITE_SHORT  0x2c 100 // probability 100%
+    END
+
+    ACTION_IF (NOT FILE_EXISTS ~.../inlined/QD_MC_GA.EFF~) BEGIN
+      COPY - ~.../inlined/qd_blank.file~ ~.../inlined/QD_MC_GA.EFF~
+        INSERT_BYTES 0 0x110
+        WRITE_ASCII  0x00 "EFF V2.0EFF V2.0" (16)
+        PATCH_FOR_EACH ofs IN ~0x80~ ~0x84~ ~0x88~ ~0x8c~ BEGIN
+          WRITE_LONG ofs "-1"
+        END
+        WRITE_LONG   0x10 171 // give spell
+        WRITE_LONG   0x14 2   // preset target
+        WRITE_SHORT  0x24 1   // permament until death
+        WRITE_SHORT  0x2c 100 // probability 100%
+    END
+
+    // parse kit clab and assign abilities to spell effects
+    ACTION_IF (NOT ~%kit_clab%~ STR_EQ ~~ AND
+               FILE_EXISTS_IN_GAME ~%kit_clab%.2DA~) BEGIN
+      ACTION_CLEAR_ARRAY ~token_cache~  // collects affected base class CLABs for later update
+      COPY_EXISTING ~%kit_clab%.2da~ ~override~
+        READ_2DA_ENTRIES_NOW rows 1
+        READ_2DA_ENTRY_FORMER rows 1 0 default
+        FOR (row = 3; row < rows; ++row) BEGIN
+          FOR (col = 1; VARIABLE_IS_SET $rows(~%row%~ ~%col%~); ++col) BEGIN
+            TEXT_SPRINT class_token ~%base_class%~
+            READ_2DA_ENTRY_FORMER rows row col ability
+            TO_UPPER ~ability~
+            PATCH_IF !(~%ability%~ STR_EQ ~%default%~) BEGIN
+              PATCH_IF (~%ability%~ STRING_MATCHES_REGEXP ~[DFMPRT]GA_.+~ = 0 ||
+                        ~%ability%~ STRING_MATCHES_REGEXP ~[DFMPRT]AP_.+~ = 0) BEGIN
+                // override base class
+                INNER_PATCH_SAVE ability ~%ability%~ BEGIN
+                  READ_ASCII 0 class_token (1)
+                  DELETE_BYTES 0 1
+                END
+              END
+              PATCH_IF (STRING_LENGTH ~%ability%~ > 3) BEGIN
+                LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END
+                SET length = (STRING_LENGTH ~%ability%~) - 3
+                LPF SUBSTRING INT_VAR start = 3 length STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
+                PATCH_IF (length < 8) BEGIN
+                  DEFINE_ASSOCIATIVE_ARRAY abil_types BEGIN
+                    ~AP_~ => ~QD_MC_AP~
+                    ~GA_~ => ~QD_MC_GA~
+                  END
+                  PATCH_IF (VARIABLE_IS_SET $abil_types(~%abil_type%~)) BEGIN
+                    // mark base class CLAB for update
+                    SET $token_cache(~%class_token%~) = 1
+
+                    // granted abilities or bonuses
+                    TEXT_SPRINT qdmc_eff_resref $abil_types(~%abil_type%~)
+                    INNER_ACTION BEGIN
+                      COPY ~.../inlined/%qdmc_eff_resref%.EFF~ ~override/%abil_new%#.EFF~
+                        WRITE_ASCIIE 0x30 ~%abil_new%~ (8)
+                        SET col_length = STRING_LENGTH ~%col%~
+                      ACTION_IF (col < 10) BEGIN
+                        OUTER_TEXT_SPRINT qdmc_spl_resref ~QD_MC%class_token%0%col%~
+                      END ELSE BEGIN
+                        OUTER_TEXT_SPRINT qdmc_spl_resref ~QD_MC%class_token%%col%~
+                      END
+                      LAF QD_ENSURE_QDMC_SPL STR_VAR base_class = EVAL ~%class_token%~ END
+                      COPY_EXISTING ~%qdmc_spl_resref%.SPL~ ~override~
+                        LPF ADD_SPELL_EFFECT
+                          INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = kit_id parameter2 = 9
+                          STR_VAR resource = EVAL ~%abil_new%#~
+                        END
+                    END
+                  END ELSE BEGIN
+                    PATCH_WARN ~WARNING: Could not evaluate kit ability entry [%ability%]. Skipping.~
+                  END
+                END ELSE BEGIN
+                  PATCH_WARN ~WARNING: Internal ability name too long [%abil_new%]. Skipping.~
+                END
+              END ELSE BEGIN
+                PATCH_WARN ~WARNING: Could not evaluate kit ability entry [%ability%]. Skipping.~
+              END
+            END
+          END
+        END
+      BUT_ONLY
+
+      // make all marked base class CLABs multiclass-ready
+      ACTION_PHP_EACH token_cache AS token => _ BEGIN
+        LAF QD_ENSURE_BASE_CLAB STR_VAR base_class = EVAL ~%token%~ RET success clab_resref END
+      END
+    END ELSE BEGIN
+      WARN ~WARNING: Could not find kit ability table [%kit_clab%.2da]. Skipping.~
+    END
+  END
 END

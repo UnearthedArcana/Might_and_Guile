@@ -1772,7 +1772,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
   PATCH_FOR_EACH nu_song_y IN ~01y~ ~02y~ ~03y~ ~05y~ ~06y~ ~07y~ ~08y~ ~20y~ ~21y~ ~22y~ ~23y~ ~24y~ ~25y~ ~41y~ ~42y~ ~43y~ ~46y~ ~47y~ ~48y~ ~49y~ ~51a~ ~61y~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song_y%~ END
   END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bdxxx~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
@@ -2125,7 +2125,7 @@ COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference
 	SAY NAME1 @21201
 	SAY UNIDENTIFIED_DESC @21202
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd20b~ END
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
 	PATCH_FOR_EACH nu_song IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END

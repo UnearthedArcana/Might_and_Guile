@@ -613,6 +613,18 @@ END
 //MEISTERSINGER ABILITY FILES________________________________________________________
 //
 COPY ~might_and_guile/nubards/d5_mstr.2da~ ~override~
+COPY ~might_and_guile/nubards/d5meis1.bam~ ~override~
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5meis1.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5meis1~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 100 STR_VAR resource = ~d5ratsu~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 85 STR_VAR resource = ~d5ratsu~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 70 STR_VAR resource = ~d5ratsu~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 55 STR_VAR resource = ~d5ratsu~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 40 STR_VAR resource = ~d5ratsu~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 25 STR_VAR resource = ~d5ratsu~ END
+COPY ~might_and_guile/nubards/d5ratsu.cre~ ~override~
+  WRITE_BYTE 0x275 0
+
 //___________________________________________________________________________________
 
 
@@ -2760,20 +2772,21 @@ COPY_EXISTING ~d5ub61.spl~ ~override/d5vb61.spl~
 // add new auras to world_____________________________________________________________
 //
 COPY ~might_and_guile/nubards/d5bd05.itm~ ~override~			//		mirror images
-	SAY NAME2 @21051
-	SAY IDENTIFIED_DESC @21052
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd05a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
+  SAY NAME2 @21051
+  SAY IDENTIFIED_DESC @21052
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd05a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd05a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -2796,20 +2809,21 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~edion.sto~)THEN BEGIN
 END
 
 COPY ~might_and_guile/nubards/d5bd08.itm~ ~override~			//		mind shield
-	SAY NAME2 @21081
-	SAY IDENTIFIED_DESC @21082
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd08a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
+  SAY NAME2 @21081
+  SAY IDENTIFIED_DESC @21082
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd08a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd08a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -2824,20 +2838,21 @@ ACTION_IF FILE_EXISTS_IN_GAME ~pirmur01.cre~ BEGIN
 END
 
 COPY ~might_and_guile/nubards/d5bd24.itm~ ~override~			//		hold undead
-	SAY NAME2 @21241
-	SAY IDENTIFIED_DESC @21242
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd24a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
+  SAY NAME2 @21241
+  SAY IDENTIFIED_DESC @21242
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd24a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd24a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -2856,20 +2871,21 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~shlehlan.sto~)THEN BEGIN
 END
 
 COPY ~might_and_guile/nubards/d5bd25.itm~ ~override~			//		entangle
-	SAY NAME2 @21241
-	SAY IDENTIFIED_DESC @21242
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd25a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
+  SAY NAME2 @21241
+  SAY IDENTIFIED_DESC @21242
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd25a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd25a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -2884,20 +2900,21 @@ ACTION_IF FILE_EXISTS_IN_GAME ~jugmim01.cre~ BEGIN
 END
 
 COPY ~might_and_guile/nubards/d5bd48.itm~ ~override~			//		dispel illusions
-	SAY NAME2 @21481
-	SAY IDENTIFIED_DESC @21482
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd48a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
+  SAY NAME2 @21481
+  SAY IDENTIFIED_DESC @21482
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd48a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
 CREATE EFF ~d5bd48a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -2913,19 +2930,20 @@ END
 
 /*
 COPY ~might_and_guile/nubards/d5bd51.itm~ ~override~			//		bladesong
-	SAY NAME2 @21511
-	SAY IDENTIFIED_DESC @21512
-	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd51a~ END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-//	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
+  SAY NAME2 @21511
+  SAY IDENTIFIED_DESC @21512
+  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd51a~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% END
 CREATE EFF ~d5bd51a~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
@@ -3389,7 +3407,7 @@ OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp613~
 OUTER_SET ++nubard_spell_ind
 
 // Entropy Shield:
-ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~)) BEGIN
+ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
 // COUNT_REGEXP_INSTANCES ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~ entropy_shield_exists
 //ACTION_IF (entropy_shield_exists) BEGIN
@@ -3405,7 +3423,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 318 opcode = 328 parameter1 = 0 parameter2 = 66 special = 1 STR_VAR resource = ~EFF_E04~ END
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 318 opcode = 328 parameter1 = 0 parameter2 = 66 special = 1 STR_VAR resource = ~EFF_M02~ END
 END
-ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~)) BEGIN
+ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //ACTION_IF !(entropy_shield_exists) BEGIN
   COPY ~might_and_guile/nubards/d5bp615.spl~ ~override~
 	SAY NAME1 @21909
@@ -3668,7 +3686,7 @@ OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp318~
 OUTER_SET ++nubard_spell_ind
 
 // IWD Thorn Spray
-ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~)) BEGIN
+ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
 // COUNT_REGEXP_INSTANCES ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~ thorn_spray_exists
 //ACTION_IF (thorn_spray_exists) BEGIN
@@ -3681,7 +3699,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~)) 
   COPY_EXISTING ~%spell_res%.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 12 dicenumber = 4 decesize = 8 END
 END
-ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY$~)) BEGIN
+ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //ACTION_IF !(thorn_spray_exists) BEGIN
   ADD_PROJECTILE ~might_and_guile/nubards/IDPRO303.pro~
   COPY ~might_and_guile/nubards/d5bp427.spl~ ~override~
@@ -3702,7 +3720,7 @@ OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp427~
 OUTER_SET ++nubard_spell_ind
 
 // IWD Spike Growth
-ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH$~)) BEGIN
+ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //COPY_EXISTING - ~spell.ids~ ~might_and_guile/backup~
 // COUNT_REGEXP_INSTANCES ~[ %TAB%]CLERIC_ENTROPY_SHIELD$~ spike_growth_exists
 //ACTION_IF (spike_growth_exists) BEGIN
@@ -3711,7 +3729,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH$~))
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 4
 END
-ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH$~)) BEGIN
+ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
 //ACTION_IF !(spike_growth_exists) BEGIN
 //  COPY ~might_and_guile/nubards/IDPRO300.pro~ ~override~
   ADD_PROJECTILE ~might_and_guile/nubards/IDPRO300.pro~
@@ -3746,63 +3764,96 @@ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp704~
 OUTER_SET ++nubard_spell_ind
 
-ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
 // SR AS 1
-  ACTION_IF FILE_EXISTS_IN_GAME ~sppr120.spl~ BEGIN
-	COPY_EXISTING ~sppr120.spl~ ~override/d5bp120.spl~
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_1[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_1~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas1.spl~
 	  WRITE_SHORT 0x1c 1
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp120~
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas1~
   OUTER_SET ++nubard_spell_ind
 
 // SR AS 2
-  ACTION_IF !(GAME_IS ~iwdee~) BEGIN
-   ACTION_IF FILE_EXISTS_IN_GAME ~sppr220.spl~ BEGIN
-	COPY_EXISTING ~sppr220.spl~ ~override/d5bp220.spl~
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_2[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_2~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas2.spl~
 	  WRITE_SHORT 0x1c 1
-   END
   END
-  ACTION_IF (GAME_IS ~iwdee~) BEGIN
-   ACTION_IF FILE_EXISTS_IN_GAME ~sppr222.spl~ BEGIN
-	COPY_EXISTING ~sppr222.spl~ ~override/d5bp220.spl~
-	  WRITE_SHORT 0x1c 1
-   END
-  END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp220~
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas2~
   OUTER_SET ++nubard_spell_ind
 
 // SR AS 3
-  ACTION_IF FILE_EXISTS_IN_GAME ~sppr320.spl~ BEGIN
-	COPY_EXISTING ~sppr320.spl~ ~override/d5bp320.spl~
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_3[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_3~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas3.spl~
 	  WRITE_SHORT 0x1c 1
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp320~
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas3~
+  OUTER_SET ++nubard_spell_ind
+
+// SR AS 4
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_4[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_4~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas4.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas4~
+  OUTER_SET ++nubard_spell_ind
+
+// SR AS 5
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_5[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_5~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas5.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas5~
+  OUTER_SET ++nubard_spell_ind
+
+// SR AS 6
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_6[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_6~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas6.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas6~
+  OUTER_SET ++nubard_spell_ind
+
+// SR AS 7
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_7[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_7~ RET spell_res END
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas7~
   OUTER_SET ++nubard_spell_ind
 END
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
 // AS I:
-ACTION_IF FILE_EXISTS_IN_GAME ~sppr402.spl~ BEGIN
-  COPY_EXISTING ~sppr402.spl~ ~override/d5bp402.spl~
-	WRITE_SHORT 0x1c 1
-END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp402~
-OUTER_SET ++nubard_spell_ind
+  ACTION_IF FILE_EXISTS_IN_GAME ~sppr402.spl~ BEGIN
+	COPY_EXISTING ~sppr402.spl~ ~override/d5bp402.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp402~
+  OUTER_SET ++nubard_spell_ind
 
 // ASII:
-ACTION_IF FILE_EXISTS_IN_GAME ~sppr501.spl~ BEGIN
-  COPY_EXISTING ~sppr501.spl~ ~override/d5bp501.spl~
-	WRITE_SHORT 0x1c 1
-END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp501~
-OUTER_SET ++nubard_spell_ind
+  ACTION_IF FILE_EXISTS_IN_GAME ~sppr501.spl~ BEGIN
+	COPY_EXISTING ~sppr501.spl~ ~override/d5bp501.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp501~
+  OUTER_SET ++nubard_spell_ind
 
 // AS III:
-ACTION_IF FILE_EXISTS_IN_GAME ~sppr602.spl~ BEGIN
-  COPY_EXISTING ~sppr602.spl~ ~override/d5bp602.spl~
-	WRITE_SHORT 0x1c 1
+  ACTION_IF FILE_EXISTS_IN_GAME ~sppr602.spl~ BEGIN
+	COPY_EXISTING ~sppr602.spl~ ~override/d5bp602.spl~
+	  WRITE_SHORT 0x1c 1
+  END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp602~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp602~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these meistersinger spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zmstr.spl~
@@ -3814,14 +3865,20 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zmstr.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP324~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP410~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP704~ END
-  PATCH_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP120~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP220~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP320~ END
+  PATCH_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS2~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS3~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS4~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS5~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS6~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS7~ END
   END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP402~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP501~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP602~ END
+  PATCH_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP402~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP501~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP602~ END
+  END
 
 APPEND ~d5_mstr.2da~ ~BASE_SPLS   AP_D5ZMSTR ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -7103,7 +7160,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
 	WRITE_EVALUATED_ASCII 0x94 ~D5SRC9F~ #8
+END
 
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d51l1spl.eff~ BEGIN
 // make EFFs to increase traditional mem/cast slots by 1
   CREATE EFF ~d51l1spl~
 	WRITE_LONG 0x10 42

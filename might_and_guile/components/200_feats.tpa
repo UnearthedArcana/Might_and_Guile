@@ -2310,6 +2310,7 @@ COPY ~might_and_guile/feats/d5_wfc5.spl~ ~override/d5uwc5.spl~   // 			poison/di
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %poison_evasion_state% END
 COPY_EXISTING  ~d5uwc5.spl~ ~override/d5vwc5.spl~ 
 	WRITE_SHORT 0x1c 1
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
 <<<<<<<< d5/d5poisev.2da
 2DA V1.0 
 RES
@@ -2396,6 +2397,7 @@ COPY_EXISTING ~d5poisev.2da~ ~override~
 	END
   END
 BUT_ONLY
+END	// end if not already present
 
 // determination: 39 Sleep, 217 PW Sleep, 109 Hold, 175 Hold2, 24 Horror, 106 Morale Break, 23 Morale change, 45 Stun, 210 PW Stun
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_STUNEVADE~ RET new_state_ind END

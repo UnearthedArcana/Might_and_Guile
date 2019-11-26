@@ -94,7 +94,7 @@ COPY ~might_and_guile/ranger/d5_rbaab.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rback.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_rbarb.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL151~ ~****      ~
 		LPM remove_blank_lines

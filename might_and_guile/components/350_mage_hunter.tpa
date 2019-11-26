@@ -140,7 +140,7 @@ COPY ~might_and_guile/ranger/d5_mghs2.eff~ ~override~
 //__________________________________________________________________________________
 
 //2DA MODIFICATIONS___________________________________________________________________
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~

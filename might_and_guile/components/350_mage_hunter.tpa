@@ -51,7 +51,7 @@ ADD_KIT ~D5MAGEH~
 ~D5MAGEH           0  0  0  0  0  0~
 
 //KIT ABILITIES 2DA FILE______________________________________________________________
-~might_and_guile/ranger/d5_mageh.2da~
+~might_and_guile/ranger/d5mageh.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 ~K_R_E K_R_H K_R_HE~
@@ -89,7 +89,7 @@ END
 
 //MAGE HUNTER ABILITY FILES__________________________________________________________
 //
-COPY ~might_and_guile/ranger/d5_mageh.2da~ ~override~
+COPY ~might_and_guile/ranger/d5mageh.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rasp1.spl~ ~override~
@@ -141,34 +141,34 @@ COPY ~might_and_guile/ranger/d5_mghs2.eff~ ~override~
 
 //2DA MODIFICATIONS___________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 		BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
 		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
 	BUT_ONLY
 END
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
 		BUT_ONLY
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
-		COPY_EXISTING ~d5_mageh.2da~ ~override~
+		COPY_EXISTING ~d5mageh.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
 			BUT_ONLY
 	END
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_range.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/ranstab.txt~
 	BUT_ONLY
@@ -200,7 +200,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	END
   BUT_ONLY
 
-  COPY_EXISTING ~d5_mageh.2da~ ~override~
+  COPY_EXISTING ~d5mageh.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_ranger.txt~
   BUT_ONLY
@@ -214,7 +214,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 	READ_2DA_ENTRIES_NOW r2en_kitlist 10
 	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
-	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_mageh~) BEGIN
+	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5mageh~) BEGIN
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
@@ -229,7 +229,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
 			COUNT_2DA_ROWS cols rows
 			FOR (col = 1; col < (cols - 1); ++col) BEGIN
 			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5_mageh~) BEGIN
+			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5mageh~) BEGIN
 				SET this_col = %col%
 				INNER_ACTION BEGIN
 				  LAF CREATE_SEQUENCER_MENU 
@@ -285,11 +285,11 @@ END
 //VANILLA SPELL TABLES______________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_staspl.d5~ THEN BEGIN
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/mhspl1.txt~
 		BUT_ONLY
-	COPY_EXISTING ~d5_mageh.2da~ ~override~
+	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/raspl1.txt~
 		BUT_ONLY
@@ -299,7 +299,7 @@ END
 //REVISED SPELL TABLES_______________________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
-	COPY ~might_and_guile/ranger/d5_maghb.2da~ ~override/d5_mageh.2da~
+	COPY ~might_and_guile/ranger/d5_maghb.2da~ ~override/d5mageh.2da~
 END
 //____________________________________________________________________________________
 

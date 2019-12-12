@@ -51,7 +51,7 @@ ADD_KIT ~D5EARCH~
 ~D5EARCH           0  0  0  0  0  0~
 
 //KIT ABILITIES 2DA FILE______________________________________________________________
-~might_and_guile/ranger/d5_earch.2da~
+~might_and_guile/ranger/d5earch.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 ~~
@@ -90,7 +90,7 @@ END
 
 //ARCHER ABILITY FILES________________________________________________________________
 //
-COPY ~might_and_guile/ranger/d5_earch.2da~ ~override~
+COPY ~might_and_guile/ranger/d5earch.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_parch.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
@@ -118,12 +118,12 @@ BUT_ONLY
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 
-  COPY_EXISTING ~d5_earch.2da~ ~override~
+  COPY_EXISTING ~d5earch.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
 	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
-  APPEND ~d5_earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~d5earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
  
   ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
    COPY_EXISTING ~clastext.2da~ ~override~
@@ -190,7 +190,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 	READ_2DA_ENTRIES_NOW r2en_kitlist 10
 	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
-	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_earch~) BEGIN
+	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
@@ -205,7 +205,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 			COUNT_2DA_ROWS cols rows
 			FOR (col = 1; col < (cols - 1); ++col) BEGIN
 			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5_earch~) BEGIN
+			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
 				SET this_col = %col%
 				INNER_ACTION BEGIN
 				  LAF CREATE_SEQUENCER_MENU 
@@ -262,7 +262,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 	READ_2DA_ENTRIES_NOW r2en_kitlist 10
 	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
-	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_earch~) BEGIN
+	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
@@ -277,7 +277,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 			COUNT_2DA_ROWS cols rows
 			FOR (col = 1; col < (cols - 1); ++col) BEGIN
 			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5_earch~) BEGIN
+			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
 				SET this_col = %col%
 				INNER_ACTION BEGIN
 				  LAF CREATE_SEQUENCER_MENU 

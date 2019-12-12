@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.3.3~
+VERSION ~4.4.1~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -25,21 +25,15 @@ ALWAYS
 	  END
 	END
 
-	INCLUDE ~might_and_guile/lib/joinable_npcs.tpa~
-
-	INCLUDE ~might_and_guile/lib/add_spellstate.tpa~
-
-	INCLUDE ~might_and_guile/lib/new_specifics.tpa~
+	INCLUDE ~might_and_guile/lib/misc_functions.tpa~
 
 	INCLUDE ~might_and_guile/lib/hla_actions.tpa~
-
-	INCLUDE ~might_and_guile/lib/remove_lines.tpa~
-
-	INCLUDE ~might_and_guile/lib/spell_to_innate.tpa~
 
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
 
 	INCLUDE ~might_and_guile/lib/fnp_compat.tpa~
+
+	LAF fix_kitlist_missing_ids END
 	
 END
 
@@ -61,7 +55,7 @@ LANGUAGE
 
 BEGIN @200
 DESIGNATED 200
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/200_feats.tpa~
@@ -94,7 +88,7 @@ INCLUDE ~might_and_guile/components/205_revised_archer.tpa~
 
 BEGIN @210
 DESIGNATED 210
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
@@ -113,7 +107,7 @@ INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
 
 BEGIN @220
 DESIGNATED 220
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @23
 
 INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
@@ -183,6 +177,7 @@ INCLUDE ~might_and_guile/components/240_improved_rangers.tpa~
 
 BEGIN @245
 DESIGNATED 245
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/245_quickstride.tpa~
@@ -235,6 +230,7 @@ INCLUDE ~might_and_guile/components/260_revised_kensai.tpa~
 
 BEGIN @265
 DESIGNATED 265
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/265_monk_fist.tpa~
@@ -251,7 +247,7 @@ INCLUDE ~might_and_guile/components/265_monk_fist.tpa~
 
 BEGIN @275
 DESIGNATED 275
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~might_and_guile.tp2~ ~200~ @1
 //GROUP @22
 
@@ -292,7 +288,7 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 BEGIN @322
 DESIGNATED 322
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_earch.2da~ @5
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5earch.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
@@ -314,7 +310,7 @@ INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //________________________MAGE HUNTER_______________________________________________
 BEGIN @350
 DESIGNATED 350
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_mageh.2da~ @5
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5mageh.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
@@ -324,7 +320,7 @@ INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //_______________________BARBARIAN RANGER___________________________________________
 BEGIN @360
 DESIGNATED 360
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_rbarb.2da~ @5
+REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5rbarb.2da~ @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~

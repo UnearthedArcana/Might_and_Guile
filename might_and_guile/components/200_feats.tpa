@@ -2553,14 +2553,14 @@ COPY_EXISTING ~d5flstf.2da~ ~override~
 	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
 	INNER_ACTION BEGIN
 	  COPY_EXISTING ~kitlist.2da~ ~override~
-		READ_2DA_ENTRIES_NOW rows 9
+		READ_2DA_ENTRIES_NOW rows 10
 		FOR (row = 1; row < rows; ++row) BEGIN
 		  READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
 		  READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
 		  READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
 		  READ_2DA_ENTRY_FORMER rows row 8 kitlist_class
 		  READ_2DA_ENTRY_FORMER rows row 9 kitids_num
-		  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) BEGIN
+		  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) /*&& (IS_AN_INT %kitids_num%)*/ BEGIN
 			PATCH_IF (%kitlist_class% = 3) OR (%kitlist_class% = 6) OR (%kitlist_class% = 8) OR (%kitlist_class% = 11) OR (%kitlist_class% = 12) OR (%kitlist_class% = 15) OR (%kitlist_class% = 16) OR (%kitlist_class% = 18) BEGIN
 			  SET feat_spell_class = 1
 			END ELSE BEGIN

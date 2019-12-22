@@ -282,7 +282,7 @@ DEFINE_ACTION_FUNCTION fix_kitlist_missing_ids BEGIN
 			SET val = (row - 12)
 			TEXT_SPRINT new_ids ~000040%val%~
 			READ_2DA_ENTRY row 9 10 ids_val
-			PATCH_IF (~%ids_val%~ STRING_EQUAL_CASE ~ZZZZZ~) BEGIN
+			PATCH_IF !(IS_AN_INT %ids_val%) /*(~%ids_val%~ STRING_EQUAL_CASE ~ZZZZZ~)*/ BEGIN
 				SET_2DA_ENTRY row 9 10 ~0x%new_ids%~
 			END
 		END

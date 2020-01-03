@@ -1648,7 +1648,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 			spell_level = 8 	OR
 			spell_level = 9 	OR
 //			~%SOURCE_RES%~ STRING_EQUAL_CASE ~~ 	OR 	// what were these three for?
-//			~%SOURCE_RES%~ STRING_EQUAL_CASE ~~ 	OR
+//			~%SOURCE_RES%~ STRING_EQUAL_CASE ~~ 	OR	// sequencers?
 //			~%SOURCE_RES%~ STRING_EQUAL_CASE ~~ 	OR
 			~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi110~ 	BEGIN	// identify
 	  WRITE_BYTE 0x20 (%bard_excludes% BOR ~0b10000000~) 		// unusable by skalds
@@ -1777,6 +1777,8 @@ BUT_ONLY
 //
 COPY ~might_and_guile/nubards/d5bdmusx.bam~ ~override~			//		no song icon
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
+  SAY NAME1 @21003
+  SAY UNIDENTIFIED_DESC @21003
   LPF ALTER_ITEM_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bdmusx~ END
   PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song_a%~ END
@@ -1786,11 +1788,50 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
   END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
 
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdyyy.spl~	//		add new learned songs
+  PATCH_FOR_EACH nu_song IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
+  END
+  PATCH_FOR_EACH nu_song_y IN ~01y~ ~02y~ ~03y~ ~05y~ ~06y~ ~07y~ ~08y~ ~20y~ ~21y~ ~22y~ ~23y~ ~24y~ ~25y~ ~41y~ ~42y~ ~43y~ ~46y~ ~47y~ ~48y~ ~49y~ ~51y~ ~61y~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song_y%~ END
+  END
+
+OUTER_SET spell_op38_ind = 0
+OUTER_SPRINT $opcode_38_spells(~%spell_op38_ind%~) ~opcode_38_spell~
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-  PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 38 opcode = 321 timing = 1 duration = 0 STR_VAR resource = ~d5bd%nu_song_a%~ END
+  PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
+  	SET opcode_38 = 0
+	READ_BYTE     0x2f current ELSE 0
+	READ_BYTE     0x2b current2 ELSE 0
+	READ_LONG 0x64 headoffset  ELSE 0
+	READ_SHORT 0x68 headcount  ELSE 0
+	READ_LONG 0x6a effectsoffset  ELSE 0
+	FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
+      this_head = 0
+	  READ_SHORT (headoffset + (headcyc * 0x28) + 0x1e) effcount  ELSE 0
+	  READ_SHORT (headoffset + (headcyc * 0x28) + 0x20) effectsindex  ELSE 0
+	  FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
+		READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
+		PATCH_IF (opcode = 38) AND (this_head = 0) BEGIN
+		  SET opcode_38 = 1
+		  SET this_head = 1
+		END
+	  END
+	END
+	PATCH_IF (opcode_38 = 1) BEGIN
+	  SPRINT $opcode_38_spells(~%spell_op38_ind%~) ~%SOURCE_RES%~
+	  SET ++spell_op38_ind
+	END
   END
 BUT_ONLY
+
+ACTION_PHP_EACH opcode_38_spells AS ind => op38_spell BEGIN
+  COPY_EXISTING ~%op38_spell%.spl~ ~override~
+	PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
+	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 38 opcode = 321 timing = 1 duration = 0 STR_VAR resource = ~d5bd%nu_song_a%~ END
+	END
+  BUT_ONLY
+END
 
 //bard inspirations___________________________________________________________________
 //
@@ -1804,6 +1845,7 @@ COPY ~might_and_guile/nubards/d5bd01a.spl~ ~override~			//		luck inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 4096 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd01b.eff~ ~override~			//		232 eff triggered by song
@@ -1821,9 +1863,13 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub01.spl~	//		learn song
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd01b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd01z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd01z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD01Y~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD01Y~ END
+// 146 to cast new spell
+// new spell removes all songs and gives all songs
+// all songs, while in effect, should protect from new spell (in 'a' spells?)
+//	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd01z.spl~	//		206 vs. give song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD01Y~ END
 CREATE EFF ~d5bd01y~											// 		give song
@@ -1848,6 +1894,7 @@ COPY ~might_and_guile/nubards/d5bd02a.spl~ ~override~			//		courage inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd02b.spl~ ~override~
@@ -1865,7 +1912,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub02.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd02b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd02z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd02z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD02Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD02Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd02z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD02Y~ END
 CREATE EFF ~d5bd02y~
@@ -1890,6 +1938,7 @@ COPY ~might_and_guile/nubards/d5bd03a.spl~ ~override~			//		power inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd03b.spl~ ~override~
@@ -1907,7 +1956,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub03.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd03b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd03z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd03z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD03Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD03Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd03z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD03Y~ END
 CREATE EFF ~d5bd03y~
@@ -1932,6 +1982,7 @@ COPY ~might_and_guile/nubards/d5bd05a.spl~ ~override~			//		RI inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd05b.spl~ ~override~
@@ -1949,7 +2000,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub05.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd05b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd05z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd05z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD05Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD05Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd05z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD05Y~ END
 CREATE EFF ~d5bd05y~
@@ -1974,6 +2026,7 @@ COPY ~might_and_guile/nubards/d5bd06a.spl~ ~override~			//		bless inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd06b.spl~ ~override~
@@ -1991,7 +2044,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub06.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd06b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd06z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd06z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD06Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD06Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd06z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD06Y~ END
 CREATE EFF ~d5bd06y~
@@ -2016,6 +2070,7 @@ COPY ~might_and_guile/nubards/d5bd07a.spl~ ~override~			//		NPP inspiration
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd07b.spl~ ~override~
@@ -2033,7 +2088,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub07.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd07b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd07z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd07z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD07Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD07Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd07z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD07Y~ END
 CREATE EFF ~d5bd07y~
@@ -2058,6 +2114,7 @@ COPY ~might_and_guile/nubards/d5bd08a.spl~ ~override~			//		mind shield inspirat
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd08b.spl~ ~override~
@@ -2075,7 +2132,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub08.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd08b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd08z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd08z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD08Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD08Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd08z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD08Y~ END
 CREATE EFF ~d5bd08y~
@@ -2100,6 +2158,7 @@ COPY ~might_and_guile/nubards/d5bd09a.spl~ ~override~			//		death ward inspirati
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd09b.spl~ ~override~
@@ -2117,7 +2176,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub09.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd09b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd09z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd09z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD09Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD09Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd09z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD09Y~ END
 CREATE EFF ~d5bd09y~
@@ -2142,6 +2202,7 @@ COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd20b.spl~ ~override~
@@ -2159,7 +2220,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub20.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd20b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd20z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd20z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD20Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD20Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd20z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD20Y~ END
 CREATE EFF ~d5bd20y~
@@ -2184,6 +2246,7 @@ COPY ~might_and_guile/nubards/d5bd21a.spl~ ~override~			//		combat penalties ema
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd21b.spl~ ~override~
@@ -2201,7 +2264,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub21.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd21b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd21z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd21z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD21Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD21Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd21z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD21Y~ END
 CREATE EFF ~d5bd21y~
@@ -2226,6 +2290,7 @@ COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emana
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd22b.spl~ ~override~
@@ -2243,7 +2308,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub22.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd22b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd22z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd22z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD22Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD22Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd22z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD22Y~ END
 CREATE EFF ~d5bd22y~
@@ -2268,6 +2334,7 @@ COPY ~might_and_guile/nubards/d5bd23a.spl~ ~override~			//		confusion emanation
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd23b.spl~ ~override~
@@ -2285,7 +2352,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub23.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd23b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd23z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd23z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD23Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD23Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd23z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD23Y~ END
 CREATE EFF ~d5bd23y~
@@ -2310,6 +2378,7 @@ COPY ~might_and_guile/nubards/d5bd24a.spl~ ~override~			//		hold undead emanatio
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd24b.spl~ ~override~
@@ -2327,7 +2396,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub24.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd24b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd24z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd24z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD24Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD24Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd24z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD24Y~ END
 CREATE EFF ~d5bd24y~
@@ -2352,6 +2422,7 @@ COPY ~might_and_guile/nubards/d5bd25a.spl~ ~override~			//		entangle emanation
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd25b.spl~ ~override~
@@ -2369,7 +2440,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub25.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd25b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd25z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd25z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD25Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD25Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd25z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD25Y~ END
 CREATE EFF ~d5bd25y~
@@ -2394,6 +2466,7 @@ COPY ~might_and_guile/nubards/d5bd41a.spl~ ~override~			//		blur aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 //COPY ~might_and_guile/nubards/d5bd41a.eff~ ~override~
@@ -2412,7 +2485,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub41.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd41b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd41z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd41z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD41Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD41Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd41z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD41Y~ END
 CREATE EFF ~d5bd41y~
@@ -2437,6 +2511,7 @@ COPY ~might_and_guile/nubards/d5bd42a.spl~ ~override~			//		mind blank aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd42b.spl~ ~override~
@@ -2454,7 +2529,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub42.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd42b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd42z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd42z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD42Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD42Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd42z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD42Y~ END
 CREATE EFF ~d5bd42y~
@@ -2479,6 +2555,7 @@ COPY ~might_and_guile/nubards/d5bd43a.spl~ ~override~			//		MGOI aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd43b.spl~ ~override~
@@ -2496,7 +2573,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub43.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd43b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd43z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd43z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD43Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD43Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd43z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD43Y~ END
 CREATE EFF ~d5bd43y~
@@ -2521,6 +2599,7 @@ COPY ~might_and_guile/nubards/d5bd46a.spl~ ~override~			//		fear aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd46b.spl~ ~override~
@@ -2538,7 +2617,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub46.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd46b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd46z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd46z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD46Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD46Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd46z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD46Y~ END
 CREATE EFF ~d5bd46y~
@@ -2563,6 +2643,7 @@ COPY ~might_and_guile/nubards/d5bd47a.spl~ ~override~			//		slow aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd47b.spl~ ~override~
@@ -2580,7 +2661,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub47.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd47b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd47z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd47z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD47Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD47Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd47z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD47Y~ END
 CREATE EFF ~d5bd47y~
@@ -2606,6 +2688,7 @@ COPY ~might_and_guile/nubards/d5bd48a.spl~ ~override~			//		dispel illusions aur
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd48b.spl~ ~override~
@@ -2623,7 +2706,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub48.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd48b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd48z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd48z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD48Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD48Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd48z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD48Y~ END
 CREATE EFF ~d5bd48y~
@@ -2648,6 +2732,7 @@ COPY ~might_and_guile/nubards/d5bd49a.spl~ ~override~			//		hex aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd49b.spl~ ~override~
@@ -2667,7 +2752,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub49.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd49b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd49z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd49z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD49Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD49Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd49z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD49Y~ END
 CREATE EFF ~d5bd49y~
@@ -2692,6 +2778,7 @@ COPY ~might_and_guile/nubards/d5bd51a.spl~ ~override~			//		bladesong
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 //COPY ~might_and_guile/nubards/d5bd51a.eff~ ~override~
@@ -2710,7 +2797,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub51.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd51b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd51z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd51z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD51Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD51Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd51z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD51Y~ END
 CREATE EFF ~d5bd51y~
@@ -2735,6 +2823,7 @@ COPY ~might_and_guile/nubards/d5bd61a.spl~ ~override~			//		maze aura
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%nu_song%~ END
 	END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/nubards/d5bd61b.spl~ ~override~
@@ -2752,7 +2841,8 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub61.spl~
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd61b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd61z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd61z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~D5BD61Y~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD61Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd61z.spl~	//		206 song
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD61Y~ END
 CREATE EFF ~d5bd61y~
@@ -3328,8 +3418,8 @@ OUTER_SET ++nubard_spell_ind
 
 // IWD Great Shout:
 COPY ~might_and_guile/nubards/d5gshou.spl~ ~override/d5bi806.spl~
-	SAY NAME1 @21905
-	SAY UNIDENTIFIED_DESC @21906
+	SAY NAME1 @21907
+	SAY UNIDENTIFIED_DESC @21908
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 6
 	WRITE_ASCII 0x3a ~SPWI806C~ #8
@@ -4408,7 +4498,7 @@ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5prepb.spl~
   SAY NAME1 @21981 											// ~daily spell preparation~
   SAY UNIDENTIFIED_DESC @21981								// ~daily spell preparation~
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~spcl919b~ END
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~spcl919b~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d517slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5b206~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5prepb1~ END
@@ -4732,7 +4822,7 @@ COPY ~might_and_guile/nubards/d5bcast.bam~ ~override~
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bcast.spl~
   SAY NAME1 @21982 											// ~initialize bardic spellcasting~
   SAY UNIDENTIFIED_DESC @21982 								// ~initialize bardic spellcasting~
-  LPF ALTER_SPELL_HEADER INT_VAR STR_VAR icon = ~d5bcast~ END
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bcast~ END
 /*
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5fmnuse~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5fmnuse~ END
@@ -5256,7 +5346,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdc00.spl~	//		apply 206 spel
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bccst.spl~
   SAY NAME1 @21982 											// ~initialize bardic spellcasting~
   SAY UNIDENTIFIED_DESC @21982 								// ~initialize bardic spellcasting~
-  LPF ALTER_SPELL_HEADER INT_VAR STR_VAR icon = ~d5bcast~ END
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bcast~ END
 /*
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5fmnuse~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5fmnuse~ END

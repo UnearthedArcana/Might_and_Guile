@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 4.0 beta </strong><br />
+  <p><strong> Version 4.4</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -770,10 +770,35 @@ CALLED SHOTS <br />
 </div>
 <h2>Credits and Copyright Information</h2>
 <div class="section">
-  <p>Copyright 2015-2016. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
+  <p>Copyright 2015-2019. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
 </div>
 <h2>Version History</h2>
 <div class="section">
+  <p><strong>Version 4.4 - December 2019</strong></p>
+  <ul>
+    <li>support for SR v4b17+</li>
+    <li>bard bug fixes</li>
+  </ul>
+  <p><strong>Version 4.3 - November 2019</strong></p>
+  <ul>
+    <li>bug fixes</li>
+  </ul>
+  <p><strong>Version 4.2 - October 2019</strong></p>
+  <ul>
+    <li>bug fixes</li>
+  </ul>
+  <p><strong>Version 4.1 - September 2019</strong></p>
+  <ul>
+    <li>new QDmulti</li>
+    <li>updated evasion</li>
+  </ul>
+  <p><strong>Version 4.0 - summer 2019</strong></p>
+  <ul>
+    <li>spell-learning UI for feats</li>
+    <li>TnB stat-based spell slot bonuses</li>
+    <li>new monk fist implementation</li>
+    <li>Halfling Whistler demibard kit</li>
+  </ul>
   <p><strong>Version 3.9 - March 2019</strong></p>
   <ul>
     <li>5E casting multiclass bards</li>

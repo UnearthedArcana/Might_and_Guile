@@ -92,6 +92,7 @@ END
 
 //REPLACE BASE SHADOWDANCER___________________________________________________________
 //
+/*
 COPY_EXISTING ~kitlist.2da~ ~override~
 	COUNT_2DA_ROWS ~7~ ~kit_row~
 OUTER_SET kit_row -= 2
@@ -104,6 +105,23 @@ COPY_EXISTING ~K_T_D.2da~ ~override~
 			~K_T_HO.2da~ ~override~
 	REPLACE_TEXTUALLY ~33~ ~%kit_row%~
 BUT_ONLY
+*/
+ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~K_B_%race%.2da~ BEGIN
+	COPY_EXISTING ~K_T_%race%.2da~ ~override~
+	  COUNT_2DA_COLS cols
+	  READ_2DA_ENTRIES_NOW rows cols
+	  SET rows_removed = 0
+	  FOR (row = 1; row < rows; ++row) BEGIN
+		READ_2DA_ENTRY_FORMER rows row 1 kit
+		PATCH_IF (%kit% = 33) BEGIN
+		  REMOVE_2DA_ROW (row - rows_removed) cols
+		  SET rows_removed += 1
+		END
+	  END
+	BUT_ONLY
+  END
+END
 //___________________________________________________________________________________
 
 
@@ -133,6 +151,16 @@ COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
 COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
 COMPILE ~might_and_guile/thief/d5_shadd.baf~
 //__________________________________________________________________________________
+
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_shadd.2da~) BEGIN
+	APPEND ~d5_shadd.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+//____________________________________________________________________________________
 
 
 //DON'T USE SCROLLS/WANDS___________________________________________________________

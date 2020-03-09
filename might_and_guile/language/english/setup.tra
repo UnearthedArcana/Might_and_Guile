@@ -341,7 +341,7 @@ Restrictions:
 @20106  = ~Detection Skills: this ability increase the rogue's Find Traps and Detect Illusions skills by 10% each. This feat may be chosen up to three times.~
 @20107  = ~Tracking~
 @20108  = ~Tracking: the Tracking ability gives one a general idea of what creatures are in an area and which direction they are. Red arrows at the edge of the screen will point in the general direction of the creatures in the area.~
-@20309  = ~Quickstride~
+@20109  = ~Quickstride~
 @20110  = ~Quickstride: this ability allows the rogue to increase <PRO_HISHER> movement rate at will.~
 @20111  = ~Spike Trap~
 @20112  = ~Spike Trap: this ability sets a powerful spring-loaded spike that does piercing damage to whoever trigger it. Damage is 3d6, plus an additional 3d6 for each 6 levels of the trap-setter.~
@@ -488,6 +488,8 @@ This allows the use of any one of the following five abilities:
 @20292  = ~Use Wands: this ability allows the rogue to use wands normally restricted to wizards.~
 @20293  = ~Use Magical Devices~
 @20294  = ~Use Magical Devices: this ability allows the rogue to cast magic from wands and scrolls, just like a wizard or bard.~
+@20298  = ~Psionic Wild Talent~
+@20299  = ~This ability will reveal that the character is a 'wild talent' with access to a psionic power.~
 @20301  = ~Lore Bonus~
 @20302  = ~Lore Bonus: this ability confers a permanent +15 bonus to Lore.~
 @20303  = ~Luck Bonus~
@@ -963,26 +965,27 @@ Restrictions:
 - May not learn 8th- or 9th-level spells.
 - Backstab damage limited to a 2x multiplier.
 ~
-@21841  = ~loresinger~
-@21842  = ~Loresinger~
-@21843  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches as they travel. Loresingers are charged by Milil with spreading the cultural gifts of music, art, and literature, and seeking out foreign sources of them. As a species of bard, Loresingers may perform Bard Songs; and like other bards, their use of magic is less powerful but more flexible than that of a typical wizard.
+@21841  = ~elegist~
+@21842  = ~Elegist~
+@21843  = ~ELEGIST: these bards perform as cantors and mourners, able to move the most taciturn souls with funereal music. They immerse themselves in death - often in order to help others appreciate life. Their music and spellcasting tends to reflect this obsession.  They eschew Illusion magic, preferring to confront people with the hard truths of life and death.
 
 Abilities:
 - Lore increased by 5 points per level.
-- May use Inspiration: Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
-- From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. The Loresinger cannot cast spells while the Positive Energy Inspiration is in effect.
+- May use Emanation: Hold Undead, which can Slow nearby undead creatures or even stop them in their tracks.
+- From 6th level, may use a Death Ward Inspiration, providing all allies within 20 feet with the benefits of the Death Ward priest spell. The Elegist cannot cast spells while the Death Ward Inspiration is in effect.
 - May learn to manifest other bard song effects.
 - While bards memorize arcane spells like a wizard, they can cast them spontaneously, like a sorcerer.
 
 Restrictions:
-- May not turn undead.
 - May cast spells one level later than a wizard.
-- May not learn spells from the Evocation, Conjuration, or Necromancy schools of magic.
+- May only wear leather armors (plus elven chain).
+- While most bards are a subcategory of Enchanter specialist wizards, Elegists share characteristics with Necromancers.
+- May not learn spells from the Evocation, Illusion, or Conjuration schools of magic.
 - May not learn 8th- or 9th-level spells.
 ~
 @21846  = ~hexblade~
 @21847  = ~Hexblade~
-@21848  = ~HEXBLADE: This kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
+@21848  = ~HEXBLADE: This kit combines skilled combat abilities with an understanding of magic and the innate ability to curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.
 
 Abilities:
 - Lore increased by 5 points per level.
@@ -1050,7 +1053,20 @@ Abilities:
 Restrictions:
 - Backstab damage limited to a 2x multiplier.
 - May not use the Set Traps thief skill.
-- Advances 15% slower than most rogues.
+- Advances 25% slower than most rogues.
+~
+@21866  = ~loresinger~
+@21867  = ~Loresinger~
+@21868  = ~LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches as they travel. Loresingers are charged by Milil with spreading the cultural gifts of music, art, and literature, and seeking out foreign sources of them. As devotees of one of the major deities of bards, Loresingers can learn to play and sing bard songs with various effects, just like bards.
+
+Advantages:
+- Lore increased by 5 points per level.
+- May use Inspiration: Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.
+- From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. The Loresinger cannot cast spells while the Positive Energy Inspiration is in effect.
+- May learn to manifest other bard song effects.
+
+Restrictions:
+- May not turn undead.
 ~
 @21891  = ~ACROBAT: As entertainers, most Acrobats are typically found accompanying carnivals or circuses, although a troupe of Acrobats can put on a remarkable show all by themselves. The often perform in large taverns or in clubs, using their arts to draw in the crowd and captivate them long enough for the proprietor to drain their purses. Acrobats are flashy and love to show off their skills; whatever they do, they like to do with a sense of style and a flair for the dramatic. Acrobats sometimes become cat burglars extraordinaire, and they are also useful adventuring allies, as they can squeeze into places where others cannot go without the aid of magic. Their skill at avoiding traps and other dangers also makes them excellent scouts.
 

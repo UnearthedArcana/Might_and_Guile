@@ -139,6 +139,15 @@ COPY ~might_and_guile/ranger/d5_mghs1.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_mghs2.eff~ ~override~
 //__________________________________________________________________________________
 
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5mageh.2da~) BEGIN
+	APPEND ~d5mageh.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+//____________________________________________________________________________________
+
 //2DA MODIFICATIONS___________________________________________________________________
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
 	COPY_EXISTING ~d5mageh.2da~ ~override~
@@ -305,12 +314,7 @@ END
 
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
-ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
-
-COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS 1 rows
-	READ_2DA_ENTRY (%rows% - 1) 5 1 mod_clab
-BUT_ONLY
+INCLUDE ~%MOD_FOLDER%/lib/fnp_compatibility.tpa~
 
 LAF ~DEFINE_FNP_KIT_INFO~
   INT_VAR
@@ -329,7 +333,7 @@ LAF ~DEFINE_FNP_KIT_INFO~
 	u_bows 				= 2
 	u_crossbows 		= 2  
   STR_VAR
-    clab_name 	= EVAL ~%mod_clab%~
+    clab_name 		= ~d5mageh~
 	class 			= ~scout~
 	s_Life 			= ~ranger~
 	s_Death 		= ~x~
@@ -359,11 +363,11 @@ END
 LAM ~READ_FNP_KIT_INFO~
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
-  LAM apply_fnp_spheres
+  LAF apply_fnp_spheres STR_VAR clab_name = ~d5mageh~ END
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
-  LAM apply_fnp_usability
+  LAF apply_fnp_usability STR_VAR clab_name = ~d5mageh~ END
 END
 //__________________________________________________________________________________
 

@@ -26,10 +26,10 @@ END
 // 
 ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2251)
@@ -39,10 +39,10 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
   COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2251)
@@ -140,10 +140,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   BUT_ONLY
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2253)
@@ -153,10 +153,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
  END
  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
   COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~STALKER~ BEGIN
 	    SET patch_row = %row%
 		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2253)

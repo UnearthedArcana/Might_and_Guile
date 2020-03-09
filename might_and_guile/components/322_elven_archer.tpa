@@ -97,6 +97,16 @@ COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 //____________________________________________________________________________________
 
 
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5earch.2da~) BEGIN
+	APPEND ~d5earch.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+//____________________________________________________________________________________
+
+
 // get kit identifiers________________________________________________________________
 //
 OUTER_SET elven_archer_code = (0x4000 + %D5EARCH%)
@@ -333,12 +343,7 @@ END
 
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
-ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
-
-COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS 1 rows
-	READ_2DA_ENTRY (%rows% - 1) 5 1 mod_clab
-BUT_ONLY
+INCLUDE ~%MOD_FOLDER%/lib/fnp_compatibility.tpa~
 
 LAF ~DEFINE_FNP_KIT_INFO~
   INT_VAR
@@ -357,7 +362,7 @@ LAF ~DEFINE_FNP_KIT_INFO~
 	u_bows 				= 5
 	u_crossbows 		= 1  
   STR_VAR
-    clab_name 	= EVAL ~%mod_clab%~
+    clab_name 		= ~d5earch~
 	class 			= ~scout~
 	s_Life 			= ~ranger~
 	s_Death 		= ~x~
@@ -381,17 +386,17 @@ LAF ~DEFINE_FNP_KIT_INFO~
 	s_Light 		= ~ranger~
 	s_Shadow 		= ~x~
 	s_Magic 		= ~ranger~
-	s_Perdition     = ~x~
+	s_Astral	     = ~x~
 END
 
 LAM ~READ_FNP_KIT_INFO~
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
-  LAM apply_fnp_spheres
+  LAF apply_fnp_spheres STR_VAR clab_name = ~d5earch~ END
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
-  LAM apply_fnp_usability
+  LAF apply_fnp_usability STR_VAR clab_name = ~d5earch~ END
 END
 //__________________________________________________________________________________
 

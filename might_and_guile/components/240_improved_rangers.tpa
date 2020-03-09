@@ -70,6 +70,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spcl922.spl~ BEGIN
   
 END
 
+ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) BEGIN
 
 // give poison/disease/nausea evasion________________________________________________
 // 
@@ -201,3 +202,5 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 BUT_ONLY
 //__________________________________________________________________________________
+
+END 	//	end EE-only stuff

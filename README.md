@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 4.4</strong><br />
+  <p><strong> Version 4.5</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -58,6 +58,8 @@
     <li> SCS</li>
     <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Randomiser, etc.]</li>
   </ul>
+  <p><strong>Modder Resources:</strong><br />
+	Might and Guile adds several custom spellstates to SPLSTATE.IDS.  It uses the 4th byte of stat 115, Clubs proficiency, to track certain feats, principally the Fighting Dirty feat.  It uses the Skald and Archer kit usability flags to control spell access in the Revised Bards component.</p>
 </div>
 <h2>Contents</h2>
   <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
@@ -93,7 +95,8 @@
 	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to the rogue's Lore. </li>
 	    <li> <b>Miscellaneous - Tracking:</b> the Tracking ability gives one a general idea of what creatures are in an area and which direction they are. Red arrows at the edge of the screen will point in the general direction of the creatures in the area. </li>
 	    <li> <b>Miscellaneous - Slippery Mind:</b> this ability allows an extra saving throw vs. Spells to avoid Charm/Domination, Confusion, Feeblemind and Maze effects. (Available at 9th level.)</li>
-	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. (Trueclass and Swashbuckler only)</li><br />
+	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the rogue's Luck. </li><br />
+	    <li> <b>Miscellaneous - Wild Talent:</b> this ability allows a rogue to discover a latent psionic ability, and enough PSPs to use it several times per day. (Only if the Will to Power mod is installed first)</li><br />
 	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
 	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Available at 9th level.)</li>
 	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter. (Available at 9th level.)</li>
@@ -129,8 +132,8 @@
 	    <li> The 'Shadow Magic' feat will be available to all thieves as an HLA.</li>
 	    <li> The 'Illusion Magic' feat will be available to all thieves as an HLA.</li>
 	    <li> Instead of traps, Trueclass bards can choose Extra level 6 Spell, Escape Artist, and Power Attack.</li>
-	    <li> Blades can choose Extra Level 6 Spell, Escape Artist, and Whirlwind.</li>
-	    <li> Jesters can choose Extra Level 6 Spell, Escape Artist, and Shadow Pool.</li>
+	    <li> Instead of traps, Blades can choose Extra Level 6 Spell, Escape Artist, and Whirlwind.</li>
+	    <li> Instead of traps, Jesters can choose Extra Level 6 Spell, Escape Artist, and Shadow Magic.</li>
 	    <li> Skalds can choose Power Attack, War Cry, and Hardiness.</li>
 	  </ul>
       <p> This component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
@@ -315,6 +318,21 @@ CALLED SHOTS <br />
         &ndash; No backstab damage multiplier.<br />.</p>
     </div>
     <div class="kit_description">
+      <p>JINXER: This roguish bard mixes casual disregard of the notion of property rights with the innate talent to manipulate luck and probabilities - and a flair for showmanship. Sometimes Jinxers operate within a Gypsy clan such as the Vistani (in which case they may be called 'Zingaros'), and sometimes they operate as lone wolves. Often singers in their spare time, Jinxers have a love of song and may use some basic bardic abilities, such as being able to manifest an aura that hexes nearby rivals. To the great vexation of many a noble, Jinxers often turn this talent to selfish ends. With a knack for turning the tables, they can be very frustrating opponents. As a species of bard, Jinxers may perform Bard Songs. And like other bards, their use of magic is less powerful but more flexible than that of a typical wizard.</p>
+      <p>Abilities:<br />
+        &ndash; Lore increased by 5 points per level.<br />
+        &ndash; May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
+        &ndash; From 6th level, may use a focused Hex Aura, which causes enemies within melee range to suffer a 1-point penalty to Luck and saving throws; additionally, every melee hit the Jinxer lands against enemies (up to once per round) will increase this penalty by one more point. A Jinxer cannot cast spells while this aura is active.<br />
+        &ndash; May learn to manifest other Bard Song effects.<br />
+        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
+        &ndash; Automatically gains knowledge of the following spells: Curse, Doom, Miscast Magic, Spiritual Clarity, Remove Curse, and Greater Malison.</p>
+      <p>Restrictions:<br />
+        &ndash; May cast spells one level later than a wizard.<br />
+        &ndash; May not learn spells from the Evocation, Conjuration, or Necromancy schools of magic.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
+        &ndash; Backstab damage limited to a 2x multiplier.<br />.</p>
+    </div>
+    <div class="kit_description">
       <p>HEXBLADE: This kit combines skilled combat abilities with an understanding of magic and the innate ability to Curse foes. Hexblades are often wrathful individuals, applying their skills in violence toward the end of vengeance for wrongs they have suffered.</p>
       <p>Abilities:<br />
         &ndash; Lore increased by 5 points per level.<br />
@@ -343,6 +361,21 @@ CALLED SHOTS <br />
         &ndash; Backstab damage limited to a 2x multiplier.<br />.</p>
     </div>
     <div class="kit_description">
+      <p>ELEGIST: these bards perform as cantors and mourners, able to move the most taciturn souls with funereal music. They immerse themselves in death - often in order to help others appreciate life. Their music and spellcasting tends to reflect this obsession.  They eschew Illusion magic, preferring to confront people with the hard truths of life and death.</p>
+      <p>Abilities:<br />
+        &ndash; Lore increased by 5 points per level.<br />
+        &ndash; May use Emanation: Hold Undead, which can Slow nearby undead creatures or even stop them in their tracks.<br />
+        &ndash; From 6th level, may use a Death Ward Inspiration, providing all allies within 20 feet with the benefits of the Death Ward priest spell. The Elegist cannot cast spells while the Death Ward Inspiration is in effect.<br />
+        &ndash; May learn to manifest other Bard Song effects.<br />
+        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.</p>
+      <p>Restrictions:<br />
+        &ndash; May cast spells one level later than a wizard.<br />
+        &ndash; May only wear leather armors (plus elven chain).<br />
+        &ndash; May not learn spells from the Evocation, Conjuration, or Illusion schools of magic.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
+        &ndash; While most bards are a subcategory of Enchanter specialist wizards, Elegists share characteristics with Necromancers.<br />.</p>
+    </div>
+    <div class="kit_description">
         <p>ELVEN BLADESINGER: Among the Elven nations there is an order of warriors who wield power matched by few.  Combining martial skill with magical prowess, Bladesingers have the resources to face nearly any threat. They master the use of bladed weapons wielded in one hand, keeping the other free for spellcasting. Name notwithstanding, Bladesingers can actually use many different weapons; most elven armies and societies have different units devoted to particular weapons. Bladesingers can choose their weapon of focus at 9th level.  (These are exclusively melee weapons; the Bladesong is specific to hand-to-hand combat. If a Bladesinger needs to attack from range, they use magic to do so.</p>
         <p>Abilities:<br />
         &ndash; May use a Blur Aura, which improves armor class and saving throws. The Bladesinger cannot cast spells while under the effect of the Blur Aura.<br />
@@ -360,18 +393,31 @@ CALLED SHOTS <br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
     </div>
     <div class="kit_description">
-        <p>LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches as they travel. Loresingers are charged by Milil with spreading the cultural gifts of music, art, and literature, and seeking out foreign sources of them. Such exploration can lead to dangerous situations; as such, many Loresingers supplement their musical and priestly talents with more utilitarian roguish skills.</p>
+        <p>LORESINGER OF MILIL: Loresingers venerate Milil, god of poetry, song, and storytelling. Both bard and priest, they often volunteer their talents as cantors for churches as they travel. Loresingers are charged by Milil with spreading the cultural gifts of music, art, and literature, and seeking out foreign sources of them. As devotees of one of the major deities of bards, Loresingers can learn to play and sing bard songs with various effects, just like bards. Loresingers may be pure clerics, or mix cleric advancement with thief skills.</p>
         <p>Abilities:<br />
+        &ndash; Lore increased by 5 points per level.<br />
         &ndash; May use Inspiration: Blessing, constantly providing all allies within 20 feet with the benefits of the Bless spell.<br />
         &ndash; From 6th level, may use a Positive Energy Inspiration, providing all allies within 20 feet with the benefits of the Negative Plane Protection priest spell. The Loresinger cannot cast spells while the Positive Energy Inspiration is in effect.<br />
-        &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While Loresingers memorize spells like a cleric, they can cast them spontaneously, like a sorcerer.</p>
+        &ndash; May learn to manifest other Bard Song effects.</p>
       <p>Restrictions:<br />
-        &ndash; May not turn undead.<br />
-        &ndash; May cast spells one level later than a cleric.<br />
-        &ndash; May not cast 7th-level spells.<br />
-        &ndash; May only spend 15 thief skill points per level.<br />
-        &ndash; No backstab damage multiplier.<br />.</p>
+        &ndash; May not turn undead.<br />.</p>
+    </div>
+    <div class="kit_description">
+        <p>HALFLING WHISTLER: Whistlers are an odd mix of forest wanderer and entertainer. Halflings belong generally to the category of nature-sensitive races, and Whistlers are extremely attuned to the natural environment around them. In particular, they love forest animals and plant life. They can use their special whistling abilities to communicate with animals, and even have some influence over plants and natural forces like the wind and water. In addition to these special abilities, Whistlers can perform traditional Bard Songs through their whistling.</p>
+        <p>Abilities:<br />
+        &ndash; May use the Animal Empathy ability, as a Ranger.<br />
+        &ndash; From 3rd level, may cast one of the following druid spells: Magical Stone, Sanctuary, Shillelagh, or Goodberry.<br />
+        &ndash; From 8th level, may cast one of the following druid spells: Slow Poison, Cure Disease, Barkskin, or Animal Summoning I.<br />
+        &ndash; From 13th level, may cast one of the following druid spells: Zone of Sweet Air, Call Lightning, or Animal Summoning II.<br />
+        &ndash; May use an Inspiration of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.<br />
+        &ndash; From 6th level, may use an Entangling Emanation, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.<br />
+        &ndash; May learn to manifest other Bard Song effects.<br />
+        &ndash; May specialize (++) in the use of slings.</p>
+      <p>Restrictions:<br />
+        &ndash; Backstab damage limited to a 2x multiplier.<br />
+        &ndash; As halfling demi-bards, Whistlers may not cast wizard spells.<br />
+        &ndash; May not use the Set Traps thief skill.<br />
+        &ndash; Advances 25% slower than most rogues.<br />.</p>
     </div>
     <p> In Spear of Dragonspear and BG2EE, the Bard's Hat magic item is modified. Now the hat radiates the basic bardic Luck inspiration. The bard wearing the hat can manifest a different aura, allowing you to get the benefit of two bard auras simultaneously.</p>
     <p><b>Compatibility:</b> these changes are <i>totally incompatible with the way all other bard kits work</i>.  I have not disabled the old bard class; instead you will see that it is called "2E Bard" in the class menu. If you install bard kits from other mods, like Song & Silence or Bardic Wonders, they will be available under the "2E Bard" class and will function like unmodded bards; at the same time, the nine kits in this component will be available under the Mage/Thief and Fighter/Thief classes.</p>

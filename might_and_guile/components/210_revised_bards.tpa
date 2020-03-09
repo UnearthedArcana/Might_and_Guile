@@ -1285,7 +1285,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
 END
 
 /* already done when copied d5_lors to this one
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_fnp_settings.ini~) BEGIN
+ACTION_IF (FILE_EXISTS ~override/d5_fnp_settings.ini~) BEGIN
   INCLUDE ~override/d5_fnp_settings.ini~
   LAM d5_spont_option
   ACTION_IF (d5_spell_spontaneous > 0) BEGIN

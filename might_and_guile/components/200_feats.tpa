@@ -412,8 +412,8 @@ END
 
 //PREP SPLPROT.2DA__________________________________________________________________
 //
-APPEND ~splprot.2da~ ~D5_115_FEATS%TAB%115%TAB%-1%TAB%8~
-APPEND ~splprot.2da~ ~D5_115_NFEATS%TAB%115%TAB%-1%TAB%9~
+APPEND ~splprot.2da~ ~D5_115_FEATS%TAB%115%TAB%-1%TAB%8~ UNLESS ~D5_115_FEATS~
+APPEND ~splprot.2da~ ~D5_115_NFEATS%TAB%115%TAB%-1%TAB%9~ UNLESS ~D5_115_NFEATS~
 APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
 APPEND ~splprot.2da~ ~D5_KIT_NOT%TAB%152%TAB%-1%TAB%5~ UNLESS ~D5_KIT_NOT~
 

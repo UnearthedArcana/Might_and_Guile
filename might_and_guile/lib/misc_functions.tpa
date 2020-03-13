@@ -433,12 +433,19 @@ DEFINE_ACTION_FUNCTION cleric_clabs_umd BEGIN
 
  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) BEGIN
 
+  ACTION_FOR_EACH kitclab IN ~CLABMA01~ ~CLABMA02~ ~CLABMA03~ ~CLABMA04~ ~CLABMA05~ ~CLABMA06~ ~CLABMA07~ ~CLABMA08~ ~CLABMA09~ BEGIN 
+	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~%kitclab%.2da~) THEN BEGIN
+	  COPY ~%MOD_FOLDER%/misc/%kitclab%.2da~ ~override~
+	END 
+  END  
+
   APPEND ~clabma01.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	UNLESS ~AP_D5_UMD~
 	IF_EXISTS
 
   APPEND ~clabpr01.2da~ ~UMD         AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	UNLESS ~AP_D5_NUMD~
+	IF_EXISTS
 
   COPY_EXISTING ~kitlist.2da~ ~override~
 	COUNT_2DA_ROWS 9 rows

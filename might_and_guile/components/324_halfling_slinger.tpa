@@ -106,6 +106,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			briefdesc = RESOLVE_STR_REF (@3243)
 		STR_VAR
 			kit_name = D5SLING
+			clsrcreq = ~0 0 0 0 1 0 0~
 			clswpbon = ~1 0 2~
 	END
 END

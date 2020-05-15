@@ -2342,8 +2342,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
 2DA V1.0 
 RES
 >>>>>>>> 
-COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+ COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
+ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
@@ -2376,8 +2376,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  END
 	END
   END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+ BUT_ONLY
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
@@ -2406,8 +2406,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  END
 	END
   END
-BUT_ONLY
-COPY_EXISTING ~d5poisev.2da~ ~override~ 
+ BUT_ONLY
+ COPY_EXISTING ~d5poisev.2da~ ~override~ 
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
   FOR (row = 1; row < rows; ++row) BEGIN
@@ -2428,7 +2428,7 @@ COPY_EXISTING ~d5poisev.2da~ ~override~
 	 END
 	END
   END
-BUT_ONLY
+ BUT_ONLY
 END	// end if not already present
 
 // determination: 39 Sleep, 217 PW Sleep, 109 Hold, 175 Hold2, 24 Horror, 45 Stun, 210 PW Stun

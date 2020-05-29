@@ -2046,14 +2046,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   PATCH_IF spell_type = 1 BEGIN
 	READ_BYTE 0x25 spell_school
 	READ_LONG 0x34 spell_level
-	READ_BYTE 0x20 bard_excludes
+	READ_BYTE 0x1f bard_excludes
 	PATCH_IF spell_school = 5 	OR 		//	illusion
 			spell_school = 6 	OR 		//	invocation
 			spell_school = 2 	OR 		//	conjuration
 			spell_school = 9 	OR		//	wild magic
 			spell_level = 8 	OR
 			spell_level = 9 	BEGIN
-	  WRITE_BYTE 0x1f (%bard_excludes% BOR ~0b10000000~) 		// unusable by archers
+//	  WRITE_BYTE 0x1f (%bard_excludes% BOR ~0b10000000~) 		// unusable by archers
+	  WRITE_BYTE 0x1f (THIS BOR ~0b10000000~) 				// better way to do this...?
 	END
 	PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
 	  PATCH_IF  ~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi420~	OR		// minor sequencer

@@ -17,7 +17,7 @@ COPY ~might_and_guile/lib/markers/d5_wfeat.d5~ ~override~
 //IMPROVE THAC0 TABLE_______________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
+	COUNT_2DA_COLS cols 
 	SET_2DA_ENTRY 2 3 cols ~19~
 	SET_2DA_ENTRY 2 6 cols ~17~
 	SET_2DA_ENTRY 2 9 cols ~15~
@@ -100,7 +100,7 @@ COPY_EXISTING ~thac0.2da~ ~override~
 	SET_2DA_ENTRY 12 19 cols ~8~
 	SET_2DA_ENTRY 12 20 cols ~8~
 	SET_2DA_ENTRY 12 21 cols ~7~
-	FOR (col = 22; col < cols; ++col) BEGIN // iterate over rows
+	FOR (col = 22; col < cols; ++col) BEGIN
 		SET_2DA_ENTRY 3 col cols ~6~
 		SET_2DA_ENTRY 4 col cols ~6~
 		SET_2DA_ENTRY 12 col cols ~6~
@@ -2030,11 +2030,11 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf21.spl~
 	SAY UNIDENTIFIED_DESC @20342
 	WRITE_ASCII 0x3a ~d5_wfb1~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5_wfb1b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
@@ -2080,11 +2080,11 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf22.spl~
 	SAY UNIDENTIFIED_DESC @20344
 	WRITE_ASCII 0x3a ~d5_wfb2b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5_wfb2b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
@@ -2135,11 +2135,11 @@ COPY ~might_and_guile/feats/d5_wf23.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
@@ -2182,11 +2182,11 @@ COPY ~might_and_guile/feats/d5_wf24.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
@@ -2229,11 +2229,11 @@ COPY ~might_and_guile/feats/d5_wf25.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf23~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf22~ END
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5_wf21~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF25~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF24~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF23~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF22~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 15 timing = 0 duration = 126244000 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF21~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF22~ END
@@ -2788,6 +2788,27 @@ COPY_EXISTING ~d5flstf.2da~ ~override~
   END
 BUT_ONLY
 
+/* already did with d5featx! just didn't apply it to any kit tables
+//remove feats for duals____________________________________________________________
+
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5featrm.spl~
+
+COPY_EXISTING ~d5flstf.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 0; row < rows; ++row) BEGIN
+  	READ_2DA_ENTRY row 0 cols ~book_feat~
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~d5featrm.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+	  IF_EXISTS BUT_ONLY
+	END
+  END
+BUT_ONLY
+
+//__________________________________________________________________________________
+*/
+
 //__________________________________________________________________________________
 
 COPY ~might_and_guile/misc/d5_thac1.spl~ ~override~
@@ -3224,6 +3245,25 @@ ACTION_PHP_EACH d5_feat_array AS bo => zo BEGIN
 		APPEND ~%bo%.2da~ ~NO_FEATS    AP_D5NFEATS ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	END
 END
+
+APPEND ~clabpr01.2da~ ~NO_FEATS    AP_D5FEATX  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5FEATX~
+
+APPEND ~clabdr01.2da~ ~NO_FEATS    AP_D5FEATX  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5FEATX~
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+//  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 9
+  FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+    READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 class_ab
+    READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+    PATCH_IF /*(class_num = 1) OR*/ (class_num = 3) OR (class_num = 11) BEGIN // just cleric and druid...?
+      INNER_ACTION BEGIN
+        APPEND ~%class_ab%.2da~ ~NO_FEATS    AP_D5FEATX  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5FEATX~
+      END
+    END
+  END
+BUT_ONLY
+
 //__________________________________________________________________________________
 
 

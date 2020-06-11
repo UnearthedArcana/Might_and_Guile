@@ -3841,26 +3841,35 @@ OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~spell~
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr102.spl~ BEGIN
   COPY_EXISTING ~sppr102.spl~ ~override/d5bp102.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny102.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6102~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6102~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp102~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp102~
-OUTER_SET ++nubard_spell_ind
 
 // Vocalize - lvl 1:
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi219.spl~ BEGIN
   COPY_EXISTING ~spwi219.spl~ ~override/d5bi219.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5iy219.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5i6219~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5i6219~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bi219~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp102~
-OUTER_SET ++nubard_spell_ind
 
 // Silence:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr211.spl~ BEGIN
   COPY_EXISTING ~sppr211.spl~ ~override/d5bp211.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny211.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6211~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6211~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp211~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp211~
-OUTER_SET ++nubard_spell_ind
 
 // IWD Shout:
 ADD_PROJECTILE ~might_and_guile/nubards/d5shout.pro~
@@ -3874,24 +3883,35 @@ COPY ~might_and_guile/nubards/d5shout.spl~ ~override/d5bi431.spl~
 COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
 COPY ~might_and_guile/nubards/spwi431c.bam~ ~override~
 COPY ~might_and_guile/nubards/spwi431b.bam~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5iy431.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~di6431~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5i6431~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bi431~
 OUTER_SET ++nubard_spell_ind
 
-// Exaltation:
+// Exaltation/Break Enchantment:
 ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND (FILE_EXISTS_IN_GAME ~ohtyr1.spl~) BEGIN
   COPY_EXISTING ~ohtyr1.spl~ ~override/d5bp321.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 4
 	LPF ALTER_SPELL_HEADER INT_VAR speed = 3 END
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny321.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6321~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6321~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp321~
+  OUTER_SET ++nubard_spell_ind
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND (FILE_EXISTS_IN_GAME ~spwi410.spl~) BEGIN
   COPY_EXISTING ~spwi410.spl~ ~override/d5bp321.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 4
 	LPF ALTER_SPELL_HEADER INT_VAR speed = 3 END  
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny321.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6321~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6321~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp321~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp321~
-OUTER_SET ++nubard_spell_ind
 
 // Greater Command:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr512.spl~ BEGIN
@@ -3912,6 +3932,9 @@ COPY ~might_and_guile/nubards/d5gshou.spl~ ~override/d5bi806.spl~
 COPY ~might_and_guile/nubards/#tra_08.wav~ ~override~
 COPY ~might_and_guile/nubards/spwi806c.bam~ ~override~
 COPY ~might_and_guile/nubards/spwi806b.bam~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5iy806.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5i6806~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5i6806~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bi806~
 OUTER_SET ++nubard_spell_ind
 
@@ -3919,12 +3942,24 @@ OUTER_SET ++nubard_spell_ind
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr720.spl~ BEGIN
   COPY_EXISTING ~sppr720.spl~ ~override/d5bp720.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny720.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6720~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6720~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp720~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp720~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these base bardic spells, plus PW: Silence & Vocalize
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zbard.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny102~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5iy219~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny211~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5iy431~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny321~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny512~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5iy806~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny720~ END
+/*
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP102~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP211~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~SPBI219~ END
@@ -3935,6 +3970,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zbard.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BI806~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~SPWI612~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP720~ END
+*/
 
 APPEND ~d5_bard.2da~ ~BASE_SPLS   AP_D5ZBARD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -3944,42 +3980,61 @@ APPEND ~d5_bard.2da~ ~BASE_SPLS   AP_D5ZBARD  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr310.spl~ BEGIN
   COPY_EXISTING ~sppr310.spl~ ~override/d5bp310.spl~
 	WRITE_SHORT 0x1c 1
-	WRITE_LONG 0x34 2
+	WRITE_LONG 0x34 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny310.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6310~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6310~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp310~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp310~
-OUTER_SET ++nubard_spell_ind
 
 // Rigid Thinking:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr311.spl~ BEGIN
   COPY_EXISTING ~sppr311.spl~ ~override/d5bp311.spl~
 	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 2
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny311.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6311~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6311~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp311~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp311~
-OUTER_SET ++nubard_spell_ind
 
 // Free Action:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr403.spl~ BEGIN
   COPY_EXISTING ~sppr403.spl~ ~override/d5bp403.spl~
 	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 3
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny403.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6403~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6403~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp403~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp403~
-OUTER_SET ++nubard_spell_ind
 
 // Chaotic Commands:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr508.spl~ BEGIN
   COPY_EXISTING ~sppr508.spl~ ~override/d5bp508.spl~
 	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 4
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny508.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6508~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6508~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp508~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp508~
-OUTER_SET ++nubard_spell_ind
 
 // Physical Mirror:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr613.spl~ BEGIN
   COPY_EXISTING ~sppr613.spl~ ~override/d5bp613.spl~
 	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 5
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny613.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6613~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6613~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp613~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp613~
-OUTER_SET ++nubard_spell_ind
 
 // Entropy Shield:
 ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
@@ -3989,7 +4044,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[ 
   LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ENTROPY_SHIELD~ RET spell_res END
   COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp615.spl~
 	WRITE_SHORT 0x1c 1
-	WRITE_LONG 0x34 7
+	WRITE_LONG 0x34 6
 	WRITE_BYTE 0x27 1
 	LPF DELETE_EFFECT INT_VAR match_opcode = 83 match_parameter2 = 55 END
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 318 opcode = 101 parameter2 = 58 END
@@ -4004,7 +4059,7 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[
 	SAY NAME1 @21909
 	SAY UNIDENTIFIED_DESC @21910
 	WRITE_SHORT 0x1c 1
-	WRITE_LONG 0x34 7
+	WRITE_LONG 0x34 6
 	WRITE_BYTE 0x27 1
 	LPF DELETE_EFFECT INT_VAR match_opcode = 83 match_parameter2 = 55 END
 	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 318 opcode = 101 parameter2 = 58 END
@@ -4019,17 +4074,20 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ENTROPY_SHIELD[
   COPY ~might_and_guile/nubards/abjurh.vvc~ ~override~
   COPY ~might_and_guile/nubards/abjurh.bam~ ~override~
 END
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny615.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6615~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6615~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp615~
 OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these jester spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zjstr.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP310~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP311~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP403~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP508~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP613~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP615~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny310~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny311~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny403~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny508~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny613~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny615~ END
 
 APPEND ~d5_jstr.2da~ ~BASE_SPLS   AP_D5ZJSTR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -4039,70 +4097,91 @@ APPEND ~d5_jstr.2da~ ~BASE_SPLS   AP_D5ZJSTR  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr108.spl~ BEGIN
   COPY_EXISTING ~sppr108.spl~ ~override/d5bp108.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny108.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6108~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6108~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp108~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp108~
-OUTER_SET ++nubard_spell_ind
 
 // Flame Blade:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr206.spl~ BEGIN
   COPY_EXISTING ~sppr206.spl~ ~override/d5bp206.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny206.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6206~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6206~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp206~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp206~
-OUTER_SET ++nubard_spell_ind
 
 // DUHM:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr214.spl~ BEGIN
   COPY_EXISTING ~sppr214.spl~ ~override/d5bp214.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 3
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny214.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6214~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6214~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp214~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp214~
-OUTER_SET ++nubard_spell_ind
 
 // Def. Harmony:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr406.spl~ BEGIN
   COPY_EXISTING ~sppr406.spl~ ~override/d5bp406.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny406.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6406~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6406~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp406~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp406~
-OUTER_SET ++nubard_spell_ind
 
 // Righteous Magic:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr513.spl~ BEGIN
   COPY_EXISTING ~sppr513.spl~ ~override/d5bp513.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny513.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6513~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6513~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp513~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp513~
-OUTER_SET ++nubard_spell_ind
 
 // Magic Resistance:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr509.spl~ BEGIN
   COPY_EXISTING ~sppr509.spl~ ~override/d5bp509.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 6
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny509.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6509~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6509~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp509~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp509~
-OUTER_SET ++nubard_spell_ind
 
 // Blade Barrier:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr603.spl~ BEGIN
   COPY_EXISTING ~sppr603.spl~ ~override/d5bp603.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 7
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny603.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6603~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6603~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp603~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp603~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these skald spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zskld.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP108~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP206~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP214~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP406~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP513~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP509~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP603~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny108~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny206~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny214~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny406~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny513~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny509~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny603~ END
 
 APPEND ~d5_skld.2da~ ~BASE_SPLS   AP_D5ZSKLD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -4112,61 +4191,79 @@ APPEND ~d5_skld.2da~ ~BASE_SPLS   AP_D5ZSKLD  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr111.spl~ BEGIN
   COPY_EXISTING ~sppr111.spl~ ~override/d5bp111.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny111.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6111~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6111~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp111~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp111~
-OUTER_SET ++nubard_spell_ind
 
 // Aid:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr201.spl~ BEGIN
   COPY_EXISTING ~sppr201.spl~ ~override/d5bp201.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny201.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6201~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6201~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp201~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp201~
-OUTER_SET ++nubard_spell_ind
 
 // Cure Disease:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr317.spl~ BEGIN
   COPY_EXISTING ~sppr317.spl~ ~override/d5bp317.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny317.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6317~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6317~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp317~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp317~
-OUTER_SET ++nubard_spell_ind
 
 // Pro Evil 10':
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr408.spl~ BEGIN
   COPY_EXISTING ~sppr408.spl~ ~override/d5bp408.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 4
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny408.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6408~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6408~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp408~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp408~
-OUTER_SET ++nubard_spell_ind
 
 // NPP - level 5:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr413.spl~ BEGIN
   COPY_EXISTING ~sppr413.spl~ ~override/d5bp413.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 5
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny413.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6413~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6413~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp413~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp413~
-OUTER_SET ++nubard_spell_ind
 
 // Mass Cure - level 6:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr514.spl~ BEGIN
   COPY_EXISTING ~sppr514.spl~ ~override/d5bp514.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 6
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny514.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6514~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6514~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp514~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp514~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these gallant spells, plus ProEvil
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zglnt.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP111~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP201~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP317~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP408~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP413~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP514~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny111~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny201~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny317~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny408~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny413~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny514~ END
 
 APPEND ~d5_glnt.2da~ ~BASE_SPLS   AP_D5ZGLNT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -4177,41 +4274,56 @@ APPEND ~d5_glnt.2da~ ~BASE_SPLS   AP_D5ZGLNT  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr205.spl~ BEGIN
   COPY_EXISTING ~sppr205.spl~ ~override/d5bp205.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny205.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6205~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6205~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp205~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp205~
-OUTER_SET ++nubard_spell_ind
 
 // Glyph of Warding:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr304.spl~ BEGIN
   COPY_EXISTING ~sppr304.spl~ ~override/d5bp304.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny304.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6304~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6304~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp304~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp304~
-OUTER_SET ++nubard_spell_ind
 
 // Farsight:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr415.spl~ BEGIN
   COPY_EXISTING ~sppr415.spl~ ~override/d5bp415.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny415.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6415~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6415~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp415~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp415~
-OUTER_SET ++nubard_spell_ind
 
 // Champion's Strength:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr507.spl~ BEGIN
   COPY_EXISTING ~sppr507.spl~ ~override/d5bp507.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny507.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6507~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6507~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp507~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp507~
-OUTER_SET ++nubard_spell_ind
 
 // Aerial Servant:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr601.spl~ BEGIN
   COPY_EXISTING ~sppr601.spl~ ~override/d5bp601.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny601.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6601~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6601~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp601~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp601~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these herald spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zhrld.spl~
@@ -4230,35 +4342,47 @@ APPEND ~d5_hrld.2da~ ~BASE_SPLS   AP_D5ZHRLD  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr105.spl~ BEGIN
   COPY_EXISTING ~sppr105.spl~ ~override/d5bp105.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny105.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6105~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6105~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp105~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp105~
-OUTER_SET ++nubard_spell_ind
 
 // Goodberry:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr207.spl~ BEGIN
   COPY_EXISTING ~sppr207.spl~ ~override/d5bp207.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny207.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6207~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6207~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp207~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp207~
-OUTER_SET ++nubard_spell_ind
 
 // Barkskin:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr202.spl~ BEGIN
   COPY_EXISTING ~sppr202.spl~ ~override/d5bp202.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny202.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6202~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6202~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp202~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp202~
-OUTER_SET ++nubard_spell_ind
 
 // ZoSA:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr318.spl~ BEGIN
   COPY_EXISTING ~sppr318.spl~ ~override/d5bp318.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 2
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny318.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6318~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6318~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp318~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp318~
-OUTER_SET ++nubard_spell_ind
 
 // IWD Thorn Spray
 ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
@@ -4291,6 +4415,9 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_THORN_SPRAY[ %T
   COPY ~might_and_guile/nubards/tsprayt.bam~ ~override~
   COPY ~might_and_guile/nubards/#tra_61.wav~ ~override~
 END
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny427.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6427~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp427~
 OUTER_SET ++nubard_spell_ind
 
@@ -4319,6 +4446,9 @@ ACTION_IF !(FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_SPIKE_GROWTH[ %
   COPY ~might_and_guile/nubards/sgrowta.bam~ ~override~
   COPY ~might_and_guile/nubards/sgrowtx.bam~ ~override~
 END
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny324.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6324~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6324~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp324~
 OUTER_SET ++nubard_spell_ind
 
@@ -4327,81 +4457,109 @@ ACTION_IF FILE_EXISTS_IN_GAME ~sppr410.spl~ BEGIN
   COPY_EXISTING ~sppr410.spl~ ~override/d5bp410.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 5
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny410.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6410~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6410~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp410~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp410~
-OUTER_SET ++nubard_spell_ind
 
 // Nature's Beauty:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr704.spl~ BEGIN
   COPY_EXISTING ~sppr704.spl~ ~override/d5bp704.spl~
 	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 6
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny704.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6704~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6704~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp704~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp704~
-OUTER_SET ++nubard_spell_ind
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
 // SR AS 1
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_1[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_1~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas1.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp149.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny151.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n149~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6149~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp149~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas1~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 2
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_2[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_2~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas2.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp249.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny249.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n649~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6249~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp249~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas2~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 3
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_3[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_3~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas3.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp349.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny349.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6349~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6349~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp349~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas3~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 4
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_4[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_4~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas4.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp449.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny449.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6449~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6449~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp449~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas4~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 5
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_5[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_5~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas5.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp549.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny549.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6549~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6549~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp549~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas5~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 6
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_6[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_6~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas6.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp649.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny649.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6649~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6649~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp649~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas6~
-  OUTER_SET ++nubard_spell_ind
 
 // SR AS 7
   ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_ANIMAL_SUMMONING_LEVEL_7[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
     LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_ANIMAL_SUMMONING_LEVEL_7~ RET spell_res END
-    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bpas.spl~
+    COPY_EXISTING ~%spell_res%.spl~ ~override/d5bp749.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny749.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6749~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6749~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp749~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bpas7~
-  OUTER_SET ++nubard_spell_ind
 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
@@ -4409,50 +4567,60 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~sppr402.spl~ BEGIN
 	COPY_EXISTING ~sppr402.spl~ ~override/d5bp402.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny402.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6402~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6402~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp402~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp402~
-  OUTER_SET ++nubard_spell_ind
 
 // ASII:
   ACTION_IF FILE_EXISTS_IN_GAME ~sppr501.spl~ BEGIN
 	COPY_EXISTING ~sppr501.spl~ ~override/d5bp501.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny501.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6501~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6501~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp501~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp501~
-  OUTER_SET ++nubard_spell_ind
 
 // AS III:
   ACTION_IF FILE_EXISTS_IN_GAME ~sppr602.spl~ BEGIN
 	COPY_EXISTING ~sppr602.spl~ ~override/d5bp602.spl~
 	  WRITE_SHORT 0x1c 1
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny602.spl~
+ 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6602~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6602~ END
+	OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp602~
+	OUTER_SET ++nubard_spell_ind
   END
-  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp602~
-  OUTER_SET ++nubard_spell_ind
 END
 
 // make a spell with 171 effects for these meistersinger spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zmstr.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP105~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP207~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP202~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP318~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP427~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP324~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP410~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP704~ END
+// probably need to apply these at certain levels
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny105~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny207~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny202~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny318~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny427~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny324~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny410~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny704~ END
   PATCH_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS1~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS2~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS3~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS4~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS5~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS6~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BPAS7~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny149~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny249~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny349~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny449~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny549~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny649~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny749~ END
   END
   PATCH_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP402~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP501~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP602~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny402~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny501~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny602~ END
   END
 
 APPEND ~d5_mstr.2da~ ~BASE_SPLS   AP_D5ZMSTR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
@@ -4463,9 +4631,12 @@ APPEND ~d5_mstr.2da~ ~BASE_SPLS   AP_D5ZMSTR  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr113.spl~ BEGIN
   COPY_EXISTING ~sppr113.spl~ ~override/d5bp113.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny113.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6113~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6113~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp113~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp113~
-OUTER_SET ++nubard_spell_ind
 
 // IWD Curse:
 COPY ~might_and_guile/nubards/d5curse.spl~ ~override/d5bp112.spl~
@@ -4476,26 +4647,79 @@ COPY ~might_and_guile/nubards/d5curse.spl~ ~override/d5bp112.spl~
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~SPPR112B~ END
 COPY ~might_and_guile/nubards/sppr112c.bam~ ~override~
 COPY ~might_and_guile/nubards/sppr112b.bam~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny112.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6112~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6112~ END
 OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp112~
 OUTER_SET ++nubard_spell_ind
 
-// Spiritual Clarity:
-ACTION_IF FILE_EXISTS_IN_GAME ~sppr350.spl~ BEGIN
+// Spiritual Clarity/Break Enchantment:
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND (FILE_EXISTS_IN_GAME ~sppr350.spl~) BEGIN
   COPY_EXISTING ~sppr350.spl~ ~override/d5bp350.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 3
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp350~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp350~
-OUTER_SET ++nubard_spell_ind
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND (FILE_EXISTS_IN_GAME ~spwi410.spl~) BEGIN
+  COPY_EXISTING ~spwi410.spl~ ~override/d5bp350.spl~
+	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 4
+	LPF ALTER_SPELL_HEADER INT_VAR speed = 3 END  
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny350.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6350~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6350~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp350~
+  OUTER_SET ++nubard_spell_ind
+END
+
+// Greater Malison:
+ACTION_IF FILE_EXISTS_IN_GAME ~spw412.spl~ BEGIN
+  COPY_EXISTING ~spwi219.spl~ ~override/d5bi412.spl~
+	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 4
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5iy412.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5i6412~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5i6412~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bi412~
+  OUTER_SET ++nubard_spell_ind
+END
+
+// Pixie Dust:
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr516.spl~ BEGIN
+  COPY_EXISTING ~sppr113.spl~ ~override/d5bp516.spl~
+	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 5
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny516.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6516~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6516~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp516~
+  OUTER_SET ++nubard_spell_ind
+END
+
+// Insect Plague - level 6:
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr517.spl~ BEGIN
+  COPY_EXISTING ~sppr514.spl~ ~override/d5bp517.spl~
+	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 6
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny5517.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6517~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6517~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp517~
+  OUTER_SET ++nubard_spell_ind
+END
 
 // make a spell with 171 effects for these jinxer spells + miscast magic + malison
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zjinx.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP113~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP112~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP310~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP350~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~SPWI410~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~SPWI412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny113~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny112~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny350~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5iy412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny516~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny517~ END
 
 APPEND ~d5_jinx.2da~ ~BASE_SPLS   AP_D5ZJINX  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 APPEND ~d5_hxbl.2da~ ~BASE_SPLS   AP_D5ZJINX  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
@@ -4506,60 +4730,78 @@ APPEND ~d5_hxbl.2da~ ~BASE_SPLS   AP_D5ZJINX  ****        ****        ****      
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr150.spl~ BEGIN
   COPY_EXISTING ~sppr111.spl~ ~override/d5bp150.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny150.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6150~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6150~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp150~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp150~
-OUTER_SET ++nubard_spell_ind
 
 // Chant:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr203.spl~ BEGIN
   COPY_EXISTING ~sppr201.spl~ ~override/d5bp203.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny203.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6203~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6203~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp203~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp203~
-OUTER_SET ++nubard_spell_ind
 
 // Spirit Fire:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr450.spl~ BEGIN
   COPY_EXISTING ~sppr317.spl~ ~override/d5bp450.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 3
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny450.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6450~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6450~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp450~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp450~
-OUTER_SET ++nubard_spell_ind
 
 // Death Ward:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr409.spl~ BEGIN
   COPY_EXISTING ~sppr408.spl~ ~override/d5bp409.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny409.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6409~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6409~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp409~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp409~
-OUTER_SET ++nubard_spell_ind
 
 // Slay Living:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr511.spl~ BEGIN
   COPY_EXISTING ~sppr413.spl~ ~override/d5bp511.spl~
 	WRITE_SHORT 0x1c 1
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny511.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6511~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6511~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp511~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp511~
-OUTER_SET ++nubard_spell_ind
 
 // Recall Spirit - level 6:
 ACTION_IF FILE_EXISTS_IN_GAME ~sppr550.spl~ BEGIN
   COPY_EXISTING ~sppr514.spl~ ~override/d5bp550.spl~
 	WRITE_SHORT 0x1c 1
 	WRITE_LONG 0x34 6
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ny550.spl~
+ 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5n6550~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5n6550~ END
+  OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp550~
+  OUTER_SET ++nubard_spell_ind
 END
-OUTER_SPRINT $nu_bard_spells(~%nubard_spell_ind%~) ~d5bp550~
-OUTER_SET ++nubard_spell_ind
 
 // make a spell with 171 effects for these elegist spells
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zglnt.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP150~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP203~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP450~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP409~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP511~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~D5BP550~ END
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zeleg.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny150~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny203~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny450~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny409~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny511~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5ny550~ END
 
 APPEND ~d5_eleg.2da~ ~BASE_SPLS   AP_D5ZELEG  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 

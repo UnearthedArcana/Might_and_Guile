@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 4.7</strong><br />
+  <p><strong> Version 4.8</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>

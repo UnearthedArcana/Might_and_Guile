@@ -5410,10 +5410,12 @@ END
 
 // 'prepare spells' spell_____________________________________________________________
 //
+COPY ~might_and_guile/nubards/d5prepb.bam~ ~override~
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5prepb.spl~
   SAY NAME1 @21981 											// ~daily spell preparation~
   SAY UNIDENTIFIED_DESC @21981								// ~daily spell preparation~
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~spcl919b~ END
+  WRITE_ASCII 0x3a ~d5prepb~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5prepb~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d517slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d589slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5b206~ END
@@ -5609,7 +5611,7 @@ COPY_EXISTING ~d5sclons.2da~ ~override~
 		  READ_BYTE (%eff_offset% + 0x02) eff_target
 		  LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
 		  PATCH_IF (%abil_target% = 4) BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
 			PATCH_IF (%abil_range% < 35) BEGIN
 			  PATCH_IF (%abil_range% > 4) BEGIN
 				LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
@@ -5620,7 +5622,7 @@ COPY_EXISTING ~d5sclons.2da~ ~override~
 			END
 		  END
 		  ELSE BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
 		  END
 // exempt lvl 1 if lv1 1 cantrips
 		  PATCH_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~ BEGIN
@@ -5893,7 +5895,7 @@ COPY_EXISTING ~d5bclons.2da~ ~override~
 		  READ_BYTE (%eff_offset% + 0x02) eff_target
 		  LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
 		  PATCH_IF (%abil_target% = 4) BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
 			PATCH_IF (%abil_range% < 35) BEGIN
 			  PATCH_IF (%abil_range% > 4) BEGIN
 				LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
@@ -5904,7 +5906,7 @@ COPY_EXISTING ~d5bclons.2da~ ~override~
 			END
 		  END
 		  ELSE BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
 		  END
 // exempt lvl 1 if lv1 1 cantrips
 		  PATCH_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~ BEGIN

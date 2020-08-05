@@ -17,8 +17,25 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5_stride.d5~
 
 LAM JOINABLE_NPC_ARRAYS
 
-
 LAM d5_quickstride_speed
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_STRIDE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_STRIDE~) BEGIN
+		SET quickstride_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %quickstride_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_STRIDE~ RET new_state_ind END
+  OUTER_SET quickstride_state = %new_state_ind%
+END
 
 COPY ~might_and_guile/feats/d5_wfc1b.bam~ ~override~
 COPY ~might_and_guile/misc/d5strid.spl~ ~override~
@@ -29,6 +46,7 @@ COPY ~might_and_guile/misc/d5strid.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 176 parameter1 = %d5_quickstride_bonus% END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5swalk~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5strid~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 parameter2 = %quickstride_state% timing = 9 special = 1 END
 
 COPY ~might_and_guile/misc/d5_rwlkb.bam~ ~override~
 COPY ~might_and_guile/misc/d5swalk.spl~ ~override~
@@ -39,6 +57,9 @@ COPY ~might_and_guile/misc/d5swalk.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5strid~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 171 STR_VAR resource = ~d5strid~ END
 	LPF ALTER_EFFECT INT_VAR match_opcode = 172 STR_VAR resource = ~d5swalk~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~spcl813~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~qdmnk02~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~qdmnk03~ END
 
 
 ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
@@ -59,6 +80,8 @@ ACTION_FOR_EACH stride_kit IN ~clabrn01~ ~clabmo01~ ~d5shmbb~ ~QDMONK~ ~QDMONKSS
   ACTION_IF FILE_EXISTS_IN_GAME ~%stride_kit%.2da~ BEGIN
 	COPY_EXISTING ~%stride_kit%.2da~ ~override~
 	  REPLACE_TEXTUALLY ~AP_SPCL813 ~ ~****       ~
+	  REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+	  REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****      ~
 	BUT_ONLY
 	APPEND ~%stride_kit%.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~ UNLESS ~STRIDE~
   END
@@ -74,6 +97,8 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	  INNER_ACTION BEGIN
 		COPY_EXISTING ~%clab%.2da~ ~override~
 		  REPLACE_TEXTUALLY ~AP_SPCL813~ ~****      ~
+		  REPLACE_TEXTUALLY ~AP_QDMNK02~ ~****      ~
+		  REPLACE_TEXTUALLY ~AP_QDMNK03~ ~****      ~
 		BUT_ONLY
 		APPEND ~%clab%.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~ UNLESS ~STRIDE~
 	  END
@@ -85,25 +110,29 @@ OUTER_SET speed_item_ind = 0
 OUTER_SPRINT $speed_boost_items(~%speed_item_ind%~) ~speed_boost_item~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-  	SET speed_boost = 0
-	READ_LONG 0x6a effectsoffset ELSE 0
-	READ_SHORT 0x70 effectscount ELSE 0
-	FOR (effcyc = 0; effcyc < effectscount; effcyc = effcyc + 1) BEGIN
-	  READ_SHORT (effectsoffset + (effcyc * 0x30)) opcode ELSE 0
-	  READ_SHORT (effectsoffset + (effcyc * 0x30)) + 0x04 param1 ELSE 0
-	  PATCH_IF (opcode = 126) && (param1 > 0) BEGIN
-		SET speed_boost = 1
+	READ_BYTE 0x18 flags
+	PATCH_IF (flags BOR 0b11111011 = 0b11111111) BEGIN 	//	droppable flag
+  	  SET speed_boost = 0
+	  READ_LONG 0x6a effectsoffset ELSE 0
+	  READ_SHORT 0x70 effectscount ELSE 0
+	  FOR (effcyc = 0; effcyc < effectscount; effcyc = effcyc + 1) BEGIN
+		READ_SHORT (effectsoffset + (effcyc * 0x30)) opcode ELSE 0
+		READ_SHORT (effectsoffset + (effcyc * 0x30)) + 0x04 param1 ELSE 0
+		PATCH_IF (opcode = 126) && (param1 > 0) BEGIN
+		  SET speed_boost = 1
+		END
 	  END
-	END
-	PATCH_IF (speed_boost = 1) BEGIN
-	  SPRINT $speed_boost_items(~%speed_item_ind%~) ~%SOURCE_RES%~
-	  SET ++speed_item_ind
+	  PATCH_IF (speed_boost = 1) BEGIN
+		SPRINT $speed_boost_items(~%speed_item_ind%~) ~%SOURCE_RES%~
+		SET ++speed_item_ind
+	  END
 	END
   END
 BUT_ONLY
 ACTION_PHP_EACH speed_boost_items AS ind => speed_item BEGIN
   COPY_EXISTING ~%speed_item%.itm~ ~override~
-	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5swalk~ END
+//	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5swalk~ END
+	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %quickstride_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5swalk~ END
 	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5strid~ END
   IF_EXISTS BUT_ONLY
 END

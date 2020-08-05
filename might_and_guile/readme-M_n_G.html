@@ -30,10 +30,9 @@
 </div>
 <h2>Compatibility</h2>
 <div class="section">
-  <p>Might and Guile is designed to work with any Infinity Engine game on a variant of the BG2 engine that someone might purchase and play today, in 2015. At the moment, that includes TOB, TuTu, BGT, BG:EE, BG2:EE, and IWD:EE.</p>
+  <p>Might and Guile is designed to work with any Infinity Engine game on a variant of the BG2 engine that someone might purchase and play today, in 2015. At the moment, that includes TOB, TuTu, BGT, BG:EE, BG2:EE, and IWD:EE. EDIT - much of the content of the mod that has been added since 2016 utilizes features of the EE 2.x engine.  So a fair portion of the mod is now EE-only.</p>
   <p>Might and Guile aims to be compatible with almost all other popular mods. There are however a few compatibility issues of note:
   <ul>
-  	<li>I have not tested compatibility with Kit Revisions. These two mods cover some of the same ground. Eventually (after KR is released, anyway) I will try to see if I can make them work well together. But for now, you should probably choose one or the other. (You may try to skip the M&G overhauls/tweaks and only install new kits... it should work, but there might be balance issues compared to the KR kits.)</li><br />
   	<li>Some of the components of <u>Rogue Rebalancing</u> modify the same resources as M&G; be aware that you might see some different behavior depending on which one is installed last.</li>
   </ul>
   <p>See the component descriptions below for more specific information about compatibility.</p>
@@ -43,8 +42,8 @@
   <ul>
     <li> [quest mods]</li>
     <li> [NPC mods]</li>
-    <li> [item mods including Item Revisions]</li>
     <li> [spell mods including Spell Revisions]</li>
+    <li> [item mods including Item Revisions]</li>
     <li> [small kit mods]</li>
     <li> Divine Remix</li>
     <li> Song & Silence</li>
@@ -541,13 +540,6 @@ CALLED SHOTS <br />
   <div class="section">
     <p><strong><em>Revised Berserker and Rage</em></strong></p>
       <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage and Barbarian Rage are merged, because 1) I don't know why there are two different kinds of Rage, and 2) vanilla Berserk Rage is more like a Mind Shield spell than an actual Rage. Rage now lasts for 30 seconds, provides a bonus 0.5 APR, increases STR and CON by 3, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment), and penalizes AC by 2.</p>
-  </div>
-  <h4 class="subheader">Component 260: </h4>
-  <div class="section">
-    <p><strong><em>Revised Kensai</em></strong></p>
-      <p>At character creation, Kensai will begin with an innate spell ability that will let them choose a weapon. Upon casting, they are changed to a sub-kit which can reach Grand Mastery (+++++) in that weapon, and can only be proficient (+) in others. After gaining enough levels to master their weapon of focus and a fighting style or two, the kensai will be able to choose a second weapon of focus. Thereafter, they will be able to choose a new weapon of focus after reaching Grand Mastery in their current one.</p>
-      <p>Kensai thac0/damage bonuses become just damage bonuses, because they have great thac0 anyway. Their AC bonuses get better over time like a Swashbuckler's. Finally, kensai get a 0.5 bonus to APR right from 1st level, drastically increasing their offensive capabilities. The trade-off for this is having to truly devote themselves completely and permanently to their chosen weapon: kensai <b>cannot dual-class at all.</b> If you're into playing a kensage or a kenthief, this component is not for you. But I think it allows kensai to truly shine as a kit on its own.</p>
-      <p>Finally, upon choosing a weapon focus, the Kensai will receive a weapon from the Candlekeep armory. In some instances (weaker weapons like staff, spear, dagger) it will be a +1 magical weapon.</p>
   </div>
   <h4 class="subheader">Component 265: </h4>
   <div class="section">

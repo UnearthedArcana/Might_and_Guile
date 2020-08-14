@@ -83,6 +83,8 @@ END
 
 //ADD SPELLFILCHER____________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5FILCH~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -205,6 +207,8 @@ END
 
 //ADD LOREMASTER______________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5_LOREMASTER~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -317,6 +321,8 @@ END
 
 //ADD RANGER/MAGE_____________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5RANMAGE~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -406,24 +412,18 @@ END
 //
 COPY ~might_and_guile/mc/d5_rama.2da~ ~override~
 COPY ~might_and_guile/mc/d5_nthf.spl~ ~override~
-	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
-	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
-	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
-	SAY NAME1 @6
 COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
-	SAY NAME1 @6
 COPY ~might_and_guile/misc/d5_numat.spl~ ~override~
-	SAY NAME1 @6
 ACTION_IF GAME_IS ~iwdee~ BEGIN	
   APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~
   COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols // amount of columns
-	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
-	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
-	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ 
 	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CON_IS~ BEGIN
 	    SET con_row = %row%
 	  END
@@ -432,7 +432,16 @@ ACTION_IF GAME_IS ~iwdee~ BEGIN
   COPY_EXISTING ~d5rmcon.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %con_row% END
 END
-	
+
+COPY_EXISTING ~mxsplran.2da~ ~override~
+  READ_2DA_ENTRY 0 0 4 cast_lev
+  SET the_lev = cast_lev
+BUT_ONLY
+// use the_lev to patch the clab table to add 'spell slots'
+
+// change these into innate spells and add them according to proficiency
+// like a small version of multisorc
+// use stat 134
 COPY_EXISTING ~sppr207.spl~ ~override/D5RNM01.spl~ // goodberry
 //	WRITE_SHORT 0x1c 1
 //	WRITE_LONG 0x34 1
@@ -445,13 +454,13 @@ COPY_EXISTING ~sppr110.spl~ ~override/D5RNM13.spl~ // shillelagh
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr202.spl~ ~override/D5RNM21.spl~ // barkskin
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr212.spl~ ~override/D5RNM22.spl~ // slow poison
+COPY_EXISTING ~sppr212.spl~ ~override/D5RNM22.spl~ // slow poison*
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr206.spl~ ~override/D5RNM23.spl~ // flame blade
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr302.spl~ ~override/D5RNM31.spl~ // call lightning
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~sppr317.spl~ ~override/D5RNM32.spl~ // cure disease
+COPY_EXISTING ~sppr317.spl~ ~override/D5RNM32.spl~ // cure disease*
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr319.spl~ ~override/D5RNM33.spl~ // summon insects
 	WRITE_SHORT 0x1c 1
@@ -484,6 +493,8 @@ END
 
 //ADD RANGER/THIEF____________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5RANTHIEF~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -638,6 +649,8 @@ END
 
 //ADD TOMB RUNNER______________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5_TOMBRUNNER~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -744,6 +757,8 @@ END
 
 //ADD THUG____________________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5_THUG~
 
 //WEAPON PROFICIENCIES________________________________________________________________

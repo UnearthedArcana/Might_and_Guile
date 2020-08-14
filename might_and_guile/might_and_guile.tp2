@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.8.1~
+VERSION ~4.9~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -32,6 +32,8 @@ ALWAYS
 	INCLUDE ~might_and_guile/lib/fl#add_kit_ee.tpa~
 
 	INCLUDE ~might_and_guile/lib/fnp_compatibility.tpa~
+
+	INCLUDE ~might_and_guile/lib/extra_kit.tpa~
 
 	LAF fix_kitlist_missing_ids END
 	
@@ -92,6 +94,8 @@ REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
 INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
+
+INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
 
 INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
 //__________________________________________________________________________________

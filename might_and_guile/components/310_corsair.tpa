@@ -9,8 +9,9 @@
 
 //_________________________CORSAIR__________________________________________________
 
+LAF check_kit_conflict END
+
 ADD_KIT ~D5CORSA~
-//___________________________________________________________________________________
 
 //WEAPON PROFICIENCIES_______________________________________________________________
 //11                                   T   S           F   Q             S S
@@ -127,11 +128,13 @@ OUTER_SET corsair_code = (0x4000 + %D5CORSA%)
 
 //FEAT SYSTEM_________________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
-  COPY_EXISTING ~d5_corsa.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/fighter/no_rogue_feats_corsair.txt~
-  BUT_ONLY
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) THEN BEGIN
+
+  APPEND ~d5_corsa.2da~
+~ABILITY     ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****
+ABILITY     GA_D5SWASH  ****        ****        GA_D5SWASH  ****        ****        ****        GA_D5SWASH  ****        AP_D5_JLUCK ****        GA_D5SWASH  ****        ****        ****        ****        GA_D5SWASH  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+ABILITY     AP_D5_SWAPR ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN

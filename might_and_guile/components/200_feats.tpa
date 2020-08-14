@@ -132,6 +132,7 @@ ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~275~ BEGIN
 END
 //__________________________________________________________________________________
 
+LAF check_kit_conflict END
 
 //ADD ALCHEMIST_____________________________________________________________________
 
@@ -1030,11 +1031,15 @@ COPY ~might_and_guile/feats/d5_rfd2.spl~ ~override/d5urd2.spl~   // 			escape ar
 	END
 	WRITE_ASCII 0x3a ~d5_rfd2b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2b~ END
+/*old
 COPY ~might_and_guile/feats/d5_rf42.spl~ ~override~
 	SAY NAME1 @20221
 	SAY UNIDENTIFIED_DESC @20222
 	WRITE_ASCII 0x3a ~d5_rfd2b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfd2b~ END
+*/
+COPY_EXISTING ~sppr308.spl~ ~override/d5rf42.spl~ 
+	LPF ALTER_SPELL_HEADER INT_VAR target = 1 projectile = 1 STR_VAR icon = ~d5_rfd2b~ END
 COPY_EXISTING  ~d5urd2.spl~ ~override/d5vrd2.spl~ 
 	WRITE_SHORT 0x1c 1
 
@@ -3515,7 +3520,7 @@ LAF action_remove_hla STR_VAR kit_name = ~SWASHBUCKLER~ remove_ability = ~GA_TG#
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SWASHBUCKLER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3532,7 +3537,7 @@ LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF31~ num_allow
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~ASSASIN~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3548,7 +3553,7 @@ LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF31~ num
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BOUNTY_HUNTER~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3565,7 +3570,7 @@ LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF31~ num_
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
 LAF action_add_hla STR_VAR kit_name = ~SHADOWDANCER~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
@@ -3581,7 +3586,7 @@ LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF31~ num_allow
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~GA_D5_RF85~ num_allowed = ~6~ END
 LAF action_add_hla STR_VAR kit_name = ~D5SHADD~ ability = ~AP_D5_RFH4~ num_allowed = ~1~ END
@@ -3597,7 +3602,7 @@ LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF31~ num_allow
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_d5_rf3z~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~D5ALCHM~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3614,7 +3619,7 @@ LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF31~ num_allowed
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3629,7 +3634,7 @@ LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_RR
 LAF action_remove_hla STR_VAR kit_name = ~FIGHTER_THIEF~ remove_ability = ~GA_TG#BRPO~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
-LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3645,7 +3650,7 @@ LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF31
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
-LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~FIGHTER_MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3661,7 +3666,7 @@ LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF31~ num_al
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
-LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3677,7 +3682,7 @@ LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF31~ num_
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF2Z~ num_allowed = ~16~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RFD1~ num_allowed = ~2~ END
-LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_RF85~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~CLERIC_THIEF~ ability = ~GA_D5_ILLP~ num_allowed = ~3~ END
@@ -3691,7 +3696,7 @@ LAF action_remove_hla STR_VAR kit_name = ~BLADE~ remove_ability = ~GA_TG#BRPO~ E
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL900~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
@@ -3705,7 +3710,7 @@ LAF action_remove_hla STR_VAR kit_name = ~JESTER~ remove_ability = ~GA_TG#BRPO~ 
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_D5_RF85~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
@@ -3732,7 +3737,7 @@ LAF action_remove_hla STR_VAR kit_name = ~BARD~ remove_ability = ~GA_TG#BRPO~ EN
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_SPCL928~ num_allowed = ~3~ END
-LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF42~ num_allowed = ~1~ END
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_URD2~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_D5_RF43~ num_allowed = ~1~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL904~ num_allowed = ~5~ END
 LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~GA_SPCL906~ num_allowed = ~5~ END

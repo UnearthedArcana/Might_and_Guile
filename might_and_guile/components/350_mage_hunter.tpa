@@ -9,6 +9,8 @@
 
 //ADD MAGE HUNTER____________________________________________________________________
 //
+LAF check_kit_conflict END
+
 ADD_KIT ~D5MAGEH~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -63,7 +65,7 @@ ADD_KIT ~D5MAGEH~
 ~0x00004000 12~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~Ra3~
+~Ra0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
@@ -127,7 +129,7 @@ COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 	LPM spell_to_innate
 */
-COPY ~might_and_guile/misc/d5_savbo.spl~ ~override~
+COPY ~might_and_guile/misc/d5ssvbo.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_mghs1.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_mghsa.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_mghsb.eff~ ~override~

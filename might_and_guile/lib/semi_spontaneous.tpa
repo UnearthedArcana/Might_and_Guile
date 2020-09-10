@@ -135,7 +135,13 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d589slt.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 384 timing = 9 END
 BUT_ONLY
 
-COPY_EXISTING ~d517slt.spl~ ~override/d500slt.spl~
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d500slt.spl~
+  PATCH_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 126 timing = 9 END
+  END
+  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
+  END
 
 COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d502slt.spl~
   LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
@@ -490,12 +496,13 @@ END
 // 'prepare spells' spell_____________________________________________________________
 //
 OUTER_SET prep_message = RESOLVE_STR_REF(@21984)
+COPY ~%MOD_FOLDER%/data/semi_spont/d5swtch.bam~ ~override~
 COPY ~%MOD_FOLDER%/data/semi_spont/d5prepb.bam~ ~override/d5prepb.bam~
 COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5prepb.spl~
   SAY NAME1 @21982 											// ~daily spell preparation~
   SAY UNIDENTIFIED_DESC @21983								// ~daily spell preparation~
-  WRITE_ASCII 0x3a ~d5prepb~ #8
-  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5prepb~ END
+  WRITE_ASCII 0x3a ~d5swtch~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5swtch~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d517slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d589slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5b206~ END
@@ -805,7 +812,7 @@ END		//	end define function
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION semi_int_slots BEGIN
+DEFINE_ACTION_MACRO semi_int_slots BEGIN
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_semi_int.d5~) BEGIN
 

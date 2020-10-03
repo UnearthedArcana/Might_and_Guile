@@ -17,9 +17,9 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
 	READ_2DA_ENTRIES_NOW rows cols 
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
+	  PATCH_IF (~%text%~ STRING_EQUAL_CASE ~BERSERKER~) BEGIN
+//	    SET patch_row = (%row% - 1)
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 cols RESOLVE_STR_REF (@2502)
 	  END
 	END
   BUT_ONLY
@@ -31,8 +31,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
+//	    SET patch_row = %row%
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 cols RESOLVE_STR_REF (@2502)
 	  END
 	END
   BUT_ONLY
@@ -44,8 +44,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2502)
+//	    SET patch_row = %row%
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 9 RESOLVE_STR_REF (@2502)
 	  END
 	END
   BUT_ONLY

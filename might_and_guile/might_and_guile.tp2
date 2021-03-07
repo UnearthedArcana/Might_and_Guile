@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.9.4~
+VERSION ~4.10~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -95,7 +95,15 @@ REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 
 INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
+LAM d5_revised_bard_settings
+
 INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
+
+ACTION_IF d5_bards_5E_casting = 1 BEGIN
+
+  LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
+
+END
 
 INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
 //__________________________________________________________________________________

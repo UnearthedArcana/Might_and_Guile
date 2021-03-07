@@ -1444,7 +1444,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
 	READ_BYTE 0x31 prof
 	PATCH_IF (prof = 103) || (prof = 104) || (prof = 105) || (prof = 106) || (prof = 107) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5_rfh2b~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5_rfh2b~ ~d5swshc~ END
 	END
   END
 BUT_ONLY
@@ -1463,7 +1463,7 @@ COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 	//		extra prof
 	END
 	WRITE_ASCII 0x3a ~d5_rfe9b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9b~ END
-COPY ~might_and_guile/feats/d5ftprof.spl~ ~override~
+COPY ~might_and_guile/feats/d5ftprx.spl~ ~override~
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
 	WRITE_ASCII 0x3a ~d5_rfe9b~ #8
@@ -1857,10 +1857,13 @@ THEN
 
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf11n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF11~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~D5_WF11N~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf12n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF12~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~D5_WF12N~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf13n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF13~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~D5_WF13N~ END
 
 COPY ~might_and_guile/feats/d5_wfa1b.bam~ ~override~
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa1.spl~	//			offensive tactics
@@ -1995,14 +1998,19 @@ COPY ~might_and_guile/feats/d5_wf13a.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf21n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF21~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf21n~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf22n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF22~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf22n~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf23n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF23~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf23n~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf24n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF24~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf24n~ END
 COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf25n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5_WF25~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf25n~ END
 
 COPY ~might_and_guile/feats/d5_wfb1b.bam~ ~override~
 COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override/d5uwb1.spl~	//			aggressive posture

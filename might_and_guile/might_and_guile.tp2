@@ -447,3 +447,17 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 //__________________________________________________________________________________
 
 
+//_________________5E CASTING FOR 2E-STYLE BARDS____________________________________
+BEGIN @499
+DESIGNATED 499
+FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+
+INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
+
+INCLUDE ~might_and_guile/components/499_2E_bards_5E_casting.tpa~
+
+LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
+
+LAF 5E_casting_bards END
+//__________________________________________________________________________________
+

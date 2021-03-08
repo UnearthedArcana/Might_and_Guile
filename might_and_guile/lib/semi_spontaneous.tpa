@@ -617,7 +617,7 @@ END
 OUTER_SET prep_message = RESOLVE_STR_REF(~Memorized spells may be now changed. Spellcasting is disabled until the next full rest.~)
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5zwtch.bam~ ~override~
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5zprep.bam~ ~override~
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5zpurp.bam~ ~override~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5zgren.bam~ ~override~
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zprp.spl~
   SAY NAME1 ~Change Prepared Spells~
   SAY UNIDENTIFIED_DESC ~Spell Preparation

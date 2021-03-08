@@ -1444,7 +1444,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
 	READ_BYTE 0x31 prof
 	PATCH_IF (prof = 103) || (prof = 104) || (prof = 105) || (prof = 106) || (prof = 107) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5_rfh2b~ ~d5swshc~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5swshc~ END
 	END
   END
 BUT_ONLY

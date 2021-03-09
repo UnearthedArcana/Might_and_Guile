@@ -5214,7 +5214,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 				STRING_SET_EVALUATE %kit_desc% ~%kit_description%~
 			  END
 			END
-			ACTION_IF (d5_bards_5E_casting = 0) BEGIN
+			PATCH_IF (d5_bards_5E_casting = 0) BEGIN
 		      GET_STRREF %desc% kit_description
 		      INNER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
 			    REPLACE_TEXTUALLY ~%tra_5E_casting%~ ~~

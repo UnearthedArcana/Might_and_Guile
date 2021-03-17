@@ -13,7 +13,7 @@
 //	SET_2DA_ENTRY 11 5 1 ~d5_STLK2 ~
 //BUT_ONLY
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
 		SET_2DA_ENTRY 13 37 1 ~3~
 		SET_2DA_ENTRY 18 37 1 ~3~
@@ -72,7 +72,7 @@ END
 //2DA MODIFICATIONS___________________________________________________________________
 //
 /*
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_strid.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__strid.d5~ THEN BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
@@ -109,7 +109,7 @@ ACTION_PHP_EACH d5_ranstab_clabs AS roo => goo BEGIN
 		BUT_ONLY
 	END
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) THEN BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
@@ -124,7 +124,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
 	BUT_ONLY
   END
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 	COPY_EXISTING ~clabrn03.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL332 ~ ~****       ~
 		REPLACE_TEXTUALLY ~GA_SPCL311 ~ ~****       ~

@@ -11,7 +11,7 @@ DEFINE_ACTION_FUNCTION 265_monk_fists BEGIN
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/monk/d5_mfist.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__mfist.d5~
 //__________________________________________________________________________________
 
 
@@ -93,7 +93,7 @@ END
 
 //UPDATE EXISTING STRINGS__________________________________________________________
 // 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__mro.d5~ THEN BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
@@ -124,7 +124,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
 //	STRING_SET 45867 @2651
 //END
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__mro.d5~ THEN BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
@@ -307,7 +307,7 @@ END
 
 //UPDATE EXISTING STRINGS__________________________________________________________
 // 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__mro.d5~ THEN BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
@@ -338,7 +338,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
 //	STRING_SET 45867 @2651
 //END
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_mro.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__mro.d5~ THEN BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns

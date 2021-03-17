@@ -9,7 +9,7 @@
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_archy.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__archy.d5~
 //__________________________________________________________________________________
 
 /*
@@ -312,7 +312,7 @@ OUTER_SPRINT feat_label_string @20013
 
 //NO FEATS YET________________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
  COPY_EXISTING ~d5flsta.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
@@ -402,7 +402,7 @@ END
 
 //FEATS ALREADY______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
  COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
  COPY_EXISTING ~d5flstaf.2da~ ~override~
   COUNT_2DA_COLS cols

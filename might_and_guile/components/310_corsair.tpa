@@ -112,7 +112,7 @@ COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
 	
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_corsa.2da~) BEGIN
 	APPEND ~d5_corsa.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -128,7 +128,7 @@ OUTER_SET corsair_code = (0x4000 + %D5CORSA%)
 
 //FEAT SYSTEM_________________________________________________________________________
 //
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
 
   APPEND ~d5_corsa.2da~
 ~ABILITY     ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        AP_D5_ACBO1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****
@@ -137,7 +137,7 @@ ABILITY     AP_D5_SWAPR ****        ****        ****        ****        ****    
 
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
 
   ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
    COPY_EXISTING ~clastext.2da~ ~override~

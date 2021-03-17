@@ -9,11 +9,11 @@
 
 // copy marker file__________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5_imp_rangers.d5~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__imp_rangers.d5~
 //___________________________________________________________________________________
 
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // just apply feats if already installed______________________________________________
 // 
@@ -38,7 +38,7 @@ BUT_ONLY
 
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // give tracking at level 1__________________________________________________________
 //

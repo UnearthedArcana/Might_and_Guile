@@ -101,7 +101,7 @@ COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5earch.2da~) BEGIN
 	APPEND ~d5earch.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -128,7 +128,7 @@ BUT_ONLY
 /*
 //REVISED ARCHERY____________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 
   COPY_EXISTING ~d5earch.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
@@ -194,7 +194,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
   OUTER_SPRINT feat_title_string @20012 
   OUTER_SPRINT feat_label_string @20013 
 
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5flsta.2da~) BEGIN
 	  COPY ~might_and_guile/feats/d5flsta.2da~ ~override~
 	END
@@ -266,7 +266,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rarchery.d5~ BEGIN
 	END
    BUT_ONLY
   END
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5flstaf.2da~) BEGIN
 	  COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
 	END
@@ -393,11 +393,11 @@ END
 
 LAM ~READ_FNP_KIT_INFO~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   LAF apply_fnp_spheres STR_VAR clab_name = ~d5earch~ END
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5earch~ END
 END
 //__________________________________________________________________________________
@@ -413,7 +413,7 @@ END
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__echan.d5~ BEGIN
   INCLUDE ~might_and_guile/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________

@@ -146,7 +146,7 @@ COPY_EXISTING ~sppr713.spl~ ~override/d5_cho72.spl~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_chori.2da~) BEGIN
 	APPEND ~d5_chori.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -156,7 +156,7 @@ END
 
 //UPDATE SONGS______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__bards.d5~ BEGIN
   COPY_EXISTING ~d5_chori.2da~ ~override~
 	REPLACE_TEXTUALLY ~AP_D5_CHOR~ ~****     ~
 //	LPM remove_blank_lines
@@ -183,7 +183,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_bards.d5~ BEGIN
   LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BJS01~ END
   LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BSK01~ END
   LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~AP_RR#BDF03~ END
-  ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeats.d5~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeats.d5~ BEGIN
     LAF action_remove_hla STR_VAR kit_name = ~D5CHORI~ remove_ability = ~GA_SPCL918~ END
     LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF31~ num_allowed = ~3~ END
     LAF action_add_hla STR_VAR kit_name = ~D5CHORI~ ability = ~GA_D5_RF32~ num_allowed = ~3~ END

@@ -100,12 +100,12 @@ COPY ~might_and_guile/bard/d5_jons1.spl~ ~override~
 COPY ~might_and_guile/bard/d5_jonsa.spl~ ~override~
 	SAY NAME1 @4510
 	SAY UNIDENTIFIED_DESC @4510
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__taspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_jongl.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/bard/baspl2.txt~
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__taspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_jongl.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/bard/baspl1.txt~
@@ -115,7 +115,7 @@ END
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_jongl.2da~) BEGIN
 	APPEND ~d5_jongl.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END

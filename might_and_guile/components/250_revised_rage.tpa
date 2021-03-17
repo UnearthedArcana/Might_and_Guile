@@ -69,7 +69,7 @@ COPY ~might_and_guile/fighter/d5_barbr.spl~ ~override/spcl321.spl~
 //FIGHTER KIT 2DA FILES___________________________________________________________
 //
 /*
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
 	COPY_EXISTING ~clabfi01.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/fighter/ficlab.txt~
@@ -77,7 +77,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
 	END
 */
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_profs.d5~) THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__profs.d5~) THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
 		SET_2DA_ENTRY 3 30 1 ~3~ // Berserker
 		SET_2DA_ENTRY 4 30 1 ~3~
@@ -255,7 +255,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_profs.d5~) THEN BEGIN
 /*
 // new: passive charm evasion_________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 
 INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
 
@@ -313,7 +313,7 @@ BUT_ONLY
 
 END
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 
 // give determination and slippery mind to berserker
 

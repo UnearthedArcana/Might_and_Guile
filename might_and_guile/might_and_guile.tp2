@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.10~
+VERSION ~4.11~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -100,12 +100,15 @@ LAM d5_revised_bard_settings
 INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
 
 ACTION_IF d5_bards_5E_casting = 1 BEGIN
-
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane~) BEGIN
   LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
-
+ END
 END
 
 INCLUDE ~might_and_guile/components/210_revised_bards.tpa~
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
+
 //__________________________________________________________________________________
 
 
@@ -155,7 +158,7 @@ INCLUDE ~might_and_guile/components/230_revised_stalker.tpa~
 
 BEGIN @235
 DESIGNATED 235
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_beastmaster.d5~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__beastmaster.d5~) @5
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/235_revised_beastmaster.tpa~
@@ -172,7 +175,7 @@ INCLUDE ~might_and_guile/components/235_revised_beastmaster.tpa~
 
 BEGIN @240
 DESIGNATED 240
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_imp_rangers.d5~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) @5
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/240_improved_rangers.tpa~
@@ -319,7 +322,7 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 BEGIN @322
 DESIGNATED 322
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5earch.2da~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5earch.2da~) @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
@@ -331,7 +334,7 @@ BEGIN @324
 DESIGNATED 324
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5_sling.2da~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5_sling.2da~) @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
@@ -341,7 +344,7 @@ INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //________________________MAGE HUNTER_______________________________________________
 BEGIN @350
 DESIGNATED 350
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5mageh.2da~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5mageh.2da~) @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
@@ -351,7 +354,7 @@ INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //_______________________BARBARIAN RANGER___________________________________________
 BEGIN @360
 DESIGNATED 360
-REQUIRE_PREDICATE NOT FILE_EXISTS_IN_GAME ~d5rbarb.2da~ @5
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5rbarb.2da~) @5
 //GROUP @23
 
 INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
@@ -451,6 +454,7 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 BEGIN @499
 DESIGNATED 499
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__5E_casting_bards.d5~) @5
 
 INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
 
@@ -459,5 +463,8 @@ INCLUDE ~might_and_guile/components/499_2E_bards_5E_casting.tpa~
 LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
 
 LAF 5E_casting_bards END
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_bards.d5~
 //__________________________________________________________________________________
 

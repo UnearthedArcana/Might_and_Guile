@@ -111,14 +111,14 @@ COPY_EXISTING ~spwi302.spl~ ~override/d5_rarem.spl~
 	WRITE_LONG 0x34 2
 COPY_EXISTING ~spwi310.spl~ ~override/d5_ranon.spl~
 	WRITE_SHORT 0x1c 2
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_wiz.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__wiz.d5~ BEGIN
 	COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
 		WRITE_SHORT 0x1c 2
 		WRITE_LONG 0x34 2
 	COPY_EXISTING ~spwi321.spl~ ~override/d5_rathr.spl~
 		WRITE_SHORT 0x1c 2
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_wiz.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__wiz.d5~ BEGIN
 	COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
 	COPY_EXISTING ~spwi321.spl~ ~override/d5_rathr.spl~
 END
@@ -143,7 +143,7 @@ COPY ~might_and_guile/ranger/d5_mghs2.eff~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5mageh.2da~) BEGIN
 	APPEND ~d5mageh.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -151,13 +151,13 @@ END
 //____________________________________________________________________________________
 
 //2DA MODIFICATIONS___________________________________________________________________
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stride.d5~ THEN BEGIN
 	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/strirang.txt~
 		BUT_ONLY
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
@@ -170,15 +170,15 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
 		BUT_ONLY
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5__apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
 		COPY_EXISTING ~d5mageh.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
 			BUT_ONLY
 	END
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_range.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__range.d5~ THEN BEGIN
 	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/ranstab.txt~
@@ -195,7 +195,7 @@ OUTER_SET mage_hunter_code = (0x4000 + %D5MAGEH%)
 
 //FEAT SYSTEM_________________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
 
   INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
 
@@ -295,7 +295,7 @@ END
 
 //VANILLA SPELL TABLES______________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_staspl.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__staspl.d5~ THEN BEGIN
 	COPY_EXISTING ~d5mageh.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/mhspl1.txt~
@@ -309,7 +309,7 @@ END
 
 //REVISED SPELL TABLES_______________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_taspl.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__taspl.d5~ THEN BEGIN
 	COPY ~might_and_guile/ranger/d5_maghb.2da~ ~override/d5mageh.2da~
 END
 //____________________________________________________________________________________
@@ -364,11 +364,11 @@ END
 
 LAM ~READ_FNP_KIT_INFO~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   LAF apply_fnp_spheres STR_VAR clab_name = ~d5mageh~ END
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5mageh~ END
 END
 //__________________________________________________________________________________

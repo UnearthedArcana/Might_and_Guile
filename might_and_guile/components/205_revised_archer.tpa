@@ -9,7 +9,7 @@
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_rarchery.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__rarchery.d5~
 //__________________________________________________________________________________
 
 
@@ -82,7 +82,7 @@ END
 
 //WEAR ELVEN CHAIN___________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__echan.d5~ BEGIN
 	INCLUDE ~might_and_guile/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________
@@ -90,7 +90,7 @@ END
 
 //TEXT DESCRIPTIONS__________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   COPY_EXISTING ~clabrn02.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
@@ -213,7 +213,7 @@ END
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_archy.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__archy.d5~
 //__________________________________________________________________________________
 
 /*
@@ -514,7 +514,7 @@ OUTER_SPRINT feat_label_string @20013
 
 //NO FEATS YET________________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
  COPY_EXISTING ~d5flsta.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
@@ -604,7 +604,7 @@ END
 
 //FEATS ALREADY______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
  COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
  COPY_EXISTING ~d5flstaf.2da~ ~override~
   COUNT_2DA_COLS cols
@@ -707,7 +707,7 @@ BUT_ONLY
 // oh yeah, to re-apply the FnP stuff after the description change
 //FNP SHPERE ACCESS TEXT_____________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   OUTER_SPRINT sphere_access @1002
   OUTER_SPRINT focus_access @1003
   OUTER_SPRINT major_access @1004

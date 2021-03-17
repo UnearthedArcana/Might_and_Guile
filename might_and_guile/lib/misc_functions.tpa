@@ -379,7 +379,7 @@ DEFINE_ACTION_FUNCTION clerics_use_magical_devices BEGIN
 	COPY_EXISTING ~%scroll%.itm~ ~override~
 	  WRITE_BYTE 0x1e (THIS BAND 0b01111111)
 	  WRITE_BYTE 0x1f (THIS BAND 0b10111001)
-	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5_umd.d5~) BEGIN
+	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	BUT_ONLY
@@ -394,7 +394,7 @@ DEFINE_ACTION_FUNCTION clerics_use_magical_devices BEGIN
 	PATCH_IF (%cleric_use% BAND 0b10000000) = 0b10000000 BEGIN
 	  WRITE_BYTE 0x1e (THIS BAND 0b01111111)
 	  WRITE_BYTE 0x1f (THIS BAND 0b10111001)
-	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5_umd.d5~) BEGIN
+	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	END
@@ -420,7 +420,7 @@ THEN
   BUT_ONLY
  END
 
- COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5_umd.d5~
+ COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__umd.d5~
 
 END	//	end umd setup
 
@@ -431,7 +431,7 @@ END	//	end umd setup
 
 DEFINE_ACTION_FUNCTION cleric_clabs_umd BEGIN
 
- ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) BEGIN
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
 
   ACTION_FOR_EACH kitclab IN ~CLABMA01~ ~CLABMA02~ ~CLABMA03~ ~CLABMA04~ ~CLABMA05~ ~CLABMA06~ ~CLABMA07~ ~CLABMA08~ ~CLABMA09~ BEGIN 
 	ACTION_IF (NOT FILE_EXISTS_IN_GAME ~%kitclab%.2da~) THEN BEGIN
@@ -484,7 +484,7 @@ DEFINE_ACTION_FUNCTION cleric_clabs_umd BEGIN
 	BUT_ONLY
   END
 
-  COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5_cleric_umd.d5~
+  COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__cleric_umd.d5~
 
  END
  

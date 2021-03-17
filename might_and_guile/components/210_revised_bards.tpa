@@ -7,9 +7,6 @@
 //__________________________________________________________________________________
 
 /* 
-still to do: 
- -- ...have SoB remove the lvl 8/12/16/20 ones; leave the lvl 2 bonus intact
-
 thiefscl:
 PP	OL	FT	MS	HiS	DI	ST	Stealth
 */
@@ -23,7 +20,7 @@ PP	OL	FT	MS	HiS	DI	ST	Stealth
 
 //COPY MARKER FILE__________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_bards.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__bards.d5~
 //__________________________________________________________________________________
 
 
@@ -170,7 +167,7 @@ COPY_EXISTING ~might_and_guile/nubards/d5_bard.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_bard.2da~) BEGIN
 	APPEND ~d5_bard.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -275,7 +272,7 @@ COPY ~might_and_guile/nubards/d5_blade.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_blade.2da~) BEGIN
 	APPEND ~d5_blade.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -379,7 +376,7 @@ COPY ~might_and_guile/nubards/d5_jstr.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_jstr.2da~) BEGIN
 	APPEND ~d5_jstr.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -480,7 +477,7 @@ COPY ~might_and_guile/nubards/d5_skld.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_skld.2da~) BEGIN
 	APPEND ~d5_skld.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -584,7 +581,7 @@ COPY_EXISTING ~sppr409.spl~ ~override/d5galdw.spl~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_glnt.2da~) BEGIN
 	APPEND ~d5_glnt.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -699,7 +696,7 @@ COPY ~might_and_guile/nubards/d5ratsu.cre~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_mstr.2da~) BEGIN
 	APPEND ~d5_mstr.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -803,7 +800,7 @@ COPY ~might_and_guile/nubards/d5_jinx.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_jinx.2da~) BEGIN
 	APPEND ~d5_jinx.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -907,7 +904,7 @@ COPY ~might_and_guile/nubards/d5_eleg.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_eleg.2da~) BEGIN
 	APPEND ~d5_eleg.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1011,7 +1008,7 @@ COPY ~might_and_guile/nubards/d5_agnt.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_agnt.2da~) BEGIN
 	APPEND ~d5_agnt.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1030,7 +1027,7 @@ OUTER_SET nu_agent_code = (0x4000 + %D5_AGENT%)
 //
 // cleric with songs... basically, a demibard
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
   LAF clerics_use_magical_devices END
   LAF cleric_clabs_umd END
 END
@@ -1120,7 +1117,7 @@ COPY ~might_and_guile/nubards/d5_lors.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lors.2da~) BEGIN
 	APPEND ~d5_lors.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1163,11 +1160,11 @@ END
 
 LAM ~READ_FNP_KIT_INFO~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lors~ END
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5_lors~ END
 END
 
@@ -1179,7 +1176,7 @@ ACTION_IF (FILE_EXISTS ~override/d5_fnp_settings.ini~) && (FILE_CONTAINS_EVALUAT
   END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
   APPEND ~d5_lors.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 //__________________________________________________________________________________
@@ -1271,7 +1268,7 @@ END
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lort.2da~) BEGIN
 	APPEND ~d5_lort.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1315,11 +1312,11 @@ END
 
 LAM ~READ_FNP_KIT_INFO~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lort~ END
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5_lort~ END
 END
 
@@ -1332,7 +1329,7 @@ ACTION_IF (FILE_EXISTS ~override/d5_fnp_settings.ini~) && (FILE_CONTAINS_EVALUAT
   END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
   APPEND ~d5_lort.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 */
@@ -1426,7 +1423,7 @@ COPY ~might_and_guile/nubards/d5_hxbl.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_hxbl.2da~) BEGIN
 	APPEND ~d5_hxbl.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1531,7 +1528,7 @@ COPY ~might_and_guile/nubards/d5_hrld.2da~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_hrld.2da~) BEGIN
 	APPEND ~d5_hrld.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1683,7 +1680,7 @@ COPY ~might_and_guile/nubards/d5whsp3.spl~ ~override~ // spell to cast from list
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_whsl.2da~) BEGIN
 	APPEND ~d5_whsl.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1794,7 +1791,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfe9b.bam~) BEGIN
   COPY ~might_and_guile/feats/d5ftprof.cre~ ~override~
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
   COPY_EXISTING ~d5_blads.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_D5BSWPF~ ~GA_D5FTPRX~
   BUT_ONLY
@@ -1808,7 +1805,7 @@ IF_EXISTS BUT_ONLY
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_blads.2da~) BEGIN
 	APPEND ~d5_blads.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1917,7 +1914,7 @@ BUT_ONLY
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_echan.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__echan.d5~ BEGIN
   INCLUDE ~might_and_guile/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________
@@ -2195,87 +2192,35 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	READ_LONG 0x22 appearance
 	PATCH_IF (type = 2) BEGIN 								// armor
 	  PATCH_IF (appearance = 16691) BEGIN 					// chain appearance
-		PATCH_IF !(FILE_EXISTS_IN_GAME ~d5_armcast.d5~) BEGIN
+		PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__armcast.d5~) BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
 		    END
 		  END
-/*
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_bard_code%    parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_blade_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_jester_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_skald_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_gallant_code% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_agent_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_meister_code% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_jinxer_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_elegist_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_hexblade_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_bladesinger_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-*/
 		END
-		PATCH_IF FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
+		PATCH_IF FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
 		    END
 		  END
-/*
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_bard_code%    parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_blade_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_jester_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_skald_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_gallant_code% parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_agent_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_meister_code% parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_jinxer_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_elegist_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_hexblade_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_bladesinger_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
-*/
 		END
 	  END
 	  PATCH_IF (appearance = 16692) BEGIN 					// plate appearance
-		PATCH_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
+		PATCH_IF NOT FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
 		    END
 		  END
-/*
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_bard_code%    parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_blade_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_jester_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_skald_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_gallant_code% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_agent_code%   parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_meister_code% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_jinxer_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_elegist_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_hexblade_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %nu_bladesinger_code%  parameter2 = 9 STR_VAR resource = ~d5bncast~ END
-*/
 		END
-		PATCH_IF FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
+		PATCH_IF FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
 		    END
 		  END
-/*
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_bard_code%    parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_blade_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_jester_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_skald_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_gallant_code% parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_agent_code%   parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_meister_code% parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_jinxer_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_elegist_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_hexblade_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-		  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %nu_bladesinger_code%  parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
-*/
 		END
 	  END
 	END
@@ -2328,6 +2273,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub01.spl~	//		learn song
 //	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd01z.spl~	//		206 vs. give song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd01z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD01Y~ END
 CREATE EFF ~d5bd01y~											// 		give song
 	WRITE_LONG 0x10 171
@@ -2371,6 +2317,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub02.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD02Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd02z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd02z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD02Y~ END
 CREATE EFF ~d5bd02y~
 	WRITE_LONG 0x10 171
@@ -2414,6 +2361,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub03.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD03Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd03z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd03z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD03Y~ END
 CREATE EFF ~d5bd03y~
 	WRITE_LONG 0x10 171
@@ -2457,6 +2405,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub05.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD05Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd05z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd05z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD05Y~ END
 CREATE EFF ~d5bd05y~
 	WRITE_LONG 0x10 171
@@ -2500,6 +2449,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub06.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD06Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd06z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd06z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD06Y~ END
 CREATE EFF ~d5bd06y~
 	WRITE_LONG 0x10 171
@@ -2543,6 +2493,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub07.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD07Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd07z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd07z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD07Y~ END
 CREATE EFF ~d5bd07y~
 	WRITE_LONG 0x10 171
@@ -2586,6 +2537,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub08.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD08Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd08z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd08z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD08Y~ END
 CREATE EFF ~d5bd08y~
 	WRITE_LONG 0x10 171
@@ -2629,6 +2581,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub09.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD09Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd09z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd09z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD09Y~ END
 CREATE EFF ~d5bd09y~
 	WRITE_LONG 0x10 171
@@ -2672,6 +2625,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub20.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD20Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd20z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd20z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD20Y~ END
 CREATE EFF ~d5bd20y~
 	WRITE_LONG 0x10 171
@@ -2715,6 +2669,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub21.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD21Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd21z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd21z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD21Y~ END
 CREATE EFF ~d5bd21y~
 	WRITE_LONG 0x10 171
@@ -2758,6 +2713,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub22.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD22Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd22z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd22z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD22Y~ END
 CREATE EFF ~d5bd22y~
 	WRITE_LONG 0x10 171
@@ -2801,6 +2757,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub23.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD23Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd23z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd23z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD23Y~ END
 CREATE EFF ~d5bd23y~
 	WRITE_LONG 0x10 171
@@ -2844,6 +2801,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub24.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD24Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd24z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd24z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD24Y~ END
 CREATE EFF ~d5bd24y~
 	WRITE_LONG 0x10 171
@@ -2887,6 +2845,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub25.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD25Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd25z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd25z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD25Y~ END
 CREATE EFF ~d5bd25y~
 	WRITE_LONG 0x10 171
@@ -2931,6 +2890,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub41.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD41Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd41z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd41z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD41Y~ END
 CREATE EFF ~d5bd41y~
 	WRITE_LONG 0x10 171
@@ -2974,6 +2934,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub42.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD42Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd42z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd42z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD42Y~ END
 CREATE EFF ~d5bd42y~
 	WRITE_LONG 0x10 171
@@ -3017,6 +2978,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub43.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD43Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd43z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd43z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD43Y~ END
 CREATE EFF ~d5bd43y~
 	WRITE_LONG 0x10 171
@@ -3062,6 +3024,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub45.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD45Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd45z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd45z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD45Y~ END
 CREATE EFF ~d5bd45y~
 	WRITE_LONG 0x10 171
@@ -3106,6 +3069,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub46.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD46Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd46z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd46z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD46Y~ END
 CREATE EFF ~d5bd46y~
 	WRITE_LONG 0x10 171
@@ -3149,6 +3113,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub47.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD47Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd47z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd47z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD47Y~ END
 CREATE EFF ~d5bd47y~
 	WRITE_LONG 0x10 171
@@ -3192,6 +3157,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub48.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD48Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd48z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd48z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD48Y~ END
 CREATE EFF ~d5bd48y~
 	WRITE_LONG 0x10 171
@@ -3237,6 +3203,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub49.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD49Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd49z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd49z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD49Y~ END
 CREATE EFF ~d5bd49y~
 	WRITE_LONG 0x10 171
@@ -3281,6 +3248,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub51.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD51Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd51z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd51z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD51Y~ END
 CREATE EFF ~d5bd51y~
 	WRITE_LONG 0x10 171
@@ -3324,6 +3292,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub61.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD61Y~ END
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd61z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd61z~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD61Y~ END
 CREATE EFF ~d5bd61y~
 	WRITE_LONG 0x10 171
@@ -3444,28 +3413,12 @@ COPY ~might_and_guile/nubards/d5bd05.itm~ ~override~			//		mirror images
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd05ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd05ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
-*/
 CREATE EFF ~d5bd05ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd05~ #8
 	WRITE_ASCII 0x30 ~d5ub05l~ #8
 CREATE EFF ~d5bd05ic~
 	WRITE_LONG 0x10 146
@@ -3473,7 +3426,6 @@ CREATE EFF ~d5bd05ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd05~ #8
 	WRITE_ASCII 0x30 ~d5vb05l~ #8
 /*
 ACTION_IF FILE_EXISTS_IN_GAME ~pwarden.cre~ BEGIN
@@ -3504,28 +3456,12 @@ COPY ~might_and_guile/nubards/d5bd08.itm~ ~override~			//		mind shield
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd08ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd08ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
-*/
 CREATE EFF ~d5bd08ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd08~ #8
 	WRITE_ASCII 0x30 ~d5ub08l~ #8
 CREATE EFF ~d5bd08ic~
 	WRITE_LONG 0x10 146
@@ -3533,7 +3469,6 @@ CREATE EFF ~d5bd08ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd08~ #8
 	WRITE_ASCII 0x30 ~d5vb08l~ #8
 
 ACTION_IF FILE_EXISTS_IN_GAME ~pirmur01.cre~ BEGIN
@@ -3556,28 +3491,12 @@ COPY ~might_and_guile/nubards/d5bd24.itm~ ~override~			//		hold undead
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd24ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd24ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
-*/
 CREATE EFF ~d5bd24ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd24~ #8
 	WRITE_ASCII 0x30 ~d5ub24l~ #8
 CREATE EFF ~d5bd24ic~
 	WRITE_LONG 0x10 146
@@ -3585,7 +3504,6 @@ CREATE EFF ~d5bd24ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd24~ #8
 	WRITE_ASCII 0x30 ~d5vb24l~ #8
 
 ACTION_IF FILE_EXISTS_IN_GAME ~theshal.cre~ BEGIN
@@ -3612,28 +3530,12 @@ COPY ~might_and_guile/nubards/d5bd25.itm~ ~override~			//		entangle
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd25ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd25ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
-*/
 CREATE EFF ~d5bd25ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd25~ #8
 	WRITE_ASCII 0x30 ~d5ub25l~ #8
 CREATE EFF ~d5bd25ic~
 	WRITE_LONG 0x10 146
@@ -3641,7 +3543,6 @@ CREATE EFF ~d5bd25ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd25~ #8
 	WRITE_ASCII 0x30 ~d5vb25l~ #8
 
 ACTION_IF FILE_EXISTS_IN_GAME ~jugmim01.cre~ BEGIN
@@ -3664,28 +3565,12 @@ COPY ~might_and_guile/nubards/d5bd48.itm~ ~override~			//		dispel illusions
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd48ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd48ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_bladesinger_code% END
-*/
 CREATE EFF ~d5bd48ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd48~ #8
 	WRITE_ASCII 0x30 ~d5ub48l~ #8
 CREATE EFF ~d5bd48ic~
 	WRITE_LONG 0x10 146
@@ -3693,7 +3578,6 @@ CREATE EFF ~d5bd48ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd48~ #8
 	WRITE_ASCII 0x30 ~d5vb48l~ #8
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~stoblack.sto~)THEN BEGIN
@@ -3702,6 +3586,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~stoblack.sto~)THEN BEGIN
 END
 
 /*
+// need to put the scroll somewhere...
 COPY ~might_and_guile/nubards/d5bd51.itm~ ~override~			//		bladesong
   SAY NAME2 @21511
   SAY IDENTIFIED_DESC @21512
@@ -3717,27 +3602,12 @@ COPY ~might_and_guile/nubards/d5bd51.itm~ ~override~			//		bladesong
 	  END
 	END
   END
-/*
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_blade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jester_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_skald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_gallant_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_herald_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_meister_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_jinxer_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_elegist_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_hexblade_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_agent_code% END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_code% STR_VAR resource = ~d5bd51ic~ END
-  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %nu_loresinger_ct_code% STR_VAR resource = ~d5bd51ic~ END
-*/
 CREATE EFF ~d5bd51ib~
 	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd51~ #8
 	WRITE_ASCII 0x30 ~d5ub51l~ #8
 CREATE EFF ~d5bd51ic~
 	WRITE_LONG 0x10 146
@@ -3745,10 +3615,7 @@ CREATE EFF ~d5bd51ic~
 	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 9
 	WRITE_SHORT 0x2c 100
-//	WRITE_ASCII 0x30 ~d5bd51~ #8
 	WRITE_ASCII 0x30 ~d5vb51l~ #8
-	
-// need to put the scroll somewhere...
 */
 //___________________________________________________________________________________
 
@@ -3796,23 +3663,7 @@ OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
 OUTER_SPRINT feat_title_string @20012 
 OUTER_SPRINT feat_label_string @20013 
 
-/*
-ACTION_FOR_EACH high_level_feat IN 
-	~d5ub08~ 
-	~d5vb08~ 
-	~d5ub23~ 
-	~d5vb23~ 
-	~d5ub43~ 
-	~d5vb43~  
-	~d5ub47~ 
-	~d5vb47~ BEGIN
-  COPY_EXISTING ~%high_level_feat%.spl~ ~override~
-	WRITE_LONG 0x34 4
-  IF_EXISTS BUT_ONLY
-END
-*/
-
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
   COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
 
@@ -3915,7 +3766,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
 
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
  COPY ~might_and_guile/feats/d5flstbf.2da~ ~override~
  COPY_EXISTING ~d5flstbf.2da~ ~override~
   COUNT_2DA_COLS cols
@@ -3978,8 +3829,6 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rfeat.d5~) BEGIN
  ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
 /*
   COPY_EXISTING ~d5feat%num%.spl~ ~override~
-// ***** use bard_kits_list vv
-//	PATCH_FOR_EACH nu_bard_kit IN ~%nu_bard_code%~ ~%nu_blade_code%~ ~%nu_jester_code%~ ~%nu_skald_code%~ ~%nu_gallant_code%~ ~%nu_herald_code%~ ~%nu_meister_code%~ ~%nu_jinxer_code%~ ~%nu_elegist_code%~ ~%nu_agent_code%~ ~%nu_hexblade_code%~ ~%nu_bladesinger_code%~ ~%nu_loresinger_code%~ ~%nu_loresinger_ct_code%~ BEGIN
     PHP_EACH bard_kits_list AS clab => kind BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %clab_1% parameter2 = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
 	END
@@ -4022,8 +3871,8 @@ END
  END
 
 // ***** use bard_kits_list vv
- ACTION_FOR_EACH nubard_kit IN ~d5_bard~ ~d5_blade~ ~d5_jstr~ ~d5_skld~ ~d5_glnt~ ~d5_hrld~ ~d5_mstr~ ~d5_jinx~ ~d5_eleg~ ~d5_hxbl~ ~d5_agnt~ ~d5_lors~ ~d5_lort~ ~d5_blads~ BEGIN
-  COPY_EXISTING ~%nubard_kit%.2da~ ~override~
+ ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
+  COPY_EXISTING ~%clab%.2da~ ~override~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_multibard.txt~
   IF_EXISTS BUT_ONLY
@@ -4111,12 +3960,24 @@ COPY ~might_and_guile/nubards/d5cstmbd.2da~ ~override~
   LPF arcane_casting_slots STR_VAR table_spl = ~d5zltmb~ END
 BUT_ONLY
 
-APPEND ~d5nubard.2da~ 
-~CASTSLOTS   AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5zltmb.spl~) BEGIN
+  COPY_EXISTING ~d5zltmb.spl~ ~override~
+    WRITE_SHORT 0x1c 1
+END
+
+/*
+APPEND ~d5nubard.2da~ ~CASTSLOTS   AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+*/
+
+COPY_EXISTING ~d5zprpd.spl~ ~override~
+  PATCH_PHP_EACH bard_kits_list AS clab => kind BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zltmb~ END
+  END
+IF_EXISTS BUT_ONLY
 
 // add 318 effects to exempt bards from wiz casting slots
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5zltwz~) AND (FILE_CONTAINS_EVALUATED (~clabma01.2da~ ~AP_D5ZLTWZ~)) BEGIN
-  COPY_EXISTING ~d5zltwz~ ~override~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5zltwz.spl~) AND (FILE_CONTAINS_EVALUATED (~clabma01.2da~ ~AP_D5ZLTWZ~)) BEGIN
+  COPY_EXISTING ~d5zltwz.spl~ ~override~
     PHP_EACH bard_kits_list AS clab => kind BEGIN
       PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~W~) BEGIN
 	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 0 duration = 1 STR_VAR resource = ~d5zltwz~ END
@@ -4204,6 +4065,9 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d589spl.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5z89bd~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5z89bd~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d5z89bd~ END
+	PATCH_IF (FILE_EXISTS_IN_GAME ~d5zltwz.spl~) BEGIN
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zltwz~ END
+	END
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D589SPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 
@@ -5079,19 +4943,6 @@ END
 //append nubard.2da to clab tables____________________________________________________
 //
 // ***** need to re-think whether this split is necessary given changes to init
-/*
-COPY_EXISTING ~d5_bard.2da~ ~override~
-			  ~d5_blade.2da~ ~override~
-			  ~d5_jstr.2da~ ~override~
-			  ~d5_skld.2da~ ~override~
-			  ~d5_glnt.2da~ ~override~
-			  ~d5_mstr.2da~ ~override~
-			  ~d5_jinx.2da~ ~override~
-			  ~d5_eleg.2da~ ~override~
-			  ~d5_hxbl.2da~ ~override~
-			  ~d5_agnt.2da~ ~override~
-			  ~d5_blads.2da~ ~override~
-*/
 ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
   ACTION_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
     ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
@@ -5099,13 +4950,17 @@ ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
         LPM remove_blank_lines
         APPEND_FILE ~override/d5nubard.2da~
       BUT_ONLY
-//      ACTION_IF (FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
-//        COPY_EXISTING ~d5zzini.spl~ ~override~
-//          LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bsong~ END
-//      END
-//      ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
+/*
+      ACTION_IF (FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
+        COPY_EXISTING ~d5zzini.spl~ ~override~
+          LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5bsong~ END
+      END
+*/
+/*
+      ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
         APPEND ~%clab%.2da~ ~BARD_SONG   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-//      END
+      END
+*/
     END
   END
 END
@@ -5120,8 +4975,8 @@ APPEND ~d5_lort.2da~ ~BARD_SONG   AP_D5BDB00  ****        ****        ****      
 ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
   ACTION_IF !(~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
     ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
-	  APPEND ~%clab%.2da~ ~NU_BARDS    AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-BARD_SONG   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+	  APPEND ~%clab%.2da~ ~NU_BARDS    AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   AP_D5_1HP   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//BARD_SONG   AP_D5BD000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  
 	END
   END
 END
@@ -5148,15 +5003,6 @@ COPY_EXISTING ~d5_blade.2da~ ~override~
 	  END
 	END
 BUT_ONLY
-
-/*
-APPEND ~d5_blade.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5_jinx.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5_glnt.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5_skld.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5_hxbl.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5_blads.2da~ ~NOSLOTS     AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-*/
 //____________________________________________________________________________________
 */
 
@@ -5275,14 +5121,14 @@ LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_SPCL900~ num_allo
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_SPCL423~ num_allowed = ~2~ END			//	poison weapon
 LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL905~ END					//	no critical strike
 LAF action_remove_hla STR_VAR kit_name = ~D5_BLADE~ remove_ability = ~GA_SPCL906~ END					//	no power attack
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END			//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END			//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~AP_D5_UMD~ num_allowed = ~1~ END			//	use scrolls/wands
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_JESTER~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_JESTER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_JESTER~ ability = ~AP_D5_RFD5~ num_allowed = ~3~ END		//	saving throw bonus
@@ -5294,7 +5140,7 @@ LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL902~ num_allo
 LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
 LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_SPCL321~ num_allowed = ~1~ END				//	zerk rage
 LAF action_remove_hla STR_VAR kit_name = ~D5_SKALD~ remove_ability = ~GA_SPCL913~ END					//	no evasion
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_SKALD~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
@@ -5303,14 +5149,14 @@ LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL904~ num_al
 LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL211~ num_allowed = ~1~ END				//	lay on hands
 LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_SPCL233~ num_allowed = ~3~ END				//	pro. evil 10' radius
 LAF action_remove_hla STR_VAR kit_name = ~D5_GALLANT~ remove_ability = ~GA_SPCL913~ END					//	no evasion
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_GALLANT~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END		//	extra feats
 END
 
 LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL907~ num_allowed = ~1~ END				//	resist magic
 LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL904~ num_allowed = ~1~ END				//	hardiness
 LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
 //  LAF action_add_hla STR_VAR kit_name = ~D5_HERALD~ ability = ~AP_D5_WFA2~ num_allowed = ~1~ excluded_by = ~AP_D5_WFA3~ END		//	offensive tactics
@@ -5320,7 +5166,7 @@ END
 
 LAF action_add_hla STR_VAR kit_name = ~D5_MEISTER~ ability = ~GA_SPCL922~ num_allowed = ~1~ END			//	tracking
 LAF action_add_hla STR_VAR kit_name = ~D5_MEISTER~ ability = ~AP_SPCL924~ num_allowed = ~1~ END			//	poison immunity
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_MEISTER~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_MEISTER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_MEISTER~ ability = ~AP_D5_UMD~ num_allowed = ~1~ END		//	use scrolls/wands
@@ -5330,7 +5176,7 @@ END
 LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~GA_SPCL914~ num_allowed = ~3~ prerequisite = ~AP_SPCL913~ END	//	greater evasion
 LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_SPSD02~ num_allowed = ~3~ END			//	shadowstep
 LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_SPCL937~ num_allowed = ~1~ END			//	shadow maze
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_JINXER~ ability = ~AP_D5_RFG5~ num_allowed = ~1~ END		//	fighting dirty
@@ -5340,7 +5186,7 @@ END
 LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~AP_SPSD02~ num_allowed = ~3~ END			//	shadowstep
 LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~AP_SPCL937~ num_allowed = ~1~ END			//	shadow maze
 LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~GA_SPCL902~ num_allowed = ~3~ END			//	death blow
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~AP_D5_RFG5~ num_allowed = ~1~ END		//	fighting dirty
   LAF action_add_hla STR_VAR kit_name = ~D5_ELEGIST~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END		//	extra feats
@@ -5351,14 +5197,14 @@ LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL902~ num_a
 LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
 LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_SPCL321~ num_allowed = ~1~ END				//	zerk rage
 LAF action_remove_hla STR_VAR kit_name = ~D5_HEXBLADE~ remove_ability = ~GA_SPCL913~ END					//	no evasion
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_HEXBLADE~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END			//	extra feats
 END
 
 LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~GA_SPCL914~ num_allowed = ~3~ prerequisite = ~AP_SPCL913~ END	//	greater evasion
 LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~AP_SPSD02~ num_allowed = ~3~ END			//	shadowstep
 LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~AP_SPCL937~ num_allowed = ~1~ END			//	shadow maze
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END			//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END			//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_AGENT~ ability = ~AP_D5_RFG5~ num_allowed = ~1~ END			//	fighting dirty
@@ -5367,7 +5213,7 @@ END
 
 /*
 LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_SPCL907~ num_allowed = ~1~ END			//	resist magic
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END	//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END	//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_LORESINGER~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END	//	extra feats
@@ -5377,7 +5223,7 @@ END
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL907~ num_allowed = ~1~ END				//	resist magic
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL904~ num_allowed = ~1~ END				//	hardiness
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_SPCL908~ num_allowed = ~3~ END				//	war cry
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~AP_D5_RFA5~ num_allowed = ~1~ END		//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END		//	spell evasion
 //  LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~AP_D5_WFA2~ num_allowed = ~1~ excluded_by = ~AP_D5_WFA3~ END		//	offensive tactics
@@ -5385,7 +5231,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_BLADESINGER~ ability = ~GA_D5FEAT0~ num_allowed = ~3~ END		//	extra feats
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
   LAF action_add_hla STR_VAR kit_name = ~D5_BARD~ ability = ~AP_D5_RFA5~ num_allowed = ~2~ END			//	luck bonus
   LAF action_add_hla STR_VAR kit_name = ~D5_BARD~ ability = ~AP_D5_RFD3~ num_allowed = ~1~ END			//	spell evasion
   LAF action_add_hla STR_VAR kit_name = ~D5_BARD~ ability = ~AP_D5_RFD5~ num_allowed = ~3~ END			//	saving throw bonus
@@ -5552,7 +5398,7 @@ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
 			WRITE_SHORT 0x26 12
 		  END
 		END
-		PATCH_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ BEGIN
+		PATCH_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 			LPF ADD_CRE_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5feata~ END
 		END
 	  END

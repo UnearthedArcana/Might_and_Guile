@@ -9,8 +9,8 @@
 
 //COPY MARKER FILE_________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_rfeat.d5~ ~override~
-COPY ~might_and_guile/lib/markers/d5_wfeat.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__rfeat.d5~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__wfeat.d5~
 //__________________________________________________________________________________
 
 
@@ -222,7 +222,7 @@ END
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_alchm.2da~) BEGIN
 	APPEND ~d5_alchm.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -1093,7 +1093,7 @@ ACTION_PHP_EACH d5_evasion_array AS fo => sho BEGIN
   END
 END
 
-//COPY_EXISTING ~sw1h04.itm~ ~override/d5_evasion.d5~
+//COPY_EXISTING ~sw1h04.itm~ ~override/d5__evasion.d5~
 
 COPY ~might_and_guile/feats/d5_rfd4b.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfd4.spl~ ~override/d5urd4.spl~   // 			missile snaring
@@ -1806,7 +1806,7 @@ ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
 	COPY_EXISTING ~%scroll%.itm~ ~override~
 	  WRITE_BYTE 0x1f (THIS BAND 0b11111101)
 	  WRITE_BYTE 0x20 (THIS BAND 0b10111101)
-	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5_umd.d5~) BEGIN
+	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	BUT_ONLY
@@ -1819,7 +1819,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
 	  WRITE_BYTE 0x1f (THIS BAND 0b11111101)
 	  WRITE_BYTE 0x20 (THIS BAND 0b10111101)
-	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5_umd.d5~) BEGIN
+	  PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	END
@@ -1844,7 +1844,7 @@ THEN
   BUT_ONLY
  END
  
- COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5_umd.d5~
+ COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__umd.d5~
 
 //	end use scrolls/wands
 

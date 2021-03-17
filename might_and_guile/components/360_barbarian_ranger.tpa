@@ -96,14 +96,14 @@ COPY ~might_and_guile/ranger/d5_rbaab.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rback.spl~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.eff~ ~override~
 COPY ~might_and_guile/ranger/d5_rnosp.spl~ ~override~
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stride.d5~ THEN BEGIN
 	COPY_EXISTING ~d5rbarb.2da~ ~override~
 		REPLACE_TEXTUALLY ~AP_SPCL151~ ~****      ~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/stribarb.txt~
 		BUT_ONLY
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5rbarb.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
@@ -116,8 +116,8 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
 		BUT_ONLY
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5__apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
 		COPY_EXISTING ~d5rbarb.2da~ ~override~
 			LPM remove_blank_lines
 			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
@@ -129,7 +129,7 @@ END
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5rbarb.2da~) BEGIN
 	APPEND ~d5rbarb.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
@@ -145,7 +145,7 @@ OUTER_SET barb_ranger_code = (0x4000 + %D5RBARB%)
 
 //FEAT SYSTEM_________________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_rfeat.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
 
   INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
 
@@ -293,11 +293,11 @@ END
 
 LAM ~READ_FNP_KIT_INFO~
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_spheres.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
   LAF apply_fnp_spheres STR_VAR clab_name = ~d5rbarb~ END
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_fnp_usability.d5~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rbarb~ END
 END
 //__________________________________________________________________________________

@@ -3,7 +3,7 @@
 //	v2.0
 //
 DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
-  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
 	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
 		READ_SHORT 0x1c type
@@ -78,7 +78,7 @@ DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
 		SAY UNIDENTIFIED_DESC ~ ~
 		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcap~ END
-	COPY_EXISTING ~sw1h04.itm~ ~override/d5_armcast.d5~				// 	marker file
+	COPY_EXISTING ~sw1h04.itm~ ~override/d5__armcast.d5~				// 	marker file
   END
 END
 //__________________________________________________________________________________

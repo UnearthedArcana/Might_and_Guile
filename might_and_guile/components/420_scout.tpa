@@ -11,7 +11,7 @@
 
 //UPDATE EXISTING STRINGS___________________________________________________________
 // 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
@@ -63,7 +63,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ BEGIN
 //	STRING_SET 25216 @4204
 //END
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
   COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols // amount of columns
@@ -133,7 +133,7 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	SET_2DA_ENTRY 34 41 1 ~1~
 	BUT_ONLY
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stride.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stride.d5~ THEN BEGIN
 	APPEND ~d5_adven.2da~ ~STRIDE      AP_SPCL151  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~spcl922.spl~ THEN BEGIN
@@ -258,7 +258,7 @@ COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
 
 //WILD TALENT_________________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5_psionics.d5~) BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5_swash.2da~) BEGIN
 	APPEND ~d5_swash.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END

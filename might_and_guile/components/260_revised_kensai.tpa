@@ -9,7 +9,7 @@
 
 ///COPY MARKER FILE___________________________________________________________________
 //
-COPY ~might_and_guile/fighter/d5_kensai.d5~ ~override~
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~/d5__kensai.d5~
 //___________________________________________________________________________________
 
 
@@ -1373,7 +1373,7 @@ COPY ~might_and_guile/kensai/d5_kmace.spl~ ~override~
 COPY ~might_and_guile/kensai/d5_kflai.spl~ ~override~
 COPY ~might_and_guile/kensai/d5_khamm.spl~ ~override~
 COPY ~might_and_guile/kensai/d5_kbaxe.spl~ ~override~
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
 	COPY_EXISTING ~d5_kbswo.2da~ ~override~
 				 ~d5_klswo.2da~ ~override~
 				 ~d5_kkata.2da~ ~override~
@@ -1394,8 +1394,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_stats.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
 	BUT_ONLY
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5_apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5__apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
 		COPY_EXISTING ~d5_kbswo.2da~ ~override~
 					 ~d5_klswo.2da~ ~override~
 					 ~d5_kkata.2da~ ~override~

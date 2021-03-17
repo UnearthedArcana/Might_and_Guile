@@ -1,5 +1,5 @@
 
-// v5.6 - universal
+// v5.7 - universal
 
 
 /*
@@ -166,13 +166,11 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z17wz.spl~
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z89wz.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 384 timing = 9 END
-BUT_ONLY
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z17dv.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 62 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5z17dv~ END
 
-// this is for... what? to eliminate kited mage bonus slots?
+// this is for... what? to eliminate kitted mage bonus slots?
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z0slt.spl~ 
   PATCH_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 510 /*126*/ timing = 9 END // should cover lvl 8-9 spls too
@@ -749,28 +747,28 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zprpd.spl~) BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17dv~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17dv~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17dv~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z17wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~d5z89wz~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5zprp1~ END
 //    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5zz145~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
@@ -792,8 +790,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zprpd.spl~) BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 2 timing = 9 END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zsplz~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1  STR_VAR resource = ~d5zspla~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1  STR_VAR resource = ~d5zspla~ END
 END
 
 
@@ -802,14 +800,14 @@ END
 // put this zz000 in the clab tables
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zz000.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz000.spl~
-  SAY NAME1 ~initialize 5E spellcasting~
-  SAY UNIDENTIFIED_DESC ~initialize 5E spellcasting~
-  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5zcast~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
+    SAY NAME1 ~initialize 5E spellcasting~
+    SAY UNIDENTIFIED_DESC ~initialize 5E spellcasting~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5zcast~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zlotz~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5zlots~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 9 STR_VAR resource = ~d5zz000~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 2 parameter2 = 112 timing = 9 STR_VAR resource = ~d5zz000~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5zlots~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 9 STR_VAR resource = ~d5zz000~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 2 parameter2 = 112 timing = 9 STR_VAR resource = ~d5zz000~ END
 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zz001.spl~) BEGIN
@@ -1093,7 +1091,7 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
 // make spells adding the innate spell
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%give_spell%.spl~
           LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
-// make 206 spells preventing the .EFF
+// make 206 spells preventing the add spell
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%block_spell%.spl~
 		  WRITE_SHORT 0x1c 4
 	  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%give_spell%~ END

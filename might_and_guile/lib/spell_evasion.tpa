@@ -99,7 +99,7 @@ DEFINE_ACTION_FUNCTION add_evade_spell
 	READ_2DA_ENTRIES_NOW rows cols
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~STATE~ BEGIN
+	  PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~STATE~) OR (~%stat%~ STRING_CONTAINS_REGEXP ~STATEBITS=n~ = 0) BEGIN
 	    SET state_row = %row%
 	  END
 	END

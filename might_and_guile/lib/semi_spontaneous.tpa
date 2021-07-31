@@ -1,5 +1,5 @@
 
-// v5.8 - targeting fix
+// v6.1 - armor fix
 
 
 /*
@@ -27,6 +27,15 @@ the way it works:
  -- zlotr.bcs gives chosen spells and casts zprpd
  -- zprpd restores spellcasting, casts zsplz
 - zsplz gives innate spells according to your casting slots and semi state
+*/
+
+
+/* 
+
+
+***** need to make armor disable arcane casting (unless cast-in-armor mod is there), and not block spell prep, and correctly apply casting speed penalties
+		...(that last can be done in YARAS)
+
 */
 
 
@@ -170,7 +179,8 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z89wz.spl~
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z17dv.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 62 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
 
-// this is for... what? to eliminate kitted mage bonus slots?
+// this is for... what? 
+// to eliminate kitted mage bonus slots
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z0slt.spl~ 
   PATCH_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 510 /*126*/ timing = 9 END // should cover lvl 8-9 spls too
@@ -209,6 +219,7 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zjslt.spl~
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz206.spl~
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz172.spl~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zw172.spl~
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz145.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
@@ -644,6 +655,7 @@ COPY_EXISTING ~d5zprp.spl~ ~override/d5zprpb.spl~
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zprp1.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %prepared_spells_state% timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 126144000 STR_VAR resource = ~d5zarmr~ END
 
 
 //daily spell slot refresh____________________________________________________________
@@ -803,6 +815,28 @@ END
 
 // 5E system initialization___________________________________________________________
 //
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_mcsrc.qd~) BEGIN
+ COPY_EXISTING ~kit.ids~ ~override~
+  COUNT_2DA_COLS cols 
+  READ_2DA_ENTRIES_NOW rows cols 
+  FOR (row = 1; row < rows; ++row) BEGIN 
+    READ_2DA_ENTRY_FORMER rows row 1 ~kit_name~ 
+    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~ BEGIN
+      SET fighter_sorcerer_row = %row%
+      READ_2DA_ENTRY_FORMER rows fighter_sorcerer_row 0 fighter_sorcerer_code
+    END
+    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~ BEGIN
+      SET sorcerer_cleric_row = %row%
+      READ_2DA_ENTRY_FORMER rows sorcerer_cleric_row 0 sorcerer_cleric_code
+    END
+    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~ BEGIN
+      SET sorcerer_thief_row = %row%
+      READ_2DA_ENTRY_FORMER rows sorcerer_thief_row 0 sorcerer_thief_code
+    END
+  END
+ BUT_ONLY
+END
+
 // put this zz000 in the clab tables
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zz000.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz000.spl~
@@ -812,7 +846,17 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zz000.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zlotz~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5zlots~ END
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5zz000~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 9 STR_VAR resource = ~d5zz000~ END
+    PATCH_IF (VARIABLE_IS_SET %fighter_sorcerer_code%) BEGIN
+      LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = ~d5zz000~ END
+    END
+    PATCH_IF (VARIABLE_IS_SET %sorcerer_cleric_code%) BEGIN
+      LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = ~d5zz000~ END
+    END
+    PATCH_IF (VARIABLE_IS_SET %sorcerer_thief_code%) BEGIN
+      LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 9 STR_VAR resource = ~d5zz000~ END
+    END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 2 parameter2 = 112 timing = 9 STR_VAR resource = ~d5zz000~ END
 END
 
@@ -826,10 +870,12 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 1 parameter2 = 105 timing = 1 STR_VAR resource = ~d5z0slt~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zz206~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5znoqk~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 316 target = 1 timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zncast~ END
 //  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
 //    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5z2slt~ END
 //  END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zz000~ END
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zz000~ END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zprpb~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zprp1~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5zprp~ END
@@ -860,9 +906,11 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zz020.spl~
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zsttd.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_divine% timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = ~d5zsttd~ END
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zstta.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_arcane% timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = ~d5zsttd~ END
 
 
 // generate zclons.2da________________________________________________________________
@@ -926,6 +974,195 @@ ACTION_IF (IS_AN_INT %burning_hands_strref%) BEGIN
 	END
   BUT_ONLY
 END
+
+
+// modify armors' 145 effects_________________________________________________________
+//
+CREATE EFF ~d5zncast~										// 	disable wizard casting
+	WRITE_LONG 0x10 145
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZNCAST~ #8
+
+CREATE EFF ~d5zarm1l~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1L~ #8
+
+CREATE EFF ~d5zarm1c~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1C~ #8
+
+CREATE EFF ~d5zarm1p~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1P~ #8
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zarm1.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 7 STR_VAR resource = ~d5zspla~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = ~d5zarm1~ END
+
+CREATE EFF ~d5zarm2l~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2L~ #8
+
+CREATE EFF ~d5zarm2c~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2C~ #8
+
+CREATE EFF ~d5zarm2p~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2P~ #8
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_SHORT 0x1c type
+    PATCH_IF (type = 2) BEGIN
+//      LPF DELETE_EFFECT INT_VAR match_opcode = 145 END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
+      READ_LONG 0x22 appearance
+	  PATCH_IF (appearance = 16690) BEGIN // leather appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172l~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcal.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcal~ END
+	    END
+	  END
+	  PATCH_IF (appearance = 16691) BEGIN // chain appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172c~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcac.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcac~ END
+	    END
+	  END
+	  PATCH_IF (appearance = 16692) BEGIN // plate appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172p~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcap.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcap~ END
+	    END
+	  END
+	END
+  END
+BUT_ONLY
+
+ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~48~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zbarm.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
+  APPEND ~clabba01.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~AP_D5ZBARM~
+ COPY_EXISTING ~kitlist.2da~ ~override~
+   COUNT_2DA_COLS cols
+   READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
+   FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+	 READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kit_name
+     READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_table
+     READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+     READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 9 kit_ids
+     PATCH_IF (class_num = 5) BEGIN
+      PATCH_IF !(~%kit_name%~ STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+       INNER_ACTION BEGIN
+         APPEND ~%kit_table%.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5ZBARM~
+       END
+      END
+     END
+  END
+BUT_ONLY
+
+END
+
+/* above ^ should do it...
+
+// make a spell that applies a 145 effect every round
+// make a 232 .eff that casts that spell
+// change existing while-equipped 145 effects to 177 effects applying that .eff
+// then, make d5zprp1 block this spell, that the block will be removed upon waking
+
+h// no no no! just change 145 effects in armors to 144 effects!
+
+// but, that will screw up d5_armcast...
+
+// and YARAS...
+
+// wait no, blocking the cast spell button will block priest spells
+
+// maybe apply all arcane 206 effects while equipped, and cast zz172/zspld(?)/zspla once upon equipping?
+// ...then arcane spells will disappear. But, how to make them re-appear upon unequipping?
+// ...maybe have to a repeating spell being cast on delay, and 206 it while the armor is equipped.
+// ...also, need to make sure arcane spells do NOT disappear if armcast or YARAS or some other 'cast in armor' mod
+// ...also, need to make sure YARAS casting speed penalties apply to arcane spells (only)
+*/
 
 
 //fix black pits 2___________________________________________________________________
@@ -1039,6 +1276,7 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
     PATCH_IF (z_ind > 100) AND (~%spell_proc%~ STRING_EQUAL_CASE ~no~) BEGIN
       INNER_ACTION BEGIN
         COPY_EXISTING ~%mem_spell%.spl~ ~override~
+//          READ_SHORT 0x34 spell_typ
           READ_LONG 0x34 level
         IF_EXISTS BUT_ONLY
 // create innate spell
@@ -1118,6 +1356,11 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
 // add 172 to zz172
 	    COPY_EXISTING ~d5zz172.spl~ ~override~
 		  LPF ADD_SPELL_EFFECT INT_VAR /*insert_point = 0*/ opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+// conditionally add 172 to zw172 - use to remove spells upon equipping armor
+		ACTION_IF (~%spell_type%~ STRING_EQUAL_CASE ~arcane~) BEGIN
+	      COPY_EXISTING ~d5zw172.spl~ ~override~
+		    LPF ADD_SPELL_EFFECT INT_VAR /*insert_point = 0*/ opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+		END
 // generate slot#x spells
 	    ACTION_IF (~%spell_type%~ STRING_EQUAL_CASE ~arcane~) BEGIN
 		  ACTION_IF (FILE_EXISTS_IN_GAME ~d5zwot%level%a.spl~) BEGIN
@@ -1183,6 +1426,14 @@ END
     END
   END
 BUT_ONLY
+
+
+COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172l.spl~
+  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~48~) BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 5 parameter2 = 105 timing = 0 duration = 1 STR_VAR resource = ~d5zw172l~ END
+  END
+COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172c.spl~
+COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172p.spl~
 
 
 // compile script_____________________________________________________________________
@@ -1370,6 +1621,16 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zclons.2da~) BEGIN
     END
   BUT_ONLY
 
+  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
+	  READ_SHORT 0x1c spell_type
+	  READ_BYTE 0x1c spell_school
+	  PATCH_IF (spell_type = 1) AND (spell_school = 9) BEGIN
+		SPRINT $scroll_spells(~%SOURCE_RES%~) ~1~
+	  END
+	END
+  BUT_ONLY
+
   ACTION_FOR_EACH hla IN
 	~spwi920~
 	~spwi921~
@@ -1550,8 +1811,16 @@ DEFINE_PATCH_FUNCTION divine_casting_slots STR_VAR table_spl = ~~ BEGIN
 
 // PATCH function - copy .2da table, run this
 
+// limit table_spl to 7 letters!!!
+
   INNER_ACTION BEGIN
     COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 2
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 2
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
   END
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW r2en_table cols
@@ -1637,8 +1906,16 @@ DEFINE_PATCH_FUNCTION arcane_casting_slots STR_VAR table_spl = ~~ BEGIN
 
 // PATCH function - copy .2da table, run this
 
+// limit table_spl to 7 letters!!!
+
   INNER_ACTION BEGIN
     COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 1
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 1
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
   END
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW r2en_table cols
@@ -1724,8 +2001,8 @@ DEFINE_PATCH_FUNCTION arcane_casting_slots STR_VAR table_spl = ~~ BEGIN
     COPY_EXISTING ~%table_spl%.spl~ ~override~
 //      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
       FOR (header = 1 ; header < 40; ++header) BEGIN
-        LPF ADD_SPELL_EFFECT INT_VAR header = (%header% + 1) insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
-        LPF ADD_SPELL_EFFECT INT_VAR header = (%header% + 1) opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+        LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+        LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
       END
   END
 
@@ -2191,7 +2468,7 @@ IF_EXISTS BUT_ONLY
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zwisz.spl~
   PHP_EACH int_nums_lets AS wis => slot BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %int% parameter2 = 128 timing = 1 STR_VAR resource = EVAL ~d5wisb%slot%~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %wis% parameter2 = 130 timing = 1 STR_VAR resource = EVAL ~d5wisb%slot%~ END
   END
   PHP_EACH int_nums_lets AS wis => slot BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~d5wisb%slot%~ END
@@ -2499,6 +2776,7 @@ Combat abilities:
 
 Weight: 0~
     END
+/* no need to increase slots...?
 	ACTION_IF (%ind_2% > 0) BEGIN
 	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z#%ind_1%1.spl~) BEGIN
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z#%ind_1%1.spl~
@@ -2769,8 +3047,13 @@ Weight: 0~
 		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z_%ind_1%9~ END
 	  IF_EXISTS BUT_ONLY
 	END
+*/
 	COPY_EXISTING ~%slot_item%.itm~ ~override~
 	  LPF DELETE_EFFECT INT_VAR match_opcode = 42 match_parameter2 = 0 END
+	  LPF ADD_ITEM_EFFECT INT_VAR type = 3 opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zz172~ END
+	  LPF ADD_ITEM_EFFECT INT_VAR type = 3 opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+	  LPF ADD_ITEM_EFFECT INT_VAR type = 3 opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+
 	IF_EXISTS BUT_ONLY
   END	//	end if spell-doubling
   COPY_EXISTING ~%slot_item%.itm~ ~override~

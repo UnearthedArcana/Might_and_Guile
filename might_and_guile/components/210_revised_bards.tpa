@@ -1874,6 +1874,7 @@ BUT_ONLY
 
 // make EFFs giving extra APR
 ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  OUTER_TEXT_SPRINT this_prof ~%prof%~
   CREATE EFF ~d5%prof%b~
 	WRITE_LONG 0x10 1
 	WRITE_LONG 0x14 1
@@ -1883,29 +1884,29 @@ ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ 
 	WRITE_LONG 0x28 0
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5%PROF%B~ #8
+	WRITE_EVALUATED_ASCII 0x94 ~D5%this_prof%B~ #8
 END
 
 // make spells with 206 against those EFFs
-ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5%prof%6.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5%PROF%B~ END
+ACTION_FOR_EACH 206_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5%206_prof%6.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5%206_prof%B~ END
   BUT_ONLY
 END
 
 // have weapon focus spells cancel those 206 spells
 ACTION_FOR_EACH spec IN ~a~ ~b~ ~c~ ~d~ ~e~ BEGIN
-  ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-	COPY_EXISTING ~d5%spec%%prof%.spl~ ~override~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+  ACTION_FOR_EACH foc_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	COPY_EXISTING ~d5%spec%%foc_prof%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5%foc_prof%6~ END
 	IF_EXISTS BUT_ONLY
   END
 END
 
 // make spell to cast those 206 spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bs206.spl~
-  PATCH_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5%prof%6~ END
+  PATCH_FOR_EACH 146_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5%146_prof%6~ END
   END
 BUT_ONLY
 
@@ -2171,6 +2172,7 @@ APPEND ~d5nubard.2da~ ~NOBKSTAB    AP_D5NBSTB  ****        ****        ****     
 //ARMORED CASTING FOR BARDS__________________________________________________________
 //
 // ***** NOTE: this is not currently compatible with broader armored casting mods
+// ...well, it is now compatible with YARAS
 /*
 INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
 
@@ -4070,9 +4072,20 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d589spl.spl~
 	END
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D589SPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-
 //____________________________________________________________________________________
 
+
+// compat with 5E casting armors______________________________________________________
+//
+//ACTION_IF (FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zblar.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
+
+  APPEND ~d5nubard.2da~ ~BARD_CAST   AP_D5ZBLAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~D5ZBLAR~
+//END
+//____________________________________________________________________________________
 
 
 // add more bard spells_______________________________________________________________
@@ -4873,7 +4886,14 @@ ACTION_IF (d5_bards_5E_casting = 1) BEGIN
   ACTION_PHP_EACH elegist_free_spells AS spl => ind BEGIN
     LAF free_cast_spells STR_VAR free_spell = EVAL ~%spl%~ list_spell = ~d5zeleg~ END
   END
-  COPY_EXISTING ~d5zzini.spl~ ~override~
+
+  ACTION_FOR_EACH kit_spl IN ~d5zbard~ ~d5zjstr~ ~d5zskld~ ~d5zglnt~ ~d5zmstr~ ~d5zjinx~ ~d5zeleg~ BEGIN
+    COPY_EXISTING ~%kit_spl%.spl~ ~override~
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%kit_spl%~ END
+    IF_EXISTS BUT_ONLY
+  END
+
+  COPY_EXISTING ~d5zzini.spl~ ~override~ 
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_bard_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zbard~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_jester_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zjstr~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_skald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zskld~ END
@@ -4885,7 +4905,43 @@ ACTION_IF (d5_bards_5E_casting = 1) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_blade_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zblde~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_agent_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zagnt~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zblds~ END
-  IF_EXISTS BUT_ONLY
+
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+    COPY_EXISTING ~splstate.ids~ ~override~
+	  COUNT_2DA_COLS cols
+	  READ_2DA_ENTRIES_NOW rows cols
+	  FOR (row = 1; row < rows; ++row) BEGIN
+	    READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	    READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	    PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+          SET semi_spont_arcane = %state_ind%
+	    END
+	  END
+    BUT_ONLY
+  END
+
+  COPY ~might_and_guile/lib/semi_spont/d5_base.spl~ ~override/d5zbd00.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_bard_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zbard~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_jester_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zjstr~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_skald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zskld~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_gallant_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zglnt~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_meister_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zmstr~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_jinxer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zjinx~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_hexblade_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zjinx~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_elegist_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zeleg~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_blade_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zblde~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_agent_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zagnt~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zblds~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = ~d5zbd00~ END
+
+  ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
+    ACTION_IF !(~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
+      ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+        APPEND ~%clab%.2da~ ~BARD_CAST   AP_D5ZBD00  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+      END
+    END
+  END
+
 END
 
 ACTION_IF (d5_bards_5E_casting = 0) BEGIN
@@ -5094,27 +5150,41 @@ COPY ~might_and_guile/nubards/d5nosil.eff~ ~override~
 COPY ~might_and_guile/nubards/d5nosila.spl~ ~override~
 
 ACTION_IF (d5_bards_5E_casting = 1) BEGIN
- COPY_EXISTING ~d5src1a.spl~ ~override/d5brds1.spl~
-  SAY NAME1 @21991
-  SAY UNIDENTIFIED_DESC @21991
- COPY_EXISTING ~d5src2a.spl~ ~override/d5brds2.spl~
-  SAY NAME1 @21992
-  SAY UNIDENTIFIED_DESC @21992
- COPY_EXISTING ~d5src3a.spl~ ~override/d5brds3.spl~
-  SAY NAME1 @21993
-  SAY UNIDENTIFIED_DESC @21993
- COPY_EXISTING ~d5src4a.spl~ ~override/d5brds4.spl~
-  SAY NAME1 @21994
-  SAY UNIDENTIFIED_DESC @21994
- COPY_EXISTING ~d5src5a.spl~ ~override/d5brds5.spl~
-  SAY NAME1 @21995
-  SAY UNIDENTIFIED_DESC @21995
- COPY_EXISTING ~d5src6a.spl~ ~override/d5brds6.spl~
-  SAY NAME1 @21996
-  SAY UNIDENTIFIED_DESC @21996
- COPY_EXISTING ~d5src7a.spl~ ~override/d5brds7.spl~
-  SAY NAME1 @21997
-  SAY UNIDENTIFIED_DESC @21997
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src1a.spl~) BEGIN
+   COPY_EXISTING ~d5src1a.spl~ ~override/d5brds1.spl~
+    SAY NAME1 @21991
+    SAY UNIDENTIFIED_DESC @21991
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src2a.spl~) BEGIN
+   COPY_EXISTING ~d5src2a.spl~ ~override/d5brds2.spl~
+    SAY NAME1 @21992
+    SAY UNIDENTIFIED_DESC @21992
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src3a.spl~) BEGIN
+   COPY_EXISTING ~d5src3a.spl~ ~override/d5brds3.spl~
+    SAY NAME1 @21993
+    SAY UNIDENTIFIED_DESC @21993
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src4a.spl~) BEGIN
+   COPY_EXISTING ~d5src4a.spl~ ~override/d5brds4.spl~
+    SAY NAME1 @21994
+    SAY UNIDENTIFIED_DESC @21994
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src5a.spl~) BEGIN
+   COPY_EXISTING ~d5src5a.spl~ ~override/d5brds5.spl~
+    SAY NAME1 @21995
+    SAY UNIDENTIFIED_DESC @21995
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src6a.spl~) BEGIN
+   COPY_EXISTING ~d5src6a.spl~ ~override/d5brds6.spl~
+    SAY NAME1 @21996
+    SAY UNIDENTIFIED_DESC @21996
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5src7a.spl~) BEGIN
+   COPY_EXISTING ~d5src7a.spl~ ~override/d5brds7.spl~
+    SAY NAME1 @21997
+    SAY UNIDENTIFIED_DESC @21997
+  END
 END
 
 LAF action_add_hla STR_VAR kit_name = ~D5_BLADE~ ability = ~GA_SPCL900~ num_allowed = ~2~ END			//	whirlwind

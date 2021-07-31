@@ -119,6 +119,21 @@ END
 //__________________________________________________________________________________
 
 
+// compat with 5E casting armors______________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zbarm.spl~) BEGIN
+    COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zbarm.spl~
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
+  END
+
+  APPEND ~d5_lorem.2da~ ~BARD_CAST   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~D5ZBLAR~
+END
+//____________________________________________________________________________________
+
+
 //WILD TALENT_________________________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN

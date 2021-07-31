@@ -1,4 +1,6 @@
 
+// 0.79.9
+
 //REMOVE BLANK LINES MACRO___________________________________________________________
 //
 DEFINE_PATCH_MACRO ~remove_blank_lines~ BEGIN
@@ -148,14 +150,12 @@ DEFINE_ACTION_FUNCTION ~DEFINE_FNP_KIT_INFO~
 BEGIN
   PRINT ~Defining Faiths and Powers info for kit %clab_name% ...~ 
   
-/*
   // validate required files exist
   ACTION_IF !(FILE_EXISTS ~%2da_folder%/d5_class.2da~
                || NOT FILE_EXISTS ~%2da_folder%/d5_usabl.2da~
                || NOT FILE_EXISTS ~%2da_folder%/d5_spher.2da~) BEGIN
     FAIL ~DEFINE_FNP_KIT_INFO: The required d5_class.2da, d5_usabl.2da, and d5_spher.2da template files could not be found in the folder %2da_folder%.~
   END
-*/
   
   // validate class
   ACTION_TO_UPPER class
@@ -206,147 +206,145 @@ ALL
   END
   
   ACTION_IF !(FILE_CONTAINS_EVALUATED (~d5_class.2da~ ~%clab_name%~)) BEGIN
-//	ACTION_IF !(~%sphere_list%~ STRING_EQUAL_CASE ~custom~) BEGIN
-	  ACTION_IF (FILE_EXISTS_IN_GAME ~fnp_sphere_list.tpa~) && (FILE_CONTAINS_EVALUATED (~fnp_sphere_list.tpa~ ~%sphere_list%~)) BEGIN
-		INCLUDE ~override/fnp_sphere_list.tpa~
-		LAM d5_define_sphere_names
-		LAM d5_deity_kit_sphere_lists
-		ACTION_TO_LOWER %sphere_list%
-		LAF ~%sphere_list%~ RET_ARRAY ~%clab_name%_spheres_array~ = EVAL ~%sphere_list%_array~ END
-		ACTION_PHP_EACH EVAL ~%clab_name%_spheres_array~ AS this_variable => kit_access BEGIN
-		  PRINT ~%this_variable% = %kit_access%~
-		  ACTION_IF FILE_EXISTS_IN_GAME ~d5altsph.2da~ BEGIN
-			COPY_EXISTING ~d5altsph.2da~ ~override~
-			  READ_2DA_ENTRIES_NOW rows 2
-			  FOR (row = 0; row < rows; ++row) BEGIN
-				READ_2DA_ENTRY_FORMER rows row 0 ~fnp_sphere~
-				READ_2DA_ENTRY_FORMER rows row 1 ~alt_sphere~
-				PATCH_IF ~%this_variable%~ STRING_EQUAL_CASE ~%alt_sphere%~ BEGIN
-				  SPRINT new_variable ~%fnp_sphere%~
-				END
-			  END
-			BUT_ONLY
-		  END ELSE BEGIN
-			OUTER_SPRINT new_variable ~%this_variable%~
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Life~) BEGIN
-		    ACTION_IF (~%s_Life%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Life ~%kit_access%~
+   ACTION_IF !(~%sphere_list%~ STRING_EQUAL_CASE ~custom~) BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~fnp_sphere_list.tpa~) && (FILE_CONTAINS_EVALUATED (~fnp_sphere_list.tpa~ ~%sphere_list%~)) BEGIN
+	 INCLUDE ~override/fnp_sphere_list.tpa~
+	 LAM d5_define_sphere_names
+	 LAM d5_deity_kit_sphere_lists
+	 LAF ~%sphere_list%~ RET_ARRAY ~%clab_name%_spheres_array~ = EVAL ~%sphere_list%_array~ END
+	 ACTION_PHP_EACH EVAL ~%clab_name%_spheres_array~ AS this_variable => kit_access BEGIN
+	  ACTION_IF FILE_EXISTS_IN_GAME ~d5altsph.2da~ BEGIN
+		COPY_EXISTING ~d5altsph.2da~ ~override~
+		  READ_2DA_ENTRIES_NOW rows 2
+		  FOR (row = 0; row < rows; ++row) BEGIN
+			READ_2DA_ENTRY_FORMER rows row 0 ~fnp_sphere~
+			READ_2DA_ENTRY_FORMER rows row 1 ~alt_sphere~
+			PATCH_IF ~%this_variable%~ STRING_EQUAL_CASE ~%alt_sphere%~ BEGIN
+			  SPRINT new_variable ~%fnp_sphere%~
 			END
 		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Death~) BEGIN
-		    ACTION_IF (~%s_Death%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Death ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Benediction~) BEGIN
-		    ACTION_IF (~%s_Benediction%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Benediction ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Destruction~) BEGIN
-		    ACTION_IF (~%s_Destruction%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Destruction ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Protection~) BEGIN
-		    ACTION_IF (~%s_Protection%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Protection ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~War~) BEGIN
-		    ACTION_IF (~%s_War%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_War ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Exploration~) BEGIN
-		    ACTION_IF (~%s_Exploration%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Exploration ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Knowledge~) BEGIN
-		    ACTION_IF (~%s_Knowledge%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Knowledge ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Deception~) BEGIN
-		    ACTION_IF (~%s_Deception%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Deception ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Thought~) BEGIN
-		    ACTION_IF (~%s_Thought%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Thought ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Dread~) BEGIN
-		    ACTION_IF (~%s_Dread%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Dread ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Vigor~) BEGIN
-		    ACTION_IF (~%s_Vigor%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Vigor ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Affliction~) BEGIN
-		    ACTION_IF (~%s_Affliction%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Affliction ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Animal~) BEGIN
-		    ACTION_IF (~%s_Animal%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Animal ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Plant~) BEGIN
-		    ACTION_IF (~%s_Plant%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Plant ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Earth~) BEGIN
-		    ACTION_IF (~%s_Earth%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Earth ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Air~) BEGIN
-		    ACTION_IF (~%s_Air%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Air ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Water~) BEGIN
-		    ACTION_IF (~%s_Water%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Water ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Fire~) BEGIN
-		    ACTION_IF (~%s_Fire%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Fire ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Light~) BEGIN
-		    ACTION_IF (~%s_Light%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Light ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Shadow~) BEGIN
-		    ACTION_IF (~%s_Shadow%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Shadow ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Magic~) BEGIN
-		    ACTION_IF (~%s_Magic%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Magic ~%kit_access%~
-			END
-		  END
-		  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Astral~) BEGIN
-		    ACTION_IF (~%s_Astral%~ STRING_EQUAL_CASE ~x~) BEGIN
-			  OUTER_SPRINT s_Astral ~%kit_access%~
-			END
-		  END
+		BUT_ONLY
+	  END ELSE BEGIN
+		OUTER_SPRINT new_variable ~%this_variable%~
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Life~) BEGIN
+	    ACTION_IF (~%s_Life%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Life ~%kit_access%~
 		END
-      END
-//	END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Death~) BEGIN
+	    ACTION_IF (~%s_Death%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Death ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Benediction~) BEGIN
+	    ACTION_IF (~%s_Benediction%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Benediction ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Destruction~) BEGIN
+	    ACTION_IF (~%s_Destruction%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Destruction ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Protection~) BEGIN
+	    ACTION_IF (~%s_Protection%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Protection ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~War~) BEGIN
+	    ACTION_IF (~%s_War%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_War ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Exploration~) BEGIN
+	    ACTION_IF (~%s_Exploration%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Exploration ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Knowledge~) BEGIN
+	    ACTION_IF (~%s_Knowledge%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Knowledge ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Deception~) BEGIN
+	    ACTION_IF (~%s_Deception%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Deception ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Thought~) BEGIN
+	    ACTION_IF (~%s_Thought%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Thought ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Dread~) BEGIN
+	    ACTION_IF (~%s_Dread%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Dread ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Vigor~) BEGIN
+	    ACTION_IF (~%s_Vigor%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Vigor ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Affliction~) BEGIN
+	    ACTION_IF (~%s_Affliction%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Affliction ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Animal~) BEGIN
+	    ACTION_IF (~%s_Animal%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Animal ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Plant~) BEGIN
+	    ACTION_IF (~%s_Plant%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Plant ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Earth~) BEGIN
+	    ACTION_IF (~%s_Earth%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Earth ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Air~) BEGIN
+	    ACTION_IF (~%s_Air%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Air ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Water~) BEGIN
+	    ACTION_IF (~%s_Water%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Water ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Fire~) BEGIN
+	    ACTION_IF (~%s_Fire%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Fire ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Light~) BEGIN
+	    ACTION_IF (~%s_Light%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Light ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Shadow~) BEGIN
+	    ACTION_IF (~%s_Shadow%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Shadow ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Magic~) BEGIN
+	    ACTION_IF (~%s_Magic%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Magic ~%kit_access%~
+		END
+	  END
+	  ACTION_IF (~%new_variable%~ STRING_EQUAL_CASE ~Astral~) BEGIN
+	    ACTION_IF (~%s_Astral%~ STRING_EQUAL_CASE ~x~) BEGIN
+		  OUTER_SPRINT s_Astral ~%kit_access%~
+		END
+	  END
+	 END
+    END
+   END
 
   // define the text that will be added to the files
     OUTER_TEXT_SPRINT class_text ~%clab_name%	%class%	%sphere_list%	%multiclass%~
@@ -610,7 +608,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 		ACTION_GET_STRREF %kit_desc% kit_description 
 		OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN
 			REPLACE_TEXTUALLY ~%disadvantages%~ ~%restrictions%~
-			REPLACE_TEXTUALLY ~%abilities%~ ~%kit_sphere_list%~
+	//		REPLACE_TEXTUALLY ~%abilities%~ ~%kit_sphere_list%~
 			REPLACE_TEXTUALLY ~%advantages%~ ~%kit_sphere_list%~
 		END
 		STRING_SET_EVALUATE %kit_desc% ~%kit_description%~
@@ -712,18 +710,6 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 	PRINT ~%last_clab%~
 	OUTER_SPRINT mod_clab ~%last_clab%~
  END
-
- COPY_EXISTING ~%mod_clab%.2da~ ~override~
-	READ_2DA_ENTRIES_NOW rows 2
-	SET rows_removed = 0
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 0 line
-	  PATCH_IF (~%line%~ STRING_EQUAL_CASE ~FNP_USABLE~) BEGIN
-		REMOVE_2DA_ROW (row - rows_removed) cols
-		SET rows_removed += 1
-	  END
-	END
- BUT_ONLY
 
  COPY_EXISTING ~d5_usabl.2da~ ~override~
   COUNT_2DA_COLS cols

@@ -1451,6 +1451,9 @@ BUT_ONLY
 
 INCLUDE ~might_and_guile/lib/extra_prof_dialogue.tpa~
 COPY ~might_and_guile/feats/d5_rfe9b.bam~ ~override~
+COPY ~might_and_guile/feats/d5ftprof.spl~ ~override~
+	SAY NAME1 @20496
+	SAY UNIDENTIFIED_DESC @20497
 COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 	//		extra prof
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497

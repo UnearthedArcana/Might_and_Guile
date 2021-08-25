@@ -1,5 +1,5 @@
 
-// v7.3 - cleric/mage fnp fix
+// v7.4 - checks spellstates before marker file exclusion
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -80,18 +80,6 @@ END
 
 DEFINE_ACTION_FUNCTION semi_spontaneous_casting INT_VAR include_arcane = 0 include_divine = 0 BEGIN
 
-
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
-
-
-//disable quickspell buttons__________________________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5znoqk.spl~) BEGIN
- COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5znoqk.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
-END
 
 //semi spont spellstates______________________________________________________________
 //
@@ -206,6 +194,19 @@ COPY_EXISTING ~splprot.2da~ ~override~
 	END
   END
 BUT_ONLY
+
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
+
+
+//disable quickspell buttons__________________________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5znoqk.spl~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5znoqk.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
+END
 
 
 //remove spell slots pending sleep_____________________________________________________
@@ -2784,19 +2785,6 @@ DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ BEGIN
 // suffix must match the one in the menu function
 
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_sorc_casting.d5~) BEGIN
-
-//disable quickspells and scroll learning____________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnoqk.spl~) BEGIN
- COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xnoqk.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
-END
-
-
 //add spell slot stat checks to SPLPROT______________________________________________
 //
 APPEND ~splprot.2da~ ~D5_WIZ_1_7%TAB%108%TAB%-1%TAB%7~ UNLESS ~D5_WIZ_1_7~
@@ -2849,6 +2837,20 @@ END
 ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
   LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
   OUTER_SET semi_sorc_state = %new_state_ind%
+END
+
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_sorc_casting.d5~) BEGIN
+
+
+//disable quickspells and scroll learning____________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnoqk.spl~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xnoqk.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
 END
 
 

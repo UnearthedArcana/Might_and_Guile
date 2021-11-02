@@ -47,7 +47,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~clabshgs.2da~) OR (FILE_EXISTS_IN_GAME ~clabsh01
   OUTER_SPRINT $d5_kits_profs(~SHAMAN~ ~class~) ~59~
 END
 
-COPY ~might_and_guile/feats/d5ftprof.baf~ ~might_and_guile/temp/d5ftprof.baf~
+COPY ~might_and_guile/feats/d5ftprof.baf~ ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~
 
 COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_COLS cols
@@ -64,7 +64,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 ACTION_PHP_EACH d5_kits_profs AS kitidsname => profcol BEGIN
 //  PRINT ~%kitidsname% = %kitidsname_1% = column %profcol%~
   ACTION_IF (~%kitidsname_1%~ STRING_EQUAL_CASE ~kit~) BEGIN
-	APPEND_OUTER ~might_and_guile/temp/d5ftprof.baf~ ~
+	APPEND_OUTER ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~ ~
 IF
 	NumTimesTalkedTo(0)
 	Global("D5FTPROF","GLOBAL",0)
@@ -83,7 +83,7 @@ END
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~clabshgs.2da~) OR (FILE_EXISTS_IN_GAME ~clabsh01.2da~) BEGIN
 
-  APPEND_OUTER ~might_and_guile/temp/d5ftprof.baf~ ~
+  APPEND_OUTER ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~ ~
 IF
 	NumTimesTalkedTo(0)
 	Global("D5FTPROF","GLOBAL",0)
@@ -98,7 +98,7 @@ END
 ~ KEEP_CRLF
 END
 
-APPEND_OUTER ~might_and_guile/temp/d5ftprof.baf~ ~
+APPEND_OUTER ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~ ~
 IF
 	NumTimesTalkedTo(0)
 	Global("D5FTPROF","GLOBAL",0)
@@ -409,7 +409,7 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	  SET dart_prof = (dart_prof + 1)
 	  SET sling_prof = (sling_prof + 1)
 	  INNER_ACTION BEGIN
-		COPY ~might_and_guile/temp/d5ftprof.baf~ ~might_and_guile/temp/d5ftprof.baf~
+		COPY ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~ ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~
 		  PATCH_IF (%two_weapon_style% > 0) BEGIN
 			REPLACE_TEXTUALLY ~	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_%kitidsname%","LOCALS",1))~ ~	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_%kitidsname%","LOCALS",1))
 	ActionOverride(LastSummonerOf(Myself),SetGlobal("D5_TWO_WEAPON","LOCALS",%two_weapon_style%))~
@@ -562,7 +562,7 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	READ_2DA_ENTRY 31 2 cols two_weapon_name
 	READ_2DA_ENTRY 31 3 cols two_weapon_desc
 
-COPY ~might_and_guile/feats/d5ftprof.d~ ~might_and_guile/temp/d5ftprof.d~
+COPY ~might_and_guile/feats/d5ftprof.d~ ~weidu_external/dialprof/might_and_guile/d5ftprof.d~
 	REPLACE_TEXTUALLY ~bastard_sword_name~ ~%bastard_sword_name%~
 	REPLACE_TEXTUALLY ~bastard_sword_desc~ ~%bastard_sword_desc%~
 	REPLACE_TEXTUALLY ~long_sword_name~ ~%long_sword_name%~
@@ -953,7 +953,7 @@ COPY ~might_and_guile/feats/d51bswo.spl~ ~override/d5estwf.spl~
 //	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 337 parameter2 = 328 parameter1 = %extra_prof_row% target = 1 timing = 1 END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 114 END
 
-COMPILE ~might_and_guile/temp/d5ftprof.baf~
-COMPILE ~might_and_guile/temp/d5ftprof.d~
+COMPILE ~weidu_external/dialprof/might_and_guile/d5ftprof.baf~
+COMPILE ~weidu_external/dialprof/might_and_guile/d5ftprof.d~
 
 //__________________________________________________________________________________

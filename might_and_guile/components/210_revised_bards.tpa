@@ -1713,7 +1713,7 @@ ADD_KIT ~D5_BLADESINGER~
 //2             	R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1             	D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5_BLADESINGER     0 0 0 0 0 0 0 0~
-~D5_BLADESINGER     0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 2 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5_BLADESINGER     0 0 0 0 0 0 0 0 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 2 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                  STR DEX CON INT WIS CHR
@@ -1793,7 +1793,8 @@ END
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
   COPY_EXISTING ~d5_blads.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_D5BSWPF~ ~GA_D5FTPRX~
+	REPLACE_TEXTUALLY ~GA_D5BSWPF~ ~****      ~
+	REPLACE_TEXTUALLY ~GA_D5FTPRX~ ~****      ~
   BUT_ONLY
 END
 
@@ -1825,55 +1826,55 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
 	READ_BYTE 0x31 proficiency
 	PATCH_IF (proficiency = 89) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5bswob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bswob~ END
 	END
 	PATCH_IF (proficiency = 90) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5lswob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5lswob~ END
 	END
 	PATCH_IF (proficiency = 91) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5sswob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5sswob~ END
 	END
 	PATCH_IF (proficiency = 93) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d52swob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d52swob~ END
 	END
 	PATCH_IF (proficiency = 92) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5baxeb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5baxeb~ END
 	END
 	PATCH_IF (proficiency = 94) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5katab~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5katab~ END
 	END
 	PATCH_IF (proficiency = 95) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5scimb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5scimb~ END
 	END
 	PATCH_IF (proficiency = 96) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5daggb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5daggb~ END
 	END
 	PATCH_IF (proficiency = 97) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5hammb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5hammb~ END
 	END
 	PATCH_IF (proficiency = 98) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5speab~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5speab~ END
 	END
 	PATCH_IF (proficiency = 99) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5halbb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5halbb~ END
 	END
 	PATCH_IF (proficiency = 100) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5flaib~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5flaib~ END
 	END
 	PATCH_IF (proficiency = 101) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5maceb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5maceb~ END
 	END
 	PATCH_IF (proficiency = 115) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5clubb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5clubb~ END
 	END
 	PATCH_IF (proficiency = 102) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% paramater2 = 9 timing = 2 STR_VAR resource = ~d5stafb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5stafb~ END
 	END
   END
 BUT_ONLY
 
 // make EFFs giving extra APR
-ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+ACTION_FOR_EACH prof IN ~BSWO~ ~LSWO~ ~SSWO~ ~2SWO~ ~BAXE~ ~KATA~ ~SCIM~ ~DAGG~ ~HAMM~ ~SPEA~ ~HALB~ ~FLAI~ ~MACE~ ~CLUB~ ~STAF~ BEGIN
   OUTER_TEXT_SPRINT this_prof ~%prof%~
   CREATE EFF ~d5%prof%b~
 	WRITE_LONG 0x10 1
@@ -1969,7 +1970,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  END
 	END
 	PATCH_IF ((%bard_use% BOR 0b10111111) = 0b10111111) && ((%m_t_use% BAND 0b00001000) = 0b00001000) BEGIN 	// if usable by bards but not by M/T...
-	  WRITE_BYTE 0x20 (THIS BAND 0b11110111)						// make usable by mage/thieves
+	  WRITE_BYTE 0x20 (THIS BAND 0b11110110)						// make usable by mage/thieves
 	  SPRINT item_res ~%SOURCE_RES%~
 	  INNER_ACTION BEGIN
 		COPY_EXISTING ~d5mtnuse.spl~ ~override~
@@ -2181,6 +2182,7 @@ LAM D5_ARMORED_CASTING
 APPEND ~d5nubard.2da~ ~ARMOR_CAST  AP_D5ARCA1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 */
 
+/*
 CREATE EFF ~d5bncast~										// 	disable casting button
 	WRITE_LONG 0x10 144
 	WRITE_LONG 0x14 1
@@ -2201,7 +2203,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 		    END
 		  END
 		END
-		PATCH_IF FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
+		PATCH_IF (FILE_EXISTS_IN_GAME ~d5__armcast.d5~) BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR match_resource = ~d5arcac~ resource = ~d5bncast~ END
@@ -2210,14 +2212,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 		END
 	  END
 	  PATCH_IF (appearance = 16692) BEGIN 					// plate appearance
-		PATCH_IF NOT FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
+		PATCH_IF !(FILE_EXISTS_IN_GAME ~d5__armcast.d5~) BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 145 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR resource = ~d5bncast~ END
 		    END
 		  END
 		END
-		PATCH_IF FILE_EXISTS_IN_GAME ~d5__armcast.d5~ BEGIN
+		PATCH_IF (FILE_EXISTS_IN_GAME ~d5__armcast.d5~) BEGIN
 		  PHP_EACH bard_kits_list AS clab => kind BEGIN
 		    PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~w~) BEGIN
 		      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 opcode = 177 parameter1 = %clab_1% parameter2 = 9 STR_VAR match_resource = ~d5arcap~ resource = ~d5bncast~ END
@@ -2228,6 +2230,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	END
   END
 BUT_ONLY
+*/
+
+// I think this vv is all it needs, now...?
+APPEND ~d5nubard.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
 //___________________________________________________________________________________
 
 
@@ -3647,7 +3654,8 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
 	20	=> t
 END
 
-INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+//INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
 
 COPY ~might_and_guile/feats/d5flstb.2da~ ~override~
 
@@ -3972,8 +3980,9 @@ APPEND ~d5nubard.2da~ ~CASTSLOTS   AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTMB  AP_D5ZLTM
 */
 
 COPY_EXISTING ~d5zprpd.spl~ ~override~
+			  ~d5zrfsh.spl~ ~override~
   PATCH_PHP_EACH bard_kits_list AS clab => kind BEGIN
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zltmb~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 2 opcode = 326 target = 1 parameter1 = %clab_1% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zltmbz~ END
   END
 IF_EXISTS BUT_ONLY
 
@@ -4893,7 +4902,8 @@ ACTION_IF (d5_bards_5E_casting = 1) BEGIN
     IF_EXISTS BUT_ONLY
   END
 
-  COPY_EXISTING ~d5zzini.spl~ ~override~ 
+//  COPY_EXISTING ~d5zzini.spl~ ~override~ 
+  COPY_EXISTING ~d5zltmbz.spl~ ~override~ 
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_bard_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zbard~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_jester_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zjstr~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %nu_skald_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zskld~ END

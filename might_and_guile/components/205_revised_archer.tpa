@@ -481,7 +481,8 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
 	20	=> t
 END
 
-INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+//INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
 
 APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
 COPY_EXISTING ~splprot.2da~ ~override~

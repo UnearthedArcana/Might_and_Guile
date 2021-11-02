@@ -122,6 +122,20 @@ END
 //__________________________________________________________________________________
 
 
+//CHECK IF THIEVES CAN USE WANDS____________________________________________________
+//
+COPY_EXISTING - ~wand07.itm~ ~override~
+  READ_BYTE 0x20 thief_use
+//  PATCH_IF (thief_use BAND 0b01000000 = 0b00000000) BEGIN
+  PATCH_IF (thief_use BOR 0b10111111 = 0b10111111) BEGIN
+    SET thief_use_wands = 1
+  END
+  ELSE BEGIN
+    SET thief_use_wands = 0
+  END
+//__________________________________________________________________________________
+
+
 //REVISED KITS______________________________________________________________________
 //
 ACTION_IF NOT MOD_IS_INSTALLED ~might_and_guile.tp2~ ~225~ BEGIN
@@ -1413,7 +1427,7 @@ COPY_EXISTING  ~d5ure7.spl~ ~override/d5vre7.spl~
 // combat techniques
 
 COPY ~might_and_guile/feats/d5_rfe8b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 //				swashbuckling
+COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 	//				swashbuckling
 	SAY NAME1 @3112
 	SAY UNIDENTIFIED_DESC @3113
 	WRITE_SHORT 0x1c 2
@@ -1454,7 +1468,7 @@ COPY ~might_and_guile/feats/d5_rfe9b.bam~ ~override~
 COPY ~might_and_guile/feats/d5ftprof.spl~ ~override~
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
-COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 	//		extra prof
+COPY ~might_and_guile/feats/d5ftprof.spl~ ~override/d5ure9.spl~	 		//		extra prof
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
 	WRITE_SHORT 0x1c 2
@@ -1469,8 +1483,8 @@ COPY ~might_and_guile/feats/d5ftpr0f.spl~ ~override/d5ure9.spl~	 	//		extra prof
 COPY ~might_and_guile/feats/d5ftprx.spl~ ~override~
 	SAY NAME1 @20496
 	SAY UNIDENTIFIED_DESC @20497
-	WRITE_ASCII 0x3a ~d5_rfe9b~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9b~ END
+	WRITE_ASCII 0x3a ~d5_rfe9~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9~ END
 COPY ~might_and_guile/feats/d5ftprof.eff~ ~override~
 COPY ~might_and_guile/feats/d5ftprof.cre~ ~override~
 COPY_EXISTING  ~d5ure9.spl~ ~override/d5vre9.spl~ 
@@ -1478,7 +1492,7 @@ COPY_EXISTING  ~d5ure9.spl~ ~override/d5vre9.spl~
 
 /*
 COPY ~might_and_guile/feats/d5_rfg1b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg1.spl~ ~override~   // 			trip
+COPY ~might_and_guile/feats/d5_rfg1.spl~ ~override~ 			  // 			trip
 	SAY NAME1 @20251
 	SAY UNIDENTIFIED_DESC @20252
 	WRITE_ASCII 0x3a ~d5_rfg1b~ #8
@@ -1507,7 +1521,7 @@ COPY ~might_and_guile/feats/d5_rf72c.eff~ ~override~
 */
 
 COPY ~might_and_guile/feats/d5_rfg3b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override/d5urg3.spl~   // 			blind
+COPY ~might_and_guile/feats/d5_rfg3.spl~ ~override/d5urg3.spl~   	// 			blind
 	SAY NAME1 @20255
 	SAY UNIDENTIFIED_DESC @20256
 	WRITE_SHORT 0x1c 2
@@ -1529,7 +1543,7 @@ COPY_EXISTING  ~d5urg3.spl~ ~override/d5vrg3.spl~
 	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_rfg4b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override/d5urg4.spl~   // 			disrupt
+COPY ~might_and_guile/feats/d5_rfg4.spl~ ~override/d5urg4.spl~   	// 			disrupt
 	SAY NAME1 @20257
 	SAY UNIDENTIFIED_DESC @20258
 	WRITE_SHORT 0x1c 2
@@ -1552,7 +1566,7 @@ COPY_EXISTING  ~d5urg4.spl~ ~override/d5vrg4.spl~
 
 // ***** change this to a chance of each effect
 COPY ~might_and_guile/feats/d5_rfg5b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   // 			fighting dirty
+COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   	// 			fighting dirty
 	SAY NAME1 @20259
 	SAY UNIDENTIFIED_DESC @20260
 	WRITE_SHORT 0x1c 2
@@ -1596,7 +1610,7 @@ COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_rfh1b.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh2b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfh1.spl~ ~override/d5urh1.spl~   //          grease jar/smoke bomb
+COPY ~might_and_guile/feats/d5_rfh1.spl~ ~override/d5urh1.spl~  	 //          grease jar/smoke bomb
 	SAY NAME1 @20271
 	SAY UNIDENTIFIED_DESC @20272
 	WRITE_SHORT 0x1c 2
@@ -1621,13 +1635,13 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rfh2b.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5_rfh2b~ END
 COPY_EXISTING  ~d5urh1.spl~ ~override/d5vrh1.spl~ 
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~  		 //            grease jar
+COPY_EXISTING ~spwi101.spl~ ~override/d5_rf81.spl~  			 //            grease jar
 	SAY NAME1 @20273 
 	SAY UNIDENTIFIED_DESC @20274
 	WRITE_ASCII 0x3a ~d5_rfh1b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh1b~ END
 	LPM spell_to_innate
-COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~  		 //            smoke bomb
+COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~  			 //            smoke bomb
 	SAY NAME1 @20275
 	SAY UNIDENTIFIED_DESC @20276
 	WRITE_ASCII 0x3a ~d5_rfh2b~ #8
@@ -1713,8 +1727,12 @@ COPY_EXISTING  ~d5urh6.spl~ ~override/d5vrh6.spl~
 
 //use scrolls/wands_________________________________________________________________
 //
-COPY ~might_and_guile/feats/d5_rfh4b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5urh4.spl~   //           UMD
+ACTION_IF (thief_use_wands = 0) BEGIN
+
+  COPY_EXISTING ~wand11.itm~ ~weidu_external/might_and_guile/temp~
+  
+  COPY ~might_and_guile/feats/d5_rfh4b.bam~ ~override~
+  COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5urh4.spl~  	 //           UMD
 	SAY NAME1 @20293
 	SAY UNIDENTIFIED_DESC @20294
 	WRITE_SHORT 0x1c 2
@@ -1727,28 +1745,28 @@ COPY ~might_and_guile/feats/d5_rfh4.spl~ ~override/d5urh4.spl~   //           UM
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4b~ END
 //	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = ~d5_numd~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
-COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
+  COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
 	WRITE_SHORT 0x1c 1
-COPY_EXISTING  ~d5urh4.spl~ ~override/d5_umd.spl~ 
+  COPY_EXISTING  ~d5urh4.spl~ ~override/d5_umd.spl~ 
 	WRITE_SHORT 0x1c 4
 	WRITE_LONG 0x34 1
 
-LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
+  LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
 
-OUTER_SET no_umd_specific = %new_specific_ind%
+  OUTER_SET no_umd_specific = %new_specific_ind%
 
-COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END
+  COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
+    LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END
 // add .eff setting local variable
-  LPF CLONE_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5numdlv~ END
+    LPF CLONE_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5numdlv~ END
 
-COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
-  WRITE_LONG 0x1c %no_umd_specific%
-  WRITE_LONG 0x90 1
-  WRITE_EVALUATED_ASCII 0x94 ~D5_NUMD~ #8
+  COPY ~might_and_guile/feats/d5_rf84n.eff~ ~override/D5_NUMD.eff~
+    WRITE_LONG 0x1c %no_umd_specific%
+    WRITE_LONG 0x90 1
+    WRITE_EVALUATED_ASCII 0x94 ~D5_NUMD~ #8
 
 // make an .eff to set D5NOUMD local variable
-CREATE EFF ~d5numdlv~
+  CREATE EFF ~d5numdlv~
 	WRITE_LONG 0x10 309
 	WRITE_LONG 0x14 1
 	WRITE_LONG 0x1c 1
@@ -1758,16 +1776,16 @@ CREATE EFF ~d5numdlv~
 	WRITE_SHORT 0x2c 100
 	WRITE_ASCII 0x30 ~D5NOUMD~ #8
 
-OUTER_SET scroll_count = 0
-OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  READ_BYTE     0x2f current ELSE 0
-  READ_BYTE     0x2b current2 ELSE 0
-  READ_LONG 0x64 headoffset  ELSE 0
-  READ_SHORT 0x68 headcount  ELSE 0
-  READ_LONG 0x6a effectsoffset  ELSE 0
-  haslearn = 0
-  hascast = 0
+  OUTER_SET scroll_count = 0
+  OUTER_SPRINT $use_scrolls(~%scroll_count%~) ~scroll~
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+   READ_BYTE     0x2f current ELSE 0
+   READ_BYTE     0x2b current2 ELSE 0
+   READ_LONG 0x64 headoffset  ELSE 0
+   READ_SHORT 0x68 headcount  ELSE 0
+   READ_LONG 0x6a effectsoffset  ELSE 0
+   haslearn = 0
+   hascast = 0
 //	  PATCH_IF (headcount = 2) BEGIN
     FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
       thishead = 0
@@ -1798,13 +1816,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       END // FOR... effect_cycle
     END // FOR... header cycle
 //  END // PATCH_IF... have exactly 2 headers
-  PATCH_IF (haslearn = 1) AND (hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
+   PATCH_IF (haslearn = 1) AND (hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~) */BEGIN
 	SPRINT $use_scrolls(~%scroll_count%~) ~%SOURCE_RES%~
 	SET ++scroll_count
-  END
-BUT_ONLY
-ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
-  ACTION_IF FILE_EXISTS_IN_GAME ~%scroll%.itm~ BEGIN
+   END
+  BUT_ONLY
+  ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
+   ACTION_IF FILE_EXISTS_IN_GAME ~%scroll%.itm~ BEGIN
 //	PRINT ~%scroll% is a wizard scroll~
 	COPY_EXISTING ~%scroll%.itm~ ~override~
 	  WRITE_BYTE 0x1f (THIS BAND 0b11111101)
@@ -1813,11 +1831,11 @@ ACTION_PHP_EACH use_scrolls AS num => scroll BEGIN
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	BUT_ONLY
+   END
   END
-END
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  READ_SHORT	0x1c item_type
-  PATCH_IF (item_type = 35) BEGIN
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+   READ_SHORT	0x1c item_type
+   PATCH_IF (item_type = 35) BEGIN
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
 	  WRITE_BYTE 0x1f (THIS BAND 0b11111101)
@@ -1826,13 +1844,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 target = 1 parameter2 = 6 parameter1 = %no_umd_specific% timing = 2 END
 	  END
 	END
-  END
-BUT_ONLY
+   END
+  BUT_ONLY
 
- ACTION_IF GAME_INCLUDES ~sod~ BEGIN
-  COPY_EXISTING dplayer2.bcs override
-	DECOMPILE_AND_PATCH BEGIN
-	  REPLACE_TEXTUALLY ~THEN[%WNL%%LNL%%MNL%%TAB% ]+RESPONSE[%TAB% ]+#100[%WNL%%LNL%%MNL%%TAB% ]+ChangeSpecifics(Myself,\(1\|NORMAL\))~
+  ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+    COPY_EXISTING dplayer2.bcs override
+	  DECOMPILE_AND_PATCH BEGIN
+	    REPLACE_TEXTUALLY ~THEN[%WNL%%LNL%%MNL%%TAB% ]+RESPONSE[%TAB% ]+#100[%WNL%%LNL%%MNL%%TAB% ]+ChangeSpecifics(Myself,\(1\|NORMAL\))~
     ~
   !Specifics(Myself,D5_NO_UMD)
   Switch("D5NOUMD","locals")
@@ -1843,15 +1861,16 @@ THEN
     SetGlobal("bd_npc_camp","locals",0)
   RESPONSE #1
     ChangeSpecifics(Myself,D5_NO_UMD)~
-	END
-  BUT_ONLY
- END
+	 END
+    BUT_ONLY
+  END
+
+  COPY_EXISTING ~weidu_external/might_and_guile/temp/wand11.itm~ ~override~
  
- COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__umd.d5~
+  COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__umd.d5~
 
+END
 //	end use scrolls/wands
-
-// ***** if WtP installed, make feat for automatic wild talent
 
 
 // warrior feats______________________________________________________________________
@@ -1869,7 +1888,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf13n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~D5_WF13N~ END
 
 COPY ~might_and_guile/feats/d5_wfa1b.bam~ ~override~
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa1.spl~	//			offensive tactics
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa1.spl~		//			offensive tactics
 	SAY NAME1 @20321
 	SAY UNIDENTIFIED_DESC @20322
 	WRITE_SHORT 0x1c 2
@@ -1912,7 +1931,7 @@ COPY ~might_and_guile/feats/d5_wf11a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf11a.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfa2b.bam~ ~override~
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa2.spl~	//			defensive tactics
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa2.spl~		//			defensive tactics
 	SAY NAME1 @20323
 	SAY UNIDENTIFIED_DESC @20324
 	WRITE_SHORT 0x1c 2
@@ -1955,7 +1974,7 @@ COPY ~might_and_guile/feats/d5_wf12a.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf12a.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfa3b.bam~ ~override~
-COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa3.spl~	//			efficient tactics
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5uwa3.spl~		//			efficient tactics
 	SAY NAME1 @20325
 	SAY UNIDENTIFIED_DESC @20326
 	WRITE_SHORT 0x1c 2
@@ -2016,7 +2035,7 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_wf25n.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_wf25n~ END
 
 COPY ~might_and_guile/feats/d5_wfb1b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override/d5uwb1.spl~	//			aggressive posture
+COPY ~might_and_guile/feats/d5_wfb1.spl~ ~override/d5uwb1.spl~		//			aggressive posture
 	SAY NAME1 @20341
 	SAY UNIDENTIFIED_DESC @20342
 	WRITE_SHORT 0x1c 2
@@ -2066,7 +2085,7 @@ COPY ~might_and_guile/feats/d5_wf21b.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf21b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfb2b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb2.spl~ ~override/d5uwb2.spl~	//			disarming posture
+COPY ~might_and_guile/feats/d5_wfb2.spl~ ~override/d5uwb2.spl~		//			disarming posture
 	SAY NAME1 @20343
 	SAY UNIDENTIFIED_DESC @20344
 	WRITE_SHORT 0x1c 2
@@ -2116,7 +2135,7 @@ COPY ~might_and_guile/feats/d5_wf22b.eff~ ~override~
 COPY ~might_and_guile/feats/d5_wf22b.spl~ ~override~
 
 COPY ~might_and_guile/feats/d5_wfb3b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb3.spl~ ~override/d5uwb3.spl~	//			parry slashing
+COPY ~might_and_guile/feats/d5_wfb3.spl~ ~override/d5uwb3.spl~		//			parry slashing
 	SAY NAME1 @20345
 	SAY UNIDENTIFIED_DESC @20346
 	WRITE_SHORT 0x1c 2
@@ -2163,7 +2182,7 @@ COPY ~might_and_guile/feats/d5_wf23.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 
 COPY ~might_and_guile/feats/d5_wfb4b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb4.spl~ ~override/d5uwb4.spl~	//			parry piercing
+COPY ~might_and_guile/feats/d5_wfb4.spl~ ~override/d5uwb4.spl~		//			parry piercing
 	SAY NAME1 @20347
 	SAY UNIDENTIFIED_DESC @20348
 	WRITE_SHORT 0x1c 2
@@ -2210,7 +2229,7 @@ COPY ~might_and_guile/feats/d5_wf24.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5_WF25~ END
 
 COPY ~might_and_guile/feats/d5_wfb5b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override/d5uwb5.spl~	//			parry crushing
+COPY ~might_and_guile/feats/d5_wfb5.spl~ ~override/d5uwb5.spl~		//			parry crushing
 	SAY NAME1 @20349
 	SAY UNIDENTIFIED_DESC @20350
 	WRITE_SHORT 0x1c 2
@@ -2277,7 +2296,7 @@ ACTION_IF !(VARIABLE_IS_SET %quickstride_state%) BEGIN
   OUTER_SET quickstride_state = %new_state_ind%
 END
 COPY ~might_and_guile/feats/d5_wfc1b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfc1.spl~ ~override/d5uwc1.spl~   // 			quickstride
+COPY ~might_and_guile/feats/d5_wfc1.spl~ ~override/d5uwc1.spl~  	 // 			quickstride
 	SAY NAME1 @2450
 	SAY UNIDENTIFIED_DESC @20110
 	WRITE_SHORT 0x1c 2
@@ -2344,7 +2363,7 @@ ACTION_PHP_EACH speed_boost_items AS ind => speed_item BEGIN
 END
 
 COPY ~might_and_guile/feats/d5_wfc2b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfc2.spl~ ~override/d5uwc2.spl~   // 			+5 hp
+COPY ~might_and_guile/feats/d5_wfc2.spl~ ~override/d5uwc2.spl~   	// 			+5 hp
 	SAY NAME1 @20305
 	SAY UNIDENTIFIED_DESC @20306
 	WRITE_SHORT 0x1c 2
@@ -2371,7 +2390,7 @@ COPY_EXISTING  ~d5uwc2.spl~ ~override/d5vwc2.spl~
 	WRITE_SHORT 0x1c 1
 
 COPY ~might_and_guile/feats/d5_wfc3b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfc3.spl~ ~override/d5uwc3.spl~   // 			10% DR
+COPY ~might_and_guile/feats/d5_wfc3.spl~ ~override/d5uwc3.spl~   	// 			10% DR
 	SAY NAME1 @20307
 	SAY UNIDENTIFIED_DESC @20308
 	WRITE_SHORT 0x1c 2
@@ -2389,7 +2408,7 @@ COPY_EXISTING  ~d5uwc3.spl~ ~override/d5vwc3.spl~
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_POISONEVADE~ RET new_state_ind END
 OUTER_SET poison_evasion_state = %new_state_ind%
 COPY ~might_and_guile/feats/d5_wfc5b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfc5.spl~ ~override/d5uwc5.spl~   // 			poison/disease evasion
+COPY ~might_and_guile/feats/d5_wfc5.spl~ ~override/d5uwc5.spl~  	 // 			poison/disease evasion
 	SAY NAME1 @20309
 	SAY UNIDENTIFIED_DESC @20310
 	WRITE_SHORT 0x1c 2
@@ -2502,7 +2521,7 @@ END	// end if not already present
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_STUNEVADE~ RET new_state_ind END
 OUTER_SET stun_evasion_state = %new_state_ind%
 COPY ~might_and_guile/feats/d5_wfc6b.bam~ ~override~
-COPY ~might_and_guile/feats/d5_wfc6.spl~ ~override/d5uwc6.spl~   // 			hold/stun evasion
+COPY ~might_and_guile/feats/d5_wfc6.spl~ ~override/d5uwc6.spl~  	 // 			hold/stun evasion
 	SAY NAME1 @20219
 	SAY UNIDENTIFIED_DESC @20220
 	WRITE_SHORT 0x1c 2
@@ -2576,7 +2595,7 @@ COPY_EXISTING ~d5stunev.2da~ ~override~
 BUT_ONLY
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5pswt0.spl~) BEGIN
-  COPY_EXISTING ~d5pswt0.spl~ ~override/d5upsw.spl~	//			wild talent
+  COPY_EXISTING ~d5pswt0.spl~ ~override/d5upsw.spl~				//			wild talent
 	SAY NAME1 @20298
 	SAY UNIDENTIFIED_DESC @20299
 	WRITE_SHORT 0x1c 2
@@ -2628,11 +2647,25 @@ END
 //UI FEAT MENU______________________________________________________________________
 //
 COPY ~might_and_guile/feats/d5flstf.2da~ ~override~ 
-  PATCH_IF (FILE_EXISTS_IN_GAME ~d5pswt0.spl~) BEGIN
-	COUNT_2DA_COLS cols
-	COUNT_2DA_ROWS cols rows
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  PATCH_IF (thief_use_wands = 1) BEGIN
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY row 0 cols feat
+	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5urh4~) BEGIN
+	    FOR (col = 1; col < cols; ++col) BEGIN
+		  PATCH_IF (cols > col) BEGIN
+			SET_2DA_ENTRY row col cols 0
+		  END
+		END
+	  END
+	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5vrh4~) BEGIN
+	    FOR (col = 1; col < cols; ++col) BEGIN
+		  PATCH_IF (cols > col) BEGIN
+			SET_2DA_ENTRY row col cols 0
+		  END
+		END
+	  END
 	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5upsw~) BEGIN
 		PATCH_FOR_EACH patch_col IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ ~14~ ~15~ ~24~ BEGIN
 		  PATCH_IF (cols > patch_col) BEGIN
@@ -2649,6 +2682,7 @@ COPY ~might_and_guile/feats/d5flstf.2da~ ~override~
 	  END
 	END
   END
+BUT_ONLY
 
 ACTION_IF !(GAME_IS ~iwdee~) BEGIN
   COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~
@@ -2657,7 +2691,8 @@ ACTION_IF (GAME_IS ~iwdee~) BEGIN
   COPY ~might_and_guile/feats/d5ftskn_iwd.2da~ ~override/d5ftskn.2da~
 END
 
-INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+//INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
+INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
 
 OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
 OUTER_SET feat_select_strref = RESOLVE_STR_REF (@20011) // (%feat_select_string%)
@@ -3207,9 +3242,15 @@ ACTION_FOR_EACH mageclab IN ~clabma01~ ~clabma02~ ~clabma03~ ~clabma04~ ~clabma0
   END 
 END
 
-APPEND ~clabma01.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-  UNLESS ~AP_D5_UMD~
+APPEND ~clabma01.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5_UMD~
 APPEND ~clabma01.2da~ ~NO_FEATS    AP_D5NFEATS ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+/* do the above for all mage kits?
+ACTION_FOR_EACH mageclab IN ~clabma01~ ~clabma02~ ~clabma03~ ~clabma04~ ~clabma05~ ~clabma06~ ~clabma07~ ~clabma08~ ~clabma09~ BEGIN
+  APPEND ~%mageclab%.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5_UMD~
+  APPEND ~%mageclab%.2da~ ~NO_FEATS    AP_D5NFEATS ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+*/
 
 APPEND ~clabpr01.2da~ ~NO_FEATS    AP_D5NFEATS ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 

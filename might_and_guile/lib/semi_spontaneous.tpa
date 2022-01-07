@@ -1,5 +1,5 @@
 
-// v7.8 - liddle fixes
+// v8 - fix spell name tooltips
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -832,7 +832,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zrfsh.spl~) BEGIN
 END
 
 
-// spell to set prepped spells and refresh slots______________________________________
+// spell to set prepped spells and then refresh slots_________________________________
 //
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zprpd.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zprpd.spl~
@@ -1535,7 +1535,7 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
         IF_EXISTS BUT_ONLY
 // create innate spell
 		COPY_EXISTING ~%cast_spell%.spl~ ~override/%innate_spell%.spl~
-		  SAY NAME1 ~~
+//		  SAY NAME1 ~~
 //		  SAY UNIDENTIFIED_DESC ~~
 		  WRITE_SHORT 0x1c 4
 		  WRITE_BYTE 0x27 0									//	no sectype for the innates
@@ -3388,7 +3388,7 @@ COPY_EXISTING ~d5xclons.2da~ ~override~
         IF_EXISTS BUT_ONLY
 // create innate spell
 		COPY_EXISTING ~%cast_spell%.spl~ ~override/%innate_spell%.spl~
-		  SAY NAME1 ~~
+//		  SAY NAME1 ~~
 //		  SAY UNIDENTIFIED_DESC ~~
 		  WRITE_SHORT 0x1c 4
 		  WRITE_BYTE 0x27 0									//	no sectype for the innates
@@ -4355,7 +4355,7 @@ COPY_EXISTING ~d5yclons.2da~ ~override~
         IF_EXISTS BUT_ONLY
 // create innate spell
 		COPY_EXISTING ~%cast_spell%.spl~ ~override/%innate_spell%.spl~
-		  SAY NAME1 ~~
+//		  SAY NAME1 ~~
 //		  SAY UNIDENTIFIED_DESC ~~
 		  WRITE_SHORT 0x1c 4
 		  WRITE_BYTE 0x27 0									//	no sectype for the innates

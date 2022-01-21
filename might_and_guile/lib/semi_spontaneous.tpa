@@ -1,5 +1,5 @@
 
-// v8 - fix spell name tooltips
+// v8.2 - 
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -2060,8 +2060,9 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~d5zclons.2da~ ~%free_spell%~)) BEGIN
     READ_2DA_ENTRIES_NOW ~r2en_zclons~ cols
     SET free_spell_ind = 0
     FOR (row = 0; row < r2en_zclons; ++row) BEGIN
-      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 mem_spell
       READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 0 z_ind
+      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 mem_spell
+      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 cast_spell
       PATCH_IF (~%mem_spell%~ STRING_EQUAL_CASE ~%free_spell%~) BEGIN
         SET free_spell_ind = z_ind
       END 
@@ -2850,9 +2851,9 @@ END
     SAY UNIDENTIFIED_DESC ~~
     WRITE_SHORT 0x1c 4
     LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5xsor1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor2.spl~
     SAY NAME1 @300
@@ -3429,8 +3430,8 @@ COPY_EXISTING ~d5xclons.2da~ ~override~
 			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%level%~ END
 		    END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5xx172~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
-//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+//			LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
 		  END
 		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
 		    PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN

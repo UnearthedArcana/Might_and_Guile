@@ -1650,8 +1650,8 @@ COPY_EXISTING ~sppr207.spl~ ~override/d5rt207.spl~ // goodberry
 COPY ~might_and_guile/nubards/d5whsp1.2da~ ~override~
 COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
 COPY ~might_and_guile/nubards/d5whsp1.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic~
-	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	SAY NAME1 ~Nature Magic I~
+	SAY UNIDENTIFIED_DESC ~Nature Magic I~
 COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
 	LPM spell_to_innate
 COPY_EXISTING ~sppr212.spl~ ~override/d5rt212.spl~ // slow poison
@@ -1663,9 +1663,11 @@ COPY_EXISTING ~sppr402.spl~ ~override/d5rt402.spl~ // 4th-level animal summoning
 COPY ~might_and_guile/nubards/d5whsp2.2da~ ~override~
 COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
 COPY ~might_and_guile/nubards/d5whsp2.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic~
-	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	SAY NAME1 ~Nature Magic II~
+	SAY UNIDENTIFIED_DESC ~Nature Magic II~
 COPY_EXISTING ~sppr318.spl~ ~override/d5rt318.spl~ // zone of sweet air
+	LPM spell_to_innate
+COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
 	LPM spell_to_innate
 COPY_EXISTING ~sppr302.spl~ ~override/d5rt302.spl~ // call lightning
 	LPM spell_to_innate
@@ -1674,8 +1676,8 @@ COPY_EXISTING ~sppr501.spl~ ~override/d5rt501.spl~ // 5th-level animal summoning
 COPY ~might_and_guile/nubards/d5whsp3.2da~ ~override~
 COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
 COPY ~might_and_guile/nubards/d5whsp3.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic~
-	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	SAY NAME1 ~Nature Magic III~
+	SAY UNIDENTIFIED_DESC ~Nature Magic III~
 //___________________________________________________________________________________
 
 //WILD TALENT_________________________________________________________________________

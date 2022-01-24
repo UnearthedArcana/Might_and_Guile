@@ -160,7 +160,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5FILCH
 			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
 			clswpbon = ~0 0 3~
-			thiefskl = ~50 25~
+			thiefskl = ~50 20~
 	END
 END
 //____________________________________________________________________________________
@@ -192,16 +192,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
 	BUT_ONLY
 END
 //__________________________________________________________________________________
-
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5FILCH~ 
-		kit_clab = ~d5_filch~
-		base_class = ~T~
-END 
-//____________________________________________________________________________________
 
 
 
@@ -285,7 +275,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
 			clasiskl = ~0 0 10 0 0 0 0~
 			clswpbon = ~0 0 3~
-			thiefskl = ~30 18~
+			thiefskl = ~30 20~
 			thiefscl = ~0 100 100 100 100 100 0 0~
 			traplimt = 0
 			sneakatt = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
@@ -306,16 +296,6 @@ COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
 COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 	SAY NAME1 @6
 //__________________________________________________________________________________
-
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_LOREMASTER~ 
-		kit_clab = ~d5_lorma~
-		base_class = ~T~
-END 
-//____________________________________________________________________________________
 
 
 
@@ -399,7 +379,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
 			clasiskl = ~0 0 0 15 15 0 0~
 			clswpbon = ~1 0 3~
-			thiefskl = ~30 12~
+			thiefskl = ~30 10~
 			thiefscl = ~0 0 100 100 100 100 0 0~
 			traplimt = 0
 			sneakatt = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
@@ -478,16 +458,6 @@ COPY ~might_and_guile/mc/d5rmavem.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhf.eff~ ~override~
 COPY ~might_and_guile/mc/d5rmavhm.eff~ ~override~
 //__________________________________________________________________________________
-
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5RANMAGE~ 
-		kit_clab = ~d5_rama~
-		base_class = ~T~
-END 
-//____________________________________________________________________________________
 
 
 
@@ -635,16 +605,6 @@ COPY ~might_and_guile/mc/d5rt300.spl~ ~override~
 COPY ~might_and_guile/mc/d5rt300.2da~ ~override~
 //__________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5RANTHIEF~ 
-		kit_clab = ~d5_rath~
-		base_class = ~F~
-END 
-//____________________________________________________________________________________
-
 
 
 //ADD TOMB RUNNER______________________________________________________________________
@@ -743,16 +703,6 @@ COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
 //____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
-//
-LAF qd_multiclass
-	STR_VAR
-		kit_name = ~D5_TOMBRUNNER~ 
-		kit_clab = ~d5_tombr~
-		base_class = ~T~
-END 
-//____________________________________________________________________________________
-
 
 
 //ADD THUG____________________________________________________________________________
@@ -834,7 +784,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_THUG
 			clswpbon = ~1 0 3~
 			thiefskl = ~40 20~
-			thiefscl = ~100 0 100 100 100 0 0 0~
+			thiefscl = ~100 0 100 100 100 100 0 0~
 			traplimt = 0
 	END
 END
@@ -848,10 +798,169 @@ COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
 COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
-//__________________________________________________________________________________
+//____________________________________________________________________________________
 
-//MULTICLASS KIT______________________________________________________________________
+
+
+//MULTICLASS KIT FEATS________________________________________________________________
 //
+APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
+
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
+	    SET kit_is_row = %row%
+	  END
+	END
+BUT_ONLY
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
+  COPY ~might_and_guile/feats/d5flstmc.2da~ ~override~ 
+
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
+	1	=> a
+	2	=> b
+	3	=> c
+	4	=> d
+	5	=> e
+	6	=> f
+	7	=> g
+	8	=> h
+	9	=> i
+	10	=> j
+	11	=> k
+	12	=> l
+	13	=> m
+	14	=> n
+	15	=> o
+	16	=> p
+	17	=> q
+	18	=> r
+	19	=> s
+	20	=> t
+  END
+
+  INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
+
+  OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
+  OUTER_SET feat_select_strref = RESOLVE_STR_REF (@20011) // (%feat_select_string%)
+  OUTER_SPRINT feat_title_string @20012 
+  OUTER_SPRINT feat_label_string @20013 
+
+ COPY_EXISTING ~d5flstmc.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (col = 1; col < cols; ++col) BEGIN
+	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~kitlist.2da~ ~override~
+		READ_2DA_ENTRIES_NOW rows 10
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
+		  READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
+		  READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
+		  READ_2DA_ENTRY_FORMER rows row 8 kitlist_class
+		  READ_2DA_ENTRY_FORMER rows row 9 kitids_num
+		  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) /*&& (IS_AN_INT %kitids_num%)*/ BEGIN
+			PATCH_IF (%kitlist_class% = 3) OR (%kitlist_class% = 6) OR (%kitlist_class% = 8) OR (%kitlist_class% = 11) OR (%kitlist_class% = 12) OR (%kitlist_class% = 15) OR (%kitlist_class% = 16) OR (%kitlist_class% = 18) BEGIN
+			  SET feat_spell_class = 1
+			END ELSE BEGIN
+			  SET feat_spell_class = 2
+			END
+	        SPRINT $mc_feat_kit_list(~%kitlist_index%~)~%kitids_num%~
+			GET_STRREF %kitlist_name% kit_name_strref
+			SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
+			SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
+			SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
+			SET kit_seq_index = %kitlist_index% 
+			INNER_ACTION BEGIN
+			  LAF CREATE_SEQUENCER_MENU 
+			   INT_VAR 
+				name = %kit_seq_name%
+				tip = %kit_seq_tip%
+				desc = RESOLVE_STR_REF (~blah~) 
+				column = %col% 
+				class = %feat_spell_class%
+			   STR_VAR 
+				resref = EVAL ~d5ft%kit_seq_index%~
+				icon = ~spcl919b~
+				spelltable = ~d5ftskn~ 
+				spelllist = ~d5flstmc~
+				title = EVAL ~%feat_title_string%~
+				label = EVAL ~%feat_label_string%~
+			  END
+			END
+		  END
+		END
+	  BUT_ONLY
+	END
+  END
+ BUT_ONLY
+
+ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
+  COPY_EXISTING ~d5feat%let%.spl~ ~override~
+	PHP_EACH mc_feat_kit_list AS ind => ids BEGIN
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %ids% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%ind%~ END
+	END
+  IF_EXISTS BUT_ONLY
+END
+
+ ACTION_FOR_EACH mc_kit IN ~d5_lorma~ ~d5_rath~ ~d5_tombr~ ~d5_thug~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%mc_kit%.2da~ BEGIN
+    COPY_EXISTING ~%mc_kit%.2da~ ~override~
+        REPLACE_TEXTUALLY ~GA_SPCL412~ ~****      ~	
+        REPLACE_TEXTUALLY ~AP_D5CL412~ ~****      ~	
+        LPM remove_blank_lines
+        APPEND_FILE ~might_and_guile/feats/feats_multithief.txt~
+    BUT_ONLY
+  END
+ END
+
+END
+//____________________________________________________________________________________
+
+
+
+//MULTICLASS KITS_____________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5FILCH~ 
+		kit_clab = ~d5_filch~
+		base_class = ~T~
+END 
+
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_LOREMASTER~ 
+		kit_clab = ~d5_lorma~
+		base_class = ~T~
+END
+
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANMAGE~ 
+		kit_clab = ~d5_rama~
+		base_class = ~T~
+END 
+
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANTHIEF~ 
+		kit_clab = ~d5_rath~
+		base_class = ~T~
+END 
+
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5_TOMBRUNNER~ 
+		kit_clab = ~d5_tombr~
+		base_class = ~T~
+END 
+
 LAF qd_multiclass
 	STR_VAR
 		kit_name = ~D5_THUG~ 
@@ -861,3 +970,20 @@ END
 //____________________________________________________________________________________
 
 
+//FIX MULTICLASS KIT FEATS____________________________________________________________
+//
+OUTER_FOR (qd_num = 1; qd_num < 9; ++qd_num) BEGIN
+  COPY_EXISTING ~qd_mct0%qd_num%.spl~ ~override~
+    FOR (eff_num = 1; eff_num < 9; ++eff_num) BEGIN
+      LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = EVAL ~d5mcft%eff_num%#~ resource = EVAL ~d5mcft%eff_num%~ END
+    END
+  IF_EXISTS BUT_ONLY
+END
+OUTER_FOR (qd_num = 10; qd_num < 50; ++qd_num) BEGIN
+  COPY_EXISTING ~qd_mct%qd_num%.spl~ ~override~
+    FOR (eff_num = 1; eff_num < 9; ++eff_num) BEGIN
+      LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = EVAL ~d5mcft%eff_num%#~ resource = EVAL ~d5mcft%eff_num%~ END
+    END
+  IF_EXISTS BUT_ONLY
+END
+//____________________________________________________________________________________

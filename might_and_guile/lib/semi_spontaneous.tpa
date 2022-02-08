@@ -1,5 +1,4 @@
 
-// v8.4 - update semi_int/wis_slots for more install flexibility
 // v8.5 - no longer set fatigue to 1 after check for resting
 
 
@@ -2871,7 +2870,7 @@ IND
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5lernwi.bam~ ~override~
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/xsorc.itm~ ~override/%itm_name%.itm~			//	learn spells .itm
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5xsorc.itm~ ~override/%itm_name%.itm~			//	learn spells .itm
     SAY NAME1 @301
     SAY NAME2 @301
     SAY UNIDENTIFIED_DESC @301

@@ -1,5 +1,5 @@
 
-// v8.5 - no longer set fatigue to 1 after check for resting
+// v8.6 - fixed fatigue handling if use 'Prepare Spells' ability too much too quick
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -752,6 +752,7 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zprp.spl~
   SAY UNIDENTIFIED_DESC @202
   WRITE_ASCII 0x3a ~d5zgren~ #8
   LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5zgren~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 0 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5xrest~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5z17wz~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5z89wz~ END
@@ -835,6 +836,12 @@ END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5xrest.spl~ BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xrest.spl~
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5zrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zzfat.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zzfat.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
 END
 
 
@@ -934,7 +941,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zprpd.spl~) BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-6~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-7~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 2 timing = 9 END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5zprp~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 6 STR_VAR resource = ~d5zprp~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zsplz~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
@@ -1628,6 +1635,7 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
 //			LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1  STR_VAR resource = ~d5zspla~ END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5zzfat~ END
 		  END
 		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
 		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
@@ -1635,6 +1643,7 @@ COPY_EXISTING ~d5zclons.2da~ ~override~
 //			LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1  STR_VAR resource = ~d5zspla~ END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5zzfat~ END
 		  END
 // make spells adding the innate spell
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%give_spell%.spl~
@@ -3348,6 +3357,12 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5xrest.spl~ BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5zrest~ END
 END
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xxfat.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xxfat.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
+END
+
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5xnfsh.spl~ BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xnfsh.spl~
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~d5xrfsh~ END
@@ -3515,6 +3530,7 @@ COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5xx172~ END
 //			LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xxfat~ END
 		  END
 		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
 		    PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
@@ -3528,6 +3544,7 @@ COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
 		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5xx172~ END
 			LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
 //		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xxfat~ END
 		  END
 // make spells adding the innate spell
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%give_spell%.spl~
@@ -4393,8 +4410,14 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5zrest.spl~ BEGIN
 END
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5xrest.spl~ BEGIN
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xrest.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5zrest~ END
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5yrest.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5xrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5yyfat.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5yyfat.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
 END
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5ynfsh.spl~ BEGIN
@@ -4528,19 +4551,14 @@ COPY_EXISTING ~d5yclons.2da~ ~override~
 		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
 			LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
 //		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5yyfat~ END
 		  END
 		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
-		    PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-		      PATCH_IF (%level% > 1) BEGIN
-				LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5shm-%level%~ END
-		      END
-		    END
-		    PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-			  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5shm-%level%~ END
-		    END
+			LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5shm-%level%~ END
 		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
 			LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
 //		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5yyfat~ END
 		  END
 // make spells adding the innate spell
 		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%give_spell%.spl~

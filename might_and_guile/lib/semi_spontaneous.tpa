@@ -1,5 +1,5 @@
 
-// v8.6 - fixed fatigue handling if use 'Prepare Spells' ability too much too quick
+// v8.6.1 - fixed fatigue handling if use 'Prepare Spells' ability too much too quick
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -1543,6 +1543,18 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_DIVINE~)) BEGIN
 	END
   BUT_ONLY
 END
+
+COPY_EXISTING ~splprot.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
+	  SET fatigue_zero = %row%
+	END
+  END
+BUT_ONLY
+
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zlotr.bcs~) BEGIN
 <<<<<<<<d5/inline_script.baf

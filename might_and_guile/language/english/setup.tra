@@ -2445,7 +2445,7 @@ The secrets contained in this tome may enable the owner to learn the skills and 
 [WARNING: activation of this item cannot be reversed.  Save before doing so.]~
 @5213   = ~Silence~
 @5214   = ~The target of this ability must make a saving throw vs. spell at -1; if the save is failed, then they are silenced for the duration of the spell, unless and until they are affected by Vocalize.~
-@5215   = ~Spell Turning~
+@5215   = ~Turn Spell~
 @5216   = ~This abjuration causes one spell cast against the Spellfilcher to rebound upon the original caster.~
 @5217   = ~spellfilcher~
 @5218   = ~Spellfilcher~
@@ -2469,8 +2469,7 @@ Abilities:
 - Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
 
 Restrictions:
-- Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
-- Loremasters do not do extra damage by backstabbing.
+- Loremasters may only spend 20 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
 ~
 @5234   = ~Dusty Tome of Facts and Sagery~ 
 @5235   = ~LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.
@@ -2480,8 +2479,7 @@ Abilities:
 - Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.
 
 Restrictions:
-- Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
-- Loremasters do not do extra damage by backstabbing.
+- Loremasters may only spend 20 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.
 
 Using this Tome will allow the reader to engage in a career as a Loremaster.
 
@@ -2499,10 +2497,12 @@ Abilities:
 Level 1: Entangle, Sanctuary, Shillelagh
 Level 2: Barkskin, Slow Poison, Flame Blade
 Level 3: Cure Disease, Call Lightning, Summon Insects
+Level 4: Death Ward, Animal Summoning I
+Level 5: Animal Summoning II
 
 Restrictions:
 - May only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.
-- May spend only 12 skill points per level to advance thief abilities.
+- May spend only 15 skill points per level to advance thief abilities.
 ~
 @5274   = ~Ranger/Mage~
 @5275   = ~Tome of Woodland Magicks~
@@ -2511,15 +2511,18 @@ Restrictions:
 Abilities:
 - 2 more hit points each level than a standard thief/mage, up to level 10; and 1 extra hit point every level after level that, up to level 20.
 - 1-point bonus to thac0 every third level, up to level 18.
+- Automatically increases proficiency in the single-hand, two-hand, and two-weapon fighting styles at 1st level and 9th level.
 - May use Animal Empathy innately just like any ranger, and can also cast Goodberry innately.
-- Automatically learns the following druid spells in their wizard spellbook:
+- Automatically learns the following druid spells in <PRO_HISHER> wizard spellbook:
 Level 1: Entangle, Sanctuary, Shillelagh
 Level 2: Barkskin, Slow Poison, Flame Blade
 Level 3: Cure Disease, Call Lightning, Summon Insects
+Level 4: Death Ward, Animal Summoning I
+Level 5: Animal Summoning II
 
 Restrictions:
 - May only add skill points to Hide in Shadows, Move Silently, Find Traps, and Detect Illusion.
-- May spend only 12 skill points per level to advance thief abilities.
+- May spend only 15 skill points per level to advance thief abilities.
 
 Using this Tome will allow the reader to forsake a career as a thief and instead follow the path of a ranger.
 
@@ -2538,7 +2541,6 @@ Abilities:
 Restrictions:
 - May not use the Pick Pockets skill.
 - May distribute 20 skill points each level.
-- Reduced backstab multiplier progression, matching that of a Stalker.
 - Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.
 ~
 @5335  = ~Tome of Dungeon Delving~
@@ -2553,7 +2555,6 @@ Abilities:
 Restrictions:
 - May not use the Pick Pockets skill.
 - May distribute 20 skill points each level.
-- Reduced backstab multiplier progression, matching that of a Stalker.
 - Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.
 
 Using this Tome will allow the reader to engage in a career as a Tomb Runner.
@@ -2570,7 +2571,7 @@ Abilities:
 
 Restrictions:
 - -2 penalty to Dexterity.
-- May not use the Open Locks, Detect Illusion, or Set Traps skills.
+- May not use the Open Locks or Set Traps skills.
 - May distribute 20 skill points each level.
 - May not be Lawful or Good alignments.
 ~
@@ -2583,7 +2584,7 @@ Abilities:
 
 Restrictions:
 - -2 penalty to Dexterity
-- May not use the Open Locks, Detect Illusion, or Set Traps skills.
+- May not use the Open Locks or Set Traps skills.
 - May distribute 20 skill points each level.
 - May not be Lawful or Good alignments.
 
@@ -2603,7 +2604,6 @@ Abilities:
 Restrictions:
 - May not use the Pick Pockets or Open Locks skills.
 - May only distribute 15 skill points each thief level.
-- Reduced backstab multiplier progression, matching that of a Stalker.
 - 15% experience point penalty.
 - Limited to Good alignments.
 ~
@@ -2618,7 +2618,6 @@ Abilities:
 Restrictions:
 - May not use the Pick Pockets or Open Locks skills.
 - May only distribute 15 skill points each thief level.
-- Reduced backstab multiplier progression, matching that of a Stalker.
 - 15% experience point penalty.
 - Limited to Good alignments.
 

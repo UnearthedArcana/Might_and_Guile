@@ -5002,7 +5002,31 @@ COPY ~might_and_guile/nubards/d5bdvoc.spl~ ~override~
 */
 
 ACTION_IF (d5_bards_5E_casting = 1) BEGIN
-  LAF process_semi_spells END
+ LAF process_semi_spells END
+
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
+  LAF semi_spont_sequencers END
+  
+  ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_metamagic.qd~) BEGIN
+    ACTION_FOR_EACH seq_spl IN ~d5_seq1~ ~d5_seq2~ ~d5_seq3~ BEGIN
+      COPY_EXISTING ~%seq_spl%.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = EVAL ~%seq_spl%~ END
+      IF_EXISTS BUT_ONLY
+    END
+    ACTION_FOR_EACH seq_seq IN ~spwi420d~ ~spwi420p~ ~spwi710d~ ~spwi710p~ ~spwi809d~ ~spwi809p~ BEGIN
+      COPY_EXISTING ~%seq_seq%.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq2~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq3~ END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+ END
+
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+  LAF semi_spont_identify END
+ END
+
 END
 //___________________________________________________________________________________
 

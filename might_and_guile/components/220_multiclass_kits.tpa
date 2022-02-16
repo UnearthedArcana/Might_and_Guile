@@ -80,6 +80,20 @@ END
 //___________________________________________________________________________________
 
 
+//DEAL WITH SNARES___________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5cl412.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 171 timing = 1 STR_VAR resource = ~spcl412~ END
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5nx412.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 172 timing = 1 STR_VAR resource = ~spcl412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5cl412~ END
+
+COPY_EXISTING ~clabth01.2da~ ~override~
+  REPLACE_TEXTUALLY ~GA_SPCL412~ ~AP_D5CL412~
+IF_EXISTS BUT_ONLY
+//___________________________________________________________________________________
+
 
 //ADD SPELLFILCHER____________________________________________________________________
 //
@@ -100,7 +114,7 @@ ADD_KIT ~D5FILCH~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5FILCH       0 0 0 0 0 0 0 0~
-~D5FILCH       0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 0 0 1 1 1 1 1 1 1 1 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5FILCH       0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 0 0 1 1 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -214,7 +228,7 @@ ADD_KIT ~D5_LOREMASTER~
 //2               R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1               D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5_LOREMASTER    0 0 0 0 0 0 0 0~
-~D5_LOREMASTER    0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 1 1 0 0 0 0 1 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5_LOREMASTER    0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -318,7 +332,7 @@ ADD_KIT ~D5RANMAGE~
 //2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5RANMAGE     0 0 0 0 0 0 0 0~
-~D5RANMAGE     0 0 0 0 0 0 0 0 2 2 2 2 0 2 2 2 2 2 0 0 2 2 2 2 0 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5RANMAGE     0 0 0 0 0 0 0 0 0 2 2 0 0 2 2 2 0 2 0 0 0 0 2 2 0 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -396,7 +410,8 @@ COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
 COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
 COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
 COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
-COPY ~might_and_guile/misc/d5_numat.spl~ ~override~
+COPY ~might_and_guile/misc/d5_apr7.spl~ ~override~
+COPY ~might_and_guile/misc/d5_apr2.spl~ ~override~
 ACTION_IF GAME_IS ~iwdee~ BEGIN	
   APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~
   COPY_EXISTING ~splprot.2da~ ~override~
@@ -480,7 +495,7 @@ ADD_KIT ~D5RANTHIEF~
 //2             R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1             D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5RANTHIEF     0 0 0 0 0 0 0 0~
-~D5RANTHIEF     0 0 0 0 0 0 0 0 0 2 2 2 0 2 2 2 0 2 2 0 0 0 2 2 2 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5RANTHIEF     0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -626,7 +641,7 @@ ADD_KIT ~D5_TOMBRUNNER~
 //2               R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1               D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5_TOMBRUNNER    0 0 0 0 0 0 0 0~
-~D5_TOMBRUNNER    0 0 0 0 0 0 0 0 0 2 2 0 0 0 2 2 0 2 0 0 0 0 2 2 2 2 2 2 2 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5_TOMBRUNNER    0 0 0 0 0 0 0 0 0 2 2 0 0 2 2 2 0 2 0 0 0 0 2 2 2 2 2 2 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR
@@ -724,7 +739,7 @@ ADD_KIT ~D5_THUG~
 //2               R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1               D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
 ~D5_THUG	      0 0 0 0 0 0 0 0~
-~D5_THUG	      0 0 0 0 0 0 0 0 0 2 2 0 0 2 2 2 0 2 0 0 0 0 2 2 2 2 2 2 2 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~D5_THUG	      0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
 //                 STR DEX CON INT WIS CHR

@@ -1,0 +1,400 @@
+
+//Patch function that replaces set or all occurrences of the given regexp pattern in the file with the given string.
+//Use EVAL to perform variable substitution on the string and/or the regexp pattern.
+//Unlike REPLACE_TEXTUALLY the pattern can be multi-line text, even without using regexp.
+//Just like REPLACE_BCS_BLOCK the function ignores pattern whitespace.
+//The function can be also used as a COUNT_REGEXP_INSTANCES alternative with the above mentioned features.
+//Optional PATCH_WARN message is printed if the task could not be performed (pattern not found or different amount of pattern matches than expected).
+
+DEFINE_PATCH_FUNCTION REPLACE_MULTILINE
+	INT_VAR
+		num = "-1"     //amount of times the pattern should be replaced with string (-1 by default which is at least 1 but without max limit)
+		strict = 0     //set to 1 to enable strict checking (auto escapes $^.*+?[]\ special characters)
+		verbose = 1    //set to 0 to skip printing patching message
+		warn = 1       //set to 0 to skip printing warning message if the function can't do what you ask it to do
+		only_count = 0 //set to to 1 to skip pattern replacing and just return num_matches (COUNT_REGEXP_INSTANCES alternative)
+	STR_VAR
+		pattern = ""   //pattern that you want to replace
+		string = ""    //string that the pattern will be replaced with
+	RET
+		num_matches    //amount of times the pattern has been found
+	BEGIN
+	TEXT_SPRINT percent ~%~
+	INNER_PATCH_SAVE textToReplace ~%pattern%~ BEGIN
+		PATCH_IF strict = 1 BEGIN
+			REPLACE_TEXTUALLY ~\\~ ~\\\\~
+			REPLACE_TEXTUALLY ~\[~ ~\[~
+			REPLACE_TEXTUALLY ~\]~ ~\]~
+			REPLACE_EVALUATE ~\([\$\^\.\*\+\?]\)~ BEGIN END ~\%MATCH1%~
+		END
+		REPLACE_TEXTUALLY ~[%WNL%%LNL%%MNL%%TAB% ]+~ ~[%WNL%%LNL%%MNL%%TAB% ]+~
+	END
+	SET num_matches = 0
+	PATCH_IF only_count = 0 BEGIN
+		REPLACE_EVALUATE CASE_INSENSITIVE ~%textToReplace%~ BEGIN
+			SET num_matches = num_matches + 1
+			INNER_PATCH_SAVE string ~%string%~ BEGIN
+				REPLACE_TEXTUALLY ~%percent%MATCH\([0-9]+\)%percent%~ ~%MATCH\1%~
+			END
+		END ~%string%~
+		SET warned = 0
+		PATCH_IF num_matches != num BEGIN
+			PATCH_IF num_matches = 0 BEGIN
+				PATCH_IF warn = 1 BEGIN
+					PATCH_WARN ~WARNING %SOURCE_FILESPEC% - pattern not found:%LNL%%pattern%~
+				END
+				SET warned = 1
+			END ELSE PATCH_IF num >= 0 AND (num_matches > num OR num_matches < num) BEGIN
+				PATCH_IF warn = 1 BEGIN
+					PATCH_WARN ~WARNING %SOURCE_FILESPEC% - pattern replaced %num_matches% time(s) instead of %num%:%LNL%%pattern%~
+				END
+				SET warned = 1
+			END
+		END
+		PATCH_IF verbose = 1 AND warned = 0 BEGIN
+			PATCH_PRINT ~Patching %SOURCE_FILESPEC% - pattern replaced %num_matches% time(s):%LNL%%pattern% => %string%~
+		END
+	END ELSE BEGIN
+		COUNT_REGEXP_INSTANCES ~%textToReplace%~ num_matches
+	END
+END
+
+DEFINE_ACTION_FUNCTION B3_CONTINGENCY_REDIRECT_INSTALL
+BEGIN
+
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~B3ContingencyRedirect.mrk~ BEGIN
+
+		//////////////////
+		// B3CONRED.lua //
+		//////////////////
+
+<<<<<<<< .../B3ContingencyRedirect-inlined/copy/B3CONRED.lua
+
+B3ContingencyRedirect_ResrefToFunction = {}
+
+function B3ContingencyRedirect_MageDoRedirect()
+    local redirectFunc = B3ContingencyRedirect_ResrefToFunction[contingencyResRef]
+    if showContingency and redirectFunc then
+        mageScreen:CancelSequencingSpells()
+        Infinity_PopMenu("MAGE")
+        redirectFunc()
+        return true
+    end
+end
+
+function B3ContingencyRedirect_ContingencyDoRedirect()
+    local redirectFunc = B3ContingencyRedirect_ResrefToFunction[contingencyResRef]
+    if showContingency and redirectFunc then
+        mageScreen:CancelSequencingSpells()
+        Infinity_PopMenu("CONTINGENCY")
+        redirectFunc()
+        return true
+    end
+end
+>>>>>>>>
+
+		//////////////////
+		// includes.lua //
+		//////////////////
+
+<<<<<<<< .../B3ContingencyRedirect-inlined/patches/includes.lua
+
+-- B3ContingencyRedirect Edit Start
+
+Infinity_DoFile("B3CONRED")
+
+-- B3ContingencyRedirect Edit End
+
+>>>>>>>>
+
+		///////////////
+		// blank.txt //
+		///////////////
+
+<<<<<<<< .../B3ContingencyRedirect-inlined/copy/blank.txt
+>>>>>>>>
+
+		//////////
+		// Code //
+		//////////
+
+		COPY ~.../B3ContingencyRedirect-inlined/copy/B3CONRED.lua~ ~override~
+
+		COPY_EXISTING ~includes.LUA~ ~override~ INSERT_FILE 0 ~.../B3ContingencyRedirect-inlined/patches/includes.lua~ BUT_ONLY
+
+		COPY_EXISTING ~UI.MENU~ ~override~
+
+			PATCH_IF MOD_IS_INSTALLED ~LeUI.tp2~ ~0~ OR MOD_IS_INSTALLED ~LeUI-BG1EE.tp2~ ~0~ OR MOD_IS_INSTALLED ~LeUI-SoD.tp2~ ~0~ BEGIN
+
+				LPF REPLACE_MULTILINE INT_VAR num = 1 STR_VAR pattern = ~		showMageMemorizationFlash = false
+		setMageBookLevel(1, true)~ string = ~
+		-- B3ContingencyRedirect Edit Start
+
+		if B3ContingencyRedirect_MageDoRedirect() then return end
+
+		-- B3ContingencyRedirect Edit End
+
+		showMageMemorizationFlash = false
+		setMageBookLevel(1, true)~
+				END
+
+			END ELSE BEGIN
+
+				LPF REPLACE_MULTILINE INT_VAR num = 1 STR_VAR pattern = ~showMageMemorizationFlash = false
+	mgpage = nil~ string = ~
+		-- B3ContingencyRedirect Edit Start
+
+		if B3ContingencyRedirect_MageDoRedirect() then return end
+
+		-- B3ContingencyRedirect Edit End
+
+		showMageMemorizationFlash = false
+		mgpage = nil~
+				END
+
+			END
+
+			PATCH_IF GAME_IS ~iwdee~ BEGIN
+
+				LPF REPLACE_MULTILINE INT_VAR num = 1 STR_VAR pattern = ~currentContingencyCondition = 0
+	currentContingencyTarget = 0
+	contingencySpellType = 0~ string = ~
+	-- B3ContingencyRedirect Edit Start
+
+	if B3ContingencyRedirect_ContingencyDoRedirect() then return end
+
+	-- B3ContingencyRedirect Edit End
+
+	currentContingencyCondition = 0
+	currentContingencyTarget = 0
+	contingencySpellType = 0~
+				END
+
+			END
+
+		BUT_ONLY
+
+		COPY ~.../B3ContingencyRedirect-inlined/copy/blank.txt~ ~override/B3ContingencyRedirect.mrk~
+
+	END
+
+END
+
+DEFINE_ACTION_FUNCTION B3_IDENTIFY_INSTALL
+BEGIN
+
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~B3Identify.mrk~ BEGIN
+
+		//////////////////
+		// M_B3IDEN.lua //
+		//////////////////
+
+<<<<<<<< .../B3Identify-inlined/copy/M_B3IDEN.lua
+
+-------------
+-- GLOBALS --
+-------------
+
+B3Identify_InventoryOverride = false
+B3Identify_UseCount = -1
+B3Identify_UnidentifiedCount = -1
+
+---------------
+-- FUNCTIONS --
+---------------
+
+function B3Identify_RemainingUsesText()
+	return "Remaining Identify Uses: "..B3Identify_UseCount
+end
+
+function B3Identify_IdentifySlot(slotinfo)
+	if slotinfo.item.identified == 0 then
+		Infinity_OnSpellIdentify(slotinfo.id)
+		B3Identify_UseCount = B3Identify_UseCount - 1
+		if B3Identify_UseCount == 0 then
+			Infinity_PopMenu("B3Identify_Menu")
+			e:SelectEngine(worldScreen)
+		end
+	end
+end
+
+function B3Identify_InventoryOverrideFunc()
+    if B3Identify_InventoryOverride then
+        Infinity_PopMenu("INVENTORY")
+        Infinity_PushMenu("B3Identify_Menu")
+        return true
+    end
+end
+
+function B3Identify_RegisterResref(resref, useCount)
+	resref = resref:upper()
+	mageBookStrings[resref] = {tip = -1, title = "", action = ""}
+	B3ContingencyRedirect_ResrefToFunction[resref] = function()
+		B3Identify_InventoryOverride = true
+		B3Identify_UseCount = useCount
+		e:GetActiveEngine():OnLeftPanelButtonClick(3)
+	end
+end
+>>>>>>>>
+
+		/////////////
+		// UI.MENU //
+		/////////////
+
+<<<<<<<< .../B3Identify-inlined/patches/UI.MENU
+
+-- B3Identify Edit Start
+
+menu
+{
+	name "B3Identify_Menu"
+	align center center
+
+	onopen
+	"
+		for slotName, slot in pairs(characters[id].equipment) do
+			Infinity_CheckItemIdentify(slot.id)
+		end
+
+		B3Identify_UnidentifiedCount = 0
+
+		for slotName, slot in pairs(characters[id].equipment) do
+			if slot.item.identified == 0 then
+				B3Identify_UnidentifiedCount = B3Identify_UnidentifiedCount + 1
+			end
+		end
+	"
+
+	onclose
+	"
+		B3Identify_InventoryOverride = false
+	"
+
+	button
+	{
+		area 774 0 44 44
+		on escape
+		bam "GUIOSW"
+		sequence 2
+		action
+		"
+			Infinity_PopMenu('B3Identify_Menu')
+			e:SelectEngine(worldScreen)
+		"
+	}
+
+	label
+	{
+		area 271 0 250 92
+		text lua "B3Identify_RemainingUsesText()"
+		text style "normal"
+		text align center center
+	}
+
+	button {area 26 243 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.weapon0"  action "B3Identify_IdentifySlot(characters[id].equipment.weapon0)"}
+	button {area 78 243 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.weapon1"  action "B3Identify_IdentifySlot(characters[id].equipment.weapon1)"}
+	button {area 130 243 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.weapon2"  action "B3Identify_IdentifySlot(characters[id].equipment.weapon2)"}
+	button {area 182 243 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.weapon3"  action "B3Identify_IdentifySlot(characters[id].equipment.weapon3)"}
+
+	button {area 26 347 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.personal0" action "B3Identify_IdentifySlot(characters[id].equipment.personal0)"}
+	button {area 78 347 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.personal1" action "B3Identify_IdentifySlot(characters[id].equipment.personal1)"}
+	button {area 130 347 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.personal2" action "B3Identify_IdentifySlot(characters[id].equipment.personal2)"}
+
+	button {area 242 98 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.armor"     action "B3Identify_IdentifySlot(characters[id].equipment.armor)"}
+	button {area 294 98 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.gauntlets" action "B3Identify_IdentifySlot(characters[id].equipment.gauntlets)"}
+	button {area 346 98 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.helmet"    action "B3Identify_IdentifySlot(characters[id].equipment.helmet)"}
+	button {area 398 98 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.amulet"    action "B3Identify_IdentifySlot(characters[id].equipment.amulet)"}
+	button {area 78 138 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.quiver0"   action "B3Identify_IdentifySlot(characters[id].equipment.quiver0)"}
+	button {area 130 138 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.quiver1"   action "B3Identify_IdentifySlot(characters[id].equipment.quiver1)"}
+	button {area 182 138 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.quiver2"   action "B3Identify_IdentifySlot(characters[id].equipment.quiver2)"}
+	button {area 393 361 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.belt"      action "B3Identify_IdentifySlot(characters[id].equipment.belt)"}
+	button {area 218 302 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ringleft"  action "B3Identify_IdentifySlot(characters[id].equipment.ringleft)"}
+	button {area 462 302 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ringright" action "B3Identify_IdentifySlot(characters[id].equipment.ringright)"}
+	button {area 282 361 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.cloak"     action "B3Identify_IdentifySlot(characters[id].equipment.cloak)"}
+	button {area 338 361 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.boots"     action "B3Identify_IdentifySlot(characters[id].equipment.boots)"}
+	button {area 461 244 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.shield"    action "B3Identify_IdentifySlot(characters[id].equipment.shield)"}
+
+	button {area 87 571 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.group0"  action "B3Identify_IdentifySlot(characters[id].equipment.group0)"}
+	button {area 87 626 52 52  bam "STONSLOT" slotinfo "characters[id].equipment.group1"  action "B3Identify_IdentifySlot(characters[id].equipment.group1)"}
+	button {area 140 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group2"  action "B3Identify_IdentifySlot(characters[id].equipment.group2)"}
+	button {area 140 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group3"  action "B3Identify_IdentifySlot(characters[id].equipment.group3)"}
+	button {area 193 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group4"  action "B3Identify_IdentifySlot(characters[id].equipment.group4)"}
+	button {area 193 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group5"  action "B3Identify_IdentifySlot(characters[id].equipment.group5)"}
+	button {area 246 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group6"  action "B3Identify_IdentifySlot(characters[id].equipment.group6)"}
+	button {area 246 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group7"  action "B3Identify_IdentifySlot(characters[id].equipment.group7)"}
+	button {area 299 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group8"  action "B3Identify_IdentifySlot(characters[id].equipment.group8)"}
+	button {area 299 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group9"  action "B3Identify_IdentifySlot(characters[id].equipment.group9)"}
+	button {area 352 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group10" action "B3Identify_IdentifySlot(characters[id].equipment.group10)"}
+	button {area 352 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group11" action "B3Identify_IdentifySlot(characters[id].equipment.group11)"}
+	button {area 405 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group12" action "B3Identify_IdentifySlot(characters[id].equipment.group12)"}
+	button {area 405 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group13" action "B3Identify_IdentifySlot(characters[id].equipment.group13)"}
+	button {area 458 571 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group14" action "B3Identify_IdentifySlot(characters[id].equipment.group14)"}
+	button {area 458 626 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.group15" action "B3Identify_IdentifySlot(characters[id].equipment.group15)"}
+
+	button {area 710 478 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground0" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground0)"}
+	button {area 766 478 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground1" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground1)"}
+	button {area 710 534 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground2" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground2)"}
+	button {area 766 534 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground3" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground3)"}
+	button {area 710 590 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground4" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground4)"}
+	button {area 766 590 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground5" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground5)"}
+	button {area 710 646 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground6" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground6)"}
+	button {area 766 646 52 52 bam "STONSLOT" slotinfo "characters[id].equipment.ground7" actionScroll "scrollGroundItems()" action "B3Identify_IdentifySlot(characters[id].equipment.ground7)"}
+}
+
+-- B3Identify Edit End
+
+>>>>>>>>
+
+		///////////////
+		// blank.txt //
+		///////////////
+
+<<<<<<<< .../B3Identify-inlined/copy/blank.txt
+>>>>>>>>
+
+		//////////
+		// Code //
+		//////////
+
+		LAF B3_CONTINGENCY_REDIRECT_INSTALL END
+
+		COPY ~.../B3Identify-inlined/copy/M_B3IDEN.lua~ ~override~
+
+		COPY_EXISTING ~UI.MENU~ ~override~
+
+			LPF REPLACE_MULTILINE INT_VAR num = 1 STR_VAR pattern = ~Infinity_ActivateInventory()~ string = ~Infinity_ActivateInventory()
+
+		-- B3Identify Edit Start
+
+		if B3Identify_InventoryOverrideFunc() then return end
+
+		-- B3Identify Edit End
+~			END
+
+			LPF REPLACE_MULTILINE INT_VAR num = 1 STR_VAR pattern = ~enabled "itemDescLeftButtonEnabled()"~ string = ~
+		-- B3Identify Edit Start
+
+		--enabled "itemDescLeftButtonEnabled()"
+		enabled "not B3Identify_InventoryOverride and itemDescLeftButtonEnabled()"
+
+		-- B3Identify Edit End
+~			END
+
+			INSERT_FILE 0 ~.../B3Identify-inlined/patches/UI.MENU~
+
+		BUT_ONLY
+
+		COPY ~.../B3Identify-inlined/copy/blank.txt~ ~override/B3Identify.mrk~
+
+	END
+
+END
+
+DEFINE_ACTION_FUNCTION B3_IDENTIFY_REGISTER
+	INT_VAR
+		uses = 1 // Amount of items that can be identified by the resref
+	STR_VAR
+		resref = ~~ // Resref to register
+BEGIN
+	APPEND_OUTER ~override/M_B3IDEN.lua~ ~B3Identify_RegisterResref("%resref%", %uses%)~ KEEP_CRLF
+END

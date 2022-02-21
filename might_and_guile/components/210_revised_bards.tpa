@@ -3858,8 +3858,12 @@ COPY ~might_and_guile/feats/d5mcft1.spl~ ~override/d5mcfb1.spl~
   LPF CLONE_EFFECT INT_VAR match_opcode = 177 match_parameter1 = 15 parameter1 = 10 END
   LPF CLONE_EFFECT INT_VAR match_opcode = 177 match_parameter1 = 9 parameter1 = 7 END
   LPF CLONE_EFFECT INT_VAR match_opcode = 177 match_parameter1 = 9 parameter1 = 3 END
-  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = ~d5mcfb1~ END
-COPY ~might_and_guile/feats/d5mcft1.eff~ ~override~
+//  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~d5mcfb1~ END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5mcft1.eff~) BEGIN
+  COPY ~might_and_guile/feats/d5mcft1.eff~ ~override~
+END
 
 ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
   ACTION_IF (num > 1) && (num < 10) BEGIN
@@ -3873,6 +3877,12 @@ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
 	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = EVAL ~d5mcft%num%~ END
 	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~d5mcfb%num%~ END
 	BUT_ONLY
+//    COPY_EXISTING ~d5mcft%num%.spl~ ~override~
+//	  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5mcfb%num%~ END
+//    IF_EXISTS BUT_ONLY
+    COPY_EXISTING ~d5feat%let%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5mcfb%num%~ END
+    IF_EXISTS BUT_ONLY
   END
 END
 

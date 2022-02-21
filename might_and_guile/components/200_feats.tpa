@@ -3149,7 +3149,8 @@ COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5nfeats.spl~
   END
 
 COPY ~might_and_guile/feats/d5mcft1.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 318 parameter2 = %kit_not_row% END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 parameter2 = %kit_not_row% END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 206 /*STR_VAR match_resource = ~d5mcft1~*/ END
 COPY ~might_and_guile/feats/d5mcft1.eff~ ~override~
 
 ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
@@ -3158,10 +3159,13 @@ ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
 	  WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
 	BUT_ONLY
 	COPY_EXISTING ~d5mcft1.spl~ ~override/d5mcft%num%.spl~
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 318 STR_VAR resource = EVAL ~d5mcft%num%~ END
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = EVAL ~d5mcft%num%~ END
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR resource = EVAL ~d5mcft%num%~ END
+//	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 206 STR_VAR resource = EVAL ~d5mcft%num%~ END
 	BUT_ONLY
+	COPY_EXISTING ~dsfeat%let%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5mcft%num%~ END
+	IF_EXISTS BUT_ONLY
   END
 END
 //__________________________________________________________________________________

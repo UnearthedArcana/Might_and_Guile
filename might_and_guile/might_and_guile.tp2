@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.18.1~
+VERSION ~4.18.3~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -101,7 +101,9 @@ INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~
 
 ACTION_IF d5_bards_5E_casting = 1 BEGIN
  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane~) BEGIN
-  LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
+  LAF semi_spontaneous_casting END
+  LAF semi_arcane_spells END
+  LAF process_semi_spells END
  END
 END
 

@@ -1,5 +1,5 @@
 
-// 0.79.9
+// 0.82.0
 
 //REMOVE BLANK LINES MACRO___________________________________________________________
 //
@@ -203,6 +203,11 @@ ALL
             Life        Death       Benediction Destruction Protection  War         Exploration Knowledge   Deception   Thought     Dread       Vigor       Affliction  Animal      Plant       Earth       Water       Air         Fire        Light       Shadow      Magic     Astral
 >>>>>>>> 
 	COPY ~d5/d5_spher.2da~ ~override/d5_spher.2da~ 
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_spher.2da~) BEGIN
+	COPY_EXISTING ~d5_spher.2da~ ~override~
+	  REPLACE_TEXTUALLY ~[ %TAB%]Perdition~ ~%TAB%Astral~
+	BUT_ONLY
   END
   
   ACTION_IF !(FILE_CONTAINS_EVALUATED (~d5_class.2da~ ~%clab_name%~)) BEGIN
@@ -447,6 +452,15 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 
   LAM ~READ_FNP_KIT_INFO~
 
+  COPY_EXISTING ~d5_class.2da~ ~override~
+   READ_2DA_ENTRIES_NOW ~r2en_d5_class~ 2
+   FOR (row = 1; row < r2en_d5_class; row += 1) BEGIN
+	READ_2DA_ENTRY_FORMER ~r2en_d5_class~ row 0 kit
+	READ_2DA_ENTRY_FORMER ~r2en_d5_class~ row 1 type
+	TEXT_SPRINT $d5_fnp_kit_caster_type(~%kit%~) ~%type%~
+   END
+  BUT_ONLY
+
   INCLUDE ~%MOD_FOLDER%/lib/qd_multiclass.tpa~
   OUTER_SPRINT sphere_access ~- Access to the spheres of:~
   OUTER_SPRINT focus_access ~- Focus access to the spheres of:~
@@ -508,21 +522,21 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 	REPLACE_TEXTUALLY ~^\(%kit_label%[ %TAB%]+\).+$~ ~\1b_%kit_index%~
   BUT_ONLY
  END
- COPY ~faiths_and_powers/spheres/hlas/luclxyz.2da~ ~override/lub_%kit_index%.2da~
+ COPY ~faiths_and_powers/data/hlas/luclxyz.2da~ ~override/lub_%kit_index%.2da~
  ACTION_IF (%kit_class% = 11) BEGIN 	// druid
-  COPY ~faiths_and_powers/spheres/hlas/ludrxyz.2da~ ~override/lub_%kit_index%.2da~
+  COPY ~faiths_and_powers/data/hlas/ludrxyz.2da~ ~override/lub_%kit_index%.2da~
  END
  ACTION_IF (%kit_class% = 8) BEGIN 	// f/c
-  COPY ~faiths_and_powers/spheres/hlas/lufcxyz.2da~ ~override/lub_%kit_index%.2da~
+  COPY ~faiths_and_powers/data/hlas/lufcxyz.2da~ ~override/lub_%kit_index%.2da~
  END
  ACTION_IF (%kit_class% = 18) BEGIN 	// c/r
-  COPY ~faiths_and_powers/spheres/hlas/lucrxyz.2da~ ~override/lub_%kit_index%.2da~
+  COPY ~faiths_and_powers/data/hlas/lucrxyz.2da~ ~override/lub_%kit_index%.2da~
  END
  ACTION_IF (%kit_class% = 15) BEGIN 	// c/t
-  COPY ~faiths_and_powers/spheres/hlas/luctxyz.2da~ ~override/lub_%kit_index%.2da~
+  COPY ~faiths_and_powers/data/hlas/luctxyz.2da~ ~override/lub_%kit_index%.2da~
  END
  ACTION_IF (%kit_class% = 14) BEGIN 	// c/m
-  COPY ~faiths_and_powers/spheres/hlas/lucmxyz.2da~ ~override/lub_%kit_index%.2da~
+  COPY ~faiths_and_powers/data/hlas/lucmxyz.2da~ ~override/lub_%kit_index%.2da~
  END
  ACTION_PHP_EACH d5_fnp_kits AS ind => kit BEGIN
   ACTION_IF (~%kit%~ STRING_EQUAL_CASE ~%mod_clab%~) BEGIN
@@ -543,51 +557,76 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 		  SNPRINT 3 ~shortsphere~ ~%sphere%~
 		END
 		ACTION_IF (VARIABLE_IS_SET $d5_fnp_sphere_access(~%access%~)) && (~%access%~ STRING_EQUAL_CASE ~FOCUS~) BEGIN
-		  COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
-			LPM remove_blank_lines
-			APPEND_FILE ~faiths_and_powers/spheres/hlas/%sphere%/hlas_%sphere%.txt~
-		  BUT_ONLY
+		  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__v_plus_spheres.d5~) BEGIN
+		    COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
+			  PATCH_IF (FILE_EXISTS ~weidu_external/faiths_and_powers/hlas/hlas_%text_sphere%.txt~) BEGIN
+			    LPM remove_blank_lines
+			    APPEND_FILE ~weidu_external/faiths_and_powers/hlas/hlas_%text_sphere%.txt~
+			  END
+		    BUT_ONLY
+		  END
 		  COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
 			REPLACE_TEXTUALLY ~[%LNL%%MNL%%WNL%]zzz~ ~~
 		  BUT_ONLY
-		  ACTION_IF !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SF%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_divine.d5~) /*AND !(FILE_EXISTS_IN_GAME ~d5__fnp_spont_casting.d5~)*/ BEGIN
+			    APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SF%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			  END
+			  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__5E_casting_divine.d5~) OR (FILE_EXISTS_IN_GAME ~d5__fnp_spont_casting.d5~) BEGIN
+			    APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5ZF%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			  END
+			END
 		  END
-		  ACTION_IF (~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && (~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			END
 		  END
-		  OUTER_TEXT_SPRINT focus_sphere_list ~%focus_sphere_list% %text_sphere%~
+		  OUTER_TEXT_SPRINT focus_sphere_list ~%focus_sphere_list%, %text_sphere%~
 		END
 		ACTION_IF (VARIABLE_IS_SET $d5_fnp_sphere_access(~%access%~)) && (~%access%~ STRING_EQUAL_CASE ~MAJOR~) BEGIN
-		  COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
-			LPM remove_blank_lines
-			APPEND_FILE ~faiths_and_powers/spheres/hlas/%sphere%/hlas_%sphere%.txt~
-		  BUT_ONLY
+		  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__v_plus_spheres.d5~) BEGIN
+		    COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
+			  PATCH_IF (FILE_EXISTS ~weidu_external/faiths_and_powers/hlas/hlas_%text_sphere%.txt~) BEGIN
+			    LPM remove_blank_lines
+			    APPEND_FILE ~weidu_external/faiths_and_powers/hlas/hlas_%text_sphere%.txt~
+			  END
+		    BUT_ONLY
+		  END
 		  COPY_EXISTING ~lub_%kit_index%.2da~ ~override~
 			REPLACE_TEXTUALLY ~[%LNL%%MNL%%WNL%]zzz~ ~~
 		  BUT_ONLY
-		  ACTION_IF !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			END
 		  END
-		  OUTER_TEXT_SPRINT major_sphere_list ~%major_sphere_list% %text_sphere%,~
+		  OUTER_TEXT_SPRINT major_sphere_list ~%major_sphere_list%, %text_sphere%~
 		END
 		ACTION_IF (VARIABLE_IS_SET $d5_fnp_sphere_access(~%access%~)) && (~%access%~ STRING_EQUAL_CASE ~MINOR~) BEGIN
-		  ACTION_IF !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SM%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SM%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			END
 		  END
-		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list% %text_sphere%,~
+		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list%, %text_sphere%~
 		END
 		ACTION_IF (VARIABLE_IS_SET $d5_fnp_sphere_access(~%access%~)) && (~%access%~ STRING_EQUAL_CASE ~PALADIN~) BEGIN
-		  ACTION_IF !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			END
 		  END
-		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list% %text_sphere%,~
+		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list%, %text_sphere%~
 		END
 		ACTION_IF (VARIABLE_IS_SET $d5_fnp_sphere_access(~%access%~)) && (~%access%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-		  ACTION_IF !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
-			APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+		  ACTION_PHP_EACH d5_fnp_kit_caster_type AS this_kit => caster_type BEGIN
+			ACTION_IF (~%this_kit%~ STRING_EQUAL_CASE ~%mod_clab%~) && !(~%caster_type%~ STRING_EQUAL_CASE ~mystic~) BEGIN
+			  APPEND ~%mod_clab%.2da~ ~SPHERES     AP_D5SP%shortsphere%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
+			END
 		  END
-		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list% %text_sphere%,~
+		  OUTER_TEXT_SPRINT minor_sphere_list ~%minor_sphere_list%, %text_sphere%~
 		END
 	  END
 	 END
@@ -603,6 +642,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 		OUTER_TEXT_SPRINT minor_sphere_list ~%WNL%%minor_access%%minor_sphere_list%~
 	 END
 	 OUTER_TEXT_SPRINT total_sphere_list ~%total_sphere_list%%minor_sphere_list%~
+     OUTER_INNER_PATCH_SAVE total_sphere_list ~%total_sphere_list%~ BEGIN
+	   REPLACE_TEXTUALLY ~:,~ ~:~
+     END
 	 OUTER_TEXT_SPRINT kit_sphere_list ~Abilities: %total_sphere_list%~
 	 ACTION_IF IS_AN_INT ~%kit_desc%~ BEGIN
 		ACTION_GET_STRREF %kit_desc% kit_description 
@@ -665,11 +707,11 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
 					LAF QD_ENSURE_QDMC_SPL STR_VAR base_class = EVAL ~%class_letter%~ END
 					ACTION_IF (%col_length% = 1) BEGIN 
 					  COPY_EXISTING ~override/QD_MC%class_letter%0%col%.spl~ ~override~ 
-						LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+						LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 					END 
 					ACTION_IF (%col_length% = 2) BEGIN
 					  COPY_EXISTING ~override/QD_MC%class_letter%%col%.spl~ ~override~ 
-						LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
+						LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~%abil_new%#~ END  
 					END 
 				  END 
 				END
@@ -794,7 +836,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 //	  SET patch_row = %row%
 //	  PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
 		INNER_ACTION BEGIN
-		  COPY ~faiths_and_powers/kits/misc/d5fnpuse.spl~ ~override/d5_u%kit_index%.spl~
+		  COPY ~faiths_and_powers/data/misc/d5fnpuse.spl~ ~override/d5_u%kit_index%.spl~
 		END
 		PHP_EACH d5_fnp_mod_kit_use AS usable => access BEGIN
 		  PATCH_IF (IS_AN_INT %access%) BEGIN
@@ -1200,7 +1242,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 				WRITE_EVALUATED_ASCII 0x30 ~d5_u%kit_index%~
 			  LAF QD_ENSURE_QDMC_SPL STR_VAR base_class = EVAL ~%class_letter%~ END
 			  COPY_EXISTING ~QD_MC%class_letter%01.spl~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~d5_u%kit_index%#~ END  
+				LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~d5_u%kit_index%#~ END  
 			END 
 		  END
 		END

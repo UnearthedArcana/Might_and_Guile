@@ -2235,8 +2235,18 @@ BUT_ONLY
 */
 
 // I think this vv is all it needs, now...?
-APPEND ~d5nubard.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//APPEND ~d5nubard.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
+// nope, just this
+//ACTION_IF (FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zblar.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarml~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
+
+ APPEND ~d5nubard.2da~ ~BARD_CAST   AP_D5ZBLAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~D5ZBLAR~
+//END
 //___________________________________________________________________________________
 
 
@@ -4069,8 +4079,6 @@ END
 //
 // don't do this... or, maybe make add a setting for it?
 
-//LAF arcane_spont_items END
-
 
 //make sure no level 8-9 slots________________________________________________________
 //
@@ -4093,19 +4101,6 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d589spl.spl~
 	END
 
 APPEND ~d5nubard.2da~ ~BARD_INIT   AP_D589SPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-//____________________________________________________________________________________
-
-
-// compat with 5E casting armors______________________________________________________
-//
-//ACTION_IF (FILE_EXISTS_IN_GAME ~d5__semi_spont.d5~) BEGIN
-  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5zblar.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
-
-  APPEND ~d5nubard.2da~ ~BARD_CAST   AP_D5ZBLAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~D5ZBLAR~
-//END
 //____________________________________________________________________________________
 
 

@@ -1,5 +1,5 @@
 
-// v9.5 - explanation of functions; more flexible install order
+// v9.6 - fix spell-doubling bug with some armors in some circumstances
 
 /*
 functions in this file:
@@ -113,8 +113,8 @@ functions in this file:
 
 
 
-DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
-  STR_VAR tra = ~~ // e.g. ~@123~
+DEFINE_PATCH_FUNCTION ~TRA2STR~ 
+  STR_VAR tra = ~~ 
   RET str
 BEGIN
   PATCH_IF ((~%tra%~ STRING_MATCHES_REGEXP ~@-?[0-9]+~) == 0) BEGIN
@@ -197,7 +197,7 @@ ACTION_IF !(VARIABLE_IS_SET %EE_LANGUAGE%) BEGIN
   BUT_ONLY
   ACTION_FOR_EACH lang IN ~en_US~ /*~fr_FR~ ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~*/ BEGIN
 	WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%lang%/semi_spont.tra~ BEGIN
-	  OUTER_SPRINT duration_lang @10	//	USING_TRA ~low_magic/language/%lang%/descriptions.tra~
+	  OUTER_SPRINT duration_lang @10 
 	END	
 	ACTION_IF !(~%description_string%~ STRING_CONTAINS_REGEXP ~%duration_lang%~) BEGIN
 	  OUTER_SPRINT game_lang ~%lang%~
@@ -1404,6 +1404,12 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	WRITE_LONG 0x90 1
 	WRITE_ASCII 0x94 ~D5ZNCAST~ #8
 
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zarml.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5zspla~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5xspls~ END
+ COPY_EXISTING ~d5zarml.spl~ ~override/d5zarmc.spl~
+ COPY_EXISTING ~d5zarml.spl~ ~override/d5zarmp.spl~
+
  CREATE EFF ~d5zarm1l~
 	WRITE_LONG 0x10 232
 	WRITE_LONG 0x14 1
@@ -1411,7 +1417,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	WRITE_LONG 0x20 20
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_ASCII 0x30 ~d5zarml~ #8
 	WRITE_LONG 0x48 102
 	WRITE_LONG 0x90 1
 	WRITE_ASCII 0x94 ~D5ZARM1L~ #8
@@ -1423,7 +1429,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	WRITE_LONG 0x20 20
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_ASCII 0x30 ~d5zarmc~ #8
 	WRITE_LONG 0x48 102
 	WRITE_LONG 0x90 1
 	WRITE_ASCII 0x94 ~D5ZARM1C~ #8
@@ -1435,14 +1441,10 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	WRITE_LONG 0x20 20
 	WRITE_LONG 0x24 2
 	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5zarm1~ #8
+	WRITE_ASCII 0x30 ~d5zarmp~ #8
 	WRITE_LONG 0x48 102
 	WRITE_LONG 0x90 1
 	WRITE_ASCII 0x94 ~D5ZARM1P~ #8
-
- COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zarm1.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5zspla~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5xspls~ END
 
  CREATE EFF ~d5zarm2l~
 	WRITE_LONG 0x10 206
@@ -1547,6 +1549,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3l~ END
 //	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4l~ END
+// this ^^ is for the mana sorcerer, not used yet
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
@@ -1555,7 +1558,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
-	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarml~ END
 	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172l~ END
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcal.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcal~ END
@@ -1573,7 +1576,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
-	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarmc~ END
 	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172c~ END
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcac.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcac~ END
@@ -1591,7 +1594,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
-	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarm1~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarmp~ END
 	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172p~ END
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcap.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcap~ END

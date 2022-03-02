@@ -6,7 +6,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-// Version: 3.4
+// Version: 3.5 - add beholder rays to extended list
 
 /*
 SAVES:
@@ -300,6 +300,23 @@ ACTION_IF (optional_evade = 1) BEGIN
 	spwi925 		=> 1
 	cdstaf12		=> 1
 // add all beholder abilities???
+  END
+  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+    PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
+	  READ_SHORT 0x68 num_ab
+	  PATCH_IF (num_ab > 0) BEGIN
+	    GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+	    PHP_EACH ab_array AS int => ab_off BEGIN
+		  READ_SHORT (ab_off + 0x26) spl_proj
+		  PATCH_IF (spl_proj = 209) BEGIN
+		    SPRINT $beholder_ray_spells(~%SOURCE_RES%~)~1~
+		  END
+	    END
+	  END
+    END
+  BUT_ONLY
+  ACTION_PHP_EACH beholder_ray_spells AS res => ind BEGIN
+    OUTER_SPRINT $evade_spells(~%res%~)~1~
   END
   ACTION_IF (MOD_IS_INSTALLED ~item_rev.tp2~ ~0~) BEGIN
 	ACTION_DEFINE_ASSOCIATIVE_ARRAY evade_spells BEGIN

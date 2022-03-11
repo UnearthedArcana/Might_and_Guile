@@ -1,5 +1,5 @@
 
-// v9.6 - fix spell-doubling bug with some armors in some circumstances
+// v9.7 - fix caster armors
 
 /*
 functions in this file:
@@ -1540,12 +1540,22 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 
  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    SET no_cast = 0
     READ_SHORT 0x1c type
     PATCH_IF (type = 2) BEGIN
+	  READ_LONG 0x6a eff_offset
+	  READ_SHORT 0x70 num_effects
+	  FOR (cnt = 0; cnt < %num_effects%; cnt = cnt+1) BEGIN
+	    READ_SHORT (%eff_offset% + 0x30*cnt) eff_type
+	    PATCH_IF (eff_type = 145) BEGIN
+	  	  SET no_cast = 1
+	    END
+	  END
 //      LPF DELETE_EFFECT INT_VAR match_opcode = 145 END
 	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
       READ_LONG 0x22 appearance
-	  PATCH_IF (appearance = 16690) BEGIN // leather appearance
+      PATCH_IF (no_cast = 1) BEGIN
+	   PATCH_IF (appearance = 16690) BEGIN // leather appearance
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2l~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3l~ END
 //	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4l~ END
@@ -1563,8 +1573,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcal.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcal~ END
 	    END
-	  END
-	  PATCH_IF (appearance = 16691) BEGIN // chain appearance
+	   END
+	   PATCH_IF (appearance = 16691) BEGIN // chain appearance
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2c~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3c~ END
 //	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4c~ END
@@ -1581,8 +1591,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcac.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcac~ END
 	    END
-	  END
-	  PATCH_IF (appearance = 16692) BEGIN // plate appearance
+	   END
+	   PATCH_IF (appearance = 16692) BEGIN // plate appearance
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2p~ END
         LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3p~ END
 //	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4p~ END
@@ -1599,6 +1609,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcap.eff~) BEGIN
 	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcap~ END
 	    END
+	   END
 	  END
 	END
   END

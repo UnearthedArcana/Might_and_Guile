@@ -1,5 +1,5 @@
 
-// v9.7 - fix caster armors
+// v9.8 - magus compatibility
 
 /*
 functions in this file:
@@ -1550,9 +1550,19 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
 	    PATCH_IF (eff_type = 145) BEGIN
 	  	  SET no_cast = 1
 	    END
+	    PATCH_IF (eff_type = 177) BEGIN
+	  	  READ_ASCII (%eff_offset% + 0x30*cnt + 0x14) resource
+	  	  PATCH_IF (~%resource%~ STRING_EQUAL_CASE ~d5arcal~) OR (~%resource%~ STRING_EQUAL_CASE ~d5arcac~) OR (~%resource%~ STRING_EQUAL_CASE ~d5arcap~) BEGIN
+	  	    SET no_cast = 1
+	  	  END
+	    END
 	  END
-//      LPF DELETE_EFFECT INT_VAR match_opcode = 145 END
+//    LPF DELETE_EFFECT INT_VAR match_opcode = 145 match_parameter2 = 0 END
 	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
+//    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcal~ resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcac~ resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcap~ resource = ~d5zncast~ END
       READ_LONG 0x22 appearance
       PATCH_IF (no_cast = 1) BEGIN
 	   PATCH_IF (appearance = 16690) BEGIN // leather appearance
@@ -1639,6 +1649,13 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
     END
   BUT_ONLY
  END
+ 
+ ACTION_IF (FILE_EXISTS_IN_GAME ~qdmagus.2da~) BEGIN
+  COPY ~scales_of_balance/lib/d5_base.spl~ ~override/d5mgs5e.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zncast~ END
+  APPEND ~qdmagus.2da~ ~ABILITY    AP_D5MGS5E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~AP_D5MGSCST~
+ END
+
 
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_armor.d5~
 

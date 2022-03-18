@@ -1,5 +1,5 @@
 
-// v9.8 - magus compatibility
+// v9.9 - identify fix
 
 /*
 functions in this file:
@@ -1651,7 +1651,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
  END
  
  ACTION_IF (FILE_EXISTS_IN_GAME ~qdmagus.2da~) BEGIN
-  COPY ~scales_of_balance/lib/d5_base.spl~ ~override/d5mgs5e.spl~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5mgs5e.spl~
     LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zncast~ END
   APPEND ~qdmagus.2da~ ~ABILITY    AP_D5MGS5E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~AP_D5MGSCST~
  END
@@ -6777,7 +6777,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
 	  PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17 || class == 19 || class == 5) BEGIN // wizard casters
 		REMOVE_KNOWN_SPELL ~spwi110~
 		REMOVE_MEMORIZED_SPELL ~spwi110~
-		ADD_KNOWN_SPELL ~%spell_res%~ #1 ~wizard~
+		ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
 	  END
 	END
   BUT_ONLY

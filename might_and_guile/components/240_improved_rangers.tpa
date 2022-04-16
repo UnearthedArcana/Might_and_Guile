@@ -26,7 +26,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	  INNER_ACTION BEGIN
 		APPEND ~%clab%.2da~ ~FEATS       AP_D5IRVAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 		APPEND ~%clab%.2da~ ~FEATS       AP_D5_RFF1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-		ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+		ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 		  APPEND ~%clab%.2da~ ~FEATS       AP_D5_RFA9  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 		END
 	  END
@@ -42,9 +42,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // give tracking at level 1__________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~spcl922.spl~ BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
 
-  ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+  ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 
 	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 
@@ -76,14 +76,13 @@ ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) BEGIN
 // 
 INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
 <<<<<<<< d5/d5poisev.2da
 2DA V1.0 
 RES
 >>>>>>>> 
-
-COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+ COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
+ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
@@ -93,7 +92,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
 //		  PATCH_PRINT "%SOURCE_RES% is a poison spell"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 		  END
 		END
 	  END
@@ -103,7 +102,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		  PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
 //			PATCH_PRINT "%SOURCE_RES% is a poison spell"
 			INNER_ACTION BEGIN
-			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 			END
 		  END
 		END
@@ -111,14 +110,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  PATCH_IF fx_type = 78 BEGIN 							// disease
 //		  PATCH_PRINT "%SOURCE_RES% is a disease spell"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	END
   END
-BUT_ONLY
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+ BUT_ONLY
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
@@ -127,7 +125,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  PATCH_IF fx_type = 25 BEGIN 							// poison
 //		  PATCH_PRINT "%SOURCE_RES% is a poison item"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
@@ -135,19 +133,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 		PATCH_IF damage_type = 32 BEGIN
 //			PATCH_PRINT "%SOURCE_RES% is a poison item"
 			INNER_ACTION BEGIN
-			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 			END
 		END
 	  END
 	  PATCH_IF fx_type = 78 BEGIN 							// disease
 //		  PATCH_PRINT "%SOURCE_RES% is a disease item"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	END
   END
-BUT_ONLY
+ BUT_ONLY
+END	// end if not already present
 
 COPY_EXISTING ~d5poisev.2da~ ~override~ 
   COUNT_2DA_COLS cols

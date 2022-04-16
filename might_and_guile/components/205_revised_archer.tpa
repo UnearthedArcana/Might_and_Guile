@@ -20,7 +20,7 @@ LAM d5_revised_archery_kits
 ACTION_IF (%d5_archery_include_marksman% = 1) BEGIN
   INCLUDE ~might_and_guile/components/320_marksman.tpa~
 END
-ACTION_IF (%d5_archery_include_elf_archer% = 1) BEGIN
+ACTION_IF (%d5_archery_include_elf_archer% = 1) AND !(FILE_EXISTS_IN_GAME ~d5earch.2da~) BEGIN
   INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 END
 ACTION_IF (%d5_archery_include_slinger% = 1) BEGIN
@@ -34,12 +34,13 @@ END
 
 //PATCH KIT ABILITIES_________________________________________________________________
 //
-COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/misc/d5mthac.spl~ ~override~
 
 COPY_EXISTING ~clabrn02.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
   REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-APPEND ~clabrn02.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
+APPEND ~clabrn02.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_marks.2da~ BEGIN
   COPY_EXISTING ~d5_marks.2da~ ~override~
@@ -47,16 +48,16 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_marks.2da~ BEGIN
 	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  APPEND ~d5_marks.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~d5_marks.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ BEGIN
-  COPY_EXISTING ~d5_earch.2da~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5earch.2da~ BEGIN
+  COPY_EXISTING ~d5earch.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
 	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
- APPEND ~d5_earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ APPEND ~d5earch.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
 ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
@@ -65,54 +66,41 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
 	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  APPEND ~d5_sling.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~d5_sling.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_snipe.2da~ BEGIN
   COPY_EXISTING ~d5_snipe.2da~ ~override~
 	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
 	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
 	LPM remove_blank_lines
 	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
-	APPEND_FILE ~might_and_guile/feats/no_umd.txt~
-  APPEND ~d5_snipe.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//	APPEND_FILE ~might_and_guile/feats/no_umd.txt~
+  APPEND ~d5_snipe.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~a!sharp.2da~ BEGIN
+  COPY_EXISTING ~a!sharp.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
+  APPEND ~a!sharp.2da.2da~ ~ABILITY1    ****        ****        AP_D5MTHAC  ****        ****        AP_D5MTHAC  ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 //___________________________________________________________________________________
 
 
 //WEAR ELVEN CHAIN___________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__echan.d5~ BEGIN
-	INCLUDE ~might_and_guile/lib/elven_chain.tpa~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__echan.d5~) BEGIN
+	INCLUDE ~%MOD_FOLDER%/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________
 
 
 //TEXT DESCRIPTIONS__________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
-  COPY_EXISTING ~clabrn02.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  BUT_ONLY
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_earch.2da~ BEGIN
-  COPY_EXISTING ~d5_earch.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
-  BUT_ONLY
- END
- ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
-  COPY_EXISTING ~d5_sling.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  BUT_ONLY
- END
- ACTION_IF FILE_EXISTS_IN_GAME ~a!sharp.2da~ BEGIN
-  COPY_EXISTING ~a!sharp.2da~ ~override~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
-  BUT_ONLY
- END
+//ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
    COPY_EXISTING ~clastext.2da~ ~override~
 	COUNT_2DA_COLS cols 
@@ -125,7 +113,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3206)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3205)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -154,7 +142,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3206)
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3205)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -182,7 +170,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5MARKS~ BEGIN
 	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3206)
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3205)
 	  END
 	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
 	    SET patch_row = %row%
@@ -198,7 +186,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
 	  END
 	END
   BUT_ONLY
-END
+//END
 //___________________________________________________________________________________
 
 
@@ -515,7 +503,8 @@ OUTER_SPRINT feat_label_string @20013
 
 //NO FEATS YET________________________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
+ COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
  COPY_EXISTING ~d5flsta.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
@@ -605,7 +594,7 @@ END
 
 //FEATS ALREADY______________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
  COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
  COPY_EXISTING ~d5flstaf.2da~ ~override~
   COUNT_2DA_COLS cols

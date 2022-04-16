@@ -1202,7 +1202,7 @@ COPY ~might_and_guile/feats/d5_rfd7.spl~ ~override/d5urd7.spl~   // 			death/pol
 COPY_EXISTING  ~d5urd7.spl~ ~override/d5vrd7.spl~ 
 	WRITE_SHORT 0x1c 1
 
-// slippery mind: 5 Charm, 128 Confusion, 76 feeblemind, 213 Maze
+// slippery mind: 5 Charm, 128 Confusion, 76 Feeblemind, 213 Maze
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_CHARMEVADE~ RET new_state_ind END
 OUTER_SET charm_evasion_state = %new_state_ind%
 COPY ~might_and_guile/feats/d5_rfd8b.bam~ ~override~
@@ -1221,11 +1221,13 @@ COPY ~might_and_guile/feats/d5_rfd8.spl~ ~override/d5urd8.spl~   // 			charm eva
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %charm_evasion_state% END
 COPY_EXISTING  ~d5urd8.spl~ ~override/d5vrd8.spl~ 
 	WRITE_SHORT 0x1c 1
-<<<<<<<< d5/d5chrmev.2da
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5chrmev.2da~) BEGIN
+ <<<<<<<< d5/d5chrmev.2da
 2DA V1.0 
 RES
->>>>>>>> 
-COPY ~d5/d5chrmev.2da~ ~override/d5chrmev.2da~ 
+ >>>>>>>> 
+ COPY ~d5/d5chrmev.2da~ ~override/d5chrmev.2da~ 
+END
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
@@ -2517,7 +2519,7 @@ RES
  BUT_ONLY
 END	// end if not already present
 
-// determination: 39 Sleep, 217 PW Sleep, 109 Hold, 175 Hold2, 24 Horror, 45 Stun, 210 PW Stun
+// determination: 39 Sleep, 217 PW Sleep, 109 Paralysis, 175 Hold, 24 Fear, 45 Stun, 210 PW Stun
 LAF d5_resolve_state STR_VAR new_state_id = ~D5_STUNEVADE~ RET new_state_ind END
 OUTER_SET stun_evasion_state = %new_state_ind%
 COPY ~might_and_guile/feats/d5_wfc6b.bam~ ~override~
@@ -2536,11 +2538,13 @@ COPY ~might_and_guile/feats/d5_wfc6.spl~ ~override/d5uwc6.spl~  	 // 			hold/stu
 	LPF ALTER_EFFECT INT_VAR match_opcode = 328 parameter2 = %stun_evasion_state% END
 COPY_EXISTING  ~d5uwc6.spl~ ~override/d5vwc6.spl~ 
 	WRITE_SHORT 0x1c 1
-<<<<<<<< d5/d5stunev.2da
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5stunev.2da~) BEGIN
+ <<<<<<<< d5/d5stunev.2da
 2DA V1.0 
 RES
->>>>>>>> 
-COPY ~d5/d5stunev.2da~ ~override/d5stunev.2da~ 
+ >>>>>>>> 
+ COPY ~d5/d5stunev.2da~ ~override/d5stunev.2da~ 
+END
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN

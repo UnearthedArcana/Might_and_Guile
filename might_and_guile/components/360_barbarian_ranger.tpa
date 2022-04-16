@@ -103,26 +103,17 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__stride.d5~ THEN BEGIN
 		APPEND_FILE ~might_and_guile/misc/stribarb.txt~
 		BUT_ONLY
 END
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
-	COPY_EXISTING ~d5rbarb.2da~ ~override~
-		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
-		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
-	BUT_ONLY
-END
+//__________________________________________________________________________________
+
+
+//2DA MODIFICATIONS___________________________________________________________________
+//
+/* done with 'improved rangers' instead
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 	COPY_EXISTING ~d5rbarb.2da~ ~override~
 		LPM remove_blank_lines
 		APPEND_FILE ~might_and_guile/ranger/tracking.txt~
 		BUT_ONLY
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
-	ACTION_IF (FILE_EXISTS_IN_GAME ~d5__apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
-		COPY_EXISTING ~d5rbarb.2da~ ~override~
-			LPM remove_blank_lines
-			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
-			BUT_ONLY
-	END
 END
 //____________________________________________________________________________________
 
@@ -145,7 +136,15 @@ OUTER_SET barb_ranger_code = (0x4000 + %D5RBARB%)
 
 //FEAT SYSTEM_________________________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) THEN BEGIN
+    APPEND ~d5rbarb.2da~ ~FEATS       AP_D5IRVAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    APPEND ~d5rbarb.2da~ ~FEATS       AP_D5_RFF1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+      APPEND ~d5rbarb.2da~ ~FEATS       AP_D5_RFA9  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    END
+  END
 
   INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
 
@@ -239,6 +238,22 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ THEN BEGIN
 	END
   BUT_ONLY
 
+END
+//____________________________________________________________________________________
+
+
+//NO FEAT SYSTEM______________________________________________________________________
+//
+// give tracking at level 1__________________________________________________________
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) THEN BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+      ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+        APPEND ~d5rbarb.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+      END
+    END
+  END
 END
 //____________________________________________________________________________________
 

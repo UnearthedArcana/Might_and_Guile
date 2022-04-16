@@ -95,7 +95,18 @@ END
 COPY ~might_and_guile/ranger/d5earch.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_parch.spl~ ~override~
 
-COPY ~might_and_guile/misc/d5_mthac.spl~ ~override~
+COPY ~might_and_guile/misc/d5mthac.spl~ ~override~
+//____________________________________________________________________________________
+
+
+//2DA MODIFICATIONS___________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stride.d5~ THEN BEGIN
+	COPY_EXISTING ~d5earch.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/strirang.txt~
+		BUT_ONLY
+END
 //____________________________________________________________________________________
 
 
@@ -125,55 +136,20 @@ COPY_EXISTING ~K_R_E.2da~ ~override~
 BUT_ONLY
 //___________________________________________________________________________________
 
-/*
-//REVISED ARCHERY____________________________________________________________________
-//
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 
-  COPY_EXISTING ~d5earch.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
-  APPEND ~d5earch.2da~ ~ABILITY1    ****        ****        AP_D5_MTHAC ****        ****        AP_D5_MTHAC ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        AP_D5_MTHAC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
- 
-  ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-   COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols  
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
-	  END
-	END
-   BUT_ONLY
+//FEAT SYSTEM_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) THEN BEGIN
+    APPEND ~d5earch.2da~ ~FEATS       AP_D5IRVAR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    APPEND ~d5earch.2da~ ~FEATS       AP_D5_RFF1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+      APPEND ~d5earch.2da~ ~FEATS       AP_D5_RFA9  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    END
   END
-  ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-   COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols 
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@3225)
-	  END
-	END
-   BUT_ONLY
-  END
-  COPY_EXISTING ~kitlist.2da~ ~override~
-//	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows 9
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5EARCH~ BEGIN
-	    SET patch_row = %row%
-		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@3225)
-	  END
-	END
-  BUT_ONLY
+
+/* whoops, don't need this, the archery component will add it
 
   INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
 
@@ -189,16 +165,17 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 	END
   BUT_ONLY
 
+  COPY_EXISTING ~d5mageh.2da~ ~override~
+	LPM remove_blank_lines
+	APPEND_FILE ~might_and_guile/feats/feats_ranger.txt~
+  BUT_ONLY
+
   OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
   OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
   OUTER_SPRINT feat_title_string @20012 
   OUTER_SPRINT feat_label_string @20013 
 
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5flsta.2da~) BEGIN
-	  COPY ~might_and_guile/feats/d5flsta.2da~ ~override~
-	END
-   COPY_EXISTING ~kitlist.2da~ ~override~
+  COPY_EXISTING ~kitlist.2da~ ~override~
 	READ_2DA_ENTRIES_NOW r2en_kitlist 10
 	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
@@ -212,79 +189,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 		SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
 		SET kit_seq_index = %kitlist_index% 
 		INNER_ACTION BEGIN
-		  COPY_EXISTING ~d5flsta.2da~ ~override~
-			COUNT_2DA_COLS cols
-			COUNT_2DA_ROWS cols rows
-			FOR (col = 1; col < (cols - 1); ++col) BEGIN
-			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
-				SET this_col = %col%
-				INNER_ACTION BEGIN
-				  LAF CREATE_SEQUENCER_MENU 
-				   INT_VAR 
-					name = %kit_seq_name%
-					tip = %kit_seq_tip%
-					desc = RESOLVE_STR_REF (~blah~) 
-					column = %this_col% 
-					class = 2
-				   STR_VAR 
-					resref = EVAL ~d5ft%kit_seq_index%~
-					icon = ~spcl919b~
-					spelltable = ~d5ftskn~ 
-					spelllist = ~d5flsta~
-					title = EVAL ~%feat_title_string%~
-					label = EVAL ~%feat_label_string%~
-				  END
-				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
-					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
-				  IF_EXISTS BUT_ONLY 
-				  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
-					COPY_EXISTING ~d5feat%letter%.spl~ ~override~
-					  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %elven_archer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
-					IF_EXISTS BUT_ONLY
-				  END
-				END
-			  END
-			END
-		  BUT_ONLY
-		END
-	  END
-	END
-   BUT_ONLY
-   COPY_EXISTING ~d5flsta.2da~ ~override~
-	COUNT_2DA_COLS cols
-	COUNT_2DA_ROWS cols rows
-	FOR (row = 1; row < rows; ++row) BEGIN
-  	  READ_2DA_ENTRY row 0 cols ~book_feat~
-	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		  WRITE_SHORT 0x1c 4
-		  WRITE_LONG 0x34 1
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-		IF_EXISTS BUT_ONLY
-	  END
-	END
-   BUT_ONLY
-  END
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5flstaf.2da~) BEGIN
-	  COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
-	END
-   COPY_EXISTING ~kitlist.2da~ ~override~
-	READ_2DA_ENTRIES_NOW r2en_kitlist 10
-	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
-	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5earch~) BEGIN
-		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
-		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
-		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
-		GET_STRREF %kitlist_name% kit_name_strref
-		SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
-		SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
-		SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
-		SET kit_seq_index = %kitlist_index% 
-		INNER_ACTION BEGIN
-		  COPY_EXISTING ~d5flstaf.2da~ ~override~
+		  COPY_EXISTING ~d5flstf.2da~ ~override~
 			COUNT_2DA_COLS cols
 			COUNT_2DA_ROWS cols rows
 			FOR (col = 1; col < (cols - 1); ++col) BEGIN
@@ -303,7 +208,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 					resref = EVAL ~d5ft%kit_seq_index%~
 					icon = ~spcl919b~
 					spelltable = ~d5ftskn~ 
-					spelllist = ~d5flstaf~
+					spelllist = ~d5flstf~
 					title = EVAL ~%feat_title_string%~
 					label = EVAL ~%feat_label_string%~
 				  END
@@ -322,8 +227,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 		END
 	  END
 	END
-   BUT_ONLY
-   COPY_EXISTING ~d5flstaf.2da~ ~override~
+  BUT_ONLY
+  COPY_EXISTING ~d5flstf.2da~ ~override~
 	COUNT_2DA_COLS cols
 	COUNT_2DA_ROWS cols rows
 	FOR (row = 1; row < rows; ++row) BEGIN
@@ -336,12 +241,28 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__rarchery.d5~ BEGIN
 		IF_EXISTS BUT_ONLY
 	  END
 	END
-   BUT_ONLY
-  END
+  BUT_ONLY
+*/
 
 END
-//___________________________________________________________________________________
-*/
+//____________________________________________________________________________________
+
+
+//NO FEAT SYSTEM______________________________________________________________________
+//
+// give tracking at level 1__________________________________________________________
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) THEN BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+      ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+        APPEND ~d5earch.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+      END
+    END
+  END
+END
+//____________________________________________________________________________________
+
 
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
@@ -405,7 +326,7 @@ END
 
 //_______________________HLAS________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~TG#TOUG.spl~) THEN BEGIN
   COPY_EXISTING ~LURa0.2da~ ~override/LURa2.2da~	
 END
 //___________________________________________________________________________________
@@ -413,8 +334,8 @@ END
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__echan.d5~ BEGIN
-  INCLUDE ~might_and_guile/lib/elven_chain.tpa~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__echan.d5~) BEGIN
+  INCLUDE ~%MOD_FOLDER%/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________
 

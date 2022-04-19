@@ -1,5 +1,5 @@
 
-// v9.10 - handle external fatigue effects
+// v9.11 - fix fatigue effects
 
 /*
 functions in this file:
@@ -1349,7 +1349,7 @@ END
 
 ACTION_FOR_EACH fatigue_item IN ~bdamul12~ BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~%fatigue_item%.itm~) BEGIN
-    COPY_EXISTING ~%fatigue_spell%.itm~ ~override~
+    COPY_EXISTING ~%fatigue_item%.itm~ ~override~
       LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 93 match_parameter1 = 0 match_paramater2 = 1 parameter1 = 2 END
       LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 101 match_parameter2 = 93 match_timing = 2 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5zifat2~ END
     BUT_ONLY

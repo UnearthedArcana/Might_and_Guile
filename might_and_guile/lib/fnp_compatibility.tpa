@@ -1,5 +1,5 @@
 
-// 0.82.0
+// 0.83.0
 
 //REMOVE BLANK LINES MACRO___________________________________________________________
 //
@@ -214,7 +214,6 @@ ALL
    ACTION_IF !(~%sphere_list%~ STRING_EQUAL_CASE ~custom~) BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~fnp_sphere_list.tpa~) && (FILE_CONTAINS_EVALUATED (~fnp_sphere_list.tpa~ ~%sphere_list%~)) BEGIN
 	 INCLUDE ~override/fnp_sphere_list.tpa~
-	 LAM d5_define_sphere_names
 	 LAM d5_deity_kit_sphere_lists
 	 LAF ~%sphere_list%~ RET_ARRAY ~%clab_name%_spheres_array~ = EVAL ~%sphere_list%_array~ END
 	 ACTION_PHP_EACH EVAL ~%clab_name%_spheres_array~ AS this_variable => kit_access BEGIN

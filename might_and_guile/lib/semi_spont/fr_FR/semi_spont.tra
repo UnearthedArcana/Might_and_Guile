@@ -1,0 +1,85 @@
+//
+@10  = ~^Durée[^:]*:.*$~ // used for language auto-detection on non-EE games
+//
+@99  = ~initialisation de l'apprentissage inné de sorts~
+@100 = ~initialisation de la magie 5E~
+//
+@101 = ~Emplacement de sort de niveau 1 additionnel~
+@102 = ~Emplacement de sort de niveau 2 additionnel~
+@103 = ~Emplacement de sort de niveau 3 additionnel~
+@104 = ~Emplacement de sort de niveau 4 additionnel~
+@105 = ~Emplacement de sort de niveau 5 additionnel~
+@106 = ~Emplacement de sort de niveau 6 additionnel~
+@107 = ~Emplacement de sort de niveau 7 additionnel~
+@108 = ~Emplacement de sort de niveau 8 additionnel~
+@109 = ~Emplacement de sort de niveau 9 additionnel~
+//
+@201 = ~Modifier les sorts préparés~
+@202 = ~Préparation des sorts
+
+Cette compétence vous permet de préparer une nouvelle collection de sorts pour le jour à venir. Quand vous utilisez cette compétence, les emplacements de sorts deviennent accessibles dans votre livre de sorts et le lancer de sorts est désactivé. Une fois les emplacements de sorts remplis, vous devez vous reposer pendant 8 heures. Quand vous vous réveillerez, le lancer de sorts sera réactivé et vous ne pourrez plus modifier le contenu de vos emplacements de sorts jusqu'à ce que cette compétence soit utilisée à nouveau.
+~
+@203 = ~Les sorts mémorisés peuvent maintenant être changés. Le lancer de sorts est désactivé jusqu'au prochain repos complet.~
+@211 = ~Sélection de sorts~
+@212 = ~Cette aptitude vous permet d'apprendre de nouveaux sorts~
+//
+@300 = ~Initialisation de l'apprentissage des sorts à la manière des ensorceleurs~
+@301 = ~Connaissance des sorts profanes~
+//
+@400 = ~initialisation de l'apprentissage des sorts à la manière des chamans~
+@401 = ~Connaissance des sorts divins~
+@411 = ~Apprentissage des sorts de clerc~
+@412 = ~Apprentissage des sorts de druide~
+//
+@51101  = ~Identification~
+@51102  = ~Identification
+(Divination)
+
+Niveau : 1
+Portée : 0
+Durée : instantanée
+Temps d'incantation : 2
+Zone d'effet : le lanceur
+Jet de sauvegarde : aucun
+
+Quand ce sort est jeté, le nom et les enchantements (malédictions incluses) d'un objet ou d'une arme touchée par le lanceur lui sont révélés sans condition. Le lanceur a alors un aperçu de l'histoire, de la nature, des enchantements et de l'usage de l'objet. Beaucoup d'objets non identifiés peuvent être utilisés malgré tout, mais le risque est bien plus grand.
+
+Aux niveaux 5, 9 et 13, le nombre d'objets qui peuvent être identifiés par ce sort augmente de 1 (avec un maximum de 4 objets au niveau 13).
+~
+// 601-612 modified from original taken in bg2ee dialog
+@601 = ~La mémoire éternelle~
+@602 = ~Anneau des Arcanes : La Mémoire Éternelle
+On raconte que jadis, un grand magicien amnien défia les pouvoirs magiques de Mystra. Des légendes racontent que ce magicien était doué d'une capacité de mémorisation illimitée pour lancer des sorts. Il s'avéra finalement que son pouvoir provenait de plusieurs anneaux magiques qu'il s'était fabriqué. Sa prétendue "mémoire infinie" n'était qu'une plaisanterie, mais ses anneaux continuent de figurer parmi les objets les plus recherchés des Royaumes.
+
+PARAMÈTRES :
+
+Capacités d'équipement :
+– Une fois par jour, permet de rafraîchir tous les sorts profanes de niveau 1
+
+Poids : 0~
+@611 = ~Anneau de sorcellerie de Kontik~
+@612 = ~L'Anneau de Sorcellerie de Kontik
+Kontik, puissante magicienne au service d'Aurile, a pris cet anneau à un ennemi vaincu, Nill l'Infernal. Archimage se spécialisant dans la maîtrise du feu, Nill avait mis cinq ans pour créer ce puissant anneau qui l'avait bien aidé lors de ses grands voyages. Malheureusement pour lui, l'objet ne fut pas assez puissant contre les sorts et les séides de Kontik. L'anneau a été obtenu à partir d'un étrange métal gris-blanc appelé tungstène.
+
+PARAMÈTRES :
+
+Capacités d'équipement :
+– Une fois par jour, permet de rafraîchir tous les sorts profanes de niveaux 1 et 2
+
+Capacités de combat :
+- tous les dégâts de froid infligés par le porteur sont augmentés de 15%
+
+Poids : 0~
+//
+//
+@621 = ~Anneau des arcanes d'Édion~
+@622 = ~L'Anneau des Arcanes d'Édion
+Ce puissant anneau appartenait récemment à Édion, nécromancien mourant natif de Sembie, qui l'a lui-même fabriqué. À la fin, il avait tellement pris l'habitude de le porter qu'il ne l'ôtait presque jamais. Il le portait à l'annulaire gauche, pour symboliser son mariage avec les arts magiques.
+
+PARAMÈTRES :
+
+Capacités d'équipement :
+– Une fois par jour, permet de rafraîchir tous les sorts profanes de niveau 5
+
+Poids : 0~
+//

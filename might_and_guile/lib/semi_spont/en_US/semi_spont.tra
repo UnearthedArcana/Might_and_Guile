@@ -1,5 +1,5 @@
 //
-@10  = ~^Duration:.+$~
+@10  = ~^Duration:.+$~ // used for language auto-detection on non-EE games (or EE games where the user has not selected a language yet maybe?)
 //
 @99  = ~initialize innate spell learning~
 @100 = ~initialize 5E spellcasting~
@@ -19,6 +19,9 @@
 
 This ability allows the you to prepare a new set of spells for the next day. Upon using the ability, preparation slots will become available in your spellbook, and spellcasting will be disabled. After filling any available preparation slots, you must rest for 8 hours. Upon waking, spellcasting will be re-enabled, and you will be unable to modify the contents of your preparation slots until the next time this ability is used.
 ~
+@203 = ~Memorized spells may be now changed. Spellcasting is disabled until the next full rest.~
+@211 = ~Spell Selection~
+@212 = ~This ability allows you to learn new spells~
 //
 @300 = ~Initialize sorcerer-style spell learning~
 @301 = ~Arcane Spell Knowledge~

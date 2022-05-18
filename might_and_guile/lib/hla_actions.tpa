@@ -7,7 +7,7 @@ DEFINE_PATCH_FUNCTION patch_add_hla
     strref = ~*~
     min_lev = ~1~
     max_level = ~99~
-    num_allowed = ~*~
+    num_allowed = ~1~
     prerequisite = ~*~
     excluded_by = ~*~
     alignment_restrict = ~*~
@@ -15,21 +15,21 @@ BEGIN
   COUNT_2DA_COLS cols // amount of columns
   COUNT_2DA_ROWS cols rows // amount of rows
   READ_2DA_ENTRIES_NOW file cols // read all file into memory  
-  first_empty_row = rows // default value to amount of rows in order to skip removal if the table is full
+  SET first_empty_row = rows // default value to amount of rows in order to skip removal if the table is full
   FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
     SET empty_col_count = 0 // amount of empty columns in the row
     FOR (j = 0; j < cols; ++j) BEGIN // iterate over columns in the row
       READ_2DA_ENTRY_FORMER file i j col_value // read column value
-      PATCH_IF "%col_value%" STRING_EQUAL "*" BEGIN // asterisk symbolizes empty column
-        empty_col_count += 1
+      PATCH_IF (~%col_value%~ STRING_EQUAL ~*~) BEGIN // asterisk symbolizes empty column
+        SET empty_col_count += 1
       END
     END
-    PATCH_IF "%empty_col_count%" = ("%cols%" - 1) BEGIN // first column in every row is its number, that's why (cols - 1)
-      first_empty_row = i // remember the first empty row
-      i = file // skip iterating over the rest of the rows
+    PATCH_IF (%empty_col_count% = (cols - 1)) BEGIN // first column in every row is its number, that's why (cols - 1)
+      SET first_empty_row = i // remember the first empty row
+      SET i = file // skip iterating over the rest of the rows
     END
   END  
-  INSERT_2DA_ROW ("%first_empty_row%") %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+  INSERT_2DA_ROW (~%first_empty_row%~) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
   PRETTY_PRINT_2DA
 END
 
@@ -44,7 +44,7 @@ BEGIN
   SET num_deleted = 0
   FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
     READ_2DA_ENTRY_FORMER file i 1 col_value // read column value
-    PATCH_IF "%col_value%" STRING_EQUAL_CASE "%remove_ability%" BEGIN // match .spl to be removed
+    PATCH_IF (~%col_value%~ STRING_EQUAL_CASE ~%remove_ability%~) BEGIN // match .spl to be removed
       REMOVE_2DA_ROW (i - num_deleted) cols // kill the row
       SET num_deleted += 1
     END
@@ -61,7 +61,7 @@ DEFINE_PATCH_FUNCTION patch_replace_hla
     strref = ~*~
     min_lev = ~1~
     max_level = ~99~
-    num_allowed = ~*~
+    num_allowed = ~1~
     prerequisite = ~*~
     excluded_by = ~*~
     alignment_restrict = ~*~
@@ -72,26 +72,26 @@ BEGIN
   SET num_deleted = 0
   FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
     READ_2DA_ENTRY_FORMER file i 1 col_value // read column value
-    PATCH_IF "%col_value%" STRING_EQUAL_CASE "%remove_ability%" BEGIN // match .spl to be removed
+    PATCH_IF (~%col_value%~ STRING_EQUAL_CASE ~%remove_ability%~) BEGIN // match .spl to be removed
       REMOVE_2DA_ROW (i - num_deleted) cols // kill the row
       SET num_deleted += 1
     END
   END
-  PATCH_IF NOT num_deleted = 0 BEGIN
+  PATCH_IF !(num_deleted = 0) BEGIN
     FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
       SET empty_col_count = 0 // amount of empty columns in the row
       FOR (j = 0; j < cols; ++j) BEGIN // iterate over columns in the row
         READ_2DA_ENTRY_FORMER file i j col_value // read column value
-        PATCH_IF "%col_value%" STRING_EQUAL "*" BEGIN // asterisk symbolizes empty column
-          empty_col_count += 1
+        PATCH_IF (~%col_value%~ STRING_EQUAL ~*~) BEGIN // asterisk symbolizes empty column
+          SET empty_col_count += 1
         END
       END
-      PATCH_IF "%empty_col_count%" = ("%cols%" - 1) BEGIN // first column in every row is its number, that's why (cols - 1)
-        first_empty_row = i // remember the first empty row
-        i = file // skip iterating over the rest of the rows
+      PATCH_IF (%empty_col_count% = (cols - 1)) BEGIN // first column in every row is its number, that's why (cols - 1)
+        SET first_empty_row = i // remember the first empty row
+        SET i = file // skip iterating over the rest of the rows
       END
     END  
-    INSERT_2DA_ROW ("%first_empty_row%" - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+    INSERT_2DA_ROW (~%first_empty_row%~ - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
   END
   PRETTY_PRINT_2DA
 END
@@ -112,7 +112,7 @@ BEGIN
     END
   BUT_ONLY
   ACTION_PHP_EACH d5_hla_tables AS ind => tab BEGIN
-    ACTION_IF ~%ind%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+    ACTION_IF (~%ind%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
       OUTER_TEXT_SPRINT hla_table ~%tab%~
     END
   END
@@ -128,7 +128,7 @@ DEFINE_ACTION_FUNCTION action_add_hla
     strref = ~*~
     min_lev = ~1~
     max_level = ~99~
-    num_allowed = ~*~
+    num_allowed = ~1~
     prerequisite = ~*~
     excluded_by = ~*~
     alignment_restrict = ~*~
@@ -138,40 +138,88 @@ BEGIN
 	READ_2DA_ENTRIES_NOW l_rows l_cols // read all file into memory  
 	FOR (l_row = 1; l_row < l_rows; ++l_row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER l_rows l_row 0 ~l_kit~ // read column value
-	  PATCH_IF ~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+	  PATCH_IF (~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
 	    SET lu_row = %l_row%
 	    READ_2DA_ENTRY_FORMER l_rows lu_row 1 ~l_table~ // read column value
 	  END
 	END
   BUT_ONLY
-  ACTION_IF FILE_EXISTS_IN_GAME ~lu%l_table%.2da~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~lu%l_table%.2da~) BEGIN
     COPY_EXISTING ~lu%l_table%.2da~ ~override/lud5_%lu_row%.2da~ 
 	    COUNT_2DA_COLS cols // amount of columns
 	    COUNT_2DA_ROWS cols rows // amount of rows
 	    READ_2DA_ENTRIES_NOW file cols // read all file into memory  
-	    first_empty_row = rows // default value to amount of rows in order to skip removal if the table is full
+	    SET first_empty_row = rows // default value to amount of rows in order to skip removal if the table is full
 	    FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
 	      SET empty_col_count = 0 // amount of empty columns in the row
 	      FOR (j = 0; j < cols; ++j) BEGIN // iterate over columns in the row
 	        READ_2DA_ENTRY_FORMER file i j col_value // read column value
-	        PATCH_IF "%col_value%" STRING_EQUAL "*" BEGIN // asterisk symbolizes empty column
-	          empty_col_count += 1
+	        PATCH_IF (~%col_value%~ STRING_EQUAL ~*~) BEGIN // asterisk symbolizes empty column
+	          SET empty_col_count += 1
 	        END
 	      END
-	      PATCH_IF "%empty_col_count%" = ("%cols%" - 1) BEGIN // first column in every row is its number, that's why (cols - 1)
-	        first_empty_row = i // remember the first empty row
-	        i = file // skip iterating over the rest of the rows
+	      PATCH_IF (%empty_col_count% = (cols - 1)) BEGIN // first column in every row is its number, that's why (cols - 1)
+	        SET first_empty_row = i // remember the first empty row
+	        SET i = file // skip iterating over the rest of the rows
 	      END
 	    END  
-	    INSERT_2DA_ROW ("%first_empty_row%") %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    PATCH_IF (VARIABLE_IS_SET %first_empty_row%) BEGIN
+	      INSERT_2DA_ROW (~%first_empty_row%~) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END 
+	    ELSE BEGIN
+	      INSERT_2DA_ROW (%rows%) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END
 	    PRETTY_PRINT_2DA
-    ACTION_IF NOT (~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
+    ACTION_IF !(~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
       COPY_EXISTING ~LUABBR.2DA~ ~override~
         SET_2DA_ENTRY %lu_row% 1 2 ~d5_%lu_row%~
     END
   END
 END
 
+DEFINE_ACTION_FUNCTION add_hla_to_table
+  STR_VAR
+    table_name = ~~
+	2da_row = ~1~
+    ability = ~*~
+    icon = ~*~
+    strref = ~*~
+    min_lev = ~1~
+    max_level = ~99~
+    num_allowed = ~1~
+    prerequisite = ~*~
+    excluded_by = ~*~
+    alignment_restrict = ~*~
+BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%table_name%.2da~) BEGIN
+    COPY_EXISTING ~%table_name%.2da~ ~override~ 
+      COUNT_2DA_COLS cols // amount of columns
+      COUNT_2DA_ROWS cols rows // amount of rows
+      READ_2DA_ENTRIES_NOW file cols // read all file into memory  
+      SET first_empty_row = rows // default value to amount of rows in order to skip removal if the table is full
+      FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
+        SET empty_col_count = 0 // amount of empty columns in the row
+        FOR (j = 0; j < cols; ++j) BEGIN // iterate over columns in the row
+          READ_2DA_ENTRY_FORMER file i j col_value // read column value
+          PATCH_IF (~%col_value%~ STRING_EQUAL ~*~) BEGIN // asterisk symbolizes empty column
+            SET empty_col_count += 1
+          END
+        END
+        PATCH_IF (%empty_col_count% = (cols - 1)) BEGIN // first column in every row is its number, that's why (cols - 1)
+          SET first_empty_row = i // remember the first empty row
+          SET i = file // skip iterating over the rest of the rows
+        END
+      END  
+      PATCH_IF (VARIABLE_IS_SET %first_empty_row%) BEGIN
+        INSERT_2DA_ROW (~%first_empty_row%~) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+      END 
+      ELSE BEGIN
+        INSERT_2DA_ROW (%rows%) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+      END
+      PRETTY_PRINT_2DA
+	BUT_ONLY
+  END
+END
 
 DEFINE_ACTION_FUNCTION action_remove_hla
   STR_VAR
@@ -183,13 +231,13 @@ BEGIN
 	READ_2DA_ENTRIES_NOW l_rows l_cols // read all file into memory  
 	FOR (l_row = 1; l_row < l_rows; ++l_row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER l_rows l_row 0 ~l_kit~ // read column value
-	  PATCH_IF ~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+	  PATCH_IF (~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
 	    SET lu_row = %l_row%
 	    READ_2DA_ENTRY_FORMER l_rows lu_row 1 ~l_table~ // read column value
 	  END
 	END
   BUT_ONLY
-  ACTION_IF FILE_EXISTS_IN_GAME ~lu%l_table%.2da~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~lu%l_table%.2da~) BEGIN
     COPY_EXISTING ~lu%l_table%.2da~ ~override/lud5_%lu_row%.2da~ 
 	  COUNT_2DA_COLS cols // amount of columns
 	  COUNT_2DA_ROWS cols rows // amount of rows
@@ -197,12 +245,12 @@ BEGIN
 	  SET num_deleted = 0
 	  FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
 	    READ_2DA_ENTRY_FORMER file i 1 col_value // read column value
-	    PATCH_IF "%col_value%" STRING_EQUAL_CASE "%remove_ability%" BEGIN // match .spl to be removed
+	    PATCH_IF (~%col_value%~ STRING_EQUAL_CASE ~%remove_ability%~) BEGIN // match .spl to be removed
 	      REMOVE_2DA_ROW (i - num_deleted) cols // kill the row
 	      SET num_deleted += 1
 	    END
 	  END
-    ACTION_IF NOT (~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
+    ACTION_IF !(~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
       COPY_EXISTING ~LUABBR.2DA~ ~override~
         SET_2DA_ENTRY %lu_row% 1 2 ~d5_%lu_row%~
     END
@@ -219,7 +267,7 @@ DEFINE_ACTION_FUNCTION action_replace_hla
     strref = ~*~
     min_lev = ~1~
     max_level = ~99~
-    num_allowed = ~*~
+    num_allowed = ~1~
     prerequisite = ~*~
     excluded_by = ~*~
     alignment_restrict = ~*~
@@ -229,13 +277,13 @@ BEGIN
 	READ_2DA_ENTRIES_NOW l_rows l_cols // read all file into memory  
 	FOR (l_row = 1; l_row < l_rows; ++l_row) BEGIN // iterate over rows
 	  READ_2DA_ENTRY_FORMER l_rows l_row 0 ~l_kit~ // read column value
-	  PATCH_IF ~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~ BEGIN
+	  PATCH_IF (~%l_kit%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
 	    SET lu_row = %l_row%
 	    READ_2DA_ENTRY_FORMER l_rows lu_row 1 ~l_table~ // read column value
 	  END
 	END
   BUT_ONLY
-  ACTION_IF FILE_EXISTS_IN_GAME ~lu%l_table%.2da~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~lu%l_table%.2da~) BEGIN
     COPY_EXISTING ~lu%l_table%.2da~ ~override/lud5_%lu_row%.2da~ 
 	  COUNT_2DA_COLS cols // amount of columns
 	  COUNT_2DA_ROWS cols rows // amount of rows
@@ -243,29 +291,66 @@ BEGIN
 	  SET num_deleted = 0
 	  FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
 	    READ_2DA_ENTRY_FORMER file i 1 col_value // read column value
-	    PATCH_IF "%col_value%" STRING_EQUAL_CASE "%remove_ability%" BEGIN // match .spl to be removed
+	    PATCH_IF (~%col_value%~ STRING_EQUAL_CASE ~%remove_ability%~) BEGIN // match .spl to be removed
+	      READ_2DA_ENTRY_FORMER file i 2 old_icon
+	      READ_2DA_ENTRY_FORMER file i 3 old_strref
+	      READ_2DA_ENTRY_FORMER file i 4 old_min_lev
+	      READ_2DA_ENTRY_FORMER file i 5 old_max_level
+	      READ_2DA_ENTRY_FORMER file i 6 old_num_allowed
+	      READ_2DA_ENTRY_FORMER file i 7 old_prerequisite
+	      READ_2DA_ENTRY_FORMER file i 8 old_excluded_by
+	      READ_2DA_ENTRY_FORMER file i 9 old_alignment_restrict
+	      PATCH_IF (~%icon%~ STRING_EQUAL_CASE ~*~) AND !(~%old_icon%~ STRING_EQUAL_CASE ~*~) BEGIN
+	        SPRINT icon ~%old_icon%~
+	      END
+	      PATCH_IF (~%strref%~ STRING_EQUAL_CASE ~*~) AND !(~%old_strref%~ STRING_EQUAL_CASE ~*~) BEGIN
+	        SPRINT strref ~%old_strref%~
+	      END
+	      PATCH_IF (~%min_lev%~ STRING_EQUAL_CASE ~1~) AND !(~%old_min_lev%~ STRING_EQUAL_CASE ~1~) BEGIN
+	        SPRINT min_lev ~%old_min_lev%~
+	      END
+	      PATCH_IF (~%max_level%~ STRING_EQUAL_CASE ~99~) AND !(~%old_max_level%~ STRING_EQUAL_CASE ~99~) BEGIN
+	        SPRINT max_level ~%old_max_level%~
+	      END
+	      PATCH_IF (~%num_allowed%~ STRING_EQUAL_CASE ~1~) AND !(~%old_num_allowed%~ STRING_EQUAL_CASE ~1~) BEGIN
+	        SPRINT num_allowed ~%old_num_allowed%~
+	      END
+	      PATCH_IF (~%prerequisite%~ STRING_EQUAL_CASE ~*~) AND !(~%old_prerequisite%~ STRING_EQUAL_CASE ~*~) BEGIN
+	        SPRINT prerequisite ~%old_prerequisite%~
+	      END
+	      PATCH_IF (~%excluded_by%~ STRING_EQUAL_CASE ~*~) AND !(~%old_excluded_by%~ STRING_EQUAL_CASE ~*~) BEGIN
+	        SPRINT excluded_by ~%old_excluded_by%~
+	      END
+	      PATCH_IF (~%alignment_restrict%~ STRING_EQUAL_CASE ~*~) AND !(~%old_alignment_restrict%~ STRING_EQUAL_CASE ~*~) BEGIN
+	        SPRINT alignment_restrict ~%old_alignment_restrict%~
+	      END
 	      REMOVE_2DA_ROW (i - num_deleted) cols // kill the row
 	      SET num_deleted += 1
 	    END
 	  END
-	  PATCH_IF NOT num_deleted = 0 BEGIN
+	  PATCH_IF (num_deleted > 0) BEGIN
 	    FOR (i = 0; i < file; ++i) BEGIN // iterate over rows
 	      SET empty_col_count = 0 // amount of empty columns in the row
 	      FOR (j = 0; j < cols; ++j) BEGIN // iterate over columns in the row
 	        READ_2DA_ENTRY_FORMER file i j col_value // read column value
-	        PATCH_IF "%col_value%" STRING_EQUAL "*" BEGIN // asterisk symbolizes empty column
-	          empty_col_count += 1
+	        PATCH_IF (~%col_value%~ STRING_EQUAL ~*~) BEGIN // asterisk symbolizes empty column
+	          SET empty_col_count += 1
 	        END
 	      END
-	      PATCH_IF "%empty_col_count%" = ("%cols%" - 1) BEGIN // first column in every row is its number, that's why (cols - 1)
-	        first_empty_row = i // remember the first empty row
-	        i = file // skip iterating over the rest of the rows
+	      PATCH_IF (%empty_col_count% = (cols - 1)) BEGIN // first column in every row is its number, that's why (cols - 1)
+	        SET first_empty_row = i // remember the first empty row
+	        SET i = file // skip iterating over the rest of the rows
 	      END
 	    END  
-	    INSERT_2DA_ROW ("%first_empty_row%" - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    PATCH_IF (VARIABLE_IS_SET %first_empty_row%) BEGIN
+	      INSERT_2DA_ROW (~%first_empty_row%~ - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END 
+	    ELSE BEGIN
+	      INSERT_2DA_ROW (rows - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END
 	  END
 	  PRETTY_PRINT_2DA
-    ACTION_IF NOT (~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
+    ACTION_IF !(~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
       COPY_EXISTING ~LUABBR.2DA~ ~override~
         SET_2DA_ENTRY %lu_row% 1 2 ~d5_%lu_row%~
     END

@@ -307,7 +307,6 @@ END
 //ADD SPELLSTATE MACRO______________________________________________________________
 //
 DEFINE_ACTION_FUNCTION d5_resolve_state STR_VAR new_state_id = ~blah~ RET new_state_ind BEGIN
-
   OUTER_SET state_ind = IDS_OF_SYMBOL (~splstate~ ~%new_state_id%~)
   ACTION_IF !(state_ind = 0 - 1) BEGIN
     OUTER_SET new_state_ind = state_ind
@@ -324,8 +323,8 @@ DEFINE_ACTION_FUNCTION d5_resolve_state STR_VAR new_state_id = ~blah~ RET new_st
             READ_2DA_ENTRY_FORMER rows row 1 spec
             SET poss_ind = (ind + 1)
             PATCH_IF (poss_ind < 256) BEGIN
-              LOOKUP_IDS_SYMBOL_OF_INT poss_spec ~specific~ poss_ind
-              PATCH_IF (~%poss_spec%~ STRING_EQUAL_CASE ~%poss_ind%~) BEGIN
+              LOOKUP_IDS_SYMBOL_OF_INT poss_state ~specific~ poss_ind
+              PATCH_IF (~%poss_state%~ STRING_EQUAL_CASE ~%poss_ind%~) BEGIN
                 SET found = 1
                 SET new_state_ind = poss_ind
               END
@@ -335,7 +334,7 @@ DEFINE_ACTION_FUNCTION d5_resolve_state STR_VAR new_state_id = ~blah~ RET new_st
       END
     BUT_ONLY
     ACTION_IF (new_state_ind > 0) BEGIN
-      APPEND ~specific.ids~ ~%new_state_ind%  %new_state_id%~
+      APPEND ~splstate.ids~ ~%new_state_ind%  %new_state_id%~
     END
   END
 END 

@@ -1,5 +1,5 @@
 
-// v9.14 - french translation
+// v9.15 - MiH Edion's Ring
 
 /*
 functions in this file:
@@ -6017,8 +6017,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	    END
- //       SAY NAME2 @601
- //       SAY IDENTIFIED_DESC @602
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
     END
     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~bdring08~) BEGIN
 	  CREATE EFF ~d5rng8~
@@ -6044,8 +6044,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	    END
- //       SAY NAME2 @601
- //       SAY IDENTIFIED_DESC @602
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
     END
     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08_~) BEGIN
 	  CREATE EFF ~d5rng8~
@@ -6071,8 +6071,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
 	    END
- //       SAY NAME2 @601
- //       SAY IDENTIFIED_DESC @602
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
     END
     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ringkon~) BEGIN
 	  CREATE EFF ~d5rngk~
@@ -6098,8 +6098,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGK~ END
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGK~ END
 	    END
- //       SAY NAME2 @611
- //       SAY IDENTIFIED_DESC @612
+        SAY NAME2 @611
+        SAY IDENTIFIED_DESC @612
     END
     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ringed~) BEGIN
 	  CREATE EFF ~d5rnge~
@@ -6125,8 +6125,35 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
 	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
 	    END
-//        SAY NAME2 @621
-//        SAY IDENTIFIED_DESC @622
+        SAY NAME2 @621
+        SAY IDENTIFIED_DESC @622
+    END
+    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~mh#iwd11~) BEGIN
+	  CREATE EFF ~d5rnge~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 5
+	    WRITE_LONG 0x20 512
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNGE~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ringed.itm~ ~override/mh#iwd11.itm~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rnge~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNGE~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNGE~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	    END
+        SAY NAME2 @621
+        SAY IDENTIFIED_DESC @622
     END
   END	//	end if spell-doubling
  END

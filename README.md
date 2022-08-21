@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 4.18</strong><br />
+  <p><strong> Version 4.24</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -517,8 +517,11 @@ CALLED SHOTS <br />
   <h4 class="subheader">Component 240 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Improved Rangers</em></strong></p>
-      <p> This component adds two abilities to all rangers. First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
-      <p> Second, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
+      <p> This component adds several abilities to all rangers: </p>
+      <p>First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
+      <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
+      <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
+      <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
       <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
       <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
   </div>

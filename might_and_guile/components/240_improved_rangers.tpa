@@ -13,15 +13,173 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__imp_rangers.d5~
 //___________________________________________________________________________________
 
 
+//CHANGE CLASS TEXT_________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~bgclatxt.2da~) BEGIN
+  COPY_EXISTING ~bgclatxt.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
+	  END
+	END
+  BUT_ONLY
+END
+
+
+// first, get all rangers____________________________________________________________
+// 
+OUTER_SPRINT $d5_rangers_array(~RANGER~)~CLABRN01~
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 2; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 1 9 kit_name
+    READ_2DA_ENTRY row 5 9 kit_clab
+    READ_2DA_ENTRY row 8 9 kit_class
+    PATCH_IF (kit_class = 12) BEGIN
+      SPRINT $d5_rangers_array(~%kit_name%~)~%kit_clab%~
+    END
+  END
+BUT_ONLY
+
+
+// let all rangers backstab__________________________________________________________
+// 
+COPY_EXISTING ~backstab.2da~ ~override~
+  COUNT_2DA_COLS backstab_cols
+  PATCH_IF (backstab_cols < 45) BEGIN
+    SPRINT new_backstab_row ~RANGER        1             1             1             1             1             1             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2~
+  END
+  PATCH_IF (backstab_cols > 44) BEGIN
+    SPRINT new_backstab_row ~RANGER        1             1             1             1             1             1             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2             2~
+  END
+BUT_ONLY
+
+//APPEND ~backstab.2da~ ~%new_backstab_row%~
+
+ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
+  ACTION_IF !(~%kit%~ STRING_EQUAL_CASE ~STALKER~) BEGIN
+	OUTER_INNER_PATCH_SAVE new_backstab_row ~%new_backstab_row%~ BEGIN
+	  REPLACE_TEXTUALLY ~RANGER~ ~%kit%~
+	END
+	APPEND ~backstab.2da~ ~%new_backstab_row%~
+	APPEND ~sneakatt.2da~ ~%new_backstab_row%~
+	OUTER_INNER_PATCH_SAVE new_backstab_row ~%new_backstab_row%~ BEGIN
+	  REPLACE_TEXTUALLY ~%kit%~ ~RANGER~
+	END
+  END
+END
+
+COPY_EXISTING ~sneakatt.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 2; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 0 cols name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~STALKER~) BEGIN
+      SET stalker_row = row
+    END
+  END
+  SET_2DA_ENTRY stalker_row 6 cols 2
+  SET_2DA_ENTRY stalker_row 7 cols 2
+  SET_2DA_ENTRY stalker_row 8 cols 2
+  SET_2DA_ENTRY stalker_row 10 cols 3
+  SET_2DA_ENTRY stalker_row 11 cols 3
+  SET_2DA_ENTRY stalker_row 12 cols 3
+  SET_2DA_ENTRY stalker_row 13 cols 3
+  SET_2DA_ENTRY stalker_row 14 cols 3
+  SET_2DA_ENTRY stalker_row 15 cols 3
+  SET_2DA_ENTRY stalker_row 16 cols 3
+  SET_2DA_ENTRY stalker_row 19 cols 4
+  SET_2DA_ENTRY stalker_row 20 cols 4
+  SET_2DA_ENTRY stalker_row 21 cols 4
+  SET_2DA_ENTRY stalker_row 22 cols 4
+  SET_2DA_ENTRY stalker_row 23 cols 4
+  SET_2DA_ENTRY stalker_row 24 cols 4
+BUT_ONLY
+
+// 'alertness' - increased visual range______________________________________________
+// 
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5rnvis.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 262 target = 1 parameter1 = 2 parameter2 = 0 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5rnvis~ END
+
+ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+    APPEND ~%clab%.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+  END
+END
+
+/*
+APPEND ~clabrn01.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 3 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 9 clab
+	READ_2DA_ENTRY row 8 9 class
+	PATCH_IF (class = 12) BEGIN
+	  INNER_ACTION BEGIN
+		APPEND ~%clab%.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+	  END
+	END
+  END
+BUT_ONLY
+*/
+
+//___________________________________________________________________________________
+
+
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // just apply feats if already installed______________________________________________
 // 
+/*
 APPEND ~clabrn01.2da~ ~FEATS       AP_D5VWC5L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 ACTION_IF !(GAME_IS ~iwdee~) BEGIN
   APPEND ~clabrn01.2da~ ~TRACKING    AP_D5VRA9L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 END
+*/
 
+ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+    APPEND ~%clab%.2da~ ~FEATS       AP_D5VWC5L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    ACTION_IF !(GAME_IS ~iwdee~) BEGIN
+      APPEND ~%clab%.2da~ ~FEATS       AP_D5VRA9L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+    END
+  END
+END
+
+/*
 COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_ROWS 9 rows
   FOR (row = 3 ; row < rows ; ++row ) BEGIN
@@ -37,6 +195,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	END
   END
 BUT_ONLY
+*/
 
 //___________________________________________________________________________________
 
@@ -50,8 +209,14 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
 
   ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 
-	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+//	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 
+    ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
+      ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+        APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+      END
+    END
+/*
 	COPY_EXISTING ~kitlist.2da~ ~override~
 // 	  COUNT_2DA_COLS cols
 	  COUNT_2DA_ROWS 9 rows
@@ -65,6 +230,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
 		END
 	  END
 	BUT_ONLY
+*/
 
 	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
 	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END

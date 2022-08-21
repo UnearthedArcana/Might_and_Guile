@@ -379,6 +379,39 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
 	END
   BUT_ONLY
 END
+ACTION_IF (FILE_EXISTS_IN_GAME ~bgclatxt.2da~) BEGIN
+  COPY_EXISTING ~bgclatxt.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET thief_row = %row%
+		SET_2DA_ENTRY %thief_row% 3 cols RESOLVE_STR_REF (@20000)
+		SET_2DA_ENTRY %thief_row% 4 cols RESOLVE_STR_REF (@20002)
+		SET_2DA_ENTRY %thief_row% 5 cols RESOLVE_STR_REF (@20001)
+		SET_2DA_ENTRY (%thief_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+		SET_2DA_ENTRY (%thief_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%thief_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%thief_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+		SET_2DA_ENTRY (%thief_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+		SET_2DA_ENTRY (%thief_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FIGHTER~ BEGIN
+	    SET fighter_row = %row%
+		SET_2DA_ENTRY %fighter_row% 4 cols RESOLVE_STR_REF (@20015)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@20016)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
+	    SET barb_row = %row%
+		SET_2DA_ENTRY %barb_row% 4 cols RESOLVE_STR_REF (@20017)
+	  END
+	END
+  BUT_ONLY
+END
 ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
   COPY_EXISTING ~kitlist.2da~ ~override~
 //	COUNT_2DA_COLS cols

@@ -323,7 +323,7 @@ DEFINE_ACTION_FUNCTION d5_resolve_state STR_VAR new_state_id = ~blah~ RET new_st
             READ_2DA_ENTRY_FORMER rows row 1 spec
             SET poss_ind = (ind + 1)
             PATCH_IF (poss_ind < 256) BEGIN
-              LOOKUP_IDS_SYMBOL_OF_INT poss_state ~specific~ poss_ind
+              LOOKUP_IDS_SYMBOL_OF_INT poss_state ~splstate~ poss_ind
               PATCH_IF (~%poss_state%~ STRING_EQUAL_CASE ~%poss_ind%~) BEGIN
                 SET found = 1
                 SET new_state_ind = poss_ind

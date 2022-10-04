@@ -1,112 +1,116 @@
 
-// v9.15 - MiH Edion's Ring
+// v9.16 - added semi_innate function
 
 /*
 functions in this file:
 
-- semi_spontaneous_casting - line 224
+- semi_spontaneous_casting - line 228
     sets up structure of the 5E casting system, covers both arcane and divine spells
 
-- semi_armor_casting - line 1409
+- semi_armor_casting - line 1413
     sets armor to block arcane 5E casting
 
-- semi_divine_spells - line 1757
+- semi_divine_spells - line 1761
     adds all spells valid for divine casters to the 5E system
     NB: this works for vanilla cleric/druid spells, and for Faiths & Powers sphere systems
     ...therefore this should be run the first time *after* Faiths & Powers is installed
 
-- semi_arcane_spells - line 1863
+- semi_arcane_spells - line 1867
     adds all spells learnable from scrolls and valid for sorcerers to the 5E system
     NB: this also runs semi_armor_casting
 
-- process_semi_spells - line 2074
+- process_semi_spells - line 2078
     applies 5E memorization and casting mechanics to the relevant spells
 
-- add_semi_spells - line 2357
+- add_semi_spells - line 2361
     add a spell to the 5E system if it was not already captured by the functions above
     NB: if 5E has already been processed, must "LAF process_semi_spells" again after this
 
-- free_cast_spells - line 2399
+- free_cast_spells - line 2403
     input a free_spell (can run multiple free_spells for the same list_spell)
     outputs a list_spell that makes the free_spells castable regardless of being memorized
     list-spell can then be applied in a kit ability table
 
-- free_known_spells - line 2433
+- free_known_spells - line 2437
     input a free_spell (can run multiple free_spells for the same list_spell)
     outputs a list_spell that add the free_spells to one's spellbook
     list-spell can then be applied in a kit ability table
 
-- find_zclons_spell - line 2464
+- find_zclons_spell - line 2468
     input a spell that gets memorized, output its 5E index #, the spell it casts, and type
     ...just a little helper function
 
-- arcane_casting_slots - line 2490
+- arcane_casting_slots - line 2494
     patch and action functions
     input a table structured like MXSPLWIZ.2da
     outputs table_spl with 40 headers that converts the table into proficiency increases
     apply table_spl at every level to simulate spellcasting slots
 
-- divine_casting_slots - line 2797
+- divine_casting_slots - line 2801
     patch and action functions
     input a table structured like MXSPLWIZ.2da
     outputs table_spl with 40 headers that converts the table into proficiency increases
     apply table_spl at every level to simulate spellcasting slots
 
-- sorcerer_spell_learning - line 3034
+- sorcerer_spell_learning - line 3038
     creates spell & item to learn any sorcerer-valid spell via kjeron's spell-learning UI
     NB: this is in use and also works for alternate, coexisting versions
 
-- add_sorcerer_spells - line 3230
+- add_sorcerer_spells - line 3234
     input an array, any spells in the array get added to the sorcerer spell-learning
     NB: variables must match those used in sorcerer_spell_learning
     NB: if sorcerer casting is already initialized, must "LAF semi_sorcerer_casting" again
 
-- semi_sorcerer_casting - line 3289
+- semi_sorcerer_casting - line 3293
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in sorcerer_spell_learning
 
-- divine_spell_learning - line 4017
+- divine_spell_learning - line 4021
     creates spell and item to learn any cleric-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- shaman_spell_learning - line 4207
+- shaman_spell_learning - line 4211
     creates spell & item to learn any druid/shaman-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- semi_shaman_casting - line 4397
+- semi_shaman_casting - line 4401
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in divine_spell_learning/shaman_spell_learning
     NB: this is unused and untested so far
 
-- semi_int_slots - line 5022
+- semi_innate_casting - line 5026
+    sets up a pool of innate abilities that will use a pool of points to cast (up to 15 points)
+    NB: needs the "semi_innate_spells" array to be filled out
+
+- semi_int_slots - line 5354
     adds bonus casting slots for high INT scores
     bonuses are according to Tome & Blood (levels 1-7) - NB, this is not flexible
     5e_int_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- semi_cha_slots - line 5252
+- semi_cha_slots - line 5584
     adds bonus casting slots for high CHA scores
     bonuses are according to Tome & Blood (levels 1-5) - NB, this is not flexible
 
-- semi_wis_slots - line 5504
+- semi_wis_slots - line 5836
     adds bonus casting slots for high WIS scores
     bonuses are according to Tome & Blood (spell levels 1-7) - NB, this is not flexible
     5e_wis_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- arcane_spont_items - line 5713
+- arcane_spont_items - line 6045
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- divine_spont_items - line 6150
+- divine_spont_items - line 6482
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- semi_spont_sequencers - line 6698
+- semi_spont_sequencers - line 7030
     sets sequencers and contingencies to pick from known spells instead of memorized spells
     NB: putting spells in a sequencer will no exhaust any spell slots
 
-- semi_spont_identify - line 6795
+- semi_spont_identify - line 7127
    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
 
 */
@@ -400,7 +404,7 @@ END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z0slt.spl~) BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z0slt.spl~ 
   PATCH_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 510 /*126*/ timing = 9 END // cover all lvls 1-9 spls
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 510 /*126*/ timing = 9 END // cover all lvls 2-9 spls
   END
   PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~62~) BEGIN	//	level 1 cantrips
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 511 /*127*/ timing = 9 END // cover all lvls 1-9 spls
@@ -5019,6 +5023,354 @@ END		//	end define function
 //__________________________________________________________________________________
 
 
+DEFINE_ACTION_FUNCTION semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~~ semi_innate_array = ~~ BEGIN
+
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
+LAM 5E_casting_settings
+
+
+APPEND ~splprot.2da~ ~D5_INNATE_PTS%TAB%%semi_innate_stat%%TAB%-1%TAB%7~ UNLESS ~D5_INNATE_PTS~
+APPEND ~splprot.2da~ ~D5_INNATE=PTS%TAB%%semi_innate_stat%%TAB%-1%TAB%8~ UNLESS ~D5_INNATE=PTS~
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+APPEND ~splprot.2da~ ~D5_FATIGUE_1%TAB%30%TAB%1%TAB%4~ UNLESS ~D5_FATIGUE_1~
+
+COPY_EXISTING ~splprot.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_INNATE_PTS~) BEGIN
+	  SET fake_innate_slots = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_INNATE=PTS~) BEGIN
+	  SET fake_innate_equal = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
+	  SET fatigue_zero = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_1~) BEGIN
+	  SET fatigue_one = %row%
+	END
+  END
+BUT_ONLY
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_INNATE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_INNATE~) BEGIN
+		SET semi_innate_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+
+ACTION_IF !(VARIABLE_IS_SET %semi_innate_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_INNATE~ RET new_state_ind END
+  OUTER_SET semi_innate_state = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_REST~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_REST~) BEGIN
+		SET semi_spont_rest = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_rested%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_REST~ RET new_state_ind END
+  OUTER_SET semi_spont_rest = %new_state_ind%
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_innate_casting.d5~) BEGIN
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%206.spl~
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%172.spl~
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%lota.spl~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%lotb.spl~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%lotc.spl~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%lotd.spl~
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%pls.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = ~%semi_innate_prefix%lota~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = ~%semi_innate_prefix%lotb~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = ~%semi_innate_prefix%lotc~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = ~%semi_innate_prefix%lotd~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 318 insert_point = 0 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%x1a.spl~) BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~z~ BEGIN
+	COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%x1%let%.spl~
+	  SAY NAME1 @101
+	  SAY UNIDENTIFIED_DESC @101
+	  LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~spcl919b~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 9 END
+  END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%x-1.spl~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%x-1.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 1 END
+END
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5zcast.bam~ ~override~
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%ltz.spl~
+  SAY NAME1 @300
+  SAY UNIDENTIFIED_DESC @300
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5zcast~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~%semi_innate_prefix%lts~ END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lts.eff~) BEGIN
+  CREATE EFF ~%semi_innate_prefix%lts~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 9
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~%semi_innate_prefix%lts~ #8
+	WRITE_LONG 0x48 102
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lts.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%lts.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 1 STR_VAR resource = ~%semi_innate_prefix%ini~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~%semi_innate_prefix%ltf~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_one% timing = 1 STR_VAR resource = ~d5xrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%000.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%000.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 1 STR_VAR resource = ~%semi_innate_prefix%ltz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 1 STR_VAR resource = ~%semi_innate_prefix%stt~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%stt.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%stt.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_innate_state% timing = 9 END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = ~%semi_innate_prefix%stt~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%ltf.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%ltf.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5xnfsh~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xrfsh~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = ~%semi_innate_prefix%ltf~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xrfsh.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xrfsh.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~%semi_innate_prefix%172~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 duration = 0 STR_VAR resource = ~d5zrest~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~%semi_innate_prefix%x-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zrest.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zrest.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_rest% timing = 9 END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xrest.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xrest.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5zrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xxfat.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xxfat.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnfsh.spl~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xnfsh.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~d5xrfsh~ END
+END
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~
+
+END	//	end no marker file
+
+// casting system______________________________________________________________________
+//
+//OUTER_SPRINT $semi_innate_spells(~nada~)~yada~
+
+ACTION_PHP_EACH EVAL ~%semi_innate_array%~ AS semi => spell BEGIN
+  ACTION_IF !(~%semi%~ STRING_EQUAL_CASE ~nada~) BEGIN
+    OUTER_SPRINT cast_spell ~%spell%~
+    OUTER_SPRINT innate_spell ~%semi%i~
+    OUTER_SPRINT give_spell ~%semi%g~
+    OUTER_SPRINT block_spell ~%semi%b~
+    OUTER_SPRINT learn_spell ~%semi%l~
+// create innate spell
+	COPY_EXISTING ~%cast_spell%.spl~ ~override/%innate_spell%.spl~
+//	  SAY NAME1 ~~
+//	  SAY UNIDENTIFIED_DESC ~~
+	  WRITE_SHORT 0x1c 4
+	  WRITE_BYTE 0x27 0									//	no sectype for the innates
+	  LPF ALTER_SPELL_HEADER INT_VAR location = 4 END
+	  READ_LONG 0x64 abil_offset
+	  READ_SHORT 0x68 abil_number
+	  READ_BYTE (%abil_offset% + 0x0c) abil_target					
+	  READ_SHORT (%abil_offset% + 0x0e) abil_range
+	  READ_LONG 0x6a eff_offset
+	  WHILE (%abil_number% > 0) BEGIN
+		SET abil_number = (%abil_number% - 1)
+		WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
+	  END
+	  READ_BYTE (%eff_offset% + 0x02) eff_target
+	  LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
+	  PATCH_IF (%abil_target% = 4) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%cast_spell%~ END
+		PATCH_IF (%abil_range% < 35) BEGIN
+		  PATCH_IF (%abil_range% > 4) BEGIN
+			LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
+		  END
+		  PATCH_IF (%abil_range% < 5) BEGIN
+		 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// might need to carve out exceptions, e.g. burning hands
+		  END
+		END
+	  END
+	  ELSE BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%cast_spell%~ END
+	  END
+	  PATCH_IF (lose_spell_on_interrupt = 0) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%x-%level%~ END
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~%semi_innate_prefix%172~ END
+//		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+            LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xxfat~ END
+	  END
+	  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
+		LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%x-%level%~ END
+	    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~%semi_innate_prefix%172~ END
+		LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+//	    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+        LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xxfat~ END
+	  END
+	BUT_ONLY
+// make spells adding the innate spell
+	COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%give_spell%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+	BUT_ONLY
+// make 206 spells preventing the give spell
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%block_spell%.spl~
+	  WRITE_SHORT 0x1c 4
+  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%give_spell%~ END
+	BUT_ONLY
+// add 206 spells to CLAB spell
+    COPY_EXISTING ~%semi_innate_prefix%206.spl~ ~override~
+      LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%block_spell%~ END
+      LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = EVAL ~%block_spell%~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%block_spell%~ END
+  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+	BUT_ONLY
+// make learn spells canceling the 206
+	COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%learn_spell%.spl~
+  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+      LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~%semi_innate_prefix%172~ END
+      LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+	BUT_ONLY
+// add 172 to zz172
+    COPY_EXISTING ~%semi_innate_prefix%172.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR /*insert_point = 0*/ opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%innate_spell%~ END
+	BUT_ONLY
+// learn from seq menu
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%cast_spell%%sorc_suffix%.spl~) BEGIN
+	  COPY_EXISTING ~%cast_spell%%sorc_suffix%.spl~ ~override~
+//	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%mem_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = EVAL ~%learn_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~%semi_innate_prefix%172~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~%semi_innate_prefix%pls~ END
+	  BUT_ONLY
+	END
+/*
+// conditionally add 172 to zw172 - use to remove spells upon equipping armor
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5zw172.spl~) BEGIN
+      COPY_EXISTING ~d5zw172.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = EVAL ~%innate_spell%~ END
+	    LPF ADD_SPELL_EFFECT INT_VAR /*insert_point = 0*/ opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+	END
+*/
+// generate slot#x spells
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lota.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotb.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotc.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotd.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+  END
+END
+
+ACTION_CLEAR_ARRAY ~semi_innate_spells~
+
+END		//	end with_tra
+
+
+END	//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
 DEFINE_ACTION_MACRO semi_int_slots BEGIN
 
 ACTION_IF !(VARIABLE_IS_SET %5e_int_bonus_memorization%)  BEGIN
@@ -5993,7 +6345,9 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	IF_EXISTS BUT_ONLY
   END	//	end if not spell-doubling
   ACTION_IF (%ind_3% = 99) BEGIN
-    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08~) BEGIN
+   ACTION_IF !(MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~3111~) BEGIN
+    ACTION_IF !(MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~3112~)
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08~) BEGIN
 	  CREATE EFF ~d5rng8~
 	    WRITE_LONG 0x10 42
 	    WRITE_LONG 0x14 1
@@ -6019,8 +6373,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	    END
         SAY NAME2 @601
         SAY IDENTIFIED_DESC @602
-    END
-    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~bdring08~) BEGIN
+     END
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~bdring08~) BEGIN
 	  CREATE EFF ~d5rng8~
 	    WRITE_LONG 0x10 42
 	    WRITE_LONG 0x14 1
@@ -6046,8 +6400,8 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	    END
         SAY NAME2 @601
         SAY IDENTIFIED_DESC @602
-    END
-    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08_~) BEGIN
+     END
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08_~) BEGIN
 	  CREATE EFF ~d5rng8~
 	    WRITE_LONG 0x10 42
 	    WRITE_LONG 0x14 1
@@ -6073,6 +6427,7 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
 	    END
         SAY NAME2 @601
         SAY IDENTIFIED_DESC @602
+     END
     END
     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ringkon~) BEGIN
 	  CREATE EFF ~d5rngk~
@@ -6155,6 +6510,7 @@ ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
         SAY NAME2 @621
         SAY IDENTIFIED_DESC @622
     END
+   END
   END	//	end if spell-doubling
  END
 END

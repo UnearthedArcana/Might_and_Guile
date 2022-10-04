@@ -2618,6 +2618,52 @@ COPY_EXISTING ~d5ub09.spl~ ~override/d5vb09.spl~
 
 OUTER_SPRINT $bard_songs_list(~09~) ~I~
 
+/*
+COPY ~might_and_guile/nubards/d5_bd10b.bam~ ~override~
+COPY ~might_and_guile/nubards/d5bd10a.spl~ ~override~			//		electric charge inspiration
+	SAY NAME1 @21101
+	SAY UNIDENTIFIED_DESC @21102
+	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd10b~ END
+	WRITE_SHORT 0x1c 4
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+COPY ~might_and_guile/nubards/d5bd10b.spl~ ~override~
+COPY ~might_and_guile/nubards/d5bd10b.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub10.spl~
+	SAY NAME1 @21101
+	SAY UNIDENTIFIED_DESC @21102
+	WRITE_SHORT 0x1c 2
+	PATCH_IF GAME_IS ~iwdee~ BEGIN
+	  WRITE_LONG 0x34 4
+	END ELSE BEGIN
+	  WRITE_LONG 0x34 2
+	END
+	WRITE_ASCII 0x3a ~d5_bd10b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd10b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd10z~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd10z~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD10Y~ END
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd10z.spl~	//		206 song
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd10z~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD10Y~ END
+CREATE EFF ~d5bd10y~
+	WRITE_LONG 0x10 171
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x24 9
+	WRITE_LONG 0x28 0
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~d5bd10a~ #8
+	WRITE_LONG 0x90 1
+	WRITE_EVALUATED_ASCII 0x94 ~D5BD10Y~ #8
+COPY_EXISTING ~d5ub10.spl~ ~override/d5vb10.spl~
+	WRITE_SHORT 0x1c 1
+
+OUTER_SPRINT $bard_songs_list(~10~) ~I~
+*/
+
 COPY ~might_and_guile/nubards/d5_bd20b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd20a.spl~ ~override~			//		casting interference emanation
 	SAY NAME1 @21201
@@ -5976,7 +6022,11 @@ IF ~CheckStatLT(Player1,13,CHR)
 ~ THEN REPLY #54887  GOTO 4
 END
 >>>>>>>> 
-COMPILE ~d5/bdaraya+.d~
+COPY ~d5/bdaraya+.d~ ~weidu_external/%MOD_FOLDER%/compile/bdaraya+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#54887~ ~#254887~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/bdaraya+.d~
 
 <<<<<<<< d5/bdautinn+.d
 EXTEND_BOTTOM BDAUTINN 1
@@ -5997,7 +6047,11 @@ EXTEND_BOTTOM BDAUTINN 1
 ~ THEN REPLY #44392  GOTO 9
 END
 >>>>>>>> 
-COMPILE ~d5/bdautinn+.d~
+COPY ~d5/bdautinn+.d~ ~weidu_external/%MOD_FOLDER%/compile/bdautinn+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#44392~ ~#244392~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/bdautinn+.d~
 
 <<<<<<<< d5/BDBFORT4+.d
 EXTEND_BOTTOM BDBFORT4 7
@@ -6018,7 +6072,11 @@ EXTEND_BOTTOM BDBFORT4 7
 ~ GOTO 9
 END
 >>>>>>>> 
-COMPILE ~d5/bdautinn+.d~
+COPY ~d5/BDBFORT4+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDBFORT4+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#43682~ ~#243682~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDBFORT4+.d~
 
 <<<<<<<< d5/BDCORWIJ+.d
 EXTEND_BOTTOM BDCORWIJ 82
@@ -6038,7 +6096,11 @@ EXTEND_BOTTOM BDCORWIJ 82
 ~ THEN REPLY #52066  GOTO 84
 END
 >>>>>>>> 
-COMPILE ~d5/BDCORWIJ+.d~
+COPY ~d5/BDCORWIJ+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDCORWIJ+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#52066~ ~#252066~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDCORWIJ+.d~
 
 <<<<<<<< d5/BDDELEND+.d
 EXTEND_BOTTOM BDDELEND 14
@@ -6085,7 +6147,12 @@ IF ~ Class(Player1,BARD_ALL)
 END
 */
 >>>>>>>> 
-COMPILE ~d5/BDDELEND+.d~
+COPY ~d5/BDDELEND+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDDELEND+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#44605~ ~#244605~
+    REPLACE_TEXTUALLY ~#44640~ ~#244640~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDELEND+.d~
 
 <<<<<<<< d5/BDDENELD+.d
 EXTEND_BOTTOM BDDENELD 18
@@ -6122,7 +6189,12 @@ EXTEND_BOTTOM BDDENELD 36
 ~ THEN REPLY #62096  GOTO 37
 END
 >>>>>>>> 
-COMPILE ~d5/BDDENELD+.d~
+COPY ~d5/BDDENELD+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDDENELD+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#48995~ ~#248995~
+    REPLACE_TEXTUALLY ~#62096~ ~#262096~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDENELD+.d~
 
 <<<<<<<< d5/BDDREON+.d
 EXTEND_BOTTOM BDDREON 5
@@ -6158,7 +6230,12 @@ EXTEND_BOTTOM BDDREON 8
 ~ THEN REPLY #61246  GOTO 9
 END
 >>>>>>>> 
-COMPILE ~d5/BDDREON+.d~
+COPY ~d5/BDDREON+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDDREON+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#61237~ ~#261237~
+    REPLACE_TEXTUALLY ~#61246~ ~#261246~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDREON+.d~
 
 <<<<<<<< d5/BDDSSEN+.d
 EXTEND_BOTTOM BDDSSEN 2
@@ -6195,7 +6272,12 @@ EXTEND_BOTTOM BDDSSEN 7
 ~ THEN REPLY #58567  GOTO 10
 END
 >>>>>>>> 
-COMPILE ~d5/BDDSSEN+.d~
+COPY ~d5/BDDSSEN+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDDSSEN+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#44056~ ~#244056~
+    REPLACE_TEXTUALLY ~#58567~ ~#258567~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDSSEN+.d~
 
 <<<<<<<< d5/BDFAMARI+.d
 EXTEND_BOTTOM BDFAMARI 2
@@ -6217,7 +6299,11 @@ EXTEND_BOTTOM BDFAMARI 2
 ~ THEN REPLY #58488  GOTO 3
 END
 >>>>>>>> 
-COMPILE ~d5/BDFAMARI+.d~
+COPY ~d5/BDFAMARI+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDFAMARI+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#58488~ ~#258488~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDFAMARI+.d~
 
 <<<<<<<< d5/BDGUAR20+.d
 EXTEND_BOTTOM BDGUAR20 18
@@ -6238,7 +6324,11 @@ EXTEND_BOTTOM BDGUAR20 18
 ~ THEN REPLY #64235  GOTO 19
 END
 >>>>>>>> 
-COMPILE ~d5/BDGUAR20+.d~
+COPY ~d5/BDGUAR20+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDGUAR20+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#64235~ ~#264235~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDGUAR20+.d~
 
 <<<<<<<< d5/BDHESTER+.d
 EXTEND_BOTTOM BDHESTER 6
@@ -6278,7 +6368,12 @@ EXTEND_BOTTOM BDHESTER 7
 ~ THEN REPLY #47998  GOTO 14
 END
 >>>>>>>> 
-COMPILE ~d5/BDHESTER+.d~
+COPY ~d5/BDHESTER+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDHESTER+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#47990~ ~#247990~
+    REPLACE_TEXTUALLY ~#47998~ ~#247998~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDHESTER+.d~
 
 <<<<<<<< d5/BDJENKS+.d
 EXTEND_BOTTOM BDJENKS 3
@@ -6300,7 +6395,11 @@ EXTEND_BOTTOM BDJENKS 3
 ~ THEN REPLY #58765  GOTO 4
 END
 >>>>>>>> 
-COMPILE ~d5/BDJENKS+.d~
+COPY ~d5/BDJENKS+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDJENKS+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#58765~ ~#258765~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDJENKS+.d~
 
 <<<<<<<< d5/BDJOSPIL+.d
 EXTEND_BOTTOM BDJOSPIL 23
@@ -6323,7 +6422,11 @@ EXTEND_BOTTOM BDJOSPIL 23
 ~ GOTO 24
 END
 >>>>>>>> 
-COMPILE ~d5/BDJOSPIL+.d~
+COPY ~d5/BDJOSPIL+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDJOSPIL+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#44809~ ~#244809~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDJOSPIL+.d~
 
 <<<<<<<< d5/BDKATHEE+.d
 EXTEND_BOTTOM BDKATHEE 8
@@ -6344,7 +6447,11 @@ EXTEND_BOTTOM BDKATHEE 8
 ~ THEN REPLY #57619  GOTO 9
 END
 >>>>>>>> 
-COMPILE ~d5/BDKATHEE+.d~
+COPY ~d5/BDKATHEE+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDKATHEE+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#57619~ ~#257619~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDKATHEE+.d~
 
 <<<<<<<< d5/BDKHALID+.d
 EXTEND_BOTTOM BDKHALID 36
@@ -6367,7 +6474,11 @@ EXTEND_BOTTOM BDKHALID 36
 ~ THEN REPLY #57945  GOTO 37
 END
 >>>>>>>> 
-COMPILE ~d5/BDKHALID+.d~
+COPY ~d5/BDKHALID+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDKHALID+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#57945~ ~#257945~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDKHALID+.d~
 
 <<<<<<<< d5/BDLEOPAS+.d
 EXTEND_BOTTOM BDLEOPAS 20
@@ -6444,7 +6555,13 @@ EXTEND_BOTTOM BDLEOPAS 20
 ~ THEN REPLY #47856  GOTO 27
 END
 >>>>>>>> 
-COMPILE ~d5/BDLEOPAS+.d~
+COPY ~d5/BDLEOPAS+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDLEOPAS+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#47853~ ~#247853~
+    REPLACE_TEXTUALLY ~#47854~ ~#247854~
+    REPLACE_TEXTUALLY ~#47856~ ~#247856~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDLEOPAS+.d~
 
 <<<<<<<< d5/BDRASAAD+.d
 EXTEND_BOTTOM BDRASAAD 20
@@ -6489,7 +6606,11 @@ SetGlobal("bd_invited_rasaad","bd0111",1)
 ~ GOTO 21
 END
 >>>>>>>> 
-COMPILE ~d5/BDRASAAD+.d~
+COPY ~d5/BDRASAAD+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDRASAAD+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#34589~ ~#234589~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDRASAAD+.d~
 
 <<<<<<<< d5/BDRIGAH+.d
 EXTEND_BOTTOM BDRIGAH 20
@@ -6510,7 +6631,11 @@ EXTEND_BOTTOM BDRIGAH 20
 ~ THEN REPLY #52579  GOTO 21
 END
 >>>>>>>> 
-COMPILE ~d5/BDRIGAH+.d~
+COPY ~d5/BDRIGAH+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDRIGAH+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#52579~ ~#252579~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDRIGAH+.d~
 
 <<<<<<<< d5/BDSHAPUR+.d
 EXTEND_BOTTOM BDSHAPUR 8
@@ -6552,7 +6677,12 @@ EXTEND_BOTTOM BDSHAPUR 25
 ~ THEN REPLY #41903  GOTO 26
 END
 >>>>>>>> 
-COMPILE ~d5/BDSHAPUR+.d~
+COPY ~d5/BDSHAPUR+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDSHAPUR+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#41754~ ~#241754~
+    REPLACE_TEXTUALLY ~#41903~ ~#241903~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSHAPUR+.d~
 
 <<<<<<<< d5/BDSIMONE+.d
 EXTEND_BOTTOM BDSIMONE 14
@@ -6573,7 +6703,11 @@ EXTEND_BOTTOM BDSIMONE 14
 ~ THEN REPLY #50976  GOTO 15
 END
 >>>>>>>> 
-COMPILE ~d5/BDSIMONE+.d~
+COPY ~d5/BDSIMONE+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDSIMONE+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#50976~ ~#250976~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSIMONE+.d~
 
 <<<<<<<< d5/BDSKIE+.d
 EXTEND_BOTTOM BDSKIE 41
@@ -6614,7 +6748,12 @@ EXTEND_BOTTOM BDSKIE 45
 ~ THEN REPLY #44084  GOTO 46
 END
 >>>>>>>> 
-COMPILE ~d5/BDSKIE+.d~
+COPY ~d5/BDSKIE+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDSKIE+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#44078~ ~#244078~
+    REPLACE_TEXTUALLY ~#44084~ ~#244084~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSKIE+.d~
 
 <<<<<<<< d5/BDTAKOS+.d
 EXTEND_BOTTOM BDTAKOS 21
@@ -6653,7 +6792,12 @@ EXTEND_BOTTOM BDTAKOS 22
 ~ THEN REPLY #42962  GOTO 23
 END
 >>>>>>>> 
-COMPILE ~d5/BDTAKOS+.d~
+COPY ~d5/BDTAKOS+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDTAKOS+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#42957~ ~#242957~
+    REPLACE_TEXTUALLY ~#42962~ ~#242962~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDTAKOS+.d~
 
 <<<<<<<< d5/BDULORI+.d
 EXTEND_BOTTOM BDULORI 3
@@ -6694,7 +6838,11 @@ EXTEND_BOTTOM BDULORI 3
 ~ THEN REPLY #49207  GOTO 8
 END
 >>>>>>>> 
-COMPILE ~d5/BDULORI+.d~
+COPY ~d5/BDULORI+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDULORI+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#49207~ ~#249207~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDULORI+.d~
 
 <<<<<<<< d5/BDWAIZAH+.d
 EXTEND_BOTTOM BDWAIZAH 1
@@ -6716,7 +6864,11 @@ EXTEND_BOTTOM BDWAIZAH 1
 ~ THEN REPLY #48805  GOTO 0
 END
 >>>>>>>> 
-COMPILE ~d5/BDWAIZAH+.d~
+COPY ~d5/BDWAIZAH+.d~ ~weidu_external/%MOD_FOLDER%/compile/BDWAIZAH+.d~
+  PATCH_IF (GAME_IS ~eet~) BEGIN
+    REPLACE_TEXTUALLY ~#48805~ ~#248805~
+  END
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDWAIZAH+.d~
 
 END 	// 	end game includes sod
 //____________________________________________________________________________________

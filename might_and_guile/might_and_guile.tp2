@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~4.25.1~
+VERSION ~4.26~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -57,6 +57,7 @@ LANGUAGE
 
 BEGIN @200
 DESIGNATED 200
+LABEL ~D5_3E_FEAT_SYSTEM~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
@@ -74,6 +75,7 @@ INCLUDE ~might_and_guile/components/200_feats.tpa~
 
 BEGIN @205
 DESIGNATED 205
+LABEL ~D5_REVISED_ARCHERY~
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/205_revised_archer.tpa~
@@ -90,6 +92,7 @@ INCLUDE ~might_and_guile/components/205_revised_archer.tpa~
 
 BEGIN @210
 DESIGNATED 210
+LABEL ~D5_REVISED_BARDS~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
@@ -124,6 +127,7 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.
 
 BEGIN @220
 DESIGNATED 220
+LABEL ~D5_ORIGINAL_MULTICLASS_KITS~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @23
 
@@ -143,6 +147,7 @@ INCLUDE ~might_and_guile/components/220_multiclass_kits.tpa~
 
 BEGIN @230
 DESIGNATED 230
+LABEL ~D5_REVISED_STALKER~
 FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
 //GROUP @22
 
@@ -160,6 +165,7 @@ INCLUDE ~might_and_guile/components/230_revised_stalker.tpa~
 
 BEGIN @235
 DESIGNATED 235
+LABEL ~D5_REVISED_BEASTMASTER~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__beastmaster.d5~) @5
 //GROUP @22
 
@@ -177,6 +183,7 @@ INCLUDE ~might_and_guile/components/235_revised_beastmaster.tpa~
 
 BEGIN @240
 DESIGNATED 240
+LABEL ~D5_IMPROVED_RANGERS~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__imp_rangers.d5~) @5
 //GROUP @22
 
@@ -194,6 +201,7 @@ INCLUDE ~might_and_guile/components/240_improved_rangers.tpa~
 
 BEGIN @245
 DESIGNATED 245
+LABEL ~D5_QUICKSTRIDE~
 //REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
@@ -220,6 +228,7 @@ END
 
 BEGIN @250
 DESIGNATED 250
+LABEL ~D5_REVISED_RAGE~
 //GROUP @22
 
 INCLUDE ~might_and_guile/components/250_revised_rage.tpa~
@@ -238,6 +247,7 @@ LAF 250_revised_rage END
 
 BEGIN @260
 DESIGNATED 260
+LABEL ~D5_REVISED_KENSAI~
 //GROUP @22
 DEPRECATED @1
 
@@ -255,6 +265,7 @@ INCLUDE ~might_and_guile/components/260_revised_kensai.tpa~
 
 BEGIN @265
 DESIGNATED 265
+LABEL ~D5_REVISED_MONK_FISTS~
 //REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @22
 
@@ -282,6 +293,7 @@ END
 
 BEGIN @275
 DESIGNATED 275
+LABEL ~D5_REVISED_SHADOWDANCER~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~might_and_guile.tp2~ ~200~ @1
 //GROUP @22
@@ -303,6 +315,7 @@ INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
 //________________________CORSAIR___________________________________________________
 BEGIN @310
 DESIGNATED 310
+LABEL ~D5_CORSAIR~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 //GROUP @23
 
@@ -313,6 +326,7 @@ INCLUDE ~might_and_guile/components/310_corsair.tpa~
 //________________________MARKSMAN__________________________________________________
 BEGIN @320
 DESIGNATED 320
+LABEL ~D5_MARKSMAN~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 //GROUP @23
 
@@ -323,6 +337,7 @@ INCLUDE ~might_and_guile/components/320_marksman.tpa~
 //______________________ELVEN ARCHER________________________________________________
 BEGIN @322
 DESIGNATED 322
+LABEL ~D5_ELVEN_ARCHER~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5earch.2da~) @5
 //GROUP @23
@@ -334,6 +349,7 @@ INCLUDE ~might_and_guile/components/322_elven_archer.tpa~
 //________________________SLINGER__________________________________________________
 BEGIN @324
 DESIGNATED 324
+LABEL ~D5_~
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5_sling.2da~) @5
@@ -346,6 +362,7 @@ INCLUDE ~might_and_guile/components/324_halfling_slinger.tpa~
 //________________________MAGE HUNTER_______________________________________________
 BEGIN @350
 DESIGNATED 350
+LABEL ~D5_MAGE_HUNTER~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5mageh.2da~) @5
 //GROUP @23
 
@@ -356,6 +373,7 @@ INCLUDE ~might_and_guile/components/350_mage_hunter.tpa~
 //_______________________BARBARIAN RANGER___________________________________________
 BEGIN @360
 DESIGNATED 360
+LABEL ~D5_BARB_RANGER~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5rbarb.2da~) @5
 //GROUP @23
 
@@ -375,6 +393,7 @@ INCLUDE ~might_and_guile/components/360_barbarian_ranger.tpa~
 //__________________________SNIPER__________________________________________________
 BEGIN @410
 DESIGNATED 410
+LABEL ~D5_SNIPER_KIT~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 //GROUP @23
 
@@ -385,6 +404,7 @@ INCLUDE ~might_and_guile/components/410_sniper.tpa~
 //__________________________SCOUT__________________________________________________
 BEGIN @420
 DESIGNATED 420
+LABEL ~D5_SCOUT_KIT~
 FORBID_COMPONENT ~setup-might_and_guile.tp2~ ~200~ @1
 //GROUP @23
 
@@ -404,6 +424,7 @@ INCLUDE ~might_and_guile/components/420_scout.tpa~
 //__________________________JONGLEUR________________________________________________
 BEGIN @450
 DESIGNATED 450
+LABEL ~D5_2E_JONGLEUR~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
@@ -414,6 +435,7 @@ INCLUDE ~might_and_guile/components/450_jongleur.tpa~
 //_________________________LOREMASTER________________________________________________
 BEGIN @460
 DESIGNATED 460
+LABEL ~D5_2E_LOREMASTER~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 FORBID_COMPONENT ~might_and_guile.tp2~ ~500~ @1
 //GROUP @23
@@ -425,6 +447,7 @@ INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 //__________________________GALLANT_________________________________________________
 BEGIN @470
 DESIGNATED 470
+LABEL ~D5_2E_GALLANT~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
@@ -435,6 +458,7 @@ INCLUDE ~might_and_guile/components/470_gallant.tpa~
 //________________________MEISTERSINGER_____________________________________________
 BEGIN @480
 DESIGNATED 480
+LABEL ~D5_2E_MEISTERSINGER~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
@@ -445,6 +469,7 @@ INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 //_________________________LORESINGER_______________________________________________
 BEGIN @490
 DESIGNATED 490
+LABEL ~D5_2E_LORESINGER~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 //GROUP @23
 
@@ -455,6 +480,7 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 //_________________5E CASTING FOR 2E-STYLE BARDS____________________________________
 BEGIN @499
 DESIGNATED 499
+LABEL ~D5_2E_BARDS_5E_CASTING~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__5E_casting_bards.d5~) @5
 

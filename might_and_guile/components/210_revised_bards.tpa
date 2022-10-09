@@ -1023,7 +1023,7 @@ OUTER_SET nu_agent_code = (0x4000 + %D5_AGENT%)
 //____________________________________________________________________________________
 
 
-//ADD LORESINGER AS CLERIC, and C/T_______________________________________________________
+//ADD LORESINGER AS CLERIC, and C/T____________________________________________________
 //
 // cleric with songs... basically, a demibard
 
@@ -1171,7 +1171,7 @@ END
 ACTION_IF (FILE_EXISTS ~override/d5_fnp_settings.ini~) && (FILE_CONTAINS_EVALUATED (~d5_fnp_settings.ini~ ~d5_spont_option~)) BEGIN
   INCLUDE ~override/d5_fnp_settings.ini~
   LAM d5_spont_option
-  ACTION_IF (d5_spell_spontaneous > 0) BEGIN
+  ACTION_IF (spell_spontaneous > 0) BEGIN
 	APPEND ~d5_lors.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
 END
@@ -1781,25 +1781,6 @@ END
 //
 COPY ~might_and_guile/nubards/d5_blads.2da~ ~override~
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_rfe9b.bam~) BEGIN
-  INCLUDE ~might_and_guile/lib/extra_prof_dialogue.tpa~
-  COPY ~might_and_guile/feats/d5_rfe9b.bam~ ~override~
-  COPY ~might_and_guile/feats/d5ftprx.spl~ ~override~
-	SAY NAME1 @20496
-	SAY UNIDENTIFIED_DESC @20497
-	WRITE_ASCII 0x3a ~d5_rfe9~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9~ END
-  COPY ~might_and_guile/feats/d5ftprof.eff~ ~override~
-  COPY ~might_and_guile/feats/d5ftprof.cre~ ~override~
-END
-
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
-  COPY_EXISTING ~d5_blads.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_D5BSWPF~ ~****      ~
-	REPLACE_TEXTUALLY ~GA_D5FTPRX~ ~****      ~
-  BUT_ONLY
-END
-
 // imp. alacrity must cancel bladesong
 COPY_EXISTING ~spwi921.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd51b~ END
@@ -1828,55 +1809,55 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
 	READ_BYTE 0x31 proficiency
 	PATCH_IF (proficiency = 89) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bswob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs89b~ END
 	END
 	PATCH_IF (proficiency = 90) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5lswob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs90b~ END
 	END
 	PATCH_IF (proficiency = 91) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5sswob~ END
-	END
-	PATCH_IF (proficiency = 93) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d52swob~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs91b~ END
 	END
 	PATCH_IF (proficiency = 92) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5baxeb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs92b~ END
+	END
+	PATCH_IF (proficiency = 93) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs93b~ END
 	END
 	PATCH_IF (proficiency = 94) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5katab~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs94b~ END
 	END
 	PATCH_IF (proficiency = 95) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5scimb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs95b~ END
 	END
 	PATCH_IF (proficiency = 96) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5daggb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs96b~ END
 	END
 	PATCH_IF (proficiency = 97) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5hammb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs97b~ END
 	END
 	PATCH_IF (proficiency = 98) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5speab~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs98b~ END
 	END
 	PATCH_IF (proficiency = 99) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5halbb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs99b~ END
 	END
 	PATCH_IF (proficiency = 100) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5flaib~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs100b~ END
 	END
 	PATCH_IF (proficiency = 101) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5maceb~ END
-	END
-	PATCH_IF (proficiency = 115) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5clubb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs101b~ END
 	END
 	PATCH_IF (proficiency = 102) BEGIN
-	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5stafb~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs102b~ END
+	END
+	PATCH_IF (proficiency = 115) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = %nu_bladesinger_code% parameter2 = 9 timing = 2 STR_VAR resource = ~d5bs115b~ END
 	END
   END
 BUT_ONLY
 
 // make EFFs giving extra APR
-ACTION_FOR_EACH prof IN ~BSWO~ ~LSWO~ ~SSWO~ ~2SWO~ ~BAXE~ ~KATA~ ~SCIM~ ~DAGG~ ~HAMM~ ~SPEA~ ~HALB~ ~FLAI~ ~MACE~ ~CLUB~ ~STAF~ BEGIN
+ACTION_FOR_EACH prof IN ~89~ ~90~ ~91~ ~92~ ~93~ ~94~ ~95~ ~96~ ~97~ ~98~ ~99~ ~100~ ~101~ ~102~ ~115~ BEGIN
   OUTER_TEXT_SPRINT this_prof ~%prof%~
   CREATE EFF ~d5%prof%b~
 	WRITE_LONG 0x10 1
@@ -1891,27 +1872,48 @@ ACTION_FOR_EACH prof IN ~BSWO~ ~LSWO~ ~SSWO~ ~2SWO~ ~BAXE~ ~KATA~ ~SCIM~ ~DAGG~ 
 END
 
 // make spells with 206 against those EFFs
-ACTION_FOR_EACH 206_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5%206_prof%6.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5%206_prof%B~ END
+ACTION_FOR_EACH 206_prof IN ~89~ ~90~ ~91~ ~92~ ~93~ ~94~ ~95~ ~96~ ~97~ ~98~ ~99~ ~100~ ~101~ ~102~ ~115~ BEGIN
+  COPY ~might_and_guile/misc/d5_base.spl~ ~override/D5BS%206_prof%6.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5BS%206_prof%B~ END
   BUT_ONLY
 END
 
 // have weapon focus spells cancel those 206 spells
-ACTION_FOR_EACH spec IN ~a~ ~b~ ~c~ ~d~ ~e~ BEGIN
-  ACTION_FOR_EACH foc_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-	COPY_EXISTING ~d5%spec%%foc_prof%.spl~ ~override~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5%foc_prof%6~ END
+ACTION_FOR_EACH spec IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ BEGIN
+  ACTION_FOR_EACH foc_prof IN ~89~ ~90~ ~91~ ~92~ ~93~ ~94~ ~95~ ~96~ ~97~ ~98~ ~99~ ~100~ ~101~ ~102~ ~115~ BEGIN
+	COPY_EXISTING ~d5%spec%B%foc_prof%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~D5BS%foc_prof%6~ END
 	IF_EXISTS BUT_ONLY
   END
 END
 
 // make spell to cast those 206 spells
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bs206.spl~
-  PATCH_FOR_EACH 146_prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5%146_prof%6~ END
+  PATCH_FOR_EACH 146_prof IN ~89~ ~90~ ~91~ ~92~ ~93~ ~94~ ~95~ ~96~ ~97~ ~98~ ~99~ ~100~ ~101~ ~102~ ~115~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~D5BS%146_prof%6~ END
   END
 BUT_ONLY
+
+INCLUDE ~%MOD_FOLDER%/lib/dialprof.tpa~
+
+OUTER_SPRINT prof_script_name ~d5bsfo~
+OUTER_SET script_level_one = 0
+OUTER_SET script_higher_levels = 0
+
+LAM PROF_DIALOGUE
+
+COPY_EXISTING ~d5_blads.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_D5BSWPF~ ~GA_D5BSFOA~
+	REPLACE_TEXTUALLY ~GA_D5FTPRX~ ~GA_D5BSFOA~
+BUT_ONLY
+
+COPY ~might_and_guile/feats/d5_rfe9b.bam~ ~override~
+
+COPY_EXISTING ~d5bsfoa.spl~ ~override~
+	SAY NAME1 @20496
+	SAY UNIDENTIFIED_DESC @20497
+	WRITE_ASCII 0x3a ~d5_rfe9~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe9~ END
 
 //___________________________________________________________________________________
 

@@ -190,7 +190,7 @@ ADD_KIT ~D5SWASH~
 ~D5SWASH           0  1  1  0  0  0~
 
 //KIT ABILITIES 2DA FILE______________________________________________________________
-~might_and_guile/thief/d5_swash.2da~
+~might_and_guile/thief/d5swash.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 ~K_T_E K_T_H K_T_HE K_T_HL~
@@ -230,13 +230,13 @@ END
 //____________________________________________________________________________________
 
 ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
-	COPY ~might_and_guile/thief/d5_swasg.2da~ ~override/d5_swash.2da~
+	COPY ~might_and_guile/thief/d5_swasg.2da~ ~override/d5swash.2da~
 	BUT_ONLY
 END
 
 //SCOUT & SWASHBUCKLER ABILITY FILES________________________________________________
 //
-COPY ~might_and_guile/thief/d5_swash.2da~ ~override~
+COPY ~might_and_guile/thief/d5swash.2da~ ~override~
 COPY ~might_and_guile/misc/d5_luckp.spl~ ~override~
 	SAY NAME1 @3108
 	SAY UNIDENTIFIED_DESC @3108
@@ -259,22 +259,22 @@ COPY ~might_and_guile/fighter/d5_swapr.spl~ ~override~
 //WILD TALENT_________________________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_swash.2da~) BEGIN
-	APPEND ~d5_swash.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5swash.2da~) BEGIN
+	APPEND ~d5_wash.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
 END
 //____________________________________________________________________________________
 
 //DON'T USE SCROLLS/WANDS___________________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_nscrl.spl~ BEGIN
-	APPEND ~d5_swash.2da~ ~ABILITY    AP_D5_NSCRL ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_nscrl.spl~) BEGIN
+	APPEND ~d5swash.2da~ ~ABILITY    AP_D5_NSCRL ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
 END
 //__________________________________________________________________________________
 
 //______________________HLAS________________________________________________________
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~TG#TOUG.spl~) BEGIN
 	COPY_EXISTING ~LUTh0.2da~ ~override/luth4.2da~	
 END
 //__________________________________________________________________________________

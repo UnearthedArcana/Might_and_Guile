@@ -1,4 +1,4 @@
-// v2 - many more options
+// v2.1 - many more options
 
 
 //__________________________________________________________________________________
@@ -68,15 +68,15 @@ WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%game_lang%/dialprof.tra~ BEGIN
 
 //macro defaults____________________________________________________________________
 //
-ACTION_IF !(VARIABLE_IS_SET %prof_script_name%)  BEGIN
+ACTION_IF !(VARIABLE_IS_SET %prof_script_name%) BEGIN
   OUTER_SPRINT prof_script_name ~d5cprf~
 END
 
-ACTION_IF !(VARIABLE_IS_SET %script_level_one%)  BEGIN
+ACTION_IF !(VARIABLE_IS_SET %script_level_one%) BEGIN
   OUTER_SET script_level_one = 0
 END
 
-ACTION_IF !(VARIABLE_IS_SET %script_higher_levels%)  BEGIN
+ACTION_IF !(VARIABLE_IS_SET %script_higher_levels%) BEGIN
   OUTER_SET script_higher_levels = 0
 END
 
@@ -397,7 +397,7 @@ BUT_ONLY
 
 //__________________________________________________________________________________
 
-ACTION_IF (script_higher_levels = 1) BEGIN
+ACTION_IF (script_level_one = 1) BEGIN
   APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
 ~
 IF
@@ -811,7 +811,7 @@ END
 
 //__________________________________________________________________________________
 
-ACTION_IF (script_level_one = 0) AND (script_higher_levels = 0) BEGIN
+ACTION_IF (%script_level_one% = 0) AND (%script_higher_levels% = 0) BEGIN
   APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
 ~
 IF

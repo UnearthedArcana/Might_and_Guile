@@ -1,5 +1,5 @@
 
-// 0.83.0
+// 0.85.0
 
 //REMOVE BLANK LINES MACRO___________________________________________________________
 //
@@ -846,7 +846,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
     READ_2DA_ENTRY row 1 cols stat
     PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~89~) BEGIN
       READ_2DA_ENTRY row 2 cols bswo_strref
-      GET_STRREF %bswo_strref% bwso_text
+      GET_STRREF %bswo_strref% bswo_text
     END
     PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~90~) BEGIN
       READ_2DA_ENTRY row 2 cols lswo_strref

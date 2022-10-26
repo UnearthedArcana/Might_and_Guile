@@ -133,8 +133,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5mageh~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  LAF fnp_spontaneous STR_VAR kit_clab = ~d5mageh~ learn_res = ~d5magez~ END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5mageh~ learn_res = ~d5magez~ END
+    END
+  END
 END
 //__________________________________________________________________________________
 

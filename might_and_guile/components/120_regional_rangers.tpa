@@ -140,23 +140,7 @@ COPY ~might_and_guile/ranger/forest_ranger/d5enemfn.eff~ ~override~
 
 //REPLACE VANILLA KIT WITH THIS KIT__________________________________________________
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__rangers.d5~ BEGIN
-  ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~K_R_%race%.2da~ BEGIN
-	  COPY_EXISTING ~K_R_%race%.2da~ ~override~
-		COUNT_2DA_COLS cols
-		READ_2DA_ENTRIES_NOW rows cols
-		FOR (row = 1; row < rows; ++row) BEGIN
-		  READ_2DA_ENTRY_FORMER rows row 1 kit
-		  PATCH_IF (%kit% = 0) BEGIN
-			REMOVE_2DA_ROW row cols
-		  END
-		END
-	  BUT_ONLY
-	END
-  END
-END
-
+LAF remove_menu_kit INT_VAR del_kit = 0 STR_VAR class = ~R~ END
 
 //DEFINE SPHERE ACCESS_______________________________________________________________
 //
@@ -177,8 +161,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rfor~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  APPEND ~d5rfor.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5rfor~ learn_res = ~d5rforz~ END
+    END
+  END
 END
 
 END
@@ -317,8 +311,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rmou~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  APPEND ~d5rmou.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5rmou~ learn_res = ~d5rmouz~ END
+    END
+  END
 END
 
 END
@@ -449,8 +453,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rjun~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  APPEND ~d5rjun.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5rjun~ learn_res = ~d5rjunz~ END
+    END
+  END
 END
 
 END
@@ -586,8 +600,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rdes~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  APPEND ~d5rdes.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5rdes~ learn_res = ~d5rdesz~ END
+    END
+  END
 END
 
 END
@@ -718,8 +742,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
   LAF apply_fnp_usability STR_VAR clab_name = ~d5rarc~ END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
-  APPEND ~d5rarc.2da~ ~SPNT_SPLS    GA_D5FPSP2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5rarc~ learn_res = ~d5rarcz~ END
+    END
+  END
 END
 
 END

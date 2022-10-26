@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha1~
+VERSION ~5alpha2~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -209,9 +209,11 @@ INCLUDE ~might_and_guile/components/120_regional_rangers.tpa~
 
 LAF forest_ranger_kit END
 LAF mountain_ranger_kit END
+/*
 LAF jungle_ranger_kit END
 LAF desert_ranger_kit END
 LAF arctic_ranger_kit END
+*/
 //__________________________________________________________________________________
 
 
@@ -238,7 +240,8 @@ INCLUDE ~might_and_guile/components/130_barbarian_ranger.tpa~
 LAF barb_ranger_kit END
 //__________________________________________________________________________________
 
-
+/* 
+these are bad don't use these
 //_____________________FAKE MULTICLASS RANGERS______________________________________
 BEGIN @145
 DESIGNATED 145
@@ -247,7 +250,7 @@ INCLUDE ~might_and_guile/components/145_fake_rangers.tpa~
 
 LAF fake_ranger_multi_kits END
 //__________________________________________________________________________________
-
+*/
 
 
 //__________________________________________________________________________________

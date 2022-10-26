@@ -1,0 +1,326 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								REVISED BACKSTABS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION revised_backstabs BEGIN
+
+// ***** patch kit descriptions
+
+// assassin_________________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5___.spl~			//	poison backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~bdpweapn~ END
+
+/* just apply weapon poison
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5.spl~
+  SAY NAME1 @28021
+  SAY UNIDENTIFIED_DESC @28021
+*/
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth02.2da~) BEGIN
+  APPEND ~clabth02.2da~ ~BACKSTAB    AP_D5_____  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+COPY_EXISTING ~clabth02.2da~ ~override~
+  REPLACE TEXTUALLY ~AP_SPCL332~ ~****      ~
+IF_EXISTS BUT_ONLY
+
+// bounty hunter____________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb03.spl~			//	web backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb03b~ END
+
+// adapt single-target web tangle
+COPY_EXISTING ~spin683.spl~ ~override/d5stb03b.spl~
+  SAY NAME1 @28031
+  SAY UNIDENTIFIED_DESC @28031
+  LPF ALTER_EFFECT INT_VAR silent = 1 duration = 8 END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth03.2da~) BEGIN
+  APPEND ~clabth03.2da~ ~BACKSTAB    AP_D5STB03  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// shadowdancer_____________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb05.spl~			//	phased backstab  (blur visual + slow)
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb05b~ END
+
+OUTER_SET phased = RESOLVE_STR_REF (@28053)
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb05b.spl~
+  SAY NAME1 @28051
+  SAY UNIDENTIFIED_DESC @28051
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 65 target = 2 timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 0 target = 2 parameter1 = (0 -  2) timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 54 target = 2 parameter1 = (0 -  2) timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 40 target = 2 timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 141 target = 2 parameter2 = 6 timing = 1 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 139 target = 2 parameter1 = %phased% timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 174 target = 2 parameter2 = 17 timing = 1 savingthrow = 2 savebonus = (0 - 2) STR_VAR resource = ~eff_m29~ END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth05.2da~) BEGIN
+  APPEND ~clabth05.2da~ ~BACKSTAB    AP_D5STB05  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_shadd.2da~) BEGIN
+  APPEND ~d5_shadd.2da~ ~BACKSTAB    AP_D5STB05  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// rake_____________________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb06.spl~			//	panic backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb06b~ END
+
+// adapt Spook as an innate
+COPY_EXISTING ~spwi125.spl~ ~override/d5stb06b.spl~
+  LPM spell_to_innate
+  SAY NAME1 @28061
+  SAY UNIDENTIFIED_DESC @28061
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_rake.2da~) BEGIN
+  APPEND ~d5_rake.2da~ ~BACKSTAB    AP_D5STB06  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// ninja____________________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb07.spl~			//	blind backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb07b~ END
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb07b.spl~
+  SAY NAME1 @28071
+  SAY UNIDENTIFIED_DESC @28071
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 74 target = 2 timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 2 parameter2 = 8 timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 139 target = 2 parameter1 = 31786 timing = 0 duration = 12 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 141 target = 2 parameter2 = 17 timing = 1 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 174 target = 2 parameter2 = 17 timing = 1 savingthrow = 2 savebonus = (0 - 2) STR_VAR resource = ~eff_m58~ END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5ninja.2da~) BEGIN
+  APPEND ~d5ninja.2da~ ~BACKSTAB    AP_D5STB07  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5ninjf.2da~) BEGIN
+  APPEND ~d5ninjf.2da~ ~BACKSTAB    AP_D5STB07  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// spellfilcher_____________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb08.spl~			//	dispel magic backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb08b~ END
+
+// adapt Remove Magic as an innate
+COPY_EXISTING ~spwi302.spl~ ~override/d5stb06b.spl~
+  LPM spell_to_innate
+  SAY NAME1 @28081
+  SAY UNIDENTIFIED_DESC @28081
+  LPF ALTER_SPELL_HEADER INT_VAR target = 1 projectile = 1 END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_filch.2da~) BEGIN
+  APPEND ~d5_filch.2da~ ~BACKSTAB    AP_D5STB08  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// thug_____________________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb09.spl~			//	knockback/down backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb09b~ END
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb09b.spl~
+  SAY NAME1 @28091
+  SAY UNIDENTIFIED_DESC @28091
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 235 target = 2 parameter1 = 7 parameter2 = 2 timing = 0 duration = 2 savingthrow = 2 savebonus = (0 - 2) END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 39 target = 2 parameter2 = 1 timing = 0 duration = 4 savingthrow = 2 savebonus = (0 - 2) END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5_thug.2da~) BEGIN
+  APPEND ~d5_thug.2da~ ~BACKSTAB    AP_D5STB09  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// WtP psionicist___________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb10.spl~			//	mind thrust/sleep backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb10b~ END
+
+// adapt Commmand as an innate
+COPY_EXISTING ~sppr102.spl~ ~override/d5stb10b.spl~
+  LPM spell_to_innate
+  SAY NAME1 @28101
+  SAY UNIDENTIFIED_DESC @28102 
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 39 parameter2 = 1 END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5psith.2da~) BEGIN
+  APPEND ~d5psith.2da~ ~BACKSTAB    AP_D5STB10  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+
+// S&S soulknife____________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb11.spl~			//	stun backstab
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 340 target = 1 timing = 9 STR_VAR resource = ~d5stb11b~ END
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5stb11b.spl~
+  SAY NAME1 @28111
+  SAY UNIDENTIFIED_DESC @28111
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 45 target = 2 timing = 0 duration = 6 savingthrow = 2 savebonus = (0 - 2) END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~a!soul.2da~) BEGIN
+  APPEND ~a!soul.2da~ ~BACKSTAB    AP_D5STB11  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+//__________________________________________________________________________________
+
+
+//CHANGE KIT TEXT___________________________________________________________________
+//
+ACTION_FOR_EACH text_file IN ~clastext~ /*~sodcltxt~ ~bgclatxt~*/ BEGIN
+  COPY_EXISTING ~%text_file%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 0 cols kit_name
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) BEGIN
+        READ_2DA_ENTRY row 4 cols assassin_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
+        READ_2DA_ENTRY row 4 cols bounty_hunter_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) OR (~%kit_name%~ STRING_EQUAL_CASE ~D5SHADD~) BEGIN
+        READ_2DA_ENTRY row 4 cols shadowdancer_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_RAKE~) BEGIN
+        READ_2DA_ENTRY row 4 cols rake_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5NINJA_T~) OR (~%kit_name%~ STRING_EQUAL_CASE ~D5NINJA_F~) BEGIN
+        READ_2DA_ENTRY row 4 cols ninja_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5FILCH~) BEGIN
+        READ_2DA_ENTRY row 4 cols spellfilcher_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_THUG~) BEGIN
+        READ_2DA_ENTRY row 4 cols thug_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_PSION~) BEGIN
+        READ_2DA_ENTRY row 4 cols psionicist_desc
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~A!SOULKNIFE~) BEGIN
+        READ_2DA_ENTRY row 4 cols soulknife_desc
+      END
+    END
+  IF_EXISTS BUT_ONLY
+END
+
+OUTER_SPRINT assassin_backstab_desc @28020
+OUTER_SPRINT bounty_hunter_backstab_desc @28030
+OUTER_SPRINT shadowdancer_backstab_desc @28050
+OUTER_SPRINT rake_backstab_desc @28060
+OUTER_SPRINT ninja_backstab_desc @28070
+OUTER_SPRINT spellfilcher_backstab_desc @28080
+OUTER_SPRINT thug_backstab_desc @28090
+OUTER_SPRINT psionicist_backstab_desc @28100
+OUTER_SPRINT soulknife_backstab_desc @28110
+
+ACTION_IF (VARIABLE_IS_SET %assassin_desc%) BEGIN
+  ACTION_GET_STRREF %assassin_desc% assassin_desc_text
+  OUTER_SPRINT new_assassin_desc ~%assassin_desc_text%~^~%assassin_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %bounty_hunter_desc%) BEGIN
+  ACTION_GET_STRREF %bounty_hunter_desc% bounty_hunter_desc_text
+  OUTER_SPRINT new_bounty_hunter_desc ~%bounty_hunter_desc_text%~^~%bounty_hunter_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %shadowdancer_desc%) BEGIN
+  ACTION_GET_STRREF %shadowdancer_desc% shadowdancer_desc_text
+  OUTER_SPRINT new_shadowdancer_desc ~%shadowdancer_desc_text%~^~%shadowdancer_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %rake_desc%) BEGIN
+  ACTION_GET_STRREF %rake_desc% rake_desc_text
+  OUTER_SPRINT new_rake_desc ~%rake_desc_text%~^~%rake_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %ninja_desc%) BEGIN
+  ACTION_GET_STRREF %ninja_desc% ninja_desc_text
+  OUTER_SPRINT new_ninja_desc ~%ninja_desc_text%~^~%ninja_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %spellfilcher_desc%) BEGIN
+  ACTION_GET_STRREF %spellfilcher_desc% spellfilcher_desc_text
+  OUTER_SPRINT new_spellfilcher_desc ~%spellfilcher_desc_text%~^~%spellfilcher_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %thug_desc%) BEGIN
+  ACTION_GET_STRREF %thug_desc% thug_desc_text
+  OUTER_SPRINT new_thug_desc ~%thug_desc_text%~^~%thug_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %psionicist_desc%) BEGIN
+  ACTION_GET_STRREF %psionicist_desc% psionicist_desc_text
+  OUTER_SPRINT new_psionicist_desc ~%psionicist_desc_text%~^~%psionicist_backstab_desc%~
+END
+ACTION_IF (VARIABLE_IS_SET %soulknife_desc%) BEGIN
+  ACTION_GET_STRREF %soulknife_desc% soulknife_desc_text
+  OUTER_SPRINT new_soulknife_desc ~%soulknife_desc_text%~^~%soulknife_backstab_desc%~
+END
+
+ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist.2da~ BEGIN
+  COPY_EXISTING ~%text_file%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 0 cols kit_name
+      READ_2DA_ENTRY row 1 cols kitlist_name
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_assassin_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_assassin_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_bounty_hunter_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_bounty_hunter_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_shadowdancer_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_shadowdancer_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5SHADD~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5SHADD~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_shadowdancer_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_shadowdancer_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_RAKE~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5_RAKE~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_rake_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_rake_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5NINJA_T~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5NINJA_T~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_ninja_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_ninja_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5NINJA_F~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5NINJA_F~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_ninja_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_ninja_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5FILCH~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5FILCH~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_spellfilcher_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_spellfilcher_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_THUG~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5_THUG~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_thug_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_thug_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_PSION~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~D5_PSION~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_psionicist_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_psionicist_desc%~)
+        END
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~A!SOULKNIFE~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~A!SOULKNIFE~) BEGIN
+        PATCH_IF (VARIABLE_IS_SET %new_soulknife_desc%) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_soulknife_desc%~)
+        END
+      END
+    END
+  IF_EXISTS BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
+END	//	end function
+

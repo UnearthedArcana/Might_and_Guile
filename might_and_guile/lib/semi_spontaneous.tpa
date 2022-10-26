@@ -5106,7 +5106,7 @@ ACTION_IF !(VARIABLE_IS_SET %semi_spont_rested%) BEGIN
   OUTER_SET semi_spont_rest = %new_state_ind%
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_innate_casting.d5~) BEGIN
+//ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_innate_casting.d5~) BEGIN
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%206.spl~
 
@@ -5218,9 +5218,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnfsh.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~d5xrfsh~ END
 END
 
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~
+//COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~
 
-END	//	end no marker file
+//END	//	end no marker file
 
 // casting system______________________________________________________________________
 //

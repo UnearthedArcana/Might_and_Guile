@@ -1,0 +1,109 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								MULTICLASS TWEAKS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION revised_multiclassing BEGIN
+
+
+//COPY MARKER FILE__________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__multi.d5~
+//__________________________________________________________________________________
+
+
+//ENABLE MORE MULTICLASSES__________________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+		SET_2DA_ENTRY 34 1 8 ~1~
+		SET_2DA_ENTRY 35 1 8 ~1~
+		SET_2DA_ENTRY 36 1 8 ~1~
+		SET_2DA_ENTRY 37 1 8 ~1~
+		SET_2DA_ENTRY 46 1 8 ~1~
+		SET_2DA_ENTRY 47 1 8 ~1~
+		SET_2DA_ENTRY 48 1 8 ~1~
+		SET_2DA_ENTRY 49 1 8 ~1~
+		SET_2DA_ENTRY 50 1 8 ~1~
+		SET_2DA_ENTRY 51 1 8 ~1~
+//		SET_2DA_ENTRY 25 2 8 ~1~
+		SET_2DA_ENTRY 35 2 8 ~1~
+		SET_2DA_ENTRY 47 2 8 ~1~
+		SET_2DA_ENTRY 48 2 8 ~1~
+		SET_2DA_ENTRY 50 2 8 ~1~
+		SET_2DA_ENTRY 51 2 8 ~1~
+		SET_2DA_ENTRY 48 3 8 ~1~
+		SET_2DA_ENTRY 48 4 8 ~1~
+		SET_2DA_ENTRY 35 5 8 ~1~
+		SET_2DA_ENTRY 48 5 8 ~1~
+	BUT_ONLY
+END
+ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
+	COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+		SET_2DA_ENTRY 11 1 7 ~1~
+		SET_2DA_ENTRY 12 1 7 ~1~
+		SET_2DA_ENTRY 13 1 7 ~1~
+		SET_2DA_ENTRY 14 1 7 ~1~
+		SET_2DA_ENTRY 15 1 7 ~1~
+		SET_2DA_ENTRY 16 1 7 ~1~
+		SET_2DA_ENTRY 17 1 7 ~1~
+		SET_2DA_ENTRY 18 1 7 ~1~
+		SET_2DA_ENTRY 19 1 7 ~1~
+		SET_2DA_ENTRY 20 1 7 ~1~
+//		SET_2DA_ENTRY 5 2 7 ~1~
+		SET_2DA_ENTRY 12 2 7 ~1~
+		SET_2DA_ENTRY 15 2 7 ~1~
+		SET_2DA_ENTRY 16 2 7 ~1~
+		SET_2DA_ENTRY 18 2 7 ~1~
+		SET_2DA_ENTRY 20 2 7 ~1~
+		SET_2DA_ENTRY 16 3 7 ~1~
+		SET_2DA_ENTRY 16 4 7 ~1~
+		SET_2DA_ENTRY 12 5 7 ~1~
+		SET_2DA_ENTRY 16 5 7 ~1~
+	BUT_ONLY
+END
+//___________________________________________________________________________________
+
+
+//DEAL WITH SNARES___________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5cl412.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 171 timing = 1 STR_VAR resource = ~spcl412~ END
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5nx412.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 172 timing = 1 STR_VAR resource = ~spcl412~ END
+  LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5cl412~ END
+
+COPY_EXISTING ~clabth01.2da~ ~override~
+  REPLACE_TEXTUALLY ~GA_SPCL412~ ~AP_D5CL412~
+IF_EXISTS BUT_ONLY
+//___________________________________________________________________________________
+
+
+//FIX MULTICLASS KIT FEATS___________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
+ OUTER_FOR (qd_num = 1; qd_num < 9; ++qd_num) BEGIN
+  COPY_EXISTING ~qd_mct0%qd_num%.spl~ ~override~
+    FOR (eff_num = 1; eff_num < 9; ++eff_num) BEGIN
+      LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = EVAL ~d5mcft%eff_num%#~ resource = EVAL ~d5mcft%eff_num%~ END
+    END
+  IF_EXISTS BUT_ONLY
+ END
+ OUTER_FOR (qd_num = 10; qd_num < 50; ++qd_num) BEGIN
+  COPY_EXISTING ~qd_mct%qd_num%.spl~ ~override~
+    FOR (eff_num = 1; eff_num < 9; ++eff_num) BEGIN
+      LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = EVAL ~d5mcft%eff_num%#~ resource = EVAL ~d5mcft%eff_num%~ END
+    END
+  IF_EXISTS BUT_ONLY
+ END
+END
+//___________________________________________________________________________________
+
+
+END	//	end function
+

@@ -731,6 +731,21 @@ END
 //
 DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 
+
+//check config settings______________________________________________________________
+//
+ ACTION_IF (FILE_EXISTS_IN_GAME ~d5_fnp_settings.ini~) BEGIN
+  INCLUDE ~override/d5_fnp_settings.ini~
+    LAM d5_fnp_weapon_usability
+ END
+
+ ACTION_IF !(VARIABLE_IS_SET %simpler_usability_changes%) BEGIN
+  OUTER_SET simpler_usability_changes = 0
+ END
+
+
+//___________________________________________________________________________________
+//
  LAM ~READ_FNP_KIT_INFO~
 
  OUTER_TEXT_SPRINT hex_lat 			~04000000~
@@ -768,7 +783,8 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
   END
 
  ACTION_PHP_EACH d5_fnp_mod_kit_use AS use => val BEGIN
-  ACTION_IF (~%use%~ STRING_EQUAL_CASE ~CHAIN_ARMOR~) BEGIN
+  ACTION_IF (simpler_usability_changes = 0) BEGIN
+   ACTION_IF (~%use%~ STRING_EQUAL_CASE ~CHAIN_ARMOR~) BEGIN
 	ACTION_IF (%val% = 1) BEGIN
 	  PRINT ~    %use_1% : %use% : %val%~
 	  COPY_EXISTING ~kitlist.2da~ ~override~
@@ -778,9 +794,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 kit_class
 		  PATCH_IF (~%kit_clab%~ STRING_EQUAL_CASE ~%use_1%~) BEGIN
-//			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
+			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
 			  SET_2DA_ENTRY row 7 10 ~0x%hex_helm%~
-//			END
+			END
 		  END
 		END
 	  BUT_ONLY
@@ -794,15 +810,15 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 kit_class
 		  PATCH_IF (~%kit_clab%~ STRING_EQUAL_CASE ~%use_1%~) BEGIN
-//			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
+			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
 			  SET_2DA_ENTRY row 7 10 ~0x%hex_lat%~
-//			END
+			END
 		  END
 		END
 	  BUT_ONLY
 	END
-  END
-  ACTION_IF (~%use%~ STRING_EQUAL_CASE ~PLATE_ARMOR~) BEGIN
+   END
+   ACTION_IF (~%use%~ STRING_EQUAL_CASE ~PLATE_ARMOR~) BEGIN
 	ACTION_IF (%val% = 1) BEGIN
 	  PRINT ~    %use_1% : %use% : %val%~
 	  COPY_EXISTING ~kitlist.2da~ ~override~
@@ -812,20 +828,133 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 		  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 kit_class
 		  PATCH_IF (~%kit_clab%~ STRING_EQUAL_CASE ~%use_1%~) BEGIN
-//			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
+			PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
 			  SET_2DA_ENTRY row 7 10 ~0x%hex_talos%~
-//			END
+			END
 		  END
 		END
 	  BUT_ONLY
 	END
+   END
   END
  END
+
+ COPY_EXISTING ~weapprof.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 7; row < rows; ++row) BEGIN
+    READ_2DA_ENTRY row 1 cols stat
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~89~) BEGIN
+      READ_2DA_ENTRY row 2 cols bswo_strref
+      GET_STRREF %bswo_strref% bwso_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~90~) BEGIN
+      READ_2DA_ENTRY row 2 cols lswo_strref
+      GET_STRREF %lswo_strref% lswo_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~91~) BEGIN
+      READ_2DA_ENTRY row 2 cols sswo_strref
+      GET_STRREF %sswo_strref% sswo_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~92~) BEGIN
+      READ_2DA_ENTRY row 2 cols baxe_strref
+      GET_STRREF %baxe_strref% baxe_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~93~) BEGIN
+      READ_2DA_ENTRY row 2 cols 2swo_strref
+      GET_STRREF %2swo_strref% 2swo_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~94~) BEGIN
+      READ_2DA_ENTRY row 2 cols kata_strref
+      GET_STRREF %kata_strref% kata_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~95~) BEGIN
+      READ_2DA_ENTRY row 2 cols scim_strref
+      GET_STRREF %scim_strref% scim_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~96~) BEGIN
+      READ_2DA_ENTRY row 2 cols dagg_strref
+      GET_STRREF %dagg_strref% dagg_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~97~) BEGIN
+      READ_2DA_ENTRY row 2 cols hamm_strref
+      GET_STRREF %hamm_strref% hamm_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~98~) BEGIN
+      READ_2DA_ENTRY row 2 cols spea_strref
+      GET_STRREF %spea_strref% spea_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~99~) BEGIN
+      READ_2DA_ENTRY row 2 cols halb_strref
+      GET_STRREF %halb_strref% halb_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~100~) BEGIN
+      READ_2DA_ENTRY row 2 cols flai_strref
+      GET_STRREF %flai_strref% flai_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~101~) BEGIN
+      READ_2DA_ENTRY row 2 cols mace_strref
+      GET_STRREF %mace_strref% mace_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~102~) BEGIN
+      READ_2DA_ENTRY row 2 cols staf_strref
+      GET_STRREF %staf_strref% staf_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~103~) BEGIN
+      READ_2DA_ENTRY row 2 cols xbow_strref
+      GET_STRREF %xbow_strref% xbow_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~104~) BEGIN
+      READ_2DA_ENTRY row 2 cols lbow_strref
+      GET_STRREF %lbow_strref% lbow_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~105~) BEGIN
+      READ_2DA_ENTRY row 2 cols sbow_strref
+      GET_STRREF %sbow_strref% sbow_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~106~) BEGIN
+      READ_2DA_ENTRY row 2 cols dart_strref
+      GET_STRREF %sbow_strref% dart_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~107~) BEGIN
+      READ_2DA_ENTRY row 2 cols slin_strref
+      GET_STRREF %slin_strref% slin_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~111~) BEGIN
+      READ_2DA_ENTRY row 2 cols 2hws_strref
+      GET_STRREF %2hws_strref% 2hws_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~112~) BEGIN
+      READ_2DA_ENTRY row 2 cols snss_strref
+      GET_STRREF %snss_strref% snss_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~113~) BEGIN
+      READ_2DA_ENTRY row 2 cols swss_strref
+      GET_STRREF %swss_strref% swss_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~114~) BEGIN
+      READ_2DA_ENTRY row 2 cols twfs_strref
+      GET_STRREF %twfs_strref% twfs_text
+    END
+    PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~115~) BEGIN
+      READ_2DA_ENTRY row 2 cols club_strref
+      GET_STRREF %club_strref% club_text
+    END
+  END
+ BUT_ONLY  
+
+ OUTER_SPRINT base_weapon_use ~
+
+Weapons Usable by this kit:
+ - %staf_text%
+ - %club_text%
+~
 
  COPY_EXISTING ~kitlist.2da~ ~override~
 //  COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
   FOR (row = 3; row < r2en_kitlist; row += 1) BEGIN
+    SPRINT these_weapon_use ~~
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 0 kit_index
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kit_label
@@ -833,7 +962,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 9 kit_code
 	PATCH_IF (~%kit_clab%~ STRING_EQUAL_CASE ~%mod_clab%~) BEGIN
 //	  SET patch_row = %row%
-//	  PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
+	  PATCH_IF (%kit_class% = 3 || %kit_class% = 11 || %kit_class% = 21 || %kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
 		INNER_ACTION BEGIN
 		  COPY ~faiths_and_powers/data/misc/d5fnpuse.spl~ ~override/d5_u%kit_index%.spl~
 		END
@@ -856,27 +985,6 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 				BUT_ONLY
 			  END
 			END
-			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~HAMMERS~) BEGIN				// war hammers
-			  INNER_ACTION BEGIN
-				COPY_EXISTING ~weapprof.2da~ override
-				  READ_2DA_ENTRIES_NOW weapprof 3
-				  COUNT_2DA_COLS cols
-				  FOR (col = 0; col < cols - 1; ++col) BEGIN
-					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
-					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
-					  SET_2DA_ENTRY 17 (col + 1) 3 %access%						// war hammer
-					END
-				  END
-				BUT_ONLY
-			  END
-			  PATCH_IF (access = 0) BEGIN
-				INNER_ACTION BEGIN
-				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
-					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 21 parameter2 = 0 timing = 9 END
-				  BUT_ONLY
-				END
-			  END
-			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~MACES~) BEGIN				// maces
 			  INNER_ACTION BEGIN
 				COPY_EXISTING ~weapprof.2da~ override
@@ -896,7 +1004,34 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 17 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %mace_text%
+~
+		      END
+			END
+			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~HAMMERS~) BEGIN				// war hammers
+			  INNER_ACTION BEGIN
+				COPY_EXISTING ~weapprof.2da~ override
+				  READ_2DA_ENTRIES_NOW weapprof 3
+				  COUNT_2DA_COLS cols
+				  FOR (col = 0; col < cols - 1; ++col) BEGIN
+					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
+					  SET_2DA_ENTRY 17 (col + 1) 3 %access%						// war hammer
+					END
+				  END
+				BUT_ONLY
 			  END
+			  PATCH_IF (access = 0) BEGIN
+				INNER_ACTION BEGIN
+				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
+					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 21 parameter2 = 0 timing = 9 END
+				  BUT_ONLY
+				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %hamm_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~FLAILS~) BEGIN				// flails
 			  INNER_ACTION BEGIN
@@ -917,7 +1052,10 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 23 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %flai_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~AXES~) BEGIN				// axes
 			  INNER_ACTION BEGIN
@@ -938,7 +1076,10 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 25 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %baxe_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~DAGGERS~) BEGIN				// daggers
 			  INNER_ACTION BEGIN
@@ -959,7 +1100,10 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 16 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %dagg_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~SHORT_SWORDS~) BEGIN		// short swords
 			  INNER_ACTION BEGIN
@@ -980,7 +1124,10 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 19 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %sswo_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~LONG_SWORDS~) BEGIN			// long swords
 			  INNER_ACTION BEGIN
@@ -1001,48 +1148,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 20 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
-			END
-			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~SCIMITARS~) BEGIN			// scimitars
-			  INNER_ACTION BEGIN
-				COPY_EXISTING ~weapprof.2da~ override
-				  READ_2DA_ENTRIES_NOW weapprof 3
-				  COUNT_2DA_COLS cols
-				  FOR (col = 0; col < cols - 1; ++col) BEGIN
-					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
-					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
-					  SET_2DA_ENTRY 15 (col + 1) 3 %access%						//	scimitar
-					END
-				  END
-				BUT_ONLY
-			  END
-			  PATCH_IF (access = 0) BEGIN
-				INNER_ACTION BEGIN
-				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
-					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 29 parameter2 = 0 timing = 9 END
-				  BUT_ONLY
-				END
-			  END
-			END
-			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~KATANAS~) BEGIN				// katanas
-			  INNER_ACTION BEGIN
-				COPY_EXISTING ~weapprof.2da~ override
-				  READ_2DA_ENTRIES_NOW weapprof 3
-				  COUNT_2DA_COLS cols
-				  FOR (col = 0; col < cols - 1; ++col) BEGIN
-					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
-					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
-					  SET_2DA_ENTRY 14 (col + 1) 3 %access%						//	katana
-					END
-				  END
-				BUT_ONLY
-			  END
-			  PATCH_IF (access = 0) BEGIN
-				INNER_ACTION BEGIN
-				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
-					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 30 parameter2 = 0 timing = 9 END
-				  BUT_ONLY
-				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %lswo_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~BASTARD_SWORDS~) BEGIN		// bastard swords
@@ -1064,6 +1172,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 22 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %bswo_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~2HAND_SWORDS~) BEGIN		// 2-hand swords
@@ -1085,9 +1196,12 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 57 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %2swo_text%
+~
 			  END
 			END
-			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~HALBERDS~) BEGIN			// halberds
+			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~SCIMITARS~) BEGIN			// scimitars
 			  INNER_ACTION BEGIN
 				COPY_EXISTING ~weapprof.2da~ override
 				  READ_2DA_ENTRIES_NOW weapprof 3
@@ -1095,7 +1209,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 				  FOR (col = 0; col < cols - 1; ++col) BEGIN
 					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
 					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
-					  SET_2DA_ENTRY 20 (col + 1) 3 %access%						//	halberd
+					  SET_2DA_ENTRY 15 (col + 1) 3 %access%						//	scimitar
 					END
 				  END
 				BUT_ONLY
@@ -1103,9 +1217,36 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 			  PATCH_IF (access = 0) BEGIN
 				INNER_ACTION BEGIN
 				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
-					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 69 parameter2 = 0 timing = 9 END
+					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 29 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %scim_text%
+~
+			  END
+			END
+			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~KATANAS~) BEGIN				// katanas
+			  INNER_ACTION BEGIN
+				COPY_EXISTING ~weapprof.2da~ override
+				  READ_2DA_ENTRIES_NOW weapprof 3
+				  COUNT_2DA_COLS cols
+				  FOR (col = 0; col < cols - 1; ++col) BEGIN
+					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
+					  SET_2DA_ENTRY 14 (col + 1) 3 %access%						//	katana
+					END
+				  END
+				BUT_ONLY
+			  END
+			  PATCH_IF (access = 0) BEGIN
+				INNER_ACTION BEGIN
+				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
+					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 30 parameter2 = 0 timing = 9 END
+				  BUT_ONLY
+				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %kata_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~SPEARS~) BEGIN				// spears
@@ -1127,6 +1268,33 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 44 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %spea_text%
+~
+			  END
+			END
+			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~HALBERDS~) BEGIN			// halberds
+			  INNER_ACTION BEGIN
+				COPY_EXISTING ~weapprof.2da~ override
+				  READ_2DA_ENTRIES_NOW weapprof 3
+				  COUNT_2DA_COLS cols
+				  FOR (col = 0; col < cols - 1; ++col) BEGIN
+					READ_2DA_ENTRY_FORMER weapprof 0 col column_name
+					PATCH_IF "%column_name%" STRING_EQUAL_CASE "%kit_label%" BEGIN
+					  SET_2DA_ENTRY 20 (col + 1) 3 %access%						//	halberd
+					END
+				  END
+				BUT_ONLY
+			  END
+			  PATCH_IF (access = 0) BEGIN
+				INNER_ACTION BEGIN
+				  COPY_EXISTING ~d5_u%kit_index%.spl~ ~override~
+					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 69 parameter2 = 0 timing = 9 END
+				  BUT_ONLY
+				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %halb_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~DARTS~) BEGIN				// darts
@@ -1148,6 +1316,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 24 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %dart_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~SLINGS~) BEGIN				// slings, bullets
@@ -1170,6 +1341,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 //					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 14 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %slin_text%
+~
 			  END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~BOWS~) BEGIN				// long bows, short bows, arrows
@@ -1193,7 +1367,11 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 //					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 5 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
-			  END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %lbow_text%
+ - %sbow_text%
+~
+		      END
 			END
 			PATCH_IF (~%usable%~ STRING_EQUAL_CASE ~CROSSBOWS~) BEGIN			// crossbows, bolts
 			  INNER_ACTION BEGIN
@@ -1215,11 +1393,23 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 //					LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 31 parameter2 = 0 timing = 9 END
 				  BUT_ONLY
 				END
+		      END ELSE BEGIN
+		        SPRINT these_weapon_use ~%these_weapon_use%~^~ - %xbow_text%
+~
 			  END
 			END
 		  END
+	      SPRINT kit_weapon_use ~%base_weapon_use%~^~%these_weapon_use%~
+//	      PATCH_PRINT ~%kit_weapon_use%~
+	      PATCH_IF (simpler_usability_changes = 0) BEGIN
+	        GET_STRREF %kit_desc% kit_desc_text
+	        SPRINT new_kit_desc ~%kit_desc_text%~^~ %kit_weapon_use%~
+	        SET new_kit_desc_string = RESOLVE_STR_REF (~%new_kit_desc%~)
+	        SET_2DA_ENTRY row 4 10 new_kit_desc_string
+	      END
 		END
-		INNER_ACTION BEGIN
+	    PATCH_IF (simpler_usability_changes = 0) BEGIN
+		 INNER_ACTION BEGIN
 		  ACTION_IF FILE_EXISTS_IN_GAME ~%mod_clab%.2da~ BEGIN
 			APPEND ~%mod_clab%.2da~ ~FNP_USABLE   AP_D5_U%kit_index%   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 			ACTION_IF (%kit_class% = 8 || %kit_class% = 14 || %kit_class% = 15 || %kit_class% = 18 || %kit_class% = 16) BEGIN
@@ -1244,8 +1434,9 @@ DEFINE_ACTION_FUNCTION apply_fnp_usability STR_VAR clab_name = ~x~ BEGIN
 				LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = %kit_code% parameter2 = 9 STR_VAR resource = EVAL ~d5_u%kit_index%#~ END  
 			END 
 		  END
+		 END
 		END
-//	  END
+	  END
 	END
   END
  BUT_ONLY

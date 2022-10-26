@@ -7,6 +7,9 @@
 //__________________________________________________________________________________
 
 
+DEFINE_ACTION_FUNCTION improved_rangers BEGIN
+
+
 // copy marker file__________________________________________________________________
 //
 COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__imp_rangers.d5~
@@ -15,44 +18,23 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__imp_rangers.d5~
 
 //CHANGE CLASS TEXT_________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
-  COPY_EXISTING ~clastext.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols 
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
-	    SET ranger_row = %row%
-		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
-	  END
-	END
-  BUT_ONLY
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
-  COPY_EXISTING ~sodcltxt.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols 
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
-	    SET ranger_row = %row%
-		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
-	  END
-	END
-  BUT_ONLY
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~bgclatxt.2da~) BEGIN
-  COPY_EXISTING ~bgclatxt.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols 
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
-	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
-	    SET ranger_row = %row%
-		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@2401)
-	  END
-	END
-  BUT_ONLY
+ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ BEGIN
+  COPY_EXISTING ~%text_file%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 0 cols kit_name
+      READ_2DA_ENTRY row 1 cols kitlist_name
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
+        PATCH_IF !(FILE_EXISTS_IN_GAME ~d5rfor.2da~) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@2401)
+        END
+        PATCH_IF (FILE_EXISTS_IN_GAME ~d5rfor.2da~) BEGIN
+          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@2402)
+        END
+      END
+    END
+  IF_EXISTS BUT_ONLY
 END
 
 
@@ -139,23 +121,6 @@ ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
     APPEND ~%clab%.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
   END
 END
-
-/*
-APPEND ~clabrn01.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-COPY_EXISTING ~kitlist.2da~ ~override~
-  COUNT_2DA_ROWS 9 rows
-  FOR (row = 3 ; row < rows ; ++row ) BEGIN
-	READ_2DA_ENTRY row 5 9 clab
-	READ_2DA_ENTRY row 8 9 class
-	PATCH_IF (class = 12) BEGIN
-	  INNER_ACTION BEGIN
-		APPEND ~%clab%.2da~ ~ALERT       AP_D5RNVIS  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-	  END
-	END
-  END
-BUT_ONLY
-*/
-
 //___________________________________________________________________________________
 
 
@@ -163,13 +128,6 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // just apply feats if already installed______________________________________________
 // 
-/*
-APPEND ~clabrn01.2da~ ~FEATS       AP_D5VWC5L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-ACTION_IF !(GAME_IS ~iwdee~) BEGIN
-  APPEND ~clabrn01.2da~ ~TRACKING    AP_D5VRA9L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-END
-*/
-
 ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
     APPEND ~%clab%.2da~ ~FEATS       AP_D5VWC5L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
@@ -178,25 +136,6 @@ ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
     END
   END
 END
-
-/*
-COPY_EXISTING ~kitlist.2da~ ~override~
-  COUNT_2DA_ROWS 9 rows
-  FOR (row = 3 ; row < rows ; ++row ) BEGIN
-	READ_2DA_ENTRY row 5 9 clab
-	READ_2DA_ENTRY row 8 9 class
-	PATCH_IF (class = 12) BEGIN
-	  INNER_ACTION BEGIN
-		APPEND ~%clab%.2da~ ~FEATS       AP_D5VWC5L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-		ACTION_IF !(GAME_IS ~iwdee~) BEGIN
-		  APPEND ~%clab%.2da~ ~FEATS       AP_D5VRA9L  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-		END
-	  END
-	END
-  END
-BUT_ONLY
-*/
-
 //___________________________________________________________________________________
 
 END
@@ -205,7 +144,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
 // give tracking at level 1__________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+ ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
 
   ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 
@@ -216,21 +155,6 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
         APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
       END
     END
-/*
-	COPY_EXISTING ~kitlist.2da~ ~override~
-// 	  COUNT_2DA_COLS cols
-	  COUNT_2DA_ROWS 9 rows
-	  FOR (row = 3 ; row < rows ; ++row ) BEGIN
-		READ_2DA_ENTRY row 5 9 clab
-		READ_2DA_ENTRY row 8 9 class
-		PATCH_IF (class = 12) BEGIN
-		  INNER_ACTION BEGIN
-			APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
-		  END
-		END
-	  END
-	BUT_ONLY
-*/
 
 	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
 	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
@@ -238,15 +162,16 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
 
   END
   
-END
+ END
+//___________________________________________________________________________________
 
-ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) BEGIN
+ ACTION_IF (GAME_IS ~bgee bg2ee eet iwdee~) BEGIN
 
 // give poison/disease/nausea evasion________________________________________________
 // 
-INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+ INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
 <<<<<<<< d5/d5poisev.2da
 2DA V1.0 
 RES
@@ -340,6 +265,7 @@ BUT_ONLY
 
 END
 
+/* do this in the 'regional rangers' comp... right? Or, should it be in both?
 //more ranger alignments_____________________________________________________________
 //
 COPY_EXISTING ~kitlist.2da~ ~override~
@@ -371,5 +297,9 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 BUT_ONLY
 //__________________________________________________________________________________
+*/
 
 END 	//	end EE-only stuff
+
+END	//	end function
+

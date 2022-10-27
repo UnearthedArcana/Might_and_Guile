@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha2~
+VERSION ~5alpha4~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -75,7 +75,7 @@ LAF fighter_cavalier END
 
 //____________________________CORSAIR_______________________________________________
 BEGIN @55
-DESIGNATED 310		//	soon to be 55
+DESIGNATED 55
 LABEL ~D5_CORSAIR_KIT~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 
@@ -209,17 +209,15 @@ INCLUDE ~might_and_guile/components/120_regional_rangers.tpa~
 
 LAF forest_ranger_kit END
 LAF mountain_ranger_kit END
-/*
 LAF jungle_ranger_kit END
 LAF desert_ranger_kit END
 LAF arctic_ranger_kit END
-*/
 //__________________________________________________________________________________
 
 
 //___________________________MAGE HUNTER____________________________________________
 BEGIN @125
-DESIGNATED 350			//	soon to be  125
+DESIGNATED 125
 LABEL ~D5_MAGE_HUNTER~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5mageh.2da~) @5
 
@@ -231,7 +229,7 @@ LAF mage_hunter_kit END
 
 //_________________________BARBARIAN RANGER_________________________________________
 BEGIN @130
-DESIGNATED 360			//	soon to be  130
+DESIGNATED 130
 LABEL ~D5_BARBARIAN_RANGER~
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5rbarb.2da~) @5
 
@@ -263,7 +261,7 @@ LAF fake_ranger_multi_kits END
 
 //_________________________MARKSMAN_________________________________________________
 BEGIN @150
-DESIGNATED 320			//	soon to be 150
+DESIGNATED 150
 LABEL ~D5_MARKSMAN~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 
@@ -275,7 +273,7 @@ LAF marksman_kit END
 
 //_______________________ELVEN ARCHER_______________________________________________
 BEGIN @155
-DESIGNATED 322			//	soon to be 155
+DESIGNATED 155
 LABEL ~D5_ELVEN_ARCHER~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5earch.2da~) @5
@@ -288,7 +286,7 @@ LAF elven_archer_kit END
 
 //_________________________SLINGER__________________________________________________
 BEGIN @160
-DESIGNATED 324			//	soon to be 160
+DESIGNATED 160
 LABEL ~D5_HALFLING_SLINGER~
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee eet iwdee~) @4
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
@@ -302,7 +300,7 @@ LAF halfling_slinger_kit END
 
 //__________________________SNIPER__________________________________________________
 BEGIN @165
-DESIGNATED 410			//	soon to be 165
+DESIGNATED 165
 LABEL ~D5_SNIPER_KIT~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 
@@ -525,7 +523,7 @@ LAF revised_rogue_thac0 END
 
 //___________________________REVISED BARDS__________________________________________
 BEGIN @400
-DESIGNATED 210			//	soon to be 400
+DESIGNATED 400
 LABEL ~D5_REVISED_BARDS~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 

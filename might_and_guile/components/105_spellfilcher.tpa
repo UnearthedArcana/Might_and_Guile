@@ -102,6 +102,14 @@ COPY ~might_and_guile/mc/d5_flch5.spl~ ~override~
 COPY ~might_and_guile/mc/d5_flch4.eff~ ~override~
 COPY ~might_and_guile/mc/d5_flch5.eff~ ~override~
 
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_filch.2da~) BEGIN
+	APPEND ~d5_filch.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+
 //__________________________________________________________________________________
 //
 LAF qd_multiclass

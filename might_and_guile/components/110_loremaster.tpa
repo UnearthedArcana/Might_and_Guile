@@ -100,6 +100,14 @@ COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
 COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 	SAY NAME1 @6
 
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lorma.2da~) BEGIN
+	APPEND ~d5_lorma.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+
 //___________________________________________________________________________________
 //
 LAF qd_multiclass

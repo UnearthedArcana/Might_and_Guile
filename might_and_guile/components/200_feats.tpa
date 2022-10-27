@@ -13,7 +13,7 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__rfeat.d5~
 COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__wfeat.d5~
 //__________________________________________________________________________________
 
-/* do this iin a separate component
+/* do this in a separate component
 //IMPROVE THAC0 TABLE_______________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
@@ -316,39 +316,45 @@ BUT_ONLY
 
 //CHANGE CLASS TEXT_________________________________________________________________
 //
-ACTION_FOR_EACH text_file IN ~clastext~ /*~sodcltxt~ ~bgclatxt~*/ BEGIN
-  COPY_EXISTING ~%text_file%.2da~ ~override~
+COPY_EXISTING ~clastext.2da~ ~override~
     COUNT_2DA_COLS cols
     COUNT_2DA_ROWS cols rows
     FOR (row = 1; row < rows; ++row) BEGIN
       READ_2DA_ENTRY row 0 cols kit_name
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FIGHTER~) BEGIN
-        READ_2DA_ENTRY row 4 cols fighter_desc
+        READ_2DA_ENTRY row 4 cols fighter_str
+        GET_STRREF %fighter_str% fighter_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BARBARIAN~) BEGIN
-        READ_2DA_ENTRY row 4 cols barbarian_desc
+        READ_2DA_ENTRY row 4 cols barbarian_str
+        GET_STRREF %barbarian_str% barbarian_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-        READ_2DA_ENTRY row 4 cols ranger_desc
+        READ_2DA_ENTRY row 4 cols ranger_str
+        GET_STRREF %ranger_str% ranger_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
-        READ_2DA_ENTRY row 4 cols thief_desc
+        READ_2DA_ENTRY row 4 cols thief_str
+        GET_STRREF %thief_str% thief_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) BEGIN
-        READ_2DA_ENTRY row 4 cols assassin_desc
+        READ_2DA_ENTRY row 4 cols assassin_str
+        GET_STRREF %assassin_str% assassin_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
-        READ_2DA_ENTRY row 4 cols bounty_hunter_desc
+        READ_2DA_ENTRY row 4 cols bounty_hunter_str
+        GET_STRREF %bounty_hunter_str% bounty_hunter_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
-        READ_2DA_ENTRY row 4 cols swashbuckler_desc
+        READ_2DA_ENTRY row 4 cols swashbuckler_str
+        GET_STRREF %swashbuckler_str% swashbuckler_desc
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
-        READ_2DA_ENTRY row 4 cols shadowdancer_desc
+        READ_2DA_ENTRY row 4 cols shadowdancer_str
+        GET_STRREF %shadowdancer_str% shadowdancer_desc
       END
     END
-  IF_EXISTS BUT_ONLY
-END
+IF_EXISTS BUT_ONLY
 
 OUTER_SPRINT fighter_feats_desc @20021
 OUTER_SPRINT barbarian_feats_desc @20022
@@ -360,36 +366,28 @@ OUTER_SPRINT swashbuckler_feats_desc @20027
 OUTER_SPRINT shadowdancer_feats_desc @20028
 
 ACTION_IF (VARIABLE_IS_SET %fighter_desc%) BEGIN
-  ACTION_GET_STRREF %fighter_desc% fighter_desc_text
-  OUTER_SPRINT new_fighter_desc ~%fighter_desc_text%~^~%fighter_feats_desc%~
+  OUTER_SPRINT new_fighter_desc ~%fighter_desc%~^~%fighter_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %barbarian_desc%) BEGIN
-  ACTION_GET_STRREF %barbarian_desc% barbarian_desc_text
-  OUTER_SPRINT new_barbarian_desc ~%barbarian_desc_text%~^~%barbarian_feats_desc%~
+  OUTER_SPRINT new_barbarian_desc ~%barbarian_desc%~^~%barbarian_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %ranger_desc%) BEGIN
-  ACTION_GET_STRREF %ranger_desc% ranger_desc_text
-  OUTER_SPRINT new_ranger_desc ~%ranger_desc_text%~^~%ranger_feats_desc%~
+  OUTER_SPRINT new_ranger_desc ~%ranger_desc%~^~%ranger_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %thief_desc%) BEGIN
-  ACTION_GET_STRREF %thief_desc% thief_desc_text
-  OUTER_SPRINT new_thief_desc ~%thief_desc_text%~^~%thief_feats_desc%~
+  OUTER_SPRINT new_thief_desc ~%thief_desc%~^~%thief_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %assassin_desc%) BEGIN
-  ACTION_GET_STRREF %assassin_desc% assassin_desc_text
-  OUTER_SPRINT new_assassin_desc ~%assassin_desc_text%~^~%assassin_feats_desc%~
+  OUTER_SPRINT new_assassin_desc ~%assassin_desc%~^~%assassin_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %bounty_hunter_desc%) BEGIN
-  ACTION_GET_STRREF %bounty_hunter_desc% bounty_hunter_desc_text
-  OUTER_SPRINT new_bounty_hunter_desc ~%bounty_hunter_desc_text%~^~%bounty_hunter_feats_desc%~
+  OUTER_SPRINT new_bounty_hunter_desc ~%bounty_hunter_desc%~^~%bounty_hunter_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %swashbuckler_desc%) BEGIN
-  ACTION_GET_STRREF %swashbuckler_desc% swashbuckler_desc_text
-  OUTER_SPRINT new_swashbuckler_desc ~%swashbuckler_desc_text%~^~%swashbuckler_feats_desc%~
+  OUTER_SPRINT new_swashbuckler_desc ~%swashbuckler_desc%~^~%swashbuckler_feats_desc%~
 END
 ACTION_IF (VARIABLE_IS_SET %shadowdancer_desc%) BEGIN
-  ACTION_GET_STRREF %shadowdancer_desc% shadowdancer_desc_text
-  OUTER_SPRINT new_shadowdancer_desc ~%shadowdancer_desc_text%~^~%shadowdancer_feats_desc%~
+  OUTER_SPRINT new_shadowdancer_desc ~%shadowdancer_desc%~^~%shadowdancer_feats_desc%~
 END
 
 ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist.2da~ BEGIN
@@ -399,43 +397,43 @@ ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist.2da~ BEGI
     FOR (row = 1; row < rows; ++row) BEGIN
       READ_2DA_ENTRY row 0 cols kit_name
       READ_2DA_ENTRY row 1 cols kitlist_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FIGHTER~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_fighter_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_fighter_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FIGHTER~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_fighter_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BARBARIAN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BARBARIAN~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_barbarian_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_barbarian_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BARBARIAN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BARBARIAN~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_barbarian_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_ranger_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_ranger_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_ranger_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_thief_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_thief_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_thief_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_assassin_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_assassin_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_assassin_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_bounty_hunter_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_bounty_hunter_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_bounty_hunter_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_swashbuckler_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_swashbuckler_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_swashbuckler_desc%~)
         END
       END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
-        PATCH_IF (VARIABLE_IS_SET %new_shadowdancer_desc%) BEGIN
+      PATCH_IF (VARIABLE_IS_SET %new_shadowdancer_desc%) BEGIN
+        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
           SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_shadowdancer_desc%~)
         END
       END

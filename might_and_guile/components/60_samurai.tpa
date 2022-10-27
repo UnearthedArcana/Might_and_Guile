@@ -44,10 +44,12 @@ LAF ADD_KIT_EX
     alignmnt   = ~1  1  1  1  1  1  0  0  0~
 //                F C M T D R
     dualclas   = ~0 1 1 1 1 0~
+//                HU E  HE D  HL G  HO
+    clsrcreq   = ~1  1  1  1  1  1  1~
+    kittable   = ~K_F_H K_F_E K_F_HE K_F_D K_F_HL K_F_G K_F_HO~
     luabbr     = ~Fi0~
     stweap     = ~LEAT14	* HELM07 BAG20 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
     clab_path  = ~might_and_guile/fighter/samurai/d5samur.2da~
-    kittable   = ~K_F_H K_F_G K_F_E K_F_HE K_F_HL K_F_HO~
   RET D5SAMURAI = kit_id
 END
 //____________________________________________________________________________________
@@ -79,6 +81,8 @@ COPY_EXISTING ~7eyes.2da~ ~override~
 BUT_ONLY
 
 COPY ~might_and_guile/fighter/samurai/d5samu2.bam~ ~override~
+COPY ~might_and_guile/fighter/samurai/d5mglb.vvc~ ~override~
+COPY ~might_and_guile/fighter/samurai/d5mglb.bam~ ~override~
 COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu2.spl~			//	shield of wind
   SAY NAME1 @6011
   SAY UNIDENTIFIED_DESC @6012
@@ -86,6 +90,7 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu2.spl~			//	shield of wind
   LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu2~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 5 parameter2 = 2 timing = 0 duration = 24 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 0 duration = 24 STR_VAR resource = ~d5samu2a~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 215 target = 1 parameter1 = 0 parameter2 = 1 timing = 0 duration = 24 STR_VAR resource = ~d5mglb~ END
 
 CREATE EFF  ~d5samu2a~
 	WRITE_LONG 0x10 232
@@ -125,13 +130,17 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu4.spl~			//	tiger strike
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 249 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu4x~ END
 
 CREATE EFF ~d5samu4x~
-	WRITE_LONG 0x10 321
+	WRITE_LONG 0x10 146
 	WRITE_LONG 0x14 9
 	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 0
+	WRITE_LONG 0x20 1
 	WRITE_LONG 0x24 1
 	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5samu4~ #8
+	WRITE_ASCII 0x30 ~d5samu4x~ #8
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu4x.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5samu4~ END  
 
 COPY ~might_and_guile/fighter/samurai/d5samu5.bam~ ~override~
 COPY_EXISTING ~spcl811.spl~ ~override/d5samu5.spl~					//	stunning blow
@@ -212,8 +221,7 @@ OUTER_SPRINT class_dlgs ~fi~
 
 LAM PROF_DIALOGUE
 
-COPY_EXISTING ~d5kifofi.dlg~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
+COPY ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~ ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
     REPLACE_TEXTUALLY ~CheckStatGT(myself,9,LEVEL)~ ~CheckStatGT(myself,8,LEVEL)~
     REPLACE_TEXTUALLY ~GOTO d5kifofi_2~ ~GOTO d5kifofi_5~
     REPLACE_TEXTUALLY ~GOTO d5kifofi_3~ ~GOTO d5kifofi_5~
@@ -237,8 +245,13 @@ COPY_EXISTING ~d5kifofi.dlg~ ~override~
     REPLACE_TEXTUALLY ~"LOCALS",3) Proficiency(Myself~ ~"LOCALS",2) Proficiency(Myself~
     REPLACE_TEXTUALLY ~"LOCALS",4) Proficiency(Myself~ ~"LOCALS",3) Proficiency(Myself~
     REPLACE_TEXTUALLY ~"LOCALS",5) Proficiency(Myself~ ~"LOCALS",4) Proficiency(Myself~
-  END
 IF_EXISTS BUT_ONLY
+
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%game_lang%/dialprof.tra~ BEGIN
+  COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
+END
 
 COPY_EXISTING ~d5kifoa.spl~ ~override~
   SAY NAME1 @6008

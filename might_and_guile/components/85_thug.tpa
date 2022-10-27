@@ -81,6 +81,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			thiefskl = ~40 20~
 			thiefscl = ~100 0 100 100 100 100 0 0~
 			traplimt = 0
+            clsrcreq = ~1  1  1  1  1  1  1~
 	END
 END
 
@@ -92,6 +93,14 @@ COPY ~might_and_guile/feats/d5_rfe5.spl~ ~override~   // 			backstab bonus
 	SAY NAME1 @20241
 	SAY UNIDENTIFIED_DESC @20242
 COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_thug.2da~) BEGIN
+	APPEND ~d5_thug.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
 
 //___________________________________________________________________________________
 //

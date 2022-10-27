@@ -37,13 +37,15 @@ LAF ADD_KIT_EX
     alignmnt   = ~1  1  1  1  1  1  1  1  1~
 //                F C M T D R
     dualclas   = ~1 1 1 0 0 0~
+//                HU E  HE D  HL G  HO
+    clsrcreq   = ~1  1  1  1  1  1  1~
+    kittable   = ~K_T_H K_T_G K_T_E K_T_HE K_T_HL K_T_HO~
     luabbr     = ~Th0~
     stweap     = ~LEAT14	* HELM07 BAG20 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
-    clab_path  = ~might_and_guile/thief/ninja/d5ninjf.2da~
-    kittable   = ~K_T_H K_T_G K_T_E K_T_HE K_T_HL K_T_HO~
     thiefskl   = ~40 20~
     thiefscl   = ~0 100 100 100 100 100 100 0~
     backstab   = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+    clab_path  = ~might_and_guile/thief/ninja/d5ninja.2da~
   RET D5NINJA_T = kit_id
 END
 //____________________________________________________________________________________
@@ -87,7 +89,7 @@ END
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5ninja.2da~) BEGIN
-	APPEND ~d5_corsa.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+	APPEND ~d5ninja.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
 END
 //____________________________________________________________________________________
@@ -111,7 +113,7 @@ LAF ADD_KIT_EX
     briefdesc  = RESOLVE_STR_REF(@9504)
   STR_VAR
     kit_name   = ~D5NINJA_F~
-    base_class = ~T~
+//    base_class = ~T~
     unusable   = ~0x00004000~
     clasweap   = ~1 1 1 1 1 0 0 0~
 //11                                      T   S           F   Q             S S
@@ -135,13 +137,16 @@ LAF ADD_KIT_EX
     alignmnt   = ~1  1  1  1  1  1  1  1  1~
 //                F C M T D R
     dualclas   = ~1 1 1 0 0 0~
+//                HU E  HE D  HL G  HO
+    clsrcreq   = ~1  1  1  1  1  1  1~
+    kittable   = ~K_FT_H K_FT_G K_FT_E K_FT_HE K_FT_HL K_FT_HO~
     luabbr     = ~Th0~
     stweap     = ~LEAT14	* HELM07 BAG20 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
-    clab_path  = ~might_and_guile/thief/ninja/d5ninjf.2da~
-    kittable   = ~K_FT_H K_FT_G K_FT_E K_FT_HE K_FT_HL K_FT_HO~
     thiefskl   = ~40 20~
     thiefscl   = ~0 100 100 100 100 100 100 0~
     backstab   = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+//    clab_path  = ~might_and_guile/thief/ninja/d5ninjf.2da~
+    clab_base_t = ~might_and_guile/thief/ninja/d5ninja.2da~
   RET D5NINJA_F = kit_id
 END
 //____________________________________________________________________________________
@@ -199,10 +204,11 @@ END
 //WILD TALENT_________________________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5ninja.2da~) BEGIN
-	APPEND ~d5_corsa.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5ninjf.2da~) BEGIN
+	APPEND ~d5ninjf.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
   END
 END
+// ***** add to qd_mct
 //____________________________________________________________________________________
 
 END	//	end function

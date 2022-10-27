@@ -84,6 +84,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			thiefscl = ~0 100 100 100 100 100 100 0~
 			sneakatt = ~1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
 			crippstr = ~0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 3 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5~
+            clsrcreq = ~1  1  1  1  1  1  1~
 	END
 END
 
@@ -93,6 +94,14 @@ COPY ~might_and_guile/mc/d5_tombr.2da~ ~override~
 COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
 COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
 COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_tombr.2da~) BEGIN
+	APPEND ~d5_tombr.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
 
 //___________________________________________________________________________________
 //

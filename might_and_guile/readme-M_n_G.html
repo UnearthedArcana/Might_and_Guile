@@ -395,24 +395,19 @@
   <h4 class="subheader">Component 205: </h4>
   <div class="section">
     <p><strong><em>Revised Archers</em></strong></p>
-    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots.  These Called Shots will be available as feats, instead of granted automatically at pre-determined levels. Use the white ability with a "+" to choose one.</p> 
+    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned like feats. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots. Not all Called Shots are available to every Archer class - some are unique to the  Sniper, Elven Archer, or Halfling Slinger.</p> 
     <div class="kit_description">
-      <p>Advantages:<br />
-        &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
-        &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
-        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:<br />
-<br />
-CALLED SHOTS <br />
-        &ndash; Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Available at 1st level: Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Available at 1st level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Available at 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
-        &ndash; Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
-        &ndash; 1Available at 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-      <p>Disadvantages:<br />
-        &ndash; May only become proficient (+) with melee weapons.<br />
-        &ndash; May only wear leather or similar armors.<br />.</p>
+      <p>CALLED SHOTS <br />
+        &ndash; Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Rapid Shot. This technique allows the archer to fire much faster - with one extra attack  per round - albeit less accurately - with a 2-point <b>penalty</b> to attack and damage rolls.<br />
+        &ndash; Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
+        &ndash; Blinding Shot (Sniper). Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath. <br />
+        &ndash; Stunning Shot (Slinger). Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; Sleep Shot (Elven Archer). This shot causes the target to fall unconscious for one or two rounds on a failed save vs. spells.<br />
+        &ndash; Entangling Shot (Elven Archer). This shot contains the target in a mass of vines and roots on a failed save vs. breath weapon.<br />
+        &ndash; Faerie Fire Shot (Elven Archer). This shot envelopes the target in a ghostly white glow, m aking them easier to hit in combat (-2 to AC) and preventing them from becoming invisible.</p>
     </div>
     <p><b>Compatibility:</b> this component will conflict with other mods that alter the Archer kit, like the "Improved Archer" mod.</p>
   </div>
@@ -468,22 +463,12 @@ CALLED SHOTS <br />
     <p><strong><em>Revised Monk Fists</em></strong></p>
       <p>Monk fists are are rebalanced to do less damage, but have higher APR. The fists also become toggleable, able to switch at will between doing fatigue damage as a normal unenchanted fist, and crushing and magical damage as an enchanted fist.</p>
   </div>
-  <h4 class="subheader">Component 275: </h4>
-  <div class="section">
-    <p><strong><em>Revised Shadowdancer</em></strong></p>
-      <p>This component removes Shadowdancers' "Hide in Plain Sight" ability. It also turns their "Shadowstep" ability into something called "Shadow Pool" which allows the Shadowdancer to cast any one of the following spells:<br />
-        &ndash; Sanctuary<br />
-        &ndash; Blindness<br />
-        &ndash; Shadow Door<br />
-        &ndash; Shadowstep<br />
-        &ndash; Summon Shadow</p>
-  </div>
   <h4 class="subheader">Component 280 (for EE 2.0+): </h4>
   <div class="section">
     <p><strong><em>Revised Backstabbing</em></strong></p>
       <p>This component allows certain kits to deliver special offensive effects when they make a successful backstab:</p>
       <ul>
-        <li> Assassins can deliver their poison, without having to use the innate ability.</li>
+        <li> Assassins can deliver their poison, without having to use the innate ability. (<b>NOTE,</b> this take the place of the extra backstab damage assassins can normally do at high levels.)</li>
         <li> Bounty Hunters can cause the target to be trapped in a Web for two rounds.</li>
         <li> Shadowdancers an cause the target to become slightly out of phase with the material plane, resulting in being Slowed and 2-point penalties to attack rolls and  armor class.</li>
         <li> Rakes an cause the target to become panicked for three rounds.</li>

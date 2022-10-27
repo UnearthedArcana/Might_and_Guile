@@ -1726,7 +1726,7 @@ COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~  			 //            smoke bomb
 //COPY SHADOW POOL FILES_____________________________________________________________
 //
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_shad1.spl~) BEGIN
-  COPY ~might_and_guile/thief/d5_shadd.2da~ ~override~
+//  COPY ~might_and_guile/thief/d5_shadd.2da~ ~override~
   COPY ~might_and_guile/thief/d5_shad1.spl~ ~override~
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
@@ -1744,7 +1744,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_shad1.spl~) BEGIN
   COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
 	SAY NAME1 @9
   COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
-  COMPILE ~might_and_guile/thief/d5_shadd.baf~
+//  COMPILE ~might_and_guile/thief/d5_shadd.baf~
 END
 //__________________________________________________________________________________
 

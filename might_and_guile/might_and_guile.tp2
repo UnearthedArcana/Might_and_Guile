@@ -1,7 +1,7 @@
 BACKUP ~might_and_guile/backup~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha4~
+VERSION ~5alpha5~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -259,15 +259,15 @@ LAF fake_ranger_multi_kits END
 //__________________________________________________________________________________
 
 
-//_________________________MARKSMAN_________________________________________________
-BEGIN @150
-DESIGNATED 150
+//______________________FIGHTER ARCHER______________________________________________
+BEGIN @151
+DESIGNATED 151
 LABEL ~D5_MARKSMAN~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 
-INCLUDE ~might_and_guile/components/150_marksman.tpa~
+INCLUDE ~might_and_guile/components/151_archer_fighter.tpa~
 
-LAF marksman_kit END
+LAF archer_fighter_kit END
 //__________________________________________________________________________________
 
 
@@ -298,15 +298,15 @@ LAF halfling_slinger_kit END
 //__________________________________________________________________________________
 
 
-//__________________________SNIPER__________________________________________________
+//_________________________MARKSMAN_________________________________________________
 BEGIN @165
 DESIGNATED 165
 LABEL ~D5_SNIPER_KIT~
 FORBID_COMPONENT ~might_and_guile.tp2~ ~205~ @1
 
-INCLUDE ~might_and_guile/components/165_sniper.tpa~
+INCLUDE ~might_and_guile/components/165_marksman.tpa~
 
-LAF sniper_thief_kit END
+LAF marksman_thief_kit END
 //__________________________________________________________________________________
 
 

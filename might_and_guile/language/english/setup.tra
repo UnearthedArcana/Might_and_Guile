@@ -30,10 +30,10 @@
 @125   = ~Add the Mage Hunter (ranger kit)~
 @130   = ~Add the Barbarian Ranger (ranger kit)~
 @145   = ~Add the Fake Multiclass Rangers~
-@150   = ~Add the Marksman (fighter kit)~
+@151   = ~Add the Archer as a fighter kit~
 @155   = ~Add the Elven Archer (ranger kit)~
 @160   = ~Add the Halfling Slinger (fighter/thief kit)~
-@165   = ~Add the Sniper (thief kit)~
+@165   = ~Add the Marksman (thief kit)~
 @200   = ~Feats (but stop! Maybe try Scales of Balance Combat Skills instead!)~
 @205   = ~Revised Archery~
 @220   = ~Revised Multiclassing~
@@ -320,9 +320,9 @@ Restrictions:
 @13007  = ~Among barbarian tribes there are hunters of great skill. Spending many days alone in the wild, stalking their prey, they are closer to nature than most men. They are not quite as hardy as their more aggressive brethren, and tend to be loners. Yet they bring uncommon skills to bear both in providing for, and in defending, their tribe.~
 //
 //
-@15002  = ~marksman~
-@15003  = ~Marksman~
-@15004  = ~The Marksman is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
+@15002  = ~archer~
+@15003  = ~Archer~
+@15004  = ~The Archer is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the Archer has to sacrifice some proficiency with melee weapons and armor.
 
 Advantages:
 - +1 to hit and damage rolls with any missile weapon every 3 levels.
@@ -339,7 +339,7 @@ Disadvantages:
 - May not wear heavier armor than splint mail.
 - May only become Specialized with melee weapons.
 ~
-@15005  = ~MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
+@15005  = ~Archer: This fighter is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the marksman has had to sacrifice some proficiency with melee weapons and armor.
  
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 1, 5, 10, 15, and 20.
@@ -384,7 +384,7 @@ Disadvantages:
 Advantages:
 - +1 to hit and damage rolls with ranged weapon at levels 1, 5, 10, 15, and 20.
 - Can achieve Grand Mastery with bows.
-- May learn to use a Called Shot at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use a Called Shot at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Elven Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Elven Archer may chose from among the following Called Shots:
 
 - Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
 - Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.
@@ -444,9 +444,9 @@ Restrictions:
 ~
 //
 //
-@16501  = ~sniper~ 
-@16502  = ~Sniper~
-@16503  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
+@16501  = ~marksman~ 
+@16502  = ~Marksman~
+@16503  = ~MARKSMAN: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the Marksman is a highly trained and stealthy sharpshooter who can get the job done.
 
 Advantages:
 - +1 to hit and damage rolls with any missile weapon every 3 levels.
@@ -463,12 +463,12 @@ Disadvantages:
 - May only distribute 20 skill points per level among thieving skills.
 - Reduced backstab multiplier.
 ~
-@16505  = ~SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.
+@16505  = ~MARKSMAN: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the Marksman is a highly trained and stealthy sharpshooter who can get the job done.
 
 Abilities:
 - +1 to hit and damage rolls with ranged weapon at levels 1, 5, 10, 15, and 20.
 - Can achieve High Mastery with bows and crossbows.
-- May learn to use Called Shots as feats. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer may chose from among the following Called Shots:
+- May learn to use Called Shots as feats. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman may chose from among the following Called Shots:
 
 - Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.
 - Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.
@@ -481,7 +481,7 @@ Restrictions:
 - May only distribute 20 skill points per level among thieving skills.
 - Reduced backstab multiplier.
 ~
-@16506  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the sniper is a highly trained stealthy marksman who can get the job done.~
+@16506  = ~Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the Marksman is a highly trained and stealthy sharpshooter who can get the job done.~
 //
 //
 @20007  = ~2e bard~

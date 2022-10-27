@@ -298,10 +298,11 @@
         &ndash; May not dual-class.<br />.</p>
     </div>
   </div>
-  <h4 class="subheader">Component 150: </h4>
+  <h4 class="subheader">Component 151: </h4>
   <div class="section">
-    <p><strong><em>Add the MARKSMAN fighter kit</em></strong></p>
+    <p><strong><em>Add the ARCHER as a fighter kit</em></strong></p>
     <p>This is a fighter kit which mimics the Archer ranger kit in almost every way, except this kit can reach specialization with melee weapons instead of mere proficiency.</p>
+    <p>There is a configuration option in d5_mng_settings.ini which will <b>move</b> the Archer kit to the fighter class, instead of replicating it there. This is a good option for players who want Elven Archers to be more special (the only magic-using archers in the ranger class) and it saves adding an extra kit into the game.</p>
   </div>
   <h4 class="subheader">Component 155: </h4>
   <div class="section">
@@ -315,8 +316,8 @@
   </div>
   <h4 class="subheader">Component 165: </h4>
   <div class="section">
-    <p><strong><em>Add the SNIPER thief kit</em></strong></p>
-    <p>This is a thief kit which mimics the Archer ranger kit in almost every way, except this kit combines archery skills with thieving abilities. If you also install component 205, Revised Archery, then the Sniper will get access to a special Called Shot which can blind the target.</p>
+    <p><strong><em>Add the MARKSMAN thief kit</em></strong></p>
+    <p>This is a thief kit which mimics the Archer ranger kit in almost every way, except this kit combines archery skills with thieving abilities. If you also install component 205, Revised Archery, then the Marksman will get access to a special Called Shot which can blind the target.</p>
   </div>
   <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
   <div class="section">
@@ -395,7 +396,7 @@
   <h4 class="subheader">Component 205: </h4>
   <div class="section">
     <p><strong><em>Revised Archers</em></strong></p>
-    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned like feats. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots. Not all Called Shots are available to every Archer class - some are unique to the  Sniper, Elven Archer, or Halfling Slinger.</p> 
+    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned like feats. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots. Not all Called Shots are available to every Archer class - some are unique to the  Marksman, Elven Archer, or Halfling Slinger.</p> 
     <div class="kit_description">
       <p>CALLED SHOTS <br />
         &ndash; Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
@@ -403,7 +404,7 @@
         &ndash; Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.<br />
         &ndash; Rapid Shot. This technique allows the archer to fire much faster - with one extra attack  per round - albeit less accurately - with a 2-point <b>penalty</b> to attack and damage rolls.<br />
         &ndash; Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
-        &ndash; Blinding Shot (Sniper). Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath. <br />
+        &ndash; Blinding Shot (Marksman). Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath. <br />
         &ndash; Stunning Shot (Slinger). Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
         &ndash; Sleep Shot (Elven Archer). This shot causes the target to fall unconscious for one or two rounds on a failed save vs. spells.<br />
         &ndash; Entangling Shot (Elven Archer). This shot contains the target in a mass of vines and roots on a failed save vs. breath weapon.<br />

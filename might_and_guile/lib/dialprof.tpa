@@ -1,4 +1,4 @@
-// v2.3 - classes var fix
+// v2.4 - classes var fix fix
 
 
 //__________________________________________________________________________________
@@ -95,73 +95,75 @@ ACTION_IF !(VARIABLE_IS_SET %class_dlgs%) BEGIN
   OUTER_SET sorcerer_dlg = 1
   OUTER_SET monk_dlg = 1
 END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~all~ = 0) BEGIN
+ACTION_IF (VARIABLE_IS_SET %class_dlgs%) BEGIN
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~fi~ = 0) BEGIN
   OUTER_SET fighter_dlg = 1
-  OUTER_SET ranger_dlg = 1
-  OUTER_SET paladin_dlg = 1
-  OUTER_SET cleric_dlg = 1
-  OUTER_SET druid_dlg = 1
-  OUTER_SET shaman_dlg = 1
-  OUTER_SET thief_dlg = 1
-  OUTER_SET bard_dlg = 1
-  OUTER_SET mage_dlg = 1
-  OUTER_SET sorcerer_dlg = 1
-  OUTER_SET monk_dlg = 1
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~fi~ = 0) BEGIN
-  OUTER_SET fighter_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET fighter_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ra~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ra~ = 0) BEGIN
   OUTER_SET ranger_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET ranger_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~pa~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~pa~ = 0) BEGIN
   OUTER_SET paladin_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET paladin_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~cl~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~cl~ = 0) BEGIN
   OUTER_SET cleric_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET cleric_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~dr~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~dr~ = 0) BEGIN
   OUTER_SET druid_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET druid_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~sh~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~sh~ = 0) BEGIN
   OUTER_SET shaman_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET shaman_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~th~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~th~ = 0) BEGIN
   OUTER_SET thief_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET thief_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ba~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ba~ = 0) BEGIN
   OUTER_SET bard_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET bard_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ma~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ma~ = 0) BEGIN
   OUTER_SET mage_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET mage_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~so~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~so~ = 0) BEGIN
   OUTER_SET sorcerer_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET sorcerer_dlg = 0
-END
-ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~mo~ = 0) BEGIN
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~mo~ = 0) BEGIN
   OUTER_SET monk_dlg = 1
-END ELSE BEGIN
+ END ELSE BEGIN
   OUTER_SET monk_dlg = 0
+ END
+ ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~all~ = 0) BEGIN
+  OUTER_SET fighter_dlg = 1
+  OUTER_SET ranger_dlg = 1
+  OUTER_SET paladin_dlg = 1
+  OUTER_SET cleric_dlg = 1
+  OUTER_SET druid_dlg = 1
+  OUTER_SET shaman_dlg = 1
+  OUTER_SET thief_dlg = 1
+  OUTER_SET bard_dlg = 1
+  OUTER_SET mage_dlg = 1
+  OUTER_SET sorcerer_dlg = 1
+  OUTER_SET monk_dlg = 1
+ END
 END
 
 //read weapprof_____________________________________________________________________

@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha6~
+VERSION ~5alpha7~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -531,6 +531,8 @@ INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
 LAM d5_revised_bard_settings
 
+INCLUDE ~might_and_guile/components/400_revised_bards.tpa~
+
 ACTION_IF d5_bards_5E_casting = 1 BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
     OUTER_SET 5e_divine = 0
@@ -554,13 +556,9 @@ ACTION_IF d5_bards_5E_casting = 1 BEGIN
   END
 END
 
-INCLUDE ~might_and_guile/components/400_revised_bards.tpa~
-
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
 
 // ***** if no feats use dialogue for song selection (see e.g. FnP nu paladins)
-
-// ***** add harmonic aura? (op248 +sonic damage)
 //__________________________________________________________________________________
 
 

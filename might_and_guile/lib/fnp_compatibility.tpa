@@ -955,9 +955,10 @@ Weapons Usable by this kit:
   READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
   FOR (row = 3; row < r2en_kitlist; row += 1) BEGIN
     SPRINT these_weapon_use ~~
-	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 0 kit_index
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kit_label
+	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 4 kit_desc
+	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 kit_class
 	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 9 kit_code
 	PATCH_IF (~%kit_clab%~ STRING_EQUAL_CASE ~%mod_clab%~) BEGIN

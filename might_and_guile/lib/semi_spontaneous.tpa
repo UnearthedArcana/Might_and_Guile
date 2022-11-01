@@ -1,5 +1,5 @@
 
-// v10.1 - with fixed semi_innate function
+// v10.2 - fatigue fix
 
 /*
 functions in this file:
@@ -2095,6 +2095,8 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
 ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
   COPY_EXISTING ~splstate.ids~ ~override~
 	COUNT_2DA_COLS cols
@@ -3294,6 +3296,16 @@ DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_list 
 // suffix must match the one in the menu function
 
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
+LAM 5E_casting_settings
+
+
 //find game install language__________________________________________________________
 //
 LAF set_lang RET game_lang END
@@ -4400,6 +4412,16 @@ END		//	end define function
 
 DEFINE_ACTION_FUNCTION semi_shaman_casting STR_VAR sham_suffix = ~w~ BEGIN
 // suffix must match the one in the menu function
+
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
+LAM 5E_casting_settings
 
 
 //find game install language__________________________________________________________
@@ -6072,6 +6094,8 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
 COPY_EXISTING ~splprot.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
@@ -6539,6 +6563,8 @@ LAF set_lang RET game_lang END
 
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
+
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
 
 COPY_EXISTING ~splprot.2da~ ~override~
   COUNT_2DA_COLS cols

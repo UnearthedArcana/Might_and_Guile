@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha7~
+VERSION ~5alpha8~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -531,8 +531,6 @@ INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
 LAM d5_revised_bard_settings
 
-INCLUDE ~might_and_guile/components/400_revised_bards.tpa~
-
 ACTION_IF d5_bards_5E_casting = 1 BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
     OUTER_SET 5e_divine = 0
@@ -540,7 +538,9 @@ ACTION_IF d5_bards_5E_casting = 1 BEGIN
   ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) BEGIN
     OUTER_SET 5e_divine = 1
   END
+
   LAF semi_spontaneous_casting END
+
   ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_divine~) BEGIN
     LAF semi_divine_spells END
   END
@@ -556,7 +556,8 @@ ACTION_IF d5_bards_5E_casting = 1 BEGIN
   END
 END
 
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
+INCLUDE ~might_and_guile/components/400_revised_bards.tpa~
+
 
 // ***** if no feats use dialogue for song selection (see e.g. FnP nu paladins)
 //__________________________________________________________________________________
@@ -585,8 +586,7 @@ INCLUDE ~might_and_guile/components/450_jongleur.tpa~
 BEGIN @460
 DESIGNATED 460
 LABEL ~D5_2E_LOREMASTER~
-FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
-FORBID_COMPONENT ~might_and_guile.tp2~ ~500~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~400~ @1
 
 INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 //__________________________________________________________________________________
@@ -596,7 +596,7 @@ INCLUDE ~might_and_guile/components/460_loremaster.tpa~
 BEGIN @470
 DESIGNATED 470
 LABEL ~D5_2E_GALLANT~
-FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~400~ @1
 
 INCLUDE ~might_and_guile/components/470_gallant.tpa~
 //__________________________________________________________________________________
@@ -606,7 +606,7 @@ INCLUDE ~might_and_guile/components/470_gallant.tpa~
 BEGIN @480
 DESIGNATED 480
 LABEL ~D5_2E_MEISTERSINGER~
-FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~400~ @1
 
 INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 //__________________________________________________________________________________
@@ -616,7 +616,7 @@ INCLUDE ~might_and_guile/components/480_meistersinger.tpa~
 BEGIN @490
 DESIGNATED 490
 LABEL ~D5_2E_LORESINGER~
-FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~400~ @1
 
 INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 //__________________________________________________________________________________
@@ -626,7 +626,7 @@ INCLUDE ~might_and_guile/components/490_loresinger.tpa~
 BEGIN @499
 DESIGNATED 499
 LABEL ~D5_2E_BARDS_5E_CASTING~
-FORBID_COMPONENT ~might_and_guile.tp2~ ~210~ @1
+FORBID_COMPONENT ~might_and_guile.tp2~ ~400~ @1
 REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5__5E_casting_bards.d5~) @5
 
 INCLUDE ~%MOD_FOLDER%/lib/semi_spontaneous.tpa~

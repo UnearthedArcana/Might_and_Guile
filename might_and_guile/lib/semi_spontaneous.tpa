@@ -1,5 +1,5 @@
 
-// v10 - with fixed semi_innate function
+// v10.2 - fatigue fix
 
 /*
 functions in this file:
@@ -2095,6 +2095,8 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
 ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
   COPY_EXISTING ~splstate.ids~ ~override~
 	COUNT_2DA_COLS cols
@@ -3294,6 +3296,16 @@ DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_list 
 // suffix must match the one in the menu function
 
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
+LAM 5E_casting_settings
+
+
 //find game install language__________________________________________________________
 //
 LAF set_lang RET game_lang END
@@ -4402,6 +4414,16 @@ DEFINE_ACTION_FUNCTION semi_shaman_casting STR_VAR sham_suffix = ~w~ BEGIN
 // suffix must match the one in the menu function
 
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
+LAM 5E_casting_settings
+
+
 //find game install language__________________________________________________________
 //
 LAF set_lang RET game_lang END
@@ -5106,7 +5128,7 @@ ACTION_IF !(VARIABLE_IS_SET %semi_spont_rested%) BEGIN
   OUTER_SET semi_spont_rest = %new_state_ind%
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_innate_casting.d5~) BEGIN
+//ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_innate_casting.d5~) BEGIN
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%206.spl~
 
@@ -5218,9 +5240,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnfsh.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~d5xrfsh~ END
 END
 
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~
+//COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~
 
-END	//	end no marker file
+//END	//	end no marker file
 
 // casting system______________________________________________________________________
 //
@@ -6072,6 +6094,8 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
 COPY_EXISTING ~splprot.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW rows cols
@@ -6539,6 +6563,8 @@ LAF set_lang RET game_lang END
 
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
+
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
 
 COPY_EXISTING ~splprot.2da~ ~override~
   COUNT_2DA_COLS cols

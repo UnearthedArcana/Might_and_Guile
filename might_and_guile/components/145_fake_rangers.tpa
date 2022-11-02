@@ -1,0 +1,335 @@
+
+//_________________________FAKE RANGERS______________________________________________
+//
+DEFINE_ACTION_FUNCTION fake_ranger_multi_kits BEGIN
+
+
+//ADD RANGER/MAGE_____________________________________________________________________
+//
+LAF check_kit_conflict END
+
+ADD_KIT ~D5RANMAGE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5RANMAGE     0 0 0 0 0 0 0 0~
+~D5RANMAGE     0 0 0 0 0 0 0 0 0 2 2 0 0 2 2 2 0 2 0 0 0 0 2 2 0 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANMAGE         0   12  12  12  0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANMAGE         0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANMAGE         0   15  15  0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANMAGE         0   15  15  0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5RANMAGE         1  0  0  1  0  0  1  0  0~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5RANMAGE         0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/mc/d5_rama.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~K_MT_H K_MT_E K_MT_HE~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 13~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~FM0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @5271
+SAY @5272
+SAY @5273
+//__________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@5273)
+		STR_VAR
+			kit_name = D5RANMAGE
+			backstab = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			clasiskl = ~0 0 0 15 15 0 0~
+			clswpbon = ~1 0 3~
+			thiefskl = ~25 15~
+			thiefscl = ~0 0 100 100 100 100 0 0~
+			traplimt = 0
+			sneakatt = ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1~
+			crippstr = ~0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+	END
+END
+//____________________________________________________________________________________
+
+//RANGER/MAGE ABILITY FILES___________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_rama.2da~ ~override~
+COPY ~might_and_guile/mc/d5_nthf.spl~ ~override~
+COPY ~might_and_guile/mc/d5ramsk.spl~ ~override~
+COPY ~might_and_guile/misc/d5_thac.spl~ ~override~
+COPY ~might_and_guile/misc/d5_1hp.spl~ ~override~
+COPY ~might_and_guile/misc/d5_2hp.spl~ ~override~
+COPY ~might_and_guile/mc/d5rmcon.spl~ ~override~
+COPY ~might_and_guile/misc/d5_apr7.spl~ ~override~
+COPY ~might_and_guile/misc/d5_apr2.spl~ ~override~
+ACTION_IF GAME_IS ~iwdee~ BEGIN	
+  APPEND ~splprot.2da~ ~D5_CON_IS%TAB%41%TAB%-1%TAB%4~
+  COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ 
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CON_IS~ BEGIN
+	    SET con_row = %row%
+	  END
+	END
+  BUT_ONLY
+  COPY_EXISTING ~d5rmcon.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter2 = %con_row% END
+END
+
+COPY_EXISTING ~mxsplran.2da~ ~override~
+  READ_2DA_ENTRY 0 0 4 cast_lev
+  SET the_lev = cast_lev
+BUT_ONLY
+// use the_lev to patch the clab table to add 'spell slots'
+
+// change these into innate spells and add them according to proficiency
+// like a small version of multisorc
+// use stat 134
+COPY_EXISTING ~sppr207.spl~ ~override/D5RNM01.spl~ // goodberry
+//	WRITE_SHORT 0x1c 1
+//	WRITE_LONG 0x34 1
+	LPM spell_to_innate
+COPY_EXISTING ~sppr105.spl~ ~override/D5RNM11.spl~ // entangle
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr109.spl~ ~override/D5RNM12.spl~ // sanctuary
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr110.spl~ ~override/D5RNM13.spl~ // shillelagh
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr202.spl~ ~override/D5RNM21.spl~ // barkskin
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr212.spl~ ~override/D5RNM22.spl~ // slow poison*
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr206.spl~ ~override/D5RNM23.spl~ // flame blade
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr302.spl~ ~override/D5RNM31.spl~ // call lightning
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr317.spl~ ~override/D5RNM32.spl~ // cure disease*
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr319.spl~ ~override/D5RNM33.spl~ // summon insects
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr402.spl~ ~override/D5RNM42.spl~ // animal summ 1
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr409.spl~ ~override/D5RNM44.spl~ // death ward
+	WRITE_SHORT 0x1c 1
+COPY_EXISTING ~sppr501.spl~ ~override/D5RNM51.spl~ // animal summ 2
+	WRITE_SHORT 0x1c 1
+COPY ~might_and_guile/mc/d5rmav.spl~ ~override~
+COPY ~might_and_guile/mc/d5rmave.spl~ ~override~
+COPY ~might_and_guile/mc/d5rmavh.spl~ ~override~
+COPY ~might_and_guile/mc/d5rmavef.eff~ ~override~
+COPY ~might_and_guile/mc/d5rmavem.eff~ ~override~
+COPY ~might_and_guile/mc/d5rmavhf.eff~ ~override~
+COPY ~might_and_guile/mc/d5rmavhm.eff~ ~override~
+//__________________________________________________________________________________
+
+
+
+//ADD RANGER/THIEF____________________________________________________________________
+//
+LAF check_kit_conflict END
+
+ADD_KIT ~D5RANTHIEF~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                    T   S           F   Q             S S
+//10            L S                     W   C           L   U             W I
+//9             A M             B L S   O   I   W       A   A             O N
+//8             R A             A O H   H   M   A       I   R C   S       R G
+//7             G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6             E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5             S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4             W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3             O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2             R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1             D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5RANTHIEF     0 0 0 0 0 0 0 0~
+~D5RANTHIEF     0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANTHIEF         0   12  12  0   12  0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANTHIEF         0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANTHIEF         0   15  15  0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5RANTHIEF         0   15  15  0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5RANTHIEF         1  0  0  1  0  0  1  0  0~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5RANTHIEF         0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/mc/d5_rath.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~K_FT_H K_FT_E K_FT_HE~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00004000 9~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~FT0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @5371
+SAY @5372
+SAY @5373
+//__________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+//
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@5373)
+		STR_VAR
+			kit_name = D5RANTHIEF
+			backstab = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+			clasiskl = ~0 0 0 10 10 0 0~
+			clswpbon = ~1 0 3~
+			thiefskl = ~30 15~
+			thiefscl = ~0 0 100 100 100 100 100 0~
+			sneakatt = ~1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+			crippstr = ~0 0 0 0 0 0 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 3 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5~
+	END
+END
+//____________________________________________________________________________________
+
+//RANGER/THIEF ABILITY FILES__________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_rath.2da~ ~override~
+COPY ~might_and_guile/misc/d5_xp85.spl~ ~override~
+COPY ~might_and_guile/mc/d5rath1.spl~ ~override~
+	
+COPY_EXISTING ~sppr103.spl~ ~override/d5rt103.spl~ // CLW
+	LPM spell_to_innate
+COPY_EXISTING ~sppr105.spl~ ~override/d5rt105.spl~ // entangle
+	LPM spell_to_innate
+COPY_EXISTING ~sppr106.spl~ ~override/d5rt106.spl~ // magic stone
+	LPM spell_to_innate
+COPY_EXISTING ~sppr109.spl~ ~override/d5rt109.spl~ // sanctuary
+	LPM spell_to_innate
+COPY_EXISTING ~sppr110.spl~ ~override/d5rt110.spl~ // shillelagh
+	LPM spell_to_innate
+COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
+	LPM spell_to_innate
+COPY_EXISTING ~sppr204.spl~ ~override/d5rt204.spl~ // charm mammal
+	LPM spell_to_innate
+COPY_EXISTING ~sppr206.spl~ ~override/d5rt206.spl~ // flame blade
+	LPM spell_to_innate
+COPY_EXISTING ~sppr210.spl~ ~override/d5rt210.spl~ // resist fire/cold
+	LPM spell_to_innate
+COPY_EXISTING ~sppr212.spl~ ~override/d5rt212.spl~ // slow poison
+	LPM spell_to_innate
+COPY_EXISTING ~sppr315.spl~ ~override/d5rt315.spl~ // CMW
+	LPM spell_to_innate
+COPY_EXISTING ~sppr302.spl~ ~override/d5rt302.spl~ // call lightning
+	LPM spell_to_innate
+COPY_EXISTING ~sppr309.spl~ ~override/d5rt309.spl~ // invisibility purge
+	LPM spell_to_innate
+COPY_EXISTING ~sppr317.spl~ ~override/d5rt317.spl~ // cure disease
+	LPM spell_to_innate
+COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
+	LPM spell_to_innate
+COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
+COPY ~might_and_guile/mc/d5rt100.spl~ ~override~
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr1~ END
+COPY ~might_and_guile/mc/d5rt100.2da~ ~override~
+COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
+COPY ~might_and_guile/mc/d5rt200.spl~ ~override~
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr2~ END
+COPY ~might_and_guile/mc/d5rt200.2da~ ~override~
+COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
+COPY ~might_and_guile/mc/d5rt300.spl~ ~override~
+	SAY NAME1 ~Nature Magic~
+	SAY UNIDENTIFIED_DESC ~Nature Magic~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5indr3~ END
+COPY ~might_and_guile/mc/d5rt300.2da~ ~override~
+//__________________________________________________________________________________
+
+
+//MULTICLASS KITS_____________________________________________________________________
+//
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANMAGE~ 
+		kit_clab = ~d5_rama~
+		base_class = ~T~
+END 
+
+LAF qd_multiclass
+	STR_VAR
+		kit_name = ~D5RANTHIEF~ 
+		kit_clab = ~d5_rath~
+		base_class = ~T~
+END 
+//____________________________________________________________________________________
+
+
+END	//	end function
+

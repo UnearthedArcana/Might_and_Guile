@@ -1,0 +1,272 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//									WARRIOR KITS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//_________________________SAMURAI__________________________________________________
+//
+DEFINE_ACTION_FUNCTION samurai_kit BEGIN
+
+LAF check_kit_conflict END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class  = 2
+    mixed      = RESOLVE_STR_REF(@6001)
+    lower      = RESOLVE_STR_REF(@6002)
+    help       = RESOLVE_STR_REF(@6003)
+    briefdesc  = RESOLVE_STR_REF(@6003)
+  STR_VAR
+    kit_name   = ~D5SAMURAI~
+    unusable   = ~0x00004000~
+//                SS LS BL MI BO SK AX SR
+    clasweap   = ~1  1  1  1  1  1  1  1~
+//                                B                                           S
+//                L S             A   S   2   S                 C   S       S I
+//                A M           M S L H   H   C         H       R L H     2 H N 2                 E E E E E E E E E E E
+//                R A       S   I T O O   A K I D H     A       O O O     H I G W E E E E E E E E X X X X X X X X X X X
+//                G L   S B P   S A N R   N A M A A   S L F   S S N R   S A E L E X X X X X X X X T T T T T T T T T T T
+//                E L   P L I   S R G T   D T I G M C P B L M T S G T D L N L E A T T T T T T T T R R R R R R R R R R R
+//                S S B E U K A I D S S A S A T G M L E E A A A B B B A I D D W P R R R R R R R R A A A A A A A A A A A
+//                W W O A N E X L S W W X W N A E E U A R I C F O O O R N S S S S A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//                D D W R T D E E W D D E D A R R R B R D L E F W W W T G T T T T 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+    weapprof   = ~0 0 0 0 0 0 0 0 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+//                ST DX CO IN WI CH
+    abclasrq   = ~12 0  0  0  9  9~
+    abclsmod   = ~0  0  0  0  0  0~
+    abdcdsrq   = ~17 0  0  0  0  0~
+    abdcscrq   = ~15 0  0  0  0  0~
+//                LG LN LE NG TN NE CG CN CE
+    alignmnt   = ~1  1  1  1  1  1  0  0  0~
+//                F C M T D R
+    dualclas   = ~0 1 1 1 1 0~
+//                HU E  HE D  HL G  HO
+    clsrcreq   = ~1  1  1  1  1  1  1~
+    kittable   = ~K_F_H K_F_E K_F_HE K_F_D K_F_HL K_F_G K_F_HO~
+    luabbr     = ~Fi0~
+    stweap     = ~LEAT14	* HELM07 BAG20 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
+    clab_path  = ~might_and_guile/fighter/samurai/d5samur.2da~
+  RET D5SAMURAI = kit_id
+END
+//____________________________________________________________________________________
+
+//SAMURAI ABILITY FILES_______________________________________________________________
+//
+COPY ~might_and_guile/fighter/samurai/d5samur.2da~ ~override~
+
+COPY ~might_and_guile/fighter/samurai/spcl815c.bam~ ~override~
+//	spcl211															//	lay on hands
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~7eyes.2da~) BEGIN
+  COPY ~%MOD_FOLDER%/misc/7eyes.2da~ ~override~
+END
+
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_SNAREARROW~ RET new_state_ind END
+OUTER_SET missile_snaring_state = %new_state_ind%
+
+APPEND ~7eyes.2da~ ~SNARE_ARROW  %missile_snaring_state%         %nada%        12*0x800000 *           *           *            *            *          *          *          * ~ UNLESS ~SNARE_ARROW~
+
+COPY_EXISTING ~7eyes.2da~ ~override~
+  COUNT_2DA_ROWS 1 rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 1 tag
+	PATCH_IF (~%tag%~ STRING_EQUAL_CASE ~SNARE_ARROW~) BEGIN
+	  SET missile_snaring_row = row
+	END
+  END
+BUT_ONLY
+
+COPY ~might_and_guile/fighter/samurai/d5samu2.bam~ ~override~
+COPY ~might_and_guile/fighter/samurai/d5mglb.vvc~ ~override~
+COPY ~might_and_guile/fighter/samurai/d5mglb.bam~ ~override~
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu2.spl~			//	shield of wind
+  SAY NAME1 @6011
+  SAY UNIDENTIFIED_DESC @6012
+  WRITE_ASCII 0x3a ~d5samu2~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu2~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 5 parameter2 = 2 timing = 0 duration = 24 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 0 duration = 24 STR_VAR resource = ~d5samu2a~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 215 target = 1 parameter1 = 0 parameter2 = 1 timing = 0 duration = 24 STR_VAR resource = ~d5mglb~ END
+
+CREATE EFF  ~d5samu2a~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 9
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~d5samu2a~ #8
+	WRITE_LONG 0x48 102
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu2a.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 END
+  PATCH_IF (IS_AN_INT %missile_snaring_row%) BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 335 target = 1 parameter1 = %missile_snaring_state% parameter2 = %missile_snaring_row% timing = 4 duration = 0 END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5samu2a~ END
+  END
+
+COPY ~might_and_guile/fighter/samurai/d5samu3.bam~ ~override~
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu3.spl~			//	flurry of blows
+  SAY NAME1 @6013
+  SAY UNIDENTIFIED_DESC @6014
+  WRITE_ASCII 0x3a ~d5samu3~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu3~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 1 target = 1 parameter1 = 1 parameter2 = 0 timing = 0 duration = 19 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 2) parameter2 = 0 timing = 0 duration = 19 END
+
+COPY ~might_and_guile/fighter/samurai/d5samu4.bam~ ~override~
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu4.spl~			//	tiger strike
+  SAY NAME1 @6015
+  SAY UNIDENTIFIED_DESC @6016
+  WRITE_ASCII 0x3a ~d5samu4~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu4~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 152 timing = 0 duration = 126144000 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 301 target = 1 parameter1 = 20 parameter2 = 0 timing = 0 duration = 126144000 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu4x~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 249 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu4x~ END
+
+CREATE EFF ~d5samu4x~
+	WRITE_LONG 0x10 146
+	WRITE_LONG 0x14 9
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 1
+	WRITE_LONG 0x24 1
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5samu4x~ #8
+
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu4x.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5samu4~ END  
+
+COPY ~might_and_guile/fighter/samurai/d5samu5.bam~ ~override~
+COPY_EXISTING ~spcl811.spl~ ~override/d5samu5.spl~					//	stunning blow
+  WRITE_ASCII 0x3a ~d5samu5~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu5~ END
+
+COPY ~might_and_guile/fighter/samurai/d5samu6.bam~ ~override~
+COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu6.spl~			//	inner gate strike
+  SAY NAME1 @6017
+  SAY UNIDENTIFIED_DESC @6018
+  WRITE_ASCII 0x3a ~d5samu6~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu6~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu6b~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu6x~ END
+
+CREATE EFF ~d5samu6b~
+	WRITE_LONG 0x10 325
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x1c (0 - 2)
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 30
+	WRITE_SHORT 0x2c 100
+
+CREATE EFF ~d5samu6x~
+	WRITE_LONG 0x10 321
+	WRITE_LONG 0x14 9
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 1
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5samu6~ #8
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~spcl908.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/fighter/spcl908.spl~ ~override~				//	war cry
+    SAY NAME1 @6019
+    SAY UNIDENTIFIED_DESC @6020
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ki BEGIN
+  d5ki1 => spcl211
+  d5ki2 => d5samu2
+  d5ki3 => d5samu3
+  d5ki4 => d5samu4
+  d5ki5 => d5samu5
+  d5ki6 => d5samu6
+  d5ki7 => spcl908
+END
+
+LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ END
+
+COPY ~might_and_guile/fighter/samurai/d5kisam.spl~ ~override~			//	add ki points
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki172~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5kipls~ END
+
+COPY_EXISTING ~d5ki000.spl~ ~override~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki1l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki2l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki3l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki4l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki5l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki6l~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki7l~ END
+IF_EXISTS BUT_ONLY
+
+ACTION_FOR_EACH ki IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ BEGIN
+  COPY_EXISTING ~d5ki%ki%i.spl~ ~override~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 7 END
+  IF_EXISTS BUT_ONLY
+END
+
+INCLUDE ~%MOD_FOLDER%/lib/dialprof.tpa~
+
+OUTER_SPRINT prof_script_name ~d5kifo~
+OUTER_SET script_level_one = 0
+OUTER_SET script_higher_levels = 0
+OUTER_SPRINT class_dlgs ~fi~
+
+LAM PROF_DIALOGUE
+
+COPY ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~ ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
+    REPLACE_TEXTUALLY ~CheckStatGT(myself,9,LEVEL)~ ~CheckStatGT(myself,8,LEVEL)~
+    REPLACE_TEXTUALLY ~GOTO d5kifofi_2~ ~GOTO d5kifofi_5~
+    REPLACE_TEXTUALLY ~GOTO d5kifofi_3~ ~GOTO d5kifofi_5~
+    REPLACE_TEXTUALLY ~GOTO d5kifofi_4~ ~GOTO d5kifofi_5~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_103","LOCALS",[012345]~ ~GlobalGT("D5_PROF_103","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_104","LOCALS",[012345]~ ~GlobalGT("D5_PROF_104","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_105","LOCALS",[012345]~ ~GlobalGT("D5_PROF_105","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_106","LOCALS",[012345]~ ~GlobalGT("D5_PROF_106","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_107","LOCALS",[012345]~ ~GlobalGT("D5_PROF_107","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_108","LOCALS",[012345]~ ~GlobalGT("D5_PROF_108","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_109","LOCALS",[012345]~ ~GlobalGT("D5_PROF_109","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_111","LOCALS",[012345]~ ~GlobalGT("D5_PROF_111","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_112","LOCALS",[012345]~ ~GlobalGT("D5_PROF_112","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_113","LOCALS",[012345]~ ~GlobalGT("D5_PROF_113","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_114","LOCALS",[012345]~ ~GlobalGT("D5_PROF_114","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_115","LOCALS",[012345]~ ~GlobalGT("D5_PROF_115","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_124","LOCALS",[012345]~ ~GlobalGT("D5_PROF_124","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_127","LOCALS",[012345]~ ~GlobalGT("D5_PROF_127","LOCALS",99~
+    REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_110","LOCALS",[012345]~ ~GlobalGT("D5_PROF_110","LOCALS",99~
+    REPLACE_TEXTUALLY ~"LOCALS",2) Proficiency(Myself~ ~"LOCALS",1) Proficiency(Myself~
+    REPLACE_TEXTUALLY ~"LOCALS",3) Proficiency(Myself~ ~"LOCALS",2) Proficiency(Myself~
+    REPLACE_TEXTUALLY ~"LOCALS",4) Proficiency(Myself~ ~"LOCALS",3) Proficiency(Myself~
+    REPLACE_TEXTUALLY ~"LOCALS",5) Proficiency(Myself~ ~"LOCALS",4) Proficiency(Myself~
+IF_EXISTS BUT_ONLY
+
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%game_lang%/dialprof.tra~ BEGIN
+  COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
+END
+
+COPY_EXISTING ~d5kifoa.spl~ ~override~
+  SAY NAME1 @6008
+  SAY UNIDENTIFIED_DESC @6009
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5kifo1~ END
+IF_EXISTS BUT_ONLY
+//____________________________________________________________________________________
+	
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_samur.2da~) BEGIN
+	APPEND ~d5_samur.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+//____________________________________________________________________________________
+
+END	//	end function

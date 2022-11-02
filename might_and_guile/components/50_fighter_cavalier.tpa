@@ -1,0 +1,57 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								WARRIOR TWEAKS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//______________________FIGHTER_CAVALIER____________________________________________
+
+DEFINE_ACTION_FUNCTION fighter_cavalier BEGIN
+
+//remove from paladin menus_________________________________________________________
+// 
+LAF remove_menu_kit INT_VAR del_kit = 4 STR_VAR class = ~P~ END
+
+//add to fighter menus______________________________________________________________
+// 
+ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~K_F_%race%.2da~ BEGIN
+	  COPY_EXISTING ~K_F_%race%.2da~ ~override~
+		COUNT_2DA_COLS cols
+		COUNT_2DA_ROWS cols rows
+		PATCH_IF (rows > 3) BEGIN
+		  INSERT_2DA_ROW 3 cols ~3    4~
+		END
+	  BUT_ONLY
+	END
+END
+
+//change class in kitlist___________________________________________________________
+// 
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 1; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 1 9 kitname
+    READ_2DA_ENTRY row 8 9 kitclass
+    PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~CAVALIER~) BEGIN
+      SET_2DA_ENTRY row 8 9 2
+    END
+  END
+BUT_ONLY
+
+//remove some paladin abilities_____________________________________________________
+// 
+COPY_EXISTING ~clabpa02.2da~ ~override~
+  REPLACE_TEXTUALLY ~GA_SPCL211~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_SPCL212~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_SPCL213~ ~****      ~
+IF_EXISTS BUT_ONLY
+
+
+//...is anything else necessary??
+
+END	//	end function
+

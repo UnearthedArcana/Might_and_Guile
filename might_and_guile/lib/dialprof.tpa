@@ -1,4 +1,4 @@
-// v2.4 - classes var fix fix
+// v2.1 - many more options
 
 
 //__________________________________________________________________________________
@@ -11,7 +11,7 @@ ACTION_IF !(VARIABLE_IS_SET %EE_LANGUAGE%) BEGIN
   COPY_EXISTING ~spwi101.spl~ ~override~
 	READ_STRREF 0x50 description_string
   BUT_ONLY
-  ACTION_FOR_EACH lang IN ~en_US~ /*~fr_FR~ ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~*/ BEGIN
+  ACTION_FOR_EACH lang IN ~en_US~ ~fr_FR~/* ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~*/ BEGIN
 	WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%lang%/dialprof.tra~ BEGIN
 	  OUTER_SPRINT duration_lang @10 
 	END	
@@ -53,8 +53,6 @@ DEFINE_ACTION_MACRO PROF_DIALOGUE BEGIN
 
 //  - ...if both of those last two are 0, it will only let you advance one prof once
 
-//  - %class_dlgs% - SPRINT to "all" or to a string containing the first two letters of desired classes, e.g. "fi_ra_pa"
-
 /*
 //COPY MARKER FILE__________________________________________________________________
 //
@@ -62,7 +60,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5__dialprof.d5~ ~override~
 //__________________________________________________________________________________
 */
 
-//find game install language_________________________________________________________
+//find game install language__________________________________________________________
 //
 LAF set_lang RET game_lang END
 
@@ -82,92 +80,6 @@ ACTION_IF !(VARIABLE_IS_SET %script_higher_levels%) BEGIN
   OUTER_SET script_higher_levels = 0
 END
 
-ACTION_IF !(VARIABLE_IS_SET %class_dlgs%) BEGIN
-  OUTER_SET fighter_dlg = 1
-  OUTER_SET ranger_dlg = 1
-  OUTER_SET paladin_dlg = 1
-  OUTER_SET cleric_dlg = 1
-  OUTER_SET druid_dlg = 1
-  OUTER_SET shaman_dlg = 1
-  OUTER_SET thief_dlg = 1
-  OUTER_SET bard_dlg = 1
-  OUTER_SET mage_dlg = 1
-  OUTER_SET sorcerer_dlg = 1
-  OUTER_SET monk_dlg = 1
-END
-ACTION_IF (VARIABLE_IS_SET %class_dlgs%) BEGIN
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~fi~ = 0) BEGIN
-  OUTER_SET fighter_dlg = 1
- END ELSE BEGIN
-  OUTER_SET fighter_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ra~ = 0) BEGIN
-  OUTER_SET ranger_dlg = 1
- END ELSE BEGIN
-  OUTER_SET ranger_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~pa~ = 0) BEGIN
-  OUTER_SET paladin_dlg = 1
- END ELSE BEGIN
-  OUTER_SET paladin_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~cl~ = 0) BEGIN
-  OUTER_SET cleric_dlg = 1
- END ELSE BEGIN
-  OUTER_SET cleric_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~dr~ = 0) BEGIN
-  OUTER_SET druid_dlg = 1
- END ELSE BEGIN
-  OUTER_SET druid_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~sh~ = 0) BEGIN
-  OUTER_SET shaman_dlg = 1
- END ELSE BEGIN
-  OUTER_SET shaman_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~th~ = 0) BEGIN
-  OUTER_SET thief_dlg = 1
- END ELSE BEGIN
-  OUTER_SET thief_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ba~ = 0) BEGIN
-  OUTER_SET bard_dlg = 1
- END ELSE BEGIN
-  OUTER_SET bard_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~ma~ = 0) BEGIN
-  OUTER_SET mage_dlg = 1
- END ELSE BEGIN
-  OUTER_SET mage_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~so~ = 0) BEGIN
-  OUTER_SET sorcerer_dlg = 1
- END ELSE BEGIN
-  OUTER_SET sorcerer_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~mo~ = 0) BEGIN
-  OUTER_SET monk_dlg = 1
- END ELSE BEGIN
-  OUTER_SET monk_dlg = 0
- END
- ACTION_IF (~%class_dlgs%~ STRING_CONTAINS_REGEXP ~all~ = 0) BEGIN
-  OUTER_SET fighter_dlg = 1
-  OUTER_SET ranger_dlg = 1
-  OUTER_SET paladin_dlg = 1
-  OUTER_SET cleric_dlg = 1
-  OUTER_SET druid_dlg = 1
-  OUTER_SET shaman_dlg = 1
-  OUTER_SET thief_dlg = 1
-  OUTER_SET bard_dlg = 1
-  OUTER_SET mage_dlg = 1
-  OUTER_SET sorcerer_dlg = 1
-  OUTER_SET monk_dlg = 1
- END
-END
-
-//read weapprof_____________________________________________________________________
-//
 COPY_EXISTING ~weapprof.2da~ ~override~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS 5 rows
@@ -2973,44 +2885,17 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5_base.spl~ ~override/%prof_script_name%a.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%prof_script_name%a~ END
 
 COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%.baf~
-ACTION_IF (fighter_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%fi.d~
-END
-ACTION_IF (ranger_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ra.d~
-END
-ACTION_IF (paladin_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%pa.d~
-END
-ACTION_IF (cleric_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%cl.d~
-END
-ACTION_IF (druid_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%dr.d~
-END
-ACTION_IF (shaman_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%sh.d~
-END
-ACTION_IF (thief_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%th.d~
-END
-ACTION_IF (bard_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ba.d~
-END
-ACTION_IF (mage_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ma.d~
-END
-ACTION_IF (sorcerer_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%so.d~
-END
-ACTION_IF (monk_dlg = 1) BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%mo.d~
-END
-
-OUTER_SPRINT prof_script_name ~______~
-OUTER_SET script_level_one = 0
-OUTER_SET script_higher_levels = 0
-OUTER_SPRINT class_dlgs ~all~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%fi.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ra.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%pa.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%cl.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%dr.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%sh.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%th.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ba.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ma.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%so.d~
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%mo.d~
 
 END	//	end with_tra
 

@@ -1,0 +1,29 @@
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// spell_to_innate                                  \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+// converts spell to innate and lowers casting time by two
+
+DEFINE_PATCH_MACRO ~spell_to_innate~ BEGIN
+
+  READ_LONG  0x64 abil_off ELSE 0
+  READ_SHORT 0x68 abil_num ELSE 0
+  READ_ASCII (abil_off + 0x04) bam (8) // reads the bam filename from ability
+  WRITE_SHORT 0x1C 4                         // sets spell type to innate (4)
+  WRITE_LONG  0x34 1                         // sets spell level to 1 to avoid scripting issues
+  WRITE_ASCIIE 0x3A "%bam%" #8      // writes the bam filename from abilities to spell icon
+  FOR (index = 0 ; index < abil_num ; ++index) BEGIN
+    WRITE_SHORT (abil_off + 0x02 + (0x28 * index)) 4 // changes ability icon location to innate (4)
+    READ_SHORT  (abil_off + 0x12 + (0x28 * index)) speed // reads casting speed
+    PATCH_IF (speed > 3) BEGIN
+      WRITE_SHORT  (abil_off + 0x12 + (0x28 * index)) (speed - 2) // reduces casting speed
+    END ELSE BEGIN
+      WRITE_SHORT  (abil_off + 0x12 + (0x28 * index)) 0 // makes instant
+    END
+  END
+
+END

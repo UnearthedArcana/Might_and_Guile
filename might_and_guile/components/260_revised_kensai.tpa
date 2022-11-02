@@ -1,0 +1,1547 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								KENSAI WEAPON FOCUS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+///COPY MARKER FILE___________________________________________________________________
+//
+COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~/d5__kensai.d5~
+//___________________________________________________________________________________
+
+
+
+/* not necessary?
+// get kit identifiers________________________________________________________________
+//
+OUTER_SET kensai_code = 0x4003
+
+APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
+	    SET kit_is_row = %row%
+	  END
+	END
+BUT_ONLY
+//___________________________________________________________________________________
+*/
+
+
+// kensai weapon focus gives... what?_________________________________________________
+//
+// patch all weapons to have 177 targeting kensai
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	READ_BYTE 0x31 proficiency
+	PATCH_IF (proficiency = 89) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5bswob~ END
+	END
+	PATCH_IF (proficiency = 90) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5lswob~ END
+	END
+	PATCH_IF (proficiency = 91) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5sswob~ END
+	END
+	PATCH_IF (proficiency = 93) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d52swob~ END
+	END
+	PATCH_IF (proficiency = 92) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5baxeb~ END
+	END
+	PATCH_IF (proficiency = 94) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5katab~ END
+	END
+	PATCH_IF (proficiency = 95) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5scimb~ END
+	END
+	PATCH_IF (proficiency = 96) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5daggb~ END
+	END
+	PATCH_IF (proficiency = 97) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5hammb~ END
+	END
+	PATCH_IF (proficiency = 98) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5speab~ END
+	END
+	PATCH_IF (proficiency = 99) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5halbb~ END
+	END
+	PATCH_IF (proficiency = 100) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5flaib~ END
+	END
+	PATCH_IF (proficiency = 101) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5maceb~ END
+	END
+	PATCH_IF (proficiency = 115) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5clubb~ END
+	END
+	PATCH_IF (proficiency = 102) BEGIN
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0x4003 paramater2 = 9 timing = 2 STR_VAR resource = ~d5stafb~ END
+	END
+  END
+BUT_ONLY
+
+// make EFFs giving extra APR
+ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5%prof%b.eff~) BEGIN
+    CREATE EFF ~d5%prof%b~
+	  WRITE_LONG 0x10 1
+	  WRITE_LONG 0x14 1
+	  WRITE_LONG 0x1c 6
+	  WRITE_LONG 0x20 0
+	  WRITE_LONG 0x24 2
+	  WRITE_LONG 0x28 0
+	  WRITE_SHORT 0x2c 100
+	  WRITE_LONG 0x90 1
+	  WRITE_EVALUATED_ASCII 0x94 ~D5%PROF%B~ #8
+  END
+END
+
+// make spells with 206 against those EFFs
+ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5%prof%6.spl~) BEGIN
+    COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5%prof%6.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~D5%PROF%B~ END
+    BUT_ONLY
+  END
+END
+
+// have weapon focus spells cancel those 206 spells
+ACTION_FOR_EACH spec IN ~a~ ~b~ ~c~ ~d~ ~e~ BEGIN
+  ACTION_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	COPY_EXISTING ~d5%spec%%prof%.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+	IF_EXISTS BUT_ONLY
+  END
+END
+
+// make spell to cast those 206 spells
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5bs206.spl~) BEGIN
+  COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bs206.spl~
+    PATCH_FOR_EACH prof IN ~bswo~ ~lswo~ ~sswo~ ~2swo~ ~baxe~ ~kata~ ~scim~ ~dagg~ ~hamm~ ~spea~ ~halb~ ~flai~ ~mace~ ~club~ ~staf~ BEGIN
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~d5%prof%6~ END
+    END
+  BUT_ONLY
+END
+
+// apply bs206 in clab
+APPEND ~d5_blads.2da~ ~WPN_FOCUS   AP_D5BS206  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+//___________________________________________________________________________________
+
+/*
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KLSWO~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KLSWO       0 0 0 0 0 0 0 0~
+~D5KLSWO       0 0 0 0 0 0 0 0 1 5 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KLSWO    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KLSWO           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KLSWO           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KLSWO  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KLSWO           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KLSWO           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_klswo.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2604
+SAY @2604
+SAY @2605
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@2603)
+		STR_VAR
+			kit_name = D5KLSWO
+			clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KSSWO~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KSSWO       0 0 0 0 0 0 0 0~
+~D5KSSWO       0 0 0 0 0 0 0 0 1 1 5 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSSWO    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSSWO           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSSWO           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSSWO  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KSSWO           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KSSWO           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_ksswo.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2610
+SAY @2610
+SAY @2611
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KSSWO
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KDAGG~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KDAGG       0 0 0 0 0 0 0 0~
+~D5KDAGG       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 5 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KDAGG    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KDAGG           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KDAGG           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KDAGG  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KDAGG           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KDAGG           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kdagg.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2614
+SAY @2614
+SAY @2615
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KDAGG
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KSCIM~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KSCIM       0 0 0 0 0 0 0 0~
+~D5KSCIM       0 0 0 0 0 0 0 0 1 1 1 1 1 1 5 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSCIM    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSCIM           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSCIM           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSCIM  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KSCIM           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KSCIM           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kscim.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2608
+SAY @2608
+SAY @2609
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KSCIM
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KKATA~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KKATA       0 0 0 0 0 0 0 0~
+~D5KKATA       0 0 0 0 0 0 0 0 1 1 1 1 1 5 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KKATA    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KKATA           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KKATA           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KKATA  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KKATA           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KKATA           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kkata.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2606
+SAY @2606
+SAY @2607
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KKATA
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KBSWO~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KBSWO       0 0 0 0 0 0 0 0~
+~D5KBSWO       0 0 0 0 0 0 0 0 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+~D5KBSWO    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBSWO           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBSWO           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBSWO  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KBSWO           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KBSWO           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kbswo.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2601
+SAY @2601
+SAY @2602
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@2603)
+		STR_VAR
+			kit_name = D5KBSWO
+			clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5K2SWO~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5K2SWO       0 0 0 0 0 0 0 0~
+~D5K2SWO       0 0 0 0 0 0 0 0 1 1 1 1 5 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5K2SWO    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5K2SWO           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5K2SWO           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5K2SWO  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5K2SWO           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5K2SWO           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_k2swo.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2612
+SAY @2612
+SAY @2613
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5K2SWO
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KHALB~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KHALB       0 0 0 0 0 0 0 0~
+~D5KHALB       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 5 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHALB   	       9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHALB           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHALB           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHALB  	        15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KHALB           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KHALB           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_khalb.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2630
+SAY @2630
+SAY @2631
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KHALB
+		clswpbon = ~1 0 2~
+	END
+END
+//___________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KSPEA~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KSPEA       0 0 0 0 0 0 0 0~
+~D5KSPEA       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 5 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSPEA           9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSPEA           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSPEA           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSPEA  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KSPEA           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KSPEA           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kspea.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2628
+SAY @2628
+SAY @2629
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KSPEA
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KSTAF~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KSTAF       0 0 0 0 0 0 0 0~
+~D5KSTAF       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 5 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSTAF           9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSTAF           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSTAF           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KSTAF           15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KSTAF           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KSTAF           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kstaf.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2626
+SAY @2626
+SAY @2627
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KSTAF
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KCLUB~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KCLUB       0 0 0 0 0 0 0 0~
+~D5KCLUB       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 5 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KCLUB           9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KCLUB           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KCLUB           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KCLUB  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KCLUB           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KCLUB           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kclub.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2624
+SAY @2624
+SAY @2625
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KCLUB
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KMACE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KMACE       0 0 0 0 0 0 0 0~
+~D5KMACE       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 5 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KMACE    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KMACE           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KMACE           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KMACE  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KMACE           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KMACE           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kmace.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2622
+SAY @2622
+SAY @2623
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KMACE
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KFLAI~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KFLAI       0 0 0 0 0 0 0 0~
+~D5KFLAI       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 5 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KFLAI    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KFLAI           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KFLAI           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KFLAI  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KFLAI           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KFLAI           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kflai.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2618
+SAY @2618
+SAY @2619
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KFLAI
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KHAMM~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KHAMM       0 0 0 0 0 0 0 0~
+~D5KHAMM       0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 5 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHAMM    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHAMM           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHAMM           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KHAMM  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KHAMM           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KHAMM           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_khamm.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2620
+SAY @2620
+SAY @2621
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KHAMM
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//___________________________________________________________________________________
+ADD_KIT ~D5KBAXE~
+
+//WEAPON PROFICIENCIES________________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5KBAXE       0 0 0 0 0 0 0 0~
+~D5KBAXE       0 0 0 0 0 0 0 0 1 1 1 5 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBAXE    	   9   9   0   0   0   0~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBAXE           0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBAXE           15  15  0   0   0   0~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5KBAXE  	       15  15  0   0   0   0~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5KBAXE           1  1  1  1  1  1  1  1  1~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5KBAXE           0  0  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE______________________________________________________________
+~might_and_guile/kensai/d5_kbaxe.2da~
+
+//RACIAL KIT AVAILABILITY_____________________________________________________________
+~~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20
+~0x00000004 2~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~Fi4~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~* * HELM19 BAG22 RING06 RING29 CLCK02 BOOT01 AMUL19 BRAC14 BELT06 * * * POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H27 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION________________________________________________
+SAY @2616
+SAY @2616
+SAY @2617
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS_____________________________________________________________________
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+	INT_VAR
+		briefdesc = RESOLVE_STR_REF (@2603)
+	STR_VAR
+		kit_name = D5KBAXE
+		clswpbon = ~1 0 2~
+	END
+END
+//____________________________________________________________________________________
+
+//END
+
+//KENSAI ABILITY FILES______________________________________________________________
+//
+COPY ~might_and_guile/kensai/d5_klswo.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_ksswo.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kdagg.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kscim.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kkata.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kbswo.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_k2swo.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_khalb.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kspea.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kstaf.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kclub.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kmace.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kflai.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_khamm.2da~ ~override~
+COPY ~might_and_guile/kensai/d5_kbaxe.2da~ ~override~
+COPY ~might_and_guile/kensai/clabfi04.2da~ ~override~
+COPY ~might_and_guile/misc/d5_acbo1.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo2.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo3.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo4.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo5.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo6.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo7.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo8.spl~ ~override~
+COPY ~might_and_guile/misc/d5_acbo9.spl~ ~override~
+COPY ~might_and_guile/misc/d5_thac1.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg1.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg2.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg3.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg4.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg5.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg6.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg7.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg8.spl~ ~override~
+COPY ~might_and_guile/misc/d5_dmg9.spl~ ~override~
+COPY ~might_and_guile/misc/d5_apr1.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kenf1.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf2.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf3.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf4.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf5.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf6.spl~ ~override~
+	SAY NAME1 @2632
+	SAY UNIDENTIFIED_DESC @2632
+COPY ~might_and_guile/kensai/d5_kenf.cre~ ~override~
+COMPILE ~might_and_guile/kensai/d5_kenf.baf~
+COMPILE ~might_and_guile/kensai/d5_kenf.d~
+COPY ~might_and_guile/kensai/d5_kens.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_klswo.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_ksswo.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kdagg.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kscim.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kkata.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kbswo.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_k2swo.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_khalb.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kspea.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kstaf.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kclub.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kmace.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kflai.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_khamm.spl~ ~override~
+COPY ~might_and_guile/kensai/d5_kbaxe.spl~ ~override~
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__stats.d5~ THEN BEGIN
+	COPY_EXISTING ~d5_kbswo.2da~ ~override~
+				 ~d5_klswo.2da~ ~override~
+				 ~d5_kkata.2da~ ~override~
+				 ~d5_kscim.2da~ ~override~
+				 ~d5_ksswo.2da~ ~override~
+				 ~d5_k2swo.2da~ ~override~
+				 ~d5_kdagg.2da~ ~override~
+				 ~d5_kbaxe.2da~ ~override~
+				 ~d5_khamm.2da~ ~override~
+				 ~d5_kflai.2da~ ~override~
+				 ~d5_kmace.2da~ ~override~
+				 ~d5_kclub.2da~ ~override~
+				 ~d5_kstaf.2da~ ~override~
+				 ~d5_kspea.2da~ ~override~
+				 ~d5_khalb.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/misc/charisma_bonuses.txt~
+		APPEND_FILE ~might_and_guile/misc/crit_changes.txt~
+	BUT_ONLY
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
+	ACTION_IF (FILE_EXISTS_IN_GAME ~d5__apr.d5~) OR (FILE_EXISTS_IN_GAME ~TB#TATT.spl~) THEN BEGIN
+		COPY_EXISTING ~d5_kbswo.2da~ ~override~
+					 ~d5_klswo.2da~ ~override~
+					 ~d5_kkata.2da~ ~override~
+					 ~d5_kscim.2da~ ~override~
+					 ~d5_ksswo.2da~ ~override~
+					 ~d5_k2swo.2da~ ~override~
+					 ~d5_kdagg.2da~ ~override~
+					 ~d5_kbaxe.2da~ ~override~
+					 ~d5_khamm.2da~ ~override~
+					 ~d5_kflai.2da~ ~override~
+					 ~d5_kmace.2da~ ~override~
+					 ~d5_kclub.2da~ ~override~
+					 ~d5_kstaf.2da~ ~override~
+					 ~d5_kspea.2da~ ~override~
+					 ~d5_khalb.2da~ ~override~
+			LPM remove_blank_lines
+			APPEND_FILE ~might_and_guile/profs/w1apr.txt~
+		BUT_ONLY
+	END
+END
+//______________________________________________________________________________
+
+//DON'T USE SCROLLS/WANDS___________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5_rf84n.spl~ BEGIN
+  ACTION_FOR_EACH kensai IN ~d5_kbswo~ ~d5_klswo~ ~d5_kkata~ ~d5_kscim~ ~d5_ksswo~ ~d5_k2swo~ ~d5_kdagg~ ~d5_kbaxe~ ~d5_khamm~ ~d5_kflai~ ~d5_kmace~ ~d5_kclub~ ~d5_kstaf~ ~d5_kspea~ ~d5_khalb~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%kensai%.2da~ BEGIN
+	  APPEND ~%kensai%.2da~ ~ABILITY    AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+	END
+  END
+END
+//__________________________________________________________________________________
+
+//__________________________________________________________________________________
+COPY_EXISTING ~WEAPPROF.2da~ ~override~
+	SET_2DA_ENTRY 3 32 1 ~1~
+	SET_2DA_ENTRY 4 32 1 ~1~
+	SET_2DA_ENTRY 5 32 1 ~1~
+	SET_2DA_ENTRY 6 32 1 ~1~
+	SET_2DA_ENTRY 7 32 1 ~1~
+	SET_2DA_ENTRY 8 32 1 ~1~
+	SET_2DA_ENTRY 9 32 1 ~1~
+	SET_2DA_ENTRY 10 32 1 ~1~
+	SET_2DA_ENTRY 11 32 1 ~1~
+	SET_2DA_ENTRY 12 32 1 ~1~
+	SET_2DA_ENTRY 13 32 1 ~1~
+	SET_2DA_ENTRY 14 32 1 ~1~
+	SET_2DA_ENTRY 15 32 1 ~1~
+	SET_2DA_ENTRY 16 32 1 ~1~
+	SET_2DA_ENTRY 17 32 1 ~1~
+	SET_2DA_ENTRY 18 32 1 ~1~
+	SET_2DA_ENTRY 19 32 1 ~1~
+	SET_2DA_ENTRY 20 32 1 ~1~
+	SET_2DA_ENTRY 21 32 1 ~1~
+	SET_2DA_ENTRY 22 32 1 ~1~
+	SET_2DA_ENTRY 23 32 1 ~1~
+	SET_2DA_ENTRY 24 32 1 ~1~
+	SET_2DA_ENTRY 25 32 1 ~1~
+	SET_2DA_ENTRY 31 32 1 ~0~
+	SET_2DA_ENTRY 32 32 1 ~0~
+	SET_2DA_ENTRY 33 32 1 ~0~
+	SET_2DA_ENTRY 34 32 1 ~0~
+//	BUT_ONLY
+//__________________________________________________________________________________
+
+
+//EDIT STRINGS______________________________________________________________________
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~KENSAI~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2648)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~KENSAI~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2648)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~KENSAI~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2648)
+	  END
+	END
+  BUT_ONLY
+END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//  STRING_SET 25204 @2648
+//END
+//__________________________________________________________________________________
+
+
+//NPC KENSAI________________________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~chloe7.cre~ THEN BEGIN
+	COPY_EXISTING ~chloe7.cre~ ~override~
+				~chloe9.cre~ ~override~
+				~chloe13.cre~ ~override~
+				~chloe15.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_KENF~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~nath07.cre~ THEN BEGIN
+	COPY_EXISTING ~nath07.cre~ ~override~
+				~nath08.cre~ ~override~
+				~nath10.cre~ ~override~
+				~nath25.cre~ ~override~
+		LPF ADD_CRE_EFFECT INT_VAR opcode=171 target=1 timing=9 power=1 STR_VAR resource=~d5_KENF~ END
+END
+//__________________________________________________________________________________
+
+
+//______________________HLAS________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TG#TOUG.spl~ THEN BEGIN
+	COPY_EXISTING ~LUFI0.2da~ ~override/LUFI4.2da~	
+END
+//__________________________________________________________________________________
+*/

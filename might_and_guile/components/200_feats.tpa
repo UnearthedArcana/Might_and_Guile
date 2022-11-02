@@ -13,7 +13,7 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__rfeat.d5~
 COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__wfeat.d5~
 //__________________________________________________________________________________
 
-/* do this in a separate component
+
 //IMPROVE THAC0 TABLE_______________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
@@ -120,7 +120,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
   BUT_ONLY
 END	
 //__________________________________________________________________________________
-*/
+
 
 //CHECK IF THIEVES CAN USE WANDS____________________________________________________
 //
@@ -140,13 +140,10 @@ COPY_EXISTING - ~wand07.itm~ ~override~
 //
 ACTION_IF !(MOD_IS_INSTALLED ~might_and_guile.tp2~ ~225~) BEGIN
 	INCLUDE ~might_and_guile/components/230_revised_stalker.tpa~
-	LAF revised_stalker END
 END
-/*
 ACTION_IF !(MOD_IS_INSTALLED ~might_and_guile.tp2~ ~275~) BEGIN
 	INCLUDE ~might_and_guile/components/275_revised_shadowdancer.tpa~
 END
-*/
 //__________________________________________________________________________________
 
 LAF check_kit_conflict END
@@ -249,7 +246,7 @@ END
 
 //KIT IDENTIFIERS FOR PATCHING LATER__________________________________________________
 //
-//OUTER_SET sd_code = (0x4000 + %D5SHADD%)
+OUTER_SET sd_code = (0x4000 + %D5SHADD%)
 OUTER_SET al_code = (0x4000 + %D5ALCHM%)
 
 COPY_EXISTING ~kit.ids~ ~override~
@@ -316,129 +313,147 @@ BUT_ONLY
 
 //CHANGE CLASS TEXT_________________________________________________________________
 //
-COPY_EXISTING ~clastext.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FIGHTER~) BEGIN
-        READ_2DA_ENTRY row 4 cols fighter_str
-        GET_STRREF %fighter_str% fighter_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BARBARIAN~) BEGIN
-        READ_2DA_ENTRY row 4 cols barbarian_str
-        GET_STRREF %barbarian_str% barbarian_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-        READ_2DA_ENTRY row 4 cols ranger_str
-        GET_STRREF %ranger_str% ranger_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
-        READ_2DA_ENTRY row 4 cols thief_str
-        GET_STRREF %thief_str% thief_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) BEGIN
-        READ_2DA_ENTRY row 4 cols assassin_str
-        GET_STRREF %assassin_str% assassin_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
-        READ_2DA_ENTRY row 4 cols bounty_hunter_str
-        GET_STRREF %bounty_hunter_str% bounty_hunter_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
-        READ_2DA_ENTRY row 4 cols swashbuckler_str
-        GET_STRREF %swashbuckler_str% swashbuckler_desc
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
-        READ_2DA_ENTRY row 4 cols shadowdancer_str
-        GET_STRREF %shadowdancer_str% shadowdancer_desc
-      END
-    END
-IF_EXISTS BUT_ONLY
-
-OUTER_SPRINT fighter_feats_desc @20021
-OUTER_SPRINT barbarian_feats_desc @20022
-OUTER_SPRINT ranger_feats_desc @20023
-OUTER_SPRINT thief_feats_desc @20024
-OUTER_SPRINT assassin_feats_desc @20025
-OUTER_SPRINT bounty_hunter_feats_desc @20026
-OUTER_SPRINT swashbuckler_feats_desc @20027
-OUTER_SPRINT shadowdancer_feats_desc @20028
-
-ACTION_IF (VARIABLE_IS_SET %fighter_desc%) BEGIN
-  OUTER_SPRINT new_fighter_desc ~%fighter_desc%~^~%fighter_feats_desc%~
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET thief_row = %row%
+		SET_2DA_ENTRY %thief_row% 3 cols RESOLVE_STR_REF (@20000)
+		SET_2DA_ENTRY %thief_row% 4 cols RESOLVE_STR_REF (@20002)
+		SET_2DA_ENTRY %thief_row% 5 cols RESOLVE_STR_REF (@20001)
+		SET_2DA_ENTRY (%thief_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+		SET_2DA_ENTRY (%thief_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%thief_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%thief_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+		SET_2DA_ENTRY (%thief_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+		SET_2DA_ENTRY (%thief_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FIGHTER~ BEGIN
+	    SET fighter_row = %row%
+		SET_2DA_ENTRY %fighter_row% 4 cols RESOLVE_STR_REF (@20015)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@20016)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
+	    SET barb_row = %row%
+		SET_2DA_ENTRY %barb_row% 4 cols RESOLVE_STR_REF (@20017)
+	  END
+	END
+  BUT_ONLY
 END
-ACTION_IF (VARIABLE_IS_SET %barbarian_desc%) BEGIN
-  OUTER_SPRINT new_barbarian_desc ~%barbarian_desc%~^~%barbarian_feats_desc%~
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET thief_row = %row%
+		SET_2DA_ENTRY %thief_row% 3 cols RESOLVE_STR_REF (@20000)
+		SET_2DA_ENTRY %thief_row% 4 cols RESOLVE_STR_REF (@20002)
+		SET_2DA_ENTRY %thief_row% 5 cols RESOLVE_STR_REF (@20001)
+		SET_2DA_ENTRY (%thief_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+		SET_2DA_ENTRY (%thief_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%thief_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%thief_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+		SET_2DA_ENTRY (%thief_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+		SET_2DA_ENTRY (%thief_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FIGHTER~ BEGIN
+	    SET fighter_row = %row%
+		SET_2DA_ENTRY %fighter_row% 4 cols RESOLVE_STR_REF (@20015)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@20016)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
+	    SET barb_row = %row%
+		SET_2DA_ENTRY %barb_row% 4 cols RESOLVE_STR_REF (@20017)
+	  END
+	END
+  BUT_ONLY
 END
-ACTION_IF (VARIABLE_IS_SET %ranger_desc%) BEGIN
-  OUTER_SPRINT new_ranger_desc ~%ranger_desc%~^~%ranger_feats_desc%~
+ACTION_IF (FILE_EXISTS_IN_GAME ~bgclatxt.2da~) BEGIN
+  COPY_EXISTING ~bgclatxt.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~THIEF~ BEGIN
+	    SET thief_row = %row%
+		SET_2DA_ENTRY %thief_row% 3 cols RESOLVE_STR_REF (@20000)
+		SET_2DA_ENTRY %thief_row% 4 cols RESOLVE_STR_REF (@20002)
+		SET_2DA_ENTRY %thief_row% 5 cols RESOLVE_STR_REF (@20001)
+		SET_2DA_ENTRY (%thief_row% + 1) 4 cols RESOLVE_STR_REF (@20073)
+		SET_2DA_ENTRY (%thief_row% + 2) 4 cols RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%thief_row% + 2) 3 cols RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%thief_row% + 2) 5 cols RESOLVE_STR_REF (@20076)
+		SET_2DA_ENTRY (%thief_row% + 3) 4 cols RESOLVE_STR_REF (@20077)
+		SET_2DA_ENTRY (%thief_row% + 4) 4 cols RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FIGHTER~ BEGIN
+	    SET fighter_row = %row%
+		SET_2DA_ENTRY %fighter_row% 4 cols RESOLVE_STR_REF (@20015)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 cols RESOLVE_STR_REF (@20016)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
+	    SET barb_row = %row%
+		SET_2DA_ENTRY %barb_row% 4 cols RESOLVE_STR_REF (@20017)
+	  END
+	END
+  BUT_ONLY
 END
-ACTION_IF (VARIABLE_IS_SET %thief_desc%) BEGIN
-  OUTER_SPRINT new_thief_desc ~%thief_desc%~^~%thief_feats_desc%~
-END
-ACTION_IF (VARIABLE_IS_SET %assassin_desc%) BEGIN
-  OUTER_SPRINT new_assassin_desc ~%assassin_desc%~^~%assassin_feats_desc%~
-END
-ACTION_IF (VARIABLE_IS_SET %bounty_hunter_desc%) BEGIN
-  OUTER_SPRINT new_bounty_hunter_desc ~%bounty_hunter_desc%~^~%bounty_hunter_feats_desc%~
-END
-ACTION_IF (VARIABLE_IS_SET %swashbuckler_desc%) BEGIN
-  OUTER_SPRINT new_swashbuckler_desc ~%swashbuckler_desc%~^~%swashbuckler_feats_desc%~
-END
-ACTION_IF (VARIABLE_IS_SET %shadowdancer_desc%) BEGIN
-  OUTER_SPRINT new_shadowdancer_desc ~%shadowdancer_desc%~^~%shadowdancer_feats_desc%~
-END
-
-ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist.2da~ BEGIN
-  COPY_EXISTING ~%text_file%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      READ_2DA_ENTRY row 1 cols kitlist_name
-      PATCH_IF (VARIABLE_IS_SET %new_fighter_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FIGHTER~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_fighter_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_barbarian_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BARBARIAN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BARBARIAN~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_barbarian_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_ranger_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_ranger_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_thief_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_thief_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_assassin_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ASSASSIN~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_assassin_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_bounty_hunter_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_bounty_hunter_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_swashbuckler_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_swashbuckler_desc%~)
-        END
-      END
-      PATCH_IF (VARIABLE_IS_SET %new_shadowdancer_desc%) BEGIN
-        PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SHADOWDANCER~) BEGIN
-          SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (~%new_shadowdancer_desc%~)
-        END
-      END
-    END
-  IF_EXISTS BUT_ONLY
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~ASSASIN~ BEGIN
+	    SET assassin_row = %row%
+		SET_2DA_ENTRY (%assassin_row%) 4 9 RESOLVE_STR_REF (@20073)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BOUNTY_HUNTER~ BEGIN
+	    SET hunter_row = %row%
+		SET_2DA_ENTRY (%hunter_row%) 4 9 RESOLVE_STR_REF (@20074)
+		SET_2DA_ENTRY (%hunter_row%) 2 9 RESOLVE_STR_REF (@20075)
+		SET_2DA_ENTRY (%hunter_row%) 3 9 RESOLVE_STR_REF (@20076)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SWASHBUCKLER~ BEGIN
+	    SET swash_row = %row%
+		SET_2DA_ENTRY (%swash_row%) 4 9 RESOLVE_STR_REF (@20077)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~SHADOWDANCER~ BEGIN
+	    SET dancer_row = %row%
+		SET_2DA_ENTRY (%dancer_row%) 4 9 RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~D5SHADD~ BEGIN
+	    SET shadd_row = %row%
+		SET_2DA_ENTRY (%shadd_row%) 4 9 RESOLVE_STR_REF (@20078)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~FIGHTER~ BEGIN
+	    SET fighter_row = %row%
+		SET_2DA_ENTRY %fighter_row% 4 9 RESOLVE_STR_REF (@20015)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~RANGER~ BEGIN
+	    SET ranger_row = %row%
+		SET_2DA_ENTRY %ranger_row% 4 9 RESOLVE_STR_REF (@20016)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BARBARIAN~ BEGIN
+	    SET barb_row = %row%
+		SET_2DA_ENTRY %barb_row% 4 9 RESOLVE_STR_REF (@20017)
+	  END
+	END
+  BUT_ONLY
 END
 //__________________________________________________________________________________
 
@@ -1449,8 +1464,8 @@ COPY_EXISTING  ~d5ure7.spl~ ~override/d5vre7.spl~
 
 COPY ~might_and_guile/feats/d5_rfe8b.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 	//				swashbuckling
-	SAY NAME1 @5506
-	SAY UNIDENTIFIED_DESC @5507
+	SAY NAME1 @3112
+	SAY UNIDENTIFIED_DESC @3113
 	WRITE_SHORT 0x1c 2
 	WRITE_BYTE 0x21 (THIS | 0b11000000)
 	PATCH_IF GAME_IS ~iwdee~ BEGIN
@@ -1461,15 +1476,15 @@ COPY ~might_and_guile/feats/d5_rfe8.spl~ ~override/d5ure8.spl~	 	//				swashbuck
 	WRITE_ASCII 0x3a ~d5_rfe8b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe8b~ END
 COPY ~might_and_guile/misc/d5swash.spl~ ~override~
-	SAY NAME1 @5506
-	SAY UNIDENTIFIED_DESC @5507
+	SAY NAME1 @3112
+	SAY UNIDENTIFIED_DESC @3113
 	WRITE_ASCII 0x3a ~d5_rfe8b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfe8b~ END
 COPY ~might_and_guile/misc/d5swshb.eff~ ~override~
 COPY ~might_and_guile/misc/d5swshc.spl~ ~override~
 COPY ~might_and_guile/misc/d5swshx.spl~ ~override~
-	SAY NAME1 @5514
-	SAY UNIDENTIFIED_DESC @5514
+	SAY NAME1 @3114
+	SAY UNIDENTIFIED_DESC @3114
 	WRITE_ASCII 0x3a ~d5swshx~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5swshx~ END
 COPY ~might_and_guile/misc/d5swshx.bam~ ~override~
@@ -1585,8 +1600,9 @@ COPY ~might_and_guile/feats/d5_rf74.eff~ ~override~
 COPY_EXISTING  ~d5urg4.spl~ ~override/d5vrg4.spl~ 
 	WRITE_SHORT 0x1c 1
 
+// ***** change this to a chance of each effect
 COPY ~might_and_guile/feats/d5_rfg5b.bam~ ~override~
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5urg5.spl~   		// 			fighting dirty
+COPY ~might_and_guile/feats/d5_rfg5.spl~ ~override/d5urg5.spl~   	// 			fighting dirty
 	SAY NAME1 @20259
 	SAY UNIDENTIFIED_DESC @20260
 	WRITE_SHORT 0x1c 2
@@ -1598,88 +1614,33 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5urg5.spl~   		// 			fighting dir
 	END
 	WRITE_ASCII 0x3a ~d5_rfg5b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfg5b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5csp8a~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = (4 << 24) END
 COPY_EXISTING  ~d5urg5.spl~ ~override/d5vrg5.spl~ 
 	WRITE_SHORT 0x1c 1
-
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5csp8a.spl~				//			fighting dirty effect
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 9 STR_VAR resource = ~d5csp8b~ END
-
-CREATE EFF  ~d5csp8b~
-	WRITE_LONG 0x10 146
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 1
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~D5CSP8b~ #8
-
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5csp8b.spl~				//			fighting dirty effect
-  LPF ALTER_SPELL_HEADER INT_VAR target = 1 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 33 probability2 = 0 STR_VAR resource = ~d5csp8c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 33 probability2 = 0 STR_VAR resource = ~d5csp8d~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 283 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 66 probability2 = 34 STR_VAR resource = ~d5csp8e~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 283 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 66 probability2 = 34 STR_VAR resource = ~d5csp8f~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 283 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 100 probability2 = 67 STR_VAR resource = ~d5csp8g~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 283 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 6 probability1 = 100 probability2 = 67 STR_VAR resource = ~d5csp8h~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 2 parameter1 = (0 - 1) timing = 0 duration = 7 STR_VAR resource = ~d5csp8b~ END
-
-CREATE EFF  ~d5csp8c~
-	WRITE_LONG 0x10 74
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 6
-	WRITE_SHORT 0x2c 100
-
-CREATE EFF  ~d5csp8d~
-	WRITE_LONG 0x10 24
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 3
-	WRITE_SHORT 0x2c 100
-
-CREATE EFF  ~d5csp8e~
-	WRITE_LONG 0x10 39
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 6
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~D5CSP8b~ #8
-
-CREATE EFF  ~d5csp8f~
-	WRITE_LONG 0x10 40
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 0
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 3
-	WRITE_SHORT 0x2c 100
-
-CREATE EFF  ~d5csp8g~
-	WRITE_LONG 0x10 44
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c 6
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 6
-	WRITE_SHORT 0x2c 100
-
-CREATE EFF  ~d5csp8h~
-	WRITE_LONG 0x10 250
-	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c (0 - 5)
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 0
-	WRITE_LONG 0x28 6
-	WRITE_SHORT 0x2c 100
-
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_115_FEATS~ BEGIN
+	    SET 115_dirty = %row%
+	  END
+	END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN
+	READ_BYTE 0x31 prof
+	PATCH_IF (%prof% = 115) || (%prof% = 89) || (%prof% = 90) || (%prof% = 91) || (%prof% = 92) || (%prof% = 93) || (%prof% = 94) || (%prof% = 95) || (%prof% = 96) || (%prof% = 97) || (%prof% = 98) || (%prof% = 99) || (%prof% = 100) || (%prof% = 101) || (%prof% = 102) BEGIN	// any weapon
+	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 248 target = 1 timing = 2 resist_dispel = 0 STR_VAR resource = ~d5_rf75a~ END
+	END
+  END
+BUT_ONLY
+COPY ~might_and_guile/feats/d5_rf75a.eff~ ~override~
+COPY ~might_and_guile/feats/d5_rf75a.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = (4 << 24) parameter2 = %115_dirty% END
+COPY ~might_and_guile/feats/d5_rf75b.spl~ ~override~
+COPY ~might_and_guile/feats/d5_rf75d.spl~ ~override~
+COPY ~might_and_guile/feats/d5_rf75f.spl~ ~override~
 
 // pseudo-magical
 
@@ -1722,31 +1683,6 @@ COPY_EXISTING ~spwi213.spl~ ~override/d5_rf82.spl~  			 //            smoke bomb
 	WRITE_ASCII 0x3a ~d5_rfh2b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh2b~ END
 	LPM spell_to_innate
-
-//COPY SHADOW POOL FILES_____________________________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_shad1.spl~) BEGIN
-//  COPY ~might_and_guile/thief/d5_shadd.2da~ ~override~
-  COPY ~might_and_guile/thief/d5_shad1.spl~ ~override~
-	SAY NAME1 @2755
-	SAY UNIDENTIFIED_DESC @2756
-  COPY ~might_and_guile/thief/d5_shad1.bam~ ~override~
-  COPY ~might_and_guile/thief/d5shad1a.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shad1b.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shad1c.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shado.spl~ ~override~
-	SAY NAME1 @2757
-	SAY UNIDENTIFIED_DESC @2758
-  COPY ~might_and_guile/thief/d5shado.bam~ ~override~
-  COPY ~might_and_guile/thief/d5shado.eff~ ~override~
-  COPY ~might_and_guile/thief/d5shado.cre~ ~override~
-	SAY NAME1 @2759
-  COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
-	SAY NAME1 @9
-  COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
-//  COMPILE ~might_and_guile/thief/d5_shadd.baf~
-END
-//__________________________________________________________________________________
 
 COPY ~might_and_guile/feats/d5_rfh5b.bam~ ~override~
 COPY ~might_and_guile/feats/d5_rfh5.spl~ ~override/d5urh5.spl~   //           shadow pool

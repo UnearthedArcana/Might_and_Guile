@@ -2,12 +2,9 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//								REVISED BEASTMASTER
+//						REVISED BEASTMASTER
 //__________________________________________________________________________________
 //__________________________________________________________________________________
-
-
-DEFINE_ACTION_FUNCTION revised_beastmaster BEGIN
 
 
 //copy marker file__________________________________________________________________
@@ -18,27 +15,27 @@ COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__beastmaster.d5~
 
 //BEASTMASTER WEAPONS____________________________________________________________
 //
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_SHORT 0x1c type
-		PATCH_IF (type = 16) BEGIN // daggers
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type
+		PATCH_IF (type = ~16~) BEGIN // daggers
 			READ_BYTE 0x2b kit 
 			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
 		END
 	END
 BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_SHORT 0x1c type 
-		PATCH_IF (type = 25) BEGIN // axes
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type 
+		PATCH_IF (type = ~25~) BEGIN // axes
 			READ_BYTE 0x2b kit
 			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
 		END
 	END
 BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-		READ_SHORT 0x1c type
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ // copies all item files
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN // avoid crashing on empty items
+		READ_SHORT ~0x1c~ type
 		PATCH_IF (type = 29) BEGIN // spears
 			READ_BYTE 0x2b kit 
 			WRITE_BYTE 0x2b (kit BAND 0b11111101) // makes usable by beastmasters
@@ -56,73 +53,99 @@ COPY_EXISTING ~weapprof.2da~ ~override~
 	SET_2DA_ENTRY_LATER ~#weapprof~ 26 38 0
 	SET_2DA_ENTRIES_NOW ~#weapprof~ 1
 BUT_ONLY
-//__________________________________________________________________________________
+//___________________________________________________________________________________
 
 
 //UPDATE EXISTING STRINGS__________________________________________________________
 // 
-ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist~ BEGIN
-  COPY_EXISTING ~%text_file%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      READ_2DA_ENTRY row 1 cols kitlist_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~RANGER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~RANGER~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@23500)
-      END
-    END
-  IF_EXISTS BUT_ONLY
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
+	  END
+	END
+  BUT_ONLY
 END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEAST_MASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 cols RESOLVE_STR_REF (@2350)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows 9 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BEASTMASTER~ BEGIN
+	    SET patch_row = %row%
+		SET_2DA_ENTRY (%patch_row%) 4 9 RESOLVE_STR_REF (@2350)
+	  END
+	END
+  BUT_ONLY
+END
+//ACTION_IF ENGINE_IS ~tob~ BEGIN
+//	STRING_SET 25212 @2350
+//END
 //__________________________________________________________________________________
 
 
 //BEASTMASTER SHAPECHANGING + SPIRIT WOLF____________________________________________
 //
-COPY ~might_and_guile/ranger/beastmaster/d5_rnnf.spl~ ~override~
-	SAY NAME1 @23501
-	SAY UNIDENTIFIED_DESC @23501
-COPY ~might_and_guile/ranger/beastmaster/d5_rnwlf.spl~ ~override~
-	SAY NAME1 @23502
-	SAY UNIDENTIFIED_DESC @23502
-COPY ~might_and_guile/ranger/beastmaster/d5_rnww.spl~ ~override~
-	SAY NAME1 @23503
-	SAY UNIDENTIFIED_DESC @23503
-COPY ~might_and_guile/ranger/beastmaster/d5_clwlf.itm~ ~override~
-	SAY NAME1 @23504
-	SAY UNIDENTIFIED_DESC @23504
-COPY ~might_and_guile/ranger/beastmaster/d5_clww1.itm~ ~override~
-	SAY NAME1 @23504
-	SAY UNIDENTIFIED_DESC @23504
-COPY ~might_and_guile/ranger/beastmaster/d5_clww2.itm~ ~override~
-	SAY NAME1 @23504
-	SAY UNIDENTIFIED_DESC @23504
-COPY ~might_and_guile/ranger/beastmaster/d5_wolf.cre~ ~override~
-	SAY NAME1 @23505
-COPY ~might_and_guile/ranger/beastmaster/d5_dire.cre~ ~override~
-	SAY NAME1 @23506
-COPY ~might_and_guile/ranger/beastmaster/d5_ww01.cre~ ~override~
-	SAY NAME1 @23507
-COPY ~might_and_guile/ranger/beastmaster/d5_ww02.cre~ ~override~
-	SAY NAME1 @23508
-COPY ~might_and_guile/ranger/beastmaster/d5_ww03.cre~ ~override~
-	SAY NAME1 @23509
+COPY ~might_and_guile/ranger/d5_rnnf.spl~ ~override~
+	SAY NAME1 @2351
+	SAY UNIDENTIFIED_DESC @2351
+COPY ~might_and_guile/ranger/d5_rnwlf.spl~ ~override~
+	SAY NAME1 @2352
+	SAY UNIDENTIFIED_DESC @2352
+COPY ~might_and_guile/ranger/d5_rnww.spl~ ~override~
+	SAY NAME1 @2353
+	SAY UNIDENTIFIED_DESC @2353
+COPY ~might_and_guile/ranger/d5_clwlf.itm~ ~override~
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
+COPY ~might_and_guile/ranger/d5_clww1.itm~ ~override~
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
+COPY ~might_and_guile/ranger/d5_clww2.itm~ ~override~
+	SAY NAME1 @2354
+	SAY UNIDENTIFIED_DESC @2354
+COPY ~might_and_guile/ranger/d5_wolf.cre~ ~override~
+	SAY NAME1 @2355
+COPY ~might_and_guile/ranger/d5_dire.cre~ ~override~
+	SAY NAME1 @2356
+COPY ~might_and_guile/ranger/d5_ww01.cre~ ~override~
+	SAY NAME1 @2357
+COPY ~might_and_guile/ranger/d5_ww02.cre~ ~override~
+	SAY NAME1 @2358
+COPY ~might_and_guile/ranger/d5_ww03.cre~ ~override~
+	SAY NAME1 @2359
 ACTION_IF (ENGINE_IS ~tob~) BEGIN
 	COPY_EXISTING ~clabrn04.2da~ ~override~
 		REPLACE_TEXTUALLY ~GA_SPCL342~ ~****      ~
 		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/beastmaster/beastmasterog.txt~
+		APPEND_FILE ~might_and_guile/ranger/beastmasterog.txt~
 	BUT_ONLY
 END
 ELSE BEGIN
 	COPY_EXISTING ~clabrn04.2da~ ~override~
 		REPLACE_TEXTUALLY ~GA_SPCL342~ ~****      ~
 		LPM remove_blank_lines
-		APPEND_FILE ~might_and_guile/ranger/beastmaster/beastmaster.txt~
+		APPEND_FILE ~might_and_guile/ranger/beastmaster.txt~
 	BUT_ONLY
 END
 //__________________________________________________________________________________
-
-
-END	//	end function
 

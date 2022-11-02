@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 5.0</strong><br />
+  <p><strong> Version 4.24</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -58,267 +58,9 @@
     <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Randomiser, etc.]</li>
   </ul>
   <p><strong>Modder Resources:</strong><br />
-	Might and Guile adds a handful of custom spellstates to SPLSTATE.IDS. It uses the 4th byte of stat 115, Clubs proficiency, to track certain feats. It also uses most of stat 108 and the 3rd and 4th bytes of stat 109 for the Revised Bards' "semi-spontaneous"/"5E-style" hybrid spellcasting and a couple other innate abilities. It uses the Skald and Archer kit usability flags to control spell access in the Revised Bards component.</p>
+	Might and Guile adds a handful of custom spellstates to SPLSTATE.IDS. It uses the 4th byte of stat 115, Clubs proficiency, to track certain feats, principally the Fighting Dirty feat. It also uses most of stat 108 for the Revised Bards' "semi-spontaneous"/"5E-style" hybrid spellcasting. It uses the Skald and Archer kit usability flags to control spell access in the Revised Bards component.</p>
 </div>
 <h2>Contents</h2>
-  <h4 class="subheader">Component 50: </h4>
-  <div class="section">
-    <p><strong><em>Move the CAVALIER Kit to the Fighter Class</em></strong></p>
-      <p>The Cavalier originated as a fighter kit. This restores it as such. It keeps the various immunities and combat bonuses and the Remove Fear innate ability; but it loses Lay On Hands and Protection from Evil.</p>
-  </div>
-  <h4 class="subheader">Component 55: </h4>
-  <div class="section">
-    <p><strong><em>Add the CORSAIR fighter kit</em></strong></p>
-    <div class="kit_description">
-      <p>CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.</p>
-      <p>Advantages:<br />
-        &ndash; Can achieve Grand Mastery (5 stars) with light bladed weapons.<br />
-        &ndash; Gains a bonus to Armor Class for every six levels gained.<br />
-        &ndash; Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
-      <p>Disadvantages:<br />
-        &ndash; Cannot become proficient with heavy weapons.<br />
-        &ndash; May only achieve Mastery (+++) with ranged weapons.<br />
-        &ndash; May not wear heavier armor than studded leather.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 60: </h4>
-  <div class="section">
-    <p><strong><em>Add the WEAPONMASTER fighter kit</em></strong></p>
-    <div class="kit_description">
-      <p>WEAPONMASTER: this is a warrior who draws on an implacable fighting spirit to overcome enemies. Unlike most fighters, Weaponmasters focus their training such that they can only achieve grandmastery with a single weapon group. However the bond and intense training with that weapon allows Weaponmasters to draw upon 'ki,' or spirit energy, to  perform terrific feats of combat prowess.</p>
-      <p>Advantages:<br />
-        &ndash; May select a Weapon of Focus at 9th level. The Weaponmaster instantly gains grandmastery with the chosen weapon.<br />
-        &ndash; A Weaponmaster may channel their ki energy into feats of near-superhuman strength, agility, and ferocity. The Weaponmaster gets one ki point at 1st level and another ki point every third level thereafter, up to seven at 18th level. These ki points may be used for the following abilities:<br />
-        <ul>
-          <li>Lay On Hands (heal oneself or a comrade)</li>
-          <li>Shield of the Wind (evade missile attacks)</li>
-          <li>Flurry of Blows (attack with greater speed and reduced accuracy)</li>
-          <li>Tiger Strike (preform a critical strike)</li>
-          <li>Stunning Blow (cause the target of a weapon strike to be stunned)</li>
-          <li>Inner Gate Strike (cause saving throw penalties via a weapon strike)</li>
-          <li>War Cry (a powerful yell that can a panic enemies)</li>
-        </ul></p>
-      <p>Disadvantages:<br />
-        &ndash; May only achieve specialization with weapons other than the Weapon of Focus.<br />
-        &ndash; Alignment restrictions: may not be chaotic.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 80: </h4>
-  <div class="section">
-    <p><strong><em>Add the TOMB RUNNER fighter/thief kit</em></strong></p>
-      <div class="kit_description">
-        <p>TOMB RUNNER: these adventurers are seekers after history, truth, and riches. They love to travel to strange lands, searching for mysterious and ancient ruins. Whether in pursuit of scholarly knowledge, or power and fame (or all of the above!), Tomb Runners are adept at surviving hostile dungeons that often do not *want* to be explored.</p>
-        <p>Abilities:<br />
-          &ndash; Initial 15-point bonus to Find Traps and Detect Illusions.<br />
-          &ndash; +5 bonus to Lore each level.<br />
-          &ndash; +3 bonus to to-hit and damage rolls against undead creatures.</p>
-          &ndash; At level 15, may Use Any Item.<br />
-        <p>Restrictions:<br />
-          &ndash; May not use the Pick Pockets skill.<br />
-          &ndash; May distribute 20 skill points each level.<br />
-          &ndash; Reduced backstab multiplier progression, matching that of a Stalker.<br />
-          &ndash; Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.<br />.</p>
-      </div>
-  </div>
-  <h4 class="subheader">Component 85: </h4>
-  <div class="section">
-    <p><strong><em>Add the THUG fighter/thief kit</em></strong></p>
-      <div class="kit_description">
-        <p>THUG: Some rogues find that the application of violence is as effective in the pursuit of their goals as the more refined thieving skills. These may be simple lone muggers, or organized enforcers for a guild. In either case, for most of a peaceful urban populace, the only sure thing is that thugs are to be feared and guarded against.</p>
-        <p>Abilities:<br />
-          &ndash; +1 bonus to Strength.<br />
-          &ndash; +1 bonus to backstab multiplier.<br />
-        <p>Restrictions:<br />
-          &ndash; -2 penalty to Dexterity.<br />
-          &ndash; May not use the Open Locks, Detect Illusion, or Set Traps skills.<br />
-          &ndash; May only distribute 20 skill points each level.<br />
-          &ndash; May not be Lawful or Good alignments.<br />.</p>
-      </div>
-  </div>
-  <h4 class="subheader">Component 90: </h4>
-  <div class="section">
-    <p><strong><em>Add the RAKE thief kit, and revise the Swashbuckler</em></strong></p>
-      <p>I never liked the idea of a Swashbuckler laying traps for foes instead of dramatically battling them with swash and buckle. So this component basically splits the Swashbuckler in two: the Rake can use traps but does not backstab well (kind of like the old swashbuckler); and the Swashbuckler can backstab a bit, but cannot set traps.</p>
-    <div class="kit_description">
-      <p>RAKE: The rake is a rogue who is open about his skills and talents, often to the point of being boastful. The rake might have the protection of an important figure who finds his services useful, but often simple bravado is enough to keep trouble away. Brash and unafraid of confrontation, a rake is often the face of a group for purposes diplomacy, gathering information, negotiations, or to gain the most lucrative contracts and quests from local authorities. Unlike most thieves, rakes rarely strike from the shadows, preferring to get in an opponent's face and deliver a clever quip. To their enemies' enduring frustration, rakes are often lucky enough to survive such encounters.</p>
-      <p>Advantages:<br />
-        &ndash; Natural +1 bonus to thac0, AC, and Luck.<br />
-        &ndash; May specialize in weapons that thieves can use.<br />
-        &ndash; May place 3 slots into Two-Weapon Style.</p>
-      <p>Disadvantages:<br />
-        &ndash; Only gains 20 thieving skill points each level.<br />
-        &ndash; Backstab damage does not increase when leveling up.<br />.</p>
-    </div><br />
-    <div class="kit_description">
-      <p>SWASHBUCKLER: This rogue is part acrobat, part duellist, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as dandies, and they arenot the best at thieving. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm and stealth fail.</p>
-      <p>Advantages:<br />
-        &ndash; +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 5 levels.<br />
-        &ndash; May specialize in any melee weapon usable by Thieves.<br />
-        &ndash; May place 3 slots into Two-Weapon Style.</p>
-      <p>Disadvantages:<br />
-        &ndash; May not set traps.<br />
-        &ndash; May only distribute 20 skill points per level among thieving skills.<br />
-        &ndash; The swashbuckler can backstab, but with a reduced multiplier.<br />
-        &ndash; May not dual-class to fighter.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 96: </h4>
-  <div class="section">
-    <p><strong><em>Add the NINJA thief kit</em></strong></p>
-    <div class="kit_description">
-      <p>NINJA: the Ninja is a highly trained spy who is expert in the arts of intrusion, sabotage, and elimination. These shadow warriors are generally trained by and work on behalf of a clan, town, or local organization. They learn a diverse skill set including stealth, investigation, combat, and even a small amount of specialized magic.</p>
-      <p>Advantages:<br />
-        &ndash; May specialize in weapons usable by thieves.<br />
-        &ndash; May use rangers' Tracking ability.<br />
-        &ndash; May concentrate <PRO_HISHER> ki energy into deceptive and shadowy magical effects. The Ninja begins with one ki point at first level, and gains another ki point at every odd level thereafter, up to 10 points at 19th level. Ki points may be spent to reproduce the effects of the following spells:
-        <ul>
-          <li>Blindness</li>
-          <li>Sleep</li>
-          <li>Reflected Image</li>
-          <li>Blur</li>
-          <li>Knock</li>
-          <li>Sanctuary</li>
-          <li>Shadowstep</li>
-        </ul></p>
-      <p>Disadvantages:<br />
-        &ndash; May not use the Pick Pockets thieving skill.<br />
-        &ndash; Only gains 20 thieving skill points each level.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 97: </h4>
-  <div class="section">
-    <p><strong><em>Add the NINJA as a fighter/thief</em></strong></p>
-    <p>This is identical to the Ninja kit described above, but in the fighter/thief class. You cna install whichever version you prefer, or install both and have both options while playing the game.</p>
-  </div>
-  <h4 class="subheader">Component 105: </h4>
-  <div class="section">
-    <p><strong><em>Add the SPELLFILCHER mage/thief kit</em></strong></p>
-      <div class="kit_description">
-        <p>SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.</p>
-        <p>Abilities:<br />
-          &ndash; Any target struck by a Spellfilcher in melee combat must save vs. rods/wands or suffer a 33% chance of miscast magic for 3 rounds.<br />
-          &ndash; Spellfilchers may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells.<br />
-          &ndash; At 5th level, Spellfilchers may cast a special variant of "Spell Turning" which lasts for 12 hours.  It will only turn back a single spell.<br />
-          &ndash; At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-detection."</p>
-        <p>Restrictions:<br />
-          &ndash; None<br />.</p>
-      </div>
-  </div>
-  <h4 class="subheader">Component 110: </h4>
-  <div class="section">
-    <p><strong><em>Add the LOREMASTER mage/thief kit</em></strong></p>
-      <div class="kit_description">
-        <p>LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.</p>
-        <p>Abilities:<br />
-          &ndash; Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.<br />
-          &ndash; Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.<br />
-          &ndash; Loremasters receive a bonus +5 lore per level.<br />
-        <p>Restrictions:<br />
-          &ndash; Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.<br />
-          &ndash; Loremasters do not do extra damage by backstabbing.<br />.</p>
-      </div>
-  </div>
-  <h4 class="subheader">Component 120: </h4>
-  <div class="section">
-    <p><strong><em>Add Regional Variants of the Base Ranger kit</em></strong></p>
-    <div class="kit_description">
-      <p>FOREST RANGER: the most common, or at least commonly visible, type of ranger, forest rangers are knowledgeable woodsmen and able warriors. Fiercely protective by nature, they are often called upon to fulfill a dual role: sometimes guiding travelers through areas with hostile wildlife, and at other times protecting that very wildlife from those who would carelessly exploit Toril's resource-rich woodlands.</p>
-      <p>Advantages:<br />
-        &ndash; Innate ability to Charm animals and beats, once per day per 5 levels of experience.<br />
-        &ndash; Innate ability to cast the Goodberry spell once per day.<br />
-        &ndash; +2 bonus to hit and damage against (non-humanoid) mammals, gibberlings, and lycanthropes.</p>
-      <p>Restrictions:<br />
-        &ndash; Alignment must be Good.<br />.</p>
-    </div>
-    <div class="kit_description">
-      <p>MOUNTAIN RANGER: these individuals are hardy survivalists, trained to thrive among lofty peaks and protect the passes and valleys which are the lifeblood of mountain communities. Mountain Rangers are also expert spelunkers, since the most common source of evil threatening these lands tends to spring from underground cave systems, where all manner of dangerous beings tend to congregate and where ancient artifacts of power tend to be lost.</p>
-      <p>Advantages:<br />
-        &ndash; +3 bonus to saving throws vs. Death/Poison and Petrification/Polymorph.<br />
-        &ndash; +2 bonus to hit and damage against kobolds, beetles, myconids, trolls, and umber hulks.</p>
-      <p>Restrictions:<br />
-        &ndash; Alignment must be Good.<br />.</p>
-    </div>
-    <div class="kit_description">
-      <p>JUNGLE RANGER: these warriors are guides and hunters in some of the most competitive and dangerous ecosystems. Pure might means very little in the jungle; so Jungle Rangers employ tactics such as stealth and poison to survive. These tools, along with expert knowledge of the most dangerous denizens of jungles and swamps, helps them to guide travelers and avoid unseen dangers.</p>
-      <p>Advantages:<br />
-        &ndash; 50% resistance to poison damage.<br />
-        &ndash; May use the Poison Weapon ability once per day.<br />
-        &ndash; +2 bonus to hit and damage against lizardmen, spiders, ettercaps, and wyverns.</p>
-      <p>Restrictions:<br />
-        &ndash; Alignment must be Good.<br />.</p>
-    </div>
-    <div class="kit_description">
-      <p>DESERT RANGER: these are among the toughest warriors in the land. They are trained to patrol badlands far from civilization, where exposure and thirst are as dangerous as any monster. In such places, threats tend to be powerful, and often magical. Few people understand what leads someone to take on this calling, but some say the desert itself exerts a spiritual pull on these loners.</p>
-      <p>Advantages:<br />
-        &ndash; +1 hit point per level at levels 1-9.<br />
-        &ndash; +2 bonus to hit and damage against snakes, yuan-ti, basilisks, rakshasa, and genies.</p>
-      <p>Restrictions:<br />
-        &ndash; Alignment must be Good.<br />.</p>
-    </div>
-    <div class="kit_description">
-      <p>ARCTIC RANGER: among the explorers and travelers in the frozen tundra and snowy wastes near the polar caps, the careless die quickly. Arctic rangers sometimes act as sherpas, and at other times prefer to operate unseen. But their ability to find and utilize resources where others are snowblind have saved the lives of many. And their knowledge of the more dangerous predators in these climes is invaluable.</p>
-      <p>Advantages:<br />
-        &ndash; Permanent 25% resistance to cold damage.<br />
-        &ndash; +2 bonus to hit and damage against winter wolves, polar bears, yetis, salamanders, and remorhaz.</p>
-      <p>Restrictions:<br />
-        &ndash; Alignment must be Good.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 125: </h4>
-  <div class="section">
-    <p><strong><em>Add the MAGE HUNTER ranger kit</em></strong></p>
-    <div class="kit_description">
-      <p>MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.</p>
-      <p>Advantages:<br />
-        &ndash; Mage Hunters have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.<br />
-        &ndash; Each successful melee hit bestows a 40% chance of spell failure on the target for one round.<br />
-        &ndash; May use a special vocalization that can deafen anyone nearby and impose a 40% chance of spell failure on them if they fail a saving throw vs. Petrification.</p>
-        &ndash; Can cast the following as 1st-level spells: Shocking Touch, Deafness.<br />
-        &ndash; Can cast the following as 2nd-level spells: Remove Magic, Minor Spell Deflection.<br />
-        &ndash; Can cast the following as 3rd-level spells: Breach, Non-Detection, Spell Thrust.</p>
-      <p>Disadvantages:<br />
-        &ndash; Suffers a -1 penalty to Strength and Constitution.<br />
-        &ndash; May not use Charm Animal ability.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 130: </h4>
-  <div class="section">
-    <p><strong><em>Add the BARBARIAN RANGER kit</em></strong></p>
-    <div class="kit_description">
-      <p>BARBARIAN RANGER: Among barbarian tribes there are hunters of great skill. Spending many days alone in the wild, stalking their prey, they are closer to nature than most men. They are not quite as hardy as their more aggressive brethren, and tend to be loners. Yet they bring uncommon skills to bear both in providing for, and in defending, their tribe.</p>
-      <p>Advantages:<br />
-        &ndash; Can move 2 points faster than other characters.<br />
-        &ndash; May enter an enraged state, enhancing combat abilities, once per day per six levels.<br />
-        &ndash; May Charm animals once per day per five levels.<br />
-        &ndash; Gains 5% physical damage resistance at 11th level, and again at 15th and 19th levels.</p>
-      <p>Disadvantages:<br />
-        &ndash; Cannot cast druid spells.<br />
-        &ndash; -2 penalty to Charisma.<br />
-        &ndash; May not wear armor heavier than studded leather or hide armor.<br />
-        &ndash; May not dual-class.<br />.</p>
-    </div>
-  </div>
-  <h4 class="subheader">Component 151: </h4>
-  <div class="section">
-    <p><strong><em>Add the ARCHER as a fighter kit</em></strong></p>
-    <p>This is a fighter kit which mimics the Archer ranger kit in almost every way, except this kit can reach specialization with melee weapons instead of mere proficiency.</p>
-    <p>There is a configuration option in d5_mng_settings.ini which will <b>move</b> the Archer kit to the fighter class, instead of replicating it there. This is a good option for players who want Elven Archers to be more special (the only magic-using archers in the ranger class) and it saves adding an extra kit into the game.</p>
-  </div>
-  <h4 class="subheader">Component 155: </h4>
-  <div class="section">
-    <p><strong><em>Add the ELVEN ARCHER ranger kit</em></strong></p>
-    <p>This is an alternative to the normal Archer ranger kit, which is only available to elves and can only reach grandmastery with bows, not crossbows. If you also install component 205, Revised Archery, then the Elven Archer will get access to a few magical Called Shots, which can put the target to sleep, or entangle the target, or make the target glow with Faerie fire.</p>
-  </div>
-  <h4 class="subheader">Component 160: </h4>
-  <div class="section">
-    <p><strong><em>Add the HALFLING SLINGER kit</em></strong></p>
-    <p>This is a fighter/thief kit, only available to halflings. It shares the same traits as the Archer ranger kit, except it can only reach grandmastery with slings, not bows or crossbows. If you also install component 205, Revised Archery, then the Halfling Slinger will get access to a special Called Shot which can stun the target.</p>
-  </div>
-  <h4 class="subheader">Component 165: </h4>
-  <div class="section">
-    <p><strong><em>Add the MARKSMAN thief kit</em></strong></p>
-    <p>This is a thief kit which mimics the Archer ranger kit in almost every way, except this kit combines archery skills with thieving abilities. If you also install component 205, Revised Archery, then the Marksman will get access to a special Called Shot which can blind the target.</p>
-  </div>
   <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Feat System and Revised HLAs</em></strong></p>
@@ -396,96 +138,29 @@
   <h4 class="subheader">Component 205: </h4>
   <div class="section">
     <p><strong><em>Revised Archers</em></strong></p>
-    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned like feats. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots. Not all Called Shots are available to every Archer class - some are unique to the  Marksman, Elven Archer, or Halfling Slinger.</p> 
+    <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots.  These Called Shots will be available as feats, instead of granted automatically at pre-determined levels. Use the white ability with a "+" to choose one.</p> 
     <div class="kit_description">
-      <p>CALLED SHOTS <br />
-        &ndash; Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
-        &ndash; Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
-        &ndash; Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.<br />
-        &ndash; Rapid Shot. This technique allows the archer to fire much faster - with one extra attack  per round - albeit less accurately - with a 2-point <b>penalty</b> to attack and damage rolls.<br />
-        &ndash; Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
-        &ndash; Blinding Shot (Marksman). Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath. <br />
-        &ndash; Stunning Shot (Slinger). Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
-        &ndash; Sleep Shot (Elven Archer). This shot causes the target to fall unconscious for one or two rounds on a failed save vs. spells.<br />
-        &ndash; Entangling Shot (Elven Archer). This shot contains the target in a mass of vines and roots on a failed save vs. breath weapon.<br />
-        &ndash; Faerie Fire Shot (Elven Archer). This shot envelopes the target in a ghostly white glow, m aking them easier to hit in combat (-2 to AC) and preventing them from becoming invisible.</p>
+      <p>Advantages:<br />
+        &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
+        &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:<br />
+<br />
+CALLED SHOTS <br />
+        &ndash; Available at 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; Available at 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; Available at 1st level: Pinning Shot. This shot catches the target's clothes or body and pins them to the wall, floor, or other object, rendering the target unable to move for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Available at 1st level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; Available at 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; Available at 9th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
+        &ndash; 1Available at 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+      <p>Disadvantages:<br />
+        &ndash; May only become proficient (+) with melee weapons.<br />
+        &ndash; May only wear leather or similar armors.<br />.</p>
     </div>
+    <p><b>Note: unless the mod's .ini file is altered, this component will automatically install the Marksman, Elven Archer, Halfling Slinger, and Sniper kits.</b> </p>
     <p><b>Compatibility:</b> this component will conflict with other mods that alter the Archer kit, like the "Improved Archer" mod.</p>
   </div>
-  <h4 class="subheader">Component 220 (for EE 2.0+): </h4>
-  <div class="section">
-    <p><strong><em>Revised Multiclassing</em></strong></p>
-      <p>This component liberalizes the multiclassing rules in targeted ways:</p>
-      <ul>
-        <li> Enables humans to multiclass.</li>
-        <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
-        <li> Enables half-elves to be cleric/thieves.</li>
-        <li> Enables dwarves to be cleric/thieves.</li>
-        <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
-      </ul>
-  </div>
-  <h4 class="subheader">Component 230: </h4>
-  <div class="section">
-    <p><strong><em>Revised Stalkers</em></strong></p>
-      <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below). However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
-      <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
-  </div>
-  <h4 class="subheader">Component 235: </h4>
-  <div class="section">
-    <p><strong><em>Revised Beastmasters</em></strong></p>
-      <p> Beastmasters gain the ability to wield daggers, axes, and spears in addition to the normal group of weapons available to them.</p>
-      <p> Beastmasters may also shapechange into wolf and werewolf forms, and may summon a Spirit Wolf to aid them in combat once per day.</p>
-  </div>
-  <h4 class="subheader">Component 240 (for EE 1.4+): </h4>
-  <div class="section">
-    <p><strong><em>Improved Rangers</em></strong></p>
-      <p> This component adds several abilities to all rangers: </p>
-      <p>First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
-      <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
-      <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
-      <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
-      <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
-      <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
-  </div>
-  <h4 class="subheader">Component 245: </h4>
-  <div class="section">
-    <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
-      <p> Barbarians' and Monks' movement bonus is changed from a permanent characteristic to an at-will innate ability called Quickstride. Now if they want to walk more slowly to keep the group together, they can do so.</p>
-      <p> Rangers and Scouts (if installed, see component 420 below) will also get the Quickstride ability.</p>
-      <p> <b>Note: the extent of the speed bonus when using the Quickstride ability may be configured in the mod's .ini file. </b></p>
-  </div>
-  <h4 class="subheader">Component 250: </h4>
-  <div class="section">
-    <p><strong><em>Revised Berserker and Rage</em></strong></p>
-      <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage now lasts for 30 seconds, provides a bonus 0.5 APR, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment). The temporary +15 hit point bonus is removed; instead, while berserking you cannot die from taking damage. However, if you are brought to zero hit points during the berserk state and are not healed, you will die with the berserk state ends. Finally, your hit point total is masked while berserking, so you don't know how many hit points you actually have left.</p>
-  </div>
-  <h4 class="subheader">Component 265: </h4>
-  <div class="section">
-    <p><strong><em>Revised Monk Fists</em></strong></p>
-      <p>Monk fists are are rebalanced to do less damage, but have higher APR. The fists also become toggleable, able to switch at will between doing fatigue damage as a normal unenchanted fist, and crushing and magical damage as an enchanted fist.</p>
-  </div>
-  <h4 class="subheader">Component 280 (for EE 2.0+): </h4>
-  <div class="section">
-    <p><strong><em>Revised Backstabbing</em></strong></p>
-      <p>This component allows certain kits to deliver special offensive effects when they make a successful backstab:</p>
-      <ul>
-        <li> Assassins can deliver their poison, without having to use the innate ability. (<b>NOTE,</b> this take the place of the extra backstab damage assassins can normally do at high levels.)</li>
-        <li> Bounty Hunters can cause the target to be trapped in a Web for two rounds.</li>
-        <li> Shadowdancers an cause the target to become slightly out of phase with the material plane, resulting in being Slowed and 2-point penalties to attack rolls and  armor class.</li>
-        <li> Rakes an cause the target to become panicked for three rounds.</li>
-        <li> Ninjas can cause the target to be blinded for two rounds.</li>
-        <li> Spellfilchers cause their target to be affected by Remove Magic.</li>
-        <li> Targets of a backstab by a Thug can be thrown backwards and knocked to the ground.</li>
-        <li> Psionicists can deliver a Mind Thrust mental attack via backstab, causing the  target to lose consciousness for one round.</li>
-        <li> Soulknives can stun the target for one round.</li>
-      </ul>
-  </div>
-  <h4 class="subheader">Component 290: </h4>
-  <div class="section">
-    <p><strong><em>Revised Rogue and Priest THAC0</em></strong></p>
-      <p>This component slightly improves rogue thac0 progression, to about match that of clerics. However, instead of staying static for three levels and then dropping by two points, there are instead two one-point improvements. Rogue and priest thac0 both now reach a final value of 7 at level 21.</p>
-  </div>
-  <h4 class="subheader">Component 400 (for EE 2.0+): </h4>
+  <h4 class="subheader">Component 210 (for EE 1.4+): </h4>
   <div class="section">
     <p><strong><em>Revised Bards</em></strong></p>
       <p> This component makes fundamental changes to the bard class, changes which I think of as "the best of all editions." First, harking back loosely to the 1st Edition concept of the class, all bard kits (including the base Bard) are now multiclasses of some sort. Most, being roguish in nature, fall under the mage/thief class. But some, like the Skald and Gallant, fall under the fighter/mage class. This allows roguish bards to utilize more thief skills than just Pick Pockets, and martial bards to be more effective combatants.</p>
@@ -515,7 +190,6 @@
         <li><b>Aura: Blur -</b> this provides the bard with the effects of the Blur spell. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura: Mind Blank -</b> this renders the bard immune to all magical mental effects such as Charm, Confusion, Feeblemind, etc. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura: Invulnerability -</b> this enfolds the bard in a very short-range Minor Globe of Invulnerability, preventing any spells of 1st to 3rd level from having direct effect. (This aura disables the bard's spellcasting.)</li>
-        <li><b>Aura: Harmonic Strikes -</b> this concentrates ambient noise and causes it to explode forcefully when the bard strikes a foe, resulting in an extra 1d6 sonic/crushing damage with every melee hit. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura: Cloak of Fear -</b> this causes all foes engaging in melee combat against the bard to save each round or be affected by Panic. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura: Slowing -</b> this causes all foes engaging in melee combat against the bard to save each round or be temporarily Slowed. (This aura disables the bard's spellcasting.)</li>
         <li><b>Aura: Touch of Truth -</b> this causes all illusions which come into physical contact with the bard (a 3-foot radius) to be dispelled. (This aura disables the bard's spellcasting.)</li>
@@ -536,7 +210,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May not use the Hide in Shadows or Move Silently thieving abilities.<br />
         &ndash; No backstab damage multiplier.<br />.</p>
     </div>
@@ -548,13 +222,13 @@
         &ndash; From 6th level, may use a Blur Aura, which improves the Blade's armor class and saving throws.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
         &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
-        &ndash; May use the Swashbuckling fighting style at will.</p>
-      <p>SWASHBUCKLING: This is a fighting style which focuses on harrying one's opponent while avoiding incoming blows. It provides a 2-point bonus to Armor Class against melee attacks, at the cost of a 1-point penalty to damage and to-hit rolls. Successful strikes cause enemies to suffer a 2-point penalty to thac0 on a failed save vs. Petrification. This style may be turned on and off at will.
+        &ndash; Once per day per 6 levels of experience, may use the Swashbuckling ability.</p>
+      <p>SWASHBUCKLING: This is a fighting style which focuses on harrying one's opponent while avoiding incoming blows. It provides a 2-point bonus to Armor Class against melee attacks, at the cost of a 1-point penalty to damage and to-hit rolls. Successful strikes cause enemies to suffer a 2-point penalty to thac0 on a failed save vs. Petrification, however, a critical miss may cause the swashbuckler to stumble and fall. This style may be turned on and off at will.
 </p>
       <p>Disadvantages:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
         &ndash; Backstab damage limited to a 2x multiplier.<br />.</p>
     </div>
@@ -570,7 +244,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May not use the Hide in Shadows or Move Silently thieving abilities.<br />
         &ndash; No backstab damage multiplier.<br />.</p>
     </div>
@@ -586,7 +260,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
     </div>
     <div class="kit_description">
@@ -602,7 +276,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
     </div>
     <div class="kit_description">
@@ -618,7 +292,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May not use the Pick Pockets or Pick Locks thieving abilities.<br />
         &ndash; No backstab damage multiplier.<br />.</p>
     </div>
@@ -634,7 +308,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; Backstab damage limited to a 2x multiplier.<br />.</p>
     </div>
     <div class="kit_description">
@@ -649,7 +323,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
     </div>
     <div class="kit_description">
@@ -665,7 +339,7 @@
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May only wear leather armors (plus elven chain).<br />
         &ndash; May not learn spells from the Evocation or Illusion schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; While most bards are a subcategory of Enchanter specialist wizards, Elegists share characteristics with Necromancers.<br />.</p>
     </div>
     <div class="kit_description">
@@ -681,7 +355,7 @@
         &ndash; May not be Chaotic.<br />
         &ndash; May not become proficient in ranged weapons.<br />
         &ndash; May cast spells one level later than a wizard.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; May cast one fewer spell per day at each spell level, compared to other bards.<br />.</p>
     </div>
     <div class="kit_description">
@@ -695,7 +369,7 @@
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />
-        &ndash; May not learn 9th-level spells.<br />
+        &ndash; May not learn 8th- or 9th-level spells.<br />
         &ndash; Backstab damage limited to a 2x multiplier.<br />.</p>
     </div>
     <p> While most bards practice a musical form of magic use, there are several kits categorized as "demibards," which do not learn arcane magic, but can still use bardic inspirations, emanations, and auras:</p>
@@ -740,6 +414,314 @@
     <p> In Spear of Dragonspear and BG2EE, the Bard's Hat magic item is modified. Now the hat radiates the basic bardic Luck inspiration. The bard wearing the hat can manifest a different aura, allowing you to get the benefit of two bard auras simultaneously.</p>
     <p><b>Compatibility:</b> these changes are <i>totally incompatible with the way all other bard kits work</i>.  I have not disabled the old bard class; instead you will see that it is called "2E Bard" in the class menu. If you install bard kits from other mods, like Song & Silence or Bardic Wonders, they will be available under the "2E Bard" class and will function like unmodded bards; at the same time, the nine kits in this component will be available under the Mage/Thief and Fighter/Thief classes.</p>
     <p><b>NOTE:</b> All of the bard kits below in components 450-490 were designed for the old-style 2E bard class. They will not be available if you install this component (though several have been adapted and are included in the new form).</p>
+  </div>
+  <h4 class="subheader">Component 220 (for EE 2.0+): </h4>
+  <div class="section">
+    <p><strong><em>Multiclass Kits</em></strong></p>
+      <p>This component liberalizes the multiclassing rules in targeted ways:</p>
+      <ul>
+        <li> Enables humans to multiclass.</li>
+        <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
+        <li> Enables half-elves to be cleric/thieves.</li>
+        <li> Enables dwarves to be cleric/thieves.</li>
+        <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
+      </ul>
+      <p>This component also introduces several multiclass kits to the game. If your game version is EE v2.0 or higher, these are available at character generation; in versions 1.3-1.4, you must use a tome or similar item to adopt the kit. The multiclass kits are:</p>
+      <ul>
+        <li> <b>Spellfilcher</b> - for mage/thieves.</li>
+        <li> <b>Loremaster</b> - for mage/thieves.</li>
+        <li> <b>Ranger/Mage</b> - for mage/thieves.</li>
+        <li> <b>Thug</b> - for fighter/thieves.</li>
+        <li> <b>Tomb Runner</b> - for fighter/thieves.</li>
+        <li> <b>Ranger/Thief</b> - for fighter/thieves.</li>
+      </ul>
+      <div class="kit_description">
+        <p>SPELLFILCHER: The Spellfilchers are hidden society of very specialized thieves.  They hone their abilities toward a dangerous goal: stealing magic from wizards.  To that end, Spellfilchers have a few special tricks they can employ when confronted by angry mages.</p>
+        <p>Abilities:<br />
+          &ndash; Any target struck by a Spellfilcher in melee combat must save vs. rods/wands or suffer a 33% chance of miscast magic for 3 rounds.<br />
+          &ndash; Spellfilchers may cast the priest spell "Silence 15' Radius" to prevent an enemy from casting spells.<br />
+          &ndash; At 5th level, Spellfilchers may cast a special variant of "Spell Turning" which lasts for 12 hours.  It will only turn back a single spell.<br />
+          &ndash; At 9th level Spellfilchers become innately and permanently protected by the effect of the spell "Non-detection."</p>
+        <p>Restrictions:<br />
+          &ndash; None<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>LOREMASTER: There is a fine line between Loremaster and sage. Loremasters may often be found in professorial positions, teaching history to others. But unlike sages, Loremasters feel compelled to go out and discover knowledge by exploring the unknown. They can often be found fleeing huge boulders in trapped dungeons, battling savage practitioners of strange magics, and discovering secret passages in ancient castles. Loremasters are fond of any aspect of history that makes a good story - and they enjoy living those stories as much as telling them.</p>
+        <p>Abilities:<br />
+          &ndash; Through their devoted study of the past, gain a fundamental understanding of many strange magical artifacts. Thus, they can use any magical item.<br />
+          &ndash; Loremasters' studies enhance their understanding of magic, so much that they cast spells as if they were one level higher.<br />
+          &ndash; Loremasters receive a bonus +5 lore per level.<br />
+        <p>Restrictions:<br />
+          &ndash; Loremasters may only spend 18 skill points toward thieving skills each level, and cannot practice the arts of Picking Pockets or Setting traps.<br />
+          &ndash; Loremasters do not do extra damage by backstabbing.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>RANGER/MAGE: Yeah - ranger/mage!  This is an approximation, the best I could do in the 2E Infinity Engine.  You have to start out as a mage/thief, and the thief side of your class will morph to be more like a ranger.</p>
+        <p>Abilities:<br />
+          &ndash; Bonuses to hit points and thac0 to approximate a warrior/mage.<br />
+          &ndash; May cast Goodberry innately, and has 3 druid spells each of levels 1-3 automatically added to the wizard spellbook.</p>
+        <p>Restrictions:<br />
+          &ndash; Limited access to thief abilities: may only use Hide in Shadows, Move Silently, Find Traps, and Detect Illusions.<br />
+          &ndash; Limited to Good alignments.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>THUG: Some rogues find that the application of violence is as effective in the pursuit of their goals as the more refined thieving skills. These may be simple lone muggers, or organized enforcers for a guild. In either case, for most of a peaceful urban populace, the only sure thing is that thugs are to be feared and guarded against.</p>
+        <p>Abilities:<br />
+          &ndash; +1 bonus to Strength.<br />
+          &ndash; +1 bonus to backstab multiplier.<br />
+        <p>Restrictions:<br />
+          &ndash; -2 penalty to Dexterity.<br />
+          &ndash; May not use the Open Locks, Detect Illusion, or Set Traps skills.<br />
+          &ndash; May only distribute 20 skill points each level.<br />
+          &ndash; May not be Lawful or Good alignments.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>TOMB RUNNER: these adventurers are seekers after history, truth, and riches. They love to travel to strange lands, searching for mysterious and ancient ruins. Whether in pursuit of scholarly knowledge, or power and fame (or all of the above!), Tomb Runners are adept at surviving hostile dungeons that often do not *want* to be explored.</p>
+        <p>Abilities:<br />
+          &ndash; Initial 15-point bonus to Find Traps and Detect Illusions.<br />
+          &ndash; +5 bonus to Lore each level.<br />
+          &ndash; +3 bonus to to-hit and damage rolls against undead creatures.</p>
+          &ndash; At level 15, may Use Any Item.<br />
+        <p>Restrictions:<br />
+          &ndash; May not use the Pick Pockets skill.<br />
+          &ndash; May distribute 20 skill points each level.<br />
+          &ndash; Reduced backstab multiplier progression, matching that of a Stalker.<br />
+          &ndash; Tomb Runners need a free hand to examine relics; therefore, they do not learn to dual-wield two weapons at once.<br />.</p>
+      </div>
+      <div class="kit_description">
+        <p>RANGER/THIEF: Yeah - ranger/thief!  This again is an approximation.  You start as a fighter/thief and you will get some druidic magic like rangers, offset by some limitations to your thief skills, and an XP penalty to reflect rangers' increased XP requirements vs. fighters.</p>
+        <p>Abilities:<br />
+          &ndash; +5 bonus to Hide in Shadows and Move Silently skills with each warrior level-up.<br />
+          &ndash; May use the Animal Empathy ability like other rangers.<br />
+          &ndash; May cast an assortment of druid spells, beginning at 5th level.</p>
+        <p>Restrictions:<br />
+          &ndash; May not use the Pick Pockets or Open Locks skills.<br />
+          &ndash; May only distribute 15 skill points each thief level.<br />
+          &ndash; Reduced backstab multiplier progression, matching that of a Stalker.<br />
+          &ndash; 15% experience point penalty.<br />
+          &ndash; Limited to Good alignments.<br />.</p>
+      </div>
+  </div>
+  <h4 class="subheader">Component 230: </h4>
+  <div class="section">
+    <p><strong><em>Revised Stalkers</em></strong></p>
+      <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below). However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
+      <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
+  </div>
+  <h4 class="subheader">Component 235: </h4>
+  <div class="section">
+    <p><strong><em>Revised Beastmasters</em></strong></p>
+      <p> Beastmasters gain the ability to wield daggers, axes, and spears in addition to the normal group of weapons available to them.</p>
+      <p> Beastmasters may also shapechange into wolf and werewolf forms, and may summon a Spirit Wolf to aid them in combat once per day.</p>
+  </div>
+  <h4 class="subheader">Component 240 (for EE 1.4+): </h4>
+  <div class="section">
+    <p><strong><em>Improved Rangers</em></strong></p>
+      <p> This component adds several abilities to all rangers: </p>
+      <p>First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
+      <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
+      <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
+      <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
+      <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
+      <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
+  </div>
+  <h4 class="subheader">Component 245: </h4>
+  <div class="section">
+    <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
+      <p> Barbarians' and Monks' movement bonus is changed from a permanent characteristic to an at-will innate ability called Quickstride. Now if they want to walk more slowly to keep the group together, they can do so.</p>
+      <p> Rangers and Scouts (if installed, see component 420 below) will also get the Quickstride ability.</p>
+      <p> <b>Note: the extent of the speed bonus when using the Quickstride ability may be configured in the mod's .ini file. </b></p>
+  </div>
+  <h4 class="subheader">Component 250: </h4>
+  <div class="section">
+    <p><strong><em>Revised Berserker and Rage</em></strong></p>
+      <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage and Barbarian Rage are merged, because 1) I don't know why there are two different kinds of Rage, and 2) vanilla Berserk Rage is more like a Mind Shield spell than an actual Rage. Rage now lasts for 30 seconds, provides a bonus 0.5 APR, increases STR and CON by 3, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment), and penalizes AC by 2.</p>
+  </div>
+  <h4 class="subheader">Component 265: </h4>
+  <div class="section">
+    <p><strong><em>Revised Monk Fists</em></strong></p>
+      <p>Monk fists are are rebalanced to do less damage, but have higher APR.  The fists also become toggleable, able to switch at will between doing fatigue damage as a normal unenchanted fist, and crushing and magical damage as an enchanted fist.</p>
+  </div>
+  <h4 class="subheader">Component 275: </h4>
+  <div class="section">
+    <p><strong><em>Revised Shadowdancer</em></strong></p>
+      <p>This component removes Shadowdancers' "Hide in Plain Sight" ability. It also turns their "Shadowstep" ability into something called "Shadow Pool" which allows the Shadowdancer to cast any one of the following spells:<br />
+        &ndash; Sanctuary<br />
+        &ndash; Blindness<br />
+        &ndash; Shadow Door<br />
+        &ndash; Shadowstep<br />
+        &ndash; Summon Shadow</p>
+  </div>
+  <h4 class="subheader">Component 310: </h4>
+  <div class="section">
+    <p><strong><em>Add the CORSAIR fighter kit</em></strong></p>
+    <div class="kit_description">
+      <p>CORSAIR: Part warrior, part rogue, part charming sailor, the Corsair is a dashing swordsman who survives by sharp wits and a sharper blade.</p>
+      <p>Advantages:<br />
+        &ndash; Can achieve Grand Mastery (5 stars) with light bladed weapons.<br />
+        &ndash; Gains a bonus to Armor Class for every six levels gained.<br />
+        &ndash; Can use use the skill Swashbuckling once per day for each five levels. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10.</p>
+      <p>Disadvantages:<br />
+        &ndash; Cannot become proficient with heavy weapons.<br />
+        &ndash; May only achieve Mastery (+++) with ranged weapons.<br />
+        &ndash; May not wear heavier armor than studded leather.<br />.</p>
+    </div>
+  </div>
+  <h4 class="subheader">Component 320: </h4>
+  <div class="section">
+    <p><strong><em>Add the MARKSMAN fighter kit</em></strong></p>
+    <p>This is a fighter kit which mimics the Archer ranger kit in almost every way, except this kit can reach specialization with melee weapons instead of mere proficiency.</p>
+    <p>However, if you have installed component #230, "Revised Archers," then this kit will use the new Called Shot system: </p>
+    <div class="kit_description">
+      <p>MARKSMAN: This soldier is the epitome of skill with ranged weapons. He can make almost any shot, no matter how difficult. To become so skilled, the Marksman has had to sacrifice some proficiency with melee weapons and armor.</p>
+      <p>Advantages:<br />
+        &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
+        &ndash; Can achieve Grand Mastery (+++++) with bows and crossbows.<br />
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Marksman has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Marksman learns the following Called Shots:<br />
+<br />
+CALLED SHOTS <br />
+        &ndash; 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
+      <p>Disadvantages:<br />
+        &ndash; May only specialize (++) with melee weapons.<br />
+        &ndash; May not wear heavier armor than splint mail.<br />.</p>
+    </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
+  </div>
+  <h4 class="subheader">Component 322: </h4>
+  <div class="section">
+    <p><strong><em>Add the ELVEN ARCHER ranger kit</em></strong></p>
+    <div class="kit_description">
+      <p>ELVEN ARCHER: The Elven Archer is the epitome of skill with the bow - the result of elves natural aptitude with bows as well as their single-minded dedication to training with the weapon. To become so skilled with the bow, the Archer has had to sacrifice some proficiency with melee weapons and armor.</p>
+      <p>Advantages:<br />
+        &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
+        &ndash; Can achieve Grand Mastery (+++++) with bows.<br />
+        &ndash; May learn to use Called Shots at levels 1, 2, 4, 6, 8, 10, and 12. Called Shots may be used at will, and the effects work for one round. The Archer has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Archer learns the following Called Shots:
+
+CALLED SHOTS <br />
+        &ndash; Pinning Shot: this shot pins the target's person or clothes to the ground; the target must remain stationary for two rounds upon a failed save vs. paralyzation.<br />
+        &ndash; 1st level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+		&ndash; 2nd level: Sleep Shot. This shot puts the target into a sluggish sleep for 12 seconds unless the target makes a successful saving throw vs. spells.<br />
+		&ndash; 4th level: Entangling Shot. This shot Entangles the target (per the druid spell) for 12 seconds, and thorns will cause 1d4 piercing damage, unless the target makes a successful saving throw vs. paralyzation.<br />
+		&ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+		&ndash; 8th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+		&ndash; 10th level: Faerie Fire. This shot lights up the target with a white glow for 24 seconds, preventing invisibility and causing a -3 penalty to AC, unless the target makes a successful saving throw vs. spells.<br />
+		&ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
+      <p>Disadvantages:<br />
+        &ndash; May not wear any metal armor.<br />
+        &ndash; May only become Proficient (+) with melee weapons.<br />.</p>
+    </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
+  </div>
+  <h4 class="subheader">Component 324: </h4>
+  <div class="section">
+    <p><strong><em>Add the HALFLING SLINGER kit</em></strong></p>
+    <div class="kit_description">
+      <p>HALFLING SLINGER: The Slinger is the epitome of skill with the sling - the result of halflings' natural aptitude with slings and their single-minded cultural dedication to training with the weapon. To become so skilled with the sling, the Slinger has had to sacrifice some proficiency with melee weapons and armor.</p>
+      <p>Advantages:<br />
+        &ndash; +1 to hit and damage rolls with ranged weapon at levels 3, 6, 10, 15, and 21.<br />
+        &ndash; Can achieve Grand Mastery (+++++) with slings.<br />
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Slinger has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Slinger learns the following Called Shots:<br />
+<br />
+CALLED SHOTS <br />
+        &ndash; 1st level: Trip Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Stunning Shot. Aimed at the head, this shot causes the target to become dazed for 3 seconds upon a failed save vs. paralyzation.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.<br />
+      <p>Disadvantages:<br />
+        &ndash; May not wear any metal armor.<br />
+        &ndash; May only become Proficient (+) with melee weapons.<br />
+        &ndash; May not cast druid spells.<br />.</p>
+    </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
+  </div>
+  <h4 class="subheader">Component 350: </h4>
+  <div class="section">
+    <p><strong><em>Add the MAGE HUNTER ranger kit</em></strong></p>
+    <div class="kit_description">
+      <p>MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.</p>
+      <p>Advantages:<br />
+        &ndash; Mage Hunters have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.<br />
+        &ndash; Each successful melee hit bestows a 40% chance of spell failure on the target for one round.<br />
+        &ndash; May use a special vocalization that can deafen anyone nearby and impose a 40% chance of spell failure on them if they fail a saving throw vs. Petrification.</p>
+        &ndash; Can cast the following as 1st-level spells: Shocking Touch, Deafness.<br />
+        &ndash; Can cast the following as 2nd-level spells: Remove Magic, Minor Spell Deflection.<br />
+        &ndash; Can cast the following as 3rd-level spells: Breach, Non-Detection, Spell Thrust.</p>
+      <p>Disadvantages:<br />
+        &ndash; Suffers a -1 penalty to Strength and Constitution.<br />
+        &ndash; May not use Charm Animal ability.<br />.</p>
+    </div>
+  </div>
+  <h4 class="subheader">Component 360: </h4>
+  <div class="section">
+    <p><strong><em>Add the BARBARIAN RANGER kit</em></strong></p>
+    <div class="kit_description">
+      <p>BARBARIAN RANGER: Among barbarian tribes there are hunters of great skill. Spending many days alone in the wild, stalking their prey, they are closer to nature than most men. They are not quite as hardy as their more aggressive brethren, and tend to be loners. Yet they bring uncommon skills to bear both in providing for, and in defending, their tribe.</p>
+      <p>Advantages:<br />
+        &ndash; Can move 2 points faster than other characters.<br />
+        &ndash; May enter an enraged state, enhancing combat abilities, once per day per six levels.<br />
+        &ndash; May Charm animals once per day per five levels.<br />
+        &ndash; Gains 5% physical damage resistance at 11th level, and again at 15th and 19th levels.</p>
+      <p>Disadvantages:<br />
+        &ndash; Cannot cast druid spells.<br />
+        &ndash; -2 penalty to Charisma.<br />
+        &ndash; May not wear armor heavier than studded leather or hide armor.<br />
+        &ndash; May not dual-class.<br />.</p>
+    </div>
+  </div>
+  <h4 class="subheader">Component 410: </h4>
+  <div class="section">
+    <p><strong><em>Add the SNIPER thief kit</em></strong></p>
+    <div class="kit_description">
+      <p>SNIPER: Whether you need to hit a target with a poisoned arrow or shoot a rope to the windowsill of a noble's mansion for a burglary, the Sniper is a highly trained stealthy marskman who can get the job done.</p>
+      <p>Advantages:<br />
+        &ndash; +1 to hit and damage rolls with missiles weapon at levels 1, 3, 6, 10, 15, and 21.<br />
+        &ndash; Can achieve Mastery (3 Points) with bows and crossbows<br />
+        &ndash; May learn to use Called Shots at levels 1, 3, 6, 9, and 12. Called Shots may be used at will, and the effects work for one round. The Sniper has a +2 bonus to thac0 and damage while performing Called Shots, but must remain stationary during that time. The Sniper learns the following Called Shots:<br />
+<br />
+CALLED SHOTS <br />
+        &ndash; 1st level: Pinning Shot. Aimed at the legs, this shot causes the target to fall down for one round upon a failed save vs. Breath.<br />
+        &ndash; 3rd level: Disarming Shot. This shot knocks loose the targets grasp on a weapon, resulting in a -4 penalty to thac0 and reduced APR for one round, upon a failed save vs. Breath.<br />
+        &ndash; 6th level: Crippling Shot. This shot causes the target to lose their footing and slowly recover, becoming Slowed for two rounds upon a failed save vs. Breath.<br />
+        &ndash; 9th level: Blinding Shot. Aimed at the eyes, this shot causes the target to flinch and momentarily lose their vision, being Blinded for one round upon a failed save vs. Breath.<br />
+        &ndash; 12th level: Hammer Shot. This shot strikes with incredible force, adding 1d6 crushing damage to the normal missile damage and knocking the target back 5-10 feet, unless the target makes a successful save vs. Breath.</p>
+      <p>Disadvantages:<br />
+        &ndash; May only distribute 20 skill points per level among thieving skills.<br />
+        &ndash; Reduced backstab multiplier.<br />.</p>
+    </div>
+    <p><b>Note:</b> If you have installed the Feat System, these and other Called Shots will be available as feats, instead of granted automatically at pre-determined levels.</p>
+  </div>
+  <h4 class="subheader">Component 420: </h4>
+  <div class="section">
+    <p><strong><em>Add the SCOUT thief kit, and revise the Swashbuckler</em></strong></p>
+      <p>This component splits the Swashbuckler in two: the Scout is good at combat and gets traps but no backstab (like the old swashbuckler), and the new Swashbuckler is good at combat and can backstab (somewhat) but cannot set traps.</p>
+    <div class="kit_description">
+      <p>SCOUT: While technically a member of the thief class, a scout does not burgle or murder. Scouts employ the dexterity and ingenuity of thieves for military purposes. They have skill in combat and with traps, but do not employ backstabs against enemies.</p>
+      <p>Advantages:<br />
+        &ndash; +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 6 levels.<br />
+        &ndash; May specialize (2 slots) in weapons.<br />
+        &ndash; May specialize in Single-Weapon Style</p>
+      <p>Disadvantages:<br />
+        &ndash; May not backstab.<br />.</p>
+    </div><br />
+    <div class="kit_description">
+      <p>SWASHBUCKLER: This rogue is part acrobat, part swordsman, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as fops, and they generally make poor thieves. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm fails.</p>
+      <p>Advantages:<br />
+        &ndash; +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 6 levels.<br />
+        &ndash; May achieve Mastery (three slots) in light bladed weapons (long sword, scimitar, short sword, dagger, darts).<br />
+        &ndash; Begins with one proficiency point in Single-Weapon Style, and may add one more.<br />
+        &ndash; Begins with one proficiency point in Two-Weapon Style, and may add two more.<br />
+        &ndash; Can use use the skill Swashbuckling once per day at level 1, 3, 6, 10, 15, and 21. While Swashbuckling, the character wheels and spins and parries, gaining an Armor Class of -1 per two levels, up to a maximum of -10. The character's movement rate is halved while swashbuckling.</p>
+      <p>Disadvantages:<br />
+        &ndash; May not use traps.<br />
+        &ndash; May only distribute 15 skill points per level among thieving skills.<br />
+        &ndash; The swashbuckler can backstab, but with a reduced multiplier.<br />
+        &ndash; May not dual-class to fighter.<br />.</p>
+    </div>
   </div>
   <h4 class="subheader">Component 450: </h4>
   <div class="section">

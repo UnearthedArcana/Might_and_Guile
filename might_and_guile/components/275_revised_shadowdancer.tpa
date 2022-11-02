@@ -7,11 +7,8 @@
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION revised_shadowdancer BEGIN
-
-
 //ADD NEW SHADOWDANCER________________________________________________________________
-//
+
 LAF check_kit_conflict END
 
 ADD_KIT ~D5SHADD~
@@ -132,27 +129,29 @@ END
 
 //COPY SHADOW POOL FILES_____________________________________________________________
 //
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_shad1.spl~) BEGIN
-  COPY ~might_and_guile/thief/d5_shadd.2da~ ~override~
-  COPY ~might_and_guile/thief/d5_shad1.spl~ ~override~
+//COPY_EXISTING ~clabth05.2da~ ~override~
+//	LPM remove_blank_lines
+//	APPEND_FILE ~might_and_guile/thief/shadowdance.txt~
+//	BUT_ONLY
+COPY ~might_and_guile/thief/d5_shadd.2da~ ~override~
+COPY ~might_and_guile/thief/d5_shad1.spl~ ~override~
 	SAY NAME1 @2755
 	SAY UNIDENTIFIED_DESC @2756
-  COPY ~might_and_guile/thief/d5_shad1.bam~ ~override~
-  COPY ~might_and_guile/thief/d5shad1a.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shad1b.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shad1c.2da~ ~override~
-  COPY ~might_and_guile/thief/d5shado.spl~ ~override~
+COPY ~might_and_guile/thief/d5_shad1.bam~ ~override~
+COPY ~might_and_guile/thief/d5shad1a.2da~ ~override~
+COPY ~might_and_guile/thief/d5shad1b.2da~ ~override~
+COPY ~might_and_guile/thief/d5shad1c.2da~ ~override~
+COPY ~might_and_guile/thief/d5shado.spl~ ~override~
 	SAY NAME1 @2757
 	SAY UNIDENTIFIED_DESC @2758
-  COPY ~might_and_guile/thief/d5shado.bam~ ~override~
-  COPY ~might_and_guile/thief/d5shado.eff~ ~override~
-  COPY ~might_and_guile/thief/d5shado.cre~ ~override~
+COPY ~might_and_guile/thief/d5shado.bam~ ~override~
+COPY ~might_and_guile/thief/d5shado.eff~ ~override~
+COPY ~might_and_guile/thief/d5shado.cre~ ~override~
 	SAY NAME1 @2759
-  COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
+COPY ~might_and_guile/thief/d5_shadd.spl~ ~override~
 	SAY NAME1 @9
-  COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
-  COMPILE ~might_and_guile/thief/d5_shadd.baf~
-END
+COPY ~might_and_guile/thief/d5_shadd.cre~ ~override~
+COMPILE ~might_and_guile/thief/d5_shadd.baf~
 //__________________________________________________________________________________
 
 

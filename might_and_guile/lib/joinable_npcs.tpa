@@ -1,0 +1,42 @@
+//JOINABLE NPCS ARRAY MACRO__________________________________________________________
+//
+DEFINE_ACTION_MACRO JOINABLE_NPC_ARRAYS BEGIN
+	//PDIALOG.2DA exists in all games
+	ACTION_DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~PDIALOG~ => ~~ END
+	//Check PDIALOG.2DA file variants referenced in CAMPAIGN.2DA
+	ACTION_IF FILE_EXISTS_IN_GAME ~CAMPAIGN.2DA~ BEGIN
+		COPY_EXISTING ~CAMPAIGN.2DA~ ~CAMPAIGN.2DA~
+			COUNT_2DA_ROWS 32 "cntrow"
+			FOR (i = 0; i < cntrow; i = i + 1) BEGIN
+				READ_2DA_ENTRY i 11 32 file
+				TO_UPPER file
+				DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~%file%~ => ~~ END
+			END
+		BUT_ONLY
+	END
+	//Generate array with joinable NPC DV
+	ACTION_PHP_EACH JOINABLE_NPC_ARRAY_2da AS file => ~~ BEGIN
+		ACTION_IF FILE_EXISTS_IN_GAME ~%file%.2da~ BEGIN
+			COPY_EXISTING ~%file%.2da~ ~override~
+				COUNT_2DA_ROWS 3 "cntrow"
+				FOR (i = 1; i < cntrow; i = i + 1) BEGIN
+					READ_2DA_ENTRY i 0 3 "dv"
+					TO_UPPER dv
+					DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_dv BEGIN ~%dv%~ => ~~ END
+				END
+			BUT_ONLY
+		END
+	END
+	//Generate array with joinable NPC cre files
+	COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+		READ_ASCII DEATHVAR "dv" (32) NULL
+		TO_UPPER dv
+		PATCH_IF VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+		PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________

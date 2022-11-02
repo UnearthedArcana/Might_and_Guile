@@ -95,7 +95,7 @@ END
 //GENERATE NEW SPECIFICS MACRO_________________________________________________________
 //
 DEFINE_ACTION_FUNCTION d5_resolve_specific STR_VAR new_specific_id = ~blah~ RET new_specific_ind BEGIN
-  OUTER_SET spec_ind = IDS_OF_SYMBOL (~specific~ ~%new_specific_id%~)
+  OUTER_SET spec_ind = IDS_OF_SYMBOL (~splstate~ ~%new_specific_id%~)
   ACTION_IF !(spec_ind = 0 - 1) BEGIN
     OUTER_SET new_specific_ind = spec_ind
   END
@@ -420,65 +420,4 @@ END	//	end cleric umd function
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-
-DEFINE_ACTION_FUNCTION more_ranger_alignments STR_VAR kit_name = ~~ BEGIN
-
-  APPEND ~fallen.2da~ ~%kit_label%%TAB%0~
-  COPY_EXISTING ~alignmnt.2da~ ~override~
-	COUNT_2DA_COLS num_cols
-	READ_2DA_ENTRIES_NOW ~rows~ num_cols
-	FOR (row = 3; row < rows; row += 1) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 0 align_name
-	  PATCH_IF (~%align_name%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
-		FOR (col = 1; col < num_cols; col += 1) BEGIN
-		  SET_2DA_ENTRY_LATER ~s2el_align~ row col 1 
-		END
-	  END
-	END
-	SET_2DA_ENTRIES_NOW ~s2el_align~ num_cols
-  BUT_ONLY
-
-END // end function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-DEFINE_ACTION_FUNCTION ranger_spell_tables BEGIN
-
-  COPY ~%MOD_FOLDER%/ranger/mxsplran.2da~ ~override~
-
-END // end function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-DEFINE_ACTION_FUNCTION remove_menu_kit INT_VAR del_kit = 0 STR_VAR class = ~~ BEGIN
-
-  ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
-	ACTION_IF FILE_EXISTS_IN_GAME ~K_%class%_%race%.2da~ BEGIN
-	  COPY_EXISTING ~K_%class%_%race%.2da~ ~override~
-		COUNT_2DA_COLS cols
-		COUNT_2DA_ROWS cols rows
-		PATCH_IF (rows > 3) BEGIN
-		  READ_2DA_ENTRIES_NOW rows cols
-		  FOR (row = 1; row < rows; ++row) BEGIN
-			READ_2DA_ENTRY_FORMER rows row 1 kit
-			PATCH_IF (%kit% = %del_kit%) BEGIN
-			  REMOVE_2DA_ROW row cols
-			END
-		  END
-		END
-	  BUT_ONLY
-	END
-  END
-
-END // end function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
 

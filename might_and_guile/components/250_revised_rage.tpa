@@ -2,61 +2,81 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//								REVISED BERSERKERS
+//						REVISED BERSERKERS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 
 DEFINE_ACTION_FUNCTION 250_revised_rage BEGIN
 
-
-//UPDATE EXISTING STRINGS__________________________________________________________
-// 
-ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist~ BEGIN
-  COPY_EXISTING ~%text_file%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      READ_2DA_ENTRY row 1 cols kitlist_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~BERSERKER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~BERSERKER~)BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@2502)
-      END
-    END
-  IF_EXISTS BUT_ONLY
-END
-//___________________________________________________________________________________
-
-
 //BERSERKER RAGE____________________________________________________________________
 // 
-APPEND ~splprot.2da~ ~d5_CURRENTHP>=n        0x000        -1        4~ UNLESS ~CURRENTHP>=n~
-COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows cols
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols 
 	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
-	  PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~d5_CURRENTHP>=n~) BEGIN
-	    SET cur_hp_row = %row%
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ 
+	  PATCH_IF (~%text%~ STRING_EQUAL_CASE ~BERSERKER~) BEGIN
+//	    SET patch_row = (%row% - 1)
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 cols RESOLVE_STR_REF (@2502)
 	  END
 	END
-BUT_ONLY
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols 
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
+//	    SET patch_row = %row%
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 cols RESOLVE_STR_REF (@2502)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+//	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows 9
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~BERSERKER~ BEGIN
+//	    SET patch_row = %row%
+		SET_2DA_ENTRY /*(%patch_row%)*/ row 4 9 RESOLVE_STR_REF (@2502)
+	  END
+	END
+  BUT_ONLY
+END
 
+ACTION_IF ENGINE_IS ~tob~ BEGIN
+	STRING_SET 24284 @2502
+	STRING_SET 25201 @2503
+END
 
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+	STRING_SET 32235 @2504
+END
 
-COPY ~might_and_guile/fighter/berserk/spcl321.spl~ ~override~
-	SAY NAME1 @2503
+COPY ~might_and_guile/fighter/d5_barbr.spl~ ~override/spcl321.spl~
+	SAY NAME1 @2508
 	SAY UNIDENTIFIED_DESC @2504
-COPY ~might_and_guile/fighter/berserk/spcl321d.spl~ ~override~
-COPY ~might_and_guile/fighter/berserk/d5cl321d.spl~ ~override~
-  PATCH_IF (VARIABLE_IS_SET %cur_hp_row%) BEGIN
-    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter2 = 144 parameter2 = %cur_hp_row% END
-  END
-//___________________________________________________________________________________
+//________________________________________________________________________________
 
 
-//FIGHTER KIT 2DA FILES______________________________________________________________
+//FIGHTER KIT 2DA FILES___________________________________________________________
 //
+/*
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__profs.d5~ THEN BEGIN
+	COPY_EXISTING ~clabfi01.2da~ ~override~
+		LPM remove_blank_lines
+		APPEND_FILE ~might_and_guile/fighter/ficlab.txt~
+		BUT_ONLY
+	END
+*/
+
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__profs.d5~) THEN BEGIN
 	COPY_EXISTING ~weapprof.2da~ ~override~
 		SET_2DA_ENTRY 3 30 1 ~3~ // Berserker
@@ -86,9 +106,222 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__profs.d5~) THEN BEGIN
 		SET_2DA_ENTRY 32 30 1 ~0~
 		SET_2DA_ENTRY 33 30 1 ~0~
 		SET_2DA_ENTRY 34 30 1 ~3~
-	BUT_ONLY
-END
-//___________________________________________________________________________________
+/*
+		SET_2DA_ENTRY 3 31 1 ~3~ // WS
+		SET_2DA_ENTRY 4 31 1 ~3~
+		SET_2DA_ENTRY 5 31 1 ~3~
+		SET_2DA_ENTRY 6 31 1 ~3~
+		SET_2DA_ENTRY 7 31 1 ~3~
+		SET_2DA_ENTRY 8 31 1 ~3~
+		SET_2DA_ENTRY 9 31 1 ~3~
+		SET_2DA_ENTRY 10 31 1 ~3~
+		SET_2DA_ENTRY 11 31 1 ~3~
+		SET_2DA_ENTRY 12 31 1 ~3~
+		SET_2DA_ENTRY 13 31 1 ~3~
+		SET_2DA_ENTRY 14 31 1 ~3~
+		SET_2DA_ENTRY 15 31 1 ~3~
+		SET_2DA_ENTRY 16 31 1 ~3~
+		SET_2DA_ENTRY 17 31 1 ~3~
+		SET_2DA_ENTRY 18 31 1 ~3~
+		SET_2DA_ENTRY 19 31 1 ~3~
+		SET_2DA_ENTRY 20 31 1 ~3~
+		SET_2DA_ENTRY 21 31 1 ~3~
+		SET_2DA_ENTRY 22 31 1 ~3~
+		SET_2DA_ENTRY 23 31 1 ~3~
+		SET_2DA_ENTRY 24 31 1 ~3~
+		SET_2DA_ENTRY 25 31 1 ~3~
+		SET_2DA_ENTRY 26 31 1 ~3~
+		SET_2DA_ENTRY 27 31 1 ~3~
+		SET_2DA_ENTRY 28 31 1 ~3~
+		SET_2DA_ENTRY 29 31 1 ~3~
+		SET_2DA_ENTRY 30 31 1 ~3~
+		SET_2DA_ENTRY 3 12 1 ~3~ // FM
+		SET_2DA_ENTRY 4 12 1 ~3~
+		SET_2DA_ENTRY 5 12 1 ~3~
+		SET_2DA_ENTRY 6 12 1 ~3~
+		SET_2DA_ENTRY 7 12 1 ~3~
+		SET_2DA_ENTRY 8 12 1 ~3~
+		SET_2DA_ENTRY 9 12 1 ~3~
+		SET_2DA_ENTRY 10 12 1 ~3~
+		SET_2DA_ENTRY 11 12 1 ~3~
+		SET_2DA_ENTRY 12 12 1 ~3~
+		SET_2DA_ENTRY 13 12 1 ~3~
+		SET_2DA_ENTRY 14 12 1 ~3~
+		SET_2DA_ENTRY 15 12 1 ~3~
+		SET_2DA_ENTRY 16 12 1 ~3~
+		SET_2DA_ENTRY 17 12 1 ~3~
+		SET_2DA_ENTRY 18 12 1 ~3~
+		SET_2DA_ENTRY 19 12 1 ~3~
+		SET_2DA_ENTRY 20 12 1 ~3~
+		SET_2DA_ENTRY 21 12 1 ~3~
+		SET_2DA_ENTRY 22 12 1 ~3~
+		SET_2DA_ENTRY 23 12 1 ~3~
+		SET_2DA_ENTRY 24 12 1 ~3~
+		SET_2DA_ENTRY 25 12 1 ~3~
+		SET_2DA_ENTRY 26 12 1 ~3~
+		SET_2DA_ENTRY 27 12 1 ~3~
+		SET_2DA_ENTRY 28 12 1 ~3~
+		SET_2DA_ENTRY 29 12 1 ~3~
+		SET_2DA_ENTRY 30 12 1 ~3~
+		SET_2DA_ENTRY 3 14 1 ~3~ // FT
+		SET_2DA_ENTRY 4 14 1 ~3~
+		SET_2DA_ENTRY 5 14 1 ~3~
+		SET_2DA_ENTRY 6 14 1 ~3~
+		SET_2DA_ENTRY 7 14 1 ~3~
+		SET_2DA_ENTRY 8 14 1 ~3~
+		SET_2DA_ENTRY 9 14 1 ~3~
+		SET_2DA_ENTRY 10 14 1 ~3~
+		SET_2DA_ENTRY 11 14 1 ~3~
+		SET_2DA_ENTRY 12 14 1 ~3~
+		SET_2DA_ENTRY 13 14 1 ~3~
+		SET_2DA_ENTRY 14 14 1 ~3~
+		SET_2DA_ENTRY 15 14 1 ~3~
+		SET_2DA_ENTRY 16 14 1 ~3~
+		SET_2DA_ENTRY 17 14 1 ~3~
+		SET_2DA_ENTRY 18 14 1 ~3~
+		SET_2DA_ENTRY 19 14 1 ~3~
+		SET_2DA_ENTRY 20 14 1 ~3~
+		SET_2DA_ENTRY 21 14 1 ~3~
+		SET_2DA_ENTRY 22 14 1 ~3~
+		SET_2DA_ENTRY 23 14 1 ~3~
+		SET_2DA_ENTRY 24 14 1 ~3~
+		SET_2DA_ENTRY 25 14 1 ~3~
+		SET_2DA_ENTRY 26 14 1 ~3~
+		SET_2DA_ENTRY 27 14 1 ~3~
+		SET_2DA_ENTRY 28 14 1 ~3~
+		SET_2DA_ENTRY 29 14 1 ~3~
+		SET_2DA_ENTRY 30 14 1 ~3~
+		SET_2DA_ENTRY 3 15 1 ~3~ // FMT
+		SET_2DA_ENTRY 4 15 1 ~3~
+		SET_2DA_ENTRY 5 15 1 ~3~
+		SET_2DA_ENTRY 6 15 1 ~3~
+		SET_2DA_ENTRY 7 15 1 ~3~
+		SET_2DA_ENTRY 8 15 1 ~3~
+		SET_2DA_ENTRY 9 15 1 ~3~
+		SET_2DA_ENTRY 10 15 1 ~3~
+		SET_2DA_ENTRY 11 15 1 ~3~
+		SET_2DA_ENTRY 12 15 1 ~3~
+		SET_2DA_ENTRY 13 15 1 ~3~
+		SET_2DA_ENTRY 14 15 1 ~3~
+		SET_2DA_ENTRY 15 15 1 ~3~
+		SET_2DA_ENTRY 16 15 1 ~3~
+		SET_2DA_ENTRY 17 15 1 ~3~
+		SET_2DA_ENTRY 18 15 1 ~3~
+		SET_2DA_ENTRY 19 15 1 ~3~
+		SET_2DA_ENTRY 20 15 1 ~3~
+		SET_2DA_ENTRY 21 15 1 ~3~
+		SET_2DA_ENTRY 22 15 1 ~3~
+		SET_2DA_ENTRY 23 15 1 ~3~
+		SET_2DA_ENTRY 24 15 1 ~3~
+		SET_2DA_ENTRY 25 15 1 ~3~
+		SET_2DA_ENTRY 26 15 1 ~3~
+		SET_2DA_ENTRY 27 15 1 ~3~
+		SET_2DA_ENTRY 28 15 1 ~3~
+		SET_2DA_ENTRY 29 15 1 ~3~
+		SET_2DA_ENTRY 30 15 1 ~3~
+		SET_2DA_ENTRY 7 13 1 ~3~ // FC
+		SET_2DA_ENTRY 8 13 1 ~3~
+		SET_2DA_ENTRY 10 13 1 ~3~
+		SET_2DA_ENTRY 19 13 1 ~3~
+		SET_2DA_ENTRY 20 13 1 ~3~
+		SET_2DA_ENTRY 23 13 1 ~3~
+		SET_2DA_ENTRY 24 13 1 ~3~
+		SET_2DA_ENTRY 25 13 1 ~3~
+		SET_2DA_ENTRY 6 19 1 ~3~ // FD
+		SET_2DA_ENTRY 7 19 1 ~3~
+		SET_2DA_ENTRY 8 19 1 ~3~
+		SET_2DA_ENTRY 10 19 1 ~3~
+		SET_2DA_ENTRY 17 19 1 ~3~
+		SET_2DA_ENTRY 18 19 1 ~3~
+		SET_2DA_ENTRY 20 19 1 ~3~
+		SET_2DA_ENTRY 21 19 1 ~3~
+		SET_2DA_ENTRY 25 19 1 ~3~
+		SET_2DA_ENTRY 29 19 1 ~3~
+		SET_2DA_ENTRY 7 20 1 ~3~ // FMC
+		SET_2DA_ENTRY 8 20 1 ~3~
+		SET_2DA_ENTRY 10 20 1 ~3~
+		SET_2DA_ENTRY 19 20 1 ~3~
+		SET_2DA_ENTRY 20 20 1 ~3~
+		SET_2DA_ENTRY 23 20 1 ~3~
+		SET_2DA_ENTRY 24 20 1 ~3~
+		SET_2DA_ENTRY 25 20 1 ~3~
+		SET_2DA_ENTRY 30 20 1 ~3~
+*/
+		BUT_ONLY
+	END
+//_____________________________________________________________________________
 
+
+/*
+// new: passive charm evasion_________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
+
+INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+
+<<<<<<<< d5/d5ragres.2da
+2DA V1.0 
+RES
+>>>>>>>> 
+
+COPY ~d5/d5ragres.2da~ ~override/d5ragres.2da~ 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 5) || (fx_type = 24) || (fx_type = 213) || (fx_type = 175) || (fx_type = 128) || (fx_type = 39) || (fx_type = 109) || (fx_type = 76) || (fx_type = 106) || (fx_type = 23 /*|| (fx_type = 45) || (fx_type = 216) || (fx_type = 211)*/ BEGIN
+		  PATCH_PRINT "%SOURCE_RES% can evaded by rage"
+		  INNER_ACTION BEGIN
+			APPEND ~d5ragres.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+  PHP_EACH ab_array AS int => ab_off BEGIN
+	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+	PHP_EACH fx_array AS int => fx_off BEGIN
+	  READ_SHORT fx_off fx_type
+	  PATCH_IF (fx_type = 217) || (fx_type = 5) || (fx_type = 24) || (fx_type = 213) || (fx_type = 175) || (fx_type = 128) || (fx_type = 39) || (fx_type = 109) || (fx_type = 76) || (fx_type = 106) || (fx_type = 23) /*|| (fx_type = 45) || (fx_type = 216) || (fx_type = 211)*/ BEGIN
+		  PATCH_PRINT "%SOURCE_RES% can evaded by rage"
+		  INNER_ACTION BEGIN
+			APPEND ~d5ragres.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+		  END
+	  END
+	END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~d5ragres.2da~ ~override~ 
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 cols rage_resist_res
+	PATCH_IF FILE_EXISTS_IN_GAME ~%rage_resist_res%.spl~ BEGIN
+	  INNER_ACTION BEGIN
+		LAF add_evade_spell INT_VAR evasion_??? = ??? evasion_save = 16 STR_VAR evade_condition = ~???~ evade_res = EVAL ~%rage_resist_res%~ evade_prefix = ~D5RG~ END
+	  END
+	END
+  END
+BUT_ONLY
+
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
+
+// give determination and slippery mind to berserker
+
+END
+
+// now modify SPCL321 and SPCL152 to be purely battle-oriented
+
+//_____________________________________________________________________________
+*/
 
 END	//	end define function

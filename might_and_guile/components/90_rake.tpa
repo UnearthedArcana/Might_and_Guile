@@ -8,8 +8,8 @@ LAF check_kit_conflict END
 LAF ADD_KIT_EX 
   INT_VAR
     kit_class  = 4
-    mixed      = RESOLVE_STR_REF(@9002)
-    lower      = RESOLVE_STR_REF(@9003)
+    lower      = RESOLVE_STR_REF(@9002)
+    mixed      = RESOLVE_STR_REF(@9003)
     help       = RESOLVE_STR_REF(@9004)
     briefdesc  = RESOLVE_STR_REF(@9004)
   STR_VAR

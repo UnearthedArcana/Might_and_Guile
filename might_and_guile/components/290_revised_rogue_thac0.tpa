@@ -13,14 +13,24 @@ DEFINE_ACTION_FUNCTION revised_rogue_thac0 BEGIN
 //EDIT 2DA FILE_____________________________________________________________________
 //
 COPY_EXISTING ~thac0.2da~ ~override~
-  REPLACE_TEXTUALLY ~^CLERIC.*$~ ~CLERIC                  20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^THIEF.*$~ ~THIEF                   20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^BARD.*$~ ~BARD                    20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^DRUID.*$~ ~DRUID                   20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^MAGE_THIEF.*$~ ~MAGE_THIEF              20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^CLERIC_MAGE.*$~ ~CLERIC_MAGE             20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^CLERIC_THIEF.*$~ ~CLERIC_THIEF            20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
-  REPLACE_TEXTUALLY ~^SHAMAN.*$~ ~SHAMAN                  20  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^CLERIC[ %TAB%].*$~  ~CLERIC                  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^THIEF[ %TAB%].*$~   ~THIEF                   20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^BARD.*$~            ~BARD                    20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^DRUID.*$~           ~DRUID                   20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^MAGE_THIEF.*$~      ~MAGE_THIEF              20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^CLERIC_MAGE.*$~     ~CLERIC_MAGE             20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^CLERIC_THIEF.*$~    ~CLERIC_THIEF            20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^SHAMAN.*$~          ~SHAMAN                  20  19  18  18  17  16  16  15  14  14  13  12  12  11  10  10  9   8   8   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7   7 ~
+  REPLACE_TEXTUALLY ~^FIGHTER[ %TAB%].*$~ ~FIGHTER                 19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^PALADIN[ %TAB%].*$~ ~PALADIN                 19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^RANGER[ %TAB%].*$~  ~RANGER                  19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^CLERIC_RANGER.*$~   ~CLERIC_RANGER           19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_THIEF.*$~   ~FIGHTER_THIEF           19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_MAGE.*$~    ~FIGHTER_MAGE            19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_CLERIC.*$~  ~FIGHTER_CLERIC          19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_DRUID.*$~   ~FIGHTER_DRUID           19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_MAGE_THIEF.*$~   ~FIGHTER_MAGE_THIEF      19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
+  REPLACE_TEXTUALLY ~^FIGHTER_MAGE_CLERIC.*$~  ~FIGHTER_MAGE_CLERIC     19  18  17  16  15  14  13  12  11  10  9   8   7   6   5   4   3   2   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 ~
 BUT_ONLY
 //___________________________________________________________________________________
 

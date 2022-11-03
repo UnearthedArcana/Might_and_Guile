@@ -483,7 +483,7 @@
   <h4 class="subheader">Component 290: </h4>
   <div class="section">
     <p><strong><em>Revised Rogue and Priest THAC0</em></strong></p>
-      <p>This component slightly improves rogue thac0 progression, to about match that of clerics. However, instead of staying static for three levels and then dropping by two points, there are instead two one-point improvements. Rogue and priest thac0 both now reach a final value of 7 at level 21.</p>
+      <p>This component slightly improves and smooths out thac0 progression for most classes. Warriors start at 19 and reach a final thac0 of 0 at 20th level; rogues and priests start at 20 and reach a final thac0 of 7 aat 20th level. Mage and sorcerer thac0 is unchanged.</p>
   </div>
   <h4 class="subheader">Component 400 (for EE 2.0+): </h4>
   <div class="section">

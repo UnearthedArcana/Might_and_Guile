@@ -1401,14 +1401,14 @@ Weapons Usable by this kit:
 			END
 		  END
 	      SPRINT kit_weapon_use ~%base_weapon_use%~^~%these_weapon_use%~
-//	      PATCH_PRINT ~%kit_weapon_use%~
-	      PATCH_IF (simpler_usability_changes = 0) BEGIN
-	        GET_STRREF %kit_desc% kit_desc_text
-	        SPRINT new_kit_desc ~%kit_desc_text%~^~ %kit_weapon_use%~
-	        SET new_kit_desc_string = RESOLVE_STR_REF (~%new_kit_desc%~)
-	        SET_2DA_ENTRY row 4 10 new_kit_desc_string
-	      END
 		END
+//        PATCH_PRINT ~%kit_weapon_use%~
+        PATCH_IF (simpler_usability_changes = 0) BEGIN
+          GET_STRREF %kit_desc% kit_desc_text
+          SPRINT new_kit_desc ~%kit_desc_text%~^~ %kit_weapon_use%~
+          SET new_kit_desc_string = RESOLVE_STR_REF (~%new_kit_desc%~)
+          SET_2DA_ENTRY row 4 10 new_kit_desc_string
+        END
 	    PATCH_IF (simpler_usability_changes = 0) BEGIN
 		 INNER_ACTION BEGIN
 		  ACTION_IF FILE_EXISTS_IN_GAME ~%mod_clab%.2da~ BEGIN

@@ -106,7 +106,7 @@ ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ ~kitlist~ BEGIN
       READ_2DA_ENTRY row 0 cols kit_name
       READ_2DA_ENTRY row 1 cols kitlist_name
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) OR (~%kitlist_name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@23500)
+        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@9008)
       END
     END
   IF_EXISTS BUT_ONLY

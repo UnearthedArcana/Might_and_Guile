@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha11~
+VERSION ~5alpha12~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -527,6 +527,10 @@ DESIGNATED 400
 LABEL ~D5_REVISED_BARDS~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 
+ACTION_IF !(FILE_EXISTS ~TobEx_ini/TobExVer.txt~) BEGIN
+  COPY ~%MOD_FOLDER%/misc/TobExVer.txt~ ~TobEx_ini/TobExVer.txt~
+END
+
 INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
 LAM d5_revised_bard_settings
@@ -557,6 +561,10 @@ ACTION_IF d5_bards_5E_casting = 1 BEGIN
 END
 
 INCLUDE ~might_and_guile/components/400_revised_bards.tpa~
+
+ACTION_IF FILE_EXISTS ~TobEx_ini/TobExVer.txt~ BEGIN
+	DELETE ~TobEx_ini/TobExVer.txt~
+END
 
 // ***** if no feats use dialogue for song selection (see e.g. FnP nu paladins)
 //__________________________________________________________________________________

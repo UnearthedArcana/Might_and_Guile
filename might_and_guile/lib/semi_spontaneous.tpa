@@ -1,5 +1,5 @@
 
-// v10.2 - fatigue fix
+// v10.3 - fnp adjustment
 
 /*
 functions in this file:
@@ -1841,10 +1841,10 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zclons.2da~) BEGIN
         OUTER_SET high_ind = high_ind + 1
 	    OUTER_SET spl_ind = high_ind
 	  END
-      APPEND ~d5zclons.2da~ ~%spl_ind% 	%res_1%	%res% 	divine 	no ~ UNLESS ~%res_1%	%res%~
+      APPEND ~d5zclons.2da~ ~%spl_ind% 	%res_1%	%res% 	divine 	no ~ UNLESS ~%res_1%~
       ACTION_IF !(~%res_2%~ STRING_EQUAL_CASE ~%res_1%~) BEGIN
         ACTION_IF !(~%res_2%~ STRING_EQUAL_CASE ~****~) BEGIN
-          APPEND ~d5zclons.2da~ ~%spl_ind% 	%res_2% 	%res% 	divine 	no ~ UNLESS ~%res_2% 	%res%~
+          APPEND ~d5zclons.2da~ ~%spl_ind% 	%res_2% 	%res% 	divine 	no ~ UNLESS ~%res_2%~
         END
       END    
     END

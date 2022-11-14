@@ -75,6 +75,486 @@ COPY ~might_and_guile/nubards/lud5brd.2da~ ~override~
 //____________________________________________________________________________________
 
 
+//ADD WHISTLER AS THIEF______________________________________________________________
+//
+// ***** make this a druid/thief kit...???
+// if so, add the kit, but not in menu; only if FnP installed add to menu
+
+LAF check_kit_conflict END
+
+ADD_KIT ~D5_WHISTLER~
+
+//WEAPON PROFICIENCIES_______________________________________________________________
+//11                                   T   S           F   Q             S S
+//10           L S                     W   C           L   U             W I
+//9            A M             B L S   O   I   W       A   A             O N
+//8            R A             A O H   H   M   A       I   R C   S       R G
+//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_WHISTLER   1 1 1 1 1 1 1 1~
+~D5_WHISTLER   0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS__________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_WHISTLER       0   12  0   0   9   12~
+
+//KIT STAT MODIFIERS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_WHISTLER       0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT___________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_WHISTLER       0   17  0   0   0   17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT_________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_WHISTLER       0   15  0   0   0   15~
+
+//ALIGNMENT RESTRICTIONS_____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_WHISTLER       1  1  0  1  1  1  1  1  0~
+
+//DUAL CLASS OPTIONS_________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_WHISTLER       1  1  0  0  0  0~
+
+//KIT ABILITIES 2DA FILE_____________________________________________________________
+~might_and_guile/nubards/d5_whsl.2da~
+
+//RACIAL KIT AVAILABILITY____________________________________________________________
+~K_T_HL~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
+~0x00004000 4~
+
+//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
+~Th0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @40861
+SAY @40862
+SAY @40863
+//___________________________________________________________________________________
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@40863)
+		STR_VAR
+			kit_name = D5_WHISTLER
+			clswpbon = ~0 0 3~
+			hpclass = ~HPROG~
+			clsrcreq = ~0 0 0 0 1 0 0~
+			sneakatt = ~1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2~
+			backstab = ~1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2~
+			thiefskl = ~40 20~
+			thiefscl = ~100 100 100 0 0 100 0 0~
+	END
+END
+//___________________________________________________________________________________
+
+//WHISTLER ABILITY FILES_____________________________________________________________
+//
+COPY ~might_and_guile/nubards/d5_whsl.2da~ ~override~
+
+COPY ~might_and_guile/misc/d5_xp75.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 104 parameter1 = 75 END
+
+COPY_EXISTING ~sppr106.spl~ ~override/d5rt106.spl~ // magic stone
+	LPM spell_to_innate
+COPY_EXISTING ~sppr109.spl~ ~override/d5rt109.spl~ // sanctuary
+	LPM spell_to_innate
+COPY_EXISTING ~sppr110.spl~ ~override/d5rt110.spl~ // shillelagh
+	LPM spell_to_innate
+COPY_EXISTING ~sppr207.spl~ ~override/d5rt207.spl~ // goodberry
+	LPM spell_to_innate
+COPY ~might_and_guile/nubards/d5whsp1.2da~ ~override~
+COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
+COPY ~might_and_guile/nubards/d5whsp1.spl~ ~override~ // spell to cast from list
+	SAY NAME1 ~Nature Magic I~
+	SAY UNIDENTIFIED_DESC ~Nature Magic I~
+COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
+	LPM spell_to_innate
+COPY_EXISTING ~sppr212.spl~ ~override/d5rt212.spl~ // slow poison
+	LPM spell_to_innate
+COPY_EXISTING ~sppr317.spl~ ~override/d5rt317.spl~ // cure disease
+	LPM spell_to_innate
+COPY_EXISTING ~sppr402.spl~ ~override/d5rt402.spl~ // 4th-level animal summoning
+	LPM spell_to_innate
+COPY ~might_and_guile/nubards/d5whsp2.2da~ ~override~
+COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
+COPY ~might_and_guile/nubards/d5whsp2.spl~ ~override~ // spell to cast from list
+	SAY NAME1 ~Nature Magic II~
+	SAY UNIDENTIFIED_DESC ~Nature Magic II~
+COPY_EXISTING ~sppr318.spl~ ~override/d5rt318.spl~ // zone of sweet air
+	LPM spell_to_innate
+COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
+	LPM spell_to_innate
+COPY_EXISTING ~sppr302.spl~ ~override/d5rt302.spl~ // call lightning
+	LPM spell_to_innate
+COPY_EXISTING ~sppr501.spl~ ~override/d5rt501.spl~ // 5th-level animal summoning
+	LPM spell_to_innate
+COPY ~might_and_guile/nubards/d5whsp3.2da~ ~override~
+COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
+COPY ~might_and_guile/nubards/d5whsp3.spl~ ~override~ // spell to cast from list
+	SAY NAME1 ~Nature Magic III~
+	SAY UNIDENTIFIED_DESC ~Nature Magic III~
+//___________________________________________________________________________________
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_whsl.2da~) BEGIN
+	APPEND ~d5_whsl.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+//____________________________________________________________________________________
+
+// get kit identifier, add to bards list______________________________________________
+//
+OUTER_SET nu_whistler_code = (0x4000 + %D5_WHISTLER%)
+OUTER_SPRINT $bard_kits_list(~d5_whsl~ ~%nu_whistler_code%~) ~T~
+//____________________________________________________________________________________
+
+
+//ADD LORESINGER AS CLERIC, and C/T____________________________________________________
+//
+// cleric with songs... basically, a demibard
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
+  LAF clerics_use_magical_devices END
+  LAF cleric_clabs_umd END
+END
+
+LAF check_kit_conflict END
+
+ADD_KIT ~D5_LORESINGER~
+
+//WEAPON PROFICIENCIES_______________________________________________________________
+//11           		                        T   S           F   Q             S S
+//10           		L S                     W   C           L   U             W I
+//9            		A M             B L S   O   I   W       A   A             O N
+//8            		R A             A O H   H   M   A       I   R C   S       R G
+//7            		G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            		E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            		S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            		W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            		O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            		R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            		D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_LORESINGER      0 0 0 0 0 0 0 0~
+~D5_LORESINGER      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_LORESINGER     0   0   0   9   12  15~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_LORESINGER     0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_LORESINGER     0   0   0   0   017  17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                 STR DEX CON INT WIS CHR
+~D5_LORESINGER     0   0   0   0   15  15~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                 LG LN LE NG TN NE CG CN CE
+~D5_LORESINGER     1  1  0  1  1  0  1  1  0~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                 FT CL MA TH DR RA
+~D5_LORESINGER     1  0  1  1  0  0~
+
+//KIT ABILITIES 2DA FILE____________________________________________________________
+~might_and_guile/nubards/d5_lors.2da~
+
+//RACIAL KIT AVAILABILITY___________________________________________________________
+~K_C_D K_C_E K_C_G K_C_H K_C_HE K_C_HL K_C_HO~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
+~0x00800000 3~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~CL0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @40866
+SAY @40867
+SAY @40868
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@40868)
+		STR_VAR
+			kit_name = D5_LORESINGER
+			clswpbon = ~0 0 3~
+			clsrcreq = ~1 1 1 0 0 1 0~
+	END
+END
+
+//LORESINGER ABILITY FILES___________________________________________________________
+//
+COPY ~might_and_guile/nubards/d5_lors.2da~ ~override~
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lors.2da~) BEGIN
+	APPEND ~d5_lors.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+// get kit identifier, add to bards list______________________________________________
+//
+OUTER_SET nu_loresinger_code = (0x4000 + %D5_LORESINGER%)
+OUTER_SPRINT $bard_kits_list(~d5_lors~ ~%nu_loresinger_code%~) ~C~
+
+//DEFINE SPHERE ACCESS_______________________________________________________________
+//
+LAF ~DEFINE_FNP_KIT_INFO~
+  INT_VAR
+	u_leather_armor 	= 1
+	u_chain_armor 		= 1
+	u_plate_armor 		= 0
+	u_club_staff	 	= 1
+	u_hammers	 		= 1
+	u_maces 	 		= 1
+	u_flails 			= 0
+	u_axes 				= 0
+	u_daggers 			= 1
+	u_short_swords		= 1
+	u_long_swords		= 1
+	u_scimitars 		= 1
+	u_katanas 			= 0
+	u_bastard_swords 	= 0
+	u_2hand_swords 		= 0
+	u_halberds 			= 0
+	u_spears 			= 0
+	u_darts 			= 1
+	u_slings 			= 1
+	u_bows 				= 0
+	u_crossbows 		= 1  
+  STR_VAR
+    clab_name 		= ~d5_lors~
+	class 			= ~cleric~
+	sphere_list 	= ~milil_spheres~
+END
+
+LAM ~READ_FNP_KIT_INFO~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
+  LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lors~ END
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
+  LAF apply_fnp_usability STR_VAR clab_name = ~d5_lors~ END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5_lors~ learn_res = ~d5lorz~ END
+    END
+  END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
+  APPEND ~d5_lors.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+//__________________________________________________________________________________
+
+COPY ~might_and_guile/nubards/d5_lors.2da~ ~override/d5_lort.2da~
+
+LAF check_kit_conflict END
+
+ADD_KIT ~D5_LORESINGER_CT~
+
+//WEAPON PROFICIENCIES_______________________________________________________________
+//11           		                          T   S           F   Q             S S
+//10           		  L S                     W   C           L   U             W I
+//9            		  A M             B L S   O   I   W       A   A             O N
+//8            		  R A             A O H   H   M   A       I   R C   S       R G
+//7            		  G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//6            		  E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//5            		  S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//4            		  W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//3            		  O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//2            		  R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//1            		  D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+~D5_LORESINGER_CT     0 0 0 0 0 0 0 0~
+~D5_LORESINGER_CT     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//MINIMUM KIT STATS_________________________________________________________________
+//                  STR DEX CON INT WIS CHR
+~D5_LORESINGER_CT    0   0   0   9   12  15~
+
+//KIT STAT MODIFIERS________________________________________________________________
+//                  STR DEX CON INT WIS CHR
+~D5_LORESINGER_CT    0   0   0   0   0   0~
+
+//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
+//                  STR DEX CON INT WIS CHR
+~D5_LORESINGER_CT    0   0   0   0   017  17~
+
+//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
+//                  STR DEX CON INT WIS CHR
+~D5_LORESINGER_CT    0   0   0   0   15  15~
+
+//ALIGNMENT RESTRICTIONS____________________________________________________________
+//                  LG LN LE NG TN NE CG CN CE
+~D5_LORESINGER_CT    1  1  0  1  1  0  1  1  0~
+
+//DUAL CLASS OPTIONS________________________________________________________________
+//                  FT CL MA TH DR RA
+~D5_LORESINGER_CT    0  1  0  1  0  0~
+
+//KIT ABILITIES 2DA FILE____________________________________________________________
+~override/d5_lort.2da~
+
+//RACIAL KIT AVAILABILITY___________________________________________________________
+~K_CT_D K_CT_E K_CT_G K_CT_H K_CT_HE K_CT_HL K_CT_HO~
+
+//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
+//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
+//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
+//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
+~0x00800000 15~
+
+//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
+~CT0~
+
+//TOB STARTING EQUIPMENT_____________________________________________________________
+~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
+
+//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
+SAY @40866
+SAY @40867
+SAY @40868
+
+//EE KIT EXTRAS______________________________________________________________________
+// 
+ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@40868)
+		STR_VAR
+			kit_name = D5_LORESINGER_CT
+			clswpbon = ~0 0 3~
+			clsrcreq = ~1 1 1 0 0 1 0~
+	END
+END
+
+//LORESINGER ABILITY FILES___________________________________________________________
+//
+//COPY ~might_and_guile/nubards/d5_lort.2da~ ~override~
+
+//WILD TALENT_________________________________________________________________________
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lort.2da~) BEGIN
+	APPEND ~d5_lort.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+
+// get kit identifier, add to bards list______________________________________________
+//
+OUTER_SET nu_loresinger_ct_code = (0x4000 + %D5_LORESINGER_CT%)
+OUTER_SPRINT $bard_kits_list(~d5_lort~ ~%nu_loresinger_ct_code%~) ~C~
+
+//DEFINE SPHERE ACCESS_______________________________________________________________
+//
+LAF ~DEFINE_FNP_KIT_INFO~
+  INT_VAR
+	u_leather_armor 	= 1
+	u_chain_armor 		= 0
+	u_plate_armor 		= 0
+	u_club_staff	 	= 1
+	u_hammers	 		= 1
+	u_maces 	 		= 1
+	u_flails 			= 0
+	u_axes 				= 0
+	u_daggers 			= 1
+	u_short_swords		= 1
+	u_long_swords		= 1
+	u_scimitars 		= 1
+	u_katanas 			= 0
+	u_bastard_swords 	= 0
+	u_2hand_swords 		= 0
+	u_halberds 			= 0
+	u_spears 			= 0
+	u_darts 			= 1
+	u_slings 			= 1
+	u_bows 				= 0
+	u_crossbows 		= 1  
+  STR_VAR
+    clab_name 		= ~d5_lort~
+	class 			= ~cleric_thief~
+	sphere_list 	= ~milil_spheres~
+END
+
+LAM ~READ_FNP_KIT_INFO~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
+  LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lort~ END
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
+  LAF apply_fnp_usability STR_VAR clab_name = ~d5_lort~ END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
+    OUTER_SPRINT spont_lang ~%LANGUAGE%~
+  END ELSE BEGIN
+    OUTER_SPRINT spont_lang ~english~
+  END
+  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
+    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
+      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
+      LAF fnp_spontaneous STR_VAR kit_clab = ~d5_lort~ learn_res = ~d5lortz~ END
+    END
+  END
+END
+
+/* already done when copied d5_lors to this one
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
+  APPEND ~d5_lort.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+*/
+//__________________________________________________________________________________
+
+
 //NEW "TRUECLASS" BARD________________________________________________________________
 //
 LAF check_kit_conflict END
@@ -1022,331 +1502,6 @@ OUTER_SET nu_agent_code = (0x4000 + %D5_AGENT%)
 //____________________________________________________________________________________
 
 
-//ADD LORESINGER AS CLERIC, and C/T____________________________________________________
-//
-// cleric with songs... basically, a demibard
-
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
-  LAF clerics_use_magical_devices END
-  LAF cleric_clabs_umd END
-END
-
-LAF check_kit_conflict END
-
-ADD_KIT ~D5_LORESINGER~
-
-//WEAPON PROFICIENCIES_______________________________________________________________
-//11           		                        T   S           F   Q             S S
-//10           		L S                     W   C           L   U             W I
-//9            		A M             B L S   O   I   W       A   A             O N
-//8            		R A             A O H   H   M   A       I   R C   S       R G
-//7            		G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
-//6            		E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
-//5            		S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
-//4            		W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
-//3            		O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
-//2            		R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
-//1            		D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_LORESINGER      0 0 0 0 0 0 0 0~
-~D5_LORESINGER      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
-
-//MINIMUM KIT STATS_________________________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_LORESINGER     0   0   0   9   12  15~
-
-//KIT STAT MODIFIERS________________________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_LORESINGER     0   0   0   0   0   0~
-
-//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_LORESINGER     0   0   0   0   017  17~
-
-//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_LORESINGER     0   0   0   0   15  15~
-
-//ALIGNMENT RESTRICTIONS____________________________________________________________
-//                 LG LN LE NG TN NE CG CN CE
-~D5_LORESINGER     1  1  0  1  1  0  1  1  0~
-
-//DUAL CLASS OPTIONS________________________________________________________________
-//                 FT CL MA TH DR RA
-~D5_LORESINGER     1  0  1  1  0  0~
-
-//KIT ABILITIES 2DA FILE____________________________________________________________
-~might_and_guile/nubards/d5_lors.2da~
-
-//RACIAL KIT AVAILABILITY___________________________________________________________
-~K_C_D K_C_E K_C_G K_C_H K_C_HE K_C_HL K_C_HO~
-
-//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
-//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
-//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
-//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
-~0x00800000 3~
-
-//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~CL0~
-
-//TOB STARTING EQUIPMENT_____________________________________________________________
-~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
-
-//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
-SAY @40866
-SAY @40867
-SAY @40868
-
-//EE KIT EXTRAS______________________________________________________________________
-// 
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
-	LAF fl#add_kit_ee
-		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@40868)
-		STR_VAR
-			kit_name = D5_LORESINGER
-			clswpbon = ~0 0 3~
-			clsrcreq = ~1 1 1 0 0 1 0~
-	END
-END
-
-//LORESINGER ABILITY FILES___________________________________________________________
-//
-COPY ~might_and_guile/nubards/d5_lors.2da~ ~override~
-
-//WILD TALENT_________________________________________________________________________
-//
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lors.2da~) BEGIN
-	APPEND ~d5_lors.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-  END
-END
-// get kit identifier, add to bards list______________________________________________
-//
-OUTER_SET nu_loresinger_code = (0x4000 + %D5_LORESINGER%)
-OUTER_SPRINT $bard_kits_list(~d5_lors~ ~%nu_loresinger_code%~) ~C~
-
-//DEFINE SPHERE ACCESS_______________________________________________________________
-//
-LAF ~DEFINE_FNP_KIT_INFO~
-  INT_VAR
-	u_leather_armor 	= 1
-	u_chain_armor 		= 1
-	u_plate_armor 		= 0
-	u_club_staff	 	= 1
-	u_hammers	 		= 1
-	u_maces 	 		= 1
-	u_flails 			= 0
-	u_axes 				= 0
-	u_daggers 			= 1
-	u_short_swords		= 1
-	u_long_swords		= 1
-	u_scimitars 		= 1
-	u_katanas 			= 0
-	u_bastard_swords 	= 0
-	u_2hand_swords 		= 0
-	u_halberds 			= 0
-	u_spears 			= 0
-	u_darts 			= 1
-	u_slings 			= 1
-	u_bows 				= 0
-	u_crossbows 		= 1  
-  STR_VAR
-    clab_name 		= ~d5_lors~
-	class 			= ~cleric~
-	sphere_list 	= ~milil_spheres~
-END
-
-LAM ~READ_FNP_KIT_INFO~
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
-  LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lors~ END
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
-  LAF apply_fnp_usability STR_VAR clab_name = ~d5_lors~ END
-END
-
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
-  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
-    OUTER_SPRINT spont_lang ~%LANGUAGE%~
-  END ELSE BEGIN
-    OUTER_SPRINT spont_lang ~english~
-  END
-  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
-    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
-      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
-      LAF fnp_spontaneous STR_VAR kit_clab = ~d5_lors~ learn_res = ~d5lorz~ END
-    END
-  END
-END
-
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
-  APPEND ~d5_lors.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-END
-//__________________________________________________________________________________
-
-COPY ~might_and_guile/nubards/d5_lors.2da~ ~override/d5_lort.2da~
-
-LAF check_kit_conflict END
-
-ADD_KIT ~D5_LORESINGER_CT~
-
-//WEAPON PROFICIENCIES_______________________________________________________________
-//11           		                          T   S           F   Q             S S
-//10           		  L S                     W   C           L   U             W I
-//9            		  A M             B L S   O   I   W       A   A             O N
-//8            		  R A             A O H   H   M   A       I   R C   S       R G
-//7            		  G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
-//6            		  E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
-//5            		  S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
-//4            		  W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
-//3            		  O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
-//2            		  R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
-//1            		  D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_LORESINGER_CT     0 0 0 0 0 0 0 0~
-~D5_LORESINGER_CT     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
-
-//MINIMUM KIT STATS_________________________________________________________________
-//                  STR DEX CON INT WIS CHR
-~D5_LORESINGER_CT    0   0   0   9   12  15~
-
-//KIT STAT MODIFIERS________________________________________________________________
-//                  STR DEX CON INT WIS CHR
-~D5_LORESINGER_CT    0   0   0   0   0   0~
-
-//REQUIREMENTS TO DUAL TO THIS KIT__________________________________________________
-//                  STR DEX CON INT WIS CHR
-~D5_LORESINGER_CT    0   0   0   0   017  17~
-
-//REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
-//                  STR DEX CON INT WIS CHR
-~D5_LORESINGER_CT    0   0   0   0   15  15~
-
-//ALIGNMENT RESTRICTIONS____________________________________________________________
-//                  LG LN LE NG TN NE CG CN CE
-~D5_LORESINGER_CT    1  1  0  1  1  0  1  1  0~
-
-//DUAL CLASS OPTIONS________________________________________________________________
-//                  FT CL MA TH DR RA
-~D5_LORESINGER_CT    0  1  0  1  0  0~
-
-//KIT ABILITIES 2DA FILE____________________________________________________________
-~override/d5_lort.2da~
-
-//RACIAL KIT AVAILABILITY___________________________________________________________
-~K_CT_D K_CT_E K_CT_G K_CT_H K_CT_HE K_CT_HL K_CT_HO~
-
-//UNUSABLE FLAGS AND KIT BASE CLASS_________________________________________________
-//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
-//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
-//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
-~0x00800000 15~
-
-//HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~CT0~
-
-//TOB STARTING EQUIPMENT_____________________________________________________________
-~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
-
-//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
-SAY @40866
-SAY @40867
-SAY @40868
-
-//EE KIT EXTRAS______________________________________________________________________
-// 
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
-	LAF fl#add_kit_ee
-		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@40868)
-		STR_VAR
-			kit_name = D5_LORESINGER_CT
-			clswpbon = ~0 0 3~
-			clsrcreq = ~1 1 1 0 0 1 0~
-	END
-END
-
-//LORESINGER ABILITY FILES___________________________________________________________
-//
-//COPY ~might_and_guile/nubards/d5_lort.2da~ ~override~
-
-//WILD TALENT_________________________________________________________________________
-//
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_lort.2da~) BEGIN
-	APPEND ~d5_lort.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-  END
-END
-
-// get kit identifier, add to bards list______________________________________________
-//
-OUTER_SET nu_loresinger_ct_code = (0x4000 + %D5_LORESINGER_CT%)
-OUTER_SPRINT $bard_kits_list(~d5_lort~ ~%nu_loresinger_ct_code%~) ~C~
-
-//DEFINE SPHERE ACCESS_______________________________________________________________
-//
-LAF ~DEFINE_FNP_KIT_INFO~
-  INT_VAR
-	u_leather_armor 	= 1
-	u_chain_armor 		= 0
-	u_plate_armor 		= 0
-	u_club_staff	 	= 1
-	u_hammers	 		= 1
-	u_maces 	 		= 1
-	u_flails 			= 0
-	u_axes 				= 0
-	u_daggers 			= 1
-	u_short_swords		= 1
-	u_long_swords		= 1
-	u_scimitars 		= 1
-	u_katanas 			= 0
-	u_bastard_swords 	= 0
-	u_2hand_swords 		= 0
-	u_halberds 			= 0
-	u_spears 			= 0
-	u_darts 			= 1
-	u_slings 			= 1
-	u_bows 				= 0
-	u_crossbows 		= 1  
-  STR_VAR
-    clab_name 		= ~d5_lort~
-	class 			= ~cleric_thief~
-	sphere_list 	= ~milil_spheres~
-END
-
-LAM ~READ_FNP_KIT_INFO~
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
-  LAF apply_fnp_spheres STR_VAR clab_name = ~d5_lort~ END
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5__fnp_usability.d5~ BEGIN
-  LAF apply_fnp_usability STR_VAR clab_name = ~d5_lort~ END
-END
-
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~) BEGIN
-  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%LANGUAGE%/fnp_spontaneous.tra~) BEGIN
-    OUTER_SPRINT spont_lang ~%LANGUAGE%~
-  END ELSE BEGIN
-    OUTER_SPRINT spont_lang ~english~
-  END
-  ACTION_IF (FILE_EXISTS ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~) BEGIN
-    WITH_TRA ~faiths_and_powers/language/%spont_lang%/fnp_spontaneous.tra~ BEGIN
-      INCLUDE ~faiths_and_powers/lib/system_fnp_spontaneous.tpa~
-      LAF fnp_spontaneous STR_VAR kit_clab = ~d5_lort~ learn_res = ~d5lortz~ END
-    END
-  END
-END
-
-/* already done when copied d5_lors to this one
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) BEGIN
-  APPEND ~d5_lort.2da~ ~NO_UMD      AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-END
-*/
-//__________________________________________________________________________________
-
-
 //ADD HEXBLADE AS F/M________________________________________________________________
 //
 LAF check_kit_conflict END
@@ -1549,161 +1704,6 @@ END
 //
 OUTER_SET nu_herald_code = (0x4000 + %D5_HERALD%)
 OUTER_SPRINT $bard_kits_list(~d5_hrld~ ~%nu_herald_code%~) ~T~
-//____________________________________________________________________________________
-
-
-//ADD WHISTLER AS THIEF______________________________________________________________
-//
-// ***** make this a druid/thief kit...???
-// if so, add the kit, but not in menu; only if FnP installed add to menu
-
-LAF check_kit_conflict END
-
-ADD_KIT ~D5_WHISTLER~
-
-//WEAPON PROFICIENCIES_______________________________________________________________
-//11                                   T   S           F   Q             S S
-//10           L S                     W   C           L   U             W I
-//9            A M             B L S   O   I   W       A   A             O N
-//8            R A             A O H   H   M   A       I   R C   S       R G
-//7            G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
-//6            E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
-//5            S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
-//4            W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
-//3            O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
-//2            R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
-//1            D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_WHISTLER   1 1 1 1 1 1 1 1~
-~D5_WHISTLER   0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
-
-//MINIMUM KIT STATS__________________________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_WHISTLER       0   12  0   0   9   12~
-
-//KIT STAT MODIFIERS_________________________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_WHISTLER       0   0   0   0   0   0~
-
-//REQUIREMENTS TO DUAL TO THIS KIT___________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_WHISTLER       0   17  0   0   0   17~
-
-//REQUIREMENTS TO DUAL FROM THIS KIT_________________________________________________
-//                 STR DEX CON INT WIS CHR
-~D5_WHISTLER       0   15  0   0   0   15~
-
-//ALIGNMENT RESTRICTIONS_____________________________________________________________
-//                 LG LN LE NG TN NE CG CN CE
-~D5_WHISTLER       1  1  0  1  1  1  1  1  0~
-
-//DUAL CLASS OPTIONS_________________________________________________________________
-//                 FT CL MA TH DR RA
-~D5_WHISTLER       1  1  0  0  0  0~
-
-//KIT ABILITIES 2DA FILE_____________________________________________________________
-~might_and_guile/nubards/d5_whsl.2da~
-
-//RACIAL KIT AVAILABILITY____________________________________________________________
-~K_T_HL~
-
-//UNUSABLE FLAGS AND KIT BASE CLASS__________________________________________________
-//CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
-//         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
-//         Monk = 20, FT = 9, FC = 8, CT = 15, CR = 18, FM = 7, CM = 14, MT = 13
-~0x00004000 4~
-
-//HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
-~Th0~
-
-//TOB STARTING EQUIPMENT_____________________________________________________________
-~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
-
-//CHARACTER CREATION KIT DESCRIPTION_________________________________________________
-SAY @40861
-SAY @40862
-SAY @40863
-//___________________________________________________________________________________
-
-//EE KIT EXTRAS______________________________________________________________________
-// 
-ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
-	LAF fl#add_kit_ee
-		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@40863)
-		STR_VAR
-			kit_name = D5_WHISTLER
-			clswpbon = ~0 0 3~
-			hpclass = ~HPROG~
-			clsrcreq = ~0 0 0 0 1 0 0~
-			sneakatt = ~1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2~
-			backstab = ~1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2~
-			thiefskl = ~40 20~
-			thiefscl = ~100 100 100 0 0 100 0 0~
-	END
-END
-//___________________________________________________________________________________
-
-//WHISTLER ABILITY FILES_____________________________________________________________
-//
-COPY ~might_and_guile/nubards/d5_whsl.2da~ ~override~
-
-COPY ~might_and_guile/misc/d5_xp75.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 104 parameter1 = 75 END
-
-COPY_EXISTING ~sppr106.spl~ ~override/d5rt106.spl~ // magic stone
-	LPM spell_to_innate
-COPY_EXISTING ~sppr109.spl~ ~override/d5rt109.spl~ // sanctuary
-	LPM spell_to_innate
-COPY_EXISTING ~sppr110.spl~ ~override/d5rt110.spl~ // shillelagh
-	LPM spell_to_innate
-COPY_EXISTING ~sppr207.spl~ ~override/d5rt207.spl~ // goodberry
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp1.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp1.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic I~
-	SAY UNIDENTIFIED_DESC ~Nature Magic I~
-COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
-	LPM spell_to_innate
-COPY_EXISTING ~sppr212.spl~ ~override/d5rt212.spl~ // slow poison
-	LPM spell_to_innate
-COPY_EXISTING ~sppr317.spl~ ~override/d5rt317.spl~ // cure disease
-	LPM spell_to_innate
-COPY_EXISTING ~sppr402.spl~ ~override/d5rt402.spl~ // 4th-level animal summoning
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp2.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp2.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic II~
-	SAY UNIDENTIFIED_DESC ~Nature Magic II~
-COPY_EXISTING ~sppr318.spl~ ~override/d5rt318.spl~ // zone of sweet air
-	LPM spell_to_innate
-COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
-	LPM spell_to_innate
-COPY_EXISTING ~sppr302.spl~ ~override/d5rt302.spl~ // call lightning
-	LPM spell_to_innate
-COPY_EXISTING ~sppr501.spl~ ~override/d5rt501.spl~ // 5th-level animal summoning
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp3.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp3.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic III~
-	SAY UNIDENTIFIED_DESC ~Nature Magic III~
-//___________________________________________________________________________________
-
-//WILD TALENT_________________________________________________________________________
-//
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__psionics.d5~) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_whsl.2da~) BEGIN
-	APPEND ~d5_whsl.2da~ ~WILD_TLNT   AP_D5PSWT_  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-  END
-END
-//____________________________________________________________________________________
-
-// get kit identifier, add to bards list______________________________________________
-//
-OUTER_SET nu_whistler_code = (0x4000 + %D5_WHISTLER%)
-OUTER_SPRINT $bard_kits_list(~d5_whsl~ ~%nu_whistler_code%~) ~T~
 //____________________________________________________________________________________
 
 
@@ -4814,7 +4814,7 @@ COPY ~might_and_guile/nubards/d5curse.spl~ ~override/d5bp112.spl~
 	SAY UNIDENTIFIED_DESC @40904
 	WRITE_LONG 0x34 2
 	WRITE_ASCII 0x3a ~SPPR112C~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~SPPR112B~ END
+	LPF ALTER_SPELL_HEADER INT_VAR projectile = 171 STR_VAR icon = ~SPPR112B~ END
 COPY ~might_and_guile/nubards/sppr112c.bam~ ~override~
 COPY ~might_and_guile/nubards/sppr112b.bam~ ~override~
 ACTION_IF (d5_bards_5E_casting = 1) BEGIN

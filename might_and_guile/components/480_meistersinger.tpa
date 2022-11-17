@@ -94,8 +94,8 @@ END
 //
 COPY ~might_and_guile/bard/d5_meist.2da~ ~override~
 COPY ~might_and_guile/misc/d5_jluck.spl~ ~override~
-	SAY NAME1 @3108
-	SAY UNIDENTIFIED_DESC @3108
+	SAY NAME1 @5508
+	SAY UNIDENTIFIED_DESC @5508
 COPY_EXISTING ~sppr103.spl~ ~override/d5_mei11.spl~
 	WRITE_SHORT 0x1c 1
 COPY_EXISTING ~sppr105.spl~ ~override/d5_mei12.spl~

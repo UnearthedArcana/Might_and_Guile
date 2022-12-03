@@ -1851,9 +1851,14 @@ ACTION_IF (thief_use_wands = 0) BEGIN
 	WRITE_SHORT 0x1c 4
 	WRITE_LONG 0x34 1
 
-  LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
-
-  OUTER_SET no_umd_specific = %new_specific_ind%
+  OUTER_SET spec_ids = IDS_OF_SYMBOL (~specific~ ~D5_NO_UMD~)
+  ACTION_IF (spec_ids = 0 - 1) BEGIN  
+    LAF d5_resolve_specific STR_VAR new_specific_id = ~D5_NO_UMD~ RET new_specific_ind END
+    OUTER_SET no_umd_specific = %new_specific_ind%
+  END
+  ACTION_IF (spec_ids > 0) BEGIN
+    OUTER_SET no_umd_specific = %spec_ids%
+  END
 
   COPY ~might_and_guile/feats/d5_nscrl.spl~ ~override/d5_numd.spl~
     LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR resource = ~d5_numd~ END

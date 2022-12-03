@@ -424,6 +424,12 @@
         <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
       </ul>
   </div>
+  <h4 class="subheader">Component 225: </h4>
+  <div class="section">
+    <p><strong><em>Revised Ranger Spell Table</em></strong></p>
+      <p>This component gives rangers access to their spells earlier. They get 1st-level spells at 3rd level, 2nd-level spells at 7th level, 3rd-level spells at 11th level, and 4th-level spells at 15th level. Along the way, at every odd level, they get an extra spell slot at a level they have access to. They mx out at level 19 with 5 1st-level spells, 4 2nd-level spells, 3 3rd-level spells, and  2 4th level spells.</p>
+      <p>Of note, this progession matches the revised paladin spell tables in the Faiths & Powers mod.</p>
+  </div>
   <h4 class="subheader">Component 230: </h4>
   <div class="section">
     <p><strong><em>Revised Stalkers</em></strong></p>

@@ -1,5 +1,5 @@
 
-// v10.3 - fnp adjustment
+// v10.4 - fixed semi_innate
 
 /*
 functions in this file:
@@ -5211,8 +5211,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%ltf.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltf~ END
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xrfsh.spl~) BEGIN
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xrfsh.spl~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%fsh.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%fsh.spl~
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END	//	use 326 here...?
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 duration = 0 STR_VAR resource = ~d5zrest~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%semi_innate_prefix%x-1~ END
@@ -5235,9 +5235,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xxfat.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xnfsh.spl~) BEGIN
- COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xnfsh.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~d5xrfsh~ END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%nsh.spl~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%nsh.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~%semi_innate_prefix%fsh~ END
 END
 
 //COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_innate_casting.d5~

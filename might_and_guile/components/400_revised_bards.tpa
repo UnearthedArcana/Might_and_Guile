@@ -171,47 +171,24 @@ END
 COPY ~might_and_guile/nubards/d5_whsl.2da~ ~override~
 
 COPY ~might_and_guile/misc/d5_xp75.spl~ ~override~
-  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 104 parameter1 = 75 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 104 parameter1 = 80 END
 
-COPY_EXISTING ~sppr106.spl~ ~override/d5rt106.spl~ // magic stone
-	LPM spell_to_innate
-COPY_EXISTING ~sppr109.spl~ ~override/d5rt109.spl~ // sanctuary
-	LPM spell_to_innate
-COPY_EXISTING ~sppr110.spl~ ~override/d5rt110.spl~ // shillelagh
-	LPM spell_to_innate
-COPY_EXISTING ~sppr207.spl~ ~override/d5rt207.spl~ // goodberry
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp1.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr1.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp1.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic I~
-	SAY UNIDENTIFIED_DESC ~Nature Magic I~
-COPY_EXISTING ~sppr202.spl~ ~override/d5rt202.spl~ // barkskin
-	LPM spell_to_innate
-COPY_EXISTING ~sppr212.spl~ ~override/d5rt212.spl~ // slow poison
-	LPM spell_to_innate
-COPY_EXISTING ~sppr317.spl~ ~override/d5rt317.spl~ // cure disease
-	LPM spell_to_innate
-COPY_EXISTING ~sppr402.spl~ ~override/d5rt402.spl~ // 4th-level animal summoning
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp2.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr2.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp2.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic II~
-	SAY UNIDENTIFIED_DESC ~Nature Magic II~
-COPY_EXISTING ~sppr318.spl~ ~override/d5rt318.spl~ // zone of sweet air
-	LPM spell_to_innate
-COPY_EXISTING ~sppr319.spl~ ~override/d5rt319.spl~ // summon insects
-	LPM spell_to_innate
-COPY_EXISTING ~sppr302.spl~ ~override/d5rt302.spl~ // call lightning
-	LPM spell_to_innate
-COPY_EXISTING ~sppr501.spl~ ~override/d5rt501.spl~ // 5th-level animal summoning
-	LPM spell_to_innate
-COPY ~might_and_guile/nubards/d5whsp3.2da~ ~override~
-COPY ~might_and_guile/misc/d5indr3.bam~ ~override~
-COPY ~might_and_guile/nubards/d5whsp3.spl~ ~override~ // spell to cast from list
-	SAY NAME1 ~Nature Magic III~
-	SAY UNIDENTIFIED_DESC ~Nature Magic III~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5wh000.spl~) BEGIN
+ ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_whistler BEGIN
+  d5wh01 => sppr207	
+  d5wh02 => sppr105	
+  d5wh03 => sppr212	
+  d5wh04 => sppr109	
+  d5wh05 => sppr202	
+  d5wh06 => sppr317	
+  d5wh07 => sppr318	
+  d5wh08 => sppr319	
+ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5wh~ semi_innate_array = ~semi_innate_whistler~ END
+ COPY ~might_and_guile/nubards/d5kiwhs.spl~ ~override~			//	add ki points
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5wh172~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5whpls~ END
+END
 //___________________________________________________________________________________
 
 //WILD TALENT_________________________________________________________________________

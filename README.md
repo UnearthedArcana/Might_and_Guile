@@ -730,9 +730,10 @@
         <p>HALFLING WHISTLER (thief): Whistlers are an odd mix of forest wanderer and entertainer. Halflings belong generally to the category of nature-sensitive races, and Whistlers are extremely attuned to the natural environment around them. In particular, they love forest animals and plant life. They can use their special whistling abilities to communicate with animals, and even have some influence over plants and natural forces like the wind and water. In addition to these special abilities, Whistlers can perform traditional Bard Songs through their whistling.</p>
         <p>Abilities:<br />
         &ndash; May use the Animal Empathy ability, as a Ranger.<br />
-        &ndash; From 3rd level, may cast one of the following druid spells: Magical Stone, Sanctuary, Shillelagh, or Goodberry.<br />
-        &ndash; From 8th level, may cast one of the following druid spells: Slow Poison, Cure Disease, Barkskin, or Animal Summoning I.<br />
-        &ndash; From 13th level, may cast one of the following druid spells: Zone of Sweet Air, Call Lightning, or Animal Summoning II.<br />
+        &ndash; Beginning at 3rd level, Whistlers may may cast one of several druid spells, once per day for each odd level they have gained. At 3rd level, Whistlers may cast either Goodberry or Entangle.<br />
+        &ndash; At 5th level, Whistlers may also cast Slow Poison and Sanctuary.<br />
+        &ndash; At 7th level, Whistlers may also cast Cure Disease and Barkskin.<br />
+        &ndash; At 9th level, Whistlers may also cast Zone of Sweet Air and Summon Insects.<br />
         &ndash; May use an Inspiration of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.<br />
         &ndash; From 6th level, may use an Entangling Emanation, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />

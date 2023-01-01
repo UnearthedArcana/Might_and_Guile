@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5alpha12.4~
+VERSION ~5alpha12.5~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -258,7 +258,7 @@ LAF fake_ranger_multi_kits END
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-
+/*
 //______________________FIGHTER ARCHER______________________________________________
 BEGIN @151
 DESIGNATED 151
@@ -269,7 +269,7 @@ INCLUDE ~might_and_guile/components/151_archer_fighter.tpa~
 
 LAF archer_fighter_kit END
 //__________________________________________________________________________________
-
+*/
 
 //_______________________ELVEN ARCHER_______________________________________________
 BEGIN @155
@@ -545,10 +545,10 @@ ACTION_IF d5_bards_5E_casting = 1 BEGIN
 
   LAF semi_spontaneous_casting END
 
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_divine~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_divine.d5~) BEGIN
     LAF semi_divine_spells END
   END
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane.d5~) BEGIN
     ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
       LAF semi_spont_identify END
     END

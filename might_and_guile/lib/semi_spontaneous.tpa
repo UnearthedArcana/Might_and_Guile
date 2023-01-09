@@ -2415,7 +2415,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~d5zclons.2da~ ~%free_spell%~)) BEGIN
     FOR (row = 0; row < r2en_zclons; ++row) BEGIN
       READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 0 z_ind
       READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 mem_spell
-      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 cast_spell
+//      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 2 cast_spell
       PATCH_IF (~%mem_spell%~ STRING_EQUAL_CASE ~%free_spell%~) BEGIN
         SET free_spell_ind = %z_ind%
       END 

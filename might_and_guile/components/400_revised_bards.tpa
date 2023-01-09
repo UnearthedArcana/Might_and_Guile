@@ -2122,6 +2122,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   END
 BUT_ONLY
 
+// ***** use a different flag than archer, if archer can be made into a fighter kit
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type
   PATCH_IF spell_type = 1 BEGIN

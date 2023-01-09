@@ -91,22 +91,24 @@ COPY_EXISTING ~sneakatt.2da~ ~override~
       SET stalker_row = row
     END
   END
-  SET_2DA_ENTRY stalker_row 6 cols 2
-  SET_2DA_ENTRY stalker_row 7 cols 2
-  SET_2DA_ENTRY stalker_row 8 cols 2
-  SET_2DA_ENTRY stalker_row 10 cols 3
-  SET_2DA_ENTRY stalker_row 11 cols 3
-  SET_2DA_ENTRY stalker_row 12 cols 3
-  SET_2DA_ENTRY stalker_row 13 cols 3
-  SET_2DA_ENTRY stalker_row 14 cols 3
-  SET_2DA_ENTRY stalker_row 15 cols 3
-  SET_2DA_ENTRY stalker_row 16 cols 3
-  SET_2DA_ENTRY stalker_row 19 cols 4
-  SET_2DA_ENTRY stalker_row 20 cols 4
-  SET_2DA_ENTRY stalker_row 21 cols 4
-  SET_2DA_ENTRY stalker_row 22 cols 4
-  SET_2DA_ENTRY stalker_row 23 cols 4
-  SET_2DA_ENTRY stalker_row 24 cols 4
+  PATCH_IF (VARIABLE_IS_SET %stalker_row%) BEGIN
+    SET_2DA_ENTRY stalker_row 6 cols 2
+    SET_2DA_ENTRY stalker_row 7 cols 2
+    SET_2DA_ENTRY stalker_row 8 cols 2
+    SET_2DA_ENTRY stalker_row 10 cols 3
+    SET_2DA_ENTRY stalker_row 11 cols 3
+    SET_2DA_ENTRY stalker_row 12 cols 3
+    SET_2DA_ENTRY stalker_row 13 cols 3
+    SET_2DA_ENTRY stalker_row 14 cols 3
+    SET_2DA_ENTRY stalker_row 15 cols 3
+    SET_2DA_ENTRY stalker_row 16 cols 3
+    SET_2DA_ENTRY stalker_row 19 cols 4
+    SET_2DA_ENTRY stalker_row 20 cols 4
+    SET_2DA_ENTRY stalker_row 21 cols 4
+    SET_2DA_ENTRY stalker_row 22 cols 4
+    SET_2DA_ENTRY stalker_row 23 cols 4
+    SET_2DA_ENTRY stalker_row 24 cols 4
+  END
 BUT_ONLY
 
 // 'alertness' - increased visual range______________________________________________

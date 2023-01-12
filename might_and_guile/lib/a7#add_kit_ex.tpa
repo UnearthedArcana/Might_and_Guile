@@ -7,7 +7,7 @@
  * Date: 2019-08-19
  */
 
-OUTER_SPRINT ADD_KIT_EX_VERSION ~0.4.0~
+OUTER_SPRINT ADD_KIT_EX_VERSION ~0.5.1~
 
 <<<<<<<< .../a7-add_kit_ex/inlined/blank.file
 >>>>>>>>
@@ -332,6 +332,16 @@ BEGIN
           resref
         RET success
       END
+    END ELSE BEGIN
+      LAF a7#add_kit_ex#add_row
+        STR_VAR
+          kit_name
+          array = ~items~
+          resref
+          clone1 = EVAL ~%clone2%~
+          clone2 = EVAL ~%clone3%~
+        RET success
+      END
     END
   END ELSE ACTION_IF (NOT ~%clone2%~ STR_EQ ~~) BEGIN
     LAF a7#add_kit_ex#add_row
@@ -408,6 +418,16 @@ BEGIN
           kit_name
           array = ~items~
           resref
+        RET success
+      END
+    END ELSE BEGIN
+      LAF a7#add_kit_ex#add_column
+        STR_VAR
+          kit_name
+          array = ~items~
+          resref
+          clone1 = EVAL ~%clone2%~
+          clone2 = EVAL ~%clone3%~
         RET success
       END
     END
@@ -1517,7 +1537,15 @@ BEGIN
                   LPF SUBSTRING INT_VAR start = 0 length = 3 STR_VAR string = EVAL ~%ability%~ RET abil_type = substring END
                   SET length = (STRING_LENGTH ~%ability%~) - 3
                   LPF SUBSTRING INT_VAR start = 3 length STR_VAR string = EVAL ~%ability%~ RET abil_new = substring END
-                  PATCH_IF (length < 8) BEGIN
+                  PATCH_IF (length >= 8) BEGIN
+                    LPF GET_UNIQUE_FILE_NAME STR_VAR extension = "EFF" base = EVAL "SGAB_%abil_new%" RET abil_new_name = filename END
+                    INNER_PATCH_SAVE abil_new_name "%abil_new_name%" BEGIN REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~__~ ~SGAB~ END
+                    LPF a7#add_kit_ex#print_message INT_VAR severity = 2 STR_VAR msg = EVAL ~Internal ability name too long [%abil_new%]. Making copy as [%abil_new_name%].~ END
+                  END ELSE BEGIN
+                    TEXT_SPRINT abil_new_name  ~%abil_new%#~
+                  END
+                  SET length = STRING_LENGTH ~%abil_new_name%~
+                  PATCH_IF (length <= 8) BEGIN
                     DEFINE_ASSOCIATIVE_ARRAY abil_types BEGIN
                       ~AP_~ => ~QD_MC_AP~
                       ~GA_~ => ~QD_MC_GA~
@@ -1529,7 +1557,7 @@ BEGIN
                       // granted abilities or bonuses
                       TEXT_SPRINT qdmc_eff_resref $abil_types(~%abil_type%~)
                       INNER_ACTION BEGIN
-                        COPY ~.../a7-add_kit_ex/inlined/%qdmc_eff_resref%.EFF~ ~override/%abil_new%#.EFF~
+                        COPY ~.../a7-add_kit_ex/inlined/%qdmc_eff_resref%.EFF~ ~override/%abil_new_name%.EFF~
                           WRITE_ASCIIE 0x30 ~%abil_new%~ (8)
                           SET col_length = STRING_LENGTH ~%col%~
                         ACTION_IF (col < 10) BEGIN
@@ -1541,7 +1569,7 @@ BEGIN
                         COPY_EXISTING ~%qdmc_spl_resref%.SPL~ ~override~
                           LPF ADD_SPELL_EFFECT
                             INT_VAR insert_point = 0 opcode = 177 target = 1 timing = 9 resist_dispel = 0 power = 0 parameter1 = kit_id parameter2 = 9
-                            STR_VAR resource = EVAL ~%abil_new%#~
+                            STR_VAR resource = EVAL ~%abil_new_name%~
                           END
                         BUT_ONLY
                       END
@@ -1751,7 +1779,15 @@ BEGIN
     OUTER_SET kit_number_full = kit_number + kit_id_base
 
     // getting parent class name
-    OUTER_PATCH ~~ BEGIN LOOKUP_IDS_SYMBOL_OF_INT kit_class_name ~class~ kit_class END
+    OUTER_PATCH ~~ BEGIN
+      LOOKUP_IDS_SYMBOL_OF_INT kit_class_name ~class~ kit_class
+      PATCH_IF (kit_class = 19) BEGIN
+        // special: SORCERER class isn't listed in a number of kit-related tables, using fallback option MAGE
+        LOOKUP_IDS_SYMBOL_OF_INT kit_class_name_alt ~class~ 1
+      END ELSE BEGIN
+        TEXT_SPRINT kit_class_name_alt ~~
+      END
+    END
     ACTION_IF (kit_class <= 0 || kit_class >= 100 || IS_AN_INT ~%kit_class_name%~) BEGIN
       ACTION_IF (~%source_kit%~ STR_EQ ~~) BEGIN
         LAF a7#add_kit_ex#print_message INT_VAR severity = 3 STR_VAR msg = ~No valid parent class provided for "kit_class".~ END
@@ -1837,7 +1873,7 @@ BEGIN
     // preparing kit/class lookup preference
     OUTER_TEXT_SPRINT clone1 ~%source_kit%~
     OUTER_TEXT_SPRINT clone2 ~%kit_class_name%~
-    OUTER_TEXT_SPRINT clone3 ~~
+    OUTER_TEXT_SPRINT clone3 ~%kit_class_name_alt%~
     ACTION_IF (is_multiclass) BEGIN
       ACTION_DEFINE_ASSOCIATIVE_ARRAY token_to_class_name BEGIN
         ~D~ => ~DRUID~
@@ -2156,7 +2192,7 @@ BEGIN
         ACTION_IF (NOT VARIABLE_IS_SET $clab_paths(~%base_class%~)) BEGIN
           OUTER_SET clab_paths += 1
         END
-        LAF a7#add_kit_ex#get_clab STR_VAR path = EVAL ~%clab_res%~ RET $clab_paths(~%base_class%~) = clab END
+        LAF a7#add_kit_ex#get_clab STR_VAR path = EVAL ~%clab_path%~ RET $clab_paths(~%base_class%~) = clab END
       END
 
       ACTION_IF (clab_paths > 0) BEGIN

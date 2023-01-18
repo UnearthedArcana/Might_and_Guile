@@ -1,5 +1,5 @@
 
-// v10.4 - fixed semi_innate
+// v10.4.1 - semi_innate adjustment
 
 /*
 functions in this file:
@@ -5207,7 +5207,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%ltf.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%ltf.spl~
     LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5xnfsh~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xrfsh~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%fsh~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltf~ END
 END
 

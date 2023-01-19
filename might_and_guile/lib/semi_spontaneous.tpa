@@ -1,5 +1,5 @@
 
-// v10.4.1 - semi_innate adjustment
+// v10.5 - semi_innate points generation
 
 /*
 functions in this file:
@@ -82,35 +82,41 @@ functions in this file:
     sets up a pool of innate abilities that will use a pool of points to cast (up to 15 points)
     NB: needs the "semi_innate_spells" array to be filled out
 
-- semi_int_slots - line 5354
+- semi_innate_points - line 5394
+    patch function to generate a spell granting innate/"ki" points at each level, according 
+    to a simple two-column .2da table
+    NB: make sure the %semi_innate_stat%, %semi_innate_shift%, and %semi_innate_prefix% variables 
+    match the ones used in the "semi_innate_casting" function
+
+- semi_int_slots - line 5439
     adds bonus casting slots for high INT scores
     bonuses are according to Tome & Blood (levels 1-7) - NB, this is not flexible
     5e_int_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- semi_cha_slots - line 5584
+- semi_cha_slots - line 5669
     adds bonus casting slots for high CHA scores
     bonuses are according to Tome & Blood (levels 1-5) - NB, this is not flexible
 
-- semi_wis_slots - line 5836
+- semi_wis_slots - line 5921
     adds bonus casting slots for high WIS scores
     bonuses are according to Tome & Blood (spell levels 1-7) - NB, this is not flexible
     5e_wis_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- arcane_spont_items - line 6045
+- arcane_spont_items - line 6115
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- divine_spont_items - line 6482
+- divine_spont_items - line 6598
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- semi_spont_sequencers - line 7030
+- semi_spont_sequencers - line 7150
     sets sequencers and contingencies to pick from known spells instead of memorized spells
     NB: putting spells in a sequencer will no exhaust any spell slots
 
-- semi_spont_identify - line 7127
+- semi_spont_identify - line 7243
    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
 
 */
@@ -5393,6 +5399,47 @@ END	//	end function
 //__________________________________________________________________________________
 
 
+DEFINE_PATCH_FUNCTION semi_innate_points INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~~ table_spl = ~~ BEGIN
+
+// PATCH function - copy .2da table, run this
+
+// limit table_spl to 7 letters!!!
+
+  INNER_ACTION BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 1
+  END
+  READ_2DA_ENTRIES_NOW r2en_table 2
+  FOR (row = 0; row < r2en_table; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_table row 1 points
+    INNER_ACTION BEGIN
+      COPY_EXISTING ~%table_spl%.spl~ ~override~
+        PATCH_IF (VARIABLE_IS_SET %points%) BEGIN
+          PATCH_IF (IS_AN_INT %points%) AND (%points% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 233 target = 1 parameter1 = (%points% << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 9 END
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+          END
+        END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+/*
+  INNER_ACTION BEGIN
+    COPY_EXISTING ~%table_spl%.spl~ ~override~
+//      FOR (header = 1 ; header < 40; ++header) BEGIN
+//      END
+  END
+*/
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
 DEFINE_ACTION_MACRO semi_int_slots BEGIN
 
 ACTION_IF !(VARIABLE_IS_SET %5e_int_bonus_memorization%)  BEGIN
@@ -7191,10 +7238,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
 END		//	end marker not found
 
 END		//	end define function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
 
 
 //__________________________________________________________________________________

@@ -11,7 +11,7 @@
 <div class="section">
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
     On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 5.0</strong><br />
+  <p><strong> Version 5.2</strong><br />
     <strong> Languages:</strong> English<br />
     <strong>Platforms: </strong>Windows, Mac OS X</p>
 </div>
@@ -46,15 +46,12 @@
     <li> [item mods including Item Revisions]</li>
     <li> [small kit mods]</li>
     <li> Divine Remix</li>
-    <li> Song & Silence</li>
-    <li> Rogue Rebalancing</li>
-    <li> Monastic Orders of Faerun</li>
     <li> Tome & Blood</li>
-    <li> Faiths & Powers</li>
-    <li> Might and Guile</li>
+    <li> Might and Guile (v5+)</li>
+    <li> Faiths & Powers (v0.85+)</li>
     <li> [tweak mods including Tweaks Anthology]</li>
-    <li> Scales of Balance</li>
     <li> SCS</li>
+    <li> Scales of Balance (v6+)</li>
     <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Randomiser, etc.]</li>
   </ul>
   <p><strong>Modder Resources:</strong><br />
@@ -270,12 +267,11 @@
     <div class="kit_description">
       <p>MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.</p>
       <p>Advantages:<br />
-        &ndash; Mage Hunters have a +1 bonus to all saving throws. This bonus increases by one for each five levels gained.<br />
+        &ndash; Mage Hunters have a +1 bonus to saving throws vs spells. This bonus increases by one for each four levels gained, up to 20th level.<br />
         &ndash; Each successful melee hit bestows a 40% chance of spell failure on the target for one round.<br />
         &ndash; May use a special vocalization that can deafen anyone nearby and impose a 40% chance of spell failure on them if they fail a saving throw vs. Petrification.</p>
-        &ndash; Can cast the following as 1st-level spells: Shocking Touch, Deafness.<br />
-        &ndash; Can cast the following as 2nd-level spells: Remove Magic, Minor Spell Deflection.<br />
-        &ndash; Can cast the following as 3rd-level spells: Breach, Non-Detection, Spell Thrust.</p>
+        &ndash; May use a special Breaching Touch ability once per day per two levels. The Breaching Touch can disrupt and dispel one combat protection spell. The Breaching Touch will bypass any spell protections such as Spell Deflection and Globe of Invulnerability.<br />
+        &ndash; May cast an innate version of Minor Spell Deflection once per day per five levels.</p>
       <p>Disadvantages:<br />
         &ndash; Suffers a -1 penalty to Strength and Constitution.<br />
         &ndash; May not use Charm Animal ability.<br />.</p>
@@ -414,10 +410,11 @@
   </div>
   <h4 class="subheader">Component 220 (for EE 2.0+): </h4>
   <div class="section">
-    <p><strong><em>Revised Multiclassing</em></strong></p>
+    <p><strong><em>Expanded Multiclassing</em></strong></p>
       <p>This component liberalizes the multiclassing rules in targeted ways:</p>
       <ul>
         <li> Enables humans to multiclass.</li>
+        <li> Enables demihumans to dual-class.</li>
         <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
         <li> Enables half-elves to be cleric/thieves.</li>
         <li> Enables dwarves to be cleric/thieves.</li>
@@ -427,14 +424,14 @@
   <h4 class="subheader">Component 225: </h4>
   <div class="section">
     <p><strong><em>Revised Ranger Spell Table</em></strong></p>
-      <p>This component gives rangers access to their spells earlier. They get 1st-level spells at 3rd level, 2nd-level spells at 7th level, 3rd-level spells at 11th level, and 4th-level spells at 15th level. Along the way, at every odd level, they get an extra spell slot at a level they have access to. They mx out at level 19 with 5 1st-level spells, 4 2nd-level spells, 3 3rd-level spells, and  2 4th level spells.</p>
-      <p>Of note, this progession matches the revised paladin spell tables in the Faiths & Powers mod.</p>
+      <p>This component gives rangers access to more spells, earlier. They get one extra spell slot every time they gain a level, up to 20th level. So they get their first spell slot at level 2 like bards, and at level 20 they have 5/5/5/4.</p>
+      <p>This progession matches the revised paladin spell tables in v0.85+ of the Faiths & Powers mod.</p>
   </div>
   <h4 class="subheader">Component 230: </h4>
   <div class="section">
     <p><strong><em>Revised Stalkers</em></strong></p>
-      <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 350 below). However they can set traps like a thief, and can attain greater proficiency than other rangers with daggers and short swords.</p>
-      <p> ALL rangers can now backstab for x2 damage from stealth; Stalkers' backstab multiplier increases at higher levels.</p>
+      <p> The Stalker loses its special wizard spells (install the Mage Hunter kit instead, see component 125 above). However they can set traps like a thief, and can attain grandmastery with daggers and short swords.</p>
+      <p> This also gives Stalkers' an increased backstab multiplier.</p>
   </div>
   <h4 class="subheader">Component 235: </h4>
   <div class="section">

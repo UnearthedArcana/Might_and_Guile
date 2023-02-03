@@ -122,20 +122,6 @@ END
 //__________________________________________________________________________________
 */
 
-//CHECK IF THIEVES CAN USE WANDS____________________________________________________
-//
-COPY_EXISTING - ~wand07.itm~ ~override~
-  READ_BYTE 0x20 thief_use
-//  PATCH_IF (thief_use BAND 0b01000000 = 0b00000000) BEGIN
-  PATCH_IF (thief_use BOR 0b10111111 = 0b10111111) BEGIN
-    SET thief_use_wands = 1
-  END
-  ELSE BEGIN
-    SET thief_use_wands = 0
-  END
-//__________________________________________________________________________________
-
-
 //REVISED KITS______________________________________________________________________
 //
 ACTION_IF !(MOD_IS_INSTALLED ~might_and_guile.tp2~ ~225~) BEGIN
@@ -1827,12 +1813,10 @@ COPY_EXISTING  ~d5urh6.spl~ ~override/d5vrh6.spl~
 
 //use scrolls/wands_________________________________________________________________
 //
-ACTION_IF (thief_use_wands = 0) BEGIN
+INCLUDE ~%MOD_FOLDER%/lib/d5_umd.tpa~
+LAF use_magical_devices END
 
-  INCLUDE ~%MOD_FOLDER%/lib/d5_umd.tpa~
-  LAF use_magical_devices END
-
-  COPY_EXISTING ~d5_umd.spl~ ~override/d5urh4.spl~  	 //           UMD
+COPY_EXISTING ~d5_umd.spl~ ~override/d5urh4.spl~  	 //           UMD
 	SAY NAME1 @20293
 	SAY UNIDENTIFIED_DESC @20294
 	WRITE_SHORT 0x1c 2
@@ -1843,15 +1827,13 @@ ACTION_IF (thief_use_wands = 0) BEGIN
 	END
 	WRITE_ASCII 0x3a ~d5_rfh4b~ #8
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfh4b~ END
-  COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
+COPY_EXISTING  ~d5urh4.spl~ ~override/d5vrh4.spl~ 
 	WRITE_SHORT 0x1c 1
 /*
   COPY_EXISTING  ~d5urh4.spl~ ~override/d5_umd.spl~ 
 	WRITE_SHORT 0x1c 4
 	WRITE_LONG 0x34 1
 */
-
-END
 //	end use scrolls/wands
 
 
@@ -2631,42 +2613,6 @@ END
 //UI FEAT MENU______________________________________________________________________
 //
 COPY ~might_and_guile/feats/d5flstf.2da~ ~override~ 
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  PATCH_IF (thief_use_wands = 1) BEGIN
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY row 0 cols feat
-	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5urh4~) BEGIN
-	    FOR (col = 1; col < cols; ++col) BEGIN
-		  PATCH_IF (cols > col) BEGIN
-			SET_2DA_ENTRY row col cols 0
-		  END
-		END
-	  END
-	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5vrh4~) BEGIN
-	    FOR (col = 1; col < cols; ++col) BEGIN
-		  PATCH_IF (cols > col) BEGIN
-			SET_2DA_ENTRY row col cols 0
-		  END
-		END
-	  END
-	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5upsw~) BEGIN
-		PATCH_FOR_EACH patch_col IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ ~14~ ~15~ ~24~ BEGIN
-		  PATCH_IF (cols > patch_col) BEGIN
-			SET_2DA_ENTRY row patch_col cols 1
-		  END
-		END
-	  END
-	  PATCH_IF (~%feat%~ STRING_EQUAL_CASE ~d5vpsw~) BEGIN
-		PATCH_FOR_EACH patch_col IN ~10~ ~11~ ~12~ ~13~ ~16~ ~17~ ~18~ ~19~ ~20~ ~21~ ~22~ ~23~ ~25~ BEGIN
-		  PATCH_IF (cols > patch_col) BEGIN
-			SET_2DA_ENTRY row patch_col cols 1
-		  END
-		END
-	  END
-	END
-  END
-BUT_ONLY
 
 ACTION_IF !(GAME_IS ~iwdee~) BEGIN
   COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~

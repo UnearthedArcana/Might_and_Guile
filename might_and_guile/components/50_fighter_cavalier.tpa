@@ -50,8 +50,47 @@ COPY_EXISTING ~clabpa02.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_SPCL213~ ~****      ~
 IF_EXISTS BUT_ONLY
 
+//allow cavalier dual-class_________________________________________________________
+// 
+COPY_EXISTING ~dualclas.2da~ ~override~
+  COUNT_2DA_ROWS 7 rows
+  FOR (row = 1; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 0 7 kitname
+    PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~CAVALIER~) BEGIN
+      SET cav_row = %row%
+    END
+  END
+  PATCH_IF (VARIABLE_IS_SET %cav_row%) BEGIN
+    SET_2DA_ENTRY cav_row 2 7 1
+    SET_2DA_ENTRY cav_row 3 7 1
+    SET_2DA_ENTRY cav_row 4 7 1
+    SET_2DA_ENTRY cav_row 5 7 1
+  END
+BUT_ONLY
 
-//...is anything else necessary??
+//allow grandmastery________________________________________________________________
+// 
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 1; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 1 9 kitname
+    READ_2DA_ENTRY row 6 9 profcol
+    PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~CAVALIER~) BEGIN
+      SET cav_profs = (%profcol% + 1)
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~weapprof.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 0; row < 27; ++row ) BEGIN
+    READ_2DA_ENTRY row cav_profs cols profnum
+    PATCH_IF (profnum > 0) BEGIN
+      SET_2DA_ENTRY row cav_profs cols 5
+    END
+  END
+BUT_ONLY
 
 END	//	end function
 

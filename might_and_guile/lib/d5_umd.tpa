@@ -1,0 +1,565 @@
+Subtledoc's UMD v3.0
+
+//JOINABLE NPCS ARRAY MACRO__________________________________________________________
+//
+DEFINE_ACTION_MACRO JOINABLE_NPC_ARRAYS BEGIN
+	//PDIALOG.2DA exists in all games
+	ACTION_DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~PDIALOG~ => ~~ END
+	//Check PDIALOG.2DA file variants referenced in CAMPAIGN.2DA
+	ACTION_IF FILE_EXISTS_IN_GAME ~CAMPAIGN.2DA~ BEGIN
+		COPY_EXISTING ~CAMPAIGN.2DA~ ~CAMPAIGN.2DA~
+			COUNT_2DA_ROWS 32 "cntrow"
+			FOR (i = 0; i < cntrow; i = i + 1) BEGIN
+				READ_2DA_ENTRY i 11 32 file
+				TO_UPPER file
+				DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~%file%~ => ~~ END
+			END
+		BUT_ONLY
+	END
+	//Generate array with joinable NPC DV
+	ACTION_PHP_EACH JOINABLE_NPC_ARRAY_2da AS file => ~~ BEGIN
+		ACTION_IF FILE_EXISTS_IN_GAME ~%file%.2da~ BEGIN
+			COPY_EXISTING ~%file%.2da~ ~override~
+				COUNT_2DA_ROWS 3 "cntrow"
+				FOR (i = 1; i < cntrow; i = i + 1) BEGIN
+					READ_2DA_ENTRY i 0 3 "dv"
+					TO_UPPER dv
+					DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_dv BEGIN ~%dv%~ => ~~ END
+				END
+			BUT_ONLY
+		END
+	END
+	//Generate array with joinable NPC cre files
+	COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+		READ_ASCII DEATHVAR "dv" (32) NULL
+		TO_UPPER dv
+		PATCH_IF VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+		PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+//use scrolls/wands_________________________________________________________________
+//
+DEFINE_ACTION_FUNCTION use_magical_devices BEGIN
+
+CLEAR_ARRAYS
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
+  
+ OUTER_SET scroll_count = 0
+ OUTER_SPRINT $mage_scrolls(~%scroll_count%~) ~scroll~
+ OUTER_SPRINT $other_scrolls(~%scroll_count%~) ~scroll~
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+   READ_SHORT	0x1c item_type
+   PATCH_IF (item_type = 11) BEGIN
+    READ_BYTE     0x2f current ELSE 0
+    READ_BYTE     0x2b current2 ELSE 0
+    READ_LONG 0x64 headoffset  ELSE 0
+    READ_SHORT 0x68 headcount  ELSE 0
+    READ_LONG 0x6a effectsoffset  ELSE 0
+    haslearn = 0
+    hascast = 0
+//	  PATCH_IF (headcount = 2) BEGIN
+    FOR (headcyc = 0; headcyc < headcount ; headcyc = headcyc + 1) BEGIN
+      thishead = 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x1e) effcount  ELSE 0
+      READ_SHORT (headoffset + (headcyc * 0x38) + 0x20) effectsindex  ELSE 0
+      FOR (effcyc = 0; effcyc < effcount; effcyc = effcyc + 1) BEGIN
+        READ_SHORT (effectsoffset + (effectsindex + effcyc)* 0x30) opcode ELSE 0
+        PATCH_IF (opcode = 0x93) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_learn  ELSE 0
+          INNER_PATCH_FILE ~%resref_learn%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) BEGIN // spell scroll
+            thishead = 1
+            haslearn = 1
+          END
+        END // PATCH_IF... (opcode = learn spell)
+        PATCH_IF ((opcode = 0x92) OR (opcode = 0x94)) AND (thishead = 0) BEGIN
+          READ_ASCII (effectsoffset + 0x14 + (effectsindex + effcyc)* 0x30) resref_cast  ELSE 0
+          INNER_PATCH_FILE ~%resref_cast%.spl~ BEGIN
+            READ_SHORT 0x1c type
+          END
+          PATCH_IF (type = 1) OR (type = 2) BEGIN // spell scroll
+            thishead = 1
+            hascast = 1
+          END
+        END // PATCH_IF (opcode = cast spell)
+      END // FOR... effect_cycle
+    END // FOR... header cycle
+//  END // PATCH_IF... have exactly 2 headers
+    PATCH_IF (haslearn = 1) AND (hascast = 1) /*AND (~%resref_cast%~ STRING_EQUAL_CASE ~%resref_learn%~)*/ BEGIN
+	  SPRINT $mage_scrolls(~%scroll_count%~) ~%SOURCE_RES%~
+	  SET ++scroll_count
+    END
+    PATCH_IF (haslearn = 0) /*AND (hascast = 1)*/ BEGIN
+	  SPRINT $other_scrolls(~%scroll_count%~) ~%SOURCE_RES%~
+	  SET ++scroll_count
+    END
+   END
+ BUT_ONLY
+
+ ACTION_PHP_EACH mage_scrolls AS num => scroll BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
+	  PRINT ~%scroll% is a wizard scroll~
+	  COPY_EXISTING ~%scroll%.itm~ ~override~
+	    WRITE_BYTE 0x1e (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x1f (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x20 (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x21 (THIS BAND 0b00000000)
+	  BUT_ONLY
+    END
+ END
+
+ ACTION_PHP_EACH other_scrolls AS num => scroll BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
+	  PRINT ~%scroll% is a blue or green scroll~
+	  COPY_EXISTING ~%scroll%.itm~ ~override~
+	    WRITE_SHORT 0x1c 8
+	  BUT_ONLY
+    END
+ END
+
+/* no, just check whether thieves can already use it
+ ACTION_FOR_EACH usable_wand IN
+    ~b_ph08~
+    ~c#lccenw~
+    ~ishwand~
+    ~l0wan~
+    ~ttwand~
+    ~wand03~
+    ~wand11~
+    ~wand12~
+    ~wand12_~
+    ~wand99~
+    ~wandarm~
+    ~wandmis~
+    ~a7#rod1~
+    ~c0autt02~
+    ~ohdrod~
+    ~rods02~
+    ~rods02a~
+    ~rods03~
+ BEGIN
+ END
+*/  
+ COPY_EXISTING ~wand11.itm~ ~override~
+               ~ttwand.itm~ ~override~
+    WRITE_SHORT 0x1c 13
+ IF_EXISTS BUT_ONLY
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+   READ_SHORT	0x1c item_type
+   PATCH_IF (item_type = 35) BEGIN
+	READ_BYTE 0x20 thief_use
+	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
+      WRITE_SHORT 0x1c 13
+	END
+	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
+	    WRITE_BYTE 0x1e (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x1f (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x20 (THIS BAND 0b00000000)
+	    WRITE_BYTE 0x21 (THIS BAND 0b00000000)
+	END
+   END
+ BUT_ONLY
+
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_numd.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 11 timing = 9 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 35 timing = 9 END
+
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_umd.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_numd~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
+ //__________________________________________________________________________________
+
+//Update all stores to accept new itemtypes_________________________________________
+//
+ COPY_EXISTING_REGEXP ~.*\.sto~ ~override~
+	READ_SHORT	0x08	type
+	READ_LONG	0x2c	buy_off
+	READ_LONG	0x30	buy_num
+	SET	buy_add = 0	//	Number of categories to add, to update offsets
+	SET	add_category = 0	//	Initialize check variable
+	FOR	(i = 0; i < 3; ++i)	BEGIN	SET $add_category(~%i%~) = 1	END	//	initialize check variable
+	FOR	(i = 0; i < buy_num; ++i)	BEGIN
+		READ_BYTE	(buy_off + i * 0x4)	category
+		PATCH_MATCH	category WITH
+			11 WHEN add_category = 0	BEGIN	// match category
+				++add_category
+			END
+			DEFAULT
+		END
+	END
+	//	Add categories
+	PATCH_IF	add_category	BEGIN
+		INSERT_BYTES	(buy_off + buy_num * 0x4)	0x4
+		WRITE_BYTE	(buy_off + buy_num * 0x4)	8			// new type
+		++buy_add
+		//	Update offsets
+		WRITE_LONG  0x30    (THIS + buy_add)
+		READ_LONG	0x34	items_off
+		PATCH_IF	items_off >= buy_off	BEGIN	
+			WRITE_LONG  0x34    (THIS + (buy_add * 0x04))
+		END
+		READ_LONG	0x4c	drink_off
+		PATCH_IF	drink_off >= buy_off	BEGIN
+			WRITE_LONG  0x4c    (THIS + (buy_add * 0x04))
+		END
+		READ_LONG	0x70	cures_off
+		PATCH_IF	cures_off >= buy_off	BEGIN
+			WRITE_LONG  0x70    (THIS + (buy_add * 0x04))
+		END
+	END
+ BUT_ONLY
+
+ COPY_EXISTING_REGEXP ~.*\.sto~ ~override~
+	READ_SHORT	0x08	type
+	READ_LONG	0x2c	buy_off
+	READ_LONG	0x30	buy_num
+	SET	buy_add = 0	//	Number of categories to add, to update offsets
+	SET	add_category = 0	//	Initialize check variable
+	FOR	(i = 0; i < 3; ++i)	BEGIN	SET $add_category(~%i%~) = 1	END	//	initialize check variable
+	FOR	(i = 0; i < buy_num; ++i)	BEGIN
+		READ_BYTE	(buy_off + i * 0x4)	category
+		PATCH_MATCH	category WITH
+			35 WHEN add_category = 0	BEGIN	// match category
+				++add_category
+			END
+			DEFAULT
+		END
+	END
+	//	Add categories
+	PATCH_IF	add_category	BEGIN
+		INSERT_BYTES	(buy_off + buy_num * 0x4)	0x4
+		WRITE_BYTE	(buy_off + buy_num * 0x4)	13			// new type
+		++buy_add
+		//	Update offsets
+		WRITE_LONG  0x30    (THIS + buy_add)
+		READ_LONG	0x34	items_off
+		PATCH_IF	items_off >= buy_off	BEGIN	
+			WRITE_LONG  0x34    (THIS + (buy_add * 0x04))
+		END
+		READ_LONG	0x4c	drink_off
+		PATCH_IF	drink_off >= buy_off	BEGIN
+			WRITE_LONG  0x4c    (THIS + (buy_add * 0x04))
+		END
+		READ_LONG	0x70	cures_off
+		PATCH_IF	cures_off >= buy_off	BEGIN
+			WRITE_LONG  0x70    (THIS + (buy_add * 0x04))
+		END
+	END
+ BUT_ONLY
+//__________________________________________________________________________________
+
+//APPLY NUMD TO NPCS________________________________________________________________
+//
+ LAM JOINABLE_NPC_ARRAYS
+
+ ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+  COPY_EXISTING ~%cre%~ ~override~
+    READ_BYTE 0x273 class
+    PATCH_IF !(class = 1) AND !(class = 5) AND !(class = 7) AND !(class = 10) AND !(class = 13) AND !(class = 14) AND !(class = 17) AND !(class = 19) BEGIN
+      LPF ADD_CRE_EFFECT INT_VAR opcode = 146 target = 1 timing = 1 parameter2 = 1 STR_VAR resource = ~D5_NUMD~ END
+    END
+/* shouldn't be necessary if it's in the CLAB tables!
+    PATCH_IF (class = 1) OR (class = 5) OR (class = 7) OR (class = 10) OR (class = 13) OR (class = 14) OR (class = 17) OR (class = 19) BEGIN
+      LPF ADD_CRE_EFFECT INT_VAR opcode = 146 target = 1 timing = 1 parameter2 = 1 STR_VAR resource = ~D5_UMD~ END
+    END
+*/
+  BUT_ONLY
+ END
+//__________________________________________________________________________________
+
+//APPLY NUMD TO PLAYER______________________________________________________________
+//
+<<<<<<<< d5/d5_umd.baf
+IF
+	Global("D5_NUMD_1","GLOBAL",0)
+	!Class(Player1,MAGE_ALL)
+	!Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_1","GLOBAL",1)
+	ActionOverride(Player1,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+IF
+	InParty(Player2)
+	Global("D5_NUMD_2","GLOBAL",0)
+	!Class(Player2,MAGE_ALL)
+	!Class(Player2,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_2","GLOBAL",1)
+	ActionOverride(Player2,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+IF
+	InParty(Player3)
+	Global("D5_NUMD_3","GLOBAL",0)
+	!Class(Player3,MAGE_ALL)
+	!Class(Player3,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_3","GLOBAL",1)
+	ActionOverride(Player3,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+IF
+	InParty(Player4)
+	Global("D5_NUMD_4","GLOBAL",0)
+	!Class(Player4,MAGE_ALL)
+	!Class(Player4,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_4","GLOBAL",1)
+	ActionOverride(Player4,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+IF
+	InParty(Player5)
+	Global("D5_NUMD_5","GLOBAL",0)
+	!Class(Player5,MAGE_ALL)
+	!Class(Player5,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_5","GLOBAL",1)
+	ActionOverride(Player5,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+IF
+	InParty(Player6)
+	Global("D5_NUMD_6","GLOBAL",0)
+	!Class(Player6,MAGE_ALL)
+	!Class(Player6,BARD)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_NUMD_6","GLOBAL",1)
+	ActionOverride(Player6,ApplySpellRES("D5_NUMD",Myself))
+	Continue()
+END
+>>>>>>>>
+
+/* don't need this, d5_umd has to go in mage/bard clabs anyway, for dual-classing
+IF
+	Global("D5_UMD_1","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player1)
+	SetGlobal("D5_UMD_1","GLOBAL",1)
+	Continue()
+END
+IF
+	Global("D5_UMD_2","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player2)
+	SetGlobal("D5_UMD_2","GLOBAL",1)
+	Continue()
+END
+IF
+	Global("D5_UMD_3","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player3)
+	SetGlobal("D5_UMD_3","GLOBAL",1)
+	Continue()
+END
+IF
+	Global("D5_UMD_4","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player4)
+	SetGlobal("D5_UMD_4","GLOBAL",1)
+	Continue()
+END
+IF
+	Global("D5_UMD_5","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player5)
+	SetGlobal("D5_UMD_5","GLOBAL",1)
+	Continue()
+END
+IF
+	Global("D5_UMD_6","GLOBAL",0)
+	OR(2)
+	  Class(Player1,MAGE_ALL)
+	  Class(Player1,BARD)
+THEN
+	RESPONSE #100
+	ApplySpellRES("D5_UMD",Player6)
+	SetGlobal("D5_UMD_6","GLOBAL",1)
+	Continue()
+END
+*/
+
+ ACTION_IF (FILE_EXISTS_IN_GAME ~campaign.2da~) BEGIN
+  COPY_EXISTING ~campaign.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS 14 rows
+    PATCH_IF (rows > 1) AND (cols > 14) BEGIN
+      FOR (col = 1; col < 15; ++col) BEGIN
+        READ_2DA_ENTRY 0 col 15 table_header
+        PATCH_IF (~%table_header%~ STRING_EQUAL_CASE ~startare~) BEGIN
+          SET startare_col = col
+          FOR (row = 1; row < rows; ++row) BEGIN
+            READ_2DA_ENTRY row startare_col 15 start_table
+            PATCH_IF (FILE_EXISTS_IN_GAME ~%start_table%.2da~) BEGIN
+              INNER_ACTION BEGIN
+                COPY_EXISTING ~%start_table%.2da~ ~override~
+                  COUNT_2DA_COLS start_cols
+                  PATCH_IF (start_cols > 1) BEGIN
+                    COUNT_2DA_ROWS start_cols start_rows
+                    FOR (start_row = 1; start_row < start_rows; ++start_row) BEGIN
+                      READ_2DA_ENTRY start_row 0 2 start_match
+                      READ_2DA_ENTRY start_row 1 2 start_area
+                      PATCH_IF (~%start_match%~ STRING_EQUAL_CASE ~START_AREA~) BEGIN
+                        PATCH_IF (FILE_EXISTS_IN_GAME ~%start_area%.are~) BEGIN
+/*
+                          INNER_ACTION BEGIN
+                            COPY_EXISTING ~%start_area%.are~ ~override~
+                              READ_ASCII 0x94 start_area_script
+                              PATCH_IF (FILE_EXISTS_IN_GAME ~%start_area_script%.bcs~) BEGIN
+/*
+                                INNER_ACTION BEGIN
+                                  EXTEND_TOP ~%start_area_script%.bcs~ ~d5/d5_umd.baf~
+                                END
+*/
+                                SPRINT $start_scripts(~%start_area_script%~)~1~
+                              END
+                            BUT_ONLY
+                          END
+*/
+                          SPRINT $start_areas(~%start_area%~)~1~
+                        END
+                      END
+                    END
+                  END
+                BUT_ONLY
+              END
+            END
+          END
+        END
+      END
+    END
+  BUT_ONLY
+ END
+
+ ACTION_FOR_EACH table IN ~startare~ ~25starta~ ~bgstarta~ ~sodstrta~ ~startbp_~ ~startbp~ ~tustarta~ ~#lstrta1~ ~#lstrta2~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%table%.2da~) BEGIN
+//    PRINT ~%table%.2da exists!~
+    COPY_EXISTING ~%table%.2da~ ~override~
+      COUNT_2DA_COLS start_cols
+      PATCH_IF (start_cols > 1) BEGIN
+//        PATCH_PRINT ~%table%.2da has valid rows!~
+        COUNT_2DA_ROWS start_cols start_rows
+        FOR (start_row = 1; start_row < start_rows; ++start_row) BEGIN
+          READ_2DA_ENTRY start_row 0 2 start_match
+          READ_2DA_ENTRY start_row 1 2 start_area
+          PATCH_IF (~%start_match%~ STRING_EQUAL_CASE ~START_AREA~) BEGIN
+//            PATCH_PRINT ~%table%.2da lists a start area!~
+            PATCH_IF (FILE_EXISTS_IN_GAME ~%start_area%.are~) BEGIN
+//              PATCH_PRINT ~%start_area%.are exists!~
+/*
+              INNER_ACTION BEGIN
+                COPY_EXISTING ~%start_area%.are~ ~override~
+                  READ_ASCII 0x94 start_area_script
+                  PATCH_IF (FILE_EXISTS_IN_GAME ~%start_area_script%.bcs~) BEGIN
+/*
+                    INNER_ACTION BEGIN
+                      EXTEND_TOP ~%start_area_script%.bcs~ ~d5/d5_umd.baf~
+                    END
+*/
+                    SPRINT $start_scripts(~%start_area_script%~)~1~
+                  END
+                BUT_ONLY
+              END
+*/
+              SPRINT $start_areas(~%start_area%~)~1~
+            END
+          END
+        END
+      END
+    BUT_ONLY
+  END
+ END
+
+ ACTION_PHP_EACH start_areas AS area => ind BEGIN
+  PRINT ~%area%.are will be patched~
+  COPY_EXISTING ~%area%.are~ ~override~
+    READ_ASCII 0x94 start_area_script
+    PATCH_IF (FILE_EXISTS_IN_GAME ~%start_area_script%.bcs~) BEGIN
+      SPRINT $start_scripts(~%start_area_script%~)~1~
+      PATCH_PRINT ~%start_area_script%.BCS should be extended~
+    END
+  BUT_ONLY
+ END
+
+ ACTION_PHP_EACH start_scripts AS script => ind BEGIN
+  EXTEND_TOP ~%script%.bcs~ ~d5/d5_umd.baf~
+  PRINT ~extending %script%.BCS~
+ END
+
+ COPY_EXISTING ~sw1h04.itm~ ~override/d5__umd.d5~
+ 
+END 	//	end if marker not present
+//__________________________________________________________________________________
+
+//apply UMD to mages/bards__________________________________________________________
+//
+<<<<<<<< d5/00clab.2da
+2DA V1.0
+****
+            1           2           3           4           5           6           7           8           9           10          11          12          13          14          15          16          17          18          19          20     21          22          23          24          25          26          27          28          29          30          31          32          33          34          35          36          37          38          39          40
+ABILITY1    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****
+>>>>>>>>
+
+ACTION_FOR_EACH kitclab IN ~CLABMA01~ ~CLABMA02~ ~CLABMA03~ ~CLABMA04~ ~CLABMA05~ ~CLABMA06~ ~CLABMA07~ ~CLABMA08~ ~CLABMA09~ BEGIN 
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%kitclab%.2da~) THEN BEGIN
+    COPY ~d5/00clab.2da~ ~override/%kitclab%.2da~
+  END 
+END 
+
+APPEND ~clabma01.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5_UMD~
+APPEND ~clabba01.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5_UMD~
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 "rows"
+  FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+    READ_2DA_ENTRY %index% 5 9 modclab
+    READ_2DA_ENTRY %index% 8 9 modclass
+    PATCH_IF (modclass = 1) OR (modclass = 5) OR (modclass = 19) BEGIN
+      INNER_ACTION BEGIN
+        ACTION_IF (FILE_EXISTS_IN_GAME ~%modclab%.2da~) BEGIN
+          APPEND ~%modclab%.2da~ ~UMD         AP_D5_UMD   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5_UMD~
+        END
+      END
+    END
+  END
+BUT_ONLY
+//__________________________________________________________________________________
+
+END		//	end function
+

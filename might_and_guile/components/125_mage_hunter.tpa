@@ -89,8 +89,19 @@ COPY ~might_and_guile/ranger/mage_hunter/d5mageh.2da~ ~override~
 
 COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
 	LPM spell_to_innate
+/*
 COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 	LPM spell_to_innate
+*/
+COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5_rabre.spl~
+	SAY NAME1 @12508
+	SAY UNIDENTIFIED_DESC @12509
+  LPF ALTER_SPELL_HEADER INT_VAR target = 1 range = 5 speed = 3 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 215 target = 2 power = 0 parameter2 = 1 timing = 0 duration = 1 STR_VAR resource = ~spdispma~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 230 target = 2 power = 0 parameter1 = 10 parameter2 = 7 timing = 1 END
+  PATCH_IF (FILE_EXISTS_IN_GAME ~spwi513c.spl~) BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~spwi513c~ END    
+  END
 COPY ~might_and_guile/misc/d5ssvbo.spl~ ~override~
 COPY ~might_and_guile/ranger/mage_hunter/d5_mghs1.spl~ ~override~
 COPY ~might_and_guile/ranger/mage_hunter/d5_mghsa.eff~ ~override~

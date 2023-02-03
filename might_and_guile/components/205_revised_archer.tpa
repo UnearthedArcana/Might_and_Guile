@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//								REVISED ARCHER
+//								REVISED ARCHERY
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -13,138 +13,6 @@ DEFINE_ACTION_FUNCTION revised_archery BEGIN
 //COPY MARKER FILE_________________________________________________________________
 //
 COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__rarchery.d5~
-//__________________________________________________________________________________
-
-
-//PATCH KIT ABILITIES_________________________________________________________________
-//
-COPY ~might_and_guile/misc/d5mthac.spl~ ~override~
-
-COPY_EXISTING ~clabrn02.2da~ ~override~
-  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-  REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-APPEND ~clabrn02.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5archf.2da~ BEGIN
-  COPY_EXISTING ~d5archf.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  APPEND ~d5archf.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5earch.2da~ BEGIN
-  COPY_EXISTING ~d5earch.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_elven_archer.txt~
- APPEND ~d5earch.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5_sling.2da~ BEGIN
-  COPY_EXISTING ~d5_sling.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_archer.txt~
-  APPEND ~d5_sling.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~d5marks.2da~ BEGIN
-  COPY_EXISTING ~d5marks.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
-//	APPEND_FILE ~might_and_guile/feats/no_umd.txt~
-  APPEND ~d5marks.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-END
-
-ACTION_IF FILE_EXISTS_IN_GAME ~a!sharp.2da~ BEGIN
-  COPY_EXISTING ~a!sharp.2da~ ~override~
-	REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_SPCL122~ ~****      ~
-	LPM remove_blank_lines
-	APPEND_FILE ~might_and_guile/feats/feats_sniper.txt~
-  APPEND ~a!sharp.2da~ ~ARCHERY     AP_SPCL122  ****        ****        ****        AP_SPCL122  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        AP_D5MTHAC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ 
-END
-//___________________________________________________________________________________
-
-
-//WEAR ELVEN CHAIN___________________________________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__echan.d5~) BEGIN
-	INCLUDE ~%MOD_FOLDER%/lib/elven_chain.tpa~
-END
-//___________________________________________________________________________________
-
-
-//TEXT DESCRIPTIONS__________________________________________________________________
-//
-ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ BEGIN
-  COPY_EXISTING ~%text_file%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FERALAN~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@2052)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5ARCHF~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@15005)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5EARCH~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@15505)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5SLING~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@16005)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5MARKS~) BEGIN
-        SET_2DA_ENTRY row 4 cols RESOLVE_STR_REF (@16505)
-      END
-    END
-  IF_EXISTS BUT_ONLY
-END
-COPY_EXISTING ~kitlist.2da~ ~override~
-//	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows 9
-    FOR (row = 1; row < rows; ++row) BEGIN
-      READ_2DA_ENTRY row 0 cols kit_name
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FERALAN~) BEGIN
-        SET_2DA_ENTRY row 4 9 RESOLVE_STR_REF (@2052)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5ARCHF~) BEGIN
-        SET_2DA_ENTRY row 4 9 RESOLVE_STR_REF (@15005)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5EARCH~) BEGIN
-        SET_2DA_ENTRY row 4 9 RESOLVE_STR_REF (@15505)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5SLING~) BEGIN
-        SET_2DA_ENTRY row 4 9 RESOLVE_STR_REF (@16005)
-      END
-      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5MARKS~) BEGIN
-        SET_2DA_ENTRY row 4 9 RESOLVE_STR_REF (@16505)
-      END
-    END
-BUT_ONLY
-//___________________________________________________________________________________
-
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//							ARCHER FEATS
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-//COPY MARKER FILE_________________________________________________________________
-//
-COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__archy.d5~
 //__________________________________________________________________________________
 
 /*
@@ -161,206 +29,140 @@ should do:
 
 */
 
-//ARCHER ABILITIES___________________________________________________________________
+//CALLED SHOT ABILITIES_____________________________________________________________
 //
-COPY ~might_and_guile/fighter/d5_csab.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csab.bam~ ~override/d5arcsab.bam~
 COPY ~might_and_guile/fighter/d5_artrp.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_artrp.spl~ ~override~ 		//	called shot: trip
+COPY ~might_and_guile/fighter/d5_artrp.spl~ ~override~ 				//	called shot: trip
 	SAY NAME1 @20513
 	SAY UNIDENTIFIED_DESC @20514
-	WRITE_ASCII 0x3a ~d5_csab~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csab~ END
-COPY ~might_and_guile/fighter/d5_csa.spl~ ~override/d5ucsa.spl~		//	give trip
+	WRITE_ASCII 0x3a ~d5arcsab~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsab~ END
+COPY ~might_and_guile/fighter/d5_csa.spl~ ~override/d5arcsa.spl~		//	give trip
 	SAY NAME1 @20513
 	SAY UNIDENTIFIED_DESC @20514
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_artrp~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csab~ END
-COPY_EXISTING ~d5ucsa.spl~ ~override/d5vcsa.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsab~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsab~ END
 
-COPY ~might_and_guile/fighter/d5_csbb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csbb.bam~ ~override/d5arcsbb.bam~
 COPY ~might_and_guile/fighter/d5_armv1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_armv2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~		//	called shot: pin
+COPY ~might_and_guile/fighter/d5_armov.spl~ ~override~				//	called shot: pin
 	SAY NAME1 @20511
 	SAY UNIDENTIFIED_DESC @20512
-	WRITE_ASCII 0x3a ~d5_csbb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csbb~ END
-COPY ~might_and_guile/fighter/d5_csb.spl~ ~override/d5ucsb.spl~		//	give pin
+	WRITE_ASCII 0x3a ~d5arcsbb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsbb~ END
+COPY ~might_and_guile/fighter/d5_csb.spl~ ~override/d5arcsb.spl~		//	give pin
 	SAY NAME1 @20511
 	SAY UNIDENTIFIED_DESC @20512
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_armov~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csbb~ END
-COPY_EXISTING ~d5ucsb.spl~ ~override/d5vcsb.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsbb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsbb~ END
 
-COPY ~might_and_guile/fighter/d5_cscb.bam~ ~override~
-COPY ~might_and_guile/fighter/d5_arsl1.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arsl2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arsl3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~		//	called shot: cripple
+COPY ~might_and_guile/fighter/d5_cscb.bam~ ~override/d5arcscb.bam~
+COPY ~might_and_guile/fighter/d5_arslo.spl~ ~override~				//	rapid shot
 	SAY NAME1 @20519
 	SAY UNIDENTIFIED_DESC @20520
-	WRITE_ASCII 0x3a ~d5_cscb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cscb~ END
-COPY ~might_and_guile/fighter/d5_csc.spl~ ~override/d5ucsc.spl~		//	give cripple
+	WRITE_ASCII 0x3a ~d5arcscb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcscb~ END
+COPY ~might_and_guile/fighter/d5_csc.spl~ ~override/d5arcsc.spl~		//	give rapid shot
 	SAY NAME1 @20519
 	SAY UNIDENTIFIED_DESC @20520
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arslo~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cscb~ END
-COPY_EXISTING ~d5ucsc.spl~ ~override/d5vcsc.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcscb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcscb~ END
 
-COPY ~might_and_guile/fighter/d5_csdb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csdb.bam~ ~override/d5arcsdb.bam~
 COPY ~might_and_guile/fighter/d5_ards1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ards3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~		//	called shot: disarm
+COPY ~might_and_guile/fighter/d5_ardis.spl~ ~override~				//	called shot: disarm
 	SAY NAME1 @20515
 	SAY UNIDENTIFIED_DESC @20516
-	WRITE_ASCII 0x3a ~d5_csdb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csdb~ END
-COPY ~might_and_guile/fighter/d5_csd.spl~ ~override/d5ucsd.spl~		//	give disarm
+	WRITE_ASCII 0x3a ~d5arcsdb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsdb~ END
+COPY ~might_and_guile/fighter/d5_csd.spl~ ~override/d5arcsd.spl~		//	give disarm
 	SAY NAME1 @20515
 	SAY UNIDENTIFIED_DESC @20516
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_ardis~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csdb~ END
-COPY_EXISTING ~d5ucsd.spl~ ~override/d5vcsd.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsdb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsdb~ END
 
-COPY ~might_and_guile/fighter/d5_cseb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_cseb.bam~ ~override/d5arcseb.bam~
 COPY ~might_and_guile/fighter/d5_arbli.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~		//	called shot: blind
+COPY ~might_and_guile/fighter/d5_arbli.spl~ ~override~				//	called shot: blind
 	SAY NAME1 @20521
 	SAY UNIDENTIFIED_DESC @20522
-	WRITE_ASCII 0x3a ~d5_cseb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cseb~ END
-COPY ~might_and_guile/fighter/d5_cse.spl~ ~override/d5ucse.spl~		//	give blind
+	WRITE_ASCII 0x3a ~d5arcseb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcseb~ END
+COPY ~might_and_guile/fighter/d5_cse.spl~ ~override/d5arcse.spl~		//	give blind
 	SAY NAME1 @20521
 	SAY UNIDENTIFIED_DESC @20522
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arbli~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cseb~ END
-COPY_EXISTING ~d5ucse.spl~ ~override/d5vcse.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcseb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcseb~ END
 
-COPY ~might_and_guile/fighter/d5_csfb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csfb.bam~ ~override/d5arcsfb.bam~
 COPY ~might_and_guile/fighter/d5_arhm1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arhm2.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arhm3.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~		//	called shot: hammer
+COPY ~might_and_guile/fighter/d5_arham.spl~ ~override~				//	called shot: hammer
 	SAY NAME1 @20517
 	SAY UNIDENTIFIED_DESC @20518
-	WRITE_ASCII 0x3a ~d5_csfb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csfb~ END
-COPY ~might_and_guile/fighter/d5_csf.spl~ ~override/d5ucsf.spl~		//	give hammer
+	WRITE_ASCII 0x3a ~d5arcsfb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsfb~ END
+COPY ~might_and_guile/fighter/d5_csf.spl~ ~override/d5arcsf.spl~		//	give hammer
 	SAY NAME1 @20517
 	SAY UNIDENTIFIED_DESC @20518
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arham~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csfb~ END
-COPY_EXISTING ~d5ucsf.spl~ ~override/d5vcsf.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsfb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsfb~ END
 
-COPY ~might_and_guile/fighter/d5_csgb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csgb.bam~ ~override/d5arcsgb.bam~
 COPY ~might_and_guile/fighter/d5_arstn.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~		//	called shot: stun
+COPY ~might_and_guile/fighter/d5_arstn.spl~ ~override~				//	called shot: stun
 	SAY NAME1 @20523
 	SAY UNIDENTIFIED_DESC @20524
-	WRITE_ASCII 0x3a ~d5_csgb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csgb~ END
-COPY ~might_and_guile/fighter/d5_csg.spl~ ~override/d5ucsg.spl~		//	give stun
+	WRITE_ASCII 0x3a ~d5arcsgb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsgb~ END
+COPY ~might_and_guile/fighter/d5_csg.spl~ ~override/d5arcsg.spl~		//	give stun
 	SAY NAME1 @20523
 	SAY UNIDENTIFIED_DESC @20524
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arstn~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csgb~ END
-COPY_EXISTING ~d5ucsg.spl~ ~override/d5vcsg.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsgb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsgb~ END
 
-COPY ~might_and_guile/fighter/d5_cshb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_cshb.bam~ ~override/d5arcshb.bam~
 COPY ~might_and_guile/fighter/d5_arnt1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arnt2.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~		//	called shot: entangle
+COPY ~might_and_guile/fighter/d5_arent.spl~ ~override~				//	called shot: entangle
 	SAY NAME1 @20531
 	SAY UNIDENTIFIED_DESC @20532
-	WRITE_ASCII 0x3a ~d5_cshb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cshb~ END
-COPY ~might_and_guile/fighter/d5_csh.spl~ ~override/d5ucsh.spl~		//	give entangle
+	WRITE_ASCII 0x3a ~d5arcshb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcshb~ END
+COPY ~might_and_guile/fighter/d5_csh.spl~ ~override/d5arcsh.spl~		//	give entangle
 	SAY NAME1 @20531
 	SAY UNIDENTIFIED_DESC @20532
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arent~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_cshb~ END
-COPY_EXISTING ~d5ucsh.spl~ ~override/d5vcsh.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcshb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcshb~ END
 
-COPY ~might_and_guile/fighter/d5_csib.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csib.bam~ ~override/d5arcsib.bam~
 COPY ~might_and_guile/fighter/d5_arslp.eff~ ~override~
-COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~		//	called shot: sleep
+COPY ~might_and_guile/fighter/d5_arslp.spl~ ~override~				//	called shot: sleep
 	SAY NAME1 @20533
 	SAY UNIDENTIFIED_DESC @20534
-	WRITE_ASCII 0x3a ~d5_csib~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csib~ END
-COPY ~might_and_guile/fighter/d5_csi.spl~ ~override/d5ucsi.spl~		//	give sleep
+	WRITE_ASCII 0x3a ~d5arcsib~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsib~ END
+COPY ~might_and_guile/fighter/d5_csi.spl~ ~override/d5arcsi.spl~		//	give sleep
 	SAY NAME1 @20533
 	SAY UNIDENTIFIED_DESC @20534
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arslp~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csib~ END
-COPY_EXISTING ~d5ucsi.spl~ ~override/d5vcsi.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsib~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsib~ END
 
-COPY ~might_and_guile/fighter/d5_csjb.bam~ ~override~
+COPY ~might_and_guile/fighter/d5_csjb.bam~ ~override/d5arcsjb.bam~
 COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
 COPY ~might_and_guile/fighter/d5_arff1.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff2.eff~ ~override~
@@ -368,28 +170,173 @@ COPY ~might_and_guile/fighter/d5_arff3.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff4.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_arff5.eff~ ~override~
 COPY ~might_and_guile/fighter/d5_ffire.vvc~ ~override~
-COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~		//	called shot: faerie fire
+COPY ~might_and_guile/fighter/d5_arffi.spl~ ~override~				//	called shot: faerie fire
 	SAY NAME1 @20535
 	SAY UNIDENTIFIED_DESC @20536
-	WRITE_ASCII 0x3a ~d5_csjb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csjb~ END
-COPY ~might_and_guile/fighter/d5_csj.spl~ ~override/d5ucsj.spl~		//	give faerie fire
+	WRITE_ASCII 0x3a ~d5arcsjb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsjb~ END
+COPY ~might_and_guile/fighter/d5_csj.spl~ ~override/d5arcsj.spl~		//	give faerie fire
 	SAY NAME1 @20535
 	SAY UNIDENTIFIED_DESC @20536
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 3
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
-	WRITE_ASCII 0x3a ~d5_arffi~
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_csjb~ END
-COPY_EXISTING ~d5ucsj.spl~ ~override/d5vcsj.spl~
-	WRITE_SHORT 0x1c 1
+	WRITE_SHORT 0x1c 4
+	WRITE_ASCII 0x3a ~d5arcsjb~
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5arcsjb~ END
 
-//__________________________________________________________________________________
 
-ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
+//CALLED SHOT DIALOGUE______________________________________________________________
+//
+<<<<<<<< d5/d5_arcs.d
+BEGIN ~D5_ARCS~
+
+IF ~Global("D5_ARCS","GLOBAL",1)~ THEN BEGIN d5_arcs
+ SAY @20501
+ IF ~Global("D5_ARCSA","GLOBAL",1) Global("D5ARCSA","LOCALS",0)~ THEN REPLY @20513 GOTO d5_arcs_1		//	trip
+ IF ~Global("D5_ARCSB","GLOBAL",1) Global("D5ARCSB","LOCALS",0)~ THEN REPLY @20511 GOTO d5_arcs_2		//	pin
+ IF ~Global("D5_ARCSC","GLOBAL",1) Global("D5ARCSC","LOCALS",0)~ THEN REPLY @20519 GOTO d5_arcs_3		//	rapid
+ IF ~Global("D5_ARCSD","GLOBAL",1) Global("D5ARCSD","LOCALS",0)~ THEN REPLY @20515 GOTO d5_arcs_4		//	disarm
+ IF ~Global("D5_ARCSE","GLOBAL",1) Global("D5ARCSE","LOCALS",0)~ THEN REPLY @20521 GOTO d5_arcs_5		//	blind
+ IF ~Global("D5_ARCSF","GLOBAL",1) Global("D5ARCSF","LOCALS",0)~ THEN REPLY @20517 GOTO d5_arcs_6		//	hammer
+ IF ~Global("D5_ARCSG","GLOBAL",1) Global("D5ARCSG","LOCALS",0)~ THEN REPLY @20523 GOTO d5_arcs_7		//	stun
+ IF ~Global("D5_ARCSH","GLOBAL",1) Global("D5ARCSH","LOCALS",0)~ THEN REPLY @20531 GOTO d5_arcs_8		//	entangle
+ IF ~Global("D5_ARCSI","GLOBAL",1) Global("D5ARCSI","LOCALS",0)~ THEN REPLY @20533 GOTO d5_arcs_7		//	sleep
+ IF ~Global("D5_ARCSJ","GLOBAL",1) Global("D5ARCSJ","LOCALS",0)~ THEN REPLY @20535 GOTO d5_arcs_8		//	faerie fire
+END
+
+IF ~~ THEN BEGIN d5_arcs_1 											// trip
+ SAY @20514
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSA","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSA",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_2											// pin
+ SAY @20512
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSB","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSB",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_3 											// rapid
+ SAY @20520
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSC","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSC",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_4 											// disarm
+ SAY @20516
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSD","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSD",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_5 											// blind
+ SAY @20522
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSE","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSE",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_6 											// hammer
+ SAY @20518
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSF","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSF",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_7 											// stun
+ SAY @20524
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSG","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSG",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_8 											// entangle
+ SAY @20532
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSH","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSH",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_9 											// sleep
+ SAY @20534
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSI","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSI",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+IF ~~ THEN BEGIN d5_arcs_10 										// faerie fire
+ SAY @20536
+ IF ~~ THEN REPLY @20502 DO ~IncrementGlobal("D5ARCSJ","LOCALS",1)~ DO ~ApplySpellRES("D5ARCSJ",Myself)~ EXIT 
+ IF ~~ THEN REPLY @20503 GOTO d5_arcs 
+END
+>>>>>>>>
+
+COPY ~d5/d5_arcs.d~ ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.d~
+
+// copy it to weidu_external first in case adjustments need to be made before compiling
+
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.d~
+
+<<<<<<<< d5/d5_arcs.baf
+
+>>>>>>>>
+COPY ~d5/d5_arcs.baf~ ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.baf~
+
+// blank .BAF and append everything, in case specific variable assignments need to be set first
+
+COPY ~%MOD_FOLDER%/ranger/archery/d5ardlg.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (col = 1; col < cols; ++col) BEGIN
+    READ_2DA_ENTRY 0 col cols kit_name
+    FOR (row = 0; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 0 cols abil
+      READ_2DA_ENTRY row 1 cols let
+      READ_2DA_ENTRY row col cols val
+      PATCH_PRINT ~%kit_name% - %let% - - %abil% - %val%~
+      PATCH_IF (~%val%~ STRING_EQUAL_CASE ~1~) BEGIN
+        INNER_ACTION BEGIN
+          APPEND_OUTER ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.baf~ 
+~
+IF
+	NumberOfTimesTalkedTo(0)
+	Kit(LastSummonerOf(Myself),%kit_name%)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_ARCS%let%","GLOBAL",1)
+	Continue()
+END
+~
+        END
+      END
+    END
+  END
+BUT_ONLY
+
+// finish the script 
+
+APPEND_OUTER ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.baf~
+~
+IF
+	NumberOfTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_ARCS","GLOBAL",1)
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("D5_ARCS",Myself))
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+	SetGlobal("D5_ARCS","GLOBAL",0)
+	SetGlobal("D5_ARCSA","GLOBAL",0)
+	SetGlobal("D5_ARCSB","GLOBAL",0)
+	SetGlobal("D5_ARCSC","GLOBAL",0)
+	SetGlobal("D5_ARCSD","GLOBAL",0)
+	SetGlobal("D5_ARCSE","GLOBAL",0)
+	SetGlobal("D5_ARCSF","GLOBAL",0)
+	SetGlobal("D5_ARCSG","GLOBAL",0)
+	SetGlobal("D5_ARCSH","GLOBAL",0)
+	SetGlobal("D5_ARCSI","GLOBAL",0)
+	SetGlobal("D5_ARCSJ","GLOBAL",0)
+	SetNumTimesTalkedTo(0)
+	DestroySelf() 
+END
+~
+
+COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5_arcs.baf~
+
+
+//PATCH KIT ABILITIES________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/ranger/archery/d5_arcs.bam~ ~override~
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY arch_nums_lets BEGIN
 	1	=> a
 	2	=> b
 	3	=> c
@@ -399,239 +346,149 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
 	7	=> g
 	8	=> h
 	9	=> i
-	10	=> j
-	11	=> k
-	12	=> l
-	13	=> m
-	14	=> n
-	15	=> o
-	16	=> p
-	17	=> q
-	18	=> r
-	19	=> s
-	20	=> t
 END
 
-//INCLUDE ~might_and_guile/lib/sequencer_menu_d5.tpa~
-INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
+ACTION_PHP_EACH arch_nums_lets AS num => let BEGIN
+  COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5arch%num%.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = EVAL ~d5arch%let%~ END
+  COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5arch%let%.spl~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5_arcs~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 0 duration = 12 STR_VAR resource = ~d5_arcs~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~d5arch%let%~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5arch%num%~ END
+END
 
-APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
-COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW r2en_splprot cols
-	FOR (row = 1; row < r2en_splprot; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER r2en_splprot row 0 ~stat~
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
-	    SET kit_is_row = %row%
-	  END
-	END
+CREATE EFF ~d5_arcs~
+	WRITE_LONG 0x10 67
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x28 12
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~d5_arcs~ #8
+	WRITE_ASCII 0x70 ~shskull~ #8
+
+COPY ~%MOD_FOLDER%/misc/d5_dlg.cre~ ~override/d5_arcs.cre~
+  WRITE_EVALUATED_ASCII 0x248 ~d5_arcs~ #8
+
+
+ACTION_FOR_EACH archer_kit IN ~clabrn02~ ~d5marks~ ~d5sling~ ~a!sharp~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%archer_kit%.2da~) BEGIN
+    COPY_EXISTING ~%archer_kit%.2da~ ~override~
+	  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+    APPEND ~%archer_kit%.2da~ ~D5ARCHERY    AP_D5ARCH1  ****        ****        AP_D5ARCH2  ****        ****        ****        AP_D5ARCH3  ****        ****        ****        AP_D5ARCH4  ****        ****        ****        AP_D5ARCH5  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~D5ARCHERY~
+  END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5earch.2da~) BEGIN
+    COPY_EXISTING ~d5earch.2da~ ~override~
+	  REPLACE_TEXTUALLY ~GA_SPCL121~ ~****      ~
+    APPEND ~d5earch.2da~      ~D5ARCHERY    AP_D5ARCH1  ****        AP_D5ARCH2  ****        ****        AP_D5ARCH3  ****        ****        AP_D5ARCH4  ****        ****        AP_D5ARCH5  ****        ****        AP_D5ARCH6  ****        ****        AP_D5ARCH7  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~D5ARCHERY~
+END
+
+ACTION_FOR_EACH lev IN ~1~ ~2~ ~3~ ~4~ ~5~ BEGIN
+  CREATE EFF ~d5arch%lev%#~
+    WRITE_LONG   0x10 146 
+    WRITE_LONG   0x14 2   
+    WRITE_LONG   0x20 1   
+    WRITE_SHORT  0x24 1   
+    WRITE_SHORT  0x2c 100 
+	WRITE_EVALUATED_ASCII 0x30 ~D5ARCH%lev%~ #8
+END
+
+COPY_EXISTING ~kit.ids~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER rows row 0 code
+    READ_2DA_ENTRY_FORMER rows row 1 kit
+    PATCH_IF (~%kit%~ STRING_EQUAL_CASE ~D5SLING~) BEGIN
+      SET slinger_code = %code%
+    END
+  END  
 BUT_ONLY
 
-COPY ~might_and_guile/feats/d5flsta.2da~ ~override~
+COPY_EXISTING ~QD_MCT01.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch1#~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~QD_MCT04.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch2#~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~QD_MCT08.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch3#~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~QD_MCT12.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch4#~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~QD_MCT16.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch5#~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
+IF_EXISTS BUT_ONLY
+//___________________________________________________________________________________
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5ftskn.2da~) BEGIN
- ACTION_IF !(GAME_IS ~iwdee~) BEGIN
-  COPY ~might_and_guile/feats/d5ftskn.2da~ ~override~
- END
- ACTION_IF (GAME_IS ~iwdee~) BEGIN
-  COPY ~might_and_guile/feats/d5ftskn_iwd.2da~ ~override/d5ftskn.2da~
- END
-END
 
-OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
-OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
-OUTER_SPRINT feat_title_string @20012 
-OUTER_SPRINT feat_label_string @20013 
-
-
-//NO FEATS YET________________________________________________________________________
+//WEAR ELVEN CHAIN___________________________________________________________________
 //
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
- COPY ~might_and_guile/feats/d5_feat.bam~ ~override~
- COPY_EXISTING ~d5flsta.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (col = 1; col < cols; ++col) BEGIN
-	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~kitlist.2da~ ~override~
-		READ_2DA_ENTRIES_NOW rows 9
-		FOR (row = 1; row < rows; ++row) BEGIN
-	      READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
-	      READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
-	      READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
-	      READ_2DA_ENTRY_FORMER rows row 9 kitids_num
-	      PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) BEGIN
-	        SPRINT $feat_archer_list(~%kitlist_index%~)~%kitids_num%~
-			GET_STRREF %kitlist_name% kit_name_strref
-			SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
-			SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
-			SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
-			SET kit_seq_index = %kitlist_index% 
-			INNER_ACTION BEGIN
-			  LAF CREATE_SEQUENCER_MENU 
-			   INT_VAR 
-				name = %kit_seq_name%
-				tip = %kit_seq_tip%
-				desc = RESOLVE_STR_REF (~blah~) 
-				column = %col% 
-				class = 2
-			   STR_VAR 
-				resref = EVAL ~d5ft%kit_seq_index%~
-				icon = ~spcl919b~
-				spelltable = ~d5ftskn~ 
-				spelllist = ~d5flsta~
-				title = EVAL ~%feat_title_string%~
-				label = EVAL ~%feat_label_string%~
-			  END
-			END
-		  END
-		END
-	  BUT_ONLY
-	END
-  END
- BUT_ONLY
- 
- COPY_EXISTING ~d5flsta.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (row = 0; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols ~book_feat~
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		WRITE_SHORT 0x1c 4
-		WRITE_LONG 0x34 1
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-	  IF_EXISTS BUT_ONLY
-	END
-  END
- BUT_ONLY
-
- ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
-  COPY ~might_and_guile/feats/d5feat1.spl~ ~override/d5feat%num%.spl~ 
-	LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5feat1~ resource = EVAL ~d5feat%num%~ END
-  COPY ~might_and_guile/feats/d5feat1.eff~ ~override/d5feat%num%.eff~ 
-	WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
-  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5feat%let%.spl~
-	SAY NAME1 @20099
-	SAY UNIDENTIFIED_DESC @20100
-	WRITE_ASCII 0x3a ~d5_feat~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5_feat~ END
-	LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5feat%let%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
-	PHP_EACH feat_archer_list AS ind => ids BEGIN
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %ids% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%ind%~ END
-	END
- END
-
- ACTION_PHP_EACH feat_archer_list AS ind => ids BEGIN
-  COPY_EXISTING ~d5ft%ind%.spl~ ~override~
-	LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%ind%~ END
-  IF_EXISTS BUT_ONLY
- END
-
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__echan.d5~) BEGIN
+	INCLUDE ~%MOD_FOLDER%/lib/elven_chain.tpa~
 END
 //___________________________________________________________________________________
 
 
-//FEATS ALREADY______________________________________________________________________
+//TEXT DESCRIPTIONS__________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) THEN BEGIN
- COPY ~might_and_guile/feats/d5flstaf.2da~ ~override~
- COPY_EXISTING ~d5flstaf.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (col = 1; col < (cols - 1); ++col) BEGIN
-	READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~kitlist.2da~ ~override~
-		READ_2DA_ENTRIES_NOW rows 9
-		FOR (row = 1; row < rows; ++row) BEGIN
-	      READ_2DA_ENTRY_FORMER rows row 0 kitlist_index
-	      READ_2DA_ENTRY_FORMER rows row 3 kitlist_name
-	      READ_2DA_ENTRY_FORMER rows row 5 kitlist_2da
-	      READ_2DA_ENTRY_FORMER rows row 9 kitids_num
-	      PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~%feat_kit_2da%~) BEGIN
-	        SPRINT $feat_archer_list(~%kitlist_index%~)~%kitids_num%~
-			GET_STRREF %kitlist_name% kit_name_strref
-			SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
-			SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
-			SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
-			SET kit_seq_index = %kitlist_index% 
-			INNER_ACTION BEGIN
-			  LAF CREATE_SEQUENCER_MENU 
-			   INT_VAR 
-				name = %kit_seq_name%
-				tip = %kit_seq_tip%
-				desc = RESOLVE_STR_REF (~blah~) 
-				column = %col% 
-				class = 1
-			   STR_VAR 
-				resref = EVAL ~d5ft%kit_seq_index%~
-				icon = ~spcl919b~
-				spelltable = ~d5ftskn~ 
-				spelllist = ~d5flstaf~
-				title = EVAL ~%feat_title_string%~
-				label = EVAL ~%feat_label_string%~
-			  END
-			END
-		  END
-		END
-	  BUT_ONLY
-	END
-  END
- BUT_ONLY
+OUTER_SET new_archer_desc = (RESOLVE_STR_REF (@2052))
+OUTER_SET new_elf_arch_desc = (RESOLVE_STR_REF (@15505))
+OUTER_SET new_marksman_desc = (RESOLVE_STR_REF (@16505))
+OUTER_SET new_slinger_desc = (RESOLVE_STR_REF (@16005))
 
- COPY_EXISTING ~d5flstaf.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (row = 0; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols ~book_feat~
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
-		WRITE_SHORT 0x1c 4
-		WRITE_LONG 0x34 1
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
-	  IF_EXISTS BUT_ONLY
-	END
-  END
- BUT_ONLY
-
- ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
-  COPY_EXISTING ~d5feat%let%.spl~ ~override~
-	PHP_EACH feat_archer_list AS ind => ids BEGIN
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %ids% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%ind%~ END
-	END
+ACTION_FOR_EACH text_file IN ~clastext~ ~sodcltxt~ ~bgclatxt~ BEGIN
+  COPY_EXISTING ~%text_file%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 0 cols kit_name
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FERALAN~) BEGIN
+        SET_2DA_ENTRY row 4 cols %new_archer_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ARCHER~) BEGIN
+        SET_2DA_ENTRY row 4 cols %new_archer_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5EARCH~) BEGIN
+        SET_2DA_ENTRY row 4 cols %new_elf_arch_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5SLING~) BEGIN
+        SET_2DA_ENTRY row 4 cols %new_slinger_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5MARKS~) BEGIN
+        SET_2DA_ENTRY row 4 cols %new_marksman_desc%
+      END
+    END
   IF_EXISTS BUT_ONLY
- END
-
- ACTION_PHP_EACH feat_archer_list AS ind => ids BEGIN
-  COPY_EXISTING ~d5ft%ind%.spl~ ~override~
-	LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%ind%~ END
-  IF_EXISTS BUT_ONLY
- END
-
 END
-//___________________________________________________________________________________
-
-
-//FINISH UP___________________________________________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5featx.spl~) BEGIN
-  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5featx.spl~
-END
-COPY ~might_and_guile/feats/d5flsta.2da~ ~might_and_guile/temp/d5flsta.2da~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
-  FOR (row = 1; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols spellbook_feat
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~d5featx.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spellbook_feat%~ END
-	  BUT_ONLY
-	END
-  END
+COPY_EXISTING ~kitlist.2da~ ~override~
+	READ_2DA_ENTRIES_NOW rows 9
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY row 1 9 kit_name
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~FERALAN~) BEGIN
+        SET_2DA_ENTRY row 4 9 %new_archer_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ARCHER~) BEGIN
+        SET_2DA_ENTRY row 4 9 %new_archer_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5EARCH~) BEGIN
+        SET_2DA_ENTRY row 4 9 %new_elf_arch_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5SLING~) BEGIN
+        SET_2DA_ENTRY row 4 9 %new_slinger_desc%
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5MARKS~) BEGIN
+        SET_2DA_ENTRY row 4 9 %new_marksman_desc%
+      END
+    END
 BUT_ONLY
 //___________________________________________________________________________________
 

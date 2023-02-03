@@ -32,11 +32,11 @@ ADD_KIT ~D5EARCH~
 
 //REQUIREMENTS TO DUAL TO THIS KIT_________________________________________________
 //                 STR DEX CON INT WIS CHR
-~D5EARCH           0   15  15  0   0   0~
+~D5EARCH           0   17  0   0   17  0~
 
 //REQUIREMENTS TO DUAL FROM THIS KIT________________________________________________
 //                 STR DEX CON INT WIS CHR
-~D5EARCH           0   15  15  0   0   0~
+~D5EARCH           0   15  0   0   15  0~
 
 //ALIGNMENT RESTRICTIONS____________________________________________________________
 //                 LG LN LE NG TN NE CG CN CE
@@ -59,7 +59,7 @@ ADD_KIT ~D5EARCH~
 ~0x00008000 12~
 
 //HIGH LEVEL ABILITIES ABBREVIATION_________________________________________________
-~Ra2~
+~Ra0~
 
 //TOB STARTING EQUIPMENT_____________________________________________________________
 ~LEAT14	* HELM07 BAG24 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
@@ -102,11 +102,18 @@ END
 
 //ADD ELVEN ARCHER TO MENUS__________________________________________________________
 //
-COPY_EXISTING ~kitlist.2da~ ~override~
-	COUNT_2DA_ROWS ~7~ "jrows"
-OUTER_SET jrows -= 2
 COPY_EXISTING ~K_R_E.2da~ ~override~
-	REPLACE_TEXTUALLY ~[ %TAB%]7~ ~%TAB%%jrows%~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  PATCH_IF (rows > 3) BEGIN
+    READ_2DA_ENTRIES_NOW rows cols
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER rows row 1 kit
+      PATCH_IF (%kit% = 7) BEGIN
+  	    REMOVE_2DA_ROW row cols
+      END
+    END
+  END
 BUT_ONLY
 //___________________________________________________________________________________
 
@@ -118,7 +125,7 @@ LAF ~DEFINE_FNP_KIT_INFO~
   STR_VAR
     clab_name 		= ~d5earch~
 	sphere_list		= ~elven_archer_spheres~
-	class 			= ~scout~
+	class 			= ~ranger~
 END
 
 LAM ~READ_FNP_KIT_INFO~
@@ -145,13 +152,6 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5__fnp_spont_option.d5~) AND (FILE_EXISTS ~fait
   END
 END
 //__________________________________________________________________________________
-
-//_______________________HLAS________________________________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~TG#TOUG.spl~) THEN BEGIN
-  COPY_EXISTING ~LURa0.2da~ ~override/LURa2.2da~	
-END
-//___________________________________________________________________________________
 
 //ARCHERS USE ELVEN CHAIN____________________________________________________________
 //

@@ -52,7 +52,7 @@ ADD_KIT ~D5SLING~
 ~D5SLING           0  0  0  0  0  0~
 
 //KIT ABILITIES 2DA FILE_____________________________________________________________
-~might_and_guile/ranger/d5_sling.2da~
+~might_and_guile/ranger/d5sling.2da~
 
 //RACIAL KIT AVAILABILITY____________________________________________________________
 ~K_FT_HL~
@@ -91,7 +91,7 @@ END
 
 //SLINGER ABILITY FILES______________________________________________________________
 //
-COPY ~might_and_guile/ranger/d5_sling.2da~ ~override~
+COPY ~might_and_guile/ranger/d5sling.2da~ ~override~
 COPY ~might_and_guile/ranger/d5_pslin.spl~ ~override~
 
 COPY ~might_and_guile/misc/d5mthac.spl~ ~override~
@@ -102,7 +102,7 @@ COPY ~might_and_guile/misc/d5mthac.spl~ ~override~
 LAF qd_multiclass
 	STR_VAR
 		kit_name = ~D5SLING~ 
-		kit_clab = ~d5_sling~
+		kit_clab = ~d5sling~
 		base_class = ~T~
 END 
 //___________________________________________________________________________________

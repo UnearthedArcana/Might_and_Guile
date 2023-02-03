@@ -40,6 +40,16 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 		SET_2DA_ENTRY 48 4 8 ~1~
 		SET_2DA_ENTRY 35 5 8 ~1~
 		SET_2DA_ENTRY 48 5 8 ~1~
+	    COUNT_2DA_COLS cols
+	    COUNT_2DA_ROWS cols rows
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY row 0 cols class
+		  PATCH_IF (~%class%~ STRING_EQUAL_CASE ~DUALCLASS~) BEGIN
+		    FOR (col = 1; col < cols; ++col) BEGIN
+		      SET_2DA_ENTRY row col cols 1
+		    END
+		  END
+		END
 	BUT_ONLY
 END
 ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
@@ -64,6 +74,16 @@ ACTION_IF ENGINE_IS ~tob~ THEN BEGIN
 		SET_2DA_ENTRY 16 4 7 ~1~
 		SET_2DA_ENTRY 12 5 7 ~1~
 		SET_2DA_ENTRY 16 5 7 ~1~
+	    COUNT_2DA_COLS cols
+	    COUNT_2DA_ROWS cols rows
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY row 0 cols class
+		  PATCH_IF (~%class%~ STRING_EQUAL_CASE ~DUALCLASS~) BEGIN
+		    FOR (col = 1; col < cols; ++col) BEGIN
+		      SET_2DA_ENTRY row col cols 1
+		    END
+		  END
+		END
 	BUT_ONLY
 END
 //___________________________________________________________________________________

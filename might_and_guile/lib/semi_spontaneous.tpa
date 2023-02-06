@@ -1,5 +1,5 @@
 
-// v10.5 - semi_innate points generation
+// v10.5 - fixed semi_innate
 
 /*
 functions in this file:
@@ -82,41 +82,35 @@ functions in this file:
     sets up a pool of innate abilities that will use a pool of points to cast (up to 15 points)
     NB: needs the "semi_innate_spells" array to be filled out
 
-- semi_innate_points - line 5394
-    patch function to generate a spell granting innate/"ki" points at each level, according 
-    to a simple two-column .2da table
-    NB: make sure the %semi_innate_stat%, %semi_innate_shift%, and %semi_innate_prefix% variables 
-    match the ones used in the "semi_innate_casting" function
-
-- semi_int_slots - line 5439
+- semi_int_slots - line 5354
     adds bonus casting slots for high INT scores
     bonuses are according to Tome & Blood (levels 1-7) - NB, this is not flexible
     5e_int_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- semi_cha_slots - line 5669
+- semi_cha_slots - line 5584
     adds bonus casting slots for high CHA scores
     bonuses are according to Tome & Blood (levels 1-5) - NB, this is not flexible
 
-- semi_wis_slots - line 5921
+- semi_wis_slots - line 5836
     adds bonus casting slots for high WIS scores
     bonuses are according to Tome & Blood (spell levels 1-7) - NB, this is not flexible
     5e_wis_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- arcane_spont_items - line 6115
+- arcane_spont_items - line 6045
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- divine_spont_items - line 6598
+- divine_spont_items - line 6482
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- semi_spont_sequencers - line 7150
+- semi_spont_sequencers - line 7030
     sets sequencers and contingencies to pick from known spells instead of memorized spells
     NB: putting spells in a sequencer will no exhaust any spell slots
 
-- semi_spont_identify - line 7243
+- semi_spont_identify - line 7127
    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
 
 */
@@ -1856,6 +1850,52 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zclons.2da~) BEGIN
     END
 
   END	//	end FnP
+  
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
+    FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
+      SPRINT $clabs_to_check(~%kit_clab%~)~1~
+    END
+  BUT_ONLY
+ 
+  ACTION_PHP_EACH clabs_to_check AS clab => ind BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+      COPY_EXISTING ~%clab%.2da~ ~override~
+        LPF 2DA_MISSING_COLS STR_VAR entry = ~****~ END 
+      BUT_ONLY
+      COPY_EXISTING ~%clab%.2da~ ~override~
+        COUNT_2DA_COLS cols
+        READ_2DA_ENTRIES_NOW r2en_clab cols
+        FOR (col = 1; col < cols; ++col) BEGIN
+          FOR (row = 0; row < r2en_clab; ++row) BEGIN
+            READ_2DA_ENTRY_FORMER r2en_clab row col kit_abil
+            PATCH_IF (~%kit_abil%~ STRING_CONTAINS_REGEXP ~GA_~) = 0 BEGIN
+              SPRINT $ga_abils(~%kit_abil%~)~1~
+            END
+          END
+        END
+      BUT_ONLY
+    END
+  END
+
+  ACTION_PHP_EACH ga_abils AS abil => ind BEGIN
+    OUTER_INNER_PATCH_SAVE abil ~%abil%~ BEGIN
+      REPLACE_TEXTUALLY ~GA_~ ~~
+    END
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%abil%.spl~) BEGIN
+      COPY_EXISTING ~%abil%.spl~ ~override~
+        READ_BYTE 0x1c spl_type
+        PATCH_IF (spl_type = 2) BEGIN			//	if a priest spell
+          INNER_ACTION BEGIN
+	        OUTER_SET high_ind = high_ind + 1
+		    OUTER_SET spl_ind = high_ind
+            APPEND ~d5zclons.2da~ ~%spl_ind% 	%abil% 	%abil% 	divine 	no ~ UNLESS ~%abil%~
+          END
+        END
+      BUT_ONLY
+    END
+  END
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_divine.d5~
 
@@ -2063,6 +2103,52 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zclons.2da~) BEGIN
 	    OUTER_SET spl_ind = high_ind
 	  END
       APPEND ~d5zclons.2da~ ~%spl_ind% 	%sorc_spell% 	%sorc_spell% 	arcane 	no ~ UNLESS ~%sorc_spell% 	%sorc_spell%~
+    END
+  END
+
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
+    FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_clab
+      SPRINT $clabs_to_check(~%kit_clab%~)~1~
+    END
+  BUT_ONLY
+ 
+  ACTION_PHP_EACH clabs_to_check AS clab => ind BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+      COPY_EXISTING ~%clab%.2da~ ~override~
+        LPF 2DA_MISSING_COLS STR_VAR entry = ~****~ END 
+      BUT_ONLY
+      COPY_EXISTING ~%clab%.2da~ ~override~
+        COUNT_2DA_COLS cols
+        READ_2DA_ENTRIES_NOW r2en_clab cols
+        FOR (col = 1; col < cols; ++col) BEGIN
+          FOR (row = 0; row < r2en_clab; ++row) BEGIN
+            READ_2DA_ENTRY_FORMER r2en_clab row col kit_abil
+            PATCH_IF (~%kit_abil%~ STRING_CONTAINS_REGEXP ~GA_~) = 0 BEGIN
+              SPRINT $ga_abils(~%kit_abil%~)~1~
+            END
+          END
+        END
+      BUT_ONLY
+    END
+  END
+
+  ACTION_PHP_EACH ga_abils AS abil => ind BEGIN
+    OUTER_INNER_PATCH_SAVE abil ~%abil%~ BEGIN
+      REPLACE_TEXTUALLY ~GA_~ ~~
+    END
+    ACTION_IF (FILE_EXISTS_IN_GAME ~%abil%.spl~) BEGIN
+      COPY_EXISTING ~%abil%.spl~ ~override~
+        READ_BYTE 0x1c spl_type
+        PATCH_IF (spl_type = 1) BEGIN			// if a wizard spell
+          INNER_ACTION BEGIN
+	        OUTER_SET high_ind = high_ind + 1
+		    OUTER_SET spl_ind = high_ind
+            APPEND ~d5zclons.2da~ ~%spl_ind% 	%abil% 	%abil% 	divine 	no ~ UNLESS ~%abil%~
+          END
+        END
+      BUT_ONLY
     END
   END
 
@@ -5213,7 +5299,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%ltf.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%semi_innate_prefix%ltf.spl~
     LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5xnfsh~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%fsh~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xrfsh~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltf~ END
 END
 
@@ -5393,47 +5479,6 @@ END		//	end with_tra
 
 
 END	//	end function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-DEFINE_PATCH_FUNCTION semi_innate_points INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~~ table_spl = ~~ BEGIN
-
-// PATCH function - copy .2da table, run this
-
-// limit table_spl to 7 letters!!!
-
-  INNER_ACTION BEGIN
-    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
-      WRITE_SHORT 0x1c 1
-  END
-  READ_2DA_ENTRIES_NOW r2en_table 2
-  FOR (row = 0; row < r2en_table; ++row) BEGIN
-    READ_2DA_ENTRY_FORMER r2en_table row 1 points
-    INNER_ACTION BEGIN
-      COPY_EXISTING ~%table_spl%.spl~ ~override~
-        PATCH_IF (VARIABLE_IS_SET %points%) BEGIN
-          PATCH_IF (IS_AN_INT %points%) AND (%points% > 0) BEGIN
-            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 233 target = 1 parameter1 = (%points% << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 9 END
-            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END
-            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
-            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
-            LPF ADD_SPELL_EFFECT INT_VAR header = (%row%) insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
-          END
-        END
-      IF_EXISTS BUT_ONLY
-    END
-  END
-/*
-  INNER_ACTION BEGIN
-    COPY_EXISTING ~%table_spl%.spl~ ~override~
-//      FOR (header = 1 ; header < 40; ++header) BEGIN
-//      END
-  END
-*/
-END		//	end function
 
 
 //__________________________________________________________________________________
@@ -7238,6 +7283,10 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
 END		//	end marker not found
 
 END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
 
 
 //__________________________________________________________________________________

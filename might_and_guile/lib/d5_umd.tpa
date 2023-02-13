@@ -1,4 +1,4 @@
-// Subtledoc's UMD v3.0
+// Subtledoc's UMD v3.3
 
 //JOINABLE NPCS ARRAY MACRO__________________________________________________________
 //
@@ -49,12 +49,19 @@ DEFINE_ACTION_FUNCTION use_magical_devices BEGIN
 
 CLEAR_ARRAYS
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
-  
- OUTER_SET scroll_count = 0
- OUTER_SPRINT $mage_scrolls(~%scroll_count%~) ~scroll~
- OUTER_SPRINT $other_scrolls(~%scroll_count%~) ~scroll~
- COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+<<<<<<<< d5/d5_umd.2da
+RES			0
+
+>>>>>>>>
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_umd.2da~) BEGIN
+  COPY ~d5/d5_umd.2da~ ~override~
+END
+
+OUTER_SET scroll_count = 0
+OUTER_SPRINT $mage_scrolls(~%scroll_count%~) ~scroll~
+OUTER_SPRINT $other_scrolls(~%scroll_count%~) ~scroll~
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
    READ_SHORT	0x1c item_type
    PATCH_IF (item_type = 11) BEGIN
     READ_BYTE     0x2f current ELSE 0
@@ -103,31 +110,34 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
 	  SET ++scroll_count
     END
    END
- BUT_ONLY
+BUT_ONLY
 
- ACTION_PHP_EACH mage_scrolls AS num => scroll BEGIN
-    ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
-	  PRINT ~%scroll% is a wizard scroll~
-	  COPY_EXISTING ~%scroll%.itm~ ~override~
-	    WRITE_BYTE 0x1e (THIS BAND 0b00000000)
-	    WRITE_BYTE 0x1f (THIS BAND 0b00000000)
-	    WRITE_BYTE 0x20 (THIS BAND 0b00000000)
-	    WRITE_BYTE 0x21 (THIS BAND 0b00000000)
-	  BUT_ONLY
+ACTION_PHP_EACH mage_scrolls AS num => scroll BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
+    PRINT ~%scroll% is a wizard scroll~
+    ACTION_IF !(FILE_CONTAINS_EVALUATED (~d5_umd.2da~ ~%scroll%~)) BEGIN
+      COPY_EXISTING ~%scroll%.itm~ ~override~
+        WRITE_BYTE 0x1e (THIS BAND 0b00000000)
+        WRITE_BYTE 0x1f (THIS BAND 0b00000000)
+        WRITE_BYTE 0x20 (THIS BAND 0b00000000)
+        WRITE_BYTE 0x21 (THIS BAND 0b00000000)
+      BUT_ONLY
+      APPEND ~d5_umd.2da~ ~%scroll%			1~
     END
- END
+  END
+END
 
- ACTION_PHP_EACH other_scrolls AS num => scroll BEGIN
-    ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
-	  PRINT ~%scroll% is a blue or green scroll~
-	  COPY_EXISTING ~%scroll%.itm~ ~override~
-	    WRITE_SHORT 0x1c 8
-	  BUT_ONLY
-    END
- END
+ACTION_PHP_EACH other_scrolls AS num => scroll BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN
+    PRINT ~%scroll% is a blue or green scroll~
+    COPY_EXISTING ~%scroll%.itm~ ~override~
+      WRITE_SHORT 0x1c 8
+    BUT_ONLY
+  END
+END
 
 /* no, just check whether thieves can already use it
- ACTION_FOR_EACH usable_wand IN
+ACTION_FOR_EACH usable_wand IN
     ~b_ph08~
     ~c#lccenw~
     ~ishwand~
@@ -146,37 +156,61 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
     ~rods02~
     ~rods02a~
     ~rods03~
- BEGIN
- END
+BEGIN
+END
 */  
- COPY_EXISTING ~wand11.itm~ ~override~
-               ~ttwand.itm~ ~override~
+COPY_EXISTING ~wand11.itm~ ~override~
+              ~ttwand.itm~ ~override~
     WRITE_SHORT 0x1c 13
- IF_EXISTS BUT_ONLY
- COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+IF_EXISTS BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
    READ_SHORT	0x1c item_type
    PATCH_IF (item_type = 35) BEGIN
 	READ_BYTE 0x20 thief_use
 	PATCH_IF (%thief_use% BOR 0b10111111) = 0b10111111 BEGIN
-      WRITE_SHORT 0x1c 13
+      PATCH_IF !(FILE_CONTAINS_EVALUATED (~d5_umd.2da~ ~%SOURCE_RES%~)) BEGIN
+        WRITE_SHORT 0x1c 13
+	  END
 	END
 	PATCH_IF (%thief_use% BAND 0b01000000) = 0b01000000 BEGIN
+      PATCH_IF !(FILE_CONTAINS_EVALUATED (~d5_umd.2da~ ~%SOURCE_RES%~)) BEGIN
 	    WRITE_BYTE 0x1e (THIS BAND 0b00000000)
 	    WRITE_BYTE 0x1f (THIS BAND 0b00000000)
 	    WRITE_BYTE 0x20 (THIS BAND 0b00000000)
 	    WRITE_BYTE 0x21 (THIS BAND 0b00000000)
+	    INNER_ACTION BEGIN
+          APPEND ~d5_umd.2da~ ~%SOURCE_RES%			1~
+	    END
+	  END
 	END
    END
- BUT_ONLY
+BUT_ONLY
 
- COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_numd.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 11 timing = 9 END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
+  
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_umdw.spl~
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 35 timing = 9 END
 
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_umds.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 181 target = 1 parameter1 = 11 timing = 9 END
+
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_umw.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_umdw~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 1 STR_VAR resource = ~d5_umdw~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umdw~ END
+
+ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_ums.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_umds~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 1 STR_VAR resource = ~d5_umds~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umds~ END
+
  COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5_umd.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_numd~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_numd~ END
- //__________________________________________________________________________________
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_umdw~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5_umds~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 1 STR_VAR resource = ~d5_umdw~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 1 STR_VAR resource = ~d5_umds~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umdw~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umds~ END
 
 //Update all stores to accept new itemtypes_________________________________________
 //
@@ -265,7 +299,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
   COPY_EXISTING ~%cre%~ ~override~
     READ_BYTE 0x273 class
     PATCH_IF !(class = 1) AND !(class = 5) AND !(class = 7) AND !(class = 10) AND !(class = 13) AND !(class = 14) AND !(class = 17) AND !(class = 19) BEGIN
-      LPF ADD_CRE_EFFECT INT_VAR opcode = 146 target = 1 timing = 1 parameter2 = 1 STR_VAR resource = ~D5_NUMD~ END
+      LPF ADD_CRE_EFFECT INT_VAR opcode = 146 target = 1 timing = 1 parameter2 = 1 STR_VAR resource = ~D5_UMDW~ END
+      LPF ADD_CRE_EFFECT INT_VAR opcode = 146 target = 1 timing = 1 parameter2 = 1 STR_VAR resource = ~D5_UMDS~ END
     END
 /* shouldn't be necessary if it's in the CLAB tables!
     PATCH_IF (class = 1) OR (class = 5) OR (class = 7) OR (class = 10) OR (class = 13) OR (class = 14) OR (class = 17) OR (class = 19) BEGIN
@@ -286,7 +321,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_1","GLOBAL",1)
-	ActionOverride(Player1,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player1,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player1,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 IF
@@ -297,7 +333,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_2","GLOBAL",1)
-	ActionOverride(Player2,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player2,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player2,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 IF
@@ -308,7 +345,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_3","GLOBAL",1)
-	ActionOverride(Player3,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player3,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player3,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 IF
@@ -319,7 +357,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_4","GLOBAL",1)
-	ActionOverride(Player4,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player4,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player4,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 IF
@@ -330,7 +369,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_5","GLOBAL",1)
-	ActionOverride(Player5,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player5,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player5,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 IF
@@ -341,7 +381,8 @@ IF
 THEN
 	RESPONSE #100
 	SetGlobal("D5_NUMD_6","GLOBAL",1)
-	ActionOverride(Player6,ApplySpellRES("D5_NUMD",Myself))
+	ActionOverride(Player6,ApplySpellRES("D5_UMDW",Myself))
+	ActionOverride(Player6,ApplySpellRES("D5_UMDS",Myself))
 	Continue()
 END
 >>>>>>>>

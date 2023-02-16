@@ -192,9 +192,11 @@ END
 
 LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ END
 
-COPY ~might_and_guile/fighter/samurai/d5kisam.spl~ ~override~			//	add ki points
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki172~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5kipls~ END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5kisam.spl~) BEGIN
+  COPY ~might_and_guile/fighter/samurai/d5kisam.2da~ ~override~
+    LPF semi_innate_points INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ table_spl = ~d5kisam~ END
+  BUT_ONLY
+END
 
 COPY_EXISTING ~d5ki000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki1l~ END
@@ -206,7 +208,7 @@ COPY_EXISTING ~d5ki000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki7l~ END
 IF_EXISTS BUT_ONLY
 
-ACTION_FOR_EACH ki IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ BEGIN
+ACTION_FOR_EACH ki IN ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ BEGIN
   COPY_EXISTING ~d5ki%ki%i.spl~ ~override~
     LPF ALTER_SPELL_HEADER INT_VAR target = 7 END
   IF_EXISTS BUT_ONLY

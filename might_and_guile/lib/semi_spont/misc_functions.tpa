@@ -633,3 +633,73 @@ END
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
+
+DEFINE_PATCH_FUNCTION QD_ADD_EMPTY_SPELL_HEADER
+INT_VAR
+  type            = 1
+  location        = 4
+  target          = 1
+  target_count    = 0
+  range           = 0
+  required_level  = 1
+  speed           = 0
+  projectile      = 1
+  copy_header     = 0
+  insert_point    = ~-1~
+STR_VAR
+  icon            = ~~
+RET
+  insert_point
+BEGIN
+  SET hs = 0x28
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  SET insert_point = (insert_point > hc || insert_point < 0) ? hc : insert_point
+  SET copy_header = (copy_header < 0) ? 0 : copy_header
+  PATCH_IF (copy_header > hc) BEGIN
+    PATCH_WARN ~WARNING: Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES (ho + insert_point * hs) hs
+    SET hc += 1
+    SET eo += hs
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x1e) ec
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x20) ei
+      READ_ASCII (eo + ei * 0x30) effs (ec * 0x30)
+      READ_ASCII (ho + (copy_header - 1) * hs) copy (hs)
+      WRITE_ASCIIE (ho + insert_point * hs) ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i = ho; i < ho + hc * hs; i += hs) BEGIN
+      READ_SHORT (i + 0x1e) ec
+      WRITE_SHORT (i + 0x20) ei
+      SET ei += ec
+    END
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + insert_point * hs + 0x1e) ec
+      READ_SHORT (ho + insert_point * hs + 0x20) ei
+      INSERT_BYTES (eo + ei * 0x30) (ec * 0x30)
+      WRITE_ASCIIE (eo + ei * 0x30) ~%effs%~ (ec * 0x30)
+    END ELSE BEGIN
+      SET off = ho + insert_point * hs
+      WRITE_BYTE off type
+      WRITE_BYTE (off + 0x2) location
+      WRITE_ASCIIE (off + 0x4) ~%icon%~ (8)
+      WRITE_BYTE (off + 0xc) target
+      WRITE_BYTE (off + 0xd) target_count
+      WRITE_SHORT (off + 0xe) range
+      WRITE_SHORT (off + 0x10) required_level
+      WRITE_LONG (off + 0x12) speed
+      WRITE_SHORT (off + 0x26) projectile
+    END
+  END
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+

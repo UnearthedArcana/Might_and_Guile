@@ -1,4 +1,4 @@
-// v2.4 - classes var fix fix
+// v3.1 - more class limits
 
 
 //__________________________________________________________________________________
@@ -11,12 +11,14 @@ ACTION_IF !(VARIABLE_IS_SET %EE_LANGUAGE%) BEGIN
   COPY_EXISTING ~spwi101.spl~ ~override~
 	READ_STRREF 0x50 description_string
   BUT_ONLY
-  ACTION_FOR_EACH lang IN ~en_US~ /*~fr_FR~ ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~*/ BEGIN
-	WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%lang%/dialprof.tra~ BEGIN
-	  OUTER_SPRINT duration_lang @10 
-	END	
-	ACTION_IF !(~%description_string%~ STRING_CONTAINS_REGEXP ~%duration_lang%~) BEGIN
-	  OUTER_SPRINT game_lang ~%lang%~
+  ACTION_FOR_EACH lang IN ~en_US~ ~fr_FR~ ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~ BEGIN
+    ACTION_IF (FILE_EXISTS ~%MOD_FOLDER%/lib/dialprof/%lang%/dialprof.tra~) BEGIN
+	  WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%lang%/dialprof.tra~ BEGIN
+	    OUTER_SPRINT duration_lang @10 
+	  END
+	  ACTION_IF !(~%description_string%~ STRING_CONTAINS_REGEXP ~%duration_lang%~) BEGIN
+	    OUTER_SPRINT game_lang ~%lang%~
+	  END
 	END
   END
 END
@@ -47,20 +49,14 @@ DEFINE_ACTION_MACRO PROF_DIALOGUE BEGIN
 
 //    ^^^ SIX LETTERS MAX LENGTH!
 
-//  - %script_level_one% - SET to 1 to include 1st-level prof  points
+//  - %script_level_one% - SET to 1 to include 1st-level prof points
 
 //  - %script_higher_levels% - SET to 1 to include prof points for levels higher than 1
 
-//  - ...if both of those last two are 0, it will only let you advance one prof once
+//  - ...if both of those are 0, it will only have a single use - i.e., one extra proficiency point
 
 //  - %class_dlgs% - SPRINT to "all" or to a string containing the first two letters of desired classes, e.g. "fi_ra_pa"
 
-/*
-//COPY MARKER FILE__________________________________________________________________
-//
-COPY ~%MOD_FOLDER%/lib/dialprof/d5__dialprof.d5~ ~override~
-//__________________________________________________________________________________
-*/
 
 //find game install language_________________________________________________________
 //
@@ -83,6 +79,7 @@ ACTION_IF !(VARIABLE_IS_SET %script_higher_levels%) BEGIN
 END
 
 ACTION_IF !(VARIABLE_IS_SET %class_dlgs%) BEGIN
+  OUTER_SPRINT class_dlgs ~all~
   OUTER_SET fighter_dlg = 1
   OUTER_SET ranger_dlg = 1
   OUTER_SET paladin_dlg = 1
@@ -165,6 +162,21 @@ ACTION_IF (VARIABLE_IS_SET %class_dlgs%) BEGIN
   OUTER_SET monk_dlg = 1
  END
 END
+
+//macro defaults____________________________________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dialprof.2da~) BEGIN
+
+<<<<<<<< d5/dialprof.2da
+2DA V1.0
+****
+prefix	classes	level_one	high_levels
+>>>>>>>>
+  COPY ~d5/dialprof.2da~ ~override~
+
+END
+
+APPEND ~dialprof.2da~ ~%prof_script_name%	%class_dlgs%		%script_level_one%			%script_higher_levels% ~
 
 //read weapprof_____________________________________________________________________
 //
@@ -486,9 +498,9 @@ BUT_ONLY
 //__________________________________________________________________________________
 
 ACTION_IF (script_level_one = 1) BEGIN
-  APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
-~
-IF
+  ACTION_IF (fighter_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER)
 THEN
@@ -496,7 +508,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%fighter_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (cleric_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_CLERIC)
 THEN
@@ -504,6 +520,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (druid_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_DRUID)
@@ -512,7 +533,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_MAGE)
 THEN
@@ -520,7 +545,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (thief_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_THIEF)
 THEN
@@ -528,7 +557,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%fighter_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (thief_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_MAGE_THIEF)
 THEN
@@ -536,7 +569,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (cleric_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),FIGHTER_MAGE_CLERIC)
 THEN
@@ -544,7 +581,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (ranger_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),RANGER)
@@ -553,7 +594,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (ranger_dlg = 1) OR (cleric_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),CLERIC_RANGER)
 THEN
@@ -561,7 +606,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%ranger_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (paladin_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),PALADIN)
@@ -570,7 +619,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%paladin_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (cleric_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),CLERIC)
@@ -579,7 +632,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%cleric_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (cleric_dlg = 1) OR (thief_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),CLERIC_THIEF)
 THEN
@@ -587,7 +644,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%cleric_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (cleric_dlg = 1) OR (mage_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),CLERIC_MAGE)
 THEN
@@ -595,7 +656,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%cleric_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (druid_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),DRUID)
@@ -604,7 +669,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%druid_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (shaman_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),SHAMAN)
@@ -613,7 +682,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%shaman_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (thief_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),THIEF)
@@ -622,7 +695,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%thief_init_profs%)
 END
-IF
+~ KEEP_CRLF
+  END
+  ACTION_IF (thief_dlg = 1) OR (mage_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),MAGE_THIEF)
 THEN
@@ -630,7 +707,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%thief_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (bard_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),BARD)
@@ -639,7 +720,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%bard_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (mage_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),MAGE)
@@ -649,7 +734,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%mage_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (sorcerer_dlg = 1)BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),SORCERER)
@@ -658,7 +747,11 @@ THEN
 	SetGlobal("D5PRSET","GLOBAL",1)
 	SetGlobal("D5_KIT_PRF","GLOBAL",%sorcerer_init_profs%)
 END
-
+~ KEEP_CRLF
+  END
+  ACTION_IF (monk_dlg = 1) BEGIN
+    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~
 IF
 	Global("D5PRSET","GLOBAL",0)
 	Class(LastSummonerOf(Myself),MONK)
@@ -668,6 +761,7 @@ THEN
 	SetGlobal("D5_KIT_PRF","GLOBAL",%monk_init_profs%)
 END
 ~ KEEP_CRLF
+  END
 END
 
 //__________________________________________________________________________________
@@ -702,7 +796,8 @@ ACTION_IF (script_higher_levels = 1) BEGIN
     OUTER_SET more_mage_profs = (lvl/%mage_prof_rate%)
     OUTER_SET more_sorcerer_profs = (lvl/%sorcerer_prof_rate%)
     OUTER_SET more_monk_profs = (lvl/%monk_prof_rate%)
-    APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+    ACTION_IF (fighter_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
 ~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
@@ -713,7 +808,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (thief_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -723,7 +822,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_thief_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (paladin_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -733,7 +836,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_paladin_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (ranger_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -743,7 +850,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_ranger_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (cleric_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -753,7 +864,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_cleric_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (druid_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -763,7 +878,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_druid_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (bard_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -773,7 +892,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_bard_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (mage_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -783,7 +906,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_mage_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (sorcerer_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -793,7 +920,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_sorcerer_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (monk_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -803,7 +934,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_monk_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -813,7 +948,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (cleric_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -823,7 +962,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (thief_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -833,7 +976,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (druid_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -843,7 +990,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (cleric_dlg = 1) OR (ranger_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -853,7 +1004,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_ranger_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (cleric_dlg = 1) OR (thief_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -863,7 +1018,25 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_thief_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (cleric_dlg = 1) OR (mage_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
+	Global("D5PRSET","GLOBAL",1)
+	Global("D5PRMOR","GLOBAL",0)
+	Level(LastSummonerOf(Myself),%lvl%)
+	Class(LastSummonerOf(Myself),CLERIC_MAGE)
+THEN
+	RESPONSE #100
+	SetGlobal("D5PRMOR","GLOBAL",1)
+	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_cleric_profs%)
+END
+~ KEEP_CRLF
+    END
+    ACTION_IF (mage_dlg = 1) OR (thief_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -873,7 +1046,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_thief_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (cleric_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -883,7 +1060,11 @@ THEN
 	SetGlobal("D5PRMOR","GLOBAL",1)
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
-IF
+~ KEEP_CRLF
+    END
+    ACTION_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (thief_dlg = 1) BEGIN
+      APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~
+~IF
 	Global("D5PRSET","GLOBAL",1)
 	Global("D5PRMOR","GLOBAL",0)
 	Level(LastSummonerOf(Myself),%lvl%)
@@ -894,6 +1075,7 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",%more_fighter_profs%)
 END
 ~ KEEP_CRLF
+    END
   END
 END
 
@@ -952,14 +1134,113 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	PATCH_IF (classids_num = 1) BEGIN
 	  SPRINT short_class ~ma~
 	END
-	PATCH_IF (classids_num = 2) OR (classids_num = 7) OR (classids_num = 8) OR (classids_num = 9) OR (classids_num = 10) OR (classids_num = 16) OR (classids_num = 17) BEGIN
+	PATCH_IF (classids_num = 2) BEGIN
 	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
 	END
-	PATCH_IF (classids_num = 3) OR (classids_num = 14) OR (classids_num = 15) BEGIN
+	PATCH_IF (classids_num = 7) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (mage_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (mage_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 8) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (cleric_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (cleric_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 9) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (thief_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (thief_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 10) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (thief_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (mage_dlg = 0) AND (thief_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 16) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (druid_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (druid_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 17) BEGIN
+	  SPRINT short_class ~fi~
+	  PATCH_IF (fighter_dlg = 1) OR (mage_dlg = 1) OR (cleric_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (fighter_dlg = 0) AND (mage_dlg = 0) AND (cleric_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 3) BEGIN
 	  SPRINT short_class ~cl~
+	  PATCH_IF (cleric_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (cleric_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
 	END
-	PATCH_IF (classids_num = 4) OR (classids_num = 13) BEGIN
+	PATCH_IF (classids_num = 14) BEGIN
+	  SPRINT short_class ~cl~
+	  PATCH_IF (cleric_dlg = 1) OR (mage_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (cleric_dlg = 0) AND (mage_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 15) BEGIN
+	  SPRINT short_class ~cl~
+	  PATCH_IF (cleric_dlg = 1) OR (thief_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (cleric_dlg = 0) AND (thief_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 4) BEGIN
 	  SPRINT short_class ~th~
+	  PATCH_IF (thief_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (thief_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 13) BEGIN
+	  SPRINT short_class ~th~
+	  PATCH_IF (thief_dlg = 1) OR (mage_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (thief_dlg = 0) AND (mage_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
 	END
 	PATCH_IF (classids_num = 5) BEGIN
 	  SPRINT short_class ~ba~
@@ -970,8 +1251,23 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	PATCH_IF (classids_num = 11) BEGIN
 	  SPRINT short_class ~dr~
 	END
-	PATCH_IF (classids_num = 12) OR (classids_num = 18) BEGIN
+	PATCH_IF (classids_num = 12) BEGIN
 	  SPRINT short_class ~ra~
+	  PATCH_IF (ranger_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (ranger_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
+	END
+	PATCH_IF (classids_num = 18) BEGIN
+	  SPRINT short_class ~ra~
+	  PATCH_IF (ranger_dlg = 1) OR (cleric_dlg = 1) BEGIN
+	    SET valid_class = 1
+	  END
+	  PATCH_IF (ranger_dlg = 0) AND (cleric_dlg = 0) BEGIN
+	    SET valid_class = 0
+	  END
 	END
 	PATCH_IF (classids_num = 19) BEGIN
 	  SPRINT short_class ~so~
@@ -982,8 +1278,10 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	PATCH_IF (classids_num = 21) BEGIN
 	  SPRINT short_class ~sh~
 	END
-	PATCH_IF (VARIABLE_IS_SET %kitids_name%) AND (VARIABLE_IS_SET %classids_name%) BEGIN
-	  SPRINT $d5_kits_profs(~%kitids_name%~ ~kit~ ~%classids_name%~ ~%short_class%~) ~%prof_col%~
+	PATCH_IF (valid_class = 1) BEGIN
+	  PATCH_IF (VARIABLE_IS_SET %kitids_name%) AND (VARIABLE_IS_SET %classids_name%) BEGIN
+	    SPRINT $d5_kits_profs(~%kitids_name%~ ~kit~ ~%classids_num%~ ~%short_class%~) ~%prof_col%~
+	  END
 	END
   END
 
@@ -1006,8 +1304,8 @@ END
   END
 END
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~clabshgs.2da~) OR (FILE_EXISTS_IN_GAME ~clabsh01.2da~) BEGIN
-
+ACTION_IF (shaman_dlg = 1) BEGIN
+ ACTION_IF (FILE_EXISTS_IN_GAME ~clabshgs.2da~) OR (FILE_EXISTS_IN_GAME ~clabsh01.2da~) BEGIN
   APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ ~
 IF
 	Global("D5PRSET","GLOBAL",1)
@@ -1020,10 +1318,12 @@ THEN
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%sh",Myself))
 END
 ~ KEEP_CRLF
-
+ END
 END
 
-APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ ~
+ACTION_IF (mage_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1034,7 +1334,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%ma",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1045,7 +1350,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (cleric_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1056,7 +1366,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%cl",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (thief_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1067,7 +1382,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%th",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (bard_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1078,7 +1398,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%ba",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (paladin_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1089,7 +1414,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%pa",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (druid_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1100,7 +1430,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%dr",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (ranger_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1111,7 +1446,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%ra",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1122,7 +1462,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1133,7 +1478,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1144,7 +1494,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1155,7 +1510,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (thief_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1166,7 +1526,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%th",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (cleric_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1177,7 +1542,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%cl",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (cleric_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1188,7 +1558,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%cl",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1199,7 +1574,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (fighter_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1210,7 +1590,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%fi",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (ranger_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1221,7 +1606,12 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%ra",Myself))
 END
+~ KEEP_CRLF
+END
 
+ACTION_IF (monk_dlg = 1) BEGIN
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	Global("D5PRSET","GLOBAL",1)
 	GlobalGT("D5_KIT_PRF","GLOBAL",0)
@@ -1232,7 +1622,11 @@ THEN
 	IncrementGlobal("D5_KIT_PRF","GLOBAL",-1)
 	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("%prof_script_name%mo",Myself))
 END
+~ KEEP_CRLF
+END
 
+ APPEND_OUTER ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ 
+~
 IF
 	True()
 THEN
@@ -2489,7 +2883,9 @@ ACTION_FOR_EACH class IN ~fighter~ ~ranger~ ~paladin~ ~cleric~ ~druid~ ~shaman~ 
     LPM prof_name_replacements
 */
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%fi.d~
+LAM BASE_DLG
+
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%fi.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%fi~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%FI~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%fighter_sp_min_level%~
@@ -2498,7 +2894,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%fighter_gm_min_level%~
     LPM prof_name_replacements
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ra.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ra.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%ra~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%RA~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%ranger_sp_min_level%~
@@ -2507,7 +2903,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%ranger_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%pa.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%pa.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%pa~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%PA~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%paladin_sp_min_level%~
@@ -2516,7 +2912,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%paladin_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%cl.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%cl.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%cl~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%CL~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%cleric_sp_min_level%~
@@ -2525,7 +2921,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%cleric_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%dr.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%dr.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%dr~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%DR~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%druid_sp_min_level%~
@@ -2534,7 +2930,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%druid_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%sh.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%sh.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%sh~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%SH~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%shaman_sp_min_level%~
@@ -2543,7 +2939,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%shaman_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%th.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%th.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%th~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%TH~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%thief_sp_min_level%~
@@ -2552,7 +2948,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%thief_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ba.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ba.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%ba~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%BA~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%bard_sp_min_level%~
@@ -2561,7 +2957,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%bard_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ma.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%ma.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%ma~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%MA~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%mage_sp_min_level%~
@@ -2570,7 +2966,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%mage_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%so.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%so.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%so~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%SO~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%sorcerer_sp_min_level%~
@@ -2579,7 +2975,7 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%sorcerer_gm_min_level%~
     LPM prof_name_replacements
 	
-COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%mo.d~
+COPY ~inline/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/%prof_script_name%mo.d~
 	REPLACE_TEXTUALLY ~d5profx~ ~%prof_script_name%mo~
 	REPLACE_TEXTUALLY ~D5PROFX~ ~%prof_script_name%MO~
 	REPLACE_TEXTUALLY ~sp_min_level~ ~%monk_sp_min_level%~
@@ -2588,387 +2984,403 @@ COPY ~%MOD_FOLDER%/lib/dialprof/d5profx.d~ ~weidu_external/%MOD_FOLDER%/compile/
 	REPLACE_TEXTUALLY ~gm_min_level~ ~%monk_gm_min_level%~
     LPM prof_name_replacements
 	
-
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P89.spl~
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D51P90.spl~
+CREATE SPL ~D51P89~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = 1 parameter2 = 89 timing = 9 END
+  COPY_EXISTING ~D51P89.spl~ ~override/D51P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D51P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/D51P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d51P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d51P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter2 = 134 END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P89.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P89.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D52P90.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/D52P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D52P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/D52P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d52P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d52P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 2 parameter2 = 134 END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P89.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P89.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P90.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D53P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/D53P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d53P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d53P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 3 parameter2 = 134 END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P89.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P89.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P90.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/D54P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/D54P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d54P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d54P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 4 parameter2 = 134 END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P89.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P89.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P90.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d55P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d55P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 5 parameter2 = 134 END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P89.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P89.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P90.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P90.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 90 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P91.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P91.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 91 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P92.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P92.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 92 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P93.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P93.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 93 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P94.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P94.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 94 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P95.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P95.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 95 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P96.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P96.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 96 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P97.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P97.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 97 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P98.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P98.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 98 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P99.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P99.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 99 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P100.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P100.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 100 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P101.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P101.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 101 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P102.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P102.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 102 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P103.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P103.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 103 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P104.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P104.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 104 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P105.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P105.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 105 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P106.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P106.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 106 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P107.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P107.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 107 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P108.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P108.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 108 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P109.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P109.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 109 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P110.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P110.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 110 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P111.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P111.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 111 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P112.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P112.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 112 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P113.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P113.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 113 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P114.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P114.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 114 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P115.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P115.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 115 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P124.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P124.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 124 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P127.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P127.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 127 END
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_1prf.spl~ ~override/d56P134.spl~
+  COPY_EXISTING ~D51P89.spl~ ~override/d56P134.spl~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 parameter1 = 6 parameter2 = 134 END
 
 COPY ~%MOD_FOLDER%/lib/dialprof/d5_prof.bam~ ~override~
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_cprf.eff~ ~override/%prof_script_name%.eff~
+
+CREATE EFF ~%prof_script_name%~
+  WRITE_LONG 0x10 67 
+  WRITE_LONG 0x14 1
+  WRITE_LONG 0x20 0
+  WRITE_LONG 0x24 0
+  WRITE_LONG 0x28 60
+  WRITE_LONG 0x2c 100
   WRITE_EVALUATED_ASCII 0x30 ~%prof_script_name%~ #8
+  WRITE_ASCII 0x70 ~shskull~ #8
+
 COPY ~%MOD_FOLDER%/lib/dialprof/d5_cprf.cre~ ~override/%prof_script_name%.cre~
   WRITE_EVALUATED_ASCII 0x248 ~%prof_script_name%~ #8
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_base.spl~ ~override/%prof_script_name%1.spl~
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+CREATE SPL ~%prof_script_name%1~
+  WRITE_SHORT 0x1c 4
+  WRITE_LONG 0x34 1
+  LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 171 timing = 1 STR_VAR resource = EVAL ~%prof_script_name%a~ END
 
-COPY ~%MOD_FOLDER%/lib/dialprof/d5_base.spl~ ~override/%prof_script_name%a.spl~
+CREATE SPL ~%prof_script_name%a~
+  WRITE_SHORT 0x1c 4
+  WRITE_LONG 0x34 1
   SAY NAME1 @2091
   SAY UNIDENTIFIED_DESC @2091
   WRITE_ASCII 0x3a ~d5_prof~ #8
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5_prof~ END
+  LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 STR_VAR icon = ~d5_prof~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 1 duration = 30 STR_VAR resource = EVAL ~%prof_script_name%~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%prof_script_name%a~ END
 
@@ -3016,4 +3428,1182 @@ END	//	end with_tra
 
 END	//	end define macro
 
-//
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_MACRO BASE_DLG BEGIN
+
+<<<<<<<< inline/d5profx.d
+
+BEGIN ~D5PROFX~
+
+IF ~True()~ THEN BEGIN d5profx
+SAY @2091
+
+IF ~GlobalGT("D5_PROF_89","LOCALS",0) ProficiencyLT(Myself,89,1)~ THEN REPLY #name_89 GOTO d5profx_189
+IF ~GlobalGT("D5_PROF_89","LOCALS",1) Proficiency(Myself,89,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_89 GOTO d5profx_289
+IF ~GlobalGT("D5_PROF_89","LOCALS",2) Proficiency(Myself,89,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_89 GOTO d5profx_389
+IF ~GlobalGT("D5_PROF_89","LOCALS",3) Proficiency(Myself,89,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_89 GOTO d5profx_489
+IF ~GlobalGT("D5_PROF_89","LOCALS",4) Proficiency(Myself,89,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_89 GOTO d5profx_589
+IF ~GlobalGT("D5_PROF_89","LOCALS",5) Proficiency(Myself,89,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_89 GOTO d5profx_689
+IF ~GlobalGT("D5_PROF_90","LOCALS",0) ProficiencyLT(Myself,90,1)~ THEN REPLY #name_90 GOTO d5profx_190
+IF ~GlobalGT("D5_PROF_90","LOCALS",1) Proficiency(Myself,90,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_90 GOTO d5profx_290
+IF ~GlobalGT("D5_PROF_90","LOCALS",2) Proficiency(Myself,90,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_90 GOTO d5profx_390
+IF ~GlobalGT("D5_PROF_90","LOCALS",3) Proficiency(Myself,90,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_90 GOTO d5profx_490
+IF ~GlobalGT("D5_PROF_90","LOCALS",4) Proficiency(Myself,90,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_90 GOTO d5profx_590
+IF ~GlobalGT("D5_PROF_90","LOCALS",5) Proficiency(Myself,90,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_90 GOTO d5profx_690
+IF ~GlobalGT("D5_PROF_91","LOCALS",0) ProficiencyLT(Myself,91,1)~ THEN REPLY #name_91 GOTO d5profx_191
+IF ~GlobalGT("D5_PROF_91","LOCALS",1) Proficiency(Myself,91,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_91 GOTO d5profx_291
+IF ~GlobalGT("D5_PROF_91","LOCALS",2) Proficiency(Myself,91,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_91 GOTO d5profx_391
+IF ~GlobalGT("D5_PROF_91","LOCALS",3) Proficiency(Myself,91,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_91 GOTO d5profx_491
+IF ~GlobalGT("D5_PROF_91","LOCALS",4) Proficiency(Myself,91,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_91 GOTO d5profx_591
+IF ~GlobalGT("D5_PROF_91","LOCALS",5) Proficiency(Myself,91,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_91 GOTO d5profx_691
+IF ~GlobalGT("D5_PROF_92","LOCALS",0) ProficiencyLT(Myself,92,1)~ THEN REPLY #name_92 GOTO d5profx_192
+IF ~GlobalGT("D5_PROF_92","LOCALS",1) Proficiency(Myself,92,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_92 GOTO d5profx_292
+IF ~GlobalGT("D5_PROF_92","LOCALS",2) Proficiency(Myself,92,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_92 GOTO d5profx_392
+IF ~GlobalGT("D5_PROF_92","LOCALS",3) Proficiency(Myself,92,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_92 GOTO d5profx_492
+IF ~GlobalGT("D5_PROF_92","LOCALS",4) Proficiency(Myself,92,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_92 GOTO d5profx_592
+IF ~GlobalGT("D5_PROF_92","LOCALS",5) Proficiency(Myself,92,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_92 GOTO d5profx_692
+IF ~GlobalGT("D5_PROF_93","LOCALS",0) ProficiencyLT(Myself,93,1)~ THEN REPLY #name_93 GOTO d5profx_193
+IF ~GlobalGT("D5_PROF_93","LOCALS",1) Proficiency(Myself,93,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_93 GOTO d5profx_293
+IF ~GlobalGT("D5_PROF_93","LOCALS",2) Proficiency(Myself,93,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_93 GOTO d5profx_393
+IF ~GlobalGT("D5_PROF_93","LOCALS",3) Proficiency(Myself,93,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_93 GOTO d5profx_493
+IF ~GlobalGT("D5_PROF_93","LOCALS",4) Proficiency(Myself,93,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_93 GOTO d5profx_593
+IF ~GlobalGT("D5_PROF_93","LOCALS",5) Proficiency(Myself,93,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_93 GOTO d5profx_693
+IF ~GlobalGT("D5_PROF_94","LOCALS",0) ProficiencyLT(Myself,94,1)~ THEN REPLY #name_94 GOTO d5profx_194
+IF ~GlobalGT("D5_PROF_94","LOCALS",1) Proficiency(Myself,94,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_94 GOTO d5profx_294
+IF ~GlobalGT("D5_PROF_94","LOCALS",2) Proficiency(Myself,94,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_94 GOTO d5profx_394
+IF ~GlobalGT("D5_PROF_94","LOCALS",3) Proficiency(Myself,94,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_94 GOTO d5profx_494
+IF ~GlobalGT("D5_PROF_94","LOCALS",4) Proficiency(Myself,94,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_94 GOTO d5profx_594
+IF ~GlobalGT("D5_PROF_94","LOCALS",5) Proficiency(Myself,94,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_94 GOTO d5profx_694
+IF ~GlobalGT("D5_PROF_95","LOCALS",0) ProficiencyLT(Myself,95,1)~ THEN REPLY #name_95 GOTO d5profx_195
+IF ~GlobalGT("D5_PROF_95","LOCALS",1) Proficiency(Myself,95,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_95 GOTO d5profx_295
+IF ~GlobalGT("D5_PROF_95","LOCALS",2) Proficiency(Myself,95,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_95 GOTO d5profx_395
+IF ~GlobalGT("D5_PROF_95","LOCALS",3) Proficiency(Myself,95,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_95 GOTO d5profx_495
+IF ~GlobalGT("D5_PROF_95","LOCALS",4) Proficiency(Myself,95,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_95 GOTO d5profx_595
+IF ~GlobalGT("D5_PROF_95","LOCALS",5) Proficiency(Myself,95,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_95 GOTO d5profx_695
+IF ~GlobalGT("D5_PROF_96","LOCALS",0) ProficiencyLT(Myself,96,1)~ THEN REPLY #name_96 GOTO d5profx_196
+IF ~GlobalGT("D5_PROF_96","LOCALS",1) Proficiency(Myself,96,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_96 GOTO d5profx_296
+IF ~GlobalGT("D5_PROF_96","LOCALS",2) Proficiency(Myself,96,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_96 GOTO d5profx_396
+IF ~GlobalGT("D5_PROF_96","LOCALS",3) Proficiency(Myself,96,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_96 GOTO d5profx_496
+IF ~GlobalGT("D5_PROF_96","LOCALS",4) Proficiency(Myself,96,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_96 GOTO d5profx_596
+IF ~GlobalGT("D5_PROF_96","LOCALS",5) Proficiency(Myself,96,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_96 GOTO d5profx_696
+IF ~GlobalGT("D5_PROF_97","LOCALS",0) ProficiencyLT(Myself,97,1)~ THEN REPLY #name_97 GOTO d5profx_197
+IF ~GlobalGT("D5_PROF_97","LOCALS",1) Proficiency(Myself,97,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_97 GOTO d5profx_297
+IF ~GlobalGT("D5_PROF_97","LOCALS",2) Proficiency(Myself,97,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_97 GOTO d5profx_397
+IF ~GlobalGT("D5_PROF_97","LOCALS",3) Proficiency(Myself,97,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_97 GOTO d5profx_497
+IF ~GlobalGT("D5_PROF_97","LOCALS",4) Proficiency(Myself,97,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_97 GOTO d5profx_597
+IF ~GlobalGT("D5_PROF_97","LOCALS",5) Proficiency(Myself,97,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_97 GOTO d5profx_697
+IF ~GlobalGT("D5_PROF_98","LOCALS",0) ProficiencyLT(Myself,98,1)~ THEN REPLY #name_98 GOTO d5profx_198
+IF ~GlobalGT("D5_PROF_98","LOCALS",1) Proficiency(Myself,98,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_98 GOTO d5profx_298
+IF ~GlobalGT("D5_PROF_98","LOCALS",2) Proficiency(Myself,98,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_98 GOTO d5profx_398
+IF ~GlobalGT("D5_PROF_98","LOCALS",3) Proficiency(Myself,98,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_98 GOTO d5profx_498
+IF ~GlobalGT("D5_PROF_98","LOCALS",4) Proficiency(Myself,98,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_98 GOTO d5profx_598
+IF ~GlobalGT("D5_PROF_98","LOCALS",5) Proficiency(Myself,98,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_98 GOTO d5profx_698
+IF ~GlobalGT("D5_PROF_99","LOCALS",0) ProficiencyLT(Myself,99,1)~ THEN REPLY #name_99 GOTO d5profx_199
+IF ~GlobalGT("D5_PROF_99","LOCALS",1) Proficiency(Myself,99,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_99 GOTO d5profx_299
+IF ~GlobalGT("D5_PROF_99","LOCALS",2) Proficiency(Myself,99,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_99 GOTO d5profx_399
+IF ~GlobalGT("D5_PROF_99","LOCALS",3) Proficiency(Myself,99,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_99 GOTO d5profx_499
+IF ~GlobalGT("D5_PROF_99","LOCALS",4) Proficiency(Myself,99,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_99 GOTO d5profx_599
+IF ~GlobalGT("D5_PROF_99","LOCALS",5) Proficiency(Myself,99,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_99 GOTO d5profx_699
+IF ~GlobalGT("D5_PROF_100","LOCALS",0) ProficiencyLT(Myself,100,1)~ THEN REPLY #name_100 GOTO d5profx_1100
+IF ~GlobalGT("D5_PROF_100","LOCALS",1) Proficiency(Myself,100,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_100 GOTO d5profx_2100
+IF ~GlobalGT("D5_PROF_100","LOCALS",2) Proficiency(Myself,100,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_100 GOTO d5profx_3100
+IF ~GlobalGT("D5_PROF_100","LOCALS",3) Proficiency(Myself,100,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_100 GOTO d5profx_4100
+IF ~GlobalGT("D5_PROF_100","LOCALS",4) Proficiency(Myself,100,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_100 GOTO d5profx_5100
+IF ~GlobalGT("D5_PROF_100","LOCALS",5) Proficiency(Myself,100,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_100 GOTO d5profx_6100
+IF ~GlobalGT("D5_PROF_101","LOCALS",0) ProficiencyLT(Myself,101,1)~ THEN REPLY #name_101 GOTO d5profx_1101
+IF ~GlobalGT("D5_PROF_101","LOCALS",1) Proficiency(Myself,101,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_101 GOTO d5profx_2101
+IF ~GlobalGT("D5_PROF_101","LOCALS",2) Proficiency(Myself,101,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_101 GOTO d5profx_3101
+IF ~GlobalGT("D5_PROF_101","LOCALS",3) Proficiency(Myself,101,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_101 GOTO d5profx_4101
+IF ~GlobalGT("D5_PROF_101","LOCALS",4) Proficiency(Myself,101,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_101 GOTO d5profx_5101
+IF ~GlobalGT("D5_PROF_101","LOCALS",5) Proficiency(Myself,101,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_101 GOTO d5profx_6101
+IF ~GlobalGT("D5_PROF_102","LOCALS",0) ProficiencyLT(Myself,102,1)~ THEN REPLY #name_102 GOTO d5profx_1102
+IF ~GlobalGT("D5_PROF_102","LOCALS",1) Proficiency(Myself,102,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_102 GOTO d5profx_2102
+IF ~GlobalGT("D5_PROF_102","LOCALS",2) Proficiency(Myself,102,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_102 GOTO d5profx_3102
+IF ~GlobalGT("D5_PROF_102","LOCALS",3) Proficiency(Myself,102,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_102 GOTO d5profx_4102
+IF ~GlobalGT("D5_PROF_102","LOCALS",4) Proficiency(Myself,102,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_102 GOTO d5profx_5102
+IF ~GlobalGT("D5_PROF_102","LOCALS",5) Proficiency(Myself,102,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_102 GOTO d5profx_6102
+IF ~GlobalGT("D5_PROF_103","LOCALS",0) ProficiencyLT(Myself,103,1)~ THEN REPLY #name_103 GOTO d5profx_1103
+IF ~GlobalGT("D5_PROF_103","LOCALS",1) Proficiency(Myself,103,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_103 GOTO d5profx_2103
+IF ~GlobalGT("D5_PROF_103","LOCALS",2) Proficiency(Myself,103,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_103 GOTO d5profx_3103
+IF ~GlobalGT("D5_PROF_103","LOCALS",3) Proficiency(Myself,103,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_103 GOTO d5profx_4103
+IF ~GlobalGT("D5_PROF_103","LOCALS",4) Proficiency(Myself,103,4)CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_103 GOTO d5profx_5103
+IF ~GlobalGT("D5_PROF_103","LOCALS",5) Proficiency(Myself,103,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_103 GOTO d5profx_6103
+IF ~GlobalGT("D5_PROF_104","LOCALS",0) ProficiencyLT(Myself,104,1)~ THEN REPLY #name_104 GOTO d5profx_1104
+IF ~GlobalGT("D5_PROF_104","LOCALS",1) Proficiency(Myself,104,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_104 GOTO d5profx_2104
+IF ~GlobalGT("D5_PROF_104","LOCALS",2) Proficiency(Myself,104,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_104 GOTO d5profx_3104
+IF ~GlobalGT("D5_PROF_104","LOCALS",3) Proficiency(Myself,104,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_104 GOTO d5profx_4104
+IF ~GlobalGT("D5_PROF_104","LOCALS",4) Proficiency(Myself,104,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_104 GOTO d5profx_5104
+IF ~GlobalGT("D5_PROF_104","LOCALS",5) Proficiency(Myself,104,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_104 GOTO d5profx_6104
+IF ~GlobalGT("D5_PROF_105","LOCALS",0) ProficiencyLT(Myself,105,1)~ THEN REPLY #name_105 GOTO d5profx_1105
+IF ~GlobalGT("D5_PROF_105","LOCALS",1) Proficiency(Myself,105,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_105 GOTO d5profx_2105
+IF ~GlobalGT("D5_PROF_105","LOCALS",2) Proficiency(Myself,105,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_105 GOTO d5profx_3105
+IF ~GlobalGT("D5_PROF_105","LOCALS",3) Proficiency(Myself,105,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_105 GOTO d5profx_4105
+IF ~GlobalGT("D5_PROF_105","LOCALS",4) Proficiency(Myself,105,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_105 GOTO d5profx_5105
+IF ~GlobalGT("D5_PROF_105","LOCALS",5) Proficiency(Myself,105,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_105 GOTO d5profx_6105
+IF ~GlobalGT("D5_PROF_106","LOCALS",0) ProficiencyLT(Myself,106,1)~ THEN REPLY #name_106 GOTO d5profx_1106
+IF ~GlobalGT("D5_PROF_106","LOCALS",1) Proficiency(Myself,106,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_106 GOTO d5profx_2106
+IF ~GlobalGT("D5_PROF_106","LOCALS",2) Proficiency(Myself,106,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_106 GOTO d5profx_3106
+IF ~GlobalGT("D5_PROF_106","LOCALS",3) Proficiency(Myself,106,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_106 GOTO d5profx_4106
+IF ~GlobalGT("D5_PROF_106","LOCALS",4) Proficiency(Myself,106,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_106 GOTO d5profx_5106
+IF ~GlobalGT("D5_PROF_106","LOCALS",5) Proficiency(Myself,106,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_106 GOTO d5profx_6106
+IF ~GlobalGT("D5_PROF_107","LOCALS",0) ProficiencyLT(Myself,107,1)~ THEN REPLY #name_107 GOTO d5profx_1107
+IF ~GlobalGT("D5_PROF_107","LOCALS",1) Proficiency(Myself,107,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_107 GOTO d5profx_2107
+IF ~GlobalGT("D5_PROF_107","LOCALS",2) Proficiency(Myself,107,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_107 GOTO d5profx_3107
+IF ~GlobalGT("D5_PROF_107","LOCALS",3) Proficiency(Myself,107,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_107 GOTO d5profx_4107
+IF ~GlobalGT("D5_PROF_107","LOCALS",4) Proficiency(Myself,107,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_107 GOTO d5profx_5107
+IF ~GlobalGT("D5_PROF_107","LOCALS",5) Proficiency(Myself,107,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_107 GOTO d5profx_6107
+IF ~GlobalGT("D5_PROF_108","LOCALS",0) ProficiencyLT(Myself,108,1)~ THEN REPLY #name_108 GOTO d5profx_1108
+IF ~GlobalGT("D5_PROF_108","LOCALS",1) Proficiency(Myself,108,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_108 GOTO d5profx_2108
+IF ~GlobalGT("D5_PROF_108","LOCALS",2) Proficiency(Myself,108,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_108 GOTO d5profx_3108
+IF ~GlobalGT("D5_PROF_108","LOCALS",3) Proficiency(Myself,108,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_108 GOTO d5profx_4108
+IF ~GlobalGT("D5_PROF_108","LOCALS",4) Proficiency(Myself,108,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_108 GOTO d5profx_5108
+IF ~GlobalGT("D5_PROF_108","LOCALS",5) Proficiency(Myself,108,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_108 GOTO d5profx_6108
+IF ~GlobalGT("D5_PROF_109","LOCALS",0) ProficiencyLT(Myself,109,1)~ THEN REPLY #name_109 GOTO d5profx_1109
+IF ~GlobalGT("D5_PROF_109","LOCALS",1) Proficiency(Myself,109,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_109 GOTO d5profx_2109
+IF ~GlobalGT("D5_PROF_109","LOCALS",2) Proficiency(Myself,109,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_109 GOTO d5profx_3109
+IF ~GlobalGT("D5_PROF_109","LOCALS",3) Proficiency(Myself,109,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_109 GOTO d5profx_4109
+IF ~GlobalGT("D5_PROF_109","LOCALS",4) Proficiency(Myself,109,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_109 GOTO d5profx_5109
+IF ~GlobalGT("D5_PROF_109","LOCALS",5) Proficiency(Myself,109,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_109 GOTO d5profx_6109
+IF ~GlobalGT("D5_PROF_110","LOCALS",0) ProficiencyLT(Myself,110,1)~ THEN REPLY #name_110 GOTO d5profx_1110
+IF ~GlobalGT("D5_PROF_110","LOCALS",1) Proficiency(Myself,110,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_110 GOTO d5profx_2110
+IF ~GlobalGT("D5_PROF_110","LOCALS",2) Proficiency(Myself,110,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_110 GOTO d5profx_3110
+IF ~GlobalGT("D5_PROF_110","LOCALS",3) Proficiency(Myself,110,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_110 GOTO d5profx_4110
+IF ~GlobalGT("D5_PROF_110","LOCALS",4) Proficiency(Myself,110,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_110 GOTO d5profx_5110
+IF ~GlobalGT("D5_PROF_110","LOCALS",5) Proficiency(Myself,110,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_110 GOTO d5profx_6110
+IF ~GlobalGT("D5_PROF_111","LOCALS",0) ProficiencyLT(Myself,111,1)~ THEN REPLY #name_111 GOTO d5profx_1111
+IF ~GlobalGT("D5_PROF_111","LOCALS",1) Proficiency(Myself,111,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_111 GOTO d5profx_2111
+IF ~GlobalGT("D5_PROF_111","LOCALS",2) Proficiency(Myself,111,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_111 GOTO d5profx_3111
+IF ~GlobalGT("D5_PROF_111","LOCALS",3) Proficiency(Myself,111,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_111 GOTO d5profx_4111
+IF ~GlobalGT("D5_PROF_111","LOCALS",4) Proficiency(Myself,111,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_111 GOTO d5profx_5111
+IF ~GlobalGT("D5_PROF_111","LOCALS",5) Proficiency(Myself,111,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_111 GOTO d5profx_6111
+IF ~GlobalGT("D5_PROF_112","LOCALS",0) ProficiencyLT(Myself,112,1)~ THEN REPLY #name_112 GOTO d5profx_1112
+IF ~GlobalGT("D5_PROF_112","LOCALS",1) Proficiency(Myself,112,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_112 GOTO d5profx_2112
+IF ~GlobalGT("D5_PROF_112","LOCALS",2) Proficiency(Myself,112,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_112 GOTO d5profx_3112
+IF ~GlobalGT("D5_PROF_112","LOCALS",3) Proficiency(Myself,112,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_112 GOTO d5profx_4112
+IF ~GlobalGT("D5_PROF_112","LOCALS",4) Proficiency(Myself,112,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_112 GOTO d5profx_5112
+IF ~GlobalGT("D5_PROF_112","LOCALS",5) Proficiency(Myself,112,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_112 GOTO d5profx_6112
+IF ~GlobalGT("D5_PROF_113","LOCALS",0) ProficiencyLT(Myself,113,1)~ THEN REPLY #name_113 GOTO d5profx_1113
+IF ~GlobalGT("D5_PROF_113","LOCALS",1) Proficiency(Myself,113,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_113 GOTO d5profx_2113
+IF ~GlobalGT("D5_PROF_113","LOCALS",2) Proficiency(Myself,113,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_113 GOTO d5profx_3113
+IF ~GlobalGT("D5_PROF_113","LOCALS",3) Proficiency(Myself,113,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_113 GOTO d5profx_4113
+IF ~GlobalGT("D5_PROF_113","LOCALS",4) Proficiency(Myself,113,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_113 GOTO d5profx_5113
+IF ~GlobalGT("D5_PROF_113","LOCALS",5) Proficiency(Myself,113,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_113 GOTO d5profx_6113
+IF ~GlobalGT("D5_PROF_114","LOCALS",0) ProficiencyLT(Myself,114,1)~ THEN REPLY #name_114 GOTO d5profx_1114
+IF ~GlobalGT("D5_PROF_114","LOCALS",1) Proficiency(Myself,114,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_114 GOTO d5profx_2114
+IF ~GlobalGT("D5_PROF_114","LOCALS",2) Proficiency(Myself,114,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_114 GOTO d5profx_3114
+IF ~GlobalGT("D5_PROF_114","LOCALS",3) Proficiency(Myself,114,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_114 GOTO d5profx_4114
+IF ~GlobalGT("D5_PROF_114","LOCALS",4) Proficiency(Myself,114,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_114 GOTO d5profx_5114
+IF ~GlobalGT("D5_PROF_114","LOCALS",5) Proficiency(Myself,114,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_114 GOTO d5profx_6114
+IF ~GlobalGT("D5_PROF_115","LOCALS",0) ProficiencyLT(Myself,115,1)~ THEN REPLY #name_115 GOTO d5profx_1115
+IF ~GlobalGT("D5_PROF_115","LOCALS",1) Proficiency(Myself,115,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_115 GOTO d5profx_2115
+IF ~GlobalGT("D5_PROF_115","LOCALS",2) Proficiency(Myself,115,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_115 GOTO d5profx_3115
+IF ~GlobalGT("D5_PROF_115","LOCALS",3) Proficiency(Myself,115,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_115 GOTO d5profx_4115
+IF ~GlobalGT("D5_PROF_115","LOCALS",4) Proficiency(Myself,115,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_115 GOTO d5profx_5115
+IF ~GlobalGT("D5_PROF_115","LOCALS",5) Proficiency(Myself,115,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_115 GOTO d5profx_6115
+IF ~GlobalGT("D5_PROF_124","LOCALS",0) ProficiencyLT(Myself,124,1)~ THEN REPLY #name_124 GOTO d5profx_1124
+IF ~GlobalGT("D5_PROF_124","LOCALS",1) Proficiency(Myself,124,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_124 GOTO d5profx_2124
+IF ~GlobalGT("D5_PROF_124","LOCALS",2) Proficiency(Myself,124,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_124 GOTO d5profx_3124
+IF ~GlobalGT("D5_PROF_124","LOCALS",3) Proficiency(Myself,124,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_124 GOTO d5profx_4124
+IF ~GlobalGT("D5_PROF_124","LOCALS",4) Proficiency(Myself,124,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_124 GOTO d5profx_5124
+IF ~GlobalGT("D5_PROF_124","LOCALS",5) Proficiency(Myself,124,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_124 GOTO d5profx_6124
+IF ~GlobalGT("D5_PROF_127","LOCALS",0) ProficiencyLT(Myself,127,1)~ THEN REPLY #name_127 GOTO d5profx_1127
+IF ~GlobalGT("D5_PROF_127","LOCALS",1) Proficiency(Myself,127,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_127 GOTO d5profx_2127
+IF ~GlobalGT("D5_PROF_127","LOCALS",2) Proficiency(Myself,127,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_127 GOTO d5profx_3127
+IF ~GlobalGT("D5_PROF_127","LOCALS",3) Proficiency(Myself,127,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_127 GOTO d5profx_4127
+IF ~GlobalGT("D5_PROF_127","LOCALS",4) Proficiency(Myself,127,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_127 GOTO d5profx_5127
+IF ~GlobalGT("D5_PROF_127","LOCALS",5) Proficiency(Myself,127,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_127 GOTO d5profx_6127
+IF ~GlobalGT("D5_PROF_134","LOCALS",0) ProficiencyLT(Myself,134,1)~ THEN REPLY #name_134 GOTO d5profx_1134
+IF ~GlobalGT("D5_PROF_134","LOCALS",1) Proficiency(Myself,134,1) CheckStatGT(myself,sp_min_level,LEVEL)~ THEN REPLY #name_134 GOTO d5profx_2134
+IF ~GlobalGT("D5_PROF_134","LOCALS",2) Proficiency(Myself,134,2) CheckStatGT(myself,ma_min_level,LEVEL)~ THEN REPLY #name_134 GOTO d5profx_3134
+IF ~GlobalGT("D5_PROF_134","LOCALS",3) Proficiency(Myself,134,3) CheckStatGT(myself,hi_min_level,LEVEL)~ THEN REPLY #name_134 GOTO d5profx_4134
+IF ~GlobalGT("D5_PROF_134","LOCALS",4) Proficiency(Myself,134,4) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_134 GOTO d5profx_5134
+IF ~GlobalGT("D5_PROF_134","LOCALS",5) Proficiency(Myself,134,5) CheckStatGT(myself,gm_min_level,LEVEL)~ THEN REPLY #name_134 GOTO d5profx_6134
+
+END
+
+IF ~~ THEN BEGIN d5profx_189
+ SAY #desc_89
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_190
+ SAY #desc_90
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_191
+ SAY #desc_91
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_192
+ SAY #desc_92
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_193
+ SAY #desc_93
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_194
+ SAY #desc_94
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_195
+ SAY #desc_95
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_196
+ SAY #desc_96
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_197
+ SAY #desc_97
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_198
+ SAY #desc_98
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_199
+ SAY #desc_99
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_1134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2001 DO ~ApplySpellRES("D51P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+
+IF ~~ THEN BEGIN d5profx_289
+ SAY #desc_89
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_290
+ SAY #desc_90
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_291
+ SAY #desc_91
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_292
+ SAY #desc_92
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_293
+ SAY #desc_93
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_294
+ SAY #desc_94
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_295
+ SAY #desc_95
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_296
+ SAY #desc_96
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_297
+ SAY #desc_97
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_298
+ SAY #desc_98
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_299
+ SAY #desc_99
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_2134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2002 DO ~ApplySpellRES("D52P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+
+IF ~~ THEN BEGIN d5profx_389
+ SAY #desc_89
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_390
+ SAY #desc_90
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_391
+ SAY #desc_91
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_392
+ SAY #desc_92
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_393
+ SAY #desc_93
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_394
+ SAY #desc_94
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_395
+ SAY #desc_95
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_396
+ SAY #desc_96
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_397
+ SAY #desc_97
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_398
+ SAY #desc_98
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_399
+ SAY #desc_99
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_3134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2003 DO ~ApplySpellRES("D53P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+
+IF ~~ THEN BEGIN d5profx_489
+ SAY #desc_89
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_490
+ SAY #desc_90
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_491
+ SAY #desc_91
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_492
+ SAY #desc_92
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_493
+ SAY #desc_93
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_494
+ SAY #desc_94
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_495
+ SAY #desc_95
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_496
+ SAY #desc_96
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_497
+ SAY #desc_97
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_498
+ SAY #desc_98
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_499
+ SAY #desc_99
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_4134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2004 DO ~ApplySpellRES("D54P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+
+IF ~~ THEN BEGIN d5profx_589
+ SAY #desc_89
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_590
+ SAY #desc_90
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_591
+ SAY #desc_91
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_592
+ SAY #desc_92
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_593
+ SAY #desc_93
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_594
+ SAY #desc_94
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_595
+ SAY #desc_95
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_596
+ SAY #desc_96
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_597
+ SAY #desc_97
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_598
+ SAY #desc_98
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_599
+ SAY #desc_99
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_5134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2005 DO ~ApplySpellRES("D55P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+
+IF ~~ THEN BEGIN d5profx_689
+ SAY #desc_89
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P89",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_690
+ SAY #desc_90
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P90",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_691
+ SAY #desc_91
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P91",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_692
+ SAY #desc_92
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P92",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_693
+ SAY #desc_93
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P93",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_694
+ SAY #desc_94
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P94",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_695
+ SAY #desc_95
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P95",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_696
+ SAY #desc_96
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P96",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_697
+ SAY #desc_97
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P97",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_698
+ SAY #desc_98
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P98",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_699
+ SAY #desc_99
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P99",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6100
+ SAY #desc_100
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P100",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6101
+ SAY #desc_101
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P101",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6102
+ SAY #desc_102
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P102",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6103
+ SAY #desc_103
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P103",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6104
+ SAY #desc_104
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P104",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6105
+ SAY #desc_105
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P105",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6106
+ SAY #desc_106
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P106",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6107
+ SAY #desc_107
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P107",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6108
+ SAY #desc_108
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P108",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6109
+ SAY #desc_109
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P109",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6110
+ SAY #desc_110
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P110",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6111
+ SAY #desc_111
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P111",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6112
+ SAY #desc_112
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P112",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6113
+ SAY #desc_113
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P113",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6114
+ SAY #desc_114
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P114",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6115
+ SAY #desc_115
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P115",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6124
+ SAY #desc_124
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P124",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6127
+ SAY #desc_127
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P127",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+IF ~~ THEN BEGIN d5profx_6134
+ SAY #desc_134
+ IF ~~ THEN REPLY @2006 DO ~ApplySpellRES("D56P134",myself)~ EXIT 
+ IF ~~ THEN REPLY @2092 GOTO d5profx 
+END 
+>>>>>>>>
+
+END	//	end macro
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_PATCH_FUNCTION QD_ADD_EMPTY_SPELL_HEADER
+INT_VAR
+  type            = 1
+  location        = 4
+  target          = 1
+  target_count    = 0
+  range           = 0
+  required_level  = 1
+  speed           = 0
+  projectile      = 1
+  copy_header     = 0
+  insert_point    = ~-1~
+STR_VAR
+  icon            = ~~
+RET
+  insert_point
+BEGIN
+  SET hs = 0x28
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  SET insert_point = (insert_point > hc || insert_point < 0) ? hc : insert_point
+  SET copy_header = (copy_header < 0) ? 0 : copy_header
+  PATCH_IF (copy_header > hc) BEGIN
+    PATCH_WARN ~WARNING: Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES (ho + insert_point * hs) hs
+    SET hc += 1
+    SET eo += hs
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x1e) ec
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x20) ei
+      READ_ASCII (eo + ei * 0x30) effs (ec * 0x30)
+      READ_ASCII (ho + (copy_header - 1) * hs) copy (hs)
+      WRITE_ASCIIE (ho + insert_point * hs) ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i = ho; i < ho + hc * hs; i += hs) BEGIN
+      READ_SHORT (i + 0x1e) ec
+      WRITE_SHORT (i + 0x20) ei
+      SET ei += ec
+    END
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + insert_point * hs + 0x1e) ec
+      READ_SHORT (ho + insert_point * hs + 0x20) ei
+      INSERT_BYTES (eo + ei * 0x30) (ec * 0x30)
+      WRITE_ASCIIE (eo + ei * 0x30) ~%effs%~ (ec * 0x30)
+    END ELSE BEGIN
+      SET off = ho + insert_point * hs
+      WRITE_BYTE off type
+      WRITE_BYTE (off + 0x2) location
+      WRITE_ASCIIE (off + 0x4) ~%icon%~ (8)
+      WRITE_BYTE (off + 0xc) target
+      WRITE_BYTE (off + 0xd) target_count
+      WRITE_SHORT (off + 0xe) range
+      WRITE_SHORT (off + 0x10) required_level
+      WRITE_LONG (off + 0x12) speed
+      WRITE_SHORT (off + 0x26) projectile
+    END
+  END
+END
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+

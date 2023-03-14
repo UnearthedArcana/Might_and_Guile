@@ -156,6 +156,8 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu6.spl~			//	inner gate strik
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu6b~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 248 target = 1 timing = 0 duration = 126144000 STR_VAR resource = ~d5samu6x~ END
 
+COPY ~might_and_guile/fighter/samurai/d5samu7.bam~ ~override~
+
 CREATE EFF ~d5samu6b~
 	WRITE_LONG 0x10 325
 	WRITE_LONG 0x14 2
@@ -180,6 +182,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~spcl908.spl~) BEGIN
     SAY UNIDENTIFIED_DESC @6020
 END
 
+COPY ~might_and_guile/fighter/samurai/d5kisam.2da~ ~override~
+
 ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ki BEGIN
   d5ki1 => spcl211
   d5ki2 => d5samu2
@@ -190,13 +194,12 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ki BEGIN
   d5ki7 => spcl908
 END
 
-LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ END
+LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ points_table = ~d5kisam~ table_spl = ~d5kisam~ END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5kisam.spl~) BEGIN
-  COPY ~might_and_guile/fighter/samurai/d5kisam.2da~ ~override~
-    LPF semi_innate_points INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ table_spl = ~d5kisam~ END
-  BUT_ONLY
-END
+COPY_EXISTING ~d5ki7i.spl~ ~override~
+  WRITE_ASCII 0x3a ~d5samu7~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5samu7~ END
+IF_EXISTS
 
 COPY_EXISTING ~d5ki000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5ki1l~ END

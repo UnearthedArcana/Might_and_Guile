@@ -174,6 +174,7 @@ COPY ~might_and_guile/misc/d5_xp75.spl~ ~override~
   LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 104 parameter1 = 80 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5wh000.spl~) BEGIN
+ COPY ~might_and_guile/nubards/d5kiwhs.2da~ ~override~
  ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_whistler BEGIN
   d5wh01 => sppr207	
   d5wh02 => sppr105	
@@ -184,10 +185,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5wh000.spl~) BEGIN
   d5wh07 => sppr318	
   d5wh08 => sppr319	
  END
- LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5wh~ semi_innate_array = ~semi_innate_whistler~ END
- COPY ~might_and_guile/nubards/d5kiwhs.spl~ ~override~			//	add ki points
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5wh172~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5whpls~ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5wh~ semi_innate_array = ~semi_innate_whistler~ points_table = ~d5kiwhs~ table_spl = ~d5kiwhs~ END
 END
 //___________________________________________________________________________________
 
@@ -5755,7 +5753,7 @@ ACTION_IF GAME_IS ~BG2EE EET~ BEGIN
 <<<<<<<< d5/raelis+.d
 EXTEND_BOTTOM RAELIS 71 
   IF ~Global("PlayerHasStronghold","GLOBAL",0)
-  	  OR(11)
+  	  OR(13)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
 		Kit(Player1,D5_BLADESINGER)
@@ -5767,7 +5765,8 @@ EXTEND_BOTTOM RAELIS 71
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
 ~ THEN DO ~EraseJournalEntry(4685)
 EraseJournalEntry(46846)
 EraseJournalEntry(46847)
@@ -5785,7 +5784,7 @@ AddXPObject(Player6,44000)
 END
 
 EXTEND_BOTTOM RAELIS 72
-  IF ~  OR(11)
+  IF ~  OR(13)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
 		Kit(Player1,D5_BLADESINGER)
@@ -5797,12 +5796,13 @@ EXTEND_BOTTOM RAELIS 72
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
   ~ THEN GOTO 73
 END
 
 EXTEND_BOTTOM HAERDA 99
-  IF ~  OR(11)
+  IF ~  OR(13)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
 		Kit(Player1,D5_BLADESINGER)
@@ -5814,14 +5814,15 @@ EXTEND_BOTTOM HAERDA 99
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
 		Kit(Player1,D5_AGENT)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
   ~ THEN EXTERN ~RAELIS~ 59
 END
 >>>>>>>> 
 
 COMPILE ~d5/raelis+.d~
 
-// take guild away from bard, jester, skald, gallant, herald, meistersinger, loresinger
+// take guild away from bard, jester, skald, gallant, herald, meistersinger, loresinger, whistler
 
 <<<<<<<< d5/renal+.d
 ADD_TRANS_TRIGGER RENAL 7 ~!Kit(Player1,D5_BARD)
@@ -5829,7 +5830,8 @@ ADD_TRANS_TRIGGER RENAL 7 ~!Kit(Player1,D5_BARD)
 		!Kit(Player1,D5_BLADESINGER)
 		!Kit(Player1,D5_JESTER)
 		!Kit(Player1,D5_MEISTER)
-//		!Kit(Player1,D5_LORESINGER)~ DO 1
+	    !Kit(Player1,D5_WHISTLER)
+		!Kit(Player1,D5_LORESINGER_CT)~ DO 1
 EXTEND_BOTTOM RENAL 7
   IF ~OR(5)
 		Kit(Player1,D5_BARD)
@@ -5837,7 +5839,8 @@ EXTEND_BOTTOM RENAL 7
 		Kit(Player1,D5_BLADESINGER)
 		Kit(Player1,D5_JESTER)
 		Kit(Player1,D5_MEISTER)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
+	    Kit(Player1,D5_WHISTLER)
   ~ THEN REPLY #21233 GOTO 18
 END
 >>>>>>>> 
@@ -5873,33 +5876,12 @@ END	//	end game_is
 
 // IWDEE BARD INTERACTIONS____________________________________________________________
 //
-ACTION_IF GAME_IS ~iwdee~ BEGIN
-/*
-  COPY_EXISTING ~delisia.dlg~ ~OVERRIDE~
-	DECOMPILE_AND_PATCH BEGIN
-	  REPLACE_TEXTUALLY ~Class(LastTalkedToBy,BARD_ALL)~ ~OR(11)
-		Class(LastTalkedToBy,BARD_ALL)
-		Kit(LastTalkedToBy,D5_BARD)
-		Kit(LastTalkedToBy,D5_BLADE)
-		Kit(LastTalkedToBy,D5_BLADESINGER)
-		Kit(LastTalkedToBy,D5_JESTER)
-		Kit(LastTalkedToBy,D5_SKALD)
-		Kit(LastTalkedToBy,D5_GALLANT)
-		Kit(LastTalkedToBy,D5_HERALD)
-		Kit(LastTalkedToBy,D5_MEISTER)
-		Kit(LastTalkedToBy,D5_JINXER)
-		Kit(LastTalkedToBy,D5_HEXBLADE)
-		Kit(LastTalkedToBy,D5_AGENT)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
-~
-	END
-  BUT_ONLY
-*/
+ACTION_IF (FILE_EXISTS_IN_GAME ~delisia.dlg~) BEGIN // GAME_IS ~iwdee~ BEGIN
 
 <<<<<<<< d5/delisia+.d
 EXTEND_BOTTOM DELISIA 0 
   IF ~Global("Bard_Greeting","GLOBAL",0)
-  		OR(11)
+  		OR(14)
 		Kit(LastTalkedToBy,D5_BARD)
 		Kit(LastTalkedToBy,D5_BLADE)
 		Kit(LastTalkedToBy,D5_BLADESINGER)
@@ -5910,7 +5892,9 @@ EXTEND_BOTTOM DELISIA 0
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_WHISTLER)
+		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_LORESINGER_CT)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5153 
 	DO ~SetGlobal("Bard_Greeting","GLOBAL",1)
@@ -5920,7 +5904,7 @@ EXTEND_BOTTOM DELISIA 0
 		AddJournalEntry(23507,QUEST)~ 
 	GOTO 3
   IF ~Global("Bard_Greeting","GLOBAL",1)
-  		OR(11)
+  		OR(14)
 		Kit(LastTalkedToBy,D5_BARD)
 		Kit(LastTalkedToBy,D5_BLADE)
 		Kit(LastTalkedToBy,D5_BLADESINGER)
@@ -5931,7 +5915,9 @@ EXTEND_BOTTOM DELISIA 0
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_WHISTLER)
+		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_LORESINGER_CT)
 		Kit(LastTalkedToBy,D5_AGENT)~ 
 	THEN REPLY #5157 
 	EXIT
@@ -5939,7 +5925,7 @@ END
 
 EXTEND_BOTTOM DELISIA 1
   IF ~Global("Bard_Greeting","GLOBAL",0)
-  		OR(11)
+  		OR(14)
 		Kit(LastTalkedToBy,D5_BARD)
 		Kit(LastTalkedToBy,D5_BLADE)
 		Kit(LastTalkedToBy,D5_BLADESINGER)
@@ -5950,7 +5936,9 @@ EXTEND_BOTTOM DELISIA 1
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_WHISTLER)
+		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_LORESINGER_CT)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5153 
 	DO ~SetGlobal("Bard_Greeting","GLOBAL",1)
@@ -5958,7 +5946,7 @@ EXTEND_BOTTOM DELISIA 1
 		DisplayStringNoNameDlg(Myself,30979)~ 
 	GOTO 3
   IF ~Global("Bard_Greeting","GLOBAL",1)
-  		OR(11)
+  		OR(14)
 		Kit(LastTalkedToBy,D5_BARD)
 		Kit(LastTalkedToBy,D5_BLADE)
 		Kit(LastTalkedToBy,D5_BLADESINGER)
@@ -5969,7 +5957,9 @@ EXTEND_BOTTOM DELISIA 1
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_WHISTLER)
+		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_LORESINGER_CT)
 		Kit(LastTalkedToBy,D5_AGENT)~
 	THEN REPLY #5157 
 	EXIT
@@ -5977,7 +5967,7 @@ END
 
 EXTEND_BOTTOM DELISIA 10
   IF ~!Class(LastTalkedToBy,BARD_ALL)
-	OR(11)
+	OR(14)
 		Kit(LastTalkedToBy,D5_BARD)
 		Kit(LastTalkedToBy,D5_BLADE)
 		Kit(LastTalkedToBy,D5_BLADESINGER)
@@ -5988,7 +5978,9 @@ EXTEND_BOTTOM DELISIA 10
 		Kit(LastTalkedToBy,D5_MEISTER)
 		Kit(LastTalkedToBy,D5_JINXER)
 		Kit(LastTalkedToBy,D5_HEXBLADE)
-//		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_WHISTLER)
+		Kit(LastTalkedToBy,D5_LORESINGER)
+		Kit(LastTalkedToBy,D5_LORESINGER_CT)
 		Kit(LastTalkedToBy,D5_AGENT)~ 
 	THEN REPLY #34554 
 	GOTO 13
@@ -6007,7 +5999,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~bdaraya.dlg~ BEGIN
 EXTEND_BOTTOM BDARAYA 2
 
 IF ~CheckStatGT(Player1,12,CHR) 
-	OR(11)
+	OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6018,12 +6010,14 @@ IF ~CheckStatGT(Player1,12,CHR)
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #54887  EXTERN ~bdmaxwel~ 2
 
 IF ~CheckStatLT(Player1,13,CHR)
-	OR(11)
+	OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6034,7 +6028,9 @@ IF ~CheckStatLT(Player1,13,CHR)
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #54887  GOTO 4
 END
@@ -6048,7 +6044,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/bdaraya+.d~
 <<<<<<<< d5/bdautinn+.d
 EXTEND_BOTTOM BDAUTINN 1
 
- IF ~OR(11)
+ IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6059,7 +6055,9 @@ EXTEND_BOTTOM BDAUTINN 1
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44392  GOTO 9
 END
@@ -6072,7 +6070,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/bdautinn+.d~
 
 <<<<<<<< d5/BDBFORT4+.d
 EXTEND_BOTTOM BDBFORT4 7
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6083,7 +6081,9 @@ EXTEND_BOTTOM BDBFORT4 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #43682 DO ~GiveItemCreate("bdscrl3b",Player1,0,0,0)
 ~ GOTO 9
@@ -6097,7 +6097,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDBFORT4+.d~
 
 <<<<<<<< d5/BDCORWIJ+.d
 EXTEND_BOTTOM BDCORWIJ 82
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6108,7 +6108,9 @@ EXTEND_BOTTOM BDCORWIJ 82
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #52066  GOTO 84
 END
@@ -6121,7 +6123,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDCORWIJ+.d~
 
 <<<<<<<< d5/BDDELEND+.d
 EXTEND_BOTTOM BDDELEND 14
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6132,14 +6134,16 @@ EXTEND_BOTTOM BDDELEND 14
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44605 DO ~SetGlobal("BD_SDD117_PLAY","BD0108",1)
 ~ GOTO 24
 END
 
 EXTEND_BOTTOM BDDELEND 28
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6150,7 +6154,9 @@ EXTEND_BOTTOM BDDELEND 28
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44640  GOTO 37
 END
@@ -6173,7 +6179,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDELEND+.d~
 
 <<<<<<<< d5/BDDENELD+.d
 EXTEND_BOTTOM BDDENELD 18
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6184,13 +6190,15 @@ EXTEND_BOTTOM BDDENELD 18
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #48995  GOTO 20
 END
 
 EXTEND_BOTTOM BDDENELD 36
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6201,7 +6209,9 @@ EXTEND_BOTTOM BDDENELD 36
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #62096  GOTO 37
 END
@@ -6215,7 +6225,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDENELD+.d~
 
 <<<<<<<< d5/BDDREON+.d
 EXTEND_BOTTOM BDDREON 5
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6226,12 +6236,14 @@ EXTEND_BOTTOM BDDREON 5
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #61237  GOTO 7
 END
 EXTEND_BOTTOM BDDREON 8
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6242,7 +6254,9 @@ EXTEND_BOTTOM BDDREON 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #61246  GOTO 9
 END
@@ -6256,7 +6270,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDREON+.d~
 
 <<<<<<<< d5/BDDSSEN+.d
 EXTEND_BOTTOM BDDSSEN 2
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6267,13 +6281,15 @@ EXTEND_BOTTOM BDDSSEN 2
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44056  GOTO 4
 END
 
 EXTEND_BOTTOM BDDSSEN 7
-  IF ~OR(11)
+  IF ~OR(14)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
 	Kit(Player1,D5_BLADESINGER)
@@ -6284,7 +6300,9 @@ EXTEND_BOTTOM BDDSSEN 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58567  GOTO 10
 END
@@ -6299,7 +6317,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDDSSEN+.d~
 <<<<<<<< d5/BDFAMARI+.d
 EXTEND_BOTTOM BDFAMARI 2
   IF ~ CheckStatGT(Player1,16,CHR)
-   OR(12)
+   OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6311,7 +6329,9 @@ EXTEND_BOTTOM BDFAMARI 2
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58488  GOTO 3
 END
@@ -6324,7 +6344,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDFAMARI+.d~
 
 <<<<<<<< d5/BDGUAR20+.d
 EXTEND_BOTTOM BDGUAR20 18
-  IF ~OR(12)
+  IF ~OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6336,7 +6356,9 @@ EXTEND_BOTTOM BDGUAR20 18
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #64235  GOTO 19
 END
@@ -6349,7 +6371,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDGUAR20+.d~
 
 <<<<<<<< d5/BDHESTER+.d
 EXTEND_BOTTOM BDHESTER 6
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6361,14 +6383,16 @@ EXTEND_BOTTOM BDHESTER 6
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47990  GOTO 14
 
 END
 
 EXTEND_BOTTOM BDHESTER 7
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6380,7 +6404,9 @@ EXTEND_BOTTOM BDHESTER 7
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47998  GOTO 14
 END
@@ -6395,7 +6421,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDHESTER+.d~
 <<<<<<<< d5/BDJENKS+.d
 EXTEND_BOTTOM BDJENKS 3
   IF ~CheckStatGT(Player1,12,CHR)
-  OR(12)
+  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6407,7 +6433,9 @@ EXTEND_BOTTOM BDJENKS 3
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #58765  GOTO 4
 END
@@ -6420,7 +6448,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDJENKS+.d~
 
 <<<<<<<< d5/BDJOSPIL+.d
 EXTEND_BOTTOM BDJOSPIL 23
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6432,7 +6460,9 @@ EXTEND_BOTTOM BDJOSPIL 23
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44809  DO ~SetGlobal("bd_wah029","LOCALS",1)
 	IncrementGlobal("bd_jospil_score","LOCALS",2)
@@ -6447,7 +6477,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDJOSPIL+.d~
 
 <<<<<<<< d5/BDKATHEE+.d
 EXTEND_BOTTOM BDKATHEE 8
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6459,7 +6489,9 @@ EXTEND_BOTTOM BDKATHEE 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #57619  GOTO 9
 END
@@ -6472,7 +6504,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDKATHEE+.d~
 
 <<<<<<<< d5/BDKHALID+.d
 EXTEND_BOTTOM BDKHALID 36
-  IF ~  OR(14)
+  IF ~  OR(17)
 	CheckStatGT(Player1,14,INT)
 	CheckStatGT(Player1,13,WIS)
 	Class(Player1,BARD_ALL)
@@ -6486,7 +6518,9 @@ EXTEND_BOTTOM BDKHALID 36
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #57945  GOTO 37
 END
@@ -6499,7 +6533,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDKHALID+.d~
 
 <<<<<<<< d5/BDLEOPAS+.d
 EXTEND_BOTTOM BDLEOPAS 20
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6511,13 +6545,15 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47853  EXTERN ~BDVALIS~ 24
 END
 
 EXTEND_BOTTOM BDLEOPAS 20
-  IF ~  OR(12)
+  IF ~  OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6529,14 +6565,16 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47854  EXTERN ~BDCORINT~ 21
 END
 
 EXTEND_BOTTOM BDLEOPAS 20
   IF ~ CheckStatGT(Player1,15,CHR)
-	OR(12)
+	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6548,14 +6586,16 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47856  GOTO 28
 END
 
 EXTEND_BOTTOM BDLEOPAS 20
   IF ~ CheckStatLT(Player1,16,CHR)
-	OR(12)
+	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6567,7 +6607,9 @@ EXTEND_BOTTOM BDLEOPAS 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #47856  GOTO 27
 END
@@ -6583,7 +6625,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDLEOPAS+.d~
 <<<<<<<< d5/BDRASAAD+.d
 EXTEND_BOTTOM BDRASAAD 20
   IF ~  IsValidForPartyDialogue("Safana")
-	OR(12)
+	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6595,7 +6637,9 @@ EXTEND_BOTTOM BDRASAAD 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #34589  DO ~SetGlobal("BD_Spoken_Rasaad","GLOBAL",1)
 SetGlobal("bd_invited_rasaad","bd0111",1)
@@ -6604,7 +6648,7 @@ END
 
 EXTEND_BOTTOM BDRASAAD 20
   IF ~  !IsValidForPartyDialogue("Safana")
-	OR(12)
+	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6616,7 +6660,9 @@ EXTEND_BOTTOM BDRASAAD 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #34589  DO ~SetGlobal("BD_Spoken_Rasaad","GLOBAL",1)
 SetGlobal("bd_invited_rasaad","bd0111",1)
@@ -6631,7 +6677,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDRASAAD+.d~
 
 <<<<<<<< d5/BDRIGAH+.d
 EXTEND_BOTTOM BDRIGAH 20
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6643,7 +6689,9 @@ EXTEND_BOTTOM BDRIGAH 20
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #52579  GOTO 21
 END
@@ -6656,7 +6704,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDRIGAH+.d~
 
 <<<<<<<< d5/BDSHAPUR+.d
 EXTEND_BOTTOM BDSHAPUR 8
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6668,13 +6716,15 @@ EXTEND_BOTTOM BDSHAPUR 8
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #41754  GOTO 14
 END
 
 EXTEND_BOTTOM BDSHAPUR 25
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6686,7 +6736,9 @@ EXTEND_BOTTOM BDSHAPUR 25
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 		OR(2)
 	PartyHasItem("bdinsigc")
@@ -6703,7 +6755,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSHAPUR+.d~
 
 <<<<<<<< d5/BDSIMONE+.d
 EXTEND_BOTTOM BDSIMONE 14
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6715,7 +6767,9 @@ EXTEND_BOTTOM BDSIMONE 14
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #50976  GOTO 15
 END
@@ -6728,7 +6782,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSIMONE+.d~
 
 <<<<<<<< d5/BDSKIE+.d
 EXTEND_BOTTOM BDSKIE 41
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6740,13 +6794,15 @@ EXTEND_BOTTOM BDSKIE 41
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #44078  GOTO 47
 END
 
 EXTEND_BOTTOM BDSKIE 45
-  IF ~  OR(14)
+  IF ~  OR(17)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6758,7 +6814,9 @@ EXTEND_BOTTOM BDSKIE 45
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 	CheckStatGT(Player1,14,INT)
 	CheckStatGT(Player1,14,WIS)
@@ -6774,7 +6832,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDSKIE+.d~
 
 <<<<<<<< d5/BDTAKOS+.d
 EXTEND_BOTTOM BDTAKOS 21
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6786,13 +6844,15 @@ EXTEND_BOTTOM BDTAKOS 21
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #42957  GOTO 23
 END
 
 EXTEND_BOTTOM BDTAKOS 22
-  IF ~ 	OR(12)
+  IF ~ 	OR(15)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
 	Kit(Player1,D5_BLADE)
@@ -6804,7 +6864,9 @@ EXTEND_BOTTOM BDTAKOS 22
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #42962  GOTO 23
 END
@@ -6819,7 +6881,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDTAKOS+.d~
 <<<<<<<< d5/BDULORI+.d
 EXTEND_BOTTOM BDULORI 3
   IF ~  Race(Player1,ELF)
-	OR(12)
+	OR(15)
 		Class(Player1,BARD_ALL)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
@@ -6831,14 +6893,16 @@ EXTEND_BOTTOM BDULORI 3
 		Kit(Player1,D5_MEISTER)
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_WHISTLER)
+		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
 		Kit(Player1,D5_AGENT)
 ~ THEN REPLY #49207  GOTO 4
 END
 
 EXTEND_BOTTOM BDULORI 3
   IF ~  !Race(Player1,ELF)
-	OR(12)
+	OR(15)
 		Class(Player1,BARD_ALL)
 		Kit(Player1,D5_BARD)
 		Kit(Player1,D5_BLADE)
@@ -6850,7 +6914,9 @@ EXTEND_BOTTOM BDULORI 3
 		Kit(Player1,D5_MEISTER)
 		Kit(Player1,D5_JINXER)
 		Kit(Player1,D5_HEXBLADE)
-//		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_WHISTLER)
+		Kit(Player1,D5_LORESINGER)
+		Kit(Player1,D5_LORESINGER_CT)
 		Kit(Player1,D5_AGENT)
 ~ THEN REPLY #49207  GOTO 8
 END
@@ -6863,7 +6929,7 @@ COMPILE ~weidu_external/%MOD_FOLDER%/compile/BDULORI+.d~
 
 <<<<<<<< d5/BDWAIZAH+.d
 EXTEND_BOTTOM BDWAIZAH 1
-  IF ~  OR(13)
+  IF ~  OR(16)
 	CheckStatGT(Player1,13,CHR)
 	Class(Player1,BARD_ALL)
 	Kit(Player1,D5_BARD)
@@ -6876,7 +6942,9 @@ EXTEND_BOTTOM BDWAIZAH 1
 	Kit(Player1,D5_MEISTER)
 	Kit(Player1,D5_JINXER)
 	Kit(Player1,D5_HEXBLADE)
-//	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_WHISTLER)
+	Kit(Player1,D5_LORESINGER)
+	Kit(Player1,D5_LORESINGER_CT)
 	Kit(Player1,D5_AGENT)
 ~ THEN REPLY #48805  GOTO 0
 END

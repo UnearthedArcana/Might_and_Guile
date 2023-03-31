@@ -542,7 +542,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5__spheres.d5~ BEGIN
 		OUTER_TEXT_SPRINT minor_sphere_list ~%WNL%%minor_access%%minor_sphere_list%~
 	END
 	OUTER_TEXT_SPRINT total_sphere_list ~%total_sphere_list%%minor_sphere_list%~
-	OUTER_TEXT_SPRINT kit_sphere_list ~Abilities: %total_sphere_list%~
+	OUTER_TEXT_SPRINT kit_sphere_list ~%abilities% %total_sphere_list%~
 	ACTION_IF IS_AN_INT ~%kit_desc%~ BEGIN
 		ACTION_GET_STRREF %kit_desc% kit_description 
 		OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN

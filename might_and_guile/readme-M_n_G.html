@@ -52,7 +52,7 @@
     <li> [tweak mods including Tweaks Anthology]</li>
     <li> SCS</li>
     <li> Scales of Balance (v6+)</li>
-    <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Randomiser, etc.]</li>
+    <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Dual to Kit, etc.]</li>
   </ul>
   <p><strong>Modder Resources:</strong><br />
 	Might and Guile adds a handful of custom spellstates to SPLSTATE.IDS. It uses the 4th byte of stat 115, Clubs proficiency, to track certain feats. It also uses most of stat 108 and the 3rd and 4th bytes of stat 109 for the Revised Bards' "semi-spontaneous"/"5E-style" hybrid spellcasting and a couple other innate abilities. It uses the Skald and Archer kit usability flags to control spell access in the Revised Bards component.</p>

@@ -1323,7 +1323,7 @@ ADD_KIT ~D5_ELEGIST~
 //CLASSES: Mage = 1, Fighter = 2, Cleric=3, Thief = 4, Bard = 5
 //         Paladin 6, Druid = 11, Ranger = 12, Sorcerer = 19
 //         Monk = 20
-~0x00009000 13~
+~0x00001010 13~
 
 //HIGH LEVEL ABILITIES ABBREVIATION__________________________________________________
 ~D5BRD~
@@ -2102,7 +2102,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   END
 IF_EXISTS BUT_ONLY
 
-// use the, uh... archer kit for elegists
+// use the, uh... inquisitor kit for elegists
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type
   PATCH_IF spell_type = 1 BEGIN
@@ -2115,13 +2115,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 			spell_school = 9 	OR		//	wild magic
 			spell_level = 8 	OR
 			spell_level = 9 	BEGIN
-//	  WRITE_BYTE 0x1f (%bard_excludes% BOR ~0b10000000~) 		// unusable by archers
-	  WRITE_BYTE 0x1f (THIS BOR ~0b10000000~) 					// is there a better way to do this...?
+	  WRITE_BYTE 0x1e (THIS BOR ~0b00010000~) 					// unusable by inquisitors
 	END
   END
 BUT_ONLY
 
-// ***** use a different flag than archer, if archer can be made into a fighter kit
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type
   PATCH_IF spell_type = 1 BEGIN
@@ -2132,12 +2130,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  PATCH_IF  ~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi420~	OR		// minor sequencer
 				~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi710~	OR 		// sequencer
 				~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi617~	BEGIN 	// contingency
-		WRITE_BYTE 0x1f (%bard_excludes% BOR ~0b10000000~)  		// unusable by archers
+		WRITE_BYTE 0x1e (%bard_excludes% BOR ~0b00010000~)  		// unusable by inquisitors
 	  END
 	END
 	PATCH_IF (d5_bards_5E_casting = 1) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~16~) BEGIN
 	  PATCH_IF ~%SOURCE_RES%~ STRING_EQUAL_CASE ~spwi110~ 	BEGIN	// identify
-		WRITE_BYTE 0x1f (%bard_excludes% BOR ~0b10000000~)  		// unusable by archers
+		WRITE_BYTE 0x1e (%bard_excludes% BOR ~0b00010000~)  		// unusable by inquisitors
 	  END
 	END
   END

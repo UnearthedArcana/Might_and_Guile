@@ -69,7 +69,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
   d5nj7 => spsd02
  END
 
- LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5kinin~ table_spl = ~d5kinin~ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5kinin~ table_spl = ~d5kinin~ END
 
  COPY_EXISTING ~d5nj000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5nj1l~ END
@@ -182,7 +182,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
   d5nj7 => spsd02
  END
 
- LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5ninpts~ table_spl = ~d5kinin~ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5ninpts~ table_spl = ~d5kinin~ END
 
  COPY_EXISTING ~d5nj000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5nj1l~ END

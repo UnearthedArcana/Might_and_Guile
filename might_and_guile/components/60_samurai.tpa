@@ -194,7 +194,7 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ki BEGIN
   d5ki7 => spcl908
 END
 
-LAF semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ points_table = ~d5kisam~ table_spl = ~d5kisam~ END
+LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5ki~ semi_innate_array = ~semi_innate_ki~ points_table = ~d5kisam~ table_spl = ~d5kisam~ END
 
 COPY_EXISTING ~d5ki7i.spl~ ~override~
   WRITE_ASCII 0x3a ~d5samu7~ #8

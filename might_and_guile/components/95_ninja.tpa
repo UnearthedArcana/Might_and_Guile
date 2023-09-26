@@ -57,7 +57,7 @@ COPY ~might_and_guile/thief/ninja/d5ninja.2da~ ~override~
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
 
- COPY ~might_and_guile/thief/ninja/d5kinin.2da~ ~override~
+ COPY ~might_and_guile/thief/ninja/d5njpts.2da~ ~override~
 
  ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ninja BEGIN
   d5nj1 => spwi106
@@ -69,7 +69,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
   d5nj7 => spsd02
  END
 
- LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5kinin~ table_spl = ~d5kinin~ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5njpts~ table_spl = ~d5njpts~ END
 
  COPY_EXISTING ~d5nj000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5nj1l~ END
@@ -170,7 +170,7 @@ END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
 
- COPY ~might_and_guile/thief/ninja/d5ninpts.2da~ ~override~
+ COPY ~might_and_guile/thief/ninja/d5njpts.2da~ ~override~
 
  ACTION_DEFINE_ASSOCIATIVE_ARRAY semi_innate_ninja BEGIN
   d5nj1 => spwi106
@@ -182,7 +182,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
   d5nj7 => spsd02
  END
 
- LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5ninpts~ table_spl = ~d5kinin~ END
+ LAF semi_innate_casting INT_VAR semi_innate_stat = 110 semi_innate_shift = 16 STR_VAR semi_innate_prefix = ~d5nj~ semi_innate_array = ~semi_innate_ninja~ points_table = ~d5njpts~ table_spl = ~d5njpts~ END
 
  COPY_EXISTING ~d5nj000.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5nj1l~ END

@@ -1,5 +1,5 @@
 
-// v10.14 - another semi_innate fix
+// v10.15 - addressing SDRT Wondrous Recall
 
 /*
 
@@ -846,6 +846,38 @@ END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5shm-7.spl~) BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5shm-7.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+
+
+//quickly address wondrous recall_____________________________________________________
+//
+
+ACTION_IF (MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~1611~) BEGIN
+  COPY_EXISTING ~sppr611.spl~ ~override~
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-1~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-2~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-1~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-2~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-2~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~potn43.spl~) BEGIN
+//	  COPY_EXISTING ~sppr611.spl~ ~override/potn43.spl~
+	  COPY_EXISTING ~potn43.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-2~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-2~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-1~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-2~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
+	  IF_EXISTS BUT_ONLY
+    END
+  END
 END
 
 
@@ -3804,6 +3836,29 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src-9.spl~) BEGIN
 END
 
 
+//quickly address wondrous recall_____________________________________________________
+//
+ACTION_IF (MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~1611~) BEGIN
+  COPY_EXISTING ~sppr611.spl~ ~override~
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-1~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-2~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~potn43.spl~) BEGIN
+//	  COPY_EXISTING ~sppr611.spl~ ~override/potn43.spl~
+	  COPY_EXISTING ~potn43.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5src-2~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
+	  IF_EXISTS BUT_ONLY
+    END
+  END
+END
+
+
 //daily spell slot refresh____________________________________________________________
 //
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5zcast.bam~ ~override~
@@ -4944,6 +4999,29 @@ END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5shm-7.spl~) BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5shm-7.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+
+
+//quickly address wondrous recall_____________________________________________________
+//
+ACTION_IF (MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~1611~) BEGIN
+  COPY_EXISTING ~sppr611.spl~ ~override~
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-1~ END
+    LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-2~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-2~ END
+  BUT_ONLY
+  ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~potn43.spl~) BEGIN
+//	  COPY_EXISTING ~sppr611.spl~ ~override/potn43.spl~
+	  COPY_EXISTING ~potn43.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = ~d5shm-2~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-1~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5shm-2~ END
+	  IF_EXISTS BUT_ONLY
+    END
+  END
 END
 
 

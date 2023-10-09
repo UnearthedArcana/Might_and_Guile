@@ -219,14 +219,16 @@ END
 
 INCLUDE ~%MOD_FOLDER%/lib/dialprof.tpa~
 
+/*
 OUTER_SPRINT prof_script_name ~d5kifo~
 OUTER_SET script_level_one = 0
 OUTER_SET script_higher_levels = 0
 OUTER_SPRINT class_dlgs ~fi~
+*/
 
-LAM PROF_DIALOGUE
+LAF PROF_DIALOGUE INT_VAR script_level_one = 0 script_higher_levels = 0 ignore_max = 1 STR_VAR prof_script_name = ~d5kifo~ class_dlgs = ~fi~ END
 
-COPY ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~ ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
+COPY ~weidu_external/%MOD_FOLDER%/compile/d5kifof.d~ ~weidu_external/%MOD_FOLDER%/compile/d5kifof.d~
     REPLACE_TEXTUALLY ~CheckStatGT(myself,9,LEVEL)~ ~CheckStatGT(myself,8,LEVEL)~
     REPLACE_TEXTUALLY ~GOTO d5kifofi_2~ ~GOTO d5kifofi_5~
     REPLACE_TEXTUALLY ~GOTO d5kifofi_3~ ~GOTO d5kifofi_5~
@@ -246,19 +248,27 @@ COPY ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~ ~weidu_external/%MOD_FOLDE
     REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_124","LOCALS",[012345]~ ~GlobalGT("D5_PROF_124","LOCALS",99~
     REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_127","LOCALS",[012345]~ ~GlobalGT("D5_PROF_127","LOCALS",99~
     REPLACE_TEXTUALLY ~GlobalGT("D5_PROF_110","LOCALS",[012345]~ ~GlobalGT("D5_PROF_110","LOCALS",99~
+/*
     REPLACE_TEXTUALLY ~"LOCALS",2) Proficiency(Myself~ ~"LOCALS",1) Proficiency(Myself~
     REPLACE_TEXTUALLY ~"LOCALS",3) Proficiency(Myself~ ~"LOCALS",2) Proficiency(Myself~
     REPLACE_TEXTUALLY ~"LOCALS",4) Proficiency(Myself~ ~"LOCALS",3) Proficiency(Myself~
     REPLACE_TEXTUALLY ~"LOCALS",5) Proficiency(Myself~ ~"LOCALS",4) Proficiency(Myself~
+*/
 IF_EXISTS BUT_ONLY
 
 LAF set_lang RET game_lang END
 
 WITH_TRA ~%MOD_FOLDER%/lib/dialprof/%game_lang%/dialprof.tra~ BEGIN
-  COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5kifofi.d~
+  COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5kifof.d~
 END
 
-COPY_EXISTING ~d5kifoa.spl~ ~override~
+CREATE SPL ~d5kifo1~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 171 timing = 1 STR_VAR resource = EVAL ~d5kifo~ END
+
+COPY_EXISTING ~d5kifo.spl~ ~override~
   SAY NAME1 @6008
   SAY UNIDENTIFIED_DESC @6009
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 duration = 0 STR_VAR resource = ~d5kifo1~ END

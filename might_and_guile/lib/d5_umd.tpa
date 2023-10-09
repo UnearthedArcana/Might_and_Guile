@@ -1,4 +1,4 @@
-// Subtledoc's UMD v3.3
+// Subtledoc's UMD v3.4 - .STO fix
 
 //JOINABLE NPCS ARRAY MACRO__________________________________________________________
 //
@@ -212,84 +212,63 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__umd.d5~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umdw~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5_umds~ END
 
+
 //Update all stores to accept new itemtypes_________________________________________
 //
- COPY_EXISTING_REGEXP ~.*\.sto~ ~override~
-	READ_SHORT	0x08	type
-	READ_LONG	0x2c	buy_off
-	READ_LONG	0x30	buy_num
-	SET	buy_add = 0	//	Number of categories to add, to update offsets
-	SET	add_category = 0	//	Initialize check variable
-	FOR	(i = 0; i < 3; ++i)	BEGIN	SET $add_category(~%i%~) = 1	END	//	initialize check variable
-	FOR	(i = 0; i < buy_num; ++i)	BEGIN
-		READ_BYTE	(buy_off + i * 0x4)	category
-		PATCH_MATCH	category WITH
-			11 WHEN add_category = 0	BEGIN	// match category
-				++add_category
-			END
-			DEFAULT
-		END
-	END
-	//	Add categories
-	PATCH_IF	add_category	BEGIN
-		INSERT_BYTES	(buy_off + buy_num * 0x4)	0x4
-		WRITE_BYTE	(buy_off + buy_num * 0x4)	8			// new type
-		++buy_add
-		//	Update offsets
-		WRITE_LONG  0x30    (THIS + buy_add)
-		READ_LONG	0x34	items_off
-		PATCH_IF	items_off >= buy_off	BEGIN	
-			WRITE_LONG  0x34    (THIS + (buy_add * 0x04))
-		END
-		READ_LONG	0x4c	drink_off
-		PATCH_IF	drink_off >= buy_off	BEGIN
-			WRITE_LONG  0x4c    (THIS + (buy_add * 0x04))
-		END
-		READ_LONG	0x70	cures_off
-		PATCH_IF	cures_off >= buy_off	BEGIN
-			WRITE_LONG  0x70    (THIS + (buy_add * 0x04))
-		END
-	END
- BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
+  READ_LONG 0x2c buy_off   ELSE 0
+  READ_LONG 0x30 buy_num   ELSE 0
+  SET food = 0
+  FOR (index = 0 ; index < buy_num ; ++index) BEGIN
+    READ_LONG (buy_off + (index * 0x04)) item
+    PATCH_IF (item = 35) BEGIN // wands
+      SET food = 1
+    END
+    PATCH_IF (item = 13) BEGIN // food
+      SET food = 2
+      SET index = buy_num // kills loop
+    END
+  END
+  PATCH_IF (food = 1) BEGIN // if wands but no food
+    INSERT_BYTES buy_off 0x04
+      WRITE_LONG buy_off 13
+    WRITE_LONG 0x30 (buy_num + 1)
+    PATCH_FOR_EACH offset IN 0x34 0x4c 0x70 BEGIN // adjust offsets if needed, thankfully the same in v9, v1, and v1.1
+      READ_LONG offset off
+      PATCH_IF off > buy_off BEGIN
+        WRITE_LONG offset (off + 0x04)
+      END
+    END
+  END
+BUT_ONLY
 
- COPY_EXISTING_REGEXP ~.*\.sto~ ~override~
-	READ_SHORT	0x08	type
-	READ_LONG	0x2c	buy_off
-	READ_LONG	0x30	buy_num
-	SET	buy_add = 0	//	Number of categories to add, to update offsets
-	SET	add_category = 0	//	Initialize check variable
-	FOR	(i = 0; i < 3; ++i)	BEGIN	SET $add_category(~%i%~) = 1	END	//	initialize check variable
-	FOR	(i = 0; i < buy_num; ++i)	BEGIN
-		READ_BYTE	(buy_off + i * 0x4)	category
-		PATCH_MATCH	category WITH
-			35 WHEN add_category = 0	BEGIN	// match category
-				++add_category
-			END
-			DEFAULT
-		END
-	END
-	//	Add categories
-	PATCH_IF	add_category	BEGIN
-		INSERT_BYTES	(buy_off + buy_num * 0x4)	0x4
-		WRITE_BYTE	(buy_off + buy_num * 0x4)	13			// new type
-		++buy_add
-		//	Update offsets
-		WRITE_LONG  0x30    (THIS + buy_add)
-		READ_LONG	0x34	items_off
-		PATCH_IF	items_off >= buy_off	BEGIN	
-			WRITE_LONG  0x34    (THIS + (buy_add * 0x04))
-		END
-		READ_LONG	0x4c	drink_off
-		PATCH_IF	drink_off >= buy_off	BEGIN
-			WRITE_LONG  0x4c    (THIS + (buy_add * 0x04))
-		END
-		READ_LONG	0x70	cures_off
-		PATCH_IF	cures_off >= buy_off	BEGIN
-			WRITE_LONG  0x70    (THIS + (buy_add * 0x04))
-		END
-	END
- BUT_ONLY
-//__________________________________________________________________________________
+COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
+  READ_LONG 0x2c buy_off   ELSE 0
+  READ_LONG 0x30 buy_num   ELSE 0
+  SET keys = 0
+  FOR (index = 0 ; index < buy_num ; ++index) BEGIN
+    READ_LONG (buy_off + (index * 0x04)) item
+    PATCH_IF (item = 11) BEGIN // scrolls
+      SET keys = 1
+    END
+    PATCH_IF (item = 8) BEGIN // keys
+      SET keys = 2
+      SET index = buy_num // kills loop
+    END
+  END
+  PATCH_IF (keys = 1) BEGIN // if scrolls but no keys
+    INSERT_BYTES buy_off 0x04
+      WRITE_LONG buy_off 8
+    WRITE_LONG 0x30 (buy_num + 1)
+    PATCH_FOR_EACH offset IN 0x34 0x4c 0x70 BEGIN // adjust offsets if needed, thankfully the same in v9, v1, and v1.1
+      READ_LONG offset off
+      PATCH_IF off > buy_off BEGIN
+        WRITE_LONG offset (off + 0x04)
+      END
+    END
+  END
+BUT_ONLY
+
 
 //APPLY NUMD TO NPCS________________________________________________________________
 //

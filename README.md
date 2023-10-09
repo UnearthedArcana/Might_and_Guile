@@ -1,19 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Might & Guile</title>
+<title>SubtleMods: Might & Guile</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="style/g3readme_cam.css" type="text/css" />
 <link href="style/g3icon.ico" rel="icon" type="image/bmp" />
 </head>
 <body>
-<h1>Might and Guile - a tweak mod and kit pack focusing on warriors and rogues</h1>
+<h1>SubtleMods: Might and Guile, a tweak mod and kit pack for warriors and rogues</h1>
 <div class="section">
-  <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">Duns Scotus, the SubtleDoctor</a><br />
-    On the web: <a href="https://forums.beamdog.com/discussion/43878/mod-might-and-guile-a-tweak-mod-and-kit-pack-for-warriors-and-rogues">discussion forum</a></strong></p>
-  <p><strong> Version 5.3</strong><br />
-    <strong> Languages:</strong> English<br />
-    <strong>Platforms: </strong>Windows, Mac OS X</p>
+  <p><strong> Version 5.5 </strong><br />
+  <strong> Languages:</strong> English</p>
+  <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">The Subtle Doctor</a></strong></p>
+  <p><strong><a href="https://github.com/UnearthedArcana/Might_and_Guile">Home page</a></strong></p>
+  <p><strong><a href="https://www.gibberlings3.net/forums/topic/27573-unearthed-arcana-presents-might-guile-tweaks-and-kits-for-warriors-and-rogues/#comments">Discussion Forum</a></strong></p>
+  <p><strong><a href="https://github.com/UnearthedArcana/Might_and_Guile/releases">Download</a></strong></p>
 </div>
 <h2>Overview</h2>
 <div class="section">
@@ -37,7 +38,7 @@
   </ul>
   <p>See the component descriptions below for more specific information about compatibility.</p>
   <p><strong>Load Order:</strong><br />
-    Might and Guile should be installed <strong>after</strong> all other mods that add or change items or kits. It should be installed <strong>after</strong> the "WSPATCK for All" component of <u>tb#Tweaks</u>. It should be installed <strong>before</strong> <u>Refinements</u> and <u>Sword Coast Stratagems</u>.</p>
+    Might and Guile should be installed <strong>after</strong> most other mods that add kits, and <strong>after</strong> <u>Refinements</u> (I think). It should be installed <strong>before</strong> <u>Faiths & Powers</u> and tweak mods like <u>Tweaks Anthology</u> and <u>Sword Coast Stratagems</u>.</p>
   <p>My personal install order looks something like this:
   <ul>
     <li> [quest mods]</li>
@@ -51,7 +52,6 @@
     <li> Faiths & Powers (v0.85+)</li>
     <li> [tweak mods including Tweaks Anthology]</li>
     <li> SCS</li>
-    <li> Scales of Balance (v6+)</li>
     <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Dual to Kit, etc.]</li>
   </ul>
   <p><strong>Modder Resources:</strong><br />
@@ -147,7 +147,7 @@
         &ndash; Backstab damage does not increase when leveling up.<br />.</p>
     </div><br />
     <div class="kit_description">
-      <p>SWASHBUCKLER: This rogue is part acrobat, part duellist, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as dandies, and they arenot the best at thieving. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm and stealth fail.</p>
+      <p>SWASHBUCKLER: This rogue is part acrobat, part duellist, and part wit: the epitome of charm and grace. Swashbucklers are seen by many as dandies, and they are not the best at thieving. But their skill with blades is not to be underestimated; it usually gets them out of trouble when charm and stealth fail.</p>
       <p>Advantages:<br />
         &ndash; +1 bonus to Armor Class and thac0 at 1st level, plus an additional +1 bonus every 5 levels.<br />
         &ndash; May specialize in any melee weapon usable by Thieves.<br />
@@ -315,81 +315,31 @@
     <p><strong><em>Add the MARKSMAN thief kit</em></strong></p>
     <p>This is a thief kit which mimics the Archer ranger kit in almost every way, except this kit combines archery skills with thieving abilities. If you also install component 205, Revised Archery, then the Marksman will get access to a special Called Shot which can blind the target.</p>
   </div>
-  <h4 class="subheader">Component 200 (for EE 1.4+): </h4>
+  <h4 class="subheader">Component 201 (for EE 1.4+): </h4>
   <div class="section">
-    <p><strong><em>Feat System and Revised HLAs</em></strong></p>
-      <p> This component adds learnable feats, which may be chosen by the player at certain levels in a dialogue-based method. The feats include a few melee techniques for fighters, and many skills of various kinds for thieves. If you install psionics and revised Called Shots, those abilities will be folded into this system.
-      <p> To reflect their study of martial disciplines and techniques, single-class rangers and unkitted fighters will be able to choose from among 11 warrior feats.  Fighters can choose a feat at levels 3, 6, 9, 12, 15, and 18.  Rangers can choose a feat at levels 4, 8, 13, and 18. </p>
-      <p> Thieves are more thoroughly overhauled. They will begin the game with three feats (determined by kit - but trueclass may choose any three) and then choose a new one every other level. <b>This makes fundamental changes to all thief kits.</b> Most kit abilities (traps, poison, combat bonuses) are <b>removed</b> and turned into feats. The idea is, you will be able to choose feats to make a build very similar to the vanilla kits... OR you can build a character with different capabilities. It's up to you. (But on the other hand, there are still kits, and their choice of feats is somewhat restricted by what it appropriate for that kit.) Note: every kit now begins the game with 30 skill points and gains 20 skill points per level.</p>
-      <p>This component includes one new kit: the Alchemist. This rogue is able to use knowledge of herbs and chemistry to brew powerful potions and create other psuedo-magical effects. </p>
-      <p>Each kit can choose from a custom list that is a subset of the following feats:
-	  <ul>
-	    <li> <b>Fitness - Health Conditioning:</b> this ability confers a permanent +5 hit points upon the character</li>
-	    <li> <b>Fitness - Toughness:</b> this ability confers a permanent 10% resistance to physical damage.</li>
-	    <li> <b>Fitness - Intestinal Fortitude:</b> this ability allows an extra saving throw vs. Death to avoid poison and disease.</li>
-	    <li> <b>Fitness - Unflagging Determination:</b> this ability allows an extra saving throw vs. Petrification to avoid Sleep, Hold, Stun, and fear effects.</li>
-	    <li> <b>Fitness - Quickstride:</b> this ability allows the warrior to increase his or her movement rate at will.</li>
-	    <li> <b>Fitness - Saving Throws Bonus (Mental):</b> this ability confers a permanent -2 bonus to saving throws vs. spells, wands, and psionics.</li>
-	    <li> <b>Fitness - Saving Throws Bonus (Physical):</b> this ability confers a permanent -2 bonus to saving throws vs. death/poison and petrify/polymorph.</li><br />
-	    <li> <b>Skills Mastery - Stealth Bonus:</b> this ability increase a rogue's Hide in Shadows and Move Silently skills by 10% each.</li>
-	    <li> <b>Skills Mastery - Thieving Bonus:</b> this ability increase a rogue's Pick Pockets and Open Locks skills by 10% each.</li>
-	    <li> <b>Skills Mastery - Detection Bonus:</b> this ability increase a rogue's Find Traps and Detect Illusions skills by 10% each.</li><br />
-	    <li> <b>Miscellaneous - Lore Bonus:</b> this ability confers a permanent +15 bonus to Lore. </li>
-	    <li> <b>Miscellaneous - Tracking:</b> the Tracking ability gives one a general idea of what creatures are in an area and which direction they are. Red arrows at the edge of the screen will point in the general direction of the creatures in the area. </li>
-	    <li> <b>Miscellaneous - Slippery Mind:</b> this ability allows an extra saving throw vs. Spells to avoid Charm/Domination, Confusion, Feeblemind and Maze effects. (Available at 9th level.)</li>
-	    <li> <b>Miscellaneous - Luck Bonus:</b> this ability confers a permanent +1 bonus to the Luck. </li>
-	    <li> <b>Miscellaneous - Wild Talent:</b> this ability allows you to discover a latent psionic ability, and enough PSPs to use it several times per day. (Only if the Will to Power mod is installed first)</li><br />
-	    <li> <b>Mechanical Skills - Dart Trap:</b> this ability sets a wide-area trap that does missile damage to anyone within 15 feet when it is triggered. Damage is 2d6, plus an additional 2d6 for each 6 levels of the trap-setter.</li>
-	    <li> <b>Mechanical Skills - Fire Trap:</b> this ability sets a trap that causes a fiery explosion when triggered. Damage is 2d8, plus an additional 2d8 for each 6 levels of the trap-setter. Victims may save vs Breath to take half damage and avoid being knocked back by the blast. (Available at 9th level.)</li>
-	    <li> <b>Mechanical Skills - Poison Trap:</b> this ability sets a wide-area trap that does slight missile damage to anyone within 15 feet when it is triggered, and also causes them to make a saving throw or become poisoned. The poison damage is 2d3 per round for three rounds, plus an additional 2d3 for each 6 levels of the trap-setter. (Available at 9th level.)</li>
-	    <li> <b>Mechanical Skills - Web Trap:</b> this ability sets a trap that, when triggered, covers an area with a 15 foot radius with sticky, gooey webbing. Victims must make a saving throw to avoid being held fast each round they stay in the area of effect. (Available at 9th level.)</li><br />
-	    <li> <b>Alchemy - Basic Potionmaking:</b> using foraged ingredients, this ability allows the creation of one of the following potions once per day: Potion of Healing; Antidote; Potion of Strength; Potion of Perception; Potion of Fire Resistance; Potion of Cold Resistance; or two Flaming Oils.</li>
-	    <li> <b>Alchemy - Advanced Potionmaking:</b> using foraged ingredients, this ability allows the creation of one of the following potions once per day: Elixir of Health; Potion of Regeneration; Oil of Speed; Potion of Clarity; Potion of Mind Focusing; Potion of Invisibility; or Potion of Fiery Burning. (Alchemist only - requires Basic Alchemy.)</li>
-	    <li> <b>Alchemy - Smoke Bomb/Grease Jar:</b> enable the use, once per day, of an attack with a Grease Jar (which mimics the effects of the wizard spell Grease) and a Smoke Bomb (which mimics the effects of the wizard spell Stinking Cloud).</li>
-	    <li> <b>Alchemy - Flaming Weapon:</b> usable once per day, this ability coats a weapon in a viscous and highly flammable oil. For 10 rounds, the weapon will do 1d4 fire damage in addition to normal damage. </li>
-	    <li> <b>Alchemy - Poison Weapon (Toxin):</b> this ability allows an Assassin to coat a weapon in a potent toxin. When it enters the bloodstream of a victim, they take immediate damage from the poison, and must save vs. Death to avoid taking more damage over the next several rounds. As the Assassin reaches higher level, the amount and duration of the damage increase. The poison retains its potency for 5 rounds, and victims may only be affected once per round. (Assassin only.)</li>
-	    <li> <b>Alchemy - Poison Weapon (Paralytic):</b> this ability allows a Hunter to coat a weapon in a contact poison that causes both paralysis/shock and unconsciousness in victims. after being applied, its potency lasts for 5 rounds. (Hunter only.)</li>
-	    <li> <b>Alchemy - Hulking Transformation:</b> The Alchemist causes a permanent change in his or her physiology, becoming able to trigger a transformation into a powerful brute once per day. This ability comes at a cost, however, resulting in a permanent -1 penalty to the Alchemist's Strength and Constitution. (Alchemist only.)</li><br />
-	    <li> <b>Combat Skills - Dodge:</b> this ability confers a permanent -1 bonus to Armor Class. (Swashbucklers may repeat this feat up to 6 times; other may choose it twice.)</li>
-	    <li> <b>Combat Skills - Missile Snaring:</b> this ability enables the deflection of the base (missile) damage from an incoming ranged attack, once per round. (Available at 9th level.)</li>
-	    <li> <b>Combat Skills - Mental Resilience:</b> this ability confers a permanent -2 bonus to saving throws vs. Spells and Wands. </li>
-	    <li> <b>Combat Skills - Physical Resilience:</b> this ability confers a permanent -2 bonus to saving throws vs. Death/Poison and Petrify/Polymorph. </li>
-	    <li> <b>Combat Skills - Spell Evasion:</b> upon choosing this feat, when targeted by a spell that can be evaded (Fireball, Lightning Bolt, etc.), the effects may be completely avoided upon a successful save vs. Breath. Such spells and effects cannot be evaded when helpless (e.g. held, stunned, or asleep), however.  (This ability is identical to IWDEE's Evasion. If installed on IWDEE, thieves will not receive Evasion automatically, instead they must choose this feat.</li>
-	    <li> <b>Combat Skills - Escape Artist:</b> after choosing this feat, you have a chance to be affected by a brief 'Remove Paralysis' effect whenever Held, Webbed, Entangled, or otherwise helpless.</li>
-	    <li> <b>Combat Skills - Combat Training:</b> this feat confers a permanent +1 bonus to all melee attack rolls. (Swashbucklers may repeat this feat up to 6 times; others may choose it twice.)</li>
-	    <li> <b>Combat Skills - Ranged Accuracy:</b> this ability confers a permanent +1 bonus to all ranged attack rolls. </li>
-	    <li> <b>Combat Skills - Enhanced Backstab:</b> this ability increases a rogue's or ranger's backstab multiplier by 1. (Assassins may take this feat up to 3 times; other may choose it once.)</li></li>
-	    <li> <b>Combat Skills - Fighting Dirty:</b> once per round, when a rogue with this ability makes successful melee attacks with certain weapons, it may cause debilitating secondary effects upon a failed save vs. Breath. Such strikes might cripple and slow the target, causing a -2 penalty to attacks and damage for three rounds; or trip the target, who must spend one round fumbling to regain his footing; or stun the target for three seconds.</li>
-	    <li> <b>Combat Skills - Blind Opponent:</b> use of this ability involves throwing sand, dirt, or some other material at the target's eyes, causing a very brief period of Blindness upon a failed save vs. Breath.</li>
-	    <li> <b>Combat Skills - Disrupt Magic:</b> upon using this ability, which lasts two rounds and may be used once per combat encounter, successful melee attacks interfere with the target's inner ear, resulting in Deafness and a 50% chance of spell failure for 2 rounds upon a failed save vs. Spells.</li><br />
-	    <li> <b>Combat Skills - Precise Strike:</b> this ability confers a permanent +5% chance to score a critical hit.</li><br />
-	    <li> <b>Fighting Posture - Aggressive:</b> each successful melee hit has a 20% chance to knock the target back 10 feet, and (on a failed saving throw) stun the target for two seconds.</li>
-	    <li> <b>Fighting Posture - Disarming:</b> each successful melee hit has a 20% chance to cause the target to stumble and/or fumble their weapon, resulting in the same penalties as a Slow spell, for one round.</li>
-	    <li> <b>Fighting Posture - Parry:</b> the warrior may focus on fighting and movement techniques designed to maximize the chance of dodging blows from slashing weapons, piercing weapons, or blunt weapons.</li>
-	    <li> <b>Tactics - Discipline:</b> the warrior may supervise and direct those around him, resulting in a +1 thac0 bonus for all party members within 20 feet.</li>
-	    <li> <b>Tactics - Formation:</b> the warrior may supervise and direct those around him, resulting in a +1 AC bonus for all party members within 20 feet.</li><br />
-	    <li> <b>Magical Skills - Use Magical Devices:</b> this ability allows the rogue to cast magic from scrolls and wands, just like a wizard or a bard. (Available at 9th level.)</li>
-	    <li> <b>Magical Skills - Shadow Magic:</b> this allows the rogue to use one of the following five abilities, once per day: Sanctuary, Blindness, Shadow Door, Shadowstep, or Summon Shadow. (Available at 9th level.)</li>
-	    <li> <b>Magical Skills - Illusion Magic:</b> this allows the Shadowdancer to use one of the following five abilities, once per day: Color Spray, Blur, Glitterdust, Mirror Image, or Misleading Clone. (Available at 9th level.)</li>
-	  </ul>
-      <p> <b>A note about backstabbing:</b> the base tables are simplified: x2 at level 1, x3 at level 9, and x4 at level 18. Shadowdancers' multiplier is 1 lower than other thieves. And Swashbuckers' multiplier is always x1. BUT, any thief can take the 'Backstab Bonus' feat once to improve the multiplier (to x5 for most thieves, x4 for Shadowdancers, and x2 for Swashbucklers). And Assassins may take that feat up to three times, thus reaching a x7 multiplier.</p>
-      <p> <b>Additionally,</b> this component will alter the rogue HLA tables. Since various trap HLAs have been repurposed (and rebalanced) as low/mid-level feats, the rogue HLA tables will be quite shortened. To make up for this, the following changes will be made to Rogue HLA tables:
-	  <ul>
-	    <li> Time Trap becomes Maze Trap.</li>
-	    <li> The Swashbuckler feat 'Escape Artist' wil be available to all thieves as an HLA.</li>
-	    <li> The 'Shadow Magic' feat will be available to all thieves as an HLA.</li>
-	    <li> The 'Illusion Magic' feat will be available to all thieves as an HLA.</li>
-	    <li> Instead of traps, vanilla Trueclass bards can choose Extra level 6 Spell, Escape Artist, and Power Attack.</li>
-	    <li> Instead of traps, vanilla Blades can choose Extra Level 6 Spell, Escape Artist, and Whirlwind.</li>
-	    <li> Instead of traps, vanilla Jesters can choose Extra Level 6 Spell, Escape Artist, and Shadow Magic.</li>
-	    <li> Instead of traps, vanilla Skalds can choose Power Attack, War Cry, and Hardiness.</li>
-	  </ul>
-      <p> This component will shift thieves to the priest thac0 table, making them a bit more effective in combat.</p>
-      <p><b>Finally,</b> this component will grant every enemy thief in the game the 'Dirty Fighting' feat, which means the player will be subject to secondary effects such as being Slowed, tripped, or stunned when struck by thieves.  Additionally, every enemy fighter will be assigned one of the five warrior fighting postures, giving them an AC bonus against one damage type or a chance to Slow or knock back the player.</p>
-      <p><b>Compatibility:</b> this component treads some of the same ground as Rogue Rebalancing component #2: "Thief Kit Revisions." Best not to use them together; choose whichever you prefer. Also, you should not use the Item Revisions component "Thieves Can Use Wands" - with this component, thieves using wands is a feat! (This will override the IR component if you do install both.) This component is not compatible with Kit Revisions' Revised thief kits.</p>
-      <p>Please note that this component will only grant feats to the base five thief kits: Thief, Assassin, Hunter, Swashbuckler, and Shadowdancer, as well as thief kits added by this mod and by the 'Song & Silence' mod. Thief kits from other mods may be used alongside this component... but they will only get their normal kit abilities, no feats.</p>
+    <p><strong><em>Improved Rangers</em></strong></p>
+      <p> This component adds several abilities to all rangers: </p>
+      <p>First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
+      <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
+      <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
+      <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
+      <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
+      <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
   </div>
-  <h4 class="subheader">Component 205: </h4>
+  <h4 class="subheader">Component 210: </h4>
+  <div class="section">
+    <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
+      <p> Barbarians' and Monks' movement bonus is changed from a permanent characteristic to an at-will innate ability called Quickstride. Now if they want to walk more slowly to keep the group together, they can do so.</p>
+      <p> Rangers and Scouts (if installed, see component 420 below) will also get the Quickstride ability.</p>
+      <p> <b>Note: the extent of the speed bonus when using the Quickstride ability may be configured in the mod's .ini file. </b></p>
+  </div>
+  <h4 class="subheader">Component 220: </h4>
+  <div class="section">
+    <p><strong><em>Revised Ranger Spell Table</em></strong></p>
+      <p>This component gives rangers access to more spells, earlier. They get one extra spell slot every time they gain a level, up to 20th level. So they get their first spell slot at level 2 like bards, and at level 20 they have 5/5/5/4.</p>
+      <p>This progession matches the revised paladin spell tables in v0.85+ of the Faiths & Powers mod.</p>
+  </div>
+  <h4 class="subheader">Component 225: </h4>
   <div class="section">
     <p><strong><em>Revised Archers</em></strong></p>
     <p> This component eliminates the game's basic "Called Shot" ability and replaces it with a variety of trick shots that may be learned like feats. These called shots all root the Archer in place for one round, and every shot that strikes a target during that round has the effects described below. The Archer has a +2 bonus to thac0 while attempting these shots. Not all Called Shots are available to every Archer class - some are unique to the  Marksman, Elven Archer, or Halfling Slinger.</p> 
@@ -408,25 +358,6 @@
     </div>
     <p><b>Compatibility:</b> this component will conflict with other mods that alter the Archer kit, like the "Improved Archer" mod.</p>
   </div>
-  <h4 class="subheader">Component 220 (for EE 2.0+): </h4>
-  <div class="section">
-    <p><strong><em>Expanded Multiclassing</em></strong></p>
-      <p>This component liberalizes the multiclassing rules in targeted ways:</p>
-      <ul>
-        <li> Enables humans to multiclass.</li>
-        <li> Enables demihumans to dual-class.</li>
-        <li> Enables elves to be bards, fighter/clerics, cleric/thieves, cleric/rangers, and cleric/mages.</li>
-        <li> Enables half-elves to be cleric/thieves.</li>
-        <li> Enables dwarves to be cleric/thieves.</li>
-        <li> Enables halflings to be fighter/clerics and cleric/thieves.</li>
-      </ul>
-  </div>
-  <h4 class="subheader">Component 225: </h4>
-  <div class="section">
-    <p><strong><em>Revised Ranger Spell Table</em></strong></p>
-      <p>This component gives rangers access to more spells, earlier. They get one extra spell slot every time they gain a level, up to 20th level. So they get their first spell slot at level 2 like bards, and at level 20 they have 5/5/5/4.</p>
-      <p>This progession matches the revised paladin spell tables in v0.85+ of the Faiths & Powers mod.</p>
-  </div>
   <h4 class="subheader">Component 230: </h4>
   <div class="section">
     <p><strong><em>Revised Stalkers</em></strong></p>
@@ -438,29 +369,6 @@
     <p><strong><em>Revised Beastmasters</em></strong></p>
       <p> Beastmasters gain the ability to wield daggers, axes, and spears in addition to the normal group of weapons available to them.</p>
       <p> Beastmasters may also shapechange into wolf and werewolf forms, and may summon a Spirit Wolf to aid them in combat once per day.</p>
-  </div>
-  <h4 class="subheader">Component 240 (for EE 1.4+): </h4>
-  <div class="section">
-    <p><strong><em>Improved Rangers</em></strong></p>
-      <p> This component adds several abilities to all rangers: </p>
-      <p>First, they receive the 'Tracking' High-Level Ability as an innate power at 1st level.</p>
-      <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
-      <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
-      <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
-      <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
-      <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
-  </div>
-  <h4 class="subheader">Component 245: </h4>
-  <div class="section">
-    <p><strong><em>Revised Movement Bonuses ("Quickstride")</em></strong></p>
-      <p> Barbarians' and Monks' movement bonus is changed from a permanent characteristic to an at-will innate ability called Quickstride. Now if they want to walk more slowly to keep the group together, they can do so.</p>
-      <p> Rangers and Scouts (if installed, see component 420 below) will also get the Quickstride ability.</p>
-      <p> <b>Note: the extent of the speed bonus when using the Quickstride ability may be configured in the mod's .ini file. </b></p>
-  </div>
-  <h4 class="subheader">Component 250: </h4>
-  <div class="section">
-    <p><strong><em>Revised Berserker and Rage</em></strong></p>
-      <p> Berserkers and Wizard Slayers are limited to Mastery (+++) in weapons. Berserkers are further limited to basic proficiency (+) in fighting styles. Berserk Rage now lasts for 30 seconds, provides a bonus 0.5 APR, provides immunity to Charm/Hold/Stun/Confusion (but NOT level drain or Maze/Imprisonment). The temporary +15 hit point bonus is removed; instead, while berserking you cannot die from taking damage. However, if you are brought to zero hit points during the berserk state and are not healed, you will die with the berserk state ends. Finally, your hit point total is masked while berserking, so you don't know how many hit points you actually have left.</p>
   </div>
   <h4 class="subheader">Component 265: </h4>
   <div class="section">
@@ -490,9 +398,9 @@
   </div>
   <h4 class="subheader">Component 400 (for EE 2.0+): </h4>
   <div class="section">
-    <p><strong><em>Revised Bards</em></strong></p>
+    <p><strong><em>1E-Style Revised Bards</em></strong></p>
       <p> This component makes fundamental changes to the bard class, changes which I think of as "the best of all editions." First, harking back loosely to the 1st Edition concept of the class, all bard kits (including the base Bard) are now multiclasses of some sort. Most, being roguish in nature, fall under the mage/thief class. But some, like the Skald and Gallant, fall under the fighter/mage class. This allows roguish bards to utilize more thief skills than just Pick Pockets, and martial bards to be more effective combatants.</p>
-      <p> Second, while bards are basically multiclass Enchanters, they have a more casual and improvisational approach to magic spellcasting, which follows 5th Edition rules. While they can record spells into their spellbook from scrolls like wizards, and memorize several different spells each night, they can <i>cast</i> their memorized spells improvisationally, like a sorcerer. This has a few downsides, however: 1) bards progress more slowly than wizards in being able to use magic; 2) they cannot learn the most powerful spells, those of 8th and 9th spell levels; and 3) they cannot learn spells from the schools of Necromancy or Evocation (with the exception of the Elegist). 
+      <p> Second, while bards are basically multiclass Enchanters, 1) bards progress more slowly than wizards in the use of magic (fewer spell slots); 2) they cannot learn the most powerful spells, those of 9th spell level; and 3) they cannot learn spells from the schools of Necromancy or Evocation (with the exception of the Elegist). 
       <p> Finally, bard songs are changed to function like 3E's "inspirations," and can (generally) keep working in the background while you do other things like fight and cast spells. I've expanded the concept a bit and categorized the various bard songs into three categories:
       <ul>
         <li><b>Inspirations</b> provide bonuses for your allies. These bonuses are relatively mild, and inspirations can generally work in the background while a bard fights or casts spells.</li>
@@ -534,7 +442,6 @@
         &ndash; May cast spells starting at 2nd level.<br />
         &ndash; May use the Bardic Inspiration ability. While active, this provides allies with a +1 bonus to Luck and saving throws.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Command, Vocalize (as a 1st-level spell), Silence 15' Radius, Shout, Secret Word, Greater Command, Power Word: Silence, Great Shout, and Earthquake.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -550,7 +457,6 @@
         &ndash; May use Emanation: Intimidate, which causes penalties to the attack and damage rolls of enemies within 20 feet.<br />
         &ndash; From 6th level, may use a Blur Aura, which improves the Blade's armor class and saving throws.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; May use the Swashbuckling fighting style at will.</p>
       <p>SWASHBUCKLING: This is a fighting style which focuses on harrying one's opponent while avoiding incoming blows. It provides a 2-point bonus to Armor Class against melee attacks, at the cost of a 1-point penalty to damage and to-hit rolls. Successful strikes cause enemies to suffer a 2-point penalty to thac0 on a failed save vs. Petrification. This style may be turned on and off at will.
 </p>
@@ -568,7 +474,6 @@
         &ndash; May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
         &ndash; From 6th level, may use an Emanation of Confusion, which causes all enemies within 20 feet to save vs. Spells each round or become Confused. (The Jester cannot cast spells while the Aura of Confusion is in effect.)<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Miscast Magic, Rigid Thinking, Free Action, Chaotic Commands, Physical Mirror, and Entropy Shield.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -584,7 +489,6 @@
         &ndash; May use Inspiration: Power, granting allies within 20 feet a +1 bonus to attack damage for each five levels of the Skald's experience.<br />
         &ndash; From 6th level, may radiate an Aura of Fear, causing all enemies within 3 feet to save every found or be frightened.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Remove Fear, Flame Blade, Draw Upon Holy Might, Defensive Harmony, Righteous Magic, Magic Resistance, and Blade Barrier.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -598,7 +502,6 @@
         &ndash; Lore increased by 5 points per level.<br />
         &ndash; May use Inspiration: Courage which protects allies within 20 feet from Fear effects.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Armor of Faith, Aid, Cure Disease, Protection from Evil 10' Radius, Negative Plane Protection, and Mass Cure Light Wounds.</p>
         &ndash; From 5th level, may innately cast the priest spell Death Ward once per day.<br />
         &ndash; Receivies a +1 bonus to saves vs. death for each 6 levels of experience.</p>
@@ -616,7 +519,6 @@
         &ndash; May use Inspiration: Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.<br />
         &ndash; From 6th level, may use an Entangling Emanation, causing all enemies within 20 feet to save vs. Breath every round or be Entangled, unable to move.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of druidic Animal Summoning spells, as well as the following: Entangle, Goodberry, Barkskin, Zone of Sweet Air, Thorn Spray, Spike Growth, Call Woodland Being, and Nature's Beauty.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -632,7 +534,6 @@
         &ndash; May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
         &ndash; From 6th level, may use a focused Hex Aura, which causes enemies within melee range to suffer a 1-point penalty to Luck and saving throws; additionally, every melee hit the Jinxer lands against enemies (up to once per round) will increase this penalty by one more point. A Jinxer cannot cast spells while this aura is active.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Curse, Doom, Miscast Magic, Spiritual Clarity, Remove Curse, and Greater Malison.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -647,7 +548,6 @@
         &ndash; May use a Hex Emanation, which causes a 1-point penalty to Luck and saving throws to all enemies within 20 feet.<br />
         &ndash; From 6th level, may use a focused Hex Aura, which causes enemies within melee range to suffer a 1-point penalty to Luck and saving throws; additionally, every melee hit the Hexblade lands against enemies (up to once per round) will increase this penalty by one more point. A Hexblade cannot cast spells while this aura is active.<br />
         &ndash; May learn to manifest other bard song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Curse, Doom, Miscast Magic, Spiritual Clarity, Remove Curse, and Greater Malison.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -662,7 +562,6 @@
         &ndash; May use Emanation: Hold Undead, which can Slow nearby undead creatures or even stop them in their tracks.<br />
         &ndash; From 6th level, may use a Death Ward Inspiration, providing all allies within 20 feet with the benefits of the Death Ward priest spell. The Elegist cannot cast spells while the Death Ward Inspiration is in effect.<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.<br />
         &ndash; Automatically gains use of the following spells: Spirit Ward, Chant, Spirit Fire, Death Ward, Slay Living, and Recall Spirit.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
@@ -677,8 +576,7 @@
         &ndash; May use a Blur Aura, which improves armor class and saving throws. The Bladesinger cannot cast spells while under the effect of the Blur Aura.<br />
         &ndash; From 6th level, may perform the Bladesong while fighting, at will. The Bladesong allows the Bladesinger to merge the acts of spellcasting and attacking; spells are cast with a -5 bonus to casting time, while 1 fewer attack can be made per two combat rounds. (Note: Improved Alacrity will interrupt these effects.)<br />
         &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; At 9th level, may choose a Weapon of Focus. The Bladesinger can advance to Mastery with this weapon category, and can make one more attack every two rounds when using it.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.</p>
+        &ndash; At 9th level, may choose a Weapon of Focus. The Bladesinger can advance to Mastery with this weapon category, and can make one more attack every two rounds when using it.</p>
       <p>Restrictions:<br />
         &ndash; Must be an elf.<br />
         &ndash; May not be Chaotic.<br />
@@ -693,8 +591,7 @@
         &ndash; Lore increased by 5 points per level.<br />
         &ndash; May use an Inspiration of Luck, providing all allies within 20 feet a +1 bonus to Luck and saving throws.<br />
         &ndash; From 6th level, may use a Mind Blank Aura, which causes the Agent's mind to be undetectable by, and unaffected by, psionics or mind-altering magic. An Agent cannot cast spells while this aura is active.<br />
-        &ndash; May learn to manifest other Bard Song effects.<br />
-        &ndash; While bards memorize spells like a wizard, they can cast them spontaneously, like a sorcerer.</p>
+        &ndash; May learn to manifest other Bard Song effects.</p>
       <p>Restrictions:<br />
         &ndash; May cast spells one level later than a wizard.<br />
         &ndash; May not learn spells from the Evocation or Necromancy schools of magic.<br />

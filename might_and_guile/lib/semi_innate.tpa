@@ -1,0 +1,404 @@
+
+// v11.2
+
+/*
+
+functions in this file:
+
+- semi_innate_casting - line 5267
+    sets up several innate abilities that will use a communal pool of points to cast (up to 15 points)
+    incorporates function to gives points at certain levels
+    NB: needs the "semi_innate_spells" array to be filled out first
+    NB: must be supplied with a spell-table-style .2da file to determine point pool
+
+*/
+
+
+INCLUDE ~%MOD_FOLDER%/lib/semi_spont/semi_misc_functions.tpa~
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION semi_innate_casting INT_VAR semi_innate_stat = 109 semi_innate_shift = 20 STR_VAR semi_innate_prefix = ~~ semi_innate_array = ~~ points_table = ~x~ table_spl = ~~ BEGIN
+
+APPEND ~splprot.2da~ ~D5_INNATE_%semi_innate_stat%%TAB%%semi_innate_stat%%TAB%-1%TAB%7~ UNLESS ~D5_INNATE_%semi_innate_stat%~
+APPEND ~splprot.2da~ ~D5_INNATE=%semi_innate_stat%%TAB%%semi_innate_stat%%TAB%-1%TAB%8~ UNLESS ~D5_INNATE=%semi_innate_stat%~
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+APPEND ~splprot.2da~ ~D5_FATIGUE_1%TAB%30%TAB%1%TAB%4~ UNLESS ~D5_FATIGUE_1~
+
+COPY_EXISTING ~splprot.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_INNATE_%semi_innate_stat%~) BEGIN
+	  SET fake_innate_slots = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_INNATE=%semi_innate_stat%~) BEGIN
+	  SET fake_innate_equal = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
+	  SET fatigue_zero = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_1~) BEGIN
+	  SET fatigue_one = %row%
+	END
+  END
+BUT_ONLY
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_INNATE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_INNATE~) BEGIN
+		SET semi_innate_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+
+ACTION_IF !(VARIABLE_IS_SET %semi_innate_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_INNATE~ RET new_state_ind END
+  OUTER_SET semi_innate_state = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_REST~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_REST~) BEGIN
+		SET semi_spont_rest = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_rested%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_REST~ RET new_state_ind END
+  OUTER_SET semi_spont_rest = %new_state_ind%
+END
+
+ACTION_IF /*(FILE_EXISTS_IN_GAME ~%points_table%.2da~)*/ !(~%points_table%~ STRING_EQUAL_CASE ~x~) BEGIN
+ CREATE SPL ~%table_spl%~
+  WRITE_BYTE 0x19 (THIS BOR 0b11000000)
+  WRITE_BYTE 0x1b (THIS BOR 0b00000011)
+  WRITE_SHORT 0x1c 4
+  WRITE_LONG 0x34 1
+
+ COPY_EXISTING ~%points_table%.2da~ ~override~
+  SET cur_points = 0
+  SET this_header = 0
+  READ_2DA_ENTRIES_NOW r2en_table 2
+  FOR (row = 0; row < r2en_table; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_table row 0 min_lev
+    READ_2DA_ENTRY_FORMER r2en_table row 1 points
+    INNER_ACTION BEGIN
+      COPY_EXISTING ~%table_spl%.spl~ ~override~
+        PATCH_IF (VARIABLE_IS_SET %points%) BEGIN
+          PATCH_IF (IS_AN_INT %points%) AND (%points% > %cur_points%) BEGIN
+            SET this_header = (this_header + 1)
+            SET cur_points = points
+            LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 1 required_level = %min_lev% END
+            LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 233 target = 1 parameter1 = (%points% << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 0 duration = 126144000 END
+            LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+            LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+          END
+        END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+END
+
+CREATE SPL ~%semi_innate_prefix%206~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+
+CREATE SPL ~%semi_innate_prefix%172~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+
+CREATE SPL ~%semi_innate_prefix%lota~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+CREATE SPL ~%semi_innate_prefix%lotb~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+CREATE SPL ~%semi_innate_prefix%lotc~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+CREATE SPL ~%semi_innate_prefix%lotd~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+
+CREATE SPL ~%semi_innate_prefix%pls~
+  WRITE_SHORT 0x1c 4
+  WRITE_LONG 0x34 1
+  LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%lota~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%lotb~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%lotc~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << %semi_innate_shift%) parameter2 = %fake_innate_slots% timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%lotd~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 318 insert_point = 0 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%x1a.spl~) BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~z~ BEGIN
+	CREATE SPL ~%semi_innate_prefix%x1%let%~
+      WRITE_SHORT 0x1c 4
+      WRITE_LONG 0x34 1
+      LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 STR_VAR icon = ~spcl919b~ END
+	  SAY NAME1 ~extra slot~
+	  SAY UNIDENTIFIED_DESC ~extra slot~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 0 duration = 126144000 END
+  END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%x-1.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%x-1~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << %semi_innate_shift%) parameter2 = (%semi_innate_stat% + (0x10000 * 1)) timing = 0 duration = 126144000 END
+END
+
+CREATE SPL ~%semi_innate_prefix%ltz~
+  WRITE_SHORT 0x1c 4
+  WRITE_LONG 0x34 1
+  LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 7 required_level = 1 END
+  SAY NAME1 ~initialize~
+  SAY UNIDENTIFIED_DESC ~initialize~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%semi_innate_prefix%lts~ END
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = EVAL ~%semi_innate_prefix%ltz~ END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lts.eff~) BEGIN
+  CREATE EFF ~%semi_innate_prefix%lts~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_SHORT 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 9
+	WRITE_SHORT 0x2c 100
+	WRITE_EVALUATED_ASCII 0x30 ~%semi_innate_prefix%lts~ #8
+	WRITE_LONG 0x48 102
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lts.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%lts~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltf~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_one% timing = 1 STR_VAR resource = ~d5xrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%000.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%000~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltz~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%stt~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%table_spl%~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%stt.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%stt~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_innate_state% timing = 9 END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%stt~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%ltf.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%ltf~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5xnfsh~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = EVAL ~%table_spl%~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%fsh~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_innate_state% parameter2 = 111 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%ltf~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%fsh.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%fsh~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END	//	use 326 here...?
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 duration = 0 STR_VAR resource = ~d5zrest~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%semi_innate_prefix%x-1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zrest.spl~) BEGIN
+  CREATE SPL ~d5zrest~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_rest% timing = 9 END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xrest.spl~) BEGIN
+  CREATE SPL ~d5xrest~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5zrest~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xxfat.spl~) BEGIN
+  CREATE SPL ~d5xxfat~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 4 duration = 6 END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%nsh.spl~) BEGIN
+  CREATE SPL ~%semi_innate_prefix%nsh~
+    WRITE_SHORT 0x1c 4
+    WRITE_LONG 0x34 1
+    LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 18 STR_VAR resource = ~%semi_innate_prefix%fsh~ END
+END
+
+
+// casting system______________________________________________________________________
+//
+//OUTER_SPRINT $semi_innate_spells(~nada~)~yada~
+
+ACTION_PHP_EACH EVAL ~%semi_innate_array%~ AS semi => spell BEGIN
+  ACTION_IF !(~%semi%~ STRING_EQUAL_CASE ~nada~) BEGIN
+    OUTER_SPRINT cast_spell ~%spell%~
+    OUTER_SPRINT innate_spell ~%semi%i~
+    OUTER_SPRINT give_spell ~%semi%g~
+    OUTER_SPRINT block_spell ~%semi%b~
+    OUTER_SPRINT learn_spell ~%semi%l~
+// create innate spell
+	COPY_EXISTING ~%cast_spell%.spl~ ~override/%innate_spell%.spl~
+	  WRITE_SHORT 0x1c 4
+	  WRITE_BYTE 0x27 0									//	no sectype for the innates
+	  LPF ALTER_SPELL_HEADER INT_VAR location = 4 END
+	  READ_LONG 0x64 abil_offset
+	  READ_SHORT 0x68 abil_number
+	  READ_BYTE (%abil_offset% + 0x0c) abil_target					
+	  READ_SHORT (%abil_offset% + 0x0e) abil_range
+	  READ_LONG 0x6a eff_offset
+	  WHILE (%abil_number% > 0) BEGIN
+		SET abil_number = (%abil_number% - 1)
+		WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
+	  END
+	  READ_BYTE (%eff_offset% + 0x02) eff_target
+	  LPF DELETE_EFFECT END
+	  PATCH_IF (%abil_target% = 4) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%cast_spell%~ END
+		PATCH_IF (%abil_range% < 35) BEGIN
+		  PATCH_IF (%abil_range% > 4) BEGIN
+			LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
+		  END
+		  PATCH_IF (%abil_range% < 5) BEGIN
+		 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// might need to carve out exceptions, e.g. burning hands
+		  END
+		END
+	  END
+	  ELSE BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%cast_spell%~ END
+	  END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xxfat~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%x-1~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+	BUT_ONLY
+// make spells adding the innate spell
+    CREATE SPL ~%give_spell%~
+      WRITE_SHORT 0x1c 4
+      WRITE_LONG 0x34 1
+      LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+// make 206 spells preventing the give spell
+    CREATE SPL ~%block_spell%~
+      WRITE_SHORT 0x1c 4
+      WRITE_LONG 0x34 1
+      LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%give_spell%~ END
+// add 206 spells to CLAB spell
+    COPY_EXISTING ~%semi_innate_prefix%206.spl~ ~override~
+      LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%block_spell%~ END
+      LPF DELETE_EFFECT INT_VAR match_opcode = 321 STR_VAR match_resource = EVAL ~%block_spell%~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%block_spell%~ END
+  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+	BUT_ONLY
+// make learn spells canceling the 206
+    CREATE SPL ~%learn_spell%~
+      WRITE_SHORT 0x1c 4
+      WRITE_LONG 0x34 1
+      LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
+  	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%block_spell%~ END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+// add 172 effects to broad 172 spl
+    COPY_EXISTING ~%semi_innate_prefix%172.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR /*insert_point = 0*/ opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%innate_spell%~ END
+	BUT_ONLY
+// generate slot#x spells
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lota.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotb.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotc.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%semi_innate_prefix%lota.spl~) BEGIN
+	  COPY_EXISTING ~%semi_innate_prefix%lotd.spl~ ~override~
+	    LPF DELETE_EFFECT INT_VAR match_opcode = 146 STR_VAR match_resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%give_spell%~ END
+	END
+  END
+END
+
+ACTION_CLEAR_ARRAY ~semi_innate_spells~
+
+END	//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+

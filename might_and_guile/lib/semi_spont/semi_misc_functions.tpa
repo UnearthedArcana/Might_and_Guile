@@ -1,0 +1,3028 @@
+
+// v11.4
+
+/*
+
+functions in this file:
+
+- TRA2STR
+
+- set_lang
+	establishes the game language
+
+- semi_armor_casting - line 
+    sets armor to block arcane 5E casting
+
+- free_known_spells - line 
+    input a free_spell (can run multiple free_spells for the same list_spell)
+    outputs a list_spell that adds the free_spells to one's spellbook
+    ...list-spell can then be applied in a kit ability table
+
+- arcane_casting_slots - line 
+    patch and action functions
+    input a table structured like MXSPLWIZ.2da
+    outputs table_spl with 40 headers that converts the table into proficiency increases
+    ...apply table_spl at every level to simulate spellcasting slots
+
+- divine_casting_slots - line 
+    patch and action functions
+    input a table structured like MXSPLWIZ.2da
+    outputs table_spl with 40 headers that converts the table into proficiency increases
+    ...apply table_spl at every level to simulate spellcasting slots
+
+- arcane_spont_items - line 
+    allows bonus spell slot items to give bonus casting slots in addition to memorization
+    5e_plus_mem variable allows to *remove* memorization bonuses 
+
+- divine_spont_items - line 
+    allows bonus spell slot items to give bonus casting slots in addition to memorization
+    5e_plus_mem variable allows to *remove* memorization bonuses 
+
+- semi_spont_sequencers - line 
+    sets sequencers and contingencies to pick from known spells instead of memorized spells
+    NB: putting spells in a sequencer will no exhaust any spell slots
+
+- semi_spont_identify - line 
+    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
+
+- miscellaneous helper functions - line 
+    some functions used by the above items
+
+*/
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_PATCH_FUNCTION ~TRA2STR~ 
+  STR_VAR tra = ~~ 
+  RET str
+BEGIN
+  PATCH_IF ((~%tra%~ STRING_MATCHES_REGEXP ~@-?[0-9]+~) == 0) BEGIN
+    INNER_ACTION BEGIN
+      <<<<<<<< .../inlined/mi_tra2str.tph
+        OUTER_SPRINT str %tra%
+      >>>>>>>>
+      COPY - ~.../inlined/mi_tra2str.tph~ ~.../inlined/mi_tra2str.tph~
+        EVALUATE_BUFFER
+      REINCLUDE ~.../inlined/mi_tra2str.tph~
+    END
+  END
+  ELSE BEGIN
+    TEXT_SPRINT str ~%tra%~
+  END
+END
+
+DEFINE_ACTION_FUNCTION ~ADD_ITEM_TOOLTIPS~
+  STR_VAR item = ~~     // e.g. ~sw1h01~
+          tooltips = ~~ // e.g. ~@123 @124 6620~, takes combination of tra refs and strrefs for as many abilities as you need to specify
+BEGIN
+  ACTION_IF (STRING_LENGTH ~%item%~ > 0) BEGIN
+    // generate our row to add to tooltip.2da
+    OUTER_TEXT_SPRINT row ~%item%~
+    OUTER_PATCH ~ %tooltips%~ BEGIN // extract our tooltips from the tooltips string
+      REPLACE_EVALUATE ~[ %tab%]+\(@?-?[0-9]+\)~ BEGIN
+        PATCH_IF ((~%MATCH1%~ STRING_MATCHES_REGEXP ~@-?[0-9]+~) == 0) BEGIN // tra ref
+          // look up string for given tra reference
+          LAUNCH_PATCH_FUNCTION ~TRA2STR~ STR_VAR tra = EVALUATE_BUFFER ~%MATCH1%~ RET str = str END
+          // use REPLACE to get a strref for our new string
+          INNER_PATCH ~0~ BEGIN
+            REPLACE ~0~ ~%str%~
+            READ_2DA_ENTRY 0 0 1 strref
+          END
+          TEXT_SPRINT row ~%row% %strref%~ // add to our row
+        END
+        ELSE BEGIN // strref
+          TEXT_SPRINT row ~%row% %MATCH1%~ // add to our row
+        END
+      END ~~
+    END
+    
+    COPY_EXISTING ~tooltip.2da~ ~override~
+      REPLACE_TEXTUALLY ~^[ %tab%]*%item%[ %tab%].*~ ~~ // remove previous row for this item if it exists
+      COUNT_2DA_ROWS 1 num_rows
+      INSERT_2DA_ROW num_rows 1 ~%row%~ // insert our row at the end
+      
+      // ensure all rows have -1 entries in unused columns
+      REPLACE_TEXTUALLY ~^[ %tab%]*0?[ %tab%]*1[ %tab%]+2[ %tab%]+3.*~ ~~ // remove column labels for now
+      COUNT_2DA_COLS num_cols
+      TEXT_SPRINT entries ~~
+      TEXT_SPRINT col_labels ~~
+      FOR (i = 1; i < (num_cols - 1); i += 1) BEGIN // for each number of columns less than there should be
+        TEXT_SPRINT entries ~%entries%[ %tab%]+[0-9-]+~ // generate regexp to detect this many columns
+        TEXT_SPRINT empties ~~
+        FOR (j = (num_cols - 1); j > i; j -= 1) BEGIN // generate -1 entries for the number of missing columns
+          TEXT_SPRINT empties ~%empties% -1~
+        END
+        REPLACE_TEXTUALLY ~^\([ %tab%]*[^ %tab%]+%entries%\)[ %tab%]*[%mnl%]?$~ ~\1%empties%~ // add -1 entries to all rows with this many missing columns
+        TEXT_SPRINT col_labels ~%col_labels% %i%~ // generate fresh column labels
+      END
+      INSERT_2DA_ROW 2 1 ~%col_labels% %i%~ // re-add column labels, with last entry where i == (num_cols - 1)
+      PRETTY_PRINT_2DA
+      REPLACE_TEXTUALLY ~2DA +~ ~2DA ~
+    
+  END
+END
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION set_lang RET game_lang BEGIN
+
+ACTION_IF !(VARIABLE_IS_SET %EE_LANGUAGE%) BEGIN
+  COPY_EXISTING ~spwi101.spl~ ~override~
+	READ_STRREF 0x50 description_string
+  BUT_ONLY
+  ACTION_FOR_EACH lang IN ~en_US~ ~fr_FR~/* ~pl_PL~ ~de_DE~ ~es_ES~ ~cs_CZ~ ~ru_RU~ ~ko_KR~*/ BEGIN
+	WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%lang%/semi_spont.tra~ BEGIN
+	  OUTER_SPRINT duration_lang @10 
+	END	
+	ACTION_IF !(~%description_string%~ STRING_CONTAINS_REGEXP ~%duration_lang%~) BEGIN
+	  OUTER_SPRINT game_lang ~%lang%~
+	END
+  END
+END
+ACTION_IF (VARIABLE_IS_SET %EE_LANGUAGE%) BEGIN
+  OUTER_SPRINT ee_lang ~%EE_LANGUAGE%~
+  ACTION_IF (FILE_EXISTS ~%MOD_FOLDER%/lib/semi_spont/%ee_lang%/semi_spont.tra~) BEGIN
+	OUTER_SPRINT game_lang ~%EE_LANGUAGE%~
+  END
+END
+ACTION_IF !(VARIABLE_IS_SET %game_lang%) BEGIN
+	OUTER_SPRINT game_lang ~en_US~
+END
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION semi_armor_casting BEGIN
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_armor.d5~) BEGIN
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zw172.spl~
+
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+    COPY_EXISTING ~splstate.ids~ ~override~
+  	COUNT_2DA_COLS cols
+  	READ_2DA_ENTRIES_NOW rows cols
+  	FOR (row = 1; row < rows; ++row) BEGIN
+  	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+  	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+  	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+  		SET semi_spont_arcane = %state_ind%
+  	  END
+  	END
+    BUT_ONLY
+  END
+  ACTION_IF !(VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+    LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_ARCANE~ RET new_state_ind END
+    OUTER_SET semi_spont_arcane = %new_state_ind%
+  END
+
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
+    COPY_EXISTING ~splstate.ids~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW rows cols
+    FOR (row = 1; row < rows; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+      READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+      PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
+	    SET semi_sorc_state = %state_ind%
+      END
+    END
+    BUT_ONLY
+  END
+  ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+    LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
+    OUTER_SET semi_sorc_state = %new_state_ind%
+  END
+
+// modify armors' 145 effects_________________________________________________________
+//
+ CREATE EFF ~d5zncast~										// 	disable wizard casting
+	WRITE_LONG 0x10 145
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZNCAST~ #8
+
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zarml.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5zspla~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 7 STR_VAR resource = ~d5xspls~ END
+ COPY_EXISTING ~d5zarml.spl~ ~override/d5zarmc.spl~
+ COPY_EXISTING ~d5zarml.spl~ ~override/d5zarmp.spl~
+
+ CREATE EFF ~d5zarm1l~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarml~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1L~ #8
+
+ CREATE EFF ~d5zarm1c~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarmc~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1C~ #8
+
+ CREATE EFF ~d5zarm1p~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zarmp~ #8
+	WRITE_LONG 0x48 102
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM1P~ #8
+
+ CREATE EFF ~d5zarm2l~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2L~ #8
+
+ CREATE EFF ~d5zarm2c~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2C~ #8
+
+ CREATE EFF ~d5zarm2p~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5zspla~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM2P~ #8
+
+ CREATE EFF ~d5zarm3l~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5xspls~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM3L~ #8
+
+ CREATE EFF ~d5zarm3c~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5xspls~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM3C~ #8
+
+ CREATE EFF ~d5zarm3p~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5xspls~ #8
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM3P~ #8
+
+/*
+ CREATE EFF ~d5zarm4l~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5msplz~ #8	//	manasorc... eventually change this to xsplm
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM4L~ #8
+
+ CREATE EFF ~d5zarm4c~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5msplz~ #8	//	manasorc... eventually change this to xsplm
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM4C~ #8
+
+ CREATE EFF ~d5zarm4p~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x1c 0
+	WRITE_LONG 0x24 2
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5msplz~ #8	//	manasorc... eventually change this to xsplm
+	WRITE_LONG 0x90 1
+	WRITE_ASCII 0x94 ~D5ZARM4P~ #8
+*/
+
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    SET no_cast = 0
+    READ_SHORT 0x1c type
+    PATCH_IF (type = 2) BEGIN
+	  READ_LONG 0x6a eff_offset
+	  READ_SHORT 0x70 num_effects
+	  FOR (cnt = 0; cnt < %num_effects%; cnt = cnt+1) BEGIN
+	    READ_SHORT (%eff_offset% + 0x30*cnt) eff_type
+	    PATCH_IF (eff_type = 145) BEGIN
+	  	  SET no_cast = 1
+	    END
+	    PATCH_IF (eff_type = 177) BEGIN
+	  	  READ_ASCII (%eff_offset% + 0x30*cnt + 0x14) resource
+	  	  PATCH_IF (~%resource%~ STRING_EQUAL_CASE ~d5arcal~) OR (~%resource%~ STRING_EQUAL_CASE ~d5arcac~) OR (~%resource%~ STRING_EQUAL_CASE ~d5arcap~) BEGIN
+	  	    SET no_cast = 1
+	  	  END
+	    END
+	  END
+//    LPF DELETE_EFFECT INT_VAR match_opcode = 145 match_parameter2 = 0 END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
+//    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcal~ resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcac~ resource = ~d5zncast~ END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR match_resource = ~d5arcap~ resource = ~d5zncast~ END
+      READ_LONG 0x22 appearance
+      PATCH_IF (no_cast = 1) BEGIN
+	   PATCH_IF (appearance = 16690) BEGIN // leather appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3l~ END
+//	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4l~ END
+// this ^^ is for the mana sorcerer, not used yet
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1l~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarml~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172l~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcal.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcal~ END
+	    END
+	   END
+	   PATCH_IF (appearance = 16691) BEGIN // chain appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3c~ END
+//	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1c~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarmc~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172c~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcac.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcac~ END
+	    END
+	   END
+	   PATCH_IF (appearance = 16692) BEGIN // plate appearance
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm2p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm3p~ END
+//	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5zarm4p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 1 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 7 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 10 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 13 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 14 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+        LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter1 = 17 parameter2 = 5 timing = 2 STR_VAR resource = ~d5zarm1p~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zarmp~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zw172p~ END
+	    PATCH_IF (FILE_EXISTS_IN_GAME ~d5arcap.eff~) BEGIN
+	      LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5arcap~ END
+	    END
+	   END
+	  END
+	END
+  END
+ BUT_ONLY
+
+ ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~48~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zbarm.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zw172l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm1l~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zarm2l~ END
+  APPEND ~clabba01.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~AP_D5ZBARM~
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
+    FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kit_name
+      READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_table
+      READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+      READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 9 kit_ids
+      PATCH_IF (class_num = 5) BEGIN
+        PATCH_IF !(~%kit_name%~ STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+          INNER_ACTION BEGIN
+            APPEND ~%kit_table%.2da~ ~CAST_LEAT   AP_D5ZBARM  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~AP_D5ZBARM~
+          END
+        END
+      END
+    END
+  BUT_ONLY
+ END
+ 
+ ACTION_IF (FILE_EXISTS_IN_GAME ~qdmagus.2da~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5mgs5e.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5zncast~ END
+  APPEND ~qdmagus.2da~ ~ABILITY    AP_D5MGS5E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~ UNLESS ~AP_D5MGSCST~
+ END
+
+
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_armor.d5~
+
+END
+
+/* above ^ should do it...
+
+// make a spell that applies a 145 effect every round
+// make a 232 .eff that casts that spell
+// change existing while-equipped 145 effects to 177 effects applying that .eff
+// then, make d5zprp1 block this spell, that the block will be removed upon waking
+
+h// no no no! just change 145 effects in armors to 144 effects!
+
+// but, that will screw up d5_armcast...
+
+// and YARAS...
+
+// wait no, blocking the cast spell button will block priest spells
+
+// maybe apply all arcane 206 effects while equipped, and cast zz172/zspld(?)/zspla once upon equipping?
+// ...then arcane spells will disappear. But, how to make them re-appear upon unequipping?
+// ...maybe have to a repeating spell being cast on delay, and 206 it while the armor is equipped.
+// ...also, need to make sure arcane spells do NOT disappear if armcast or YARAS or some other 'cast in armor' mod
+// ...also, need to make sure YARAS casting speed penalties apply to arcane spells (only)
+*/
+
+END		//	end with_tra
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION free_known_spells STR_VAR free_spell = ~~ list_spell = ~~ BEGIN
+
+/*
+ACTION_IF (FILE_CONTAINS_EVALUATED (~d5zclons.2da~ ~%free_spell%~)) BEGIN
+  COPY_EXISTING ~d5zclons.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_zclons~ cols
+    FOR (row = 0; row < r2en_zclons; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 1 mem_spell
+      READ_2DA_ENTRY_FORMER ~r2en_zclons~ row 0 z_ind
+      PATCH_IF (~%mem_spell%~ STRING_EQUAL_CASE ~%free_spell%~) BEGIN
+        SET free_spell_ind = z_ind
+      END
+    END
+  BUT_ONLY  
+*/
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%list_spell%.spl~) BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%list_spell%.spl~
+  END
+  COPY_EXISTING ~%list_spell%.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = EVAL ~%free_spell%~ END
+  BUT_ONLY
+//END
+
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_PATCH_FUNCTION arcane_casting_slots STR_VAR table_spl = ~~ BEGIN
+
+// PATCH function - copy .2da table, run this
+
+// limit table_spl to 7 letters!!!
+
+  INNER_ACTION BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 1
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 1
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
+  END
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW r2en_table cols
+  FOR (row = 0; row < r2en_table; ++row) BEGIN
+    PATCH_IF (cols > 1) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 1 level_1
+    END
+    PATCH_IF (cols > 2) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 2 level_2
+    END
+    PATCH_IF (cols > 3) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 3 level_3
+    END
+    PATCH_IF (cols > 4) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 4 level_4
+    END
+    PATCH_IF (cols > 5) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 5 level_5
+    END
+    PATCH_IF (cols > 6) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 6 level_6
+    END
+    PATCH_IF (cols > 7) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 7 level_7
+    END
+    PATCH_IF (cols > 8) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 8 level_8
+    END
+    PATCH_IF (cols > 9) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 9 level_9
+    END
+    INNER_ACTION BEGIN
+      COPY_EXISTING ~%table_spl%.spl~ ~override~
+        PATCH_IF (VARIABLE_IS_SET %level_1%) BEGIN
+          PATCH_IF (IS_AN_INT %level_1%) AND (%level_1% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_1% << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_2%) BEGIN
+          PATCH_IF (IS_AN_INT %level_2%) AND (%level_2% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_2% << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_3%) BEGIN
+          PATCH_IF (IS_AN_INT %level_3%) AND (%level_3% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_3% << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_4%) BEGIN
+          PATCH_IF (IS_AN_INT %level_4%) AND (%level_4% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_4% << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_5%) BEGIN
+          PATCH_IF (IS_AN_INT %level_5%) AND (%level_5% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_5% << 24) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_6%) BEGIN
+          PATCH_IF (IS_AN_INT %level_6%) AND (%level_6% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_6% << 28) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_7%) BEGIN
+          PATCH_IF (IS_AN_INT %level_7%) AND (%level_7% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_7% << 20) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_8%) BEGIN
+          PATCH_IF (IS_AN_INT %level_8%) AND (%level_8% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_8% << 24) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_9%) BEGIN
+          PATCH_IF (IS_AN_INT %level_9%) AND (%level_9% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_9% << 28) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+  INNER_ACTION BEGIN
+	ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+			SET semi_spont_arcane = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	ACTION_IF !(VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+	  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_ARCANE~ RET new_state_ind END
+	  OUTER_SET semi_spont_arcane = %new_state_ind%
+	END
+    ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
+      COPY_EXISTING ~splstate.ids~ ~override~
+	    COUNT_2DA_COLS cols
+	    READ_2DA_ENTRIES_NOW rows cols
+	    FOR (row = 1; row < rows; ++row) BEGIN
+	      READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	      READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	      PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
+		    SET semi_sorc_state = %state_ind%
+	      END
+	    END
+      BUT_ONLY
+    END
+    ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+      LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
+      OUTER_SET semi_sorc_state = %new_state_ind%
+    END
+    COPY_EXISTING ~%table_spl%.spl~ ~override~
+//      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+      FOR (header = 1 ; header < 40; ++header) BEGIN
+        LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+/*
+//	    LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+		PATCH_IF (VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+		END
+		PATCH_IF (VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+		END
+*/
+      END
+  END
+
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION arcane_casting_slots STR_VAR slot_table = ~mxsplwiz~ table_spl = ~~ BEGIN
+
+// PATCH function - copy .2da table, run this
+
+// limit table_spl to 7 letters!!!
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%slot_table%.2da~) BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 1
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 1
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
+	COPY_EXISTING ~%slot_table%.2da~ ~override~
+	  COUNT_2DA_COLS cols
+	  READ_2DA_ENTRIES_NOW r2en_table cols
+	  FOR (row = 0; row < r2en_table; ++row) BEGIN
+	    PATCH_IF (cols > 1) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 1 level_1
+	    END
+	    PATCH_IF (cols > 2) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 2 level_2
+	    END
+	    PATCH_IF (cols > 3) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 3 level_3
+	    END
+	    PATCH_IF (cols > 4) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 4 level_4
+	    END
+	    PATCH_IF (cols > 5) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 5 level_5
+	    END
+	    PATCH_IF (cols > 6) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 6 level_6
+	    END
+	    PATCH_IF (cols > 7) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 7 level_7
+	    END
+	    PATCH_IF (cols > 8) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 8 level_8
+	    END
+	    PATCH_IF (cols > 9) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 9 level_9
+	    END
+	    INNER_ACTION BEGIN
+	      COPY_EXISTING ~%table_spl%.spl~ ~override~
+	        PATCH_IF (VARIABLE_IS_SET %level_1%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_1%) AND (%level_1% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_1% << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_2%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_2%) AND (%level_2% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_2% << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_3%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_3%) AND (%level_3% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_3% << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_4%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_4%) AND (%level_4% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_4% << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_5%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_5%) AND (%level_5% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_5% << 24) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_6%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_6%) AND (%level_6% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_6% << 28) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_7%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_7%) AND (%level_7% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_7% << 20) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_8%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_8%) AND (%level_8% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_8% << 24) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_9%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_9%) AND (%level_9% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_9% << 28) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	      IF_EXISTS BUT_ONLY
+	    END
+	  END
+	BUT_ONLY
+	ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+			SET semi_spont_arcane = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	ACTION_IF !(VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+	  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_ARCANE~ RET new_state_ind END
+	  OUTER_SET semi_spont_arcane = %new_state_ind%
+	END
+    ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
+      COPY_EXISTING ~splstate.ids~ ~override~
+	    COUNT_2DA_COLS cols
+	    READ_2DA_ENTRIES_NOW rows cols
+	    FOR (row = 1; row < rows; ++row) BEGIN
+	      READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	      READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	      PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
+		    SET semi_sorc_state = %state_ind%
+	      END
+	    END
+      BUT_ONLY
+    END
+    ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+      LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
+      OUTER_SET semi_sorc_state = %new_state_ind%
+    END
+    COPY_EXISTING ~%table_spl%.spl~ ~override~
+//      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+      FOR (spl_header = 1 ; spl_header < 40; ++spl_header) BEGIN
+        LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+/*
+//	    LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+		PATCH_IF (VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+		END
+		PATCH_IF (VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+		END
+*/
+      END
+    BUT_ONLY
+  END
+
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_PATCH_FUNCTION divine_casting_slots STR_VAR table_spl = ~~ BEGIN
+
+// PATCH function - copy .2da table, run this
+
+// limit table_spl to 7 letters!!!
+
+  INNER_ACTION BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 2
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 2
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
+  END
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW r2en_table cols
+  FOR (row = 0; row < r2en_table; ++row) BEGIN
+    PATCH_IF (cols > 1) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 1 level_1
+    END
+    PATCH_IF (cols > 2) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 2 level_2
+    END
+    PATCH_IF (cols > 3) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 3 level_3
+    END
+    PATCH_IF (cols > 4) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 4 level_4
+    END
+    PATCH_IF (cols > 5) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 5 level_5
+    END
+    PATCH_IF (cols > 6) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 6 level_6
+    END
+    PATCH_IF (cols > 7) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_table row 7 level_7
+    END
+    INNER_ACTION BEGIN
+      COPY_EXISTING ~%table_spl%.spl~ ~override~
+        PATCH_IF (VARIABLE_IS_SET %level_1%) BEGIN
+          PATCH_IF (IS_AN_INT %level_1%) AND (%level_1% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_1% << 8) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_2%) BEGIN
+          PATCH_IF (IS_AN_INT %level_2%) AND (%level_2% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_2% << 12) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_3%) BEGIN
+          PATCH_IF (IS_AN_INT %level_3%) AND (%level_3% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_3% << 16) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_4%) BEGIN
+          PATCH_IF (IS_AN_INT %level_4%) AND (%level_4% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_4% << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_5%) BEGIN
+          PATCH_IF (IS_AN_INT %level_5%) AND (%level_5% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_5% << 24) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_6%) BEGIN
+          PATCH_IF (IS_AN_INT %level_6%) AND (%level_6% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_6% << 28) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+        PATCH_IF (VARIABLE_IS_SET %level_7%) BEGIN
+          PATCH_IF (IS_AN_INT %level_7%) AND (%level_7% > 0) BEGIN
+            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_7% << 16) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+          END
+        END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+  INNER_ACTION BEGIN
+    ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_DIVINE~)) BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_DIVINE~) BEGIN
+			SET semi_spont_divine = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+/*
+	ACTION_IF !(VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+	  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_DIVINE~ RET new_state_ind END
+	  OUTER_SET semi_spont_divine = %new_state_ind%
+	END
+*/
+    COPY_EXISTING ~%table_spl%.spl~ ~override~
+//    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+      FOR (header = 1 ; header < 40; ++header) BEGIN
+        LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+/*
+//	    LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		PATCH_IF (VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %header% /*(%header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		END
+*/
+      END
+  END
+
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION divine_casting_slots STR_VAR slot_table = ~mxsplprs~ table_spl = ~~ BEGIN
+
+// PATCH function - copy .2da table, run this
+
+// limit table_spl to 7 letters!!!
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%slot_table%.2da~) BEGIN
+    COPY ~%MOD_FOLDER%/lib/semi_spont/d5__slt.spl~ ~override/%table_spl%.spl~
+      WRITE_SHORT 0x1c 2
+    ACTION_IF !(FILE_EXISTS_IN_GAME ~%table_spl%z.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%table_spl%z.spl~
+        WRITE_SHORT 0x1c 2
+	    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+	END
+	COPY_EXISTING ~%slot_table%.2da~ ~override~
+	  COUNT_2DA_COLS cols
+	  READ_2DA_ENTRIES_NOW r2en_table cols
+	  FOR (row = 0; row < r2en_table; ++row) BEGIN
+	    PATCH_IF (cols > 1) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 1 level_1
+	    END
+	    PATCH_IF (cols > 2) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 2 level_2
+	    END
+	    PATCH_IF (cols > 3) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 3 level_3
+	    END
+	    PATCH_IF (cols > 4) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 4 level_4
+	    END
+	    PATCH_IF (cols > 5) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 5 level_5
+	    END
+	    PATCH_IF (cols > 6) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 6 level_6
+	    END
+	    PATCH_IF (cols > 7) BEGIN
+	      READ_2DA_ENTRY_FORMER r2en_table row 7 level_7
+	    END
+	    INNER_ACTION BEGIN
+	      COPY_EXISTING ~%table_spl%.spl~ ~override~
+	        PATCH_IF (VARIABLE_IS_SET %level_1%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_1%) AND (%level_1% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_1% << 8) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_2%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_2%) AND (%level_2% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_2% << 12) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_3%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_3%) AND (%level_3% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_3% << 16) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_4%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_4%) AND (%level_4% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_4% << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_5%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_5%) AND (%level_5% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_5% << 24) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_6%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_6%) AND (%level_6% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_6% << 28) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	        PATCH_IF (VARIABLE_IS_SET %level_7%) BEGIN
+	          PATCH_IF (IS_AN_INT %level_7%) AND (%level_7% > 0) BEGIN
+	            LPF ADD_SPELL_EFFECT INT_VAR header = (%row% + 1) opcode = 233 target = 1 parameter1 = (%level_7% << 16) parameter2 = (109 + (0x10000 * 1)) timing = 0 duration = 126144000 END
+	          END
+	        END
+	      IF_EXISTS BUT_ONLY
+	    END
+	  END
+	BUT_ONLY
+	ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_DIVINE~)) BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_DIVINE~) BEGIN
+			SET semi_spont_divine = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	ACTION_IF !(VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+	  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_DIVINE~ RET new_state_ind END
+	  OUTER_SET semi_spont_divine = %new_state_ind%
+	END
+    COPY_EXISTING ~%table_spl%.spl~ ~override~
+//      LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+      FOR (spl_header = 1 ; spl_header < 40; ++spl_header) BEGIN
+        LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+/*
+//	    LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		PATCH_IF (VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR header = %spl_header% /*(%spl_header% + 1)*/ opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		END
+*/
+      END
+    BUT_ONLY
+  END
+
+END		//	end function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//MAKE ARCANE +SPELL SLOT ITEMS WORK_________________________________________________
+//
+// *****
+// set all +slot items to just +1 per level for consistency
+// change Evermemory: give 1x/day ability to restore all 1st-level slots
+// ...(in non-IR bgee, sod, iwdee)
+// ...(Wondrous Recall + 321 d5src-1)
+// ...(ring08.itm)
+// likewise for Kontik's ring (for 1st- and 2nd-level slots) in iwdee
+// ...(ringkon.itm)
+// ring of acuity needs desc patch in non-IR bgee, sod, bg2ee
+// ...(ring40.itm)
+// ...(REPLACE_TEXTUALLY ~2 extra~ ~1 extra~)
+
+
+DEFINE_ACTION_FUNCTION arcane_spont_items INT_VAR 5e_plus_mem = 1 BEGIN
+
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
+COPY_EXISTING ~splprot.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_WIZ_1_6~) BEGIN
+	  SET fake_sorc_slots_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_WIZ=1_6~) BEGIN
+	  SET fake_sorc_equal_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_SPL_7_9~) BEGIN
+	  SET fake_spel_slots_7_9 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_SPL=7_9~) BEGIN
+	  SET fake_spel_equal_7_9 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_DIV_1_6~) BEGIN
+	  SET fake_sham_slots_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_DIV=1_6~) BEGIN
+	  SET fake_sham_equal_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
+	  SET fatigue_zero = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_PREP_SPLZ~) BEGIN
+	  SET prep_spells_row = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_NOT_PREP~) BEGIN
+	  SET not_prep_row = %row%
+	END
+  END
+BUT_ONLY
+
+
+//wizard +slot items__________________________________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__arcane_slot_items.d5~) BEGIN
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
+		SET semi_sorc_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
+  OUTER_SET semi_sorc_state = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+		SET semi_spont_arcane = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_ARCANE~ RET new_state_ind END
+  OUTER_SET semi_spont_arcane = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_DIVINE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_DIVINE~) BEGIN
+		SET semi_spont_divine = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_DIVINE~ RET new_state_ind END
+  OUTER_SET semi_spont_divine = %new_state_ind%
+END
+
+OUTER_SET generic_ind = 1
+OUTER_SET mageslot_item_ind = 1
+OUTER_TEXT_SPRINT $mage_slot_items(~0~ ~0~ ~0~ ~0~) ~item~
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ override
+  SET slot_item = 0
+  PATCH_IF SOURCE_SIZE > 0x72 BEGIN
+    GET_OFFSET_ARRAY glob_fx ITM_V10_GEN_EFFECTS
+    PHP_EACH glob_fx AS idx => off BEGIN
+      PATCH_IF SHORT_AT off == 42 BEGIN
+        SET slot_item = 1
+        READ_LONG off + 0x04 param1 ELSE 0
+        READ_LONG off + 0x08 param2 ELSE 0
+        FOR (spell_level = 1; spell_level < 10; ++spell_level) BEGIN
+          PATCH_IF param2 & (2 ** (spell_level - 1)) BEGIN
+            TEXT_SPRINT $mage_slot_items(~%generic_ind%~ ~%mageslot_item_ind%~ ~%spell_level%~ ~%param1%~ ~%param2%~) ~%SOURCE_RES%~
+            SET ++generic_ind
+          END
+        END
+        PATCH_IF (param2 = 0) OR (param2 = 512) BEGIN
+          TEXT_SPRINT $mage_slot_items(~%generic_ind%~ ~%mageslot_item_ind%~ ~%param1%~ ~99~ ~0~) ~%SOURCE_RES%~
+          SET ++generic_ind
+        END
+      END // ELSE
+      PATCH_IF SHORT_AT off == 177 /* || SHORT_AT off == 326 */ BEGIN
+        READ_ASCII off + 0x14 eff_res (8) NULL
+        INNER_PATCH_FILE ~%eff_res%.EFF~ BEGIN
+          PATCH_IF LONG_AT 0x010 == 42 BEGIN
+            SET slot_item = 1
+            READ_LONG 0x1c param1 ELSE 0
+            READ_LONG 0x20 param2 ELSE 0
+            FOR (spell_level = 1; spell_level < 10; ++spell_level) BEGIN
+              PATCH_IF param2 & (2 ** (spell_level - 1)) BEGIN
+                TEXT_SPRINT $mage_slot_items(~%generic_ind%~ ~%mageslot_item_ind%~ ~%spell_level%~ ~%param1%~ ~%param2%~) ~%SOURCE_RES%~
+                SET ++generic_ind
+              END
+            END
+            PATCH_IF (param2 == 0) BEGIN
+              TEXT_SPRINT $mage_slot_items(~%generic_ind%~ ~%mageslot_item_ind%~ ~%param1%~ ~99~ ~0~) ~%SOURCE_RES%~
+              SET ++generic_ind
+            END
+          END
+        END
+      END
+    END
+  END
+  PATCH_IF slot_item = 1 BEGIN
+    SET ++mageslot_item_ind
+  END
+BUT_ONLY
+
+ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
+ ACTION_IF (%ind% > 0) BEGIN
+  PRINT ~%ind% %ind_1% %ind_2% %ind_3% %ind_4% %slot_item%~
+  ACTION_IF (%ind_3% < 99) BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z#%ind_1%%ind_2%.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z#%ind_1%%ind_2%.spl~
+		LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		PATCH_IF (%ind_2% = 1) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 2) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 3) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 4) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 5) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 6) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 7) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (109 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 8) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 9) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	END
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z_%ind_1%%ind_2%.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z_%ind_1%%ind_2%.spl~
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zz172~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xx172~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	END
+	COPY_EXISTING ~d5zlots.spl~ ~override~
+				~d5sslot.spl~ ~override~
+	  PATCH_IF (%ind_2% = 1) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 8) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 2) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 12) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 3) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 16) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 4) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 20) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 5) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 24) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 6) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 28) parameter2 = %fake_sorc_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 7) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 20) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 8) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 24) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 9) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 28) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  END
+	IF_EXISTS BUT_ONLY
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zx%ind_1%%ind_2%.eff~) BEGIN
+	  CREATE EFF ~d5zx%ind_1%%ind_2%~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 1
+	    WRITE_LONG 0x20 %ind_4%
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_EVALUATED_ASCII 0x94 ~D5ZX%ind_1%%ind_2%~ #8
+	END
+	COPY_EXISTING ~%slot_item%.itm~ ~override~
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 42 parameter1 = 1 END
+	  PATCH_IF (5e_plus_mem = 0) BEGIN
+	    LPF ALTER_EFFECT INT_VAR match_opcode = 42 match_parameter2 = %ind_4% opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = EVAL ~d5zx%ind_1%%ind_2%~ END
+	  END
+//	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+//	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z#%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z_%ind_1%%ind_2%~ END
+	  PATCH_IF (5e_plus_mem = 0) BEGIN
+	    LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5zx%ind_1%%ind_2%~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5zx%ind_1%%ind_2%~ END
+	  END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5zz172~ END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5xx172~ END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5zspld~ END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5zspla~ END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5xspls~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5xx172~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5xspls~ END
+ 	  READ_LONG 0x54 "valid"
+	  PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+		READ_STRREF 0x54 "description"
+		PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~extra~) = 0 BEGIN // more validation
+		  INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+			REPLACE_TEXTUALLY ~2 extra~ ~1 extra~
+			REPLACE_TEXTUALLY ~3 extra~ ~1 extra~
+			REPLACE_TEXTUALLY ~two extra~ ~one extra~
+			REPLACE_TEXTUALLY ~three extra~ ~one extra~
+		  END
+		  SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	  END
+	IF_EXISTS BUT_ONLY
+  END	//	end if not spell-doubling
+  ACTION_IF (%ind_3% = 99) BEGIN
+   ACTION_IF !(MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~3111~) BEGIN
+    ACTION_IF !(MOD_IS_INSTALLED ~d5_random_tweaks.tp2~ ~3112~) BEGIN
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08~) BEGIN
+	  CREATE EFF ~d5rng8~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 1
+	    WRITE_LONG 0x20 0
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNG8~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ring08.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rng8~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNG8~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNG8~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	    END
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
+     END
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~bdring08~) BEGIN
+	  CREATE EFF ~d5rng8~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 1
+	    WRITE_LONG 0x20 0
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNG8~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ring08.itm~ ~override/bdring08.itm~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rng8~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNG8~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNG8~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	    END
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
+     END
+     ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ring08_~) BEGIN
+	  CREATE EFF ~d5rng8~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 1
+	    WRITE_LONG 0x20 0
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNG8~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ring08.itm~ ~override/ring08_.itm~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rng8~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNG8~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNG8~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNG8~ END
+	    END
+        SAY NAME2 @601
+        SAY IDENTIFIED_DESC @602
+     END
+    END
+    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ringkon~) BEGIN
+	  CREATE EFF ~d5rngk~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 2
+	    WRITE_LONG 0x20 0
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNGK~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ringkon.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rngk~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNGK~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNGK~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGK~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGK~ END
+	    END
+        SAY NAME2 @611
+        SAY IDENTIFIED_DESC @612
+    END
+    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~ringed~) BEGIN
+	  CREATE EFF ~d5rnge~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 5
+	    WRITE_LONG 0x20 512
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNGE~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ringed.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rnge~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNGE~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNGE~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	    END
+        SAY NAME2 @621
+        SAY IDENTIFIED_DESC @622
+    END
+    ACTION_IF (~%slot_item%~ STRING_EQUAL_CASE ~mh#iwd11~) BEGIN
+	  CREATE EFF ~d5rnge~
+	    WRITE_LONG 0x10 42
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 5
+	    WRITE_LONG 0x20 512
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_ASCII 0x94 ~D5RNGE~ #8
+      COPY ~%MOD_FOLDER%/lib/semi_spont/ringed.itm~ ~override/mh#iwd11.itm~
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zz172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xx172~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_divine% STR_VAR match_resource = ~d5zspld~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_spont_arcane% STR_VAR match_resource = ~d5zspla~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 326 parameter1 = %semi_sorc_state% STR_VAR match_resource = ~d5xspls~ END
+        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 match_timing = 2 STR_VAR resource = ~d5rnge~ END
+		LPF DELETE_EFFECT INT_VAR match_opcode = 318 END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 1 match_parameter2 = 110 parameter1 = %semi_spont_arcane% STR_VAR resource = ~D5RNGE~ END
+//        LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 318 match_parameter1 = 2 match_parameter2 = 110 parameter1 = %semi_sorc_state% STR_VAR resource = ~D5RNGE~ END
+	    PATCH_IF (5e_plus_mem = 0) BEGIN
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	      LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 1 STR_VAR resource = ~D5RNGE~ END
+	    END
+        SAY NAME2 @621
+        SAY IDENTIFIED_DESC @622
+    END
+   END
+  END	//	end if spell-doubling
+ END
+END
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__arcane_slot_items.d5~
+
+END
+
+END		//	end with_tra
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//MAKE DIVINE +SPELL SLOT ITEMS WORK_________________________________________________
+//
+DEFINE_ACTION_FUNCTION divine_spont_items INT_VAR 5e_plus_mem = 1 BEGIN
+
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+
+APPEND ~splprot.2da~ ~D5_FATIGUE_0%TAB%30%TAB%0%TAB%1~ UNLESS ~D5_FATIGUE_0~
+
+COPY_EXISTING ~splprot.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW rows cols
+  FOR (row = 1; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_WIZ_1_6~) BEGIN
+	  SET fake_sorc_slots_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_WIZ=1_6~) BEGIN
+	  SET fake_sorc_equal_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_SPL_7_9~) BEGIN
+	  SET fake_spel_slots_7_9 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_SPL=7_9~) BEGIN
+	  SET fake_spel_equal_7_9 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_DIV_1_6~) BEGIN
+	  SET fake_sham_slots_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_DIV=1_6~) BEGIN
+	  SET fake_sham_equal_1_6 = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
+	  SET fatigue_zero = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_PREP_SPLZ~) BEGIN
+	  SET prep_spells_row = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_NOT_PREP~) BEGIN
+	  SET not_prep_row = %row%
+	END
+  END
+BUT_ONLY
+
+
+//priest +slot items__________________________________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__divine_slot_items.d5~) BEGIN
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_DIVINE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_DIVINE~) BEGIN
+		SET semi_spont_divine = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_divine%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_DIVINE~ RET new_state_ind END
+  OUTER_SET semi_spont_divine = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+		SET semi_spont_arcane = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_spont_arcane%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_ARCANE~ RET new_state_ind END
+  OUTER_SET semi_spont_arcane = %new_state_ind%
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SHAM~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SHAM~) BEGIN
+		SET semi_sham_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF !(VARIABLE_IS_SET %semi_sham_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SHAM~ RET new_state_ind END
+  OUTER_SET semi_sham_state = %new_state_ind%
+END
+
+// ***** add shamclers from fnp below
+
+OUTER_SET generic_ind = 1
+OUTER_SET priestslot_item_ind = 1
+OUTER_TEXT_SPRINT $priest_slot_items(~0~ ~0~ ~0~ ~0~) ~item~
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ override
+  SET slot_item = 0
+  PATCH_IF SOURCE_SIZE > 0x72 BEGIN
+    GET_OFFSET_ARRAY glob_fx ITM_V10_GEN_EFFECTS
+    PHP_EACH glob_fx AS idx => off BEGIN
+      PATCH_IF SHORT_AT off == 62 BEGIN
+        SET slot_item = 1
+        READ_LONG off + 0x04 param1 ELSE 0
+        READ_LONG off + 0x08 param2 ELSE 0
+        FOR (spell_level = 1; spell_level < 8; ++spell_level) BEGIN
+          PATCH_IF param2 & (2 ** (spell_level - 1)) BEGIN
+            TEXT_SPRINT $priest_slot_items(~%generic_ind%~ ~%priestslot_item_ind%~ ~%spell_level%~ ~%param1%~ ~%param2%~) ~%SOURCE_RES%~
+            SET ++generic_ind
+          END
+        END
+        PATCH_IF (param2 = 0) OR (param2 = 512) BEGIN
+          TEXT_SPRINT $priest_slot_items(~%generic_ind%~ ~%priestslot_item_ind%~ ~%param1%~ ~99~ ~0~) ~%SOURCE_RES%~
+          SET ++generic_ind
+        END
+      END // ELSE
+      PATCH_IF SHORT_AT off == 177 /* || SHORT_AT off == 326 */ BEGIN
+        READ_ASCII off + 0x14 eff_res (8) NULL
+        INNER_PATCH_FILE ~%eff_res%.EFF~ BEGIN
+          PATCH_IF LONG_AT 0x010 == 62 BEGIN
+            SET slot_item = 1
+            READ_LONG 0x1c param1 ELSE 0
+            READ_LONG 0x20 param2 ELSE 0
+            FOR (spell_level = 1; spell_level < 8; ++spell_level) BEGIN
+              PATCH_IF param2 & (2 ** (spell_level - 1)) BEGIN
+                TEXT_SPRINT $priest_slot_items(~%generic_ind%~ ~%priestslot_item_ind%~ ~%spell_level%~ ~%param1%~ ~%param2%~) ~%SOURCE_RES%~
+                SET ++generic_ind
+              END
+            END
+            PATCH_IF param2 == 0 BEGIN
+              TEXT_SPRINT $priest_slot_items(~%generic_ind%~ ~%priestslot_item_ind%~ ~%param1%~ ~99~ ~0~) ~%SOURCE_RES%~
+              SET ++generic_ind
+            END
+          END
+        END
+      END
+    END
+  END
+  PATCH_IF slot_item = 1 BEGIN
+    SET ++priestslot_item_ind
+  END
+BUT_ONLY
+
+ACTION_PHP_EACH priest_slot_items AS ind => slot_item BEGIN
+ ACTION_IF (%ind% > 0) BEGIN
+  PRINT ~%ind% %ind_1% %ind_2% %ind_3% %ind_4% %slot_item%~
+  ACTION_IF (%ind_3% < 99) BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%%ind_2%.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%%ind_2%.spl~
+		LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		PATCH_IF (%ind_2% = 1) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 2) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 3) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 4) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 5) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 6) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		PATCH_IF (%ind_2% = 7) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (109 + (0x10000 * 1)) timing = 1 duration = 0 END
+		END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	END
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%%ind_2%.spl~) BEGIN
+	  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%%ind_2%.spl~
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		END
+//		PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	END
+	COPY_EXISTING ~d5zlots.spl~ ~override~
+	  PATCH_IF (%ind_2% = 1) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 8) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 2) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 12) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 3) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 16) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 4) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 20) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 5) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 24) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 6) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 28) parameter2 = %fake_sham_equal_1_6% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 7) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 16) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+/* ???
+	  PATCH_IF (%ind_2% = 8) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 24) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+	  PATCH_IF (%ind_2% = 9) BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 28) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  END
+*/
+	IF_EXISTS BUT_ONLY
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zy%ind_1%%ind_2%.eff~) BEGIN
+	  CREATE EFF ~d5zy%ind_1%%ind_2%~
+	    WRITE_LONG 0x10 62
+	    WRITE_LONG 0x14 1
+	    WRITE_LONG 0x1c 1
+	    WRITE_LONG 0x20 %ind_4%
+	    WRITE_LONG 0x24 2	
+	    WRITE_SHORT 0x2c 100
+	    WRITE_LONG 0x90 1
+	    WRITE_EVALUATED_ASCII 0x94 ~D5ZY%ind_1%%ind_2%~ #8
+	END
+	COPY_EXISTING ~%slot_item%.itm~ ~override~
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 62 parameter1 = 1 END
+	  PATCH_IF (5e_plus_mem = 0) BEGIN
+	    LPF ALTER_EFFECT INT_VAR match_opcode = 62 match_parameter2 = %ind_4% opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = EVAL ~d5zy%ind_1%%ind_2%~ END
+	  END
+//	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+//	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%%ind_2%~ END
+	  PATCH_IF (5e_plus_mem = 0) BEGIN
+	    LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5zy%ind_1%%ind_2%~ END
+	    LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5zy%ind_1%%ind_2%~ END
+	  END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5zz172~ END
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = ~d5zspld~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+	  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+//	  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//	  END
+//	  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//	    LPF ADD_SPELL_EFFECT INT_VAR insert_point = (0 - 1) opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//	  END
+	IF_EXISTS BUT_ONLY
+  END	//	end if not spell-doubling
+/* don't even bother... do it manually like arcane rings if necessary
+  ACTION_IF (%ind_3% = 99) BEGIN
+	ACTION_IF (%ind_2% > 0) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%1.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%1.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%1~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%1~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%1.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%1.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%1~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%1~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 8) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%1~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 1 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%1~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%1~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%1~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%1~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%1~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 1) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%2.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%2.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%2~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%2~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%2.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%2.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%2~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%2~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 12) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%2~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 2 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%2~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%2~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%2~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%2~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%2~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 2) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%3.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%3.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%3~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%3~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%3.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%3.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%3~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%3~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 16) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%3~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 4 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%3~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%3~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%3~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%3~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%3~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 3) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%4.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%4.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%4~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%4~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%4.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%4.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%4~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%4~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 20) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%4~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 8 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%4~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%4~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%4~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%4~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%4~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 4) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%5.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%5.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%5~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%5~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%5.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%5.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%5~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%5~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 24) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%5~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 16 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%5~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%5~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%5~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%5~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%5~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 5) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%6.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%6.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (134 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%6~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%6~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%6.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%6.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%6~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%6~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 28) parameter2 = %fake_sham_equal_1_7% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%6~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 32 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%6~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%6~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%6~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%6~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%6~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	ACTION_IF (%ind_2% > 6) BEGIN
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z!%ind_1%7.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z!%ind_1%7.spl~
+		  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (109 + (0x10000 * 1)) timing = 1 duration = 0 END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%7~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%7~ END
+	  END
+	  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5z-%ind_1%7.spl~) BEGIN
+		COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5z-%ind_1%7.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z!%ind_1%7~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspld~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5zspla~ END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5yspld.spl~) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5yy172~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5yspld~ END
+//		  END
+//		  PATCH_IF (FILE_EXISTS_IN_GAME ~d5shplz.spl~) BEGIN
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 duration = 0 STR_VAR resource = ~d5sh172~ END
+//		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = ~d5shplz~ END
+//		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%7~ END
+	  END
+	  COPY_EXISTING ~d5zlots.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (15 << 16) parameter2 = %fake_spel_equal_7_9% timing = 1 STR_VAR resource = EVAL ~d5z-%ind_1%7~ END
+	  IF_EXISTS BUT_ONLY
+	  COPY_EXISTING ~%slot_item%.itm~ ~override~
+		LPF CLONE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 parameter1 = 1 parameter2 = 64 END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%7~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%7~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %semi_sham_state% parameter2 = 110 timing = 1 STR_VAR resource = EVAL ~d5z!%ind_1%7~ END
+//		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5z-%ind_1%7~ END
+		LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 206 target = 1 parameter1 = (0 - 1) timing = 2 STR_VAR resource = EVAL ~d5z-%ind_1%7~ END
+	  IF_EXISTS BUT_ONLY
+	END
+	COPY_EXISTING ~%slot_item%.itm~ ~override~
+	  LPF DELETE_EFFECT INT_VAR match_opcode = 62 match_parameter2 = 0 END
+	IF_EXISTS BUT_ONLY
+  END	//	end if spell-doubling
+*/
+ END
+END
+
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__divine_slot_items.d5~
+
+END
+
+END		//	end with_tra
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION semi_spont_sequencers BEGIN
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
+
+// apply UI tweaks
+ COPY_EXISTING ~UI.MENU~ ~override~
+//	REPLACE_TEXTUALLY ~function[ %TAB%%WNL%]+filterContingencyMageSpells()~ ~function	filterContingencyMageSpellsDisabled()~
+	REPLACE_TEXTUALLY ~mageScreen:SequenceSpell([ %TAB%]*bookSpells\[currentBookSpell\].resref, bookSpells\[currentBookSpell\].masterResref[ %TAB%]*)~ ~mageScreen:SequenceSpell( bookSpells[currentBookSpell].resref, 'DEFAULT' )~
+	REPLACE_TEXTUALLY ~mageScreen:UnSequenceSpell([ %TAB%]*bottomSpells\[currentBottomSpell\].resref, bottomSpells\[currentBottomSpell\].masterResref[ %TAB%]*)~ ~mageScreen:UnSequenceSpell( bottomSpells[currentBottomSpell].resref, 'DEFAULT' )~
+
+	INCLUDE	~%MOD_FOLDER%/lib/semi_spont/SEQUENCER_MENU.TPA~
+
+	OUTER_SPRINT	resref ~DEFAULT~
+	OUTER_SPRINT custom ~~~~~
+	function()
+		local out = {}
+		if characters[id].mageSpells ~= nil and characters[id].mageSpells[currentSpellLevel] ~= nil then
+			for k,v in pairs(characters[id].mageSpells[currentSpellLevel]) do
+				if mageScreen:SpellAllowedForContingency(v.level, v.resref) then
+					if mageScreen:SpellSwappedInContingency(v.resref) then
+						for key,value in pairs(contingencySwapTable) do
+							value.castableCount = v.castableCount
+							value.level = v.level
+							table.insert(out, value)
+						end
+					else
+						table.insert(out, v)
+					end
+				end
+			end
+		end
+		if characters[id].priestSpells ~= nil and characters[id].priestSpells[currentSpellLevel] ~= nil then
+			for k,v in pairs(characters[id].priestSpells[currentSpellLevel]) do
+				if mageScreen:SpellAllowedForContingency(v.level, v.resref) then
+					if mageScreen:SpellSwappedInContingency(v.resref) then
+						for key,value in pairs(contingencySwapTable) do
+							value.castableCount = v.castableCount
+							value.level = v.level
+							table.insert(out, value)
+						end
+					else
+						table.insert(out, v)
+					end
+				end
+			end
+		end
+		bookSpells = out
+	end~~~~~
+	LAF	CREATE_SEQUENCER_MENU	STR_VAR	resref = ~~ custom = ~nil~	END
+	APPEND	~M_SQTOOL.LUA~	~~~~~SequencerMenu['%resref%'] = %WNL%%custom%~~~~~
+			
+/* not anymore
+ COPY ~TomeAndBlood/data/metamagic/M_d5meta.lua~ ~override~
+*/
+
+// set metamagic spells to "non-combat" flag 
+ COPY_EXISTING ~spwi420.spl~ ~override~
+   WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi710.spl~ ~override~
+   WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi809.spl~ ~override~
+   WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi617.spl~ ~override~
+   WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi908.spl~ ~override~
+   WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_spont_sequencers.d5~
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_metamagic.qd~) BEGIN
+    ACTION_FOR_EACH seq_spl IN ~d5_seq1~ ~d5_seq2~ ~d5_seq3~ BEGIN
+      COPY_EXISTING ~%seq_spl%.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = EVAL ~%seq_spl%~ END
+      IF_EXISTS BUT_ONLY
+    END
+    ACTION_FOR_EACH seq_seq IN ~spwi420d~ ~spwi420p~ ~spwi710d~ ~spwi710p~ ~spwi809d~ ~spwi809p~ BEGIN
+      COPY_EXISTING ~%seq_seq%.spl~ ~override~
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq2~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq3~ END
+      IF_EXISTS BUT_ONLY
+    END
+  END
+
+END		//	end marker not found
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION semi_spont_identify BEGIN
+
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+
+  INCLUDE ~%MOD_FOLDER%/lib/semi_spont/b3identify.tph~
+
+  LAF B3_IDENTIFY_INSTALL END
+
+/* forget this stuff, just overwrite the existing spell
+//  LAM identify_spell_level
+  OUTER_SET identify_level = 1
+
+  COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~D5_IDENTIFY_OLD~
+
+  ADD_SPELL ~%MOD_FOLDER%/lib/semi_spont/d5tb110.spl~ 2 1 ~D5_NEW_IDENTIFY~
+
+  COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~D5_NEW_IDENTIFY~ ~WIZARD_IDENTIFY~
+	
+  OUTER_SET spell_number = IDS_OF_SYMBOL (~spell~ ~WIZARD_IDENTIFY~)
+  ACTION_IF !(spell_number = (0 - 1)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME
+	  STR_VAR spell_name = ~WIZARD_IDENTIFY~
+	  RET spell_res
+    END
+  END
+
+  ACTION_IF (identify_level = 1) BEGIN
+    OUTER_SPRINT new_identify_desc @51102
+  END
+
+  ACTION_IF (identify_level > 1) BEGIN
+    OUTER_SPRINT identify_desc @51102
+    OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
+      REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
+    END
+  END
+
+  COPY_EXISTING ~%spell_res%.spl~ ~override~
+    WRITE_LONG 0x34 %identify_level%
+	SAY NAME1 @51101
+	SAY_EVALUATED UNIDENTIFIED_DESC ~%new_identify_desc%~
+
+  ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl75.itm~ ~override~
+		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+		SAY NAME2 @51101
+		SAY IDENTIFIED_DESC ~%new_identify_desc%~
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	BUT_ONLY
+  END
+
+  COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x2d3) BEGIN
+	  READ_BYTE 0x273 class
+	  PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17 || class == 19 || class == 5) BEGIN // wizard casters
+		REMOVE_KNOWN_SPELL ~spwi110~
+		REMOVE_MEMORIZED_SPELL ~spwi110~
+		ADD_KNOWN_SPELL ~%spell_res%~ #0 ~wizard~
+	  END
+	END
+  BUT_ONLY
+
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0~
+  END
+*/
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110.spl~ ~override/spwi110.spl~
+    WRITE_LONG 0x34 1
+	SAY NAME1 @51101
+	SAY UNIDENTIFIED_DESC @51102
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110a.spl~ ~override~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110b.spl~ ~override~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110c.spl~ ~override~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110d.spl~ ~override~
+
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 1 STR_VAR resref = ~d5tb110a~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 2 STR_VAR resref = ~d5tb110b~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 3 STR_VAR resref = ~d5tb110c~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 4 STR_VAR resref = ~d5tb110d~ END
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5_new_identify.d5~
+
+END		//	end not found d5_new_identify.d5
+
+END		//	end with_tra
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+// MISCELLANEOUS HELPER FUNCTIONS
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+// found by Ardanis in Rogue Rebalancing, had apparently been written by Nythrun
+// fixed two things, wrapped a function over it
+
+DEFINE_PATCH_FUNCTION ~FJ_SPL_ITM_REINDEX~ BEGIN
+
+PATCH_IF !(~%SOURCE_FILE%~ STRING_MATCHES_REGEXP ~^.+\.spl~) BEGIN
+  hs = 0x28
+  WRITE_LONG 0xc ~-1~ //Identified name
+  WRITE_LONG 0x54 ~-1~ //Identified description
+  PATCH_FOR_EACH tz IN 0x44 0x48 0x58 0x5c BEGIN
+    WRITE_LONG tz 0
+  END
+END ELSE PATCH_IF !(~%SOURCE_FILE%~ STRING_MATCHES_REGEXP ~^.+\.itm~) BEGIN
+  hs = 0x38
+END
+READ_LONG 0x64 hf //Extended header offset
+READ_SHORT 0x68 hc //Extended header count
+READ_LONG 0x6a fb //Feature block table offset
+READ_SHORT 0x70 fc //Feature block count
+PATCH_IF ((hf > fb) AND (hc > 0)) BEGIN // Ardanis: fixed "hc > 1" to "hc > 0"
+  READ_ASCII hf ~eh~ ELSE ~fail~ (hs * hc)
+  PATCH_IF (~%eh%~ STRING_EQUAL ~fail~) BEGIN
+    WHILE ((~%eh%~ STRING_EQUAL ~fail~) AND (hc > 0)) BEGIN
+      READ_ASCII hf ~eh~ ELSE ~fail~ (hs * hc)
+      hc -= 1
+    END
+  END
+  DELETE_BYTES hf (hs * hc)
+  hf = 0x72
+  WRITE_LONG 0x64 hf
+  WRITE_SHORT 0x68 hc
+  fb = (0x72 + (hs * hc))
+  WRITE_LONG 0x6a fb
+  PATCH_IF !(~%eh%~ STRING_EQUAL ~fail~) BEGIN
+    INSERT_BYTES hf (hs * hc)
+    WRITE_ASCIIE hf ~%eh%~
+  END
+END ELSE PATCH_IF ((hf != 0x72) AND (hc = 0)) BEGIN
+  hf = 0x72
+  WRITE_LONG 0x64 hf
+END
+FOR (i1 = 0; i1 < (hs * hc); i1 += hs) BEGIN
+  WRITE_SHORT (hf + i1 + 0x20) fc
+  READ_SHORT (hf + i1 + 0x1e) cx
+  fc += cx
+END
+PATCH_IF (SOURCE_SIZE > (0x72 + (hs * hc) + (0x30 * fc))) BEGIN
+  DELETE_BYTES (0x72 + (hs * hc) + (0x30 * fc)) (SOURCE_SIZE - (0x72 + (hs * hc) + (0x30 * fc)))
+END
+
+// added by Ardanis
+WRITE_SHORT 0x6e 0
+
+END // end of function
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+DEFINE_PATCH_FUNCTION ~ADD_ITEM_HEADER~
+  INT_VAR
+    type=3
+    required_id=0
+    location=3
+    alt_dicesize=0
+    target=1
+    target_count=0
+    range=0
+    projectile_type=0
+    alt_dicenumber=0
+    speed=0
+    alt_damage=0
+    thaco=0
+    dicesize=0
+    school=0
+    dicenumber=0
+    sectype=0
+    damage=0
+    damage_type=0
+    charges=0
+    depletion=0
+    flags=0
+    projectile=1
+    overhand=0
+    backhand=0
+    thrust=0
+    is_bow=0
+    is_xbow=0
+    is_sling=0
+    copy_header=0
+    insert_point=~-1~
+  STR_VAR
+    icon=~~
+  RET
+    insert_point
+BEGIN
+  LPF ~FJ_SPL_ITM_REINDEX~ END
+  hs=0x38
+
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  insert_point = (insert_point>hc || insert_point<0) ? hc : insert_point
+  copy_header = (copy_header<0) ? 0 : copy_header
+
+  PATCH_IF copy_header>hc BEGIN
+    PATCH_WARN ~Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES ho+insert_point*hs hs
+    hc+=1
+    eo+=hs
+    PATCH_IF copy_header BEGIN
+      READ_SHORT ho+(copy_header - 1)*hs+0x1e ec
+      READ_SHORT ho+(copy_header - 1)*hs+0x20 ei
+      READ_ASCII eo+ei*0x30 effs (ec*0x30)
+      READ_ASCII ho+(copy_header - 1)*hs copy (hs)
+      WRITE_ASCIIE ho+insert_point*hs ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i=ho;i<ho+hc*hs;i+=hs) BEGIN
+      READ_SHORT i+0x1e ec
+      WRITE_SHORT i+0x20 ei
+      ei+=ec
+    END
+
+    PATCH_IF copy_header BEGIN
+      READ_SHORT ho+insert_point*hs+0x1e ec
+      READ_SHORT ho+insert_point*hs+0x20 ei
+      INSERT_BYTES eo+ei*0x30 ec*0x30
+      WRITE_ASCIIE eo+ei*0x30 ~%effs%~ (ec*0x30)
+    END ELSE BEGIN
+      off=ho+insert_point*hs
+      WRITE_BYTE off type
+      WRITE_BYTE off+0x1 required_id
+      WRITE_BYTE off+0x2 location
+      WRITE_BYTE off+0x3 alt_dicesize
+      WRITE_ASCIIE off+0x4 ~%icon%~ (8)
+      WRITE_BYTE off+0xc target
+      WRITE_BYTE off+0xd target_count
+      WRITE_SHORT off+0xe range
+      WRITE_BYTE off+0x10 projectile_type
+      WRITE_BYTE off+0x11 alt_dicenumber
+      WRITE_BYTE off+0x12 speed
+      WRITE_BYTE off+0x13 alt_damage
+      WRITE_SHORT off+0x14 thaco
+      WRITE_BYTE off+0x16 dicesize
+      WRITE_BYTE off+0x17 school
+      WRITE_BYTE off+0x18 dicenumber
+      WRITE_BYTE off+0x19 sectype
+      WRITE_SHORT off+0x1a damage
+      WRITE_SHORT off+0x1c damage_type
+      WRITE_SHORT off+0x22 charges
+      WRITE_SHORT off+0x24 depletion
+      WRITE_LONG off+0x26 flags
+      WRITE_SHORT off+0x2a projectile
+      WRITE_SHORT off+0x2c overhand
+      WRITE_SHORT off+0x2e backhand
+      WRITE_SHORT off+0x30 thrust
+      WRITE_SHORT off+0x32 is_bow
+      WRITE_SHORT off+0x34 is_xbow
+      WRITE_SHORT off+0x36 is_sling
+    END
+  END
+END
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+// found by Ardanis in Rogue Rebalancing, had apparently been written by Nythrun
+// fixed two things, wrapped a function over it
+
+DEFINE_PATCH_FUNCTION ~FJ_SPL_ITM_REINDEX~ BEGIN
+
+PATCH_IF !(~%SOURCE_FILE%~ STRING_MATCHES_REGEXP ~^.+\.spl~) BEGIN
+  hs = 0x28
+  WRITE_LONG 0xc ~-1~ //Identified name
+  WRITE_LONG 0x54 ~-1~ //Identified description
+  PATCH_FOR_EACH tz IN 0x44 0x48 0x58 0x5c BEGIN
+    WRITE_LONG tz 0
+  END
+END ELSE PATCH_IF !(~%SOURCE_FILE%~ STRING_MATCHES_REGEXP ~^.+\.itm~) BEGIN
+  hs = 0x38
+END
+READ_LONG 0x64 hf //Extended header offset
+READ_SHORT 0x68 hc //Extended header count
+READ_LONG 0x6a fb //Feature block table offset
+READ_SHORT 0x70 fc //Feature block count
+PATCH_IF ((hf > fb) AND (hc > 0)) BEGIN // Ardanis: fixed "hc > 1" to "hc > 0"
+  READ_ASCII hf ~eh~ ELSE ~fail~ (hs * hc)
+  PATCH_IF (~%eh%~ STRING_EQUAL ~fail~) BEGIN
+    WHILE ((~%eh%~ STRING_EQUAL ~fail~) AND (hc > 0)) BEGIN
+      READ_ASCII hf ~eh~ ELSE ~fail~ (hs * hc)
+      hc -= 1
+    END
+  END
+  DELETE_BYTES hf (hs * hc)
+  hf = 0x72
+  WRITE_LONG 0x64 hf
+  WRITE_SHORT 0x68 hc
+  fb = (0x72 + (hs * hc))
+  WRITE_LONG 0x6a fb
+  PATCH_IF !(~%eh%~ STRING_EQUAL ~fail~) BEGIN
+    INSERT_BYTES hf (hs * hc)
+    WRITE_ASCIIE hf ~%eh%~
+  END
+END ELSE PATCH_IF ((hf != 0x72) AND (hc = 0)) BEGIN
+  hf = 0x72
+  WRITE_LONG 0x64 hf
+END
+FOR (i1 = 0; i1 < (hs * hc); i1 += hs) BEGIN
+  WRITE_SHORT (hf + i1 + 0x20) fc
+  READ_SHORT (hf + i1 + 0x1e) cx
+  fc += cx
+END
+PATCH_IF (SOURCE_SIZE > (0x72 + (hs * hc) + (0x30 * fc))) BEGIN
+  DELETE_BYTES (0x72 + (hs * hc) + (0x30 * fc)) (SOURCE_SIZE - (0x72 + (hs * hc) + (0x30 * fc)))
+END
+// added by Ardanis
+WRITE_SHORT 0x6e 0
+END // end of function
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
+  INT_VAR
+    type=1
+    location=4
+    target=1
+    target_count=0
+    range=0
+    required_level=1
+    speed=0
+    projectile=1
+    copy_header=0
+    insert_point=~-1~
+  STR_VAR
+    icon=~~
+  RET
+    insert_point
+BEGIN
+  LPF ~FJ_SPL_ITM_REINDEX~ END
+  hs=0x28
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  insert_point = (insert_point>hc || insert_point<0) ? hc : insert_point
+  copy_header = (copy_header<0) ? 0 : copy_header
+  PATCH_IF copy_header>hc BEGIN
+    PATCH_WARN ~Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES ho+insert_point*hs hs
+    hc+=1
+    eo+=hs
+    PATCH_IF copy_header BEGIN
+      READ_SHORT ho+(copy_header - 1)*hs+0x1e ec
+      READ_SHORT ho+(copy_header - 1)*hs+0x20 ei
+      READ_ASCII eo+ei*0x30 effs (ec*0x30)
+      READ_ASCII ho+(copy_header - 1)*hs copy (hs)
+      WRITE_ASCIIE ho+insert_point*hs ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i=ho;i<ho+hc*hs;i+=hs) BEGIN
+      READ_SHORT i+0x1e ec
+      WRITE_SHORT i+0x20 ei
+      ei+=ec
+    END
+    PATCH_IF copy_header BEGIN
+      READ_SHORT ho+insert_point*hs+0x1e ec
+      READ_SHORT ho+insert_point*hs+0x20 ei
+      INSERT_BYTES eo+ei*0x30 ec*0x30
+      WRITE_ASCIIE eo+ei*0x30 ~%effs%~ (ec*0x30)
+    END ELSE BEGIN
+      off=ho+insert_point*hs
+      WRITE_BYTE off type
+      WRITE_BYTE off+0x2 location
+      WRITE_ASCIIE off+0x4 ~%icon%~ (8)
+      WRITE_BYTE off+0xc target
+      WRITE_BYTE off+0xd target_count
+      WRITE_SHORT off+0xe range
+      WRITE_SHORT off+0x10 required_level
+      WRITE_LONG off+0x12 speed
+      WRITE_SHORT off+0x26 projectile
+    END
+  END
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//ADD SPELLSTATE MACRO______________________________________________________________
+//
+DEFINE_ACTION_FUNCTION d5_resolve_state STR_VAR new_state_id = ~blah~ RET new_state_ind BEGIN
+  OUTER_SET state_ind = IDS_OF_SYMBOL (~splstate~ ~%new_state_id%~)
+  ACTION_IF !(state_ind = 0 - 1) BEGIN
+    OUTER_SET new_state_ind = state_ind
+  END
+  ACTION_IF (state_ind = 0 - 1) BEGIN
+    OUTER_SET new_state_ind = 0
+    COPY_EXISTING ~splstate.ids~ ~override~
+      READ_2DA_ENTRIES_NOW rows 2
+      PATCH_IF (rows < 256) BEGIN
+        SET found = 0
+        FOR (row = 1; row < rows; ++row) BEGIN
+          PATCH_IF (found = 0) BEGIN
+            READ_2DA_ENTRY_FORMER rows row 0 ind
+            READ_2DA_ENTRY_FORMER rows row 1 spec
+            SET poss_ind = (ind + 1)
+            PATCH_IF (poss_ind < 256) BEGIN
+              LOOKUP_IDS_SYMBOL_OF_INT poss_state ~splstate~ poss_ind
+              PATCH_IF (~%poss_state%~ STRING_EQUAL_CASE ~%poss_ind%~) BEGIN
+                SET found = 1
+                SET new_state_ind = poss_ind
+              END
+            END
+          END
+        END
+      END
+    BUT_ONLY
+    ACTION_IF (new_state_ind > 0) BEGIN
+      APPEND ~splstate.ids~ ~%new_state_ind%  %new_state_id%~
+    END
+  END
+END 
+//__________________________________________________________________________________
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//JOINABLE NPCS ARRAY MACRO__________________________________________________________
+//
+DEFINE_ACTION_MACRO JOINABLE_NPC_ARRAYS BEGIN
+	//PDIALOG.2DA exists in all games
+	ACTION_DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~PDIALOG~ => ~~ END
+	//Check PDIALOG.2DA file variants referenced in CAMPAIGN.2DA
+	ACTION_IF FILE_EXISTS_IN_GAME ~CAMPAIGN.2DA~ BEGIN
+		COPY_EXISTING ~CAMPAIGN.2DA~ ~CAMPAIGN.2DA~
+			COUNT_2DA_ROWS 32 "cntrow"
+			FOR (i = 0; i < cntrow; i = i + 1) BEGIN
+				READ_2DA_ENTRY i 11 32 file
+				TO_UPPER file
+				DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~%file%~ => ~~ END
+			END
+		BUT_ONLY
+	END
+	//Generate array with joinable NPC DV
+	ACTION_PHP_EACH JOINABLE_NPC_ARRAY_2da AS file => ~~ BEGIN
+		ACTION_IF FILE_EXISTS_IN_GAME ~%file%.2da~ BEGIN
+			COPY_EXISTING ~%file%.2da~ ~override~
+				COUNT_2DA_ROWS 3 "cntrow"
+				FOR (i = 1; i < cntrow; i = i + 1) BEGIN
+					READ_2DA_ENTRY i 0 3 "dv"
+					TO_UPPER dv
+					DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_dv BEGIN ~%dv%~ => ~~ END
+				END
+			BUT_ONLY
+		END
+	END
+	//Generate array with joinable NPC cre files
+	COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
+		READ_ASCII DEATHVAR "dv" (32) NULL
+		TO_UPPER dv
+		PATCH_IF VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+		PATCH_IF NOT VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
+			DEFINE_ASSOCIATIVE_ARRAY NON_JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
+		END
+	BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// spell_to_innate                                  \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+// converts spell to innate and lowers casting time by two
+
+DEFINE_PATCH_MACRO ~spell_to_innate~ BEGIN
+
+  READ_LONG  0x64 abil_off ELSE 0
+  READ_SHORT 0x68 abil_num ELSE 0
+  READ_ASCII (abil_off + 0x04) bam (8) // reads the bam filename from ability
+  WRITE_SHORT 0x1C 4                         // sets spell type to innate (4)
+  WRITE_LONG  0x34 1                         // sets spell level to 1 to avoid scripting issues
+  WRITE_ASCIIE 0x3A "%bam%" #8      // writes the bam filename from abilities to spell icon
+  FOR (index = 0 ; index < abil_num ; ++index) BEGIN
+    WRITE_SHORT (abil_off + 0x02 + (0x28 * index)) 4 // changes ability icon location to innate (4)
+    READ_SHORT  (abil_off + 0x12 + (0x28 * index)) speed // reads casting speed
+    PATCH_IF (speed > 3) BEGIN
+      WRITE_SHORT  (abil_off + 0x12 + (0x28 * index)) (speed - 2) // reduces casting speed
+    END ELSE BEGIN
+      WRITE_SHORT  (abil_off + 0x12 + (0x28 * index)) 0 // makes instant
+    END
+  END
+
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+// fix kitlist IDS entries
+
+DEFINE_ACTION_FUNCTION fix_kitlist_missing_ids BEGIN
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		PRETTY_PRINT_2DA
+		PATCH_IF ~%entry%~ STR_EQ ~~ BEGIN
+			READ_2DA_ENTRY 1 0 1 "entry"
+		END
+		COUNT_2DA_COLS "cols"
+		SET cnt = 0
+		REPLACE_EVALUATE ~^\(.+\)$~ BEGIN
+			PATCH_IF cnt >= 3 BEGIN
+				INNER_PATCH_SAVE MATCH1 ~%MATCH1%~ BEGIN
+					COUNT_REGEXP_INSTANCES ~ +~ num_matches
+					WHILE (num_matches < (cols - 1)) BEGIN
+						REPLACE_TEXTUALLY ~$~ ~ ZZZZZ~
+						SET num_matches = num_matches + 1
+					END
+				END
+			END ELSE BEGIN
+				SET cnt = cnt + 1
+			END
+		END ~%MATCH1%~
+		PRETTY_PRINT_2DA
+	BUT_ONLY
+	COPY_EXISTING ~kitlist.2da~ ~override~
+		COUNT_2DA_ROWS 10 rows
+		FOR (row = 1; row < rows; ++row) BEGIN
+			SET val = (row - 12)
+			TEXT_SPRINT new_ids ~000040%val%~
+			READ_2DA_ENTRY row 9 10 ids_val
+			PATCH_IF !(IS_AN_INT ~%ids_val%~) BEGIN
+				SET_2DA_ENTRY row 9 10 ~0x%new_ids%~
+			END
+		END
+	BUT_ONLY
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+// Automatically fixes missing column entries in 2da files. Can be used as both patch and action function
+
+DEFINE_ACTION_FUNCTION 2DA_MISSING_COLS
+	INT_VAR
+	cols = 0 //minimum amount of columns that should have values (if not set function will automatically read max number of columns in file)
+	STR_VAR
+	2da = ~~ //2da file that should be patched, e.g. kitlist
+	entry = ~~ //what entry should be set in missing columns (if not set function will automatically read default entry from loaded 2da, e.g. *)
+BEGIN
+	ACTION_IF ~%2da%~ STR_EQ ~~ BEGIN
+		FAIL ~2DA_MISSING_COLS: %2da% STR_VAR not set~
+	END
+	COPY_EXISTING ~%2da%.2da~ ~override~
+		PRETTY_PRINT_2DA
+		PATCH_IF ~%entry%~ STR_EQ ~~ BEGIN
+			READ_2DA_ENTRY 1 0 1 "entry"
+		END
+		PATCH_IF cols = 0 BEGIN
+			COUNT_2DA_COLS "cols"
+		END
+		SET cnt = 0
+		REPLACE_EVALUATE ~^\(.+\)$~ BEGIN
+			PATCH_IF cnt >= 3 BEGIN
+				INNER_PATCH_SAVE MATCH1 ~%MATCH1%~ BEGIN
+					COUNT_REGEXP_INSTANCES ~ +~ num_matches
+					WHILE (num_matches < (cols - 1)) BEGIN
+						REPLACE_TEXTUALLY ~$~ ~ %entry%~
+						SET num_matches = num_matches + 1
+					END
+				END
+			END ELSE BEGIN
+				SET cnt = cnt + 1
+			END
+		END ~%MATCH1%~
+		PRETTY_PRINT_2DA
+	BUT_ONLY
+END
+
+DEFINE_PATCH_FUNCTION 2DA_MISSING_COLS
+	INT_VAR
+	cols = 0 //minimum amount of columns that should have values (if not set function will automatically read max number of columns in file)
+	STR_VAR
+	entry = ~~ //what entry should be used in missing columns (if not set function will automatically read default entry from loaded 2da, e.g. *)
+BEGIN
+	PRETTY_PRINT_2DA
+	PATCH_IF ~%entry%~ STR_EQ ~~ BEGIN
+		READ_2DA_ENTRY 1 0 1 "entry"
+	END
+	PATCH_IF cols = 0 BEGIN
+		COUNT_2DA_COLS "cols"
+	END
+	SET cnt = 0
+	REPLACE_EVALUATE ~^\(.+\)$~ BEGIN
+		PATCH_IF cnt >= 3 BEGIN
+			INNER_PATCH_SAVE MATCH1 ~%MATCH1%~ BEGIN
+				COUNT_REGEXP_INSTANCES ~ +~ num_matches
+				WHILE (num_matches < (cols - 1)) BEGIN
+					REPLACE_TEXTUALLY ~$~ ~ %entry%~
+					SET num_matches = num_matches + 1
+				END
+			END
+		END ELSE BEGIN
+			SET cnt = cnt + 1
+		END
+	END ~%MATCH1%~
+	PRETTY_PRINT_2DA
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+/* do this in the code...??
+OUTER_INNER_PATCH ~1~ BEGIN
+  WRITE_BYTE 0 0x09
+  READ_ASCII 0 tab (1)  // 0x09, tab
+  WRITE_BYTE 0 0x0d
+  READ_ASCII 0 mnl (1)  // 0x0d, Mac
+END
+*/
+
+DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
+  STR_VAR tra = ~~ // e.g. ~@123~
+  RET str
+BEGIN
+  PATCH_IF ((~%tra%~ STRING_MATCHES_REGEXP ~@-?[0-9]+~) == 0) BEGIN
+    INNER_ACTION BEGIN
+      <<<<<<<< .../inlined/mi_tra2str.tph
+        OUTER_SPRINT str %tra%
+      >>>>>>>>
+      COPY - ~.../inlined/mi_tra2str.tph~ ~.../inlined/mi_tra2str.tph~
+        EVALUATE_BUFFER
+      REINCLUDE ~.../inlined/mi_tra2str.tph~
+    END
+  END
+  ELSE BEGIN
+    TEXT_SPRINT str ~%tra%~
+  END
+END
+
+DEFINE_ACTION_FUNCTION ~ADD_ITEM_TOOLTIPS~
+  STR_VAR item = ~~     // e.g. ~sw1h01~
+          tooltips = ~~ // e.g. ~@123 @124 6620~, takes combination of tra refs and strrefs for as many abilities as you need to specify
+BEGIN
+  ACTION_IF (STRING_LENGTH ~%item%~ > 0) BEGIN
+    // generate our row to add to tooltip.2da
+    OUTER_TEXT_SPRINT row ~%item%~
+    OUTER_PATCH ~ %tooltips%~ BEGIN // extract our tooltips from the tooltips string
+      REPLACE_EVALUATE ~[ %tab%]+\(@?-?[0-9]+\)~ BEGIN
+        PATCH_IF ((~%MATCH1%~ STRING_MATCHES_REGEXP ~@-?[0-9]+~) == 0) BEGIN // tra ref
+          // look up string for given tra reference
+          LAUNCH_PATCH_FUNCTION ~TRA2STR~ STR_VAR tra = EVALUATE_BUFFER ~%MATCH1%~ RET str = str END
+          // use REPLACE to get a strref for our new string
+          INNER_PATCH ~0~ BEGIN
+            REPLACE ~0~ ~%str%~
+            READ_2DA_ENTRY 0 0 1 strref
+          END
+          TEXT_SPRINT row ~%row% %strref%~ // add to our row
+        END
+        ELSE BEGIN // strref
+          TEXT_SPRINT row ~%row% %MATCH1%~ // add to our row
+        END
+      END ~~
+    END
+    
+    COPY_EXISTING ~tooltip.2da~ ~override~
+      REPLACE_TEXTUALLY ~^[ %tab%]*%item%[ %tab%].*~ ~~ // remove previous row for this item if it exists
+      COUNT_2DA_ROWS 1 num_rows
+      INSERT_2DA_ROW num_rows 1 ~%row%~ // insert our row at the end
+      
+      // ensure all rows have -1 entries in unused columns
+      REPLACE_TEXTUALLY ~^[ %tab%]*0?[ %tab%]*1[ %tab%]+2[ %tab%]+3.*~ ~~ // remove column labels for now
+      COUNT_2DA_COLS num_cols
+      TEXT_SPRINT entries ~~
+      TEXT_SPRINT col_labels ~~
+      FOR (i = 1; i < (num_cols - 1); i += 1) BEGIN // for each number of columns less than there should be
+        TEXT_SPRINT entries ~%entries%[ %tab%]+[0-9-]+~ // generate regexp to detect this many columns
+        TEXT_SPRINT empties ~~
+        FOR (j = (num_cols - 1); j > i; j -= 1) BEGIN // generate -1 entries for the number of missing columns
+          TEXT_SPRINT empties ~%empties% -1~
+        END
+        REPLACE_TEXTUALLY ~^\([ %tab%]*[^ %tab%]+%entries%\)[ %tab%]*[%mnl%]?$~ ~\1%empties%~ // add -1 entries to all rows with this many missing columns
+        TEXT_SPRINT col_labels ~%col_labels% %i%~ // generate fresh column labels
+      END
+      INSERT_2DA_ROW 2 1 ~%col_labels% %i%~ // re-add column labels, with last entry where i == (num_cols - 1)
+      PRETTY_PRINT_2DA
+      REPLACE_TEXTUALLY ~2DA +~ ~2DA ~
+    
+  END
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+DEFINE_PATCH_FUNCTION QD_ADD_EMPTY_SPELL_HEADER
+INT_VAR
+  type            = 1
+  location        = 4
+  target          = 1
+  target_count    = 0
+  range           = 0
+  required_level  = 1
+  speed           = 0
+  projectile      = 1
+  copy_header     = 0
+  insert_point    = ~-1~
+STR_VAR
+  icon            = ~~
+RET
+  insert_point
+BEGIN
+  SET hs = 0x28
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  SET insert_point = (insert_point > hc || insert_point < 0) ? hc : insert_point
+  SET copy_header = (copy_header < 0) ? 0 : copy_header
+  PATCH_IF (copy_header > hc) BEGIN
+    PATCH_WARN ~WARNING: Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES (ho + insert_point * hs) hs
+    SET hc += 1
+    SET eo += hs
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x1e) ec
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x20) ei
+      READ_ASCII (eo + ei * 0x30) effs (ec * 0x30)
+      READ_ASCII (ho + (copy_header - 1) * hs) copy (hs)
+      WRITE_ASCIIE (ho + insert_point * hs) ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i = ho; i < ho + hc * hs; i += hs) BEGIN
+      READ_SHORT (i + 0x1e) ec
+      WRITE_SHORT (i + 0x20) ei
+      SET ei += ec
+    END
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + insert_point * hs + 0x1e) ec
+      READ_SHORT (ho + insert_point * hs + 0x20) ei
+      INSERT_BYTES (eo + ei * 0x30) (ec * 0x30)
+      WRITE_ASCIIE (eo + ei * 0x30) ~%effs%~ (ec * 0x30)
+    END ELSE BEGIN
+      SET off = ho + insert_point * hs
+      WRITE_BYTE off type
+      WRITE_BYTE (off + 0x2) location
+      WRITE_ASCIIE (off + 0x4) ~%icon%~ (8)
+      WRITE_BYTE (off + 0xc) target
+      WRITE_BYTE (off + 0xd) target_count
+      WRITE_SHORT (off + 0xe) range
+      WRITE_SHORT (off + 0x10) required_level
+      WRITE_LONG (off + 0x12) speed
+      WRITE_SHORT (off + 0x26) projectile
+    END
+  END
+END
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+

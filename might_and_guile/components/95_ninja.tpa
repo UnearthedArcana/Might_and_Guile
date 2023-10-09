@@ -55,6 +55,23 @@ END
 //
 COPY ~might_and_guile/thief/ninja/d5ninja.2da~ ~override~
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_trak.bam~) BEGIN
+  COPY ~might_and_guile/misc/d5_trak.bam~ ~override~
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+    COPY ~might_and_guile/misc/spcl922.spl~ ~override~
+      SAY NAME1 @20107
+      SAY UNIDENTIFIED_DESC @20108
+      WRITE_ASCII 0x3a ~d5_trak~ #8
+      LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_trak~ END
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+    COPY_EXISTING ~spcl922.spl~ ~override~
+      WRITE_ASCII 0x3a ~d5_trak~ #8
+      LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_trak~ END
+    BUT_ONLY
+  END
+END
+
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN
 
  COPY ~might_and_guile/thief/ninja/d5njpts.2da~ ~override~
@@ -153,19 +170,21 @@ END
 //
 COPY ~might_and_guile/thief/ninja/d5ninjf.2da~ ~override~
 
-COPY ~might_and_guile/feats/d5_rfa9b.bam~ ~override~
-ACTION_IF !(FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
-  COPY ~might_and_guile/feats/spcl922.spl~ ~override~
-	SAY NAME1 @20107
-	SAY UNIDENTIFIED_DESC @20108
-	WRITE_ASCII 0x3a ~d5_rfa9b~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa9b~ END
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
-  COPY_EXISTING ~spcl922.spl~ ~override~
-	WRITE_ASCII 0x3a ~d5_rfa9b~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_rfa9b~ END
-  BUT_ONLY
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_trak.bam~) BEGIN
+  COPY ~might_and_guile/misc/d5_trak.bam~ ~override~
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+    COPY ~might_and_guile/misc/spcl922.spl~ ~override~
+      SAY NAME1 @20107
+      SAY UNIDENTIFIED_DESC @20108
+      WRITE_ASCII 0x3a ~d5_trak~ #8
+      LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_trak~ END
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~spcl922.spl~) BEGIN
+    COPY_EXISTING ~spcl922.spl~ ~override~
+      WRITE_ASCII 0x3a ~d5_trak~ #8
+      LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_trak~ END
+    BUT_ONLY
+  END
 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nj000.spl~) BEGIN

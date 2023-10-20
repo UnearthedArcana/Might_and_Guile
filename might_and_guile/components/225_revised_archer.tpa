@@ -410,26 +410,28 @@ COPY_EXISTING ~kit.ids~ ~override~
   END  
 BUT_ONLY
 
-COPY_EXISTING ~QD_MCT01.spl~ ~override~
+ACTION_IF (VARIABLE_IS_SET %slinger_code%) BEGIN
+  COPY_EXISTING ~QD_MCT01.spl~ ~override~
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch1#~ END
     LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
-IF_EXISTS BUT_ONLY
-COPY_EXISTING ~QD_MCT04.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~QD_MCT04.spl~ ~override~
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch2#~ END
     LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
-IF_EXISTS BUT_ONLY
-COPY_EXISTING ~QD_MCT08.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~QD_MCT08.spl~ ~override~
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch3#~ END
     LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
-IF_EXISTS BUT_ONLY
-COPY_EXISTING ~QD_MCT12.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~QD_MCT12.spl~ ~override~
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch4#~ END
     LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
-IF_EXISTS BUT_ONLY
-COPY_EXISTING ~QD_MCT16.spl~ ~override~
+  IF_EXISTS BUT_ONLY
+  COPY_EXISTING ~QD_MCT16.spl~ ~override~
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 1 parameter1 = %slinger_code% parameter2 = 9 timing = 1 STR_VAR resource = EVAL ~d5arch5#~ END
     LPF DELETE_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~spcl121#~ END 
-IF_EXISTS BUT_ONLY
+  IF_EXISTS BUT_ONLY
+END
 //___________________________________________________________________________________
 
 

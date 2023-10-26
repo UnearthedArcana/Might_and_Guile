@@ -1,0 +1,32 @@
+//
+@10  = ~^Dur.e :.+$~ // used for language auto-detection on non-EE games (or EE games where the user has not selected a language yet maybe?)
+// This might be problematic in french, where encoding will vary between EE and non-EE
+//
+@2000  = ~Progresser d'un point pour ~
+@2001  = ~Progresser jusqu'à un point (+)~
+@2002  = ~Progresser jusqu'à deux point (++)~
+@2003  = ~Progresser jusqu'à trois point (+++)~
+@2004  = ~Progresser jusqu'à quatre point (++++)~
+@2005  = ~Progresser jusqu'à cinq point (+++++)~
+@2006  = ~Progresser jusqu'à six points (++++++)~
+@2007  = ~Progresser jusqu'à sept points (+++++++)~
+//
+@2021   = ~~
+@2022   = ~~
+@2023   = ~~
+@2024   = ~~
+@2090  = ~Compétence d'arme initiale~
+@2091  = ~Faire avancer la compétence d'arme~
+@2092  = ~Choisir une autre arme~
+//
+@2100  = ~Progresser jusqu'à Initié (+)~
+//
+@2200  = ~Progresser jusqu'à Spécialiste (++)~
+//
+@2300  = ~Progresser jusqu'à Maître (+++)~
+//
+@2400  = ~Progresser jusqu'à Supérieur (++++)~
+//
+@2500  = ~Progresser jusqu'à Grand-Maître (+++++)~
+//
+@2600  = ~Progresser jusqu'à Grand-Grand-Maître (++++++)~

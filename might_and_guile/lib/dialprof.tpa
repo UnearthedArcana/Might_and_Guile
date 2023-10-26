@@ -1,8 +1,6 @@
-/* v4.2
-	- function not macro; 
-	- no longer makes 171 ability; 
-	- fixed class abbreviations; 
-	- option to exceed max value
+/* v4.3
+	- better handling of PROFSMAX
+	- improved option to exceed max value
 */
 
 //__________________________________________________________________________________
@@ -1772,152 +1770,152 @@ COPY ~weidu_external/%MOD_FOLDER%/dialprof/%prof_script_name%_temp.baf~ ~weidu_e
       BUT_ONLY
 	END
     PATCH_IF (VARIABLE_IS_SET %prof_89%) BEGIN
-     PATCH_IF (%prof_89% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_89% < 5) AND (%prof_89% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_89 = prof_89 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_90%) BEGIN
-     PATCH_IF (%prof_90% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_90% < 5) AND (%prof_90% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_90 = prof_90 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_91%) BEGIN
-     PATCH_IF (%prof_91% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_91% < 5) AND (%prof_91% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_91 = prof_91 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_92%) BEGIN
-     PATCH_IF (%prof_92% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_92% < 5) AND (%prof_92% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_92 = prof_92 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_93%) BEGIN
-     PATCH_IF (%prof_93% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_93% < 5) AND (%prof_93% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_93 = prof_93 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_94%) BEGIN
-     PATCH_IF (%prof_94% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_94% < 5) AND (%prof_94% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_94 = prof_94 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_95%) BEGIN
-     PATCH_IF (%prof_95% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_95% < 5) AND (%prof_95% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_95 = prof_95 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_96%) BEGIN
-     PATCH_IF (%prof_96% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_96% < 5) AND (%prof_96% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_96 = prof_96 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_97%) BEGIN
-     PATCH_IF (%prof_97% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_97% < 5) AND (%prof_97% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_97 = prof_97 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_98%) BEGIN
-     PATCH_IF (%prof_98% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_98% < 5) AND (%prof_98% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_98 = prof_98 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_99%) BEGIN
-     PATCH_IF (%prof_99% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_99% < 5) AND (%prof_99% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_99 = prof_99 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_100%) BEGIN
-     PATCH_IF (%prof_100% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_100% < 5) AND (%prof_100% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_100 = prof_100 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_101%) BEGIN
-     PATCH_IF (%prof_101% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_101% < 5) AND (%prof_101% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_101 = prof_101 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_102%) BEGIN
-     PATCH_IF (%prof_102% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_102% < 5) AND (%prof_102% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_102 = prof_102 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_103%) BEGIN
-     PATCH_IF (%prof_103% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_103% < 5) AND (%prof_103% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_103 = prof_103 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_104%) BEGIN
-     PATCH_IF (%prof_104% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_104% < 5) AND (%prof_104% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_104 = prof_104 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_105%) BEGIN
-     PATCH_IF (%prof_105% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_105% < 5) AND (%prof_105% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_105 = prof_105 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_106%) BEGIN
-     PATCH_IF (%prof_106% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_106% < 5) AND (%prof_106% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_106 = prof_106 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_107%) BEGIN
-     PATCH_IF (%prof_107% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_107% < 5) AND (%prof_107% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_107 = prof_107 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_108%) BEGIN
-     PATCH_IF (%prof_108% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_108% < 5) AND (%prof_108% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_108 = prof_108 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_109%) BEGIN
-     PATCH_IF (%prof_109% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_109% < 5) AND (%prof_109% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_109 = prof_109 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_110%) BEGIN
-     PATCH_IF (%prof_110% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_110% < 5) AND (%prof_110% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_110 = prof_110 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_111%) BEGIN
-     PATCH_IF (%prof_111% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_111% < 2) AND (%prof_111% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_111 = prof_111 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_112%) BEGIN
-     PATCH_IF (%prof_112% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_112% < 2) AND (%prof_112% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_112 = prof_112 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_113%) BEGIN
-     PATCH_IF (%prof_113% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_113% < 2) AND (%prof_113% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_113 = prof_113 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_114%) BEGIN
-     PATCH_IF (%prof_114% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_114% < 3) AND (%prof_114% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_114 = prof_114 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_115%) BEGIN
-     PATCH_IF (%prof_115% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_115% < 5) AND (%prof_115% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_115 = prof_115 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_124%) BEGIN
-     PATCH_IF (%prof_124% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_124% < 5) AND (%prof_124% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_124 = prof_124 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_127%) BEGIN
-     PATCH_IF (%prof_127% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_127% < 5) AND (%prof_127% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_127 = prof_127 + 1
      END
     END
     PATCH_IF (VARIABLE_IS_SET %prof_134%) BEGIN
-     PATCH_IF (%prof_134% < 5) AND (%ignore_max% = 1) BEGIN
+     PATCH_IF (%prof_134% < 5) AND (%prof_134% > 0) AND (%ignore_max% = 1) BEGIN
       SET prof_134 = prof_134 + 1
      END
     END
@@ -2152,819 +2150,143 @@ COPY_EXISTING ~profsmax.2da~ ~override~
       SET level_6_max = 99
       SET level_9_max = 99
     END
+    PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
+      SET sp_min_level = 0
+    END
+    PATCH_IF (~%level_3_max%~ = 2) BEGIN
+      SET sp_min_level = 1
+    END
+    PATCH_IF (~%level_6_max%~ = 2) BEGIN
+      SET sp_min_level = 4
+    END
+    PATCH_IF (~%level_9_max%~ = 2) BEGIN
+       SET sp_min_level = 8
+    END
+    PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
+      SET sp_min_level = 50
+    END
+    PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
+      SET ma_min_level = 0
+    END
+    PATCH_IF (~%level_3_max%~ = 3) BEGIN
+      SET ma_min_level = 1
+    END
+    PATCH_IF (~%level_6_max%~ = 3) BEGIN
+      SET ma_min_level = 4
+    END
+    PATCH_IF (~%level_9_max%~ = 3) BEGIN
+      SET ma_min_level = 8
+    END
+    PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
+      SET ma_min_level = 50
+    END
+    PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
+      SET hi_min_level = 0
+    END
+    PATCH_IF (~%level_3_max%~ = 4) BEGIN
+      SET hi_min_level = 1
+    END
+    PATCH_IF (~%level_6_max%~ = 4) BEGIN
+      SET hi_min_level = 4
+    END
+    PATCH_IF (~%level_9_max%~ = 4) BEGIN
+      SET hi_min_level = 8
+    END
+    PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
+      SET hi_min_level = 50
+    END
+    PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
+      SET gm_min_level = 0
+    END
+    PATCH_IF (~%level_3_max%~ = 5) BEGIN
+      SET gm_min_level = 1
+    END
+    PATCH_IF (~%level_6_max%~ = 5) BEGIN
+      SET gm_min_level = 4
+    END
+    PATCH_IF (~%level_9_max%~ = 5) BEGIN
+      SET gm_min_level = 8
+    END
+    PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
+      SET gm_min_level = 50
+    END
+    PATCH_IF !(VARIABLE_IS_SET %sp_min_level%) BEGIN
+      SET sp_min_level = 9
+    END
+    PATCH_IF !(VARIABLE_IS_SET %ma_min_level%) BEGIN
+      SET ma_min_level = 9
+    END
+    PATCH_IF !(VARIABLE_IS_SET %hi_min_level%) BEGIN
+      SET hi_min_level = 9
+    END
+    PATCH_IF !(VARIABLE_IS_SET %gm_min_level%) BEGIN
+      SET gm_min_level = 9
+    END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~fighter~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET fighter_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET fighter_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET fighter_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET fighter_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET fighter_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET fighter_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET fighter_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET fighter_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET fighter_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET fighter_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET fighter_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET fighter_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET fighter_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET fighter_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET fighter_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET fighter_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET fighter_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET fighter_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET fighter_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET fighter_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET fighter_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET fighter_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET fighter_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET fighter_gm_min_level = 9
-      END
+        SET fighter_sp_min_level = sp_min_level
+        SET fighter_ma_min_level = ma_min_level
+        SET fighter_hi_min_level = hi_min_level
+        SET fighter_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~ranger~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET ranger_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET ranger_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET ranger_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET ranger_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET ranger_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET ranger_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET ranger_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET ranger_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET ranger_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET ranger_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET ranger_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET ranger_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET ranger_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET ranger_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET ranger_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET ranger_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET ranger_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET ranger_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET ranger_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET ranger_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET ranger_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET ranger_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET ranger_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET ranger_gm_min_level = 9
-      END
+        SET ranger_sp_min_level = sp_min_level
+        SET ranger_ma_min_level = ma_min_level
+        SET ranger_hi_min_level = hi_min_level
+        SET ranger_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~paladin~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET paladin_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET paladin_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET paladin_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET paladin_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET paladin_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET paladin_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET paladin_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET paladin_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET paladin_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET paladin_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET paladin_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET paladin_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET paladin_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET paladin_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET paladin_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET paladin_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET paladin_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET paladin_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET paladin_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET paladin_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET paladin_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET paladin_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET paladin_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET paladin_gm_min_level = 9
-      END
+        SET paladin_sp_min_level = sp_min_level
+        SET paladin_ma_min_level = ma_min_level
+        SET paladin_hi_min_level = hi_min_level
+        SET paladin_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~cleric~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET cleric_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET cleric_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET cleric_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET cleric_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET cleric_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET cleric_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET cleric_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET cleric_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET cleric_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET cleric_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET cleric_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET cleric_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET cleric_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET cleric_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET cleric_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET cleric_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET cleric_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET cleric_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET cleric_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET cleric_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET cleric_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET cleric_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET cleric_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET cleric_gm_min_level = 9
-      END
+        SET cleric_sp_min_level = sp_min_level
+        SET cleric_ma_min_level = ma_min_level
+        SET cleric_hi_min_level = hi_min_level
+        SET cleric_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~druid~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET druid_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET druid_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET druid_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET druid_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET druid_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET fighter_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET fighter_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET druid_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET druid_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET druid_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET druid_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET druid_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET druid_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET druid_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET druid_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET druid_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET druid_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET druid_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET druid_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET druid_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET druid_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET druid_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET druid_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET druid_gm_min_level = 9
-      END
+        SET druid_sp_min_level = sp_min_level
+        SET druid_ma_min_level = ma_min_level
+        SET druid_hi_min_level = hi_min_level
+        SET druid_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~shaman~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET shaman_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET shaman_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET shaman_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET shaman_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET shaman_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET shaman_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET shaman_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET shaman_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET shaman_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET shaman_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET shaman_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET shaman_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET shaman_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET shaman_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET shaman_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET shaman_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET shaman_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET shaman_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET shaman_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET shaman_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET shaman_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET shaman_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET shaman_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET shaman_gm_min_level = 9
-      END
+        SET shaman_sp_min_level = sp_min_level
+        SET shaman_ma_min_level = ma_min_level
+        SET shaman_hi_min_level = hi_min_level
+        SET shaman_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~thief~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET thief_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET thief_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET thief_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET thief_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET thief_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET thief_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET thief_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET thief_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET thief_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET thief_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET thief_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET thief_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET thief_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET thief_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET thief_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET thief_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET thief_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET thief_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET thief_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET thief_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET thief_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET thief_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET thief_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET thief_gm_min_level = 9
-      END
+        SET thief_sp_min_level = sp_min_level
+        SET thief_ma_min_level = ma_min_level
+        SET thief_hi_min_level = hi_min_level
+        SET thief_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~bard~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET bard_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET bard_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET bard_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET bard_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET bard_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET bard_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET bard_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET bard_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET bard_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET bard_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET bard_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET bard_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET bard_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET bard_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET bard_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET bard_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET bard_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET bard_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET bard_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET bard_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET bard_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET bard_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET bard_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET bard_gm_min_level = 9
-      END
+        SET bard_sp_min_level = sp_min_level
+        SET bard_ma_min_level = ma_min_level
+        SET bard_hi_min_level = hi_min_level
+        SET bard_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~mage~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET mage_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET mage_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET mage_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET mage_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET mage_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET mage_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET mage_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET mage_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET mage_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET mage_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET mage_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET fighter_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET mage_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET mage_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET mage_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET mage_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET mage_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET mage_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET fighter_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET mage_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET mage_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET mage_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET mage_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET mage_gm_min_level = 9
-      END
+        SET mage_sp_min_level = sp_min_level
+        SET mage_ma_min_level = ma_min_level
+        SET mage_hi_min_level = hi_min_level
+        SET mage_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~sorcerer~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET sorcerer_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET sorcerer_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET sorcerer_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET sorcerer_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET sorcerer_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET sorcerer_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET sorcerer_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET sorcerer_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET sorcerer_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET sorcerer_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET sorcerer_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET sorcerer_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET fighter_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET sorcerer_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET sorcerer_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET sorcerer_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET sorcerer_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET sorcerer_gm_min_level = 9
-      END
+        SET sorcerer_sp_min_level = sp_min_level
+        SET sorcerer_ma_min_level = ma_min_level
+        SET sorcerer_hi_min_level = hi_min_level
+        SET sorcerer_gm_min_level = gm_min_level
     END
     PATCH_IF (~%prof_class%~ STRING_EQUAL_CASE ~monk~) BEGIN
-      PATCH_IF (~%level_1_max%~ = 2) OR (~%level_1_max%~ > 2) BEGIN
-        SET monk_sp_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 2) BEGIN
-        SET monk_sp_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 2) BEGIN
-        SET monk_sp_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 2) BEGIN
-         SET monk_sp_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ < 2) AND (%ignore_max% = 0) BEGIN
-        SET monk_sp_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 2) AND !(~%level_6_max%~ = 2) AND !(~%level_9_max%~ = 2) AND (~%overall_max%~ > 1) AND (%ignore_max% = 0) BEGIN
-        SET monk_sp_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 3) OR (~%level_1_max%~ > 3) BEGIN
-        SET monk_ma_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 3) BEGIN
-        SET monk_ma_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 3) BEGIN
-        SET monk_ma_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 3) BEGIN
-        SET monk_ma_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ < 3) AND (%ignore_max% = 0) BEGIN
-        SET monk_ma_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 3) AND !(~%level_6_max%~ = 3) AND !(~%level_9_max%~ = 3) AND (~%overall_max%~ > 2) AND (%ignore_max% = 0) BEGIN
-        SET monk_ma_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 4) OR (~%level_1_max%~ > 4) BEGIN
-        SET monk_hi_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 4) BEGIN
-        SET monk_hi_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 4) BEGIN
-        SET monk_hi_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 4) BEGIN
-        SET monk_hi_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ < 4) AND (%ignore_max% = 0) BEGIN
-        SET monk_hi_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 4) AND !(~%level_6_max%~ = 4) AND !(~%level_9_max%~ = 4) AND (~%overall_max%~ > 3) AND (%ignore_max% = 0) BEGIN
-        SET monk_hi_min_level = 9
-      END
-      PATCH_IF (~%level_1_max%~ = 5) OR (~%level_1_max%~ > 5) BEGIN
-        SET monk_gm_min_level = 0
-      END
-      PATCH_IF (~%level_3_max%~ = 5) BEGIN
-        SET monk_gm_min_level = 1
-      END
-      PATCH_IF (~%level_6_max%~ = 5) BEGIN
-        SET monk_gm_min_level = 4
-      END
-      PATCH_IF (~%level_9_max%~ = 5) BEGIN
-        SET monk_gm_min_level = 8
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ < 5) AND (%ignore_max% = 0) BEGIN
-        SET monk_gm_min_level = 50
-      END
-      PATCH_IF !(~%level_3_max%~ = 5) AND !(~%level_6_max%~ = 5) AND !(~%level_9_max%~ = 5) AND (~%overall_max%~ > 4) AND (%ignore_max% = 0) BEGIN
-        SET monk_gm_min_level = 9
-      END
+        SET monk_sp_min_level = sp_min_level
+        SET monk_ma_min_level = ma_min_level
+        SET monk_hi_min_level = hi_min_level
+        SET monk_gm_min_level = gm_min_level
     END
   END
 BUT_ONLY

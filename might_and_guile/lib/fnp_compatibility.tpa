@@ -461,14 +461,14 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
   BUT_ONLY
 
   INCLUDE ~%MOD_FOLDER%/lib/qd_multiclass.tpa~
-  OUTER_SPRINT sphere_access ~- Access to the spheres of:~
-  OUTER_SPRINT focus_access ~- Focus access to the spheres of:~
-  OUTER_SPRINT major_access ~- Major access to the spheres of:~
-  OUTER_SPRINT minor_access ~- Minor access to the spheres of:~
-  OUTER_SPRINT advantages ~Advantages:~
-  OUTER_SPRINT abilities ~Abilities:~
-  OUTER_SPRINT disadvantages ~Disadvantages:~
-  OUTER_SPRINT restrictions ~Restrictions:~
+  OUTER_SPRINT sphere_access @1002
+  OUTER_SPRINT focus_access @1003
+  OUTER_SPRINT major_access @1004
+  OUTER_SPRINT minor_access @1005
+  OUTER_SPRINT advantages @1006
+  OUTER_SPRINT abilities @1007
+  OUTER_SPRINT disadvantages @1008
+  OUTER_SPRINT restrictions @1009
   OUTER_TEXT_SPRINT focus_sphere_list ~~
   OUTER_TEXT_SPRINT major_sphere_list ~~
   OUTER_TEXT_SPRINT minor_sphere_list ~~
@@ -644,7 +644,7 @@ DEFINE_ACTION_FUNCTION apply_fnp_spheres STR_VAR clab_name = ~x~ BEGIN
      OUTER_INNER_PATCH_SAVE total_sphere_list ~%total_sphere_list%~ BEGIN
 	   REPLACE_TEXTUALLY ~:,~ ~:~
      END
-	 OUTER_TEXT_SPRINT kit_sphere_list ~Abilities: %total_sphere_list%~
+	 OUTER_TEXT_SPRINT kit_sphere_list ~%abilities% %total_sphere_list%~
 	 ACTION_IF IS_AN_INT ~%kit_desc%~ BEGIN
 		ACTION_GET_STRREF %kit_desc% kit_description 
 		OUTER_PATCH_SAVE kit_description ~%kit_description%~ BEGIN

@@ -1,0 +1,1615 @@
+@1   = ~composant saute~
+@2   = ~composant non-EE saute~/* unused */
+@3   = ~composant de revision saute~/* unused */
+@4   = ~composant d'ajustement saute~
+@5   = ~composant de nouveau kit saute~
+@6   = ~...~
+@7   = ~ ~
+@8   = ~saute pour IWD~/* unused */
+@9   = ~modification de kit~
+@13   = ~Sorts de Rôdeur/Clerc désactivés~/* unused */
+@15   = ~Bonus de sauvegarde contre les sorts~
+@16   = ~Bonus de sauvegarde contre la mort~
+@17   = ~Bonus de sauvegarde contre les souffles~
+@18   = ~Bonus de sauvegarde contre les baguettes~
+@19   = ~Bonus de sauvegarde contre la pétrification~
+@40   = ~Métamorphose en forme naturelle~
+//
+//
+@50   = ~Deplacer le kit de Cavalier vers la classe de guerrier~
+@55   = ~Ajouter le Corsaire (kit de guerrier)~
+@60   = ~Ajouter le Maitre d'arme (kit de guerrier)~
+@80   = ~Ajouter le Pilleur de tombes (kit de guerrier/voleur)~
+@85   = ~Ajouter la Brute (kit de guerrier/voleur)~
+@90   = ~Ajouter le Libertin (kit de voleur) et reviser le Bretteur~
+@96   = ~Ajouter le Ninja (kit de voleur)~
+@97   = ~Ajouter le Ninja (kit de guerrier/voleur)~
+@105   = ~Ajouter le voleur de sorts (kit de mage/voleur)~
+@110   = ~Ajouter le Rhapsode (kit de mage/voleur)~
+@120   = ~Ajouter les kits régionaux de rodeur~
+@125   = ~Ajouter le Chasseur de magiciens (kit de rodeur)~
+@130   = ~Ajouter le Rodeur barbare (kit de rodeur)~
+@145   = ~Ajouter les faux rodeurs multiclasses~
+@151   = ~Deplacer l'Archer vers la classe de guerrier~
+@155   = ~Ajouter l'Archer elfe (kit de rôdeur)~
+@160   = ~Ajouter le Frondeur petite-personne (kit de guerrier/voleur)~
+@165   = ~Ajouter le Tireur d'elite (kit de voleur)~
+@201   = ~Rodeurs ameliores~
+@210   = ~Bonus de mouvement revises (Deplacement accru)~
+@220   = ~Revision de la table de sorts de rodeur~
+@225   = ~Revision de l'Archer~
+@230   = ~Traqueur revise~
+@235   = ~Belluaire revise~
+@265   = ~Poings du moine revises~
+@280   = ~Revision de l'Attaque sournoise~
+@290   = ~Revision de la progression du TAC0~
+@400   = ~Remaniement des Bardes : Bardes multiclasses~
+@450   = ~Ajouter le Jongleur (kit de barde)~
+@460   = ~Ajouter le Gardien du savoir (kit de barde)~
+@470   = ~Ajouter le Galant (kit de barde)~
+@480   = ~Ajouter l'Aede (kit de barde)~
+@490   = ~Ajouter le Chanteur de savoir (kit de barde)~
+@499   = ~Lancer de sorts style 5E pour les bardes style 2E~
+//
+//
+@1002   = ~- Accès aux sphères de : ~
+@1003   = ~- Accès focalisé sur les sphères de : ~
+@1004   = ~- Accès majeur aux sphères de : ~
+@1005   = ~- Accès mineur aux sphères de : ~
+
+// usage:as lookup string to be replaced
+// bg1ee, bg2ee and iwdee all use a mix of standard space and non-breakable space before the colon: ' :' v.s. ' :'
+@1006  = ~Avantages[^:]*:~
+// usage:as replacement
+// - in apply_fnp_spheres
+// in revised bard
+// in revised archer to add domains to abilities
+@1007  = ~CAPACITÉS :~
+// usage:as lookup string to be replaced
+@1008  = ~Inconvénients[^:]*:~
+// usage: replacement string
+@1009  = ~Restrictions :~
+//
+//
+@5501  = ~corsaire~
+@5502  = ~Corsaire~
+@5503  = ~CORSAIRE : Tout autant guerrier, voleur et charmant marin, le corsaire est un escrimeur élégant qui survit grâce à son esprit affûté et sa lame qui l'est encore plus.
+
+CAPACITÉS :
+- Bonus de 1 point à la classe d'armure et aux jets de sauvegarde contre les souffles tous les 6 niveaux.
+- Peut atteindre la Grande maîtrise (5 étoiles) dans les armes légères à lame.
+- Commence avec deux points de compétence dans le style Combat à une arme.
+- Peut utiliser la compétence Escrime. Le personnage tournoie, virevolte et pare, gagnant un bonus de 2 points à la classe d'armure contre les attaques au corps à corps contre une pénalité de 1 point aux jets d'attaque et de dégâts. De plus, des coups réussis sur les ennemis peut amener la cible à rater plus souvent ses coups.
+
+DÉSAVANTAGES :
+- Ne peut être Initié dans les armes lourdes.
+- Ne peut atteindre que la Spécialisation (2 étoiles) en armes à distance.
+- Ne peut porter d'armure plus lourde que le cuir clouté.
+~
+@5504  = ~Tout autant guerrier, voleur et charmant marin, le corsaire est un escrimeur élégant qui survit grâce à son esprit affûté et sa lame qui l'est encore plus.~
+@5506  = ~Escrime~
+@5507  = ~Escrime
+C'est un style de combat qui consiste à harceler l'adversaire tout en évitant ses attaques. Il accorde un bonus de 2 points à la classe d'armure contre les attaques au corps à corps en échange d'un point de pénalité aux jets de dégâts et d'attaque. Les attaques réussies imposent aux ennemis une pénalité de 2 points au TAC0 en cas d'échec à un jet de sauvegarde contre la pétrification. Par contre, un échec critique peut amener l'escrimeur à trébucher et tomber. Ce style peut être activé et désactivé à volonté.~
+@5508  = ~Chance~
+@5514  = ~Annuler Escrime~
+//
+//
+@6001  = ~maître d'arme~
+@6002  = ~maître d'arme~
+@6003  = ~MAÎTRE D'ARME : ce guerrier puise dans son esprit combatif implacable pour abattre ses ennemis. À la différence de la plupart des guerriers, les maîtres d'armes focalisent tellement leur entraînement qu'ils ne peuvent atteindre la grande maîtrise que dans un seul groupe d'armes. Par contre, leur rapport à leur arme et leur entraînement leur permettent de puiser dans le « ki », l'énergie spirituelle, pour réaliser des prouesses au combat.
+
+CAPACITÉS :
+- Peut choisir une arme de choix au niveau 9. Le Maître d'arme obtient instantanément la Grande Maîtrise dans son arme de choix.
+- Un Maître d'arme peut canaliser son énergie « ki » pour réaliser des exploits demandant une force, une agilité et une férocité surhumaines. Le Maître d'arme obtient un point ki au premier niveau, puis un autre point tous les trois niveaux par la suite, jusqu'à 7 points au niveau 18. Ces points ki peuvent être utilisés pour produite les effets suivants :
+ - Imposition des mains (se soigner soi-même ou soigner un allié)
+ - Bouclier de vent (évasion des attaques à projectiles)
+ - Déluge de coups (attaquer plus rapidement mais avec moins de précision)
+ - Frappe du tigre (effectuer une attaque critique)
+ - Coup étourdissant (Étourdir la cible d'une attaque avec l'arme)
+ - Frappe de porte intérieure (Infliger des pénalités aux jets de sauvegarde par une attaque avec l'arme)
+ - Cri de guerre (un cri puissant qui peut effrayer les ennemis)
+
+DÉSAVANTAGES :
+- Ne peut atteindre que la spécialisation avec les armes autres que l'arme de choix
+- Ne peut être d'alignement chaotique.
+~
+@6008  = ~Maîtrise d'une arme~
+@6009  = ~Maîtrise d'une arme :
+
+À la différence de la plupart des soldats et autres combattants, les maîtres d'armes ne peuvent atteindre les plus hauts niveaux de maîtrise que dans une seule arme. Cette capacité permet au Maître d'arme d'atteindre la Grande maîtrise dans une arme, choisie dans un dialogue.
+~
+@6011  = ~Bouclier de vent~
+@6012  = ~Bouclier de vent :
+Cette capacité permet d'échapper aux attaques à projectiles avec une agilité surhumaine. Durant 4 rounds, le combattant dispose d'un bonus de 5 points à la classe d'armure contre les attaques à projectiles et parmi celles qui touchent leur cible, une peut être déviée chaque round sans causer de dégâts.~
+@6013  = ~Déluge de coups~
+@6014  = ~Déluge de coups :
+Cette capacité permet au combattant d'attaquer avec une férocité surhumaine. Il peut porter une attaque de plus chaque round pendant 3 rounds. Par contre, la précision de ses attaques est amoindrie et il subit une pénalité de 2 points aux jets d'attaque pendant cette période.~
+@6015  = ~Frappe du tigre~
+@6016  = ~Frappe du tigre :
+Cette capacité permet au combattant de concentrer toute son énergie dans une seule attaque. La prochaine attaque après son activation résultera automatiquement en un coup critique.~
+@6017  = ~Frappe de porte intérieure~
+@6018  = ~Frappe de porte intérieure :
+Cette capacité permet au combattant de s'attaque à l'esprit de la cible, en plus de s'attaquer à son corps. La prochaine attaque de corps à corps réussie inflige à la cible une pénalité de 2 points à tous les jets de sauvegarde pour une durée de 5 rounds.~
+@6019  = ~Cri de guerre~
+@6020  = ~Cri de guerre :
+Avec son cri de guerre, le combattant émet un puissant cri effrayant qui fera paniquer tous les adversaires à moins de 5 m qui ne réussissent pas un jet de sauvegarde contre les sorts.~
+//
+//
+@9002  = ~libertin~
+@9003  = ~Libertin~
+@9004  = ~LIBERTIN : le libertin est un roublard qui exhibe ses dons et talents, souvent jusqu'à la vantardise. Le libertin peut être sous la protection d'un puissant qui lui trouve une utilité, mais le plus souvent, ses fanfaronnades suffisent à écarter les ennuis. Effronté et ne craignant pas la confrontation, le libertin est souvent la figure d'un groupe pour la diplomatie, la collecte d'informations, les négociations, ou pour obtenir des autorités locales les contrats et quêtes les plus avantageux. À la différence des voleurs, les libertins frappent rarement de l'ombre, préférant regarder leur adversaire dans les yeux pour lui infliger un bon mot. À la plus grande frustration de leurs ennemis, les libertins semblent souvent assez chanceux pour survivre à ces confrontations.
+
+CAPACITÉS :
+- Bonus naturel de 1 point au TAC0, à la classe d'armure et à la chance.
+- Peut se spécialiser dans les armes que les voleurs peuvent utiliser.
+- Peut atteindre la maîtrise (3 étoiles) dans le Combat à deux armes.
+
+DÉSAVANTAGES :
+- Il n'a que 20 points par niveau à répartir dans les compétences de voleur.
+- Le modificateur d'attaque sournoises n'augmente pas avec le niveau.
+~
+//
+// swashbuckler
+@9008  = ~BRETTEUR : Ce roublard est à la fois un acrobate, une fine lame et une personne d'esprit. Il incarne le charme et la grâce. Les bretteurs sont perçus comme des poseurs et sont généralement de piètres voleurs. Mais leur talent à l'épée ne doit pas être sous-estimé et les tire d'affaire quand leur charme n'opère pas.
+
+CAPACITÉS :
+- Bonus de 1 point à la classe d'armure au niveau 1, et +1 supplémentaire tous les 5 niveaux.
+- Peut atteindre la spécialisation (2 étoiles) dans toute arme de corps à corps utilisable par les voleurs.
+- Peut atteindre la maîtrise (3 étoiles) dans le Combat à deux armes.
+
+DÉSAVANTAGES :
+- Ne peut utiliser la compétence de Pose de pièges
+- Il n'a que 20 points de compétence par niveau à répartir dans les talents de voleur.
+- Peut utiliser attaque sournoise, mais avec un multiplicateur de dégâts inférieurs à celui des voleurs (équivalent à celui des Traqueurs).
+- Ne peut pas faire de jumelage vers la classe de guerrier.
+~
+//
+//
+@9502  = ~ninja~
+@9503  = ~Ninja~
+@9504  = ~NINJA : le ninja est un espion hautement entraîné, un expert dans les arts de l'intrusion, du sabotage et de l'élimination. Ces combattants de l'ombre ont le plus souvent été entraînés par, et travaillent pour un clan, une ville ou une organisation locale. Ils assimilent un ensemble de compétences varié qui comprend la discrétion, la récolte d'information, le combat et même un peu de magie spécialisée.
+
+CAPACITÉS :
+- Peut atteindre la spécialisation (2 étoiles) dans toute arme utilisable par les voleurs.
+- Peut utiliser la capacité de Pistage des rôdeurs.
+- Peut concentrer son énergie ki pour produire des effets trompeurs. Le ninja commence avec un point ki au niveau 1, puis un point ki à chaque niveau impair par la suite, jusqu'à 10 points au niveau 19. Les points ki peuvent être utilisés pour reproduire les effets des sorts suivants :
+  - Cécité
+  - Sommeil
+  - Image réfléchie
+  - Flou
+  - Déblocage
+  - Sanctuaire
+  - Pas de l'ombre
+
+DÉSAVANTAGES :
+- Ne peut utiliser la compétence de Pickpocket.
+- Il n'a que 20 points par niveau à répartir dans les compétences de voleur.
+~
+//
+//
+@12001  = ~selon la géographie~
+@12002  = ~Chaque variante de kit de rôdeur a un bonus au combat (+2 au TAC0 et aux dégâts) contre un panel d'animaux et de monstres en relation avec leur domaine géographique ou spirituel.~
+@12003  = ~RÔDEURS : Le terme générique « rôdeur » inclut plusieurs catégories de combattants solides avec quelques caractéristiques communes : ce sont des guerriers puissants et ils sont doués en discrétion et est reconnaissance. Dans la bataille, les rôdeurs préfèrent la rapidité et la compétence à la force brute. Ils utilisent souvent des armes légères à une main et sont doués pour combattre une arme dans chaque main.
+
+Les « vrais » rôdeurs sont des maîtres de leur géographie locale et apprennent des compétences qui leur permettent de survivre dans la nature sauvage, là où peu pourraient le faire. Les rôdeurs sont généralement aimables et protecteurs envers leurs semblables et utilisent leurs talents pour aider et soutenir les communautés isolées. Ils agissent suivant un code d'honneur et peuvent perdre certaines de leurs aptitudes s'ils s'écartent de l'éthique du rôdeur.
+
+D'autres disposent de jeux de compétences dérivés de celui du rôdeur, mais sans avoir leur relation étroite avec la nature ou un code éthique aussi strict. Les Archers, Traqueurs et autres personnages semblables utilisent des tactiques similaires aux rôdeurs, mais ne sont pas limités à un alignement particulier.
+
+CAPACITÉS :
+- Peut porter des casques.
+- Peut porter n'importe quelle armure et utiliser toutes les armes.
+- Peut se spécialiser (deux étoiles) dans le maniement de n'importe quelle arme.
+- Peut se spécialiser (deux étoiles) dans n'importe quel style de combat, et allouer trois étoiles dans le style de combat à deux armes.
+- Commence avec deux étoiles dans le style de combat à deux armes.
+- Peut se cacher dans l'ombre lorsqu'il porte une armure légère.
+- Peut lancer quelques sorts divins associés à la nature.
+- Dés de vie : d10
+
+Caractéristiques requises pour le jumelage : Force, Dextérité, Sagesse.
+~
+//
+//
+@12011  = ~rôdeur des forêts~
+@12012  = ~Rôdeur des forêts~
+@12013  = ~RÔDEUR DES FORÊTS : Ils sont les rôdeurs les plus courants, ou tout du moins ceux que l'on rencontre le plus souvent. Les rôdeurs des forêts connaissent la nature et sont des combattants compétents. Leur naturel férocement protecteur les amène à remplir un double rôle, parfois guidant les voyageurs aux travers de contrées hostiles, et parfois protégeant cette nature hostile contre ceux qui voudraient exploiter inconsidérément les terrains boisés de Toril.
+
+Avantages :
+- Capacité innée Charme animaux et bêtes une fois par jour tous les 5 niveaux.
+- Capacité innée à lancer Baies magiques une fois par jour.
+- Bonus de +2 au TAC0 et aux dégâts contre les mammifères non-humanoïdes, les grouilleux et les lycanthropes.
+
+Restrictions :
+- Doit être d'alignement bon.
+~
+@12014  = ~RÔDEUR DES FORÊTS : Ils sont les rôdeurs les plus courants, ou tout du moins ceux que l'on rencontre la plus souvent. Les rôdeurs des forêts connaissent la nature et sont des combattants compétents. Leur naturel férocement protecteur les amène à remplir un double rôle, parfois guidant les voyageurs aux travers de contrées hostiles, et parfois protégeant cette nature hostile contre ceux qui voudraient exploiter inconsidérément les terrains boisés de Toril.~
+//
+@12021  = ~rôdeur des montagnes~
+@12022  = ~Rôdeur des montagnes~
+@12023  = ~RÔDEUR DES MONTAGNES : Ces gens sont de robustes survivalistes entraînés pour se sentir chez eux entre les pics élevés et pour protéger les cols et les vallées qui sont vitaux pour les communautés montagnardes. Les rôdeurs des montagnes sont aussi des spéléologues confirmés, parce que le mal qui menace ces terres prend le plus souvent origine dans les cavernes, où toutes sortes de créatures dangereuses ont tendance à se rassembler et où d'anciens et puissants artefacts ont tendance à se perdre.
+
+Avantages :
+- Bonus de +3 aux jets de sauvegarde contre la mort/le poison et contre la pétrification/la métamorphose.
+- Bonus de +2 au TAC0 et aux dégâts contre les kobolds, les scarabées, les myconides, les trolls, et les ombres des roches.
+
+Restrictions :
+- Doit être d'alignement bon.
+~
+@12024  = ~RÔDEUR DES MONTAGNES : Ces gens sont de robustes survivalistes entraînés pour se sentir chez eux entre les pics élevés et pour protéger les cols et les vallées qui sont vitaux pour les communautés montagnardes. Les rôdeurs des montagnes sont aussi des spéléologues confirmés, parce que le mal qui menace ces terres prend le plus souvent origine dans les cavernes, où toutes sortes de créatures dangereuses ont tendance à se rassembler et où d'anciens et puissants artefacts ont tendance à se perdre.~
+//
+@12031  = ~rôdeur de la jungle~
+@12032  = ~Rôdeur de la jungle~
+@12033  = ~RÔDEUR DE LA JUNGLE : ces combattants sont des guides et des chasseurs dans certains des écosystèmes les plus compétitifs et les plus dangereux. La seule force signifie peu de chose dans la jungle, alors les rôdeurs de la jungle utilisent des tactiques comme la discrétion et le poison pour survivre. Avec ces outils et une connaissance approfondie des résidents les plus dangereux de la jungle et des marais, ils peuvent guider les voyageurs et éviter les dangers masqués.
+
+Avantages :
+- Résistance de 50 % aux dégâts de poison.
+- Peut utiliser Arme empoisonnée une fois par jour.
+- Bonus de +2 au TAC0 et aux dégâts contre les hommes-lézards, les araignées, les ettercaps et les wivernes.
+
+Restrictions :
+- Doit être d'alignement bon.
+~
+@12034  = ~RÔDEUR DE LA JUNGLE : ces combattants sont des guides et des chasseurs dans certains des écosystèmes les plus compétitifs et les plus dangereux. La seule force signifie peu de chose dans la jungle, alors les rôdeurs de la jungle utilisent des tactiques comme la discrétion et le poison pour survivre. Avec ces outils et une connaissance approfondie des résidents les plus dangereux de la jungle et des marais, ils peuvent guider les voyageurs et éviter les dangers masqués.~
+//
+@12041  = ~rôdeur du désert~
+@12042  = ~Rôdeur du désert~
+@12043  = ~RÔDEUR DU DÉSERT : Ils font partie des combattants les plus solides sur terre ferme. Ils sont entraînés à patrouiller les terres désolées loin de la civilisation, là où l'exposition à découvert et la soif sont aussi dangereux que n'importe quel monstre. Dans ces endroits, les menaces sont grandes et souvent de nature magique. Très peu de gens comprennent ce qui peut amener quelqu'un à suivre cette voie, mais certains pensent que le désert lui-même exerce une attirance spirituelle sur ces individus solitaires.
+
+Avantages :
+- Bonus de 1 point de vie par niveau aux niveaux 1 à 9.
+- Bonus de +2 au TAC0 et aux dégâts contre les serpents, les yuan-ti, les basilics, les rakshasas et les génies.
+
+Restrictions :
+- Doit être d'alignement bon.
+~
+@12044  = ~RÔDEUR DU DÉSERT : Ils font partie des combattants les plus solides sur terre ferme. Ils sont entraînés à patrouiller les terres désolées loin de la civilisation, là où l'exposition à découvert et la soif sont aussi dangereux que n'importe quel monstre. Dans ces endroits, les menaces sont grandes et souvent de nature magique. Très peu de gens comprennent ce qui peut amener quelqu'un à suivre cette voie, mais certains pensent que le désert lui-même exerce une attirance spirituelle sur ces individus solitaires.~
+//
+@12051  = ~rôdeur arctique~
+@12052  = ~Rôdeur arctique~
+@12053  = ~RÔDEUR ARCTIQUE : Parmi les explorateurs et les voyageurs de la toundra glacée et des étendues enneigées autour le la calotte glaciaire, ceux qui sont imprudents meurent vite. Les rôdeurs arctiques jouent parfois le rôle de sherpas ou, d'autre fois, préfèrent travailler dans la discrétion. Mais leur capacité à trouver et à faire usage de ressources là ou d'autres sont éblouis par la neige a sauvé de nombreuses vies. Et leur connaissance des plus dangereux prédateurs sous ces climats est sans prix.
+
+Avantages :
+- Résistance permanente de 25 % aux dégâts de froid.
+- Bonus de +2 au TAC0 et aux dégâts contre les loups des glaces, les ours polaires, les yétis, les salamandres et les remorhaz.
+
+Restrictions :
+- Doit être d'alignement bon.
+~
+@12054  = ~RÔDEUR ARCTIQUE : Parmi les explorateurs et les voyageurs de la toundra glacée et des étendues enneigées autour le la calotte glaciaire, ceux qui sont imprudents meurent vite. Les rôdeurs arctiques jouent parfois le rôle de sherpas ou, d'autre fois, préfèrent travailler dans la discrétion. Mais leur capacité à trouver et à faire usage de ressources là ou d'autres sont éblouis par la neige a sauvé de nombreuses vies. Et leur connaissance des plus dangereux prédateurs sous ces climats est sans prix.~
+//
+//
+@12503  = ~chasseur de mages~
+@12504  = ~Chasseur de mages~
+@12505  = ~CHASSEUR DE MAGES : Ces rôdeurs prennent part à des rituels exigeants avec des druides justiciers pour obtenir des pouvoirs magiques qu'ils utilisent dans leur campagne contre les mages qui utilisent leurs talents pour souiller la nature.
+
+Avantages :
+- Bonus de +1 aux jets de sauvegarde contre les sorts. Ce bonus augmente d'un point supplémentaire tous les quatre niveaux jusqu'au niveau 20.
+- Toutes les attaques de mêlée réussies infligent un risque d'échec des sorts de 40 % à la cible pendant 1 round.
+- Peut utiliser une capacité spéciale, Toucher de brèche, une fois par jour pour chaque tranche de 2 niveaux. Le Toucher de brèche contourne toutes les protections de sorts comme Déviation de Sorts ou Globe d'invulnérabilité.
+- Peut lancer une version innée de Déviation de Sorts Mineure une fois par jour pour chaque tranche de 5 niveaux.
+- Peut utiliser un mode d'expression vocale qui peut assourdir les créatures à proximité et leur imposer un risque d'échec des sorts de 50 % en cas d'échec à un jet de sauvegarde contre la pétrification.
+
+Inconvénients :
+- Ne peut pas utiliser la compétence de charme animal du rôdeur.
+~
+@12506  = ~Toucher de brèche~
+@12507  = ~Toucher de brèche
+
+Quand il active ce pouvoir magique, le chasseur de mages touche un lanceur de sorts, traversant toutes les protections de sorts, pour détruire et dissiper une protection de combat comme Protection contre les armes, Peau de pierre, Bouclier, etc.
+~
+@12508  = ~Perturbation vocale~
+@12509  = ~Perturbation vocale
+
+Les chasseurs de mages ont appris à produire un cri râpeux et gémissant à une fréquence spécifique qui perturbe l'oreille interne des lanceurs de sorts à proximité. Ces lanceurs de sorts doivent réussir un jet de sauvegarde contre la pétrification sous peine d'être partiellement assourdis et souffrir d'un risque de 40 % d'échec des sorts pendant 5 rounds. L'effort pour produire ce son est tel que les chasseurs de mages ne peuvent réaliser cette prouesse que peu de fois avant de devoir mettre leurs cordes vocales au repos.~
+//
+//
+@13004  = ~rôdeur barbare~
+@13005  = ~Rôdeur barbare~
+@13006  = ~RÔDEUR BARBARE : Dans les tribus barbares, se trouvent des chasseurs talentueux. Plus proches de la nature que la plupart des autres, ils peuvent passer plusieurs jours à pourchasser leur proie, seuls dans la nature. Ils ne sont pas tout à fait aussi robustes que leurs camarades plus agressifs, et ont tendance à être solitaires. Et pourtant ils apportent des compétences rares pour préserver et subvenir aux besoins de leur tribu.
+
+CAPACITÉS :
+- Se déplace plus rapidement que les autres personnages.
+- Peut entrer dans un état enragé qui augmente ses capacités de combat une fois par jour tous les six niveaux.
+- Peut utiliser Charme animal une fois par jour tous les cinq niveaux.
+- Gagne une résistance aux dégâts physiques de 5 % au niveau 11, puis aux niveaux 15 et 19.
+
+INCONVÉNIENTS :
+- Ne peut pas lancer de sorts de prêtre.
+- N'est pas immunisé contre les coups critiques.
+- Pénalité de 2 points au charisme.
+- Ne peut porter d'armures plus lourde que la besantine ou l'armure de peau.
+- Ne peut effectuer de jumelage de classe.
+~
+@13007  = ~Dans les tribus barbares, se trouvent des chasseurs talentueux. Plus proches de la nature que la plupart des autres, ils peuvent passer plusieurs jours à pourchasser leur proie, seuls dans la nature. Ils ne sont pas tout à fait aussi robustes que leurs camarades plus agressifs, et ont tendance à être solitaires. Et pourtant ils apportent des compétences rares pour préserver et subvenir aux besoins de leur tribu.~
+//
+//
+@15002  = ~archer~
+@15003  = ~Archer~
+@15004  = ~ARCHER : Maître au tir à l'arc, il est capable de réussir les tirs les plus précis et les plus difficiles. Mais pour devenir aussi efficace avec un arc, il doit négliger certaines capacités de port d'armure et de maniement des armes de contact.
+
+- Bonus de 1 point aux jets de toucher et de dégâts avec les armes à projectiles tous les 3 niveaux.
+- Peut atteindre la grande maîtrise (5 étoiles) avec les arcs courts, les arcs longs et les arbalètes.
+- Peut utiliser la compétence « Tir ajusté » une fois par jour tous les 4 niveaux à partir du niveau 4.
+
+TIR AJUSTÉ : Toute attaque à distance effectuée dans les 10 secondes possède les effets cumulatifs suivants (en plus des dégâts normaux) en fonction du niveau de l'Archer :
+Niveau 4 : La cible subit un malus de 1 point au TAC0.
+Niveau 8 : La cible subit un malus de 1 point aux jets de sauvegarde contre les sorts.
+Niveau 12 : La cible subit un malus de 1 point à la Force.
+Niveau 16 : Bonus de 2 points aux jets de dégâts du tir.
+
+Inconvénients :
+- Ne peut porter d'armure plus lourde que l'armure feuilletée.
+- Ne peut être que spécialisé (2 étoiles) dans le maniement des armes de mêlée.
+~
+@15005  = ~ARCHER : Maître au tir à l'arc, il est capable de réussir les tirs les plus précis et les plus difficiles. Mais pour devenir aussi efficace avec un arc, il doit négliger certaines capacités de port d'armure et de maniement des armes de contact.
+
+Avantages :
+- Bonus de 1 point au toucher et aux dégâts avec les armes à projectiles pour chaque tranche de trois niveaux de l'archer.
+- Peut atteindre la grande maîtrise (5 étoiles) dans les arcs courts, les arcs longs et les arbalètes.
+- Peut apprendre à utiliser cinq tirs ajustés, aux niveaux 1, 4, 8, 12 et 16. Les tirs ajustés peuvent être utilisés à volonté et les effets persistent 1 round. L'archer a un bonus de 2 points au TAC0 et aux dégâts quand il exécute un tir ajusté, mais doit rester immobile à ce moment-là. L'archer peut choisir l'un des tirs suivants :
+
+- Tir déséquilibrant. En visant les jambes, ce tir fait tomber la cible pour 1 round si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir clouant. Ce tir se prend dans les habits ou le corps de la cible et les fixe au mur, au sol ou autres objets et la rend incapable de se déplacer pendant 2 rounds si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir aveuglant. En visant les yeux, ce tir force la cible à cligner des yeux et à perdre la vue pendant un round sur un échec à un jet de sauvegarde contre les souffles.
+- Tir percutant. Ce tir frappe sa cible avec force, ajoutant 1d6 dégâts contondants aux dégâts normaux du projectile et projetant la cible 1,5 à 3m en arrière à moins qu'elle ne réussisse un jet de sauvegarde contre les souffles.
+- Tir rapide. Cette technique permet à l'archer de tirer plus rapidement, avec une attaque supplémentaire par round, mais avec moins de précision (avec une pénalité de 2 points aux jets d'attaque et de dégâts).
+
+Inconvénients :
+- Ne pourra atteindre qu'un niveau de compétence limité avec les armes de mêlée.
+- Ne peut porter d'armure plus lourde que l'armure feuilletée.
+~
+//
+//
+@15501  = ~archer elfe~
+@15502  = ~Archer elfe~
+@15503  = ~ARCHER ELFE : Les elfes se montrent particulièrement talentueux dans l'utilisation des arcs. Ceux parmi les elfes qui sont entraînés comme archers d'élite font preuve de prouesses inégalées dans le combat à distance. Rapides et revêtus d'armures légères, ils peuvent utiliser sur leurs ennemis des tirs ajustés particulièrement dévastateurs.
+
+Avantages :
+- Bonus de 1 point aux jets de toucher et de dégâts avec les armes à projectiles tous les 3 niveaux.
+- Peut atteindre la grande maîtrise (5 étoiles) avec les arcs courts et les arcs longs.
+- Peut utiliser la compétence « Tir ajusté » une fois par jour tous les 4 niveaux à partir du niveau 4.
+
+TIR AJUSTÉ : Toute attaque à distance effectuée dans les 10 secondes possède les effets cumulatifs suivants (en plus des dégâts normaux) en fonction du niveau de l'Archer :
+Niveau 4 : La cible subit un malus de 1 point au TAC0.
+Niveau 8 : La cible subit un malus de 1 point aux jets de sauvegarde contre les sorts.
+Niveau 12 : La cible subit un malus de 1 point à la Force.
+Niveau 16 : Bonus de 2 points aux jets de dégâts du tir.
+
+Inconvénients :
+- Ne peut porter d'armures métalliques à part la cotte de mailles elfique.
+- Ne peut être que compétent (1 étoile) dans le maniement des armes de mêlée.
+- Ne peut utiliser « Charme-animal ».
+~
+@15505  = ~ARCHER ELFE : Les elfes se montrent particulièrement talentueux dans l'utilisation des arcs. Ceux parmi les elfes qui sont entraînés comme archers d'élite font preuve de prouesses inégalées dans le combat à distance. Rapides et revêtus d'armures légères, ils peuvent utiliser sur leurs ennemis des tirs ajustés particulièrement dévastateurs.
+
+Avantages :
+- Bonus de 1 point au toucher et aux dégâts avec les armes à projectiles pour chaque tranche de trois niveaux de l'archer elfe.
+- Peut atteindre la grande maîtrise (5 étoiles) dans les arcs courts et les arcs longs.
+- Peut apprendre à utiliser sept tirs ajustés aux niveaux 1, 3, 6, 9, 12, 15 et 18. Les tirs ajustés peuvent être utilisés à volonté et les effets persistent 1 round. L'archer elfe a un bonus de 2 points au TAC0 et aux dégâts quand il exécute un tir ajusté, mais doit rester immobile à ce moment-là. L'archer peut choisir l'un des tirs suivants :
+
+- Tir déséquilibrant. En visant les jambes, ce tir fait tomber la cible pour 1 round si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir clouant. Ce tir se prend dans les habits ou le corps de la cible et les fixe au mur, au sol ou autres objets et la rend incapable de se déplacer pendant 2 rounds si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir percutant. Ce tir frappe sa cible avec force, ajoutant 1d6 dégâts contondants aux dégâts normaux du projectile et projetant la cible 1,5 à 3 mètres en arrière à moins qu'elle ne réussisse un jet de sauvegarde contre les souffles.
+- Tir rapide. Cette technique permet à l'archer de tirer plus rapidement, avec une attaque supplémentaire par round, mais avec moins de précision (avec une pénalité de 2 points aux jets d'attaque et de dégâts).
+- Tir aveuglant. En visant les yeux, ce tir force la cible à cligner des yeux et à perdre la vue pendant un round sur un échec à un jet de sauvegarde contre les souffles.
+- Tir anesthésiant. Ce tir endort la cible pendant 12 secondes à moins qu'elle réussisse un jet de sauvegarde contre les sorts.
+- Tir enchevêtrant. Ce tir enchevêtre la cible (comme le ferait le sort de druide) pour 12 secondes, et des épines lui infligeront 1d4 points de dégâts perforants à moins qu'elle réussisse un jet de sauvegarde contre la paralysie.
+- Feu féerique. Ce tir éclaire la cible avec une flamme verte pendant 24 secondes, lui interdisant l'utilisation d'effets d'invisibilité et lui infligeant une pénalité de 3 points à la classe d'armure et au TAC0 à moins qu'elle réussisse un jet de sauvegarde contre les sorts.
+
+Inconvénients :
+- Ne peut porter d'armures métalliques à part la cotte de mailles elfique.
+- Ne peut atteindre qu'un niveau de compétence réduit avec les armes de mêlée.
+- Ne peut utiliser « Charme-animal ».
+~
+//
+//used (slinger)
+@16001  = ~frondeur~
+@16002  = ~Frondeur~
+@16003  = ~FRONDEUR : le frondeur est le maître dans le maniement de la fronde, le résultat du talent naturel des petites-personnes avec les frondes et de leur dévouement acharné à s'entraîner avec cette arme. Mais pour devenir aussi efficace avec une fronde, il doit négliger certaines capacités de port d'armure et de maniement des armes de contact.
+
+Avantages :
+- Bonus de 1 point aux jets de toucher et de dégâts avec les armes à projectiles tous les 3 niveaux.
+- Peut atteindre la grande maîtrise (5 étoiles) avec les frondes.
+- Peut utiliser la compétence de rôdeur « Charme animal ».
+- Peut utiliser la compétence « Tir ajusté » une fois par jour tous les quatre niveaux à partir du niveau 4.
+
+TIR AJUSTÉ : Toute attaque à distance effectuée dans les 10 secondes possède les effets cumulatifs suivants (en plus des dégâts normaux) en fonction du niveau de l'Archer :
+Niveau 4 : La cible subit un malus de 1 point au TAC0.
+Niveau 8 : La cible subit un malus de 1 point aux jets de sauvegarde contre les sorts.
+Niveau 12 : La cible subit un malus de 1 point à la Force.
+Niveau 16 : Bonus de 2 points aux jets de dégâts du tir.
+
+Inconvénients :
+- Ne peut porter d'armures métalliques.
+- Ne peut être que compétent (1 étoile) dans le maniement des armes de mêlée.
+~
+@16005  = ~FRONDEUR : le frondeur est le maître dans le maniement de la fronde, le résultat du talent naturel des petites-personnes avec les frondes et de leur dévouement acharné à s'entraîner avec cette arme. Mais pour devenir aussi efficace avec une fronde, il doit négliger certaines capacités de port d'armure et de maniement des armes de contact.
+
+Avantages :
+- Bonus de 1 point au toucher et aux dégâts avec les armes à projectiles pour chaque tranche de trois niveaux de frondeur.
+- Peut atteindre la grande maîtrise (5 étoiles) avec les frondes.
+- Peut utiliser la compétence de rôdeur « Charme animal ».
+- Peut apprendre à utiliser cinq tirs ajustés aux niveaux 1, 4, 8, 12 et 16. Les tirs ajustés peuvent être utilisés à volonté et les effets persistent 1 round. L'archer a un bonus de 2 points au TAC0 et aux dégâts quand il exécute un tir ajusté, mais doit rester immobile à ce moment-là. L'archer peut choisir l'un des tirs suivants :
+
+- Tir déséquilibrant. En visant les jambes, ce tir fait tomber la cible pour 1 round si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir percutant. Ce tir frappe sa cible avec force, ajoutant 1d6 dégâts contondants aux dégâts normaux du projectile et projetant la cible 1,5 à 3 mètres en arrière à moins qu'elle ne réussisse un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir rapide. Cette technique permet à l'archer de tirer plus rapidement, avec une attaque supplémentaire par round, mais avec moins de précision (avec une pénalité de 2 points aux jets d'attaque et de dégâts).
+
+Inconvénients :
+- Ne peut porter d'armures métalliques.
+- Ne peut atteindre qu'un niveau de compétence réduit avec les armes de mêlée.
+~
+//
+//
+@16501  = ~tireur d'élite~
+@16502  = ~Tireur d'élite~
+@16503  = ~TIREUR D'ÉLITE : Que vous ayez besoin d'empoisonner une cible avec une flèche ou de tirer une corde depuis un rebord de fenêtre avec une flèche pour un cambriolage, le tireur d'élite sera le tireur discret et hautement entraîné et discret qui fera le boulot.
+
+Avantages :
+- Bonus de 1 point aux lancers d'attaque et de dégât tous les 3 niveaux avec les armes à projectiles.
+- Peut atteindre la maîtrise (3 étoiles) dans les arcs longs, les arcs courts et les arbalètes.
+- Peut utiliser l'aptitude tirs ajustés une fois par jour. Gagne une utilisation supplémentaire au niveau 4 et une autre tous les 4 niveaux par la suite.
+
+TIR AJUSTÉ : Toute attaque à distance effectuée dans les 10 secondes qui suivent a les effets cumulatifs suivants (en sus des dégâts normaux) en fonction du niveau du tireur d'élite :
+Niveau 4 : La cible subit un malus de 1 point au TAC0.
+Niveau 8 : La cible subit un malus de 1 point aux jets de sauvegarde contre les sorts.
+niveau 12 : La cible subit un malus de 1 point à la Force.
+niveau 16 : Bonus de 2 points aux dégâts du tir.
+
+Inconvénients :
+- Il n'a que 20 points de compétence par niveau (30 au premier niveau) à répartir dans les talents de voleur.
+- Multiplicateur d'attaque sournoise réduit.
+~
+@16505  = ~TIREUR D'ÉLITE : Que vous ayez besoin d'empoisonner une cible avec une flèche ou de tirer une corde depuis un rebord de fenêtre avec une flèche pour un cambriolage, le tireur d'élite sera le tireur discret et hautement entraîné et discret qui fera le boulot.
+
+Avantages :
+- Bonus de 1 point au toucher et aux dégâts avec les armes à projectiles pour chaque tranche de trois niveaux de tireur d'élite.
+- Peut atteindre la maîtrise (3 étoiles) dans les arcs longs, les arcs courts et les arbalètes.
+- Peut apprendre à utiliser cinq tirs ajustés comme dons. Les tirs ajustés peuvent être utilisés à volonté et les effets persistent 1 round. L'archer a un bonus de 2 points au TAC0 et aux dégâts quand il exécute un tir ajusté, mais doit rester immobile à ce moment-là. Le sniper peut apprendre les tirs suivants :
+
+- Tir déséquilibrant. En visant les jambes, ce tir fait tomber la cible pour 1 round si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir clouant. Ce tir se prend dans les habits ou le corps de la cible et les fixe au mur, au sol ou autres objets et la rend incapable de se déplacer pendant 2 rounds si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir aveuglant. En visant les yeux, ce tir force la cible à cligner des yeux et à perdre la vue pendant un round sur un échec à un jet de sauvegarde contre les souffles.
+- Tir rapide. Cette technique permet à l'archer de tirer plus rapidement, avec une attaque supplémentaire par round, mais avec moins de précision (avec une pénalité de 2 points aux jets d'attaque et de dégâts).
+
+Inconvénients :
+- Il n'a que 20 points de compétence par niveau à répartir dans les talents de voleur.
+- Multiplicateur d'attaque sournoise réduit.
+~
+@16506  = ~Que vous ayez besoin d'empoisonner une cible avec une flèche ou de tirer une corde depuis un rebord de fenêtre avec une flèche pour un cambriolage, le tireur d'élite sera le tireur discret et hautement entraîné et discret qui fera le boulot.~
+//
+//
+
+@20007  = ~barde 2E~
+@20008  = ~Barde 2E~
+@20009  = ~Choisir un don~
+@20010  = ~Utilisez cette capacité pour choisir un don~
+@20011  = ~Sélection de don~
+@20012  = ~Page 2 = dons du niveau 9~
+@20013  = ~~
+@20014  = ~~
+@20097  = ~Choisir une autre aptitude~
+@20098  = ~Choisir cette aptitude~
+@20099  = ~Choisir une aptitude~
+@20100  = ~Utiliser ce pouvoir pour choisir un nouveau don~
+@20496  = ~Arme de prédilection~
+@20497  = ~Arme de prédilection : ce don permet de progresser une étape plus loin que la limite normale de compétence du personnage pour une arme (Remarque : pour cela, le personnage doit déjà avoir atteint la limite de compétence pour cette arme avant de la choisir comme arme de prédilection)~
+@20498  = ~Faire avancer la compétence d'arme~
+@20499  = ~Choisir une autre arme ~
+//
+//
+@2052  = ~ARCHER : Maître au tir à l'arc, il est capable de réussir les tirs les plus précis et les plus difficiles. Mais pour devenir aussi efficace avec un arc, il doit négliger certaines capacités de port d'armure et de maniement des armes de contact.
+
+Avantages :
+- Bonus de 1 point au toucher et aux dégâts avec les armes à distance aux niveaux 1, 5, 10, 15 et 20.
+- Peut atteindre la grande maîtrise (5 étoiles) dans les arcs courts, les arcs longs et les arbalètes.
+- Peut apprendre à utiliser un tir ajusté aux niveaux 1, 3, 6, 9 et 12. Les tirs ajustés peuvent être utilisés à volonté et les effets persistent 1 round. L'archer a un bonus de 2 points au TAC0 et aux dégâts quand il exécute un tir ajusté, mais doit rester immobile à ce moment-là. L'archer peut choisir l'un des tirs suivants :
+
+- Tir déséquilibrant. En visant les jambes, ce tir fait tomber la cible pour 1 round si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir désarmant. Ce tir fait relâcher la prise de la cible sur son arme, qui subit une pénalité de 4 points au TAC0 et un nombre d'attaques réduit pendant un round à moins de réussir un jet de sauvegarde contre les souffles.
+- Tir clouant. Ce tir se prend dans les habits ou le corps de la cible et les fixe au mur, au sol ou autres objets et la rend incapable de se déplacer pendant 2 rounds si elle échoue à un jet de sauvegarde contre les souffles.
+- Tir aveuglant. En visant les yeux, ce tir force la cible à cligner des yeux et à perdre la vue pendant un round sur un échec à un jet de sauvegarde contre les souffles.
+- Tir percutant. Ce tir frappe sa cible avec force, ajoutant 1d6 dégâts contondants aux dégâts normaux du projectile et projetant la cible 1,5 à 3m en arrière à moins qu'elle ne réussisse un jet de sauvegarde contre les souffles.
+- Tir rapide. Cette technique permet à l'archer de tirer plus rapidement, avec une attaque supplémentaire par round, mais avec moins de précision (avec une pénalité de 2 points aux jets d'attaque et de dégâts).
+
+Inconvénients :
+- Ne pourra atteindre qu'un niveau de compétence limité avec les armes de mêlée.
+- Ne peut porter d'armure plus lourde que l'armure feuilletée.
+- Ne peut utiliser « Charme-animal ».
+~
+//single unused
+@20501  = ~Choisir un tir ajusté~
+@20502  = ~Choisir cette aptitude~
+@20503  = ~Choisir un autre tir ajusté~
+
+@20511  = ~Tir ajusté : Clouer~
+@20512  = ~Tir ajusté : Clouer
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont clouer la cible à l'endroit où elles sont pour 12 secondes à moins de réussir un jet de sauvegarde contre les souffles.~
+@20513  = ~Tir ajusté : Déséquilibrer~
+@20514  = ~Tir ajusté : Déséquilibrer
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont faire tomber la cible pendant un round à moins de réussir un jet de sauvegarde contre les souffles.~
+@20515  = ~Tir ajusté : Désarmer~
+@20516  = ~Tir ajusté : Désarmer
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont amener la cible à perdre le contrôle de leur arme, la rendant incapable d'attaquer au corps à corps pendant 6 secondes et lui imposant une pénalité de 3 points au TAC0 et à la classe d'armure pendant 12 secondes, à moins de réussir un jet de sauvegarde contre la paralysie.~
+@20517  = ~Tir ajusté : Tir percutant~
+@20518  = ~Tir ajusté : Tir percutant
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont infliger 1d6 points de dégâts supplémentaires et ont une chance de projeter la cible en arrière de 1,5 m à 3 m à moins de réussir un jet de sauvegarde contre les souffles.~
+@20519  = ~Tir ajusté : Tir handicapant~
+@20520  = ~Tir ajusté : Tir handicapant
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont ralentir la cible pour 12 secondes à moins qu'elle ne réussisse un jet de sauvegarde contre les souffles.~
+@20521  = ~Tir ajusté : Aveugler~
+@20522  = ~Tir ajusté : Aveugler
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont aveugler la cible pour 6 secondes à moins qu'elle ne réussisse un jet de sauvegarde contre la paralysie.~
+@20523  = ~Tir ajusté : Étourdir~
+@20524  = ~Tir ajusté : Étourdir
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont étourdir la cible pour 3 secondes à moins qu'elle ne réussisse un jet de sauvegarde contre la paralysie.~
+@20531  = ~Tir ajusté : Enchevêtrer~
+@20532  = ~Tir ajusté : Enchevêtrer
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont enchevêtrer la cible (comme le ferait le sort de druide) pour 12 secondes, et des épines lui infligeront 1d4 points de dégâts perforants à moins qu'elle ne réussisse un jet de sauvegarde contre la paralysie.~
+@20533  = ~Tir ajusté : Endormir~
+@20534  = ~Tir ajusté : Endormir
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round vont endormir la cible pendant 12 secondes à moins qu'elle ne réussisse un jet de sauvegarde contre les sorts.~
+@20535  = ~Tir ajusté : Feu féerique~
+@20536  = ~Tir ajusté : Feu féerique
+En plus des dégâts normaux, toutes les attaques à distance réussies dans le prochain round éclaireront la cible avec une flamme verte pendant 24 secondes, lui interdisant l'utilisation d'effets d'invisibilité et lui infligeant une pénalité de 3 points à la classe d'armure et au TAC0 à moins qu'elle ne réussisse un jet de sauvegarde contre les sorts.~
+//
+//
+@2251  = ~TRAQUEUR : Le Traqueur est toujours à la recherche de renseignements, à l'aise aussi bien en ville que dans la nature. Les Traqueurs sont des espions, des informateurs, des enquêteurs ; ils sont les rois du camouflage et de la furtivité, ce qui en fait des adversaires mortels.
+
+Avantages :
+- Bonus de +20 % en Déplacement silencieux et Se cacher dans l'ombre.
+- Peut atteindre un niveau de compétence supérieur d'un point par rapport à la normale avec les épées courtes et les dagues.
+- Peuvent utiliser Pose de pièges, avec un taux de réussite qui commence à 30 % et augmente de 3 % par niveau.
+- Peut utiliser attaque sournoise, mais avec un multiplicateur de dégâts inférieurs à celui des voleurs :
+  Niveau 1-8 : x2
+  Niveau 9-16 : x3
+  Niveau 17+ : x4
+
+Inconvénients :
+- Ne peut porter d'armure plus lourde que la besantine.
+- Ne peut pas utiliser la compétence de charme animal du rôdeur.~
+//
+// unused
+@2252  = ~TRAQUEUR : Le Traqueur est toujours à la recherche de renseignements, à l'aise aussi bien en ville que dans la nature. Les Traqueurs sont des espions, des informateurs, des enquêteurs ; ils sont les rois du camouflage et de la furtivité, ce qui en fait des adversaires mortels.
+
+Avantages :
+- Bonus de +20 % en Déplacement silencieux et Se cacher dans l'ombre.
+- Peut atteindre la grande maîtrise (cinq étoiles) avec les épées courtes et les dagues.
+- Peuvent utiliser Pose de pièges, avec un taux de réussite qui commence à 30 % et augmente de 3 % par niveau.
+- Peut utiliser attaque sournoise, mais avec un multiplicateur de dégâts inférieurs à celui des voleurs :
+  Niveau 1-8 : x2
+  Niveau 9-16 : x3
+  Niveau 17+ : x4
+
+Inconvénients :
+- Ne peut porter d'armure plus lourde que la besantine.
+- Ne peut pas utiliser la compétence de charme animal du rôdeur.~
+//
+//
+@23500  = ~BELLUAIRE : Ce type de rôdeur est un solitaire, rarement à l'aise en milieu urbain. Il a une affinité naturelle avec les animaux : ce sont ses amis et ses frères d'armes, avec lesquels il entretient une forme limitée de communication télépathique. En plus de pouvoir appeler des animaux normaux à l'aide, les belluaires peuvent convoquer un esprit loup et même se transformer en loup.
+
+Avantages :
+- Bonus de +15 % en Déplacement silencieux et Se cacher dans l'ombre.
+- Peut se transformer en loup au niveau 1 et en loup-garou au niveau 6.
+- Dès le premier niveau, peut convoquer un esprit loup. Le nombre de dés de vie de l'esprit animal augmente pour rattraper le niveau du belluaire aux niveaux 3, 5, 7 et 10
+- Niveau 8 : Peut lancer une forme améliorée de Convocation d'animaux comme sort de niveau 1.
+- Niveau 10 : Peut lancer une forme améliorée de Convocation d'animaux comme sort de niveau 2.
+- Niveau 12 : Peut lancer une forme améliorée de Convocation d'animaux comme sort de niveau 3.
+
+Inconvénients :
+- Ne peut pas utiliser d'arme métallique de grande taille (comme les épées, hallebardes, marteaux…).
+- Ne peut pas porter d'armure plus lourde que l'armure de cuir clouté.~
+@23501  = ~Métamorphose en forme naturelle~
+@23502  = ~Métamorphose en loup~
+@23503  = ~Métamorphose en loup-garou~
+@23504  = ~Griffe~
+@23505  = ~Loup~
+@23506  = ~Loup sanguinaire~
+@23507  = ~Loup-garou~
+@23508  = ~Muloup~
+@23509  = ~Muloup majeur~
+//
+//
+@2401  = ~RÔDEUR : Le rôdeur est un guerrier et un forestier. Il est adroit dans le maniement des armes et compétent dans l'observation et la connaissance des bois. Il protège et guide souvent les voyageurs perdus et les honnêtes paysans. Pour vivre longtemps, un rôdeur doit être fort et sage dans les voies de la nature.
+
+CAPACITÉS :
+- Peut porter des casques.
+- Peut porter n'importe quelle armure et utiliser toutes les armes.
+- Peut se spécialiser (deux étoiles) dans le maniement de n'importe quelle arme.
+- Peut se spécialiser (deux étoiles) dans n'importe quel style de combat, et allouer trois étoiles dans le style de combat à deux armes.
+- Commence avec deux étoiles dans le style de combat à deux armes.
+- Peut sélectionner une race ennemie, contre laquelle il recevra un bonus de 4 points de dégâts et d'attaque au combat.
+- Peut lancer « Charme-animal » une fois par jour tous les 2 niveaux (une utilisation au niveau 1).
+- Peut se cacher dans l'ombre lorsqu'il porte une armure au moins aussi légère qu'une besantine.
+- Vigilance : les rôdeurs ont une excellente acuité visuelle et repèrent leurs ennemis avant que ceux-ci puissent les voir.
+- Peut utiliser la capacité Pistage à volonté. Elle permet d'avoir une idée générale des créatures à proximité et de leur direction.
+- Peut avoir recours à l'attaque sournoise avec un multiplicateur x2 à partir du niveau 6.
+- Peut lancer quelques sorts divins à partir du niveau 8.
+- Doit être d'alignement bon.
+- Dés de vie : d10
+
+Caractéristiques requises pour le jumelage : Force, Dextérité, Sagesse.
+~
+@2402  = ~RÔDEURS : Le terme générique « rôdeur » inclut plusieurs catégories de combattants solides avec quelques caractéristiques communes : ce sont des guerriers puissants et ils sont doués en discrétion et est reconnaissance. Dans la bataille, les rôdeurs préfèrent la rapidité et la compétence à la force brute. Ils utilisent souvent des armes légères à une main et sont doués pour combattre une arme dans chaque main.
+
+Les « vrais » rôdeurs sont des maîtres de leur géographie locale et apprennent des compétences qui leur permettent de survivre dans la nature sauvage, là où peu pourraient le faire. Les rôdeurs sont généralement aimables et protecteurs envers leurs semblables et utilisent leurs talents pour aider et soutenir les communautés isolées. Ils agissent suivant un code d'honneur et peuvent perdre certaines de leurs aptitudes s'ils s'écartent de l'éthique du rôdeur.
+
+D'autres disposent de jeux de compétences dérivés de celui du rôdeur, mais sans avoir leur relation étroite avec la nature ou un code éthique aussi strict. Les Archers, Traqueurs et autres personnages semblables utilisent des tactiques similaires aux rôdeurs, mais ne sont pas limités à un alignement particulier.
+
+CAPACITÉS :
+- Peut porter des casques.
+- Peut porter n'importe quelle armure et utiliser toutes les armes.
+- Peut se spécialiser (deux étoiles) dans le maniement de n'importe quelle arme.
+- Peut se spécialiser (deux étoiles) dans n'importe quel style de combat, et allouer trois étoiles dans le style de combat à deux armes.
+- Commence avec deux étoiles dans le style de combat à deux armes.
+- Peut se cacher dans l'ombre lorsqu'il porte une armure au moins aussi légère qu'une besantine.
+- Vigilance : les rôdeurs ont une excellente acuité visuelle et repèrent leurs ennemis avant que ceux-ci puissent les voir.
+- Peut utiliser la capacité Pistage à volonté. Elle permet d'avoir une idée générale des créatures à proximité et de leur direction.
+- Peut avoir recours à l'attaque sournoise avec un multiplicateur x2 à partir du niveau 6.
+- Peut lancer quelques sorts divins à partir du niveau 8.
+- Dés de vie : d10
+
+Caractéristiques requises pour le jumelage : Force, Dextérité, Sagesse.
+~
+//
+//
+@2450   = ~Déplacement accru~
+@2451   = ~Déplacement normal~
+@2452  = ~Déplacement accru : cette aptitude permet d'accroître sa vitesse de déplacement à volonté.~
+//
+//
+@2502   = ~BERSERKER : Il s'agit d'un guerrier à l'écoute de sa partie animale et qui, durant le combat, peut atteindre un état d'esprit qui lui permet de se battre plus longtemps, plus durement, et plus sauvagement que personne ne pourrait le faire normalement. Les berserkers ont tendance à être issus de cultures barbares, et il peut très bien s'agir d'un choix conscient du guerrier au cours de son apprentissage. Dans tous les cas, les opposants du berserker seront impressionnés par les aspects sauvages de la nature de celui-ci. Cette spécialité est assez courante chez les nains, alors appelés « Enragés ».
+
+Avantages :
+- Peut utiliser « Furie » une fois par jour tous les 4 niveaux
+
+FURIE : Cet état dure 30 secondes. Sous Furie, le berserker gagne +2 au toucher, +2 aux dégâts et 1/2 attaque par round. Il devient immunisé aux Charmes, aux Immobilisations, à la Terreur, à la Confusion, à la Débilité, à l'Étourdissement et au Sommeil. Le nombre de points de vie total du berserker est inconnu pendant la furie et il ne peut être tué. Il attaque avec acharnement jusqu'à ce que l'effet prenne fin. Mais si, quand l'état prend fin, il ne lui reste qu'un point de vie ou moins, il meurt immédiatement. Enfin, pendant la furie, un berserker subit une pénalité de 10 points pour les attaques à distance.
+
+Essoufflement après la Furie : pénalité de 2 points au toucher, aux dégâts et à la classe d'armure.
+
+Inconvénients :
+- Ne peut atteindre que la maîtrise (3 étoiles) avec les armes de corps à corps.
+- Ne peut être que compétent (1 étoile) dans les armes à distance et les styles de combat.
+~
+@2503  = ~Furie~
+@2504   = ~Furie
+
+Cet état dure 30 secondes. Sous Furie, le berserker gagne +2 au toucher, +2 aux dégâts et 1/2 attaque par round. Il devient immunisé aux Charmes, aux Immobilisations, à la Terreur, à la Confusion, à la Débilité, à l'Étourdissement et au Sommeil. Le nombre de points de vie total du berserker est inconnu pendant la furie et il ne peut être tué. Il attaque avec acharnement jusqu'à ce que l'effet prenne fin. Mais si, quand l'état prend fin, il ne lui reste qu'un point de vie ou moins, il meurt immédiatement. Enfin, pendant la furie, un berserker subit une pénalité de 10 points pour les attaques à distance.
+
+Essoufflement après la Furie : pénalité de 2 points au toucher, aux dégâts et à la classe d'armure.
+~
+//
+//
+@2651   = ~MOINE : Les moines sont des guerriers qui cherchent la perfection à travers la contemplation et l'action. Ce sont des combattants polyvalents, bien entraînés au combat sans arme ni armure. Les moines ne peuvent pas lancer de sorts, mais ils ont des pouvoirs magiques uniques. Ils canalisent une énergie subtile, appelée « Ki », qui leur permet de réaliser des exploits incroyables. Le coup le plus connu des moines est leur aptitude à assommer un adversaire en le frappant sans armes.
+
+CAPACITÉS :
+- Ne peut porter aucune armure.
+- Ne peut devenir initié (1 étoile) qu'avec les gourdins, les dagues et les frondes.
+- Se déplace plus rapidement que les autres personnages. La vitesse de déplacement continue de s'améliorer tous les 5 niveaux.
+- Peut faire deux attaques à mains nues par round. Tous les 3 niveaux, s'y ajoute 1/2 attaque par round. Les dégâts causés par les attaques à mains nues sont non-létaux et augmentent avec le niveau :
+  Niveau 1-2 : 1d4
+  Niveau 3-5 : 1d5
+  Niveau 6-8 : 1d6
+  Niveau 9-11 : 1d7
+  Niveau 12-14 : 1d8
+  Niveau 15-18 : 1d9
+  Niveau 19-24 : 1d10
+  Niveau 25+ : 1d12
+- Un moine peut choisir d'insuffler dans ses attaques à mains nues de l'énergie ki. Ainsi améliorés, les poings du moine se comportent comme des armes enchantées +1 et font +1 dégât magique. Ce bonus augmente aux niveaux 6, 12 et 22.
+- Bonus de 2 points aux jets de sauvegarde contre les sorts.
+- Parade de projectiles : bonus de 1 point à la classe d'armure contre les projectiles par tranche de 3 niveaux.
+- La classe d'armure initiale d'un moine est de 9 au niveau 1, et diminue ensuite de 1 tous les 2 niveaux.
+- Peut utiliser « Coup étourdissant » une fois par jour tous les 4 niveaux (commence à une fois par jour au niveau 1).
+
+COUP ÉTOURDISSANT : Toutes les attaques réussies au cours du round suivant obligent la victime à réussir un jet de sauvegarde contre les sorts sous peine d'être assommée. Remarque : ce talent spécial modifie automatiquement l'attaque normale d'un moine, sans avoir besoin de viser une cible.
+
+- Niveau 5 : Immunité à la maladie, la hâte et le ralentissement.
+- Niveau 7 : Il peut utiliser « Imposition des mains » pour guérir 2 points de vie par niveau.
+- Niveau 8 : Bonus de 1 point au facteur de vitesse.
+- Niveau 9 : Bonus de 1 point aux jets de sauvegarde et immunité aux charmes.
+- Niveau 11 : Immunité au poison.
+- Niveau 12 : Bonus de 1 point au facteur de vitesse.
+- Niveau 13 : « Paume Vibratoire » une fois par jour.
+
+PAUME VIBRATOIRE : Si le moine touche un adversaire, ce dernier doit réussir un jet de sauvegarde contre les sorts ou mourir. Remarque : ce talent spécial modifie automatiquement l'attaque normale d'un moine, sans avoir besoin de viser une cible.
+
+- Niveau 14 : 3 % de résistance à la magie par niveau (démarre avec 42 % au niveau 14).
+- niveau 20 : Immunité aux armes non-magiques.
+- Doit être d'alignement loyal.
+- Dés de vie : d8.~
+@2653   = ~Poings ki~
+@2654   = ~Quand il utilise cette aptitude, le moine peut concentrer de l'énergie ki pour améliorer ses attaques à mains nues. Ses poings s'éclairent d'une lueur pâle et causent des dégâts létaux de types contondants et magiques.~
+@2655   = ~Poings normaux~
+@2656   = ~Quand il utilise cette aptitude, le moine contient la puissance de ses poings. Il reste capable de porter des attaques à mains nues avec un talent formidable mais les dégâts seront de nature non magique et non létaux.~
+//
+//
+@2751  = ~maître des ombres~
+@2752  = ~Maître des ombres~
+@2753  = ~MAÎTRE DES OMBRES : Les Maîtres des Ombres font appel à la magie pour améliorer leurs capacités à se rendre discrets. Énigmatiques et dangereux, ces voleurs aux compétences uniques possèdent la capacité de se fondre parfaitement dans les ombres, mieux qu'aucun roublard commun, pour frapper sans crier gare… parfois avec une rapidité surnaturelle.
+
+Avantages :
+- Bonus de +10 % en Déplacement silencieux et Se cacher dans l'ombre.
+- Esprit fuyant : Bonus de 1 point aux jets de sauvegarde.
+- Peut utiliser Magie des ombres une fois par jour. Gagne une utilisation supplémentaire tous les 5 niveaux.
+
+MAGIE DES OMBRES : Permet au maître des ombres d'utiliser une des cinq aptitudes suivantes :
+  1) Sanctuaire
+  3) Cécité
+  3) Porte d'ombre (au niveau 7)
+  4) Pas de l'ombre (au niveau 7)
+  5) Convocation d'ombre (au niveau 11)
+
+Inconvénients :
+- Ne peut être d'alignement loyal.
+- Il a recours à une version moins puissante de l'attaque sournoise des voleurs non spécialisés :
+  Niveaux 1 à 4 : x1 (pas de multiplicateur)
+  Niveaux 5 à 8 : x2
+  Niveaux 9 à 12 : x3
+  Niveau 13+ : x4
+- Il n'a que 20 points de compétence par niveau (30 au premier niveau) à répartir dans les talents de voleur.
+- Ne peut pas poser de pièges.
+
+Caractéristiques requises pour le jumelage : Force, Dextérité, Charisme.~
+@2755  = ~Magie des ombres~
+@2756  = ~Magie des ombres :
+
+Permet d'utiliser une des cinq aptitudes suivantes :
+  1) Sanctuaire
+  3) Cécité
+  3) Porte d'ombre (au niveau 7)
+  4) Pas de l'ombre (au niveau 7)
+  5) Convocation d'ombre (au niveau 11)
+~
+@2757  = ~Convocation d'ombre~
+@2758  = ~Ce sort convoque une ombre, un monstre mort-vivant qui servira le lanceur quelles que soient les conditions.~
+@2759  = ~Ombre~
+//
+//
+@28020  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un assassin réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre le poison sous peine d'être affecté par le poison, comme si l'assassin avait utilisé son aptitude « Arme empoisonnée ».
+~
+@28021  = ~Attaque sournoise empoisonnée~
+@28022  = ~~
+@28030  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un chasseur de primes réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre la paralysie/la mort sous peine de se voir immobilisée par un filet gluant pendant un round.
+~
+@28031  = ~Attaque sournoise avec enchevêtrement~
+@28032  = ~~
+@28050  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un maître des ombres réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre la paralysie/la mort sous peine de 
+~
+@28051  = ~Attaque sournoise avec déphasage~
+@28052  = ~~
+@28053  = ~Déphasé(e)~
+@28060  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un libertin réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre les sorts sous peine de paniquer pendant 3 rounds.
+~
+@28061  = ~Attaque sournoise avec panique~
+@28062  = ~~
+@28070  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un ninja réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre la paralysie/la mort sous peine d'être aveuglé pendant 2 rounds.
+~
+@28071  = ~Attaque sournoise aveuglante~
+@28072  = ~~
+@28080  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un voleur de sorts réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre la paralysie/la mort sous peine d'être affectée par Délivrance de la magie.
+~
+@28081  = ~Attaque sournoise avec dissipation~
+@28082  = ~~
+@28090  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand une brute réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre la paralysie/la mort sous peine d'être projetée loin de la brute et renversée au sol pendant un round.
+~
+@28091  = ~Attaque sournoise renversante~
+@28092  = ~~
+@28100  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand un psioniste réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre les sorts sous peine de se voir touché par Frappe mentale, une attaque psychique qui peut rendre la cible inconsciente pendant 1 round.
+~
+@28101  = ~Attaque sournoise avec frappe mentale~
+@28102  = ~~
+@28110  = ~
+ATTAQUE SOURNOISE :
+- Certains kits peuvent obtenir des résultats spécifiques quand ils réussissent une attaque sournoise sur une cible. Quand une lame psychique réussit une attaque sournoise, la cible doit réussir un jet de sauvegarde contre les sorts sous peine d'être étourdie pendant un round par l'énergie psychique portée par l'attaque.
+~
+@28111  = ~Attaque sournoise étourdissante~
+@28112  = ~~
+//
+// 40001-2 unused
+@40001  = ~Ajouter chanson du barde~
+@40002  = ~Chanson du barde~
+@40003  = ~Arrêter la chanson du barde~
+@40011  = ~Inspiration : Chance~
+@40012  = ~Inspiration : Chance
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres reçoivent un bonus de 1 point à la chance et aux jets de sauvegarde.~
+@40021  = ~Inspiration : Courage~
+@40022  = ~Inspiration : Courage
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres voient leur moral amélioré et sont immunisés contre les effets magiques de peur.~
+@40031  = ~Inspiration : Puissance~
+@40032  = ~Inspiration : Puissance
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres bénéficient d'un bonus de 1 point aux jets de dégâts pour chaque tranche de 5 niveaux du barde.~
+@40051  = ~Inspiration : Images réfléchies~
+@40052  = ~Inspiration : Images réfléchies
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres obtiennent un double illusoire qui a une chance de s'interposer et d'absorber une attaque de corps à corps. Le barde doit se concentrer pour maintenir l'inspiration ; le jet de sorts est désactivé pendant que l'inspiration est en cours.~
+@40061  = ~Inspiration : Bénédiction~
+@40062  = ~Inspiration : Bénédiction
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres bénéficient des effets d'un sort de Bénédiction.~
+@40071  = ~Inspiration : Protection contre le plan négatif~
+@40072  = ~Inspiration : Protection contre le plan négatif
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres sont immunisés contre les effets d'énergie négative tel le drain de niveaux. Le barde doit se concentrer pour maintenir l'inspiration ; le jet de sorts est désactivé pendant que l'inspiration est en cours.~
+@40081  = ~Inspiration : Bouclier de l'esprit~
+@40082  = ~Inspiration : Bouclier de l'esprit
+
+Tant que le barde maintient cette inspiration, tous les alliés à moins de 6 mètres sont immunisés contre les effets mentaux comme Charme, Terreur, Confusion, Débilité mentale ou Étourdissement. Le barde doit se concentrer intensivement pour maintenir l'inspiration ; le jet de sorts et les attaques de corps à corps sont désactivés pendant que l'inspiration est en cours.~
+@40091  = ~Inspiration : Protection contre la mort~
+@40092  = ~Inspiration : Protection contre la mort
+
+Tant que le barde maintient cette inspiration, tous ses alliés sont protégés et sont immunisés contre les effets magiques de mort instantanée comme Mot de pouvoir : Mort, Désintégration, etc. Le barde doit se concentrer pour maintenir l'inspiration ; le jet de sorts est désactivé pendant que l'inspiration est en cours.~
+@40201  = ~Émanation : Interférence~
+@40202  = ~Émanation : Interférence
+
+Tant que le barde maintient cette émanation, tous les jeteurs de sorts à moins de 6 mètres (alliés ou ennemis) souffrent d'un risque d'échec des sorts de 65 %. Le barde doit se concentrer pour maintenir l'émanation ; le jet de sorts est désactivé pendant que l'émanation est en cours.~
+
+@40211  = ~Émanation : Intimidation~
+@40212  = ~Émanation : Intimidation
+
+Tant que le barde maintient cette émanation, tous les ennemis à moins de 6 mètres souffrent d'une réduction de 1 point sur leurs jets d'attaque et de dégâts.~
+@40221  = ~Émanation : Malédiction~
+@40222  = ~Émanation : Malédiction
+
+Tant que le barde maintient cette émanation, tous les ennemis à moins de 6 mètres souffrent d'une réduction de 1 point à leur chance et leurs jets de sauvegarde.~
+
+@40231  = ~Émanation : Confusion~
+@40232  = ~Émanation : Confusion
+
+Tant que le barde maintient cette émanation, tous les ennemis à moins de 6 mètres doivent réussir un jet de sauvegarde contre les sorts chaque round ou souffrir de Confusion. Le barde doit se concentrer pour maintenir l'émanation ; le jet de sorts est désactivé pendant que l'émanation est en cours.~
+@40241  = ~Émanation : Immobilisation des morts-vivants~
+@40242  = ~Émanation : Immobilisation des morts-vivants
+
+Tant que le barde maintient cette émanation, tous les ennemis morts-vivants à moins de 6 mètres se déplacent plus lentement et doivent réussir un jet de sauvegarde contre les sorts chaque round ou être immobilisés. Le barde doit se concentrer pour maintenir l'émanation ; le jet de sorts est désactivé pendant que l'émanation est en cours.~
+
+@40251  = ~Emanation : Enchevêtrement~
+@40252  = ~Emanation : Enchevêtrement
+
+Tant que le barde maintient cette émanation, tous les ennemis à moins de 6 mètres doivent réussir un jet de sauvegarde contre les souffles chaque round ou alors se retrouver enchevêtré et incapable de se déplacer. Le barde doit se concentrer pour maintenir l'émanation ; le jet de sorts est désactivé pendant que l'émanation est en cours.~
+@40411  = ~Aura : Flou~
+@40412  = ~Aura : Flou
+
+Tant que le barde maintient cette aura, il bénéficie d'un effet de Flou, qui améliore sa classe d'armure de 3 points et ses jets de sauvegarde de 1 point. Au niveau 13, le flou est si important qu'il simule Invisibilité Majeure, qui accorde un bonus de 4 points à la classe d'armure et rend le barde impossible à cibler par des sorts à moins que le lanceur soit capable de détecter les objets invisibles. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+
+@40421  = ~Aura : Esprit Vierge~
+@40422  = ~Aura : Esprit Vierge
+
+Tant que le barde maintient cette aura, il ne peut être affecté par aucun effet hostile sur l'esprit, comme Charme, Terreur, Confusion, Débilité mentale ou l'étourdissement. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+@40431  = ~Aura : Globe d'invulnérabilité~
+@40432  = ~Aura : Globe d'invulnérabilité
+
+Tant que le barde maintient cette aura, il est entouré d'un Globe mineur d'invulnérabilité, qui empêche les sorts de niveau 3 ou moins de l'affecter. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+@40451  = ~Aura : Frappe Harmonique~
+@40452  = ~Aura : Frappe Harmonique
+
+Tant que le barde maintient cette aura, il concentre et manipule les bruits de la bataille sur son arme, provoquant des détonations gémissantes à chaque coup réussi. Chaque fois que le barde touche un ennemi avec une arme de mêlée, il infligera 1d6 points de dégâts contondant supplémentaire à la cible.
+~
+@40461  = ~Aura : Manteau de terreur~
+@40462  = ~Aura : Manteau de terreur
+
+Tant que le barde maintient cette aura, tous les ennemis à moins d'un mètre doivent réussir un jet de sauvegarde contre les sorts à chaque round ou alors être affecté par Terreur pour 3 rounds. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.
+~
+@40471  = ~Aura : Lenteur~
+@40472  = ~Aura : Lenteur
+
+Tant que le barde maintient cette aura, tous les ennemis à moins d'un mètre doivent réussir un jet de sauvegarde contre la paralysie ou subir l'effet de Lenteur. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+
+@40481  = ~Aura : Dissipation des illusions~
+@40482  = ~Aura : Dissipation des illusions
+
+Tant que le barde maintient cette aura, à chaque round, toutes les illusions à moins d’un mètre sont dissipées. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+@40491  = ~Aura : Maléfice~
+@40492  = ~Aura : Maléfice
+
+Tant que le barde maintient cette aura, tous les ennemis à moins d'un mètre subissent une pénalité d'un point à la chance, aux jets d'attaque et de dégâts en mêlée, à la classe d'armure et aux jets de sauvegarde. De plus, chaque fois que le barde frappe un ennemi (mais au plus une fois par round), l'ennemi doit réussir un jet de sauvegarde contre les sorts, sans quoi la pénalité est augmentée d'un point pour 3 rounds.
+~
+@40511  = ~Chantesort~
+@40512  = ~Chantesort
+
+Tant que le chantelame maintient cette aura, il fusionne le combat et le lancer de sorts. Les sorts peuvent être lancés très rapidement entre les attaques avec les armes, avec un bonus de 5 à la vitesse de lancer de sorts et une attaque de moins tous les deux rounds (Note : la capacité de haut niveau Enchaînement interrompt ces effets).~
+@40611  = ~Aura : Labyrinthe~
+@40612  = ~Aura : Labyrinthe
+
+Tant que le barde maintient cette aura, tous les ennemis à moins d'un mètre doivent réussir un jet de sauvegarde contre les sorts à chaque round ou alors disparaître dans un petit labyrinthe dimensionnel pendant trois rounds. Le barde doit se concentrer pour maintenir l'aura ; le jet de sorts est désactivé pendant que l'aura est en cours.~
+@40801  = ~barde~
+@40802  = ~Barde~
+@40803  = ~BARDE : le barde est un rejeton avec une affinité musicale de la classe de spécialisation d'Enchanteur. Alors que les mages maîtrisent les effets magiques en astreignant leur esprit à utiliser des formules dans une syntaxe spéciale, les bardes comprennent la magie comme des motifs magnifiques et des algorithmes. Leur approche est plus désinvolte. Les bardes ne peuvent utiliser les magies les plus puissantes, et ils associent presque toujours leur étude de la magie avec une ou plusieurs autres disciplines, en général le larcin mais aussi parfois l'entraînement martial. En même temps, l'utilisation de la magie par les bardes peut être plus improvisée que celle de la plupart des mages. Plutôt que des sorts distincts, les bardes assemblent des répertoires de techniques magiques qu'ils peuvent jouer comme un morceau de musique. Par ailleurs, les bardes peuvent appeler des effets magiques limités par le biais de « Chants de Barde » plutôt que par des sorts, tissant une illusion ou un enchantement dans les vibrations harmonisées de l'air.
+
+CHANT DE BARDE : les effets de chant de barde sont groupées en trois catégories. Les harmonieuses « Inspirations » qui font bénéficier de bonus les alliés proches du barde, les dissonantes « Émanations », qui créent des effets qui pénalisent les ennemis proches, et les auras, plus personnelles, qui créent des effets bénéfiques ou dangereux qui s'accrochent au corps du barde comme une armure. L'aptitude musicale du barde lui permet d'apprendre plusieurs chants au fil du temps et ils peuvent en découvrir d'autres encore grâce à des parchemins musicaux spéciaux qu'ils peuvent découvrir en parcourant le monde.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'inspiration du barde. Tant qu'elle est active, les alliés bénéficient d'un bonus de 1 point à la chance et aux jets de sauvegarde.
+- Peut apprendre d'autres Chants de Barde.
+- Obtiennent automatiquement la capacité d'utiliser les sorts suivants : Injonction, Vocaliser (comme sort de niveau 1), Silence sur 5 mètres, Cri, Mot secret, Injonction majeure, Mot secret : Silence, Grand cri, et Tremblement de terre.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Ne peut utiliser les capacités Se cacher dans l'ombre ou Déplacement Silencieux.
+- Pas de multiplicateur d'attaque sournoise.
+~
+@40806  = ~maître-lame~
+@40807  = ~Maître-lame~
+@40808  = ~MAÎTRE-LAME : Le Maître-lame est un guerrier et un aventurier expérimenté que son talent de barde pour la représentation fait apparaître encore plus intimidant qu'il ne l'est déjà. Plus roublard que guerrier, son style de combat est esthétique et distrayant ; malgré tout, son entraînement le rend plus habile à l'épée que la plupart des roublards. En tant que barde, les maîtres-lame peuvent exécuter des Chants de barde, en se spécialisant dans ceux qui les montrent comme plus dangereux ou plus difficile à attendre. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Peut atteindre la Spécialisation (2 étoiles) en épées longues, épées courtes, cimeterres et dagues.
+- Peut utiliser la compétence d'Escrime.
+- Le score de connaissance augmente de 5 points tous les deux niveaux.
+- Peut utilise l'Émanation intimidante, qui pénalise les jets d'attaque et de dégâts des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser l'Aura de flou, qui améliore la classe d'armure et les jets de sauvegarde du maître-lame. Le maître-lame ne peut plus lancer de sorts tant que l'aura est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+ESCRIME :
+C'est un style de combat qui consiste à harceler l'adversaire tout en évitant ses attaques. Il accorde un bonus de 2 points à la classe d'armure contre les attaques au corps à corps en échange d'un point de pénalité aux jets de dégâts et d'attaque. Les attaques réussies imposent aux ennemis une pénalité de 2 points au TAC0 en cas d'échec à un jet de sauvegarde contre la pétrification. Ce style peut être activé ou désactivé à volonté.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Peut lancer chaque jour un sort de moins pour chaque niveau de sort que les autres bardes.
+- Le modificateur d'attaque sournoises est limité à x2.
+~
+@40811  = ~bouffon~
+@40812  = ~Bouffon~
+@40813  = ~BOUFFON : Ce barde connaît parfaitement les arts du ridicule et de l'hilarité, et utilise ses compétences pour distraire et embrouille ses adversaires, s'ébattant comme un fou pendant les combats. Il ne faudrait cependant pas le confondre avec un vrai imbécile, car il peut se révéler mortel. En tant que barde, les bouffons peuvent exécuter des Chants de barde, en se spécialisant dans ceux qui distraient ou embrouillent leurs ennemis. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+-Peut utiliser une Émanation : Sortilège, qui impose une pénalité à la chance et aux jets de sauvegarde aux ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une Émanation de confusion, qui oblige les ennemis à moins de 6 mètres à réussir un jet de sauvegarde contre les sorts sous peine d'être confus (Le bouffon ne peut jeter de sorts tant que l'aura est active).
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts suivants : Fourvoiement magique, Obstination bornée, Action libre, Ordres Chaotiques, Miroir physique et Bouclier entropique.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Ne peut utiliser les compétences Se cacher dans l'ombre ou Déplacement silencieux.
+- Pas de multiplicateur d'attaque sournoise.
+~
+@40816  = ~scalde~
+@40817  = ~Scalde~
+@40818  = ~SCALDE : ce barde nordique est aussi un guerrier de grande force, compétence et vertu. Ses chants sont des sagas exaltantes contant batailles et bravoure et le scalde consacre sa vie à leur recherche. En tant que barde, les scaldes peuvent exécuter des Chants de barde, en se spécialisant dans ceux qui les assistent au combat et qui terrifient leurs ennemis. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Inspiration de puissance, qui accorde aux alliés un bonus de 1 point aux dégâts tous les cinq niveaux d'expérience du scalde.
+- À partir du niveau 6, peut exsuder une Aura de terreur, qui oblige les ennemis à moins de 6 mètres à réussir un jet de sauvegarde sous peine de paniquer.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts suivants : Apaisement, Lame enflammée, Puiser dans la puissance divine, Harmonie défensive, Magie des vertueux, Résistance Magique et Barrière de lames.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Peut lancer chaque jour un sort de moins pour chaque niveau de sort que les autres bardes.
+~
+
+@40821  = ~galant~
+@40822  = ~Galant~
+@40823  = ~GALANT : en partie esthètes charmants, en partie guerriers superbes, les galants parcourent le monde à la recherche de beauté, d'amour et d'aventure. Ils volent le cœur des jeunes et relèvent le moral des aînés. Leur code de conduite, similaire à celui des paladins, leur demande de défendre les innocents et le sexe opposé, et d'aider ceux dans le besoin en période de troubles et de péril. En tant que barde, les scaldes peuvent exécuter des Chants de barde, en se spécialisant dans ceux qui donnent de l'inspiration et appellent la bonne fortune. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Inspiration de bénédiction, qui accorde les effets de Bénédiction aux alliés.
+- À partir du niveau 6, peut utiliser une Inspiration d'énergie positive qui accorde aux alliés les bénéfices du sort de clerc Protection contre l'énergie négative. Le galant ne peut lancer de sorts tant que cette inspiration est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- À partir du niveau 5, peut lancer de façon innée le sort de clerc Protection contre la mort une fois par jour.
+- Reçoit un bonus de 1 point aux jets de sauvegarde contre la mort tous les 6 niveaux d'expérience.
+- Apprend automatiquement à utiliser les sorts suivants : Armure de la foi, Aide, Guérison des maladies, Protection contre le mal sur 3 mètres, Protection contre le Plan Négatif et Guérison de masse.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Peut lancer chaque jour un sort de moins pour chaque niveau de sort que les autres bardes.
+~
+@40826  = ~héraut~
+@40827  = ~Héraut~
+@40828  = ~HÉRAUT : les hérauts sont des agents au service de rois, de nobles, de châteaux, de villes ou autres autorités établies. Ils sont tout à la fois espions, soldats, érudits et artistes. Un héraut peut sans peine mettre à profit sa connaissance, des talents de diplomate ou la force des armes quand c'est nécessaire pour protéger l'intérêt de leur mécène. Ils peuvent organiser un grand bal, et même s'y produire, et identifier les gens importants ou dangereux dans l'assistance, et quand nécessaire, mener une escouade de gardes d'élite ou de soldats à la bataille. Certains hérauts restent proches de leur seigneur, tandis que d'autres prennent la route et étendent leur influence dans les terres étrangères. En tant que barde, les hérauts peuvent exécuter des Chants de barde.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Inspiration de courage, qui protège les alliés à moins de 6 mètres contre les effets de terreur.
+- À partir du niveau 6, peut utiliser l'Aura d'esprit vierge, qui met à l'abri et rend indétectable l'esprit du héraut par les effets psioniques et la magie affectant l'esprit.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+DÉSAVANTAGES :
+- Le modificateur d'attaque sournoises est limité à x2.
+- Ne peut utiliser la compétence de Pose de pièges.
+~
+@40831  = ~aède~
+@40832  = ~Aède~
+@40833  = ~AÈDE : ces bardes vagabondent dans les forêts et les bois en charmant les animaux avec leurs mélodies et en aidant les druides et rôdeurs à protéger la nature. Ils sont les ennemis des chasseurs sans pitié et des trappeurs, s'opposant sans relâche à leurs activités grâce à leurs alliés animaux, leur musique envoûtante et leur magie naturelle. En tant que barde, les aèdes peuvent exécuter des Chants de barde. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Peut utiliser la compétence Empathie animale, comme le ferait un Rôdeur.
+- Peut convoquer 1d6 rats amicaux une fois par jour.
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Inspiration de Chance, qui accorde un bonus de chance et aux jets de sauvegarde de 1 point aux alliés à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une Émanation d'enchevêtrement, qui oblige des ennemis à moins de 6 mètres à réussir un jet de sauvegarde contre les souffles à chaque round sous peine de se retrouver enchevêtré, incapable de se déplacer.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts druidiques de Convocation d'animaux, ainsi que les sorts suivants : Enchevêtrement, Baies magiques, Peau d'écorce, Zone d'air pur, Projection d'épines, Croissance d'épines, Appel des créatures des bois et Beauté de la Nature.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Ne peut utiliser les compétences de voleur Pickpocket et Crochetage.
+- Pas de multiplicateur d'attaque sournoise.
+~
+@40836  = ~maléficieux~
+@40837  = ~Maléficieux~ // my own pseudo-translation
+@40838  = ~MALÉFICIEUX : ce barde malicieux mélange un mépris désinvolte pour la notion de propriété privée avec un talent inné pour la manipulation de la chance et des probabilités… et un sens prononcé de la mise en scène. Ils opèrent parfois sous l'égide un clan Gitan comme celui des Vistani (dans ce cas, il arrive qu'on les nomme des « Zingaros »), et parfois ils se comportent comme des loups solitaires. Souvent chanteurs dans leur temps libre, les maléficieux adorent les chansons et sont capables d'utiliser des compétences de barde basiques, comme une aura qui maudit les rivaux à proximité. Au plus grand désarroi de beaucoup de nobles, les maléficieux utilisent souvent leurs talents dans leur propre intérêt égoïste. Avec leur don pour retourner la situation, ils font des adversaires irritants. En tant que barde, les maléficieux peuvent exécuter des Chants de barde. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Émanation de malédiction, qui impose une réduction de 1 point à la chance et aux jets de sauvegarde des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une Aura de maléfice, qui impose un malus de 1 point à la chance et aux jets de sauvegarde aux ennemis à portée de corps à corps et qui, en supplément, pour chaque coup porté par le maléficieux sur un ennemi (au maximum une fois par round), augmente cette pénalité d'un autre point. Un maléficieux ne peut jeter de sorts tant que cette aura est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts suivants : Imprécation, Fatalité, Fourvoiement magique, Lucidité Spirituelle, Délivrance de la malédiction et Grande malédiction.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Le modificateur d'attaque sournoises est limité à x2.
+~
+@40841  = ~élégiste~
+@40842  = ~Élégiste~
+@40843  = ~ÉLÉGISTE : ces bardes se produisent comme chantres ou en accompagnement de deuils et sont capables d'entraîner les âmes les plus taciturnes dans leur musique funéraire. Ils s'imprègnent de la mort, le plus souvent pour aider les autres à apprécier la vie. Leur musique et leur magie tendent à refléter cette obsession. Ils rejettent la magie de l'illusion et préfèrent amener les gens à affronter la dure vérité de la vie et de la mort.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Émanation d'immobilisation des morts-vivants, qui peut ralentir les créatures mortes-vivantes à proximité et même les immobiliser.
+- À partir du niveau 6, peut utiliser l'Inspiration de protection contre la mort, qui accorde aux alliés à moins de 6 mètres les effets du sort de clerc protection contre la mort. L'élégiste ne peut lancer de sorts tant que cette émanation est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts suivants : Protection de l'esprit, Cantique, Feu spirituel, Protection contre la mort, Mise à mort et Rappel de l'Esprit.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut porter au plus que des armures de cuir (et des cottes de mailles elfiques).
+- Alors que la plupart des mages sont une catégorie de mages enchanteurs, les élégistes ont plus de points communs avec les nécromanciens.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou d'Illusion.
+- Ne peut apprendre de sorts de neuvième niveau.
+~
+
+@40846  = ~occultiste~
+@40847  = ~Occultiste~
+@40848  = ~OCCULTISTE : ces bardes combinent une habileté dans le combat, une compréhension de la magie et la capacité innée de maudire ses ennemis. Les occultistes sont souvent des individus colériques, qui utilisent leur aptitude à la violence pour se venger de torts qu'ils ont subi.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Émanation de malédiction, qui impose une réduction de 1 point à la chance et aux jets de sauvegarde des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une Aura de maléfice, qui impose un malus de 1 point à la chance et aux jets de sauvegarde aux ennemis à portée de corps à corps et qui, en supplément, pour chaque coup porté par l’occultiste sur un ennemi (au maximum une fois par round), augmente cette pénalité d'un autre point. Un occultiste ne peut jeter de sorts tant que cette aura est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Apprend automatiquement à utiliser les sorts suivants : Imprécation, Fatalité, Fourvoiement magique, Lucidité Spirituelle, Délivrance de la malédiction et Grande malédiction.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Peut lancer chaque jour un sort de moins pour chaque niveau de sort que les autres bardes.
+~
+@40851  = ~agent~
+@40852  = ~Agent~
+@40853  = ~AGENT : les agents sont des maîtres de l'espionnage qui utilisent leurs dons prodigieux dans l'intérêt de leur mécène, ou parfois dans le leur propre. Ils se font souvent passer pour des artistes, ou toute autre profession d'apparence banale, pour s'infiltrer dans des cercles ou des organisations. Ils utilisent leur ample connaissance de la culture, de l'histoire et de l'art pour jouer leur rôle sans faute, avec en plus leur magie, les compétences d'un voleur et, en cas d'urgence la faculté de se sortir des situations difficiles à la force de leurs poings. Si peaufiner des compétences d’une telle variété prend du temps, la récompense de tant de patience et d'efforts est une flexibilité sans pareille. En tant que barde, les agents peuvent exécuter des Chants de barde. Comme les autres bardes, leur magie est moins puissante mais plus versatile que celle d'un mage classique.
+
+CAPACITÉS :
+- Peut utiliser l'inspiration de chance. Tant qu'elle est active, les alliés bénéficient d'un bonus de 1 point à la chance et aux jets de sauvegarde.
+- À partir du niveau 6, peut utiliser l'Aura d'esprit vierge, qui met à l'abri et rend indétectable l'esprit de l'agent par les effets psioniques et la magie affectant l'esprit.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+DÉSAVANTAGES :
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts appartenant aux écoles d'Évocation ou de Nécromancie.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Le modificateur d'attaque sournoises est limité à x2.
+~
+
+@40856  = ~chantelame~
+@40857  = ~Chantelame~
+@40858  = ~CHANTELAME : combinant les compétences martiales avec le talent magique, les chantelames ont les ressources pour affronter presque toutes les menaces. Ils maîtrisent les lames dans une main en conservant l'autre main libre pour lancer leurs sorts. En dépit de leur nom, les chantelames peuvent en réalité utiliser différents types d'armes ; la plupart des armées et sociétés elfes disposent de différentes unités de combat dévouées chacune à un type d'arme particulier. Les chantelames peuvent choisir leur arme de prédilection au niveau 9. Ce sont exclusivement des armes de corps à corps. Les chantelames sont un combattant de corps à corps, et s'il est nécessaire d'attaquer à distance, ils utiliseront la magie pour cela.
+
+CAPACITÉS :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser l'Aura de flou, qui améliore sa classe d'armure et ses jets de sauvegarde. Le chantelame ne peut plus lancer de sorts tant que l'aura est active.
+- À partir du niveau 6, peut exécuter à volonté un chantesort en combattant. Le chantesort permet au chantelame de fusionner le lancer de sort et le combat. Les sorts sont lancés avec un bonus de 5 points au temps d'incantation mais une attaque de moins peut être exécutée tous les deux rounds (Note : la capacité de haut niveau Enchaînement interrompt ces effets).
+- Au niveau 9, peut choisir une arme de prédilection. Le chantelame peut atteindre la maîtrise avec cette catégorie d'arme et peut faire une attaque de plus tous les deux rounds quand il l'utilise.
+- Même si les bardes mémorisent les sorts comme un mage, ils peuvent les lancer de façon spontanée, comme un Ensorceleur.
+
+DÉSAVANTAGES :
+- Doit être un elfe.
+- Ne peut pas être chaotique.
+- Ne peut pas être initié dans les armes à distance.
+- Est capable de lancer des sorts un niveau plus tard qu'un mage.
+- Ne peut apprendre de sorts de neuvième niveau.
+- Peut lancer chaque jour un sort de moins pour chaque niveau de sort que les autres bardes.
+~
+@40861  = ~siffleur~
+@40862  = ~Siffleur~
+@40863  = ~SIFFLEUR : les siffleurs sont un mélange étrange de vagabonds des forêts et d'artistes. Les petites-personnes font généralement partie des races attentives à la nature, et les siffleurs sont harmonisés à l'extrêmement à leur environnement naturel. En particulier, ils aiment les animaux de la forêt et les plantes. Ils peuvent utiliser leurs sifflements spéciaux pour communiquer avec les animaux et ont même une influence sur les plantes et les forces de la nature, comme le vent et l'eau. En plus de ces facultés spéciales, les siffleurs peuvent exécuter des chants de barde traditionnels en les sifflant.
+
+CAPACITÉS :
+- Peut utiliser la compétence Empathie animale, comme le ferait un Rôdeur.
+- À partir du niveau 3, peut lancer un des sorts de druide, une fois par jour pour chaque niveau impair obtenu. Au niveau 3 les siffleurs peuvent lancer soit Baies magiques soit Enchevêtrement.
+- À partir du niveau 5, peut lancer Ralentissement du poison et Sanctuaire.
+- À partir du niveau 7, peut lancer Guérison des maladies et Peau d'écorce.
+- À partir du niveau 9, peut lancer Zone d'air pur et Convocation d'insectes.
+- Peut utiliser l'inspiration de chance. Tant qu'elle est active, les alliés à moins de 6 mètres bénéficient d'un bonus de 1 point à la chance et aux jets de sauvegarde.
+- À partir du niveau 6, peut utiliser une Émanation d'enchevêtrement, qui oblige des ennemis à moins de 6 mètres à réussir un jet de sauvegarde contre les souffles à chaque round sous peine de se retrouver enchevêtré, incapable de se déplacer.
+- Peut se spécialiser (2 étoiles) dans les frondes.
+
+DÉSAVANTAGES :
+- Le modificateur d'attaque sournoises est limité à x2.
+- Ne peut utiliser la compétence de Pose de pièges.
+- Progresse 20 % moins vite que les autres voleurs.
+~
+@40866  = ~chanteur de savoir~
+@40867  = ~Chanteur de savoir~
+@40868  = ~CHANTEUR DE SAVOIR DE MILIL : les chanteurs de savoir vénèrent Milil, divinité de la poésie, du chat et des conteurs d'histoire. À la fois bardes et prêtres, ils offrent souvent leurs talents comme chantres dans les églises lors de leurs voyages. Les chanteurs de savoir sont chargés par Milil de répandre les bienfaits de la musique, des arts et de la littérature et d'en découvrir d'autres de provenance étrangère. Comme adeptes de l'une des divinités principales des bardes, les chanteurs de savoir peuvent apprendre à exécuter des chants de barde aux effets variés, comme le feraient des bardes. Les chanteurs de savoir peuvent être de purs prêtres ou exprimer des compétences de voleurs.
+
+Avantages :
+- Le score de connaissance augmente de 5 points par niveau.
+- Peut utiliser une inspiration de bénédiction, qui accorde en continu les effets de Bénédiction aux alliés à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une inspiration d'énergie positive, qui accorde aux alliés les bénéfices du sort de clerc Protection contre l'énergie négative. Le chanteur de savoir ne peut lancer de sorts tant que cette inspiration est active.
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+Inconvénients :
+- Ne peut repousser les morts-vivants.
+~
+
+/* begin unused block */
+@40891  = ~ACROBATE : dans leur rôle d'artistes, la plupart des acrobates accompagnent des carnavals ou des cirques, même si une troupe d'acrobates peut constituer un spectacle remarquable en soi. Ils se produisent souvent dans des grandes tavernes ou dans des clubs et utilisent leur art pour attirer les foules et les retenir assez longtemps pour que les propriétaires vident les bourses. Les acrobates attirent l'attention et aiment mettre leur adresse en valeur. Tout ce qu'ils font, ils le font avec style et beaucoup de sens dramatique. Les acrobates deviennent parfois des cambrioleurs extraordinaires, et ils sont aussi d'utiles alliés lors des aventures, capables de se faufiler à des endroits où les autres ne peuvent aller sans utiliser de magie. Leur capacité à éviter les pièges et autres dangers en fait aussi d'excellents éclaireurs.
+
+Avantages :
+- Bonus de 1 point à la classe d'armure.
+- Bonus de 1 point à la classe d'armure contre les projectiles tous les 8 niveaux.
+- Peut atteindre la spécialisation (2 étoiles) dans les frondes, fléchettes et dagues.
+- Peut utiliser Émanation : Intimidation, qui inflige des pénalités aux jets d'attaque et de dégâts des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une Aura de flou qui améliore la classe d'armure et les jets de sauvegarde (l'acrobate ne peut lancer de sorts dans que l'aura est active).
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+Inconvénients :
+- Ne peut placer de point de compétences que dans des armes que les voleurs peuvent utiliser.
+- Ne peut utiliser d'armures plus lourdes que la besantine.
+- Ne reçoit que la moitié du score normal de connaissance.
+~
+@40892  = ~CHORISTE : la musique, que ce soient des hymnes, des symphonies ou de sombres psaumes chantés, joue un rôle important dans les rituels voués à la plupart des divinités. Pour aider lors de ces rites ou seulement guider les croyants dans leurs pratiques, la plupart des lieux de culte disposent d'au moins un barde, connu sous le nom de choriste.
+
+Les choristes ne se rencontrent pas seulement à l'intérieur des temples. Beaucoup de fois en font des missionnaires qui amènent de nouveaux croyants. Beaucoup de bardes aventureux avec un penchant pour la religion peut aussi devenir choriste, la divinité qu'ils vénèrent répondant à leurs prières.
+
+Avantages :
+- Peut utiliser une inspiration de bénédiction, qui fait bénéficier les alliés à moins de 6 mètres des bénéfices d'un sort de Bénédiction.
+- À partir du niveau 6, peut utiliser une inspiration d'énergie positive, qui fait bénéficier les alliés à moins de 6 mètres des bénéfices du sort de clerc de Protection contre l'énergie négative. (Le choriste ne peut lancer de sorts tant que l'inspiration est active)
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- Connaît une sélection de sorts divins. Ils sont accessibles et mémorisables comme des sorts de mage :
+niveau 1 : Armure de la foi, Soins des blessures légères, Fatalité
+niveau 2 : Cantique, Puiser dans la puissance divine, Ralentissement du poison
+Niveau 3 : Soin des blessures moyennes, Glyphe de garde
+Niveau 4 : Harmonie défensive, Puissance sacrée
+Niveau 5 : Guérison de masse
+Niveau 6 : Rayon divin
+
+Inconvénients :
+- Ne reçoit que la moitié du score normal de connaissance.
+- Ne reçoit que la moitié du score normale dans la compétence Pickpocket.
+~
+@40893  = ~CHANTEUR FUNÈBRE : les chanteurs funèbres chantent des mélodies non de fête et de joie, mais de chagrin et de peine. Ils œuvrent à répandre cette vision mélancolique partout, certains que seuls ceux qui s'abandonnent à la tristesse peuvent réellement comprendre le monde.
+
+Ces tristes vagabonds s'emploient à exprimer leur peine dans des chants qui enseignent aux cœurs de leur public le sens du vrai chagrin. Certains de ces bardes déchus ne désirent rien d'autre que de voir les autres comprendre ce qu'ils ont perdu. Quelques-uns sont de sinistres créatures qui pensent que puisque leur propre joie a disparu, ils doivent éteindre celle des autres en utilisant leurs pouvoirs pour montrer la folie de l'amour, la futilité de l'espoir et la fatalité de la tombe. Ces chanteurs funèbres-ci s'associent souvent avec de puissants morts-vivants, en servant dans la cour de seigneurs vampires ou de rois liches.
+
+Les chanteurs funèbres ne peuvent être d'alignement bon.
+
+Avantages :
+- Peut utiliser une émanation de faiblesse, qui inflige une pénalité de 1 point aux jets d'attaque et de dégât des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une aura de lassitude, qui impose aux ennemis à portée de corps à corps de réussir un jet de sauvegarde contre les sorts sous peine d'être ralentis (le chanteur funèbre ne peut lancer de sorts tant que l'aura est active)
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+- À partir du niveau 5, peut utiliser un pouvoir Chant d'horreur une fois par jour. Il a le même effet que le sort profane de niveau 2 Horreur.
+- À partir du niveau 7, peut utiliser un Chant de chagrin une fois par jour. Il a le même effet que le sort profane de niveau 4 Confusion.
+- À partir du niveau 9, peut utiliser un Chant d'éveil une fois par jour. Il a le même effet que le sort profane de niveau 5 Amination des morts.
+
+Inconvénients :
+- Ne reçoit que la moitié du score normal de connaissance.
+~
+@40894  = ~ROMANICHEL : On appelle souvent les gitans les « nomades de la forêt ». Ils sillonnent le pays dans leur caravane, un assemblage de charrettes, de roulottes, de chevaux et de gitans. Ces gens sont réputés pour leurs étranges musiques et danses bohémiennes. Certaines caravanes gagnent de quoi vivoter en divertissant les communautés qu'elles traversent.
+
+Les romanichels voyagent beaucoup, et tirent leur expérience de la vie de leurs errances. Ils voyagent jusqu'à ce qu'ils trouvent un endroit qui leur plaise : une belle clairière, un village intéressant, un public devant lequel chanter et danser, ou quelqu'un qui veuille commercer avec eux. Alors, ils établissent un campement temporaire, et demeurent jusqu'à ce que leur besoin devoir le monde l'emporte sur leur désir de rester.
+
+Un romanichel qui part à l'aventure peut le faire pour diverses raisons : il peut être en quête d'un animal ou d'une plante particulière pour la « reine des gitans », ou bien simplement vouloir découvrir les fabuleuses merveilles qui bordent le chemin de l'aventure. Dans tous les cas, un romanichel a toujours un but et une philosophie concernant son aventure, même si c'est juste de « voyager pour le plaisir de voyager ».
+
+Les autres rangent à tort les gitans dans la catégorie des voleurs, des mendiants, des forains, des nomades ou de beaucoup d'autres noms erronés. Ils sont aussi très accueillants envers ceux qui souhaitent découvrir leur mode de vie et les joindre dans leurs voyages, ce qui leur vaut la réputation d'enlever les enfants dans la nuit et de les faire disparaître dans la nature. Tous les gitans ne sont pas bardes ; le romanichel n'est que l'un des types de personnages qui composent les rangs d'une troupe de gitans. Les bardes romanichels, connus dans leurs clans comme « rawuns », jouent le rôle de conteurs d'histoires, de gardiens du savoir, de diseurs de bonne aventure et de conseillers spirituels des clans gitans.
+
+Avantages :
+- Bonus de 1 point aux jets de sauvegarde contre les sorts tous les 8 niveaux.
+- Peut lancer Imprécation une fois par jour. Ce sort est l'opposé de Bénédiction et donne un malus de 1 point au TAC0 et aux jets de sauvegarde.
+- Peut utiliser une émanation de malédiction, qui inflige une pénalité à la chance et aux jets de sauvegarde des ennemis à moins de 6 mètres.
+- À partir du niveau 6, peut utiliser une aura d'esprit vierge, qui rend l'esprit du romanichel indétectable et immunisé contre les pouvoirs psioniques et la magie altérant l'esprit (le romanichel ne peut lancer de sorts tant que l'aura est active)
+- Peut apprendre à exécuter d'autres effets de Chant de barde.
+
+Inconvénients :
+- Ne peut apprendre de sorts des écoles de Convocation, Invocation ou Transmutation.
+~
+/* end unused block */
+
+@40900  = ~Ce chapeau de feutre bleu canard est orné de plumes vertes et pourpres. Jadis la propriété d'un barde doué d'une bonne humeur irrépressible, il lui fut volé lorsqu'il eut l'imprudence de le montrer aux habitués d'une taverne louche, en vantant ses pouvoirs magiques. En réalité, les enchantements de ce couvre-chef n'ont rien d'exceptionnel, mais son élégance suscite l'envie de nombreux bardes.
+
+PARAMÈTRES :
+
+Capacités d'équipement :
+- Immunité contre le silence et la surdité
+- Irradie une inspiration de barde basique qui accorde aux alliés un bonus de 1 point à la chance, aux jets de sauvegarde et aux compétences de voleur.
+- Le barde portant ce chapeau peut utiliser simultanément un autre effet de Chant de barde.
+
+Poids : 0
+~
+@40901  = ~Discours~
+@40902  = ~Discours
+(Altération)
+
+Niveau : 2
+Portée : 0
+Durée : 1 tour
+Temps d'incantation : 2
+Zone d'effet : 1 créature
+Jet de sauvegarde : aucun
+
+Le bénéficiaire de ce sort peut lancer les sorts nécessitant une composante verbale sans avoir besoin de produire aucun son. En pratique, ce sort annule les effets de Silence et la cible y est immunisé pour la durée du sort.~
+@40903  = ~Imprécation~
+@40904  = ~Imprécation
+
+Niveau : 2
+Portée : champ visuel du lanceur
+Durée : 6 rounds
+Temps d'incantation : 9
+Zone d'effet : rayon de 4,50 mètres
+Jet de sauvegarde : aucun
+
+Grâce à ce sort, le lanceur diminue le moral de ses adversaires et pénalise de 1 point leurs jets de sauvegarde et d'attaque. Dès que l'incantation s'achève, le sort affecte toutes les créatures se trouvant dans un rayon de 4,50 mètres, dont le centre est choisi par le lanceur (les créatures quittant la zone d'effet sont toujours affectées ; par contre, celles qui y entrent par la suite ne le sont pas).
+~
+@40905  = ~Cri~
+@40906  = ~Cri
+
+Niveau : 3
+Portée : personnelle
+Durée : instantanée
+Temps d'incantation : 1
+Zone d'effet : cône de 10 mètres de long et de 15 degrés d'angle
+Jet de sauvegarde : demi-dégâts
+
+Ce sort confère un pouvoir vocal terrifiant au personnage, lequel peut laisser fuser un cri à déchirer les tympans affectant une zone d'effet en forme de cône. Toute créature prise dans la zone d'effet perd 4d6 points de vie (dégâts magiques) et se retrouve assourdie pendant 9 rounds. Un jet de sauvegarde réussi contre les sorts annule la surdité et réduit les dégâts de moitié.
+~
+@40907  = ~Grand Cri~
+@40908  = ~Grand Cri
+
+Niveau : 6
+Portée : personnelle
+Durée : instantanée
+Temps d'incantation : 1
+Zone d'effet : cône de 5,10 mètres de long et de 15 degrés d'angle
+Jet de sauvegarde : demi-dégâts
+
+Au terme de l'incantation, le personnage libère un cri terrible dans un cône de 5,10 mètres de long pour un angle de 15 degrés. L'effort exigé de la part du mage est tel que ce dernier perd 2d4 points de vie et doit réussir un jet de sauvegarde contre les sorts sous peine de perdre connaissance pendant un tour. Les créatures ayant 5 DV ou moins meurent instantanément si elles sont prises dans la zone d'effet du Grand cri. Toutes les autres créatures ont droit à un jet de sauvegarde contre les sorts. Celles qui le ratent sont étourdies pendant 2 rounds, assourdies pendant 4 rounds et subissent 4d12 points de dégâts magiques. Celles qui le réussissent sont étourdies pendant 1 round, assourdies pendant 2 rounds et subissent 2d12 points de dégâts magiques.
+~
+@40909  = ~Bouclier entropique~
+@40910  = ~Bouclier entropique
+(Abjuration)
+
+Niveau : 7
+Portée : personnelle
+Durée : 1 round par niveau
+Temps d'incantation : 9
+Zone d'effet : le lanceur
+Jet de sauvegarde : aucun
+
+Ce sort entoure le prêtre d'une aura d'énergie stoppant ou détournant la plupart des attaques. Elle confère un bonus de 6 points à la classe d’armure et 50 % de résistance à la magie contre la plupart des attaques (feu, froid, électricité, etc.). Enfin, le prêtre bénéficie d'un bonus de 2 points à tous ses jets de sauvegarde, tout en étant immunisé contre Colonne de feu et toutes les attaques utilisant des projectiles, y compris ceux créés par des attaques magiques.
+~
+@40911  = ~Projection d'épines~
+@40912  = ~Projection d'épines
+(Alteration)
+
+Niveau : 3
+Portée : 9 mètres
+Durée : instantanée
+Temps d'incantation : 3
+Zone d'effet : cône de 5,10 mètres de long et de 90 degrés d'angle
+Jet de sauvegarde : demi-dégâts
+
+Par le biais de ce sort, le lanceur fait jaillir une gerbe d'épines, pics, barbillons et pointes de sa main. Les projectiles couvrent une zone conique de 5,10 mètres de long et de 90 degrés d'angle. Ils infligent 4d8 points de dégâts perforants à toutes les créatures dans la zone d'effet, ou 1d10 en cas de jet de sauvegarde réussi contre la mort.
+~
+@40913  = ~Croissance d'épines~
+@40914  = ~Croissance d'épines
+(Transmutation)
+
+Niveau : 3
+Portée : champ visuel du lanceur
+Durée : 1 tour
+Temps d'incantation : 6
+Zone d'effet : 4,50 mètres de rayon
+Jet de sauvegarde : aucun
+
+Ce sort transforme la végétation affectée en plantes épineuses. Toute créature pénétrant dans la zone d'effet subit 1d4 points de dégâts tranchants et 1d4 points de dégâts perforants par round, jusqu'au terme du sort.
+~
+//
+@40981 = ~Initialisation des capacités de barde~
+
+/* begin unused block */
+@40982 = ~Modifier les sorts préparés~
+@40983 = ~Préparation des sorts
+
+Cette compétence permet au barde de préparer une nouvelle collection de sort pour le jour à venir. Quand vous utilisez cette compétence, les emplacements de sorts deviennent accessibles dans le livre de sorts du barde et le lancer de sorts est désactivé. Une fois les emplacements de sorts remplis, le barde doit se reposer pendant 8 heures. Quand il se réveillera, le lancer de sorts sera réactivé et il ne pourra plus modifier le contenu de ses emplacements de sorts jusqu'à ce que cette compétence soit utilisée à nouveau.
+~
+@40984 = ~Les sorts préparés peuvent maintenant être modifiés. Le lancer de sort est désactivé jusqu'au prochain repos complet.~
+/* end unused block */
+
+@40985 = ~Inconvénients :
+- Ne peut pas utiliser de séquenceurs de sorts et magies similaires.~
+@40986 = ~Inconvénients :
+- Ne peut pas utiliser le sort Identification.~
+@40987 = ~
+- Même si les bardes mémorisent les sorts comme un mage, ils peuvent les lancer de façon spontanée, comme un Ensorceleur~
+@40988 = ~~
+@40989 = ~Emplacement de sort de niveau 8 additionnel~
+@40990 = ~Emplacement de sort de niveau 9 additionnel~
+@40991 = ~Emplacement de sort de niveau 1 additionnel~
+@40992 = ~Emplacement de sort de niveau 2 additionnel~
+@40993 = ~Emplacement de sort de niveau 3 additionnel~
+@40994 = ~Emplacement de sort de niveau 4 additionnel~
+@40995 = ~Emplacement de sort de niveau 5 additionnel~
+@40996 = ~Emplacement de sort de niveau 6 additionnel~
+@40997 = ~Emplacement de sort de niveau 7 additionnel~
+@40998 = ~Discours~
+@40999 = ~Discours : quand un barde choisit cette capacité, il se retrouve de façon permanente sous l'effet de Vocaliser, immunisé contre les effets hostiles qui pourraient faire obstacle à sa capacité à parler, chanter ou jouer de la musique. Ainsi, les effets de sorts ou effets tels que Silence ou Surdité ne peuvent affecter le barde. De plus, tous les alliés à moins de 4,5 mètres du barde se retrouvent protégés de la même façon. Cette immunité ne peut être dissipée par aucune technique connue.~
+//
+//
+@4505  = ~jongleur~
+@4506  = ~Jongleur~
+@4507  = ~JONGLEUR : Ces bardes agiles sont des maîtres de l'acrobatie et du jonglage. Leurs talents dans les sauts périlleux, les franchissements et comme équilibriste ne sont égalés que par la précision de leur lancer de couteaux.
+
+Avantages :
+- Bonus de 1 point à la classe d'armure, et 1 point supplémentaire tous les 6 niveaux.
+- Peut atteindre la maîtrise (3 étoiles) avec les dagues, les fléchettes et dans le style de combat à deux armes.
+- Commence avec un point de compétence dans le style combat à une arme et peut en ajouter un de plus.
+- Commence avec un point de compétence dans le style combat à deux armes et peut en ajouter deux de plus.
+- À la place du traditionnel Chat de barde, peut exécuter une « Dance d'illusion ». Cette danse complexe tisse une toile d'illusions autour des aillés du jongleur. Au niveau 1, ils sont sous un effet de flou (CA +1, CA +2 contre les projectiles). Au niveau 13, le bonus est doublé, à -2/-4, et les alliés du jongleur sont aussi protégés par des images réfléchies. Au niveau 20, le bonus triple et passe ) -3/-6 et les alliés du jongleur sont protégés par des images miroir.
+
+Inconvénients :
+- Ne peut être initié dans les armes lourdes ou dans le style combat épée et bouclier.
+- Limité aux armures légères.
+~
+@4509  = ~Ces bardes agiles sont des maîtres de l'acrobatie et du jonglage. Leurs talents dans les sauts périlleux, les franchissements et comme équilibriste ne sont égalés que par la précision de leur lancer de couteaux.~
+@4510  = ~Danse d'illusion~
+//
+//
+@4602  = ~rhapsode~
+@4603  = ~rhapsode~
+@4604  = ~RHAPSODE : Il y a une subtile différence entre le rhapsode et le sage. On rencontre le plus souvent les rhapsodes dans le cadre de leur activité professionnelle, enseignant l'histoire aux autres. Mais à la différence des sages, les rhapsodes ressentent le besoin de partir à la recherche de la connaissance en explorant l'inconnu. On peut les trouver en train de fuir d'énormes rochers dans des donjons remplis de pièges, de combattre de féroces pratiquants de magies étranges ou de découvrir des passages secrets dans des châteaux anciens. Les rhapsodes aiment tous les aspects de l'histoire qui peuvent faire de bons récits.- et apprécient de vivre ces histoires tout autant que de les conter.
+
+Avantages :
+- Grâce à leur étude fervente du passé, obtient une compréhension fondamentale de beaucoup d'objets magiques qui ne sont pas normalement utilisables par la classe de barde. Ils peuvent ainsi utiliser n'importe quel objet magique.
+- Leur étude de la magie améliore leur compréhension de la magie, de telle sorte qu'ils peuvent lancer des sorts comme s'ils avaient un niveau de plus.
+- Les rhapsodes ont une capacité innée à trouver des pièges.
+
+Inconvénients :
+- Leur chant de barde ne s'améliore pas avec le temps.
+~
+@4605  = ~Les rhapsodes sont de grands amoureux du passé. Il y a une subtile différence entre le rhapsode et le sage. Si subtile, en fait, que de nombreux rhapsodes se proclament sages et sont rarement mis en doute à ce sujet. Cependant, les véritables sages sont des spécialistes du savoir qui concentrent leurs efforts afin de maîtriser un domaine particulier, comme les champignons, les épées elfiques, ou autres. En revanche, les rhapsodes aiment tous les aspects de l'histoire qui peuvent faire de bons récits.~
+@4606  = ~Utilisation d'objet~
+//
+//
+@4702  = ~galant~
+@4703  = ~Galant~
+@4704  = ~GALANT : en partie esthètes charmants, en partie guerriers superbes, les galants parcourent le monde à la recherche de beauté, d'amour et d'aventure. Ils volent le cœur des jeunes et relèvent le moral des aînés. Leur code de conduite, similaire à celui des paladins, leur demande de défendre les innocents et le sexe opposé et d'aider ceux dans le besoin en période de troubles et de péril.
+
+CAPACITÉS :
+- Bonus de 1 point au TAC0 tous les 6 niveaux.
+- Les galants ont un bonus inhérent de 1 point à la chance.
+- Essence de la pureté : les galants s'accrochent à la vie là où d'autres l'auraient déjà laissé filer. Ils reçoivent un bonus de 1 point de vie par niveau sur les 12 premiers niveaux et un bonus de 1 point aux jets de sauvegarde contre la mort. Ce bonus de jet de sauvegarde augmente aux niveaux 3, 6, 10, 15 et 21.
+- À partir du niveau 7, peut lancer le sort de clerc Protection contre la mort une fois par jour comme aptitude innée.
+- Peut utiliser le pouvoir inné « Cœur valeureux » une fois par jour, qui fonctionne comme le sort de clerc Aide. À partir du niveau 9, ce pouvoir a aussi l'effet Protection contre le mal.
+
+DÉSAVANTAGES :
+- Le Chant de barde ne s'améliore pas avec le temps.
+- Ne peut utiliser la compétence Pickpocket.
+~
+@4705  = ~En partie esthètes charmants, en partie guerriers superbes, les galants parcourent le monde à la recherche de beauté, d'amour et d'aventure. Ils volent le cœur des jeunes et relèvent le moral des aînés. Leur code de conduite, similaire à celui des paladins, leur demande de défendre les innocents et le sexe opposé et d'aider ceux dans le besoin en période de troubles et de péril.~
+@4706  = ~Cœur valeureux~
+
+//single unused
+@4707  = ~Protection contre la mort
+
+Niveau : 4
+Durée : 1 tour par niveau du lanceur
+Temps d'invocation : 9
+Zone d'effet : le lanceur
+Jet se sauvegarde : Aucun
+
+Ce sort protège le galant de toutes les formes de magie mortelle pendant la durée du sort. Cela inclut entre autres : Désintégration, Mot de Pouvoir Mortel, Sort de Mort, Doigt de Mort, etc.~
+//
+//
+@4802  = ~aède~
+@4803  = ~Aède~
+@4804  = ~AÈDE : ces bardes vagabondent dans les forêts et les bois en charmant les animaux avec leurs mélodies et en aidant les druides et rôdeurs à protéger la nature. Ils sont les ennemis des chasseurs sans pitié et des trappeurs, s'opposant sans relâche à leurs activités grâce à leurs alliés animaux, leur musique envoûtante et leur magie naturelle.
+
+CAPACITÉS :
+- Le Chant de barde de l'aède porte chance aux alliés à portée d'oreille.
+- Peut utiliser la compétence Empathie animale, comme le ferait un Rôdeur.
+//- Une fois par jour, peut convoquer une meute de rongeurs amicaux (3 au 1er niveau et 3 de plus //tous les 3 niveaux suivants).
+- Peut lancer les sorts de druide suivants : Soin des blessures légères, Enchevêtrement, Sanctuaire, Gourdin magique, Peau d'écorce, Charme personne/mammifère, Résistance au feu et au froid, Ralentissement du poison, Délivrance de la paralysie, Guérison des maladies, Zone d'air pur, Convocation d'insectes, Soin des blessures critiques, Appel de créatures des bois, Restitution mineure, Guérison de masse, Ordres chaotiques, Fléau d'insectes, Convocation d'animaux III et Aube illusoire.
+
+DÉSAVANTAGES :
+- Ne peut être initié que dans les armes utilisables par un druide.
+- Le Chant de barde ne s'améliore pas avec le temps.
+~
+@4805  = ~Les aèdes vagabondent dans les forêts et les bois en charmant les animaux avec leurs mélodies et en aidant les druides et rôdeurs à protéger la nature. Ils sont les ennemis des chasseurs sans pitié et des trappeurs, s'opposant sans relâche à leurs activités grâce à leurs alliés animaux, leur musique envoûtante et leur magie naturelle.~
+
+@4806  = ~Jeu de flûte~
+@4807  = ~Avec cette compétence, l'aède peut convoquer une meute de rongeurs qui va attaquer et distraire ses ennemis.~
+@4808   = ~Convocation de lapin~
+@4809   = ~Convocation de lapin
+
+Niveau : 0
+Portée : 0
+Durée : 5 rounds
+Zone d'effet : lanceur de sorts
+Jet de sauvegarde : aucun
+
+Ce tour de magie convoque un rongeur de taille moyenne à l'endroit indiqué par le lanceur.~
+@4810   = ~Lapin~
+@4811   = ~Poigne terreuse~
+@4812   = ~Poigne terreuse
+
+Niveau : 1
+Portée : 6 mètres
+Durée : 2 rounds
+Zone d'effet : une créature
+Jet de sauvegarde : souffle
+
+Ce tour de magie meut des vrilles qui sortent du sol et s'agrippent aux jambes de la cible, l'empêchant de bouger pendant un round. La cible est immobilisée et incapable de se déplacer pendant cette durée à moins de réussir un jet de sauvegarde.~
+//
+//
+@4902  = ~chanteur de savoir~
+@4903  = ~Chanteur de savoir~
+@4904  = ~CHANTEUR DE SAVOIR DE MILIL : les chanteurs de savoir vénèrent Milil, divinité de la poésie, du chat et des conteurs d'histoire. Plus bardes que prêtres, ils offrent souvent leurs talents comme chantres dans les églises. Ils peuvent utiliser un mélange de magies profanes et divines mais ne peuvent Repousser les morts-vivants comme la plupart des prêtres.
+
+Avantages :
+- Peut lancer les sorts de clerc suivants : Soin des blessures légères, Sanctuaire, Détection des pièges, Silence sur 5 mètres, Marteau spirituel, soin des blessures graves, Sainte Punition, Protection contre la mort, Puissance sacrée, Injonction majeure, soin des blessures critiques et Aube illusoire.
+- Le chant du chanteur de savoir, Hymne de Milil, accorde aux alliés les effets du sort Cantique. À partir du niveau 5, il y a une chance qu'il ralentisse les morts-vivants à proximité. À partir du niveau 9, il accorde en plus aux alliés une Protection contre le mal. Enfin, à partir du niveau 13, le chant a une chance d'immobiliser les morts-vivants à proximité.
+
+Inconvénients :
+- Compétence de Pickpocket réduite.
+~
+@4905  = ~Les chanteurs de savoir vénèrent Milil, divinité de la poésie, du chat et des conteurs d'histoire. Plus bardes que prêtres, ils offrent souvent leurs talents comme chantres dans les églises. Ils peuvent utiliser un mélange de magies profanes et divines mais ne peuvent Repousser les morts-vivants comme la plupart des prêtres.~
+@4906  = ~Chant de bénédiction~
+@4907  = ~Chant de protection~
+@4911  = ~~
+
+//
+// MULTICLASS
+//
+// F/M = 5100 range
+// M/T = 5200 range
+// F/T = 5300 range
+//
+@5213   = ~Silence~
+@5214   = ~La cible de ce pouvoir doit réussir un jet de sauvegarde contre les sorts avec une pénalité de 1 point. Si elle échoue, elle subit un effet de silence pour la durée du sort sauf si elle est protégée par un effet de vocalisation.~
+@5215   = ~Renvoi de sort~
+@5216   = ~Ce sort d'abjuration renvoie un sort lancé contre le voleur de sorts vers le lanceur d'origine.~
+@5217   = ~voleur de sorts~
+@5218   = ~Voleur de sorts~
+@5219   = ~VOLEUR DE SORTS : Les voleurs de sorts sont une société secrète de voleurs très spécialisés. Ils perfectionnent leurs talents avec un objectif dangereux : voler la magie des mages. Les voleurs de sorts ont mis au point quelques astuces spécialement prévues pour affronter les mages en colère.
+
+Avantages :
+- Une fois par jour, les voleurs de sorts peuvent lancer Silence sur 5 mètres.
+- Au niveau 5, ils peuvent lancer une variante spéciale de Renvoi de sorts qui ne renvoie qu'un seul sort mais dure 12 heures.
+- Au niveau 9, les voleurs de sorts sont protégés de façon innée et permanente par les effets du sort non détection.
+- À chaque fois qu'un voleur de sorts réussit une attaque de mêlée contre un mage, la cible doit réussir un jet de sauvegarde contre les baguettes sous peine de souffrir d'un risque d'échec des sorts de 33 % pendant 2 rounds.
+
+Restrictions :
+- Aucune
+~
+@5231   = ~rhapsode~
+@5232   = ~Rhapsode~
+@5233   = ~RHAPSODE : Il y a une subtile différence entre le rhapsode et le sage. On rencontre le plus souvent les rhapsodes dans le cadre de leur activité professionnelle, enseignant l'histoire aux autres. Mais à la différence des sages, les rhapsodes ressentent le besoin de partir à la recherche de la connaissance en explorant l'inconnu. On peut les trouver en train de fuir d'énormes rochers dans des donjons remplis de pièges, de combattre de féroces pratiquants de magies étranges ou de découvrir des passages secrets dans des châteaux anciens. Les rhapsodes aiment tous les aspects de l'histoire qui peuvent faire de bons récits.- et apprécient de vivre ces histoires tout autant que de les conter.
+
+Avantages :
+- Grâce à leur étude fervente du passé, obtient une compréhension fondamentale de beaucoup d'objets magiques qui ne sont pas normalement utilisables par la classe de barde. Ils peuvent ainsi utiliser n'importe quel objet magique.
+- Leur étude de la magie améliore leur compréhension de la magie, de telle sorte qu'ils peuvent lancer des sorts comme s'ils avaient un niveau de plus.
+
+Inconvénients :
+- Ne disposent que de 20 points par niveau pour les compétences de voleur, et ne peuvent utiliser Pickpocket et Pose de pièges.
+~
+@5271   = ~rôdeur/mage~
+@5272   = ~Rôdeur/Mage~
+@5273   = ~RÔDEUR/MAGE : Alors que l'entraînement initial pour combiner la magie profane et la discrétion a tendance à être motivé par des buts criminels, certains s'orientent vers le monde naturel et suivent la voie du rôdeur. La tension entre la magie profane et la magie de la nature n'est jamais vraiment résolue mais un rôdeur/mage apprend à vivre avec.
+
+CAPACITÉS :
+- 2 points de vie de plus par niveau que le voleur/mage classique jusqu'au niveau 10, puis 1 point de plus tous les niveaux jusqu'au niveau 20.
+- Le TAC0 progresse comme celui d'un rôdeur, plutôt que celui d'un voleur.
+- Peut utiliser la compétence Empathie animale du rôdeur.
+- Peut lancer Baies magiques comme une capacité innée une fois par jour, plus une fois pour 3 niveaux (jusqu'à six fois par jour au niveau 15).
+- Apprend automatiquement les sorts de druide suivants dans son livre de sorts de mage :
+niveau 1 : Enchevêtrement, Sanctuaire, Gourdin magique
+niveau 2 : Peau décorce, Ralentissement du poison, Lame enflammée
+Niveau 3 : Guérison des maladies, Appel de la foudre, Convocation d'insectes.
+Niveau 4 : Protection contre la mort, Convocation d'animaux I
+Niveau 5 : Convocation d'animaux II
+
+Restrictions :
+- Ne peut ajouter de points que sur les compétences Se cacher dans l'ombre, Déplacement silencieux, Détection des pièges et Détection des illusions.
+- Ne peut utiliser que 15 points de compétence par niveau pour les compétences de voleur.
+~
+// unused
+@5274   = ~Rôdeur/Mage~
+
+@5331  = ~pilleur de tombes~
+@5332  = ~Pilleur de tombes~
+@5333  = ~PILLEUR DE TOMBES : ces aventuriers sont de chercheurs, recherchant l'histoire, la vérité ou cherchant la richesse. Ils aiment voyager dans des terres étranges, fouillant d'ancienne ruines mystérieuses. Que ce soit une quête de savoir académique, de puissance ou de célébrité (ou peut-être même de tout cela à la fois !), les pilleurs de tombes sont doués pour survivre dans les donjons hostiles qui souvent ne *consentent* pas être explorés.
+
+Avantages :
+- Bonus initial de 15 points en Détection des pièges et Détection des illusions.
+- Bonus de 5 points au score de connaissance par niveau.
+- Bonus de 3 points aux jets d'attaque et de dégâts contre les créatures mortes-vivantes.
+- Au niveau 12, obtient Utilisation d'objets
+
+Inconvénients :
+- Ne peut utiliser Pickpocket.
+- Ne dispose que de 20 points de compétence à chaque niveau.
+- Un pilleur de tombes a besoin d'une main libre pour examiner les reliques. Ils n'apprennent donc pas à combattre avec deux armes.
+~
+@5341  = ~brute~
+@5342  = ~Brute~
+@5343  = ~BRUTE : Certains roublards décident que l'utilisation de la violence est aussi efficace pour obtenir ce qu'ils veulent que les compétences plus raffinées de voleur. Ils peuvent être de simples agresseurs solitaires comme des hommes de main organisés en guildes. En tout cas, pour la plus grande partie de la population urbaine pacifique, une chose est sûre : il faut craindre les brutes et s'en garder.
+
+Avantages :
+- Bonus de 1 point bonus à la force.
+- Bonus de 1 point au multiplicateur d'attaque sournoise.
+
+Inconvénients :
+- Pénalité de 2 points à la dextérité.
+- Ne peut utiliser les compétences de Crochetage ou Pose de pièges.
+- Ne dispose que de 20 points de compétence par niveau.
+- Ne peut être d'alignement loyal ou bon.
+~
+@5346  = ~Science de l'attaque sournoise~
+@5347  = ~Science de l'attaque sournoise : cette aptitude ajoute 1 au multiplicateur d'attaque sournoise.~
+@5371  = ~rôdeur/voleur~
+@5372  = ~Rôdeur/voleur~
+@5373  = ~RÔDEUR/VOLEUR : Ces éclaireurs des contrées sauvages combinent la discrétion des voleurs avec les talents au combat des rôdeurs. Ce peut être utile dans bien des situations. On peut ressentir le besoin de perfectionner les tactiques de guérilla quand un territoire est occupé par des troupes hostiles. Il se peut aussi que les talents de roublards soient dans la nature d'un rôdeur.
+
+CAPACITÉS :
+- Bonus de 5 points à Se cacher dans l'ombre et Déplacement silencieux pour chaque niveau de guerrier.
+- Peut utiliser Empathie animale comme les autres rôdeurs.
+- Peut lancer une sélection de sorts de druides à partir du niveau 5.
+
+Restrictions :
+- Ne peut utiliser les compétences Pickpocket ou Crochetage.
+- Ne dispose que de 15 points de compétence pour chaque niveau de voleur.
+- Pénalité sur les gains d'expérience de 15 %.
+- Ne peut être que d'alignement bon.
+~

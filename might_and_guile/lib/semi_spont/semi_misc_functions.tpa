@@ -1,5 +1,5 @@
 
-// v11.4
+// v11.5 - fixed Identify for Vancian casting
 
 /*
 
@@ -2227,14 +2227,15 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
 
   LAF B3_IDENTIFY_INSTALL END
 
-/* forget this stuff, just overwrite the existing spell
-//  LAM identify_spell_level
-  OUTER_SET identify_level = 1
-
   COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~D5_IDENTIFY_OLD~
 
-  ADD_SPELL ~%MOD_FOLDER%/lib/semi_spont/d5tb110.spl~ 2 1 ~D5_NEW_IDENTIFY~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110.spl~ ~override~
+	SAY NAME2 @51101
+	SAY IDENTIFIED_DESC @51102
+    WRITE_LONG 0x34 1
+
+  ADD_SPELL ~override/d5tb110.spl~ 2 1 ~D5_NEW_IDENTIFY~
 
   COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~D5_NEW_IDENTIFY~ ~WIZARD_IDENTIFY~
@@ -2247,27 +2248,11 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
     END
   END
 
-  ACTION_IF (identify_level = 1) BEGIN
-    OUTER_SPRINT new_identify_desc @51102
-  END
-
-  ACTION_IF (identify_level > 1) BEGIN
-    OUTER_SPRINT identify_desc @51102
-    OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
-      REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
-    END
-  END
-
-  COPY_EXISTING ~%spell_res%.spl~ ~override~
-    WRITE_LONG 0x34 %identify_level%
-	SAY NAME1 @51101
-	SAY_EVALUATED UNIDENTIFIED_DESC ~%new_identify_desc%~
-
   ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl75.itm~ ~override~
 		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
 		SAY NAME2 @51101
-		SAY IDENTIFIED_DESC ~%new_identify_desc%~
+		SAY IDENTIFIED_DESC @51102
 		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
 		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
 	BUT_ONLY
@@ -2290,12 +2275,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
   ACTION_IF (GAME_IS ~iwdee~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi110	1		0~
   END
-*/
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110.spl~ ~override/spwi110.spl~
-    WRITE_LONG 0x34 1
-	SAY NAME1 @51101
-	SAY UNIDENTIFIED_DESC @51102
+//  COPY_EXISTING ~d5tb110.spl~ ~override/spwi110.spl~
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110a.spl~ ~override~
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5tb110b.spl~ ~override~

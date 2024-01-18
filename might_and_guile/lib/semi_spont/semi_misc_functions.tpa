@@ -1,5 +1,5 @@
 
-// v11.5 - fixed Identify for Vancian casting
+// v12 - added define_priest_spells function
 
 /*
 
@@ -12,6 +12,9 @@ functions in this file:
 
 - semi_armor_casting - line 
     sets armor to block arcane 5E casting
+
+- define_priest_spells
+	collects all priest spells and sorts by who gets what
 
 - free_known_spells - line 
     input a free_spell (can run multiple free_spells for the same list_spell)
@@ -504,6 +507,68 @@ h// no no no! just change 145 effects in armors to 144 effects!
 END		//	end with_tra
 
 END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_MACRO define_priest_spells BEGIN
+
+// sorts priest spells by who gets what
+
+COPY_EXISTING ~mxsplpal.2da~ ~override~
+  COUNT_2DA_COLS cols
+  PATCH_IF (cols > 1) BEGIN
+    SET max_lvl_pal = cols
+  END
+BUT_ONLY
+
+COPY_EXISTING ~mxsplran.2da~ ~override~
+  COUNT_2DA_COLS cols
+  PATCH_IF (cols > 1) BEGIN
+    SET max_lvl_ran = cols
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP ~^[Ss][Pp][Pp][Rr][1-7][0-5a-zA-Z][0-9a-zA-Z]\.spl$~ ~override~
+  PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
+    PATCH_IF !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
+      READ_SHORT 0x1c spl_typ
+      READ_LONG 0x34 spl_lvl
+      PATCH_IF (spl_typ = 2) BEGIN
+        READ_BYTE 0x21 exclude
+        PATCH_IF ((exclude BAND 0b11000000) = 0b10000000) BEGIN // valid for clerics
+          SPRINT $cleric_valid_spells(~%SOURCE_RES%~)~1~
+          PATCH_IF (spl_lvl <= %max_lvl_pal%) BEGIN
+            SPRINT $paladin_valid_spells(~%SOURCE_RES%~)~1~
+          END
+        END
+        PATCH_IF ((exclude BAND 0b11000000) = 0b01000000) BEGIN // valid for druids
+          SPRINT $druid_valid_spells(~%SOURCE_RES%~)~1~
+          PATCH_IF (spl_lvl <= %max_lvl_ran%) BEGIN
+            SPRINT $ranger_valid_spells(~%SOURCE_RES%~)~1~
+          END
+        END
+        PATCH_IF ((exclude BAND 0b11000000) = 0b00000000) BEGIN // valid for both
+          SPRINT $cleric_valid_spells(~%SOURCE_RES%~)~1~
+          SPRINT $druid_valid_spells(~%SOURCE_RES%~)~1~
+          PATCH_IF (spl_lvl <= %max_lvl_pal%) BEGIN
+            SPRINT $paladin_valid_spells(~%SOURCE_RES%~)~1~
+          END
+          PATCH_IF (spl_lvl <= %max_lvl_ran%) BEGIN
+            SPRINT $ranger_valid_spells(~%SOURCE_RES%~)~1~
+          END
+        END
+        PATCH_IF ((exclude BAND 0b11000000) = 0b11000000) BEGIN // valid for neither
+          SPRINT $shaman_only_spells(~%SOURCE_RES%~)~1~
+	    END
+	  END
+	END
+  END
+BUT_ONLY
+
+END	//	end macro
 
 
 //__________________________________________________________________________________

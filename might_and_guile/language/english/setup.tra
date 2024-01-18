@@ -18,8 +18,8 @@
 //
 @50   = ~Move the Cavalier to the Fighter Class~
 @55   = ~Add the Corsair (fighter kit)~
-@60   = ~Add the Weaponmaster (fighter kit)~
-@80   = ~Add the Tomb Tunner (fighter/thief kit)~
+@60   = ~Add the Samurai (fighter kit)~
+@80   = ~Add the Tomb Runner (fighter/thief kit)~
 @85   = ~Add the Thug (fighter/thief kit)~
 @90   = ~Add the Rake (thief kit) and revise the Swashbuckler~
 @96   = ~Add the Ninja (thief kit)~
@@ -85,19 +85,19 @@ This is a fighting style which focuses on harrying one's opponent while avoiding
 @5514  = ~Cancel Swashbuckling~
 //
 //
-@6001  = ~weaponmaster~
-@6002  = ~Weaponmaster~
-@6003  = ~WEAPONMASTER: this is a warrior who draws on an implacable fighting spirit to overcome enemies. Unlike most fighters, Weaponmasters focus their training such that they can only achieve grandmastery with a single weapon group. However the bond and intense training with that weapon allows Weaponmasters to draw upon 'ki,' or spirit energy, to  perform terrific feats of combat prowess.
+@6001  = ~samurai~
+@6002  = ~Samurai~
+@6003  = ~SAMURAI: this is a warrior who draws on an implacable fighting spirit to overcome enemies. Unlike most fighters, Samurai focus their training such that they can only achieve grandmastery with a single weapon group. However the bond and intense training with that weapon allows them to draw upon 'ki,' or spirit energy, to  perform terrific feats of combat prowess.
 
 Abilities:
-- May select a Weapon of Focus at 9th level. The Weaponmaster instantly gains grandmastery with the chosen weapon.
-- A Weaponmaster may channel <PRO_HISHER> 'ki,' or inner energy, into feats of near-superhuman strength, agility, and ferocity. The Weaponmaster gets one ki point at 1st level and another ki point every third level thereafter, up to seven at 18th level. These ki points may be used for the following abilities:
+- May select a Weapon of Focus at 9th level. The Samurai instantly gains grandmastery with the chosen weapon.
+- A Samurai may channel <PRO_HISHER> 'ki,' or inner energy, into feats of near-superhuman strength, agility, and ferocity. The Samurai gets one ki point at 1st level and another ki point every third level thereafter, up to seven at 18th level. These ki points may be used for the following abilities:
   -- Lay On Hands (heal oneself or a comrade)
   -- Shield of the Wind (evade missile attacks)
   -- Flurry of Blows (attack with greater speed and reduced accuracy)
-  -- Tiger Strike (preform a critical strike)
-  -- Stunning Blow (cause the target of a weapon strike to be stunned)
-  -- Inner Gate Strike (cause saving throw penalties via a weapon strike) 
+  -- Tiger Strike (perform a critical strike on the next attack)
+  -- Stunning Blow (stun the target on a failed save, on the next attack)
+  -- Inner Gate Strike (cause that target of the next attack to suffer saving throw penalties) 
   -- War Cry (a powerful yell that can a panic enemies)
 
 Restrictions:
@@ -107,7 +107,7 @@ Restrictions:
 @6008  = ~Weapon Mastery~
 @6009  = ~Weapon Mastery:
 
-Unlike most soldiers and similar fighters, Weaponmasters can only reach the highest levels of proficiency with a single weapon. This ability allows the Weaponmaster to achieve grandmastery with one weapon, chosen from a dialogue. 
+Unlike most soldiers and similar fighters, Samurai can only reach the highest levels of proficiency with a single weapon. This ability allows the Samurai to achieve grandmastery with one weapon, chosen from a dialogue. 
 ~
 @6011  = ~Shield of Wind~
 @6012  = ~Shield of Wind:
@@ -1556,6 +1556,9 @@ Restrictions:
 Abilities:
 - +1 bonus to Strength.
 - +1 bonus to backstab multiplier.
+- May use the Rage ability once per day. Gains one use at level 1 and an additional use every 4 levels thereafter.
+
+RAGE: The enraged status lasts for 5 rounds and provides a +4 bonus to Strength and Constitution, a -2 penalty to Armor Class and a +2 bonus to Saving Throws vs. Spell, as well as immunity to all charm, hold, fear, maze, stun, sleep, confusion, and level drain spells.
 
 Restrictions:
 - -2 penalty to Dexterity.

@@ -150,6 +150,10 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
   ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 
+	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
+	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
+	BUT_ONLY
+
 //	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
 
     ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
@@ -157,10 +161,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
         APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
       END
     END
-
-	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
-	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
-	BUT_ONLY
 
   END
   

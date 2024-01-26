@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5.7~
+VERSION ~5.7.1~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -17,11 +17,8 @@ ALWAYS
   	
 // eliminate #bonecir.spl from IWDEE
 	ACTION_IF GAME_IS ~iwdee~ BEGIN
-	  ACTION_IF FILE_EXISTS_IN_GAME "#bonecir.spl" BEGIN
-		DISABLE_FROM_KEY "#bonecir.spl"
-	  END
-	  ACTION_IF FILE_EXISTS "override/#bonecir.spl" BEGIN
-		DELETE "override/#bonecir.spl"
+	  ACTION_IF FILE_EXISTS_IN_GAME ~#bonecir.spl~ BEGIN
+		COPY_EXISTING ~sppr101.spl~ ~override/#bonecir.spl~
 	  END
 	END
 

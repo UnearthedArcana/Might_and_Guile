@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5.7.1~
+VERSION ~5.8~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -96,6 +96,30 @@ REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 INCLUDE ~might_and_guile/components/60_samurai.tpa~
 
 LAF samurai_kit END
+//__________________________________________________________________________________
+
+
+//___________________________IRONSMITH______________________________________________
+BEGIN @65
+DESIGNATED 65
+LABEL ~D5_IRONSMITH_KIT~
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
+
+INCLUDE ~might_and_guile/components/65_ironsmith.tpa~
+
+LAF ironsmith_kit END
+//__________________________________________________________________________________
+
+
+//________________________BARBARIAN/THIEF___________________________________________
+BEGIN @75
+DESIGNATED 75
+LABEL ~D5_BARB_THIEF_KIT~
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
+
+INCLUDE ~might_and_guile/components/75_barb_thief.tpa~
+
+LAF barb_thief_kit END
 //__________________________________________________________________________________
 
 

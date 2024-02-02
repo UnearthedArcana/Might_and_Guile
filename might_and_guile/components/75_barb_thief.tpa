@@ -1,0 +1,76 @@
+
+//_________________________BARBARIAN THIEF__________________________________________
+//
+DEFINE_ACTION_FUNCTION barb_thief_kit BEGIN
+
+LAF check_kit_conflict END
+
+ADD_KIT ~D5_BARB_THIEF~
+
+ACTION_IF !(FILE_EXISTS ~override/clabfi05.2da~) BEGIN
+  COPY_EXISTING ~clabfi05.2da~ ~override~
+END
+ACTION_IF !(FILE_EXISTS ~override/clabth01.2da~) BEGIN
+  COPY_EXISTING ~clabth01.2da~ ~override~
+END
+
+LAF check_kit_conflict END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = RESOLVE_STR_REF(@9502)
+    mixed       = RESOLVE_STR_REF(@9503)
+    help        = RESOLVE_STR_REF(@9504)
+    briefdesc   = RESOLVE_STR_REF(@9504)
+  STR_VAR
+    kit_name    = ~D5_BARB_THIEF~
+    clab_base_f = ~override/clabfi05.2da~
+    clab_base_t = ~override/clabth01.2da~
+    unusable    = ~0x40010000~
+//                                         T   S           F   Q             S S
+//                 L S                     W   C           L   U             W I
+//                 A M             B L S   O   I   W       A   A             O N
+//                 R A             A O H   H   M   A       I   R C   S       R G
+//                 G L           M S N O   A   I   R     H L   T R L H     2 D L 2                 E E E E E E E E E E E
+//                 E L       S   I T G R   N K T D H     A M   E O O O     H A E W E E E E E E E E X X X X X X X X X X X
+//                 S S   S B P   S A S T   D A A A A   S L O   R S N R   S A N W E X X X X X X X X T T T T T T T T T T T
+//                 W W   P L I   S R W S   E T R G M C P B R M S S G T D L N D E A T T T T T T T T R R R R R R R R R R R
+//                 O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
+//                 R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
+//                 D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+    clasweap    = ~1 1 1 1 1 0 0 0~
+    weapprof    = ~0 0 0 0 0 0 0 0 0 2 2 0 0 2 2 2 0 2 0 0 0 0 2 2 0 2 2 2 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+//                 ST DX CO IN WI CH
+    abclasrq    = ~12 14 0  0  0  0~
+    abclsmod    = ~0  0  0  0  0  0~
+    abdcdsrq    = ~17 17 0  0  0  0~
+    abdcscrq    = ~15 15 0  0  0  0~
+//                 LG LN LE NG TN NE CG CN CE
+    alignmnt    = ~1  1  1  1  1  1  1  1  1~
+//                 F C M T D R
+    dualclas    = ~0 0 0 0 0 0~
+//                 HU E  HE D  HL G  HO
+    clsrcreq    = ~1  1  1  1  1  1  1~
+    kittable    = ~K_FT_H K_FT_G K_FT_E K_FT_HE K_FT_HL K_FT_HO~
+    luabbr      = ~FT0~
+    clswpbon    = ~1 0 2~
+    stweap      = ~LEAT14	* HELM07 BAG20 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 HAMM07 SW1H39 STAF08~
+    thiefskl    = ~40 20~
+    thiefscl    = ~0 0 100 100 100 100 100 0~
+    backstab    = ~1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4~
+  RET D5_BARB_THIEF = kit_id
+END
+//___________________________________________________________________________________
+
+//BARB THIEF ABILITY FILES___________________________________________________________
+//
+COPY ~might_and_guile/mc/d5_tombr.2da~ ~override~
+COPY ~might_and_guile/mc/d5lorm1.spl~ ~override~
+COPY ~might_and_guile/misc/d5lor05.spl~ ~override~
+COPY ~might_and_guile/misc/d5_ft20.spl~ ~override~
+//___________________________________________________________________________________
+
+
+END	//	end function
+

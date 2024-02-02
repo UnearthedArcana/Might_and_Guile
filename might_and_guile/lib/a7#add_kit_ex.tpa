@@ -7,7 +7,7 @@
  * Date: 2019-08-19
  */
 
-OUTER_SPRINT ADD_KIT_EX_VERSION ~0.5.1~
+OUTER_SPRINT ADD_KIT_EX_VERSION ~0.6.2~
 
 <<<<<<<< .../a7-add_kit_ex/inlined/blank.file
 >>>>>>>>
@@ -19,7 +19,10 @@ INT_VAR severity = 1  // 0=LOG, 1=PRINT, 2=WARN, 3=FAIL
 STR_VAR msg = ~~
 BEGIN
   ACTION_IF (NOT ~%msg%~ STR_EQ ~~) BEGIN
-    ACTION_IF (severity = 0) BEGIN
+    ACTION_IF (IS_AN_INT ~suppress_warnings~ && suppress_warnings && severity = 2) BEGIN
+      OUTER_SET severity = 1
+    END
+    ACTION_IF (severity < 1) BEGIN
       LOG ~%msg%~
     END ELSE ACTION_IF (severity = 1) BEGIN
       PRINT ~%msg%~
@@ -1296,39 +1299,49 @@ STR_VAR
   resref = ~~
 BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~%resref%.2DA~) BEGIN
-    OUTER_SET columns = 0
     COPY_EXISTING ~%resref%.2DA~ ~override~
-      READ_2DA_ENTRIES_NOW rows 1
-      READ_2DA_ENTRY_FORMER rows 1 0 default
-      FOR (col = 41; col < 51; ++col) BEGIN // assuming first 40 columns are always defined
-        TEXT_SPRINT string ~$ $~ // header and default row are ignored
-        SET col2 = col - 1  // compensate for data header row being short by one entry
-        PATCH_IF (VARIABLE_IS_SET $rows(~2~ ~%col2%~)) BEGIN
-          TEXT_SPRINT string ~%string% $~
-        END ELSE BEGIN
-          TEXT_SPRINT string ~%string% %col%~
-        END
-        FOR (row = 3; row < rows; ++row) BEGIN
-          PATCH_IF (VARIABLE_IS_SET $rows(~%row%~ ~%col%~)) BEGIN
-            TEXT_SPRINT string ~%string% $~
-          END ELSE BEGIN
-            SET col2 = col - 10 // cloning a previous entry to keep table data consistent
-            TEXT_SPRINT value $rows(~%row%~ ~%col2%~)
-            TEXT_SPRINT string ~%string% %value%~
-          END
-        END
-        // checking whether column has to be added
-        PATCH_IF (INDEX(~[^ %TAB%$]~ ~%string%~) >= 0) BEGIN
-          TEXT_SPRINT $columns(~%columns%~) ~%string%~
-          SET columns += 1
+      SET modified = 0
+      READ_2DA_ENTRIES_NOW pad_clab_table_rows 1
+      READ_2DA_ENTRY_FORMER pad_clab_table_rows 1 0 default
+
+      // padding table header
+      FOR (col = 40; col < 50; ++col) BEGIN
+        PATCH_IF (NOT VARIABLE_IS_SET $pad_clab_table_rows(~2~ ~%col%~)) BEGIN
+          SET col_name = col + 1
+          TEXT_SPRINT $pad_clab_table_rows(~2~ ~%col%~) ~%col_name%~
+          SET modified = 1
         END
       END
-    BUT_ONLY
 
-    OUTER_FOR (col = 0; col < columns; ++col) BEGIN
-      OUTER_TEXT_SPRINT string $columns(~%col%~)
-      APPEND_COL ~%resref%.2DA~ ~%string%~
-    END
+      // padding table content
+      FOR (row = 3; row < pad_clab_table_rows; ++row) BEGIN
+        FOR (col = 41; col < 51; ++col) BEGIN
+          PATCH_IF (NOT VARIABLE_IS_SET $pad_clab_table_rows(~%row%~ ~%col%~)) BEGIN
+            SET col2 = col - 10 // cloning a previous entry to keep table data consistent
+            TEXT_SPRINT value $pad_clab_table_rows(~%row%~ ~%col2%~)
+            TEXT_SPRINT $pad_clab_table_rows(~%row%~ ~%col%~) ~%value%~
+            SET modified = 1
+          END
+        END
+      END
+
+      // writing table data to file
+      PATCH_IF (modified) BEGIN
+        TEXT_SPRINT content ~~
+        FOR (row = 0; row < pad_clab_table_rows; ++ row) BEGIN
+          FOR (col = 0; VARIABLE_IS_SET $pad_clab_table_rows(~%row%~ ~%col%~); ++col) BEGIN
+            TEXT_SPRINT value $pad_clab_table_rows(~%row%~ ~%col%~)
+            TEXT_SPRINT content ~%content%%value% ~
+          END
+          TEXT_SPRINT content ~%content%%WNL%~
+        END
+        SET content_len = STRING_LENGTH ~%content%~
+
+        DELETE_BYTES 0 BUFFER_LENGTH
+        INSERT_BYTES 0 content_len
+        WRITE_ASCIIE 0 ~%content%~ (content_len)
+      END
+    BUT_ONLY
   END
 END
 
@@ -1406,7 +1419,7 @@ BEGIN
     // make sure base CLAB table exists
     LAF a7#add_kit_ex#ensure_clab_table STR_VAR resref = EVAL ~%clab_resref%~ END
 
-    ACTION_IF (NOT FILE_CONTAINS_EVALUATED(~%clab_resref%.2DA~ ~^[ %TAB%]*QD_MULTI[ %TAB%]~)) BEGIN
+    ACTION_IF (NOT RESOURCE_CONTAINS ~%clab_resref%.2DA~ ~\bAP_QD_MC%base_class%[0-9][0-9]\b~) BEGIN
       // padding CLAB table
       LAF a7#add_kit_ex#pad_clab_table STR_VAR resref = EVAL ~%clab_resref%~ END
 
@@ -1517,12 +1530,12 @@ BEGIN
                  FILE_EXISTS_IN_GAME ~%clab_res%.2DA~) BEGIN
         ACTION_CLEAR_ARRAY ~token_cache~  // collects affected base class CLABs for later update
         COPY_EXISTING ~%clab_res%.2da~ ~override~
-          READ_2DA_ENTRIES_NOW rows 1
-          READ_2DA_ENTRY_FORMER rows 1 0 default
-          FOR (row = 3; row < rows; ++row) BEGIN
-            FOR (col = 1; VARIABLE_IS_SET $rows(~%row%~ ~%col%~); ++col) BEGIN
+          READ_2DA_ENTRIES_NOW multiclass_rows 1
+          READ_2DA_ENTRY_FORMER multiclass_rows 1 0 default
+          FOR (row = 3; row < multiclass_rows; ++row) BEGIN
+            FOR (col = 1; VARIABLE_IS_SET $multiclass_rows(~%row%~ ~%col%~); ++col) BEGIN
               TEXT_SPRINT class_token ~%base_class%~
-              READ_2DA_ENTRY_FORMER rows row col ability
+              READ_2DA_ENTRY_FORMER multiclass_rows row col ability
               TO_UPPER ~ability~
               PATCH_IF !(~%ability%~ STR_EQ ~%default%~) BEGIN
                 PATCH_IF (~%ability%~ STRING_MATCHES_REGEXP ~[DFMPRT]GA_.+~ = 0 ||
@@ -1616,6 +1629,8 @@ INT_VAR
   fallen        = "-1"
   fallen_notice = "-2"
   prettify      = 1
+  // Diagnostic arguments
+  suppress_warnings     = 0
   // For testing purposes only
   __kits_limit_override = 0
   __kits_base_value     = 0x4000

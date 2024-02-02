@@ -65,16 +65,16 @@ ADD_KIT ~D5_THUG~
 ~LEAT14	* HELM07 BAG25 RING06 RING31 CLCK02 BOOT01 AMUL19 BRAC16 BELT06 AROW11,40 BULL03,40 BOLT06,40 POTN52,5 POTN04,2 POTN14,5 BOW18 SW1H39 STAF08~
 
 //CHARACTER CREATION KIT DESCRIPTION________________________________________________
-SAY @5341
-SAY @5342
-SAY @5343
+SAY @8501
+SAY @8502
+SAY @8503
 
 //EE KIT EXTRAS_____________________________________________________________________
 //
 ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
-			briefdesc = RESOLVE_STR_REF (@5343)
+			briefdesc = RESOLVE_STR_REF (@8503)
 		STR_VAR
 			kit_name = D5_THUG
 			clswpbon = ~1 0 3~
@@ -90,8 +90,8 @@ END
 COPY ~might_and_guile/mc/d5_thug.2da~ ~override~
 COPY ~might_and_guile/misc/d5_bstb.bam~ ~override~
 COPY ~might_and_guile/misc/d5_bstb.spl~ ~override~   // 			backstab bonus
-	SAY NAME1 @5346
-	SAY UNIDENTIFIED_DESC @5347
+	SAY NAME1 @8506
+	SAY UNIDENTIFIED_DESC @8507
 	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_bstb~ END
 COPY ~might_and_guile/misc/d5ntrap.spl~ ~override~
 

@@ -18,9 +18,9 @@
 //
 @50   = ~Deplacer le kit de Cavalier vers la classe de guerrier~
 @55   = ~Ajouter le Corsaire (kit de guerrier)~
-@60   = ~Ajouter le Maitre d'arme (kit de guerrier)~
-@65   = ~Add the Forgeron (kit de kit de guerrier)~
-@75   = ~Add the Barbare/voleur (kit de guerrier/voleur)~
+@60   = ~Ajouter le Samouraï (kit de guerrier)~
+@65   = ~Ajouter le Forgeron (kit de guerrier)~
+@75   = ~Ajouter le Barbare/Voleur (kit de guerrier/voleur)~
 @80   = ~Ajouter le Pilleur de tombes (kit de guerrier/voleur)~
 @85   = ~Ajouter la Brute (kit de guerrier/voleur)~
 @90   = ~Ajouter le Libertin (kit de voleur) et reviser le Bretteur~
@@ -96,19 +96,19 @@ C'est un style de combat qui consiste à harceler l'adversaire tout en évitant 
 @5514  = ~Annuler Escrime~
 //
 //
-@6001  = ~maître d'arme~
-@6002  = ~maître d'arme~
-@6003  = ~MAÎTRE D'ARME : ce guerrier puise dans son esprit combatif implacable pour abattre ses ennemis. À la différence de la plupart des guerriers, les maîtres d'armes focalisent tellement leur entraînement qu'ils ne peuvent atteindre la grande maîtrise que dans un seul groupe d'armes. Par contre, leur rapport à leur arme et leur entraînement leur permettent de puiser dans le « ki », l'énergie spirituelle, pour réaliser des prouesses au combat.
+@6001  = ~samouraï~
+@6002  = ~Samouraï~
+@6003  = ~SAMOURAÏ : ce guerrier puise dans son esprit combatif implacable pour abattre ses ennemis. À la différence de la plupart des guerriers, les samouraïs focalisent tellement leur entraînement qu'ils ne peuvent atteindre la grande maîtrise que dans un seul groupe d'armes. Par contre, leur rapport à leur arme et leur entraînement leur permettent de puiser dans le « ki », l'énergie spirituelle, pour réaliser des prouesses au combat.
 
 CAPACITÉS :
-- Peut choisir une arme de choix au niveau 9. Le Maître d'arme obtient instantanément la Grande Maîtrise dans son arme de choix.
-- Un Maître d'arme peut canaliser son énergie « ki » pour réaliser des exploits demandant une force, une agilité et une férocité surhumaines. Le Maître d'arme obtient un point ki au premier niveau, puis un autre point tous les trois niveaux par la suite, jusqu'à 7 points au niveau 18. Ces points ki peuvent être utilisés pour produite les effets suivants :
+- Peut choisir une arme de choix au niveau 9. Le samouraï obtient instantanément la Grande maîtrise dans son arme de choix.
+- Un samouraï peut canaliser son énergie « ki » pour réaliser des exploits demandant une force, une agilité et une férocité surhumaines. Le samouraï obtient un point ki au premier niveau, puis un autre point tous les trois niveaux par la suite, jusqu'à 7 points au niveau 18. Ces points ki peuvent être utilisés pour produite les effets suivants :
  - Imposition des mains (se soigner soi-même ou soigner un allié)
  - Bouclier de vent (évasion des attaques à projectiles)
  - Déluge de coups (attaquer plus rapidement mais avec moins de précision)
- - Frappe du tigre (effectuer une attaque critique)
- - Coup étourdissant (Étourdir la cible d'une attaque avec l'arme)
- - Frappe de porte intérieure (Infliger des pénalités aux jets de sauvegarde par une attaque avec l'arme)
+ - Frappe du tigre (effectuer une attaque critique lors de la prochaine attaque)
+ - Coup étourdissant (étourdir la cible lors de la prochaine attaque, sur échec au jet de sauvegarde)
+ - Frappe de porte intérieure (infliger des pénalités aux jets de sauvegarde lors de la prochaine attaque)
  - Cri de guerre (un cri puissant qui peut effrayer les ennemis)
 
 DÉSAVANTAGES :
@@ -118,7 +118,7 @@ DÉSAVANTAGES :
 @6008  = ~Maîtrise d'une arme~
 @6009  = ~Maîtrise d'une arme :
 
-À la différence de la plupart des soldats et autres combattants, les maîtres d'armes ne peuvent atteindre les plus hauts niveaux de maîtrise que dans une seule arme. Cette capacité permet au Maître d'arme d'atteindre la Grande maîtrise dans une arme, choisie dans un dialogue.
+À la différence de la plupart des soldats et autres combattants, les samouraï ne peuvent atteindre les plus hauts niveaux de maîtrise que dans une seule arme. Cette capacité permet au samouraï d'atteindre la Grande maîtrise dans une arme, choisie dans un dialogue.
 ~
 @6011  = ~Bouclier de vent~
 @6012  = ~Bouclier de vent :
@@ -139,36 +139,36 @@ Avec son cri de guerre, le combattant émet un puissant cri effrayant qui fera p
 //
 @6501  = ~forgeron~
 @6502  = ~Forgeron~
-@6503  = ~FORGERON : these professionals are devoted to the art of forging weapons, armor, and other useful objects. They rarely go adventuring, instead focusing on outfitting those who venture into danger. Masters of the forge are capable of creating exquisitely well-honed items, sometimes even incorporating exotic materials and wild energies to produce qualities tantamount to magic. Ironsmiths are also more knowledgable about the workings of mundane and legendary items aside from bards. They become naturally resistant to heat thanks to their frequent proximity to hot forges, and their hearing is affected by spending so many hours around ringing hammers and anvils. Finally, Ironsmiths pick up some interesting techniques to create loud, resounding blows with their weapons, which can damage and distract opponents.
+@6503  = ~FORGERON : ces professionnels se consacrent à l'art de forger des armes, des armures et autres objets utiles. Ils partent rarement à l'aventure, préférant se charger d'équiper ceux qui courent le danger. Les maîtres de la forge sont en mesure de peaufiner des objets au plus haut point, allant parfois jusqu'à incorporer des matériaux exotiques et des énergies sauvages pour obtenir des qualités proches de la magie. Les forgerons sont aussi les plus instruits, bardes mis à part, sur le fonctionnement des objets, communs ou légendaires. À force de côtoyer les fourneaux, ils deviennent plus résistants à la chaleur. Leur audition est affectée par le retentissement des marteaux sur les enclumes. Enfin, les forgerons acquièrent d'intéressantes techniques leur permettant d'émettre, en frappant, des coups sonores avec leurs armes qui peuvent blesser et distraire leurs ennemis.
 
 CAPACITÉS :
-- 20% bonus to fire resistance.
-- 8 Lore per level.
-- Ironsmiths have a 50% chance to resist the effects of Chant, Command, and Power Word spells.
-- Special Ability: 'Resounding Strike' - once per day per three levels of experience, Ironsmiths can use a special strike which does 4d4 sonic damage and has a chance to deafen any opponents within five feet of their target.
-- Special Ability: 'Spiritual Hammer' - so intimately connected are Ironsmiths to their art that, once per day per four levels of experience, they can manifest a weapon that is identical to the 'Spiritual Hammer' priest spell.
+- bonus de 20 % de résistance au feu.
+- 8 points de connaissance par niveau.
+- les forgerons ont 50 % de chance de résister aux effets de Cantique, Injonction et aux sorts de la série Mot de pouvoir.
+- Frappe résonnante : une fois par jour pour chaque tranche de 3 niveaux, peut utiliser une frappe spéciale qui cause 4d4 points de dégâts de son et a une chance d'assourdir les ennemis dans un rayon de 1,5 m de la cible.
+- Marteau spirituel : les forgerons sont tellement consacrés à leur art qu'ils peuvent, une fois par jour pour chaque tranche de 4 niveaux, manifester une arme identique à celle du sort de prêtre Marteau spirituel.
 
 DÉSAVANTAGES :
-- May only achieve grandmastery with war hammers.
-- May not invest in the shield-fighting or two-handed weapon combat styles.
+- Ne peut atteindre la grande maîtrise (5 étoiles) qu'avec les marteaux de guerre.
+- Ne peut obtenir de compétence dans les styles de combat Arme et bouclier ou Combat à deux armes.
 ~
 //
 //
 @7501  = ~barbare/voleur~
 @7502  = ~Barbare/voleur~
-@7503  = ~BARBARE/VOLEUR : a Barbarian can be an excellent warrior. While not as disciplined or as skilled as a Fighter, the Barbarian can willingly throw <PRO_HIMHER>self into a berserker rage, becoming a tougher and stronger opponent. In addition, their natural physicality sometimes pairs their warrior strength with agility and keen observation, allowing the use of the stealth and detection skills of rogues.
+@7503  = ~BARBARE/VOLEUR : Le barbare peuvent être un excellent guerrier. Bien que moins discipliné ou entraîné que les guerriers normaux, le barbare peut entrer dans une rage meurtrière, devenant ainsi un adversaire plus coriace et plus puissant. Parfois, les barbares associent leur force de guerrier à l'agilité et au sens de l'observation, ce qui leur permet de faire bon usage de la discrétion et des capacités de détection des roublards.
 
 CAPACITÉS :
-- Can move 2 points faster than other characters.
-- Immune to backstab.
-- 11th level: Gains 10% resistance to crushing, slashing, piercing, and missile damage. An additional 5% is gained at levels 15 and 19.
-- May use the Rage ability once per day per four levels of experience.
+- Bonus de +2 points en vitesse de déplacement.
+- Immunité aux attaques sournoises.
+- Au niveau 11, le barbare gagne +10 % de résistance aux armes tranchantes, perçantes et contondantes, et aux projectiles. Ces résistances augmentent de +5 % aux niveaux 15 et 19.
+- Peut utiliser « Rage » une fois par jour tous les 4 niveaux (une fois par jour au niveau 1).
 
-RAGE: The enraged status lasts for 5 rounds and provides a +4 bonus to Strength and Constitution, a -2 penalty to Armor Class and a +2 bonus to Saving Throws vs. Spell, as well as immunity to all charm, hold, fear, maze, stun, sleep, confusion, and level drain spells.
+RAGE : Pendant 5 rounds, la rage confère un bonus de +4 en Constitution et en Force, une pénalité de -2 à la Classe d'Armure et un bonus de +2 aux jets de sauvegarde contre les sorts. La rage immunise aussi contre les sorts de charme, d'immobilisation, d'effroi, de labyrinthe, d'étourdissement, de sommeil, de confusion et d'absorption de niveau.
 
 DÉSAVANTAGES :
-- May not wear armor heavier than studded leather.
-- May not invest in the 'Pick Pockets' or 'Open Locks' thief skills.
+- Ne peut porter d'armures plus lourde que la besantine.
+- Ne peut utiliser les compétences de Vol à la tire ou Crochetage.
 ~
 //
 //

@@ -9,7 +9,7 @@
 <body>
 <h1>SubtleMods: Might and Guile, a tweak mod and kit pack for warriors and rogues</h1>
 <div class="section">
-  <p><strong> Version 5.5 </strong><br />
+  <p><strong> Version 5.8 </strong><br />
   <strong> Languages:</strong> English</p>
   <p><strong>Author: <a href="http://forums.gibberlings3.net/index.php?showuser=6306">The Subtle Doctor</a></strong></p>
   <p><strong><a href="https://github.com/UnearthedArcana/Might_and_Guile">Home page</a></strong></p>
@@ -46,16 +46,21 @@
     <li> [spell mods including Spell Revisions]</li>
     <li> [item mods including Item Revisions]</li>
     <li> [small kit mods]</li>
-    <li> Divine Remix</li>
+    <li> SubtleD's Spell Tweaks</li>
     <li> Tome & Blood</li>
-    <li> Might and Guile (v5+)</li>
-    <li> Faiths & Powers (v0.85+)</li>
+    <li> Will to Power</li>
+    <li> Might and Guile</li>
+    <li> Faiths & Powers</li>
+    <li> 5E Spellcasting Conversion</li>
     <li> [tweak mods including Tweaks Anthology]</li>
+    <li> SubtleD's Item Tweaks</li>
     <li> SCS</li>
+    <li> Combat Skills & Proficiencies</li>
+    <li> SubtleD's Stat Overhauls</li>
     <li> [end-of-order mods like LevelOneNPCs, NPC_EE, Dual to Kit, etc.]</li>
   </ul>
   <p><strong>Modder Resources:</strong><br />
-	Might and Guile adds a handful of custom spellstates to SPLSTATE.IDS. It uses the 4th byte of stat 115, Clubs proficiency, to track certain feats. It also uses most of stat 108 and the 3rd and 4th bytes of stat 109 for the Revised Bards' "semi-spontaneous"/"5E-style" hybrid spellcasting and a couple other innate abilities. It uses the Skald and Archer kit usability flags to control spell access in the Revised Bards component.</p>
+	Might and Guile adds a handful of custom spellstates to SPLSTATE.IDS. It uses the 4th byte of stat 115, Clubs proficiency, to track certain abilities. It also uses the 2nd byte of stat 110 for certain innate abilities. It uses the Skald and Inquisitor kit usability flags to control spell access in the Revised Bards component.</p>
 </div>
 <h2>Contents</h2>
   <h4 class="subheader">Component 50: </h4>
@@ -80,16 +85,16 @@
   </div>
   <h4 class="subheader">Component 60: </h4>
   <div class="section">
-    <p><strong><em>Add the WEAPONMASTER fighter kit</em></strong></p>
+    <p><strong><em>Add the SAMURAI fighter kit</em></strong></p>
     <div class="kit_description">
-      <p>WEAPONMASTER: this is a warrior who draws on an implacable fighting spirit to overcome enemies. Unlike most fighters, Weaponmasters focus their training such that they can only achieve grandmastery with a single weapon group. However the bond and intense training with that weapon allows Weaponmasters to draw upon 'ki,' or spirit energy, to  perform terrific feats of combat prowess.</p>
+      <p>SAMURAI: this is a warrior who draws on an implacable fighting spirit to overcome enemies. Unlike most fighters, Samurai focus their training such that they can only achieve grandmastery with a single weapon group. However the bond and intense training with that weapon allows Samurai to draw upon 'ki,' or spirit energy, to  perform terrific feats of combat prowess.</p>
       <p>Advantages:<br />
-        &ndash; May select a Weapon of Focus at 9th level. The Weaponmaster instantly gains grandmastery with the chosen weapon.<br />
-        &ndash; A Weaponmaster may channel their ki energy into feats of near-superhuman strength, agility, and ferocity. The Weaponmaster gets one ki point at 1st level and another ki point every third level thereafter, up to seven at 18th level. These ki points may be used for the following abilities:<br />
+        &ndash; May select a Weapon of Focus at 9th level. The Samurai instantly gains grandmastery with the chosen weapon.<br />
+        &ndash; A Samurai may channel their ki energy into feats of near-superhuman strength, agility, and ferocity. The Samurai gets one ki point at 1st level and another ki point every third level thereafter, up to seven at 18th level. These ki points may be used for the following abilities:<br />
         <ul>
           <li>Lay On Hands (heal oneself or a comrade)</li>
           <li>Shield of the Wind (evade missile attacks)</li>
-          <li>Flurry of Blows (attack with greater speed and reduced accuracy)</li>
+          <li>Flurry of Blows (attack with greater frequency but reduced accuracy)</li>
           <li>Tiger Strike (preform a critical strike)</li>
           <li>Stunning Blow (cause the target of a weapon strike to be stunned)</li>
           <li>Inner Gate Strike (cause saving throw penalties via a weapon strike)</li>
@@ -99,6 +104,43 @@
         &ndash; May only achieve specialization with weapons other than the Weapon of Focus.<br />
         &ndash; Alignment restrictions: may not be chaotic.<br />.</p>
     </div>
+  </div>
+  <h4 class="subheader">Component 65: </h4>
+  <div class="section">
+    <p><strong><em>Add the IRONSMITH fighter kit</em></strong></p>
+      <div class="kit_description">
+        <p>IRONSMITH: these professionals are devoted to the art of forging weapons, armor, and other useful objects. They rarely go adventuring, instead focusing on outfitting those who venture into danger. Masters of the forge are capable of creating exquisitely well-honed items, sometimes even incorporating exotic materials and wild energies to produce qualities tantamount to magic. Ironsmiths are also more knowledgable about the workings of mundane and legendary items aside from bards. They become naturally resistant to heat thanks to their frequent proximity to hot forges, and their hearing is affected by spending so many hours around ringing hammers and anvils. Finally, Ironsmiths pick up some interesting techniques to create loud, resounding blows with their weapons, which can damage and distract opponents.</p>
+        <p>Abilities:<br />
+          &ndash; 20% bonus to fire resistance.<br />
+          &ndash; 8 Lore per level.<br />
+          &ndash; Ironsmiths have a 50% chance to resist the effects of enemies' Chant, Command, and Power Word spells.<br />
+          &ndash; Special Ability: 'Resounding Strike' - once per day per three levels of experience, Ironsmiths can use a special strike which does 4d4 sonic damage and has a chance to deafen any opponents within five feet of their target.<br />
+          &ndash; Special Ability: 'Spiritual Hammer' - so intimately connected are Ironsmiths to their art that, once per day per four levels of experience, they can manifest a weapon that is identical to the 'Spiritual Hammer' priest spell.<br />
+        <p>Restrictions:<br />
+          &ndash; May only achieve grandmastery with war hammers.<br />
+          &ndash; May not invest in the shield-fighting or two-handed weapon combat styles.<br />.</p>
+      </div>
+  </div>
+  <h4 class="subheader">Component 66: </h4>
+  <div class="section">
+    <p><strong><em>Apply the IRONSMITH fighter kit to Breagar</em></strong></p>
+      <p>If you have the Breagar NPC mod installed in your game, this component will give him the MnG Ironsmith kit instead of the Dwarven Smith kit included in that mod. (The MnG Ironsmith took Ascalon's Dwarven Smith kit as rough inspiration, and adds a few bells and whistles to hopefully make playing Breagar a bit more fun.)</p>
+  </div>
+  <h4 class="subheader">Component 75: </h4>
+  <div class="section">
+    <p><strong><em>Add the BARBARIAN/THIEF fighter/thief kit</em></strong></p>
+      <div class="kit_description">
+        <p>BARBARIAN/THIEF: a Barbarian can be an excellent warrior. While not as disciplined or as skilled as a Fighter, the Barbarian can willingly throw <PRO_HIMHER>self into a berserker rage, becoming a tougher and stronger opponent. In addition, their natural physicality sometimes pairs their warrior strength with agility and keen observation, allowing the use of the stealth and detection skills of rogues.</p>
+        <p>Abilities:<br />
+          &ndash; Can move 2 points faster than other characters.<br />
+          &ndash; Immune to backstab attacks.<br />
+          &ndash; 11th level: Gains 10% resistance to crushing, slashing, piercing, and missile damage. An additional 5% is gained at levels 15 and 19.<br />
+          &ndash; May use the Rage ability once per day per four levels of experience. The enraged status lasts for 5 rounds and provides a +4 bonus to Strength and Constitution, a -2 penalty to Armor Class and a +2 bonus to Saving Throws vs. Spell, as well as immunity to all charm, hold, fear, maze, stun, sleep, confusion, and level drain spells.<br />
+        <p>Restrictions:<br />
+          &ndash; May not use the 'Pick Pockets' or 'Open Locks' thief skills.<br />
+          &ndash; May not wear armor heavier than studded leather.<br />
+          &ndash; May only distribute 20 skill points each level.<br />.</p>
+      </div>
   </div>
   <h4 class="subheader">Component 80: </h4>
   <div class="section">
@@ -730,173 +772,7 @@
 </div>
 <h2>Credits and Copyright Information</h2>
 <div class="section">
-  <p>Copyright 2015-2019. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
-</div>
-<h2>Version History</h2>
-<div class="section">
-  <p><strong>Version 4.4 - December 2019</strong></p>
-  <ul>
-    <li>support for SR v4b17+</li>
-    <li>bard bug fixes</li>
-  </ul>
-  <p><strong>Version 4.3 - November 2019</strong></p>
-  <ul>
-    <li>bug fixes</li>
-  </ul>
-  <p><strong>Version 4.2 - October 2019</strong></p>
-  <ul>
-    <li>bug fixes</li>
-  </ul>
-  <p><strong>Version 4.1 - September 2019</strong></p>
-  <ul>
-    <li>new QDmulti</li>
-    <li>updated evasion</li>
-  </ul>
-  <p><strong>Version 4.0 - summer 2019</strong></p>
-  <ul>
-    <li>spell-learning UI for feats</li>
-    <li>TnB stat-based spell slot bonuses</li>
-    <li>new monk fist implementation</li>
-    <li>Halfling Whistler demibard kit</li>
-  </ul>
-  <p><strong>Version 3.9 - March 2019</strong></p>
-  <ul>
-    <li>5E casting multiclass bards</li>
-    <li>more cool feats</li>
-    <li>improved rangers</li>
-  </ul>
-  <p><strong>Version 3.8 - September 2018</strong></p>
-  <ul>
-    <li>3E-style & multiclass bards</li>
-  </ul>
-  <p><strong>Version 3.7 - December 2017</strong></p>
-  <ul>
-    <li>fixed Spell Evasion</li>
-    <li>fixed UMD</li>
-  </ul>
-  <p><strong>Version 3.6 - July 2017</strong></p>
-  <ul>
-    <li>new feat: IWDEE Spell Evasion</li>
-    <li>enemies get fighting postures</li>
-  </ul>
-  <p><strong>Version 3.5 - May 2017</strong></p>
-  <ul>
-    <li>new multiclass kits for fighter/thieves - Thug, Tomb Runner, and Ranger/Thief</li>
-    <li>retired the Spellbender... go get Faiths & Powers instead</li>
-  </ul>
-  <p><strong>Version 3.4 - March 2017</strong></p>
-  <ul>
-    <li>new warrior feats</li>
-  </ul>
-  <p><strong>Version 3.3 - February 2017</strong></p>
-  <ul>
-    <li>added the Herald kit, removed the Blade demibard</li>
-    <li>a ton of little fixes</li>
-  </ul>
-  <p><strong>Version 3.2 - January 2017</strong></p>
-  <ul>
-    <li>added Jinxer kit</li>
-    <li>support for Song & Silence bard kits</li>
-  </ul>
-  <p><strong>Version 3.1 - December 2016</strong></p>
-  <ul>
-    <li>added 'fighting dirty' feat</li>
-    <li>added bard overhaul component</li>
-  </ul>
-  <p><strong>Version 3.0 - November 2016</strong></p>
-  <ul>
-    <li>completely rewrote the feat system, merging rogue feats and warrior feats</li>
-    <li>rolled back Called Shots to be granted in the clab table, unless the feat system is installed in which they are integrated with it</li>
-    <li>revised psionic powers and made then integrated with, but independent of, the new feat system</li>
-    <li>added psionic HLAs for the Psypher and Soulblade kits</li>
-    <li>fixed various bugs (like the rogue version of Mislead not working correctly)</li>
-  </ul>
-  <p><strong>Version 2.8 - August 2016</strong></p>
-  <ul>
-    <li>added the Soulblade psionic fighter kit</li>
-  </ul>
-  <p><strong>Version 2.7 - June 2016</strong></p>
-  <ul>
-    <li>dipping toes into psionic waters - psionic feats and the Psypher kit</li>
-  </ul>
-  <p><strong>Version 2.6 - June 2016</strong></p>
-  <ul>
-    <li>added tactician stances to warrior feats</li>
-    <li>added the Alchemist kit (installs with the Rogue Feats)</li>
-    <li>new icons for all feats</li>
-    <li>some bug fixes (as always)</li>
-  </ul>
-  <p><strong>Version 2.5 - May 2016</strong></p>
-  <ul>
-    <li>changed Called Shots over to a feat system</li>
-    <li>added Rogue Feats & HLAs!!</li>
-  </ul>
-  <p><strong>Version 2.4 - April 2016</strong></p>
-  <ul>
-    <li>SoD compatibility</li>
-    <li>improved Bladesinger</li>
-  </ul>
-  <p><strong>Version 2.3.2 - April 2016</strong></p>
-  <ul>
-    <li>warrior feats!!</li>
-  </ul>
-  <p><strong>Version 2.3.1 - April 2016</strong></p>
-  <ul>
-    <li>beastmaster fixes, ranger/mage fixes, readme fixes</li>
-  </ul>
-  <p><strong>Version 2.3 - April 2016</strong></p>
-  <ul>
-    <li>Ranger/mage!!!</li>
-  </ul>
-  <p><strong>Version 2.1 to 2.2 - ???</strong></p>
-  <ul>
-    <li>I need to be better about updating this...</li>
-    <li>I think this was basically, EET compatibility and EE 2.0 compatibility</li>
-  </ul>
-  <p><strong>Version 2.0 - December 2015</strong></p>
-  <ul>
-    <li>major re-write</li>
-    <li>the overhauls and basic game/rule tweaks are moved back to Scales of Balance v5</li>
-    <li>revised rangers expanded and split up into modular components</li>
-  </ul>
-  <p><strong>Version 1.6 - December 2015</strong></p>
-  <ul>
-    <li>IWO IWD stuff</li>
-    <li>fix for the Beastmaster spirit summon on the pre-EE engine</li>
-  </ul>
-  <p><strong>Version 1.5 - November 2015</strong></p>
-  <ul>
-    <li>at-will called shots</li>
-    <li>increased light/heavy weapon differences in IWO</li>
-    <li>beastmaster spirit summons</li>
-    <li>altered hit dice revisions</li>
-  </ul>
-  <p><strong>Version 1.4 - November 2015</strong></p>
-  <ul>
-    <li>fixed marksman and barb ranger usability</li>
-    <li>added light/heavy weapons to IWO</li>
-    <li>archer/slinger proficiency changes</li>
-    <li>added support for F&P kits and sphere system</li>
-  </ul>
-  <p><strong>Version 1.3 - October 2015</strong></p>
-  <ul>
-    <li>fixed corsair and marksman installation</li>
-    <li>fixed elven archer proficiencies</li>
-    <li>fixed monitor's casting level bonuses</li>
-    <li>added "revised shadowdancer" component</li>
-  </ul>
-  <p><strong>Version 1.2 - October 2015</strong></p>
-  <ul>
-    <li>werewolf shapeshifting for beastmasters</li>
-  </ul>
-  <p><strong>Version 1.1 - September 2015</strong></p>
-  <ul>
-    <li>fixed proficiency limits for mod clerics and rogues in the WPO</li>
-  </ul>
-  <p><strong>Version 1.0 - September 2015</strong></p>
-  <ul>
-    <li>first version, from the ashes of Scales of Balance</li>
-  </ul>
+  <p>Copyright 2015-2024. If you want to use or adapt any part of this mod in another mod or similar endeavor, please try to contact me at forums.gibberlings3.net or forums.beamdog.com to discuss it. As a general rule, I have no problem with that as long as you credit the source of the work. If you cannot get in touch with me, assume that you have my permission to use any of this code for any project that is non-commercial, offered for free, and intended for the greater enjoyment of players of Infinity Engine games. You may NOT use this code for any profit-making or commercial venture, without express permission from me.</p>
 </div>
 </body>
 </html>

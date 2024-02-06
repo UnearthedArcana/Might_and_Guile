@@ -1,0 +1,246 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								REVISED NPCs
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION ironsmith_breagar BEGIN
+
+COPY_EXISTING ~kit.ids~ ~override~
+  READ_2DA_ENTRIES_NOW r2en_kitids 2
+  FOR (kitids_row = 1; kitids_row < r2en_kitids; ++kitids_row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitids kitids_row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_IRONSMITH~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitids kitids_row 0 ironsmith_code
+    END
+  END
+BUT_ONLY
+
+ACTION_IF (VARIABLE_IS_SET %ironsmith_code%) BEGIN
+  ACTION_FOR_EACH breagar IN ~acbre~ ~acbre07~ ~acbre25~ BEGIN
+    COPY_EXISTING ~%breagar%.cre~ ~override~
+      WRITE_LONG 0x244 (%ironsmith_code%) << 16
+    BUT_ONLY
+  END
+END
+
+END	//	end function
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION revised_bard_npcs BEGIN
+
+
+//CHANGE NPC BARDS____________________________________________________________________
+//
+// do a basic algorithmic change
+// then specifically make garrick = gallant and eldoth = jinxer
+
+/* why was this here?
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 8 rows
+  FOR (row = 3; row < rows; ++row) BEGIN 
+	READ_2DA_ENTRY row 1 8 ~kit_name~
+	PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_BARD~ = 1) BEGIN
+	  SET new_bard = %row% - 1
+	END
+  END
+BUT_ONLY
+*/
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+//  PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+	  READ_BYTE 0x273 npc_class
+	  READ_SHORT 0x246 old_kit
+	  PATCH_IF (npc_class = 5) BEGIN
+		PATCH_IF (old_kit = 16384) OR
+		  		 (old_kit = 0) BEGIN 									// trueclass bards
+		  WRITE_BYTE 0x234 1 											// sets level to 1
+		  WRITE_BYTE 0x235 1
+		  WRITE_BYTE 0x236 1
+		  WRITE_BYTE 0x273 13 											// sets class
+		  WRITE_SHORT 0x244 (%nu_bard_code% >> 16) & 0xffff
+		  WRITE_SHORT 0x246 %nu_bard_code% & 0xffff
+		  WRITE_BYTE 0x0045 10
+		  WRITE_BYTE 0x0064 5
+		  WRITE_BYTE 0x0065 5
+		  WRITE_BYTE 0x0066 25
+		  WRITE_BYTE 0x0067 5
+		  WRITE_BYTE 0x0068 10
+		  WRITE_BYTE 0x0069 5
+		  WRITE_BYTE 0x006a 5
+	 	  READ_BYTE 0x23d npc_con
+		  PATCH_IF (npc_con < 15) BEGIN
+			WRITE_SHORT 0x24 6
+			WRITE_SHORT 0x26 6
+		  END
+		  PATCH_IF (npc_con = 15) BEGIN
+			WRITE_SHORT 0x24 7
+			WRITE_SHORT 0x26 7
+		  END
+		  PATCH_IF (npc_con > 15) BEGIN
+			WRITE_SHORT 0x24 8
+			WRITE_SHORT 0x26 8
+		  END
+		END
+		PATCH_IF (old_kit = 16397) BEGIN 								// blades
+		  WRITE_BYTE 0x234 1 											// sets level to 1
+		  WRITE_BYTE 0x235 1
+		  WRITE_BYTE 0x236 1
+		  WRITE_BYTE 0x273 13 											// sets class
+		  WRITE_SHORT 0x244 (%nu_blade_code% >> 16) & 0xffff
+		  WRITE_SHORT 0x246 %nu_blade_code% & 0xffff
+		  WRITE_BYTE 0x0045 10
+		  WRITE_BYTE 0x0064 5
+		  WRITE_BYTE 0x0065 5
+		  WRITE_BYTE 0x0066 10
+		  WRITE_BYTE 0x0067 5
+		  WRITE_BYTE 0x0068 10
+		  WRITE_BYTE 0x0069 5
+		  WRITE_BYTE 0x006a 5
+	 	  READ_BYTE 0x23d npc_con
+		  PATCH_IF (npc_con < 15) BEGIN
+			WRITE_SHORT 0x24 6
+			WRITE_SHORT 0x26 6
+		  END
+		  PATCH_IF (npc_con = 15) BEGIN
+			WRITE_SHORT 0x24 7
+			WRITE_SHORT 0x26 7
+		  END
+		  PATCH_IF (npc_con > 15) BEGIN
+			WRITE_SHORT 0x24 8
+			WRITE_SHORT 0x26 8
+		  END
+		END
+		PATCH_IF (old_kit = 16398) BEGIN 								// jesters
+		  WRITE_BYTE 0x234 1 											// sets level to 1
+		  WRITE_BYTE 0x235 1
+		  WRITE_BYTE 0x236 1
+		  WRITE_BYTE 0x273 4 											// sets class
+		  WRITE_SHORT 0x244 (%nu_jester_code% >> 16) & 0xffff
+		  WRITE_SHORT 0x246 %nu_jester_code% & 0xffff
+		  WRITE_BYTE 0x0045 10
+		  WRITE_BYTE 0x0064 5
+		  WRITE_BYTE 0x0065 5
+		  WRITE_BYTE 0x0066 25
+		  WRITE_BYTE 0x0067 5
+		  WRITE_BYTE 0x0068 10
+		  WRITE_BYTE 0x0069 5
+		  WRITE_BYTE 0x006a 5
+	 	  READ_BYTE 0x23d npc_con
+		  PATCH_IF (npc_con < 15) BEGIN
+			WRITE_SHORT 0x24 6
+			WRITE_SHORT 0x26 6
+		  END
+		  PATCH_IF (npc_con = 15) BEGIN
+			WRITE_SHORT 0x24 7
+			WRITE_SHORT 0x26 7
+		  END
+		  PATCH_IF (npc_con > 15) BEGIN
+			WRITE_SHORT 0x24 8
+			WRITE_SHORT 0x26 8
+		  END
+		END
+		REMOVE_KNOWN_SPELLS
+		REMOVE_MEMORIZED_SPELLS
+		PATCH_IF (old_kit = 16399) BEGIN 								//	skalds
+// ***** figure out proficiencies... just double for now
+		  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 match_parameter1 = 1 parameter1 = 2 END
+		  WRITE_BYTE 0x234 1 											// sets level to 1
+		  WRITE_BYTE 0x235 1
+		  WRITE_BYTE 0x236 1
+		  WRITE_BYTE 0x273 7											// sets class
+		  WRITE_SHORT 0x244 (%nu_skald_code% >> 16) & 0xffff
+		  WRITE_SHORT 0x246 %nu_skald_code% & 0xffff
+		  WRITE_BYTE 0x0066 25
+		  PATCH_IF (npc_con < 15) BEGIN
+			WRITE_SHORT 0x24 8
+			WRITE_SHORT 0x26 8
+		  END
+		  PATCH_IF (npc_con = 15) BEGIN
+			WRITE_SHORT 0x24 9
+			WRITE_SHORT 0x26 9
+		  END
+		  PATCH_IF (npc_con = 16) BEGIN
+			WRITE_SHORT 0x24 10
+			WRITE_SHORT 0x26 10
+		  END
+		  PATCH_IF (npc_con = 17) BEGIN
+			WRITE_SHORT 0x24 11
+			WRITE_SHORT 0x26 11
+		  END
+		  PATCH_IF (npc_con > 17) BEGIN
+			WRITE_SHORT 0x24 12
+			WRITE_SHORT 0x26 12
+		  END
+		END
+		PATCH_IF FILE_EXISTS_IN_GAME ~d5__rfeat.d5~ BEGIN
+			LPF ADD_CRE_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5feata~ END
+		END
+	  END
+	END
+  BUT_ONLY
+END
+
+ACTION_FOR_EACH char IN ~eldoth~ ~eldoth5~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%char%.cre~ BEGIN
+	COPY_EXISTING ~%char%.cre~ ~override~
+	  WRITE_SHORT 0x244 (%nu_jinxer_code% >> 16) & 0xffff
+	  WRITE_SHORT 0x246 %nu_jinxer_code% & 0xffff
+	BUT_ONLY
+  END
+END
+
+ACTION_FOR_EACH char IN ~garric~ ~garric2~ ~garric4~ ~garric6~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%char%.cre~ BEGIN
+	COPY_EXISTING ~garric2.cre~ ~override/%char%.cre~
+		  WRITE_BYTE 0x273 7
+		  WRITE_SHORT 0x244 (%nu_gallant_code% >> 16) & 0xffff
+		  WRITE_SHORT 0x246 %nu_gallant_code% & 0xffff
+	  READ_BYTE 0x23d npc_con
+	  PATCH_IF (npc_con < 15) BEGIN
+		WRITE_SHORT 0x24 8
+		WRITE_SHORT 0x26 8
+	  END
+	  PATCH_IF (npc_con = 15) BEGIN
+		WRITE_SHORT 0x24 9
+		WRITE_SHORT 0x26 9
+	  END
+	  PATCH_IF (npc_con = 16) BEGIN
+		WRITE_SHORT 0x24 10
+		WRITE_SHORT 0x26 10
+	  END
+	  PATCH_IF (npc_con = 17) BEGIN
+		WRITE_SHORT 0x24 11
+		WRITE_SHORT 0x26 11
+	  END
+	  PATCH_IF (npc_con > 17) BEGIN
+		WRITE_SHORT 0x24 12
+		WRITE_SHORT 0x26 12
+	  END
+// ***** figure out proficiencies (just double what's already there??)
+	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 233 match_parameter1 = 1 parameter1 = 2 END
+	BUT_ONLY
+  END
+END
+//___________________________________________________________________________________
+
+END	//	end function
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+

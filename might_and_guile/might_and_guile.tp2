@@ -32,6 +32,8 @@ ALWAYS
 
 	INCLUDE ~might_and_guile/lib/qd_multiclass.tpa~
 
+	INCLUDE ~might_and_guile/lib/spell_evasion.tpa~
+
 	INCLUDE ~might_and_guile/lib/semi_innate.tpa~
 
 	INCLUDE ~might_and_guile/lib/fnp_compatibility.tpa~
@@ -108,6 +110,17 @@ REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 INCLUDE ~might_and_guile/components/65_ironsmith.tpa~
 
 LAF ironsmith_kit END
+
+
+BEGIN @66
+DESIGNATED 66
+LABEL ~D5_IRONSMITH_BREAGAR~
+REQUIRE_COMPONENT ~might_and_guile.tp2~ ~65~ @1
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~acbre.cre~) OR (FILE_EXISTS_IN_GAME ~acbre07.cre~) OR (FILE_EXISTS_IN_GAME ~acbre25.cre~) @5
+
+INCLUDE ~might_and_guile/components/65_ironsmith.tpa~
+
+LAF ironsmith_breagar END
 //__________________________________________________________________________________
 
 
@@ -138,7 +151,7 @@ LAF tomb_runner_kit END
 //_____________________________THUG_________________________________________________
 BEGIN @85
 DESIGNATED 85
-LABEL ~D5_CTHUG_KIT~
+LABEL ~D5_THUG_KIT~
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
 
 INCLUDE ~might_and_guile/components/85_thug.tpa~
@@ -225,7 +238,7 @@ LAF loremaster_kit END
 //__________________________________________________________________________________
 
 
-//________________________REGIONAL RANGERS__________________________________________
+//_________________________REGIONAL RANGERS_________________________________________
 BEGIN @120
 DESIGNATED 120
 LABEL ~D5_REGIONAL_RANGERS~
@@ -285,7 +298,7 @@ LAF fake_ranger_multi_kits END
 //__________________________________________________________________________________
 
 
-//______________________ARCHER=FIGHTER______________________________________________
+//________________________ARCHER=FIGHTER____________________________________________
 BEGIN @151
 DESIGNATED 151
 LABEL ~D5_MARKSMAN~
@@ -297,7 +310,7 @@ LAF archer_fighter_kit END
 //__________________________________________________________________________________
 
 
-//_______________________ELVEN ARCHER_______________________________________________
+//________________________ELVEN ARCHER______________________________________________
 BEGIN @155
 DESIGNATED 155
 LABEL ~D5_ELVEN_ARCHER~
@@ -310,7 +323,7 @@ LAF elven_archer_kit END
 //__________________________________________________________________________________
 
 
-//______________________SLINGER (F/T)_______________________________________________
+//________________________SLINGER (F/T)_____________________________________________
 BEGIN @160
 DESIGNATED 160
 LABEL ~D5_HALFLING_SLINGER~
@@ -324,7 +337,7 @@ LAF halfling_slinger_kit END
 //__________________________________________________________________________________
 
 
-//______________________MARKSMAN (THIEF)____________________________________________
+//_______________________MARKSMAN (THIEF)___________________________________________
 BEGIN @165
 DESIGNATED 165
 LABEL ~D5_SNIPER_KIT~
@@ -345,7 +358,7 @@ LAF marksman_thief_kit END
 //__________________________________________________________________________________
 
 
-//__________________________IMPROVED RANGERS________________________________________
+//_________________________IMPROVED RANGERS_________________________________________
 BEGIN @201
 DESIGNATED 201
 LABEL ~D5_IMPROVED_RANGERS~
@@ -487,7 +500,16 @@ ACTION_IF FILE_EXISTS ~TobEx_ini/TobExVer.txt~ BEGIN
 	DELETE ~TobEx_ini/TobExVer.txt~
 END
 
-// ***** if no feats use dialogue for song selection (see e.g. FnP nu paladins)
+/*
+BEGIN @405
+DESIGNATED 405
+LABEL ~D5_REVISED_BARD_NPCS~
+REQUIRE_COMPONENT ~might_and_guile.tp2~ ~400~ @1
+
+INCLUDE ~might_and_guile/components/00_revised_npcs.tpa~
+
+LAF revised_bard_npcs END
+*/
 //__________________________________________________________________________________
 
 

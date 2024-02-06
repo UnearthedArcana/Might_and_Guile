@@ -54,13 +54,6 @@ COPY ~might_and_guile/fighter/smith/d5smith.2da~ ~override~
 ACTION_IF (GAME_IS ~iwd~) BEGIN
   COPY_EXISTING ~sppr213.spl~ ~override/d5smth3.spl~
     LPM spell_to_innate
-/* eh, just copy the priest spell
-    READ_LONG 0x08 shammer_spl_name
-    READ_LONG 0x50 shammer_spl_desc
-  COPY ~might_and_guile/fighter/smith/d5smth3.spl~ ~override
-    WRITE_LONG 0x08 shammer_spl_name
-    WRITE_LONG 0x50 shammer_spl_desc
-*/
   COPY_EXISTING ~d5smith.2da~ ~override~
     REPLACE_TEXTUALLY ~GA_SPIN113~ ~GA_D5SMTH3~
   IF_EXISTS BUT_ONLY
@@ -74,7 +67,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5smthev.2da~) BEGIN
 RES
 SPPR203D 	SPL
 >>>>>>>> 
-COPY ~d5/d5smthev.2da~ ~override/d5smthev.2da~ 
+  COPY ~d5/d5smthev.2da~ ~override/d5smthev.2da~ 
+END
 
 ACTION_FOR_EACH smith_evade_spell IN 
   ~CLERIC_COMMAND~
@@ -114,8 +108,8 @@ BUT_ONLY
 // add resounding smite - d5smth5
 
 COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5smth5.spl~			//	resounding strike
-  SAY NAME1 @65__
-  SAY UNIDENTIFIED_DESC @65__
+  SAY NAME1 @6506
+  SAY UNIDENTIFIED_DESC @6507
   WRITE_ASCII 0x3a ~spwi223c~ #8
   LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~spwi223b~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 1 parameter2 = 146 timing = 0 duration = 126144000 END
@@ -137,7 +131,9 @@ END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsburst.bam~) BEGIN
   COPY ~might_and_guile/fighter/smith/dvsburst.bam~ ~override~
 END
+
 ADD_PROJECTILE ~might_and_guile/fighter/smith/d5sburst.pro~
+
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5reson.spl~) BEGIN
   COPY ~might_and_guile/fighter/smith/d5reson.spl~ ~override~
 END
@@ -145,28 +141,6 @@ COPY_EXISTING ~d5reson.spl~ ~override~
   LPF ALTER_SPELL_HEADER INT_VAR projectile = %d5sburst% END
   LPF DELETE_EFFECT INT_VAR match_opcode = 80 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 80 target = 2 timing = 0 duration = 30 savingthrow = 16 END
-
-/*
-ACTION_IF !(FILE_EXISTS_IN_GAME ~spwi223e.spl~) BEGIN
-  COPY ~might_and_guile/fighter/smith/spwi223e.spl~ ~override~
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~spwi223e.spl~) BEGIN
-  COPY_EXISTING ~spwi223e.spl~ ~override~
-    WRITE_SHORT 0x1c 4
-    WRITE_SHORT 0x98 %dvsndbr%
-END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~spwi223d.spl~) BEGIN
-  COPY ~might_and_guile/fighter/smith/spwi223d.spl~ ~override~
-    WRITE_SHORT 0x98 %dvsndbr%
-END
-ACTION_IF (FILE_EXISTS_IN_GAME ~spwi223d.spl~) BEGIN
-  COPY_EXISTING ~spwi223d.spl~ ~override~
-    WRITE_SHORT 0x1c 4
-END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~spwi223i.eff~) BEGIN
-  COPY ~might_and_guile/fighter/smith/spwi223i.eff~ ~override~
-END
-*/
 
 CREATE EFF ~d5smth5x~
 	WRITE_LONG 0x10 146
@@ -195,4 +169,35 @@ END
 //____________________________________________________________________________________
 
 END	//	end function
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION ironsmith_breagar BEGIN
+
+COPY_EXISTING ~kit.ids~ ~override~
+  READ_2DA_ENTRIES_NOW r2en_kitids 2
+  FOR (kitids_row = 1; kitids_row < r2en_kitids; ++kitids_row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitids kitids_row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_IRONSMITH~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitids kitids_row 0 ironsmith_code
+    END
+  END
+BUT_ONLY
+
+ACTION_IF (VARIABLE_IS_SET %ironsmith_code%) BEGIN
+  ACTION_FOR_EACH breagar IN ~acbre~ ~acbre07~ ~acbre25~ BEGIN
+    COPY_EXISTING ~%breagar%.cre~ ~override~
+      WRITE_LONG 0x244 (%ironsmith_code%) << 16
+    BUT_ONLY
+  END
+END
+
+END	//	end function
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
 

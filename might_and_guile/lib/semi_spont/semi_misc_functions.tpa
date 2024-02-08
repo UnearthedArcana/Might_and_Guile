@@ -1,5 +1,5 @@
 
-// v12 - added define_priest_spells function
+// v12.1 - fixed kitlist function
 
 /*
 
@@ -2803,39 +2803,57 @@ END
 // fix kitlist IDS entries
 
 DEFINE_ACTION_FUNCTION fix_kitlist_missing_ids BEGIN
-	COPY_EXISTING ~kitlist.2da~ ~override~
-		PRETTY_PRINT_2DA
-		PATCH_IF ~%entry%~ STR_EQ ~~ BEGIN
-			READ_2DA_ENTRY 1 0 1 "entry"
-		END
-		COUNT_2DA_COLS "cols"
-		SET cnt = 0
-		REPLACE_EVALUATE ~^\(.+\)$~ BEGIN
-			PATCH_IF cnt >= 3 BEGIN
-				INNER_PATCH_SAVE MATCH1 ~%MATCH1%~ BEGIN
-					COUNT_REGEXP_INSTANCES ~ +~ num_matches
-					WHILE (num_matches < (cols - 1)) BEGIN
-						REPLACE_TEXTUALLY ~$~ ~ ZZZZZ~
-						SET num_matches = num_matches + 1
-					END
-				END
-			END ELSE BEGIN
-				SET cnt = cnt + 1
-			END
-		END ~%MATCH1%~
-		PRETTY_PRINT_2DA
-	BUT_ONLY
-	COPY_EXISTING ~kitlist.2da~ ~override~
-		COUNT_2DA_ROWS 10 rows
-		FOR (row = 1; row < rows; ++row) BEGIN
-			SET val = (row - 12)
-			TEXT_SPRINT new_ids ~000040%val%~
-			READ_2DA_ENTRY row 9 10 ids_val
-			PATCH_IF !(IS_AN_INT ~%ids_val%~) BEGIN
-				SET_2DA_ENTRY row 9 10 ~0x%new_ids%~
-			END
-		END
-	BUT_ONLY
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    PRETTY_PRINT_2DA
+    PATCH_IF ~%entry%~ STR_EQ ~~ BEGIN
+      READ_2DA_ENTRY 1 0 1 "entry"
+    END
+    COUNT_2DA_COLS "cols"
+    SET cnt = 0
+    REPLACE_EVALUATE ~^\(.+\)$~ BEGIN
+      PATCH_IF cnt >= 3 BEGIN
+        INNER_PATCH_SAVE MATCH1 ~%MATCH1%~ BEGIN
+          COUNT_REGEXP_INSTANCES ~ +~ num_matches
+          WHILE (num_matches < (cols - 1)) BEGIN
+            REPLACE_TEXTUALLY ~$~ ~  ZZZZZ~
+            SET num_matches = num_matches + 1
+          END
+        END
+      END ELSE BEGIN
+      	SET cnt = cnt + 1
+      END
+    END ~%MATCH1%~
+    PRETTY_PRINT_2DA
+  BUT_ONLY
+
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    COUNT_2DA_ROWS 10 k_rows
+    FOR (k_row = 1; k_row < k_rows; ++k_row) BEGIN
+      SPRINT ids_num ~0x00004000~
+      READ_2DA_ENTRY k_row 9 10 ids_val
+      PATCH_IF !(IS_AN_INT %ids_val%) /*(~%ids_val%~ STRING_EQUAL_CASE ~ZZZZZ~)*/ BEGIN
+        READ_2DA_ENTRY k_row 1 10 kit_name
+        INNER_ACTION BEGIN
+          COPY_EXISTING ~kit.ids~ ~override~
+            COUNT_2DA_ROWS 2 i_rows
+            FOR (i_row = 1; i_row < i_rows; ++i_row) BEGIN
+              READ_2DA_ENTRY i_row 1 2 ids_name
+              PATCH_IF (~%ids_name%~ STRING_EQUAL_CASE ~%kit_name%~) BEGIN
+                READ_2DA_ENTRY i_row 0 2 ids_num
+              END
+            END
+          IF_EXISTS BUT_ONLY
+        END
+        SPRINTF ids_hex "%x" (%ids_num%)
+        SPRINT new_ids_val ~zzzzz%ids_hex%~
+        SET_2DA_ENTRY k_row 9 10 ~%new_ids_val%~
+      END
+    END
+  BUT_ONLY
+  
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    REPLACE_TEXTUALLY ~zzzzz0x4~ ~0x00004~
+  BUT_ONLY
 END
 
 

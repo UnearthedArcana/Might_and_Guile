@@ -1,3 +1,4 @@
+//traified by mickabouille
 
 //Patch function that replaces set or all occurrences of the given regexp pattern in the file with the given string.
 //Use EVAL to perform variable substitution on the string and/or the regexp pattern.
@@ -204,7 +205,7 @@ B3Identify_UnidentifiedCount = -1
 ---------------
 
 function B3Identify_RemainingUsesText()
-	return "Remaining Identify Uses: "..B3Identify_UseCount
+	return "%remaining_uses_text%"..B3Identify_UseCount
 end
 
 function B3Identify_IdentifySlot(slotinfo)
@@ -359,6 +360,8 @@ menu
 		LAF B3_CONTINGENCY_REDIRECT_INSTALL END
 
 		COPY ~.../B3Identify-inlined/copy/M_B3IDEN.lua~ ~override~
+			SPRINT remaining_uses_text @1000
+			EVALUATE_BUFFER
 
 		COPY_EXISTING ~UI.MENU~ ~override~
 

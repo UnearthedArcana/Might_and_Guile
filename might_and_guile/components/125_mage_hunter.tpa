@@ -88,7 +88,10 @@ END
 COPY ~might_and_guile/ranger/mage_hunter/d5mageh.2da~ ~override~
 
 COPY_EXISTING ~spwi318.spl~ ~override/d5_radfl.spl~
-	LPM spell_to_innate
+  LPM spell_to_innate
+COPY_EXISTING ~spwi318b.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = ~d5_radfl~ END
+
 /*
 COPY_EXISTING ~spwi513.spl~ ~override/d5_rabre.spl~
 	LPM spell_to_innate

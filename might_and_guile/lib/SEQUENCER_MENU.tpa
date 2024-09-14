@@ -1,6 +1,6 @@
 
 	//	UI-based Spell Learning tool for Sorcerers/Shamans
-	//	v0.60
+	//	v0.60sd1
 	
 	//	This function is designed to implement a UI-based Spell selection system, as an alternative to dialog-based Spell Selection, utilizing
 	//		the Sequencer/Contingency spell selection menu to learn arcane or divine spells.  Innate abilities "can" be learned this way as well,
@@ -152,8 +152,8 @@
 		local text = ''
 		if bookMode == 1 then
 			if type(SequencerMenu[contingencyResRef]) == 'function' then
-			if SequencerMenuKnown == nil then;	SequencerMenuKnown = 0;	end
-			if SequencerMenuTotal == nil then;	SequencerMenuTotal = 0;	end
+			if SequencerMenuKnown == nil then	SequencerMenuKnown = 0;	end
+			if SequencerMenuTotal == nil then	SequencerMenuTotal = 0;	end
 				text = t("SPELLS_LABEL") .. " :" .. SequencerMenuKnown .. "/" .. SequencerMenuTotal
 			end
 		else
@@ -280,7 +280,7 @@
 		if type(SequencerMenu[abilFunc]) == 'function' then
 			mod = SequencerMenu[abilFunc](abil)
 		end
-		for k,v in pairs (unknown) do;	table.insert(temp, v);	end
+		for k,v in pairs (unknown) do	table.insert(temp, v);	end
 		table.sort(temp,function(a,b) return a.resref < b.resref end)
 		for k,v in ipairs (temp) do
 			if known < num + mod then
@@ -337,13 +337,13 @@
 							PATCH_IF	old < value	BEGIN
 								READ_2DA_ENTRY_FORMER	~READ~	j 0 level
 							//	PATCH_IF	old > 0	BEGIN
-									TEXT_SPRINT	text	~~~~~%text%%else2%if abilVal < %level% then; num = %old%;~~~~~
+									TEXT_SPRINT	text	~~~~~%text%%else2%if abilVal < %level% then num = %old%;~~~~~
 									TEXT_SPRINT	else2	~ else~
 							//	END
 								SET	old = value
 							END
 						END
-						TEXT_SPRINT	text	~~~~~%text% else; num = %value% end%WNL%%TAB%%TAB%~~~~~
+						TEXT_SPRINT	text	~~~~~%text% else num = %value% end%WNL%%TAB%%TAB%~~~~~
 						TEXT_SPRINT	else1	~else~
 					END
 					TEXT_SPRINT	text	~~~~~%text%end~~~~~
@@ -387,16 +387,16 @@
 					PATCH_IF	old < value	BEGIN
 						READ_2DA_ENTRY_FORMER	~READ~	j 0 level
 //						PATCH_IF	old > 0	BEGIN
-							TEXT_SPRINT	text	~~~~~%text%%else2%if level < %level% then; num = %old%;~~~~~
+							TEXT_SPRINT	text	~~~~~%text%%else2%if level < %level% then num = %old%;~~~~~
 							TEXT_SPRINT	else2	~ else~
 //						END
 						SET	old = value
 					END
 				END
 				PATCH_IF	old = 0	BEGIN
-					TEXT_SPRINT	text	~~~~~%text% 0 then; num = 0~~~~~
+					TEXT_SPRINT	text	~~~~~%text% 0 then num = 0~~~~~
 				END
-				TEXT_SPRINT	text	~~~~~%text% else; num = %value% end%WNL%%TAB%%TAB%~~~~~
+				TEXT_SPRINT	text	~~~~~%text% else num = %value% end%WNL%%TAB%%TAB%~~~~~
 				TEXT_SPRINT	else1	~else~
 			END
 			TEXT_SPRINT	text	~~~~~%text%end~~~~~
@@ -612,7 +612,7 @@
 				OUTER_SPRINT script ~%script%%WNL%IF%WNL%True()%WNL%THEN%WNL%RESPONSE #100%WNL%ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("%resref%G",Myself))%WNL%DestroySelf()%WNL%END~
 				COMPILE EVAL ~.../%resref%G.baf~
 			END
-			APPEND	~M_SQMENU.LUA~	~~~~~SequencerMenu['%resref%X'] = function(); bookSpells = SequencerMenuSpellsKnown(%multilist%,'%spelltable%','%attrtable%','%abil%',%alignment%,'%postfix%',%global%); end~~~~~
+			APPEND	~M_SQMENU.LUA~	~~~~~SequencerMenu['%resref%X'] = function() bookSpells = SequencerMenuSpellsKnown(%multilist%,'%spelltable%','%attrtable%','%abil%',%alignment%,'%postfix%',%global%); end~~~~~
 		END
 	END
 	

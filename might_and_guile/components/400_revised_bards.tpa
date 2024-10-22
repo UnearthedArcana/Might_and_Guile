@@ -1958,7 +1958,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_BYTE 0x1f f_c_use
   READ_BYTE 0x20 m_t_use
 //  PATCH_IF NOT (item_type = 11) && NOT (item_type = 35) BEGIN
-	PATCH_IF ((%bard_use% BOR 0b10111111) = 0b10111110) && ((%f_c_use% BAND 0b00100000) = 0b00100000) BEGIN 	// if usable by bards but not by F/M...
+	PATCH_IF ((%bard_use% BOR 0b10111111) = 0b10111111) && ((%f_c_use% BAND 0b00100000) = 0b00100000) BEGIN 	// if usable by bards but not by F/M...
 	  WRITE_BYTE 0x1f (THIS BAND 0b11011111)						// make usable by fighter/mages
 	  SPRINT item_res ~%SOURCE_RES%~
 	  INNER_ACTION BEGIN

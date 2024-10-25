@@ -1,5 +1,5 @@
 
-// v12.1 - fixed kitlist function
+// v13 - added rest-crash prevention
 
 /*
 
@@ -47,6 +47,9 @@ functions in this file:
 
 - semi_spont_identify - line 
     converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
+
+- no_crash_on_rest - line 
+    prevents crashing on rest from having too many innate abilities
 
 - miscellaneous helper functions - line 
     some functions used by the above items
@@ -2364,6 +2367,75 @@ END		//	end define function
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION no_crash_on_rest BEGIN
+
+<<<<<<<< d5/d5xcrs1.baf
+IF
+	True()
+THEN
+	RESPONSE #100
+		SetGlobal("D5_NO_CRASH","GLOBAL",1)
+		DestroySelf()
+END
+>>>>>>>> 
+COPY ~d5/d5xcrs1.baf~ ~weidu_external/%MOD_FOLDER%/compile/d5xcrs1.baf~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrsh.spl~) BEGIN
+  COMPILE ~weidu_external/%MOD_FOLDER%/compile/d5xcrs1.baf~
+END
+
+<<<<<<<< d5/d5xcrsh.baf
+IF
+	GlobalGT("D5_NO_CRASH","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("D5_NO_CRASH","GLOBAL",0)
+		ReallyForceSpellRES("D5XCRSH",Myself)
+		Wait(2)
+		RestParty()
+END
+>>>>>>>> 
+COPY ~d5/d5xcrsh.baf~ ~weidu_external/%MOD_FOLDER%/compile/d5xcrsh.baf~
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrsh.spl~) BEGIN
+  EXTEND_TOP ~player1d.bcs~ ~weidu_external/%MOD_FOLDER%/compile/d5xcrsh.baf~
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrs1.cre~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5xcrs1.cre~ ~override~
+	WRITE_ASCII 0x248 ~D5XCRS1~ #8
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrs1.eff~) BEGIN
+  CREATE EFF ~d5xcrs1~
+	WRITE_LONG 0x10 67
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 12
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~D5XCRS1~ #8
+//	WRITE_LONG 0x48 102
+//	WRITE_LONG 0x90 1
+//	WRITE_ASCII 0x94 ~D5XCRS1~ #8
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrs1.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xcrs1.spl~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 0 duration = 12 STR_VAR resource = ~d5xcrs1~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xcrsh.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5xcrsh.spl~ ~override~
+END
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
 
 // MISCELLANEOUS HELPER FUNCTIONS
 

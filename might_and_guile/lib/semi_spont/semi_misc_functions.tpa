@@ -1,5 +1,5 @@
 
-// v13 - added rest-crash prevention
+// v13.1 - adjustment to TnB sequencers
 
 /*
 
@@ -2241,10 +2241,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
 	LAF	CREATE_SEQUENCER_MENU	STR_VAR	resref = ~~ custom = ~nil~	END
 	APPEND	~M_SQTOOL.LUA~	~~~~~SequencerMenu['%resref%'] = %WNL%%custom%~~~~~
 			
-/* not anymore
- COPY ~TomeAndBlood/data/metamagic/M_d5meta.lua~ ~override~
-*/
-
 // set metamagic spells to "non-combat" flag 
  COPY_EXISTING ~spwi420.spl~ ~override~
    WRITE_BYTE 0x1a (THIS BOR 0b00000001)
@@ -2260,16 +2256,21 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__semi_spont_sequencers.d5~
 
   ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_metamagic.qd~) BEGIN
+/* isn't there anymore!
     ACTION_FOR_EACH seq_spl IN ~d5_seq1~ ~d5_seq2~ ~d5_seq3~ BEGIN
       COPY_EXISTING ~%seq_spl%.spl~ ~override~
         LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = EVAL ~%seq_spl%~ END
       IF_EXISTS BUT_ONLY
     END
+*/
     ACTION_FOR_EACH seq_seq IN ~spwi420d~ ~spwi420p~ ~spwi710d~ ~spwi710p~ ~spwi809d~ ~spwi809p~ BEGIN
       COPY_EXISTING ~%seq_seq%.spl~ ~override~
         LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq1~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = ~d5_seq1~ END
         LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq2~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = ~d5_seq2~ END
         LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = ~d5_seq3~ END
+        LPF DELETE_EFFECT INT_VAR match_opcode = 172 STR_VAR match_resource = ~d5_seq3~ END
       IF_EXISTS BUT_ONLY
     END
   END

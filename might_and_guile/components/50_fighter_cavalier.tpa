@@ -29,6 +29,25 @@ ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
 	END
 END
 
+//allow non-humans__________________________________________________________________
+// 
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	COUNT_2DA_ROWS 8 rows
+	FOR (row = 0 ; row < rows ; ++row) BEGIN
+      READ_2DA_ENTRY row 0 8 entry
+      PATCH_IF (~%entry%~ STRING_EQUAL_CASE ~CAVALIER~) BEGIN
+    	SET_2DA_ENTRY  row 2 8 1
+    	SET_2DA_ENTRY  row 3 8 1
+    	SET_2DA_ENTRY  row 4 8 1
+    	SET_2DA_ENTRY  row 5 8 1
+    	SET_2DA_ENTRY  row 6 8 1
+    	SET_2DA_ENTRY  row 7 8 1
+      END
+	END
+	PRETTY_PRINT_2DA
+IF_EXISTS BUT_ONLY
+
+
 //change class in kitlist___________________________________________________________
 // 
 COPY_EXISTING ~kitlist.2da~ ~override~

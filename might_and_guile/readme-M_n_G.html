@@ -260,6 +260,7 @@
   <h4 class="subheader">Component 120: </h4>
   <div class="section">
     <p><strong><em>Add Regional Variants of the Base Ranger kit</em></strong></p>
+    <p><strong>NOTE:</strong> each of these "proper ranger" kits has special advantages against certain classes of enemies, relating to their geographic area of expertise. This <b>replaces</b> the normal "racial enemy" mechanic of the ranger class. Ranger kits (any ranger kits) will no longer choose a singular enemy in character generation.</p>
     <div class="kit_description">
       <p>FOREST RANGER: the most common, or at least commonly visible, type of ranger, forest rangers are knowledgeable woodsmen and able warriors. Fiercely protective by nature, they are often called upon to fulfill a dual role: sometimes guiding travelers through areas with hostile wildlife, and at other times protecting that very wildlife from those who would carelessly exploit Toril's resource-rich woodlands.</p>
       <p>Advantages:<br />
@@ -346,6 +347,7 @@
   <div class="section">
     <p><strong><em>Add the ELVEN ARCHER ranger kit</em></strong></p>
     <p>This is an alternative to the normal Archer ranger kit, which is only available to elves and can only reach grandmastery with bows, not crossbows. If you also install component 205, Revised Archery, then the Elven Archer will get access to a few magical Called Shots, which can put the target to sleep, or entangle the target, or make the target glow with Faerie fire.</p>
+    <p><b>Note:</b> if you install this with component 151 (Archers in the Fighter class), then elves will be disabled from choosing the fighter archer kit. This ranger kit will be the way to make Elven Archers, and only elves will be able to become ranger Archers.</p>
   </div>
   <h4 class="subheader">Component 160: </h4>
   <div class="section">
@@ -365,8 +367,7 @@
       <p>Second, rangers will be able to backstab when attacking from stealth with weapons usable by thieves, with a x2 backstab modifier, starting at level 6. Stalkers will still be able to backstab earlier and with a greater damage modifier.</p>
       <p>Third, rangers will get a passive "Alertness" effect which enhances their vision, allowing them to see slightly further into the fog of war than most other beings. This can make rangers ideal scouts, spotting enemies without being seen and allowing the ranger to decide on the best tactical approach.<p>
       <p>Finally, Rangers' inherent fortitude allows them to make an extra saving throw vs. Death/Poison to avoid suffering the effects of most spells and abilities that cause poison, disease, and nausea.</p>
-      <p>If the feat system (component 200) is installed, this will be reflected as free access to the "Tracking" and "Intestinal Fortitude" feats for all rangers.</p>
-      <p>Finally, this component will allow all ranger kits (aside from the trueclass) to choose alignments other than Good, and will prevent them from Falling due to low reputation.</p>
+      <p>Finally, this component will allow all ranger kits to choose any alignment, and will prevent them from Falling due to low reputation.</p>
   </div>
   <h4 class="subheader">Component 210: </h4>
   <div class="section">

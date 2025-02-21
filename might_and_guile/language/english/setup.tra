@@ -47,6 +47,7 @@
 @280   = ~Revised Backstabbing~
 @290   = ~Revised THAC0 Progression~
 @400   = ~Bard Overhaul: Multiclass Bards~
+@440   = ~Bard Song Overhaul~
 @450   = ~Add the Jongleur (bard kit)~
 @460   = ~Add the Loremaster (bard kit)~
 @470   = ~Add the Gallant (bard kit)~
@@ -906,6 +907,13 @@ BACKSTABBING:
 @40001  = ~Add Bard Song~
 @40002  = ~Bard Song~
 @40003  = ~Stop Bard Song~
+@40004  = ~Pick a different ability~
+@40005  = ~Choose this ability~
+@40006  = ~~
+@40007  = ~~
+@40008  = ~Song Selection~
+@40009  = ~Choose a song~
+@40010  = ~Use this ability to learn a new bard song~
 @40011  = ~Inspiration: Luck~
 @40012  = ~Inspiration: Luck
 
@@ -1067,7 +1075,7 @@ Restrictions:
 
 Abilities:
 - Lore increased by 5 points per level.
-- May use an Inspiration of Power, granting allies a +1 bonus to weapon damage for each five levels of the Skald's experience.
+- May use an Inspiration of Courage which protects nearby allies from Fear effects.
 - From 6th level, may radiate an Aura of Fear, forcing enemies who come too close to the Skald to save every round or become panicked.
 - May learn to manifest other Bard Song effects.
 - Automatically gains use of the following spells: Remove Fear, Flame Blade, Draw Upon Holy Might, Defensive Harmony, Righteous Magic, Magic Resistance, and Blade Barrier.
@@ -1103,7 +1111,7 @@ Restrictions:
 
 Abilities:
 - Lore increased by 5 points per level.
-- May use an Inspiration of Courage which protects allies within 20 feet from Fear effects.
+- May use the Bardic Inspiration ability. While active, this provides allies with a +1 bonus to Luck and saving throws.
 - From 6th level, may use a Mind Blank Aura, which causes the Herald's mind to be undetectable by, and unaffected by, psionics or mind-altering magic.
 - May learn to manifest other Bard Song effects.
 

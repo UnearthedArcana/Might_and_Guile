@@ -1,7 +1,7 @@
 BACKUP ~weidu_external/backup/might_and_guile~
 AUTHOR ~SubtleD~
 
-VERSION ~5.8.8~
+VERSION ~5.8.9~
 
 // README ~might_and_guile/readme-M_n_G.html~
 
@@ -521,6 +521,16 @@ LAF revised_bard_npcs END
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
+/*
+//___________________________REVISED SONGS__________________________________________
+BEGIN @440
+DESIGNATED 440
+LABEL ~D5_REVISED_SONGS~
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @4
+
+INCLUDE ~might_and_guile/components/440_revised_songs.tpa~
+//__________________________________________________________________________________
+*/
 
 //__________________________JONGLEUR________________________________________________
 BEGIN @450

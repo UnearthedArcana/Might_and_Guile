@@ -1,0 +1,1033 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//						REVISED VANILLA BARD SONGS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+//COPY MARKER FILE_________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__songs.d5~
+//__________________________________________________________________________________
+
+/*
+
+set up spells to learn songs
+set up learning tool with custom lists for certain (vanilla?) kits
+set up learning tool with list for all other kits
+
+*/
+
+// splprot kit check__________________________________________________________________
+//
+APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
+COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_KIT_IS~ BEGIN
+	    SET kit_is_row = %row%
+	  END
+	END
+BUT_ONLY
+//___________________________________________________________________________________
+
+// ***** I think need to redesign these from the ground up
+
+//NEW BARD INSPIRATIONS_____________________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5ba00z.spl~ ~override~			//		blank placeholder, necessary
+
+COPY ~might_and_guile/bardsong/d5ba00x.eff~ ~override~			//		363 effect
+	WRITE_ASCII	0x94 ~string~
+	WRITE_BYTE	0x94 0
+
+COPY ~might_and_guile/bardsong/d5bamusa.bam~ ~override~			//		song icon
+COPY ~might_and_guile/bardsong/d5bamusx.bam~ ~override~			//		no song icon
+
+COPY ~might_and_guile/bardsong/d5ba01.spl~ ~override~			//		bard "switch song" target ability
+	SAY NAME1 @40011
+	SAY UNIDENTIFIED_DESC @40012
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_ba01b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba01a.spl~ ~override~			//		song ability
+	SAY NAME1 @40011
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba01b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba01b.eff~ ~override~			//		232 eff triggered by song
+COPY ~might_and_guile/bardsong/d5ba01b.spl~ ~override~			//		aura triggered by 232 eff
+COPY ~might_and_guile/bardsong/d5ba01x.spl~ ~override~			//		turn song off
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba01b.bam~ ~override~			//		song icon
+COPY ~might_and_guile/bardsong/d5ba01z.spl~ ~override~			//		give song via eff
+COPY ~might_and_guile/bardsong/d5ba01.eff~ ~override~			//		give song to bard
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us01.spl~	//		learn song
+	SAY NAME1 @40011
+	SAY UNIDENTIFIED_DESC @40012
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd01b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd01b~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~d5ba01~ END
+// ***** need to remember how the spell-learning thing works, to make it apply d5ba**z
+
+OUTER_SPRINT $new_songs_list(~01~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba02.spl~ ~override~			//		courage inspiration
+	SAY NAME1 @40021
+	SAY UNIDENTIFIED_DESC @40022
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba02b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba02a.spl~ ~override~
+	SAY NAME1 @40021
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba02b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba02b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba02b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba02x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba02b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba02z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba02.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us02.spl~	//		learn song
+	SAY NAME1 @40021
+	SAY UNIDENTIFIED_DESC @40022
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd02b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd02b~ END
+
+OUTER_SPRINT $new_songs_list(~02~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba03.spl~ ~override~			//		berserk inspiration
+	SAY NAME1 @40031
+	SAY UNIDENTIFIED_DESC @40032
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba03b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba03a.spl~ ~override~
+	SAY NAME1 @40031
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba03b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba03b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba03b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba03x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba03b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba03z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba03.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us03.spl~	//		learn song
+	SAY NAME1 @40031
+	SAY UNIDENTIFIED_DESC @40032
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd03b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd03b~ END
+
+OUTER_SPRINT $new_songs_list(~03~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba05.spl~ ~override~			//	reflected images inspiration
+	SAY NAME1 @40051
+	SAY UNIDENTIFIED_DESC @40052
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba05b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba05a.spl~ ~override~
+	SAY NAME1 @40051
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba05b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba05b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba05b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba05x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba05b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba05z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba05.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us05.spl~	//		learn song
+	SAY NAME1 @40051
+	SAY UNIDENTIFIED_DESC @40052
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd05b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd05b~ END
+
+OUTER_SPRINT $new_songs_list(~05~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba06.spl~ ~override~			//		pro evil inspiration
+	SAY NAME1 @40061
+	SAY UNIDENTIFIED_DESC @40062
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba06b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba06a.spl~ ~override~
+	SAY NAME1 @40061
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba06b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba06b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba06b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba06x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba06b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba06z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba06.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us06.spl~	//		learn song
+	SAY NAME1 @40061
+	SAY UNIDENTIFIED_DESC @40062
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd06b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd06b~ END
+
+OUTER_SPRINT $new_songs_list(~06~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba07.spl~ ~override~			//		NPP/death ward inspiration
+	SAY NAME1 @40071
+	SAY UNIDENTIFIED_DESC @40072
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba07b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba07a.spl~ ~override~
+	SAY NAME1 @40071
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba07b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba07b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba07b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba07x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba07b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba07z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba07.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us07.spl~	//		learn song
+	SAY NAME1 @40071
+	SAY UNIDENTIFIED_DESC @40072
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd07b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd07b~ END
+
+OUTER_SPRINT $new_songs_list(~07~) ~I~
+
+COPY ~might_and_guile/bardsong/d5ba20.spl~ ~override~			//		miscast aura
+	SAY NAME1 @40201
+	SAY UNIDENTIFIED_DESC @40202
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba20b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba20a.spl~ ~override~
+	SAY NAME1 @40201
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba20b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba20b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba20b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba20x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba20b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba20z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba20.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us20.spl~	//		learn song
+	SAY NAME1 @40201
+	SAY UNIDENTIFIED_DESC @40202
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd20b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd20b~ END
+
+OUTER_SPRINT $new_songs_list(~20~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba21.spl~ ~override~			//		combat penalties
+	SAY NAME1 @40211
+	SAY UNIDENTIFIED_DESC @40212
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba21b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba21a.spl~ ~override~
+	SAY NAME1 @40211
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba21b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba21b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba21b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba21x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba21b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba21z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba21.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us21.spl~	//		learn song
+	SAY NAME1 @40211
+	SAY UNIDENTIFIED_DESC @40212
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd21b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd21b~ END
+
+OUTER_SPRINT $new_songs_list(~21~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba22.spl~ ~override~			//		luck/save penalties
+	SAY NAME1 @40221
+	SAY UNIDENTIFIED_DESC @40222
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba22b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba22a.spl~ ~override~
+	SAY NAME1 @40221
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba22b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba22b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba22b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba22x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba22b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba22z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba22.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us22.spl~	//		learn song
+	SAY NAME1 @40221
+	SAY UNIDENTIFIED_DESC @40222
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd22b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd22b~ END
+
+OUTER_SPRINT $new_songs_list(~22~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba23.spl~ ~override~			//		confusion
+	SAY NAME1 @40231
+	SAY UNIDENTIFIED_DESC @40232
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba23b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba23a.spl~ ~override~
+	SAY NAME1 @40231
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba23b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba23b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba23b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba23x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba23b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba23z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba23.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us23.spl~	//		learn song
+	SAY NAME1 @40231
+	SAY UNIDENTIFIED_DESC @40232
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd23b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd23b~ END
+
+OUTER_SPRINT $new_songs_list(~23~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba24.spl~ ~override~			//		hold undead
+	SAY NAME1 @40241
+	SAY UNIDENTIFIED_DESC @40242
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba24b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba24a.spl~ ~override~
+	SAY NAME1 @40241
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba24b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba24b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24b1.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24b1.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba24b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba24.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us24.spl~	//		learn song
+	SAY NAME1 @40241
+	SAY UNIDENTIFIED_DESC @40242
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd24b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd24b~ END
+
+OUTER_SPRINT $new_songs_list(~24~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba25.spl~ ~override~			//		entangle
+	SAY NAME1 @40251
+	SAY UNIDENTIFIED_DESC @40252
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba25b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba25a.spl~ ~override~
+	SAY NAME1 @40251
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba25b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba25b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba25b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba25x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba25b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba25z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba25.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us25.spl~	//		learn song
+	SAY NAME1 @40251
+	SAY UNIDENTIFIED_DESC @40252
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd25b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd25b~ END
+
+OUTER_SPRINT $new_songs_list(~25~) ~E~
+
+COPY ~might_and_guile/bardsong/d5ba41.spl~ ~override~			//		blur
+	SAY NAME1 @40411
+	SAY UNIDENTIFIED_DESC @40412
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba41b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba41a.spl~ ~override~
+	SAY NAME1 @40411
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba41b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+//COPY ~might_and_guile/bardsong/d5ba41a.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba41b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba41b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba41x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba41b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba41z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba41.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us41.spl~	//		learn song
+	SAY NAME1 @40411
+	SAY UNIDENTIFIED_DESC @40412
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd41b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd41b~ END
+
+OUTER_SPRINT $new_songs_list(~41~) ~A~
+
+COPY ~might_and_guile/bardsong/d5ba42.spl~ ~override~			//		mind blank
+	SAY NAME1 @40421
+	SAY UNIDENTIFIED_DESC @40422
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba42b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba42a.spl~ ~override~
+	SAY NAME1 @40421
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba42b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba42b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba42b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba42x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba42b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba42z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba42.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us42.spl~	//		learn song
+	SAY NAME1 @40421
+	SAY UNIDENTIFIED_DESC @40422
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd42b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd42b~ END
+
+OUTER_SPRINT $new_songs_list(~42~) ~A~
+
+COPY ~might_and_guile/bardsong/d5ba43.spl~ ~override~			//		MGOI
+	SAY NAME1 @40431
+	SAY UNIDENTIFIED_DESC @40432
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba43b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba43a.spl~ ~override~
+	SAY NAME1 @40431
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba43b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba43b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba43b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba43x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba43b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba43z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba43.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us43.spl~	//		learn song
+	SAY NAME1 @40431
+	SAY UNIDENTIFIED_DESC @40432
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd43b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd43b~ END
+
+OUTER_SPRINT $new_songs_list(~43~) ~A~
+
+COPY ~might_and_guile/bardsong/d5ba45.spl~ ~override~			//		resounding strike
+	SAY NAME1 @40451
+	SAY UNIDENTIFIED_DESC @40452
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba45b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba45a.spl~ ~override~
+	SAY NAME1 @40451
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba45b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba45b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba45b.eff~ ~override~
+COPY ~might_and_guile/nubards/d5bd45c.eff~ ~override~
+COPY ~might_and_guile/nubards/d5bd45d.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba45x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba45b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba45z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba45.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us45.spl~	//		learn song
+	SAY NAME1 @40451
+	SAY UNIDENTIFIED_DESC @40452
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd45b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd45b~ END
+
+OUTER_SPRINT $new_songs_list(~45~) ~A~
+
+COPY ~might_and_guile/bardsong/d5ba47.spl~ ~override~			//		slow enemies
+	SAY NAME1 @40471
+	SAY UNIDENTIFIED_DESC @40472
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba47b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba47a.spl~ ~override~
+	SAY NAME1 @40471
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba47b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba47b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba47b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba47x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba47b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba47z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba47.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us47.spl~	//		learn song
+	SAY NAME1 @40471
+	SAY UNIDENTIFIED_DESC @40472
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd47b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd47b~ END
+
+OUTER_SPRINT $new_songs_list(~47~) ~A~
+
+COPY ~might_and_guile/bardsong/d5ba61.spl~ ~override~			//		Maze enemies
+	SAY NAME1 @40611
+	SAY UNIDENTIFIED_DESC @40612
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba61b~ END
+/*	PATCH_FOR_EACH all_songs IN ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~47a~ ~61a~ BEGIN
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%all_songs%~ END
+	END
+	PATCH_FOR_EACH all_cancels IN ~01x~ ~02x~ ~03x~ ~05x~ ~06x~ ~07x~ ~20x~ ~21x~ ~22x~ ~23x~ ~24x~ ~25x~ ~41x~ ~42x~ ~43x~ ~45x~ ~47x~ ~61x~ BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%all_cancels%~ END
+	END */
+COPY ~might_and_guile/bardsong/d5ba61a.spl~ ~override~
+	SAY NAME1 @40481
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5_ba61b~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 timing = 1 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5ba00x~ END
+COPY ~might_and_guile/bardsong/d5ba61b.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba61b.eff~ ~override~
+COPY ~might_and_guile/bardsong/d5ba61x.spl~ ~override~
+	SAY NAME1 @40003
+	SAY UNIDENTIFIED_DESC @40003
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5bamusx~ END
+COPY ~might_and_guile/bardsong/d5_ba61b.bam~ ~override~
+COPY ~might_and_guile/bardsong/d5ba61z.spl~ ~override~
+COPY ~might_and_guile/bardsong/d5ba61.eff~ ~override~
+COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5us61.spl~	//		learn song
+	SAY NAME1 @40611
+	SAY UNIDENTIFIED_DESC @40612
+	WRITE_SHORT 0x1c 2
+	WRITE_LONG 0x34 1
+	WRITE_ASCII 0x3a ~d5_bd61b~ #8
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd61b~ END
+
+OUTER_SPRINT $new_songs_list(~61~) ~A~
+
+ACTION_PHP_EACH new_songs_list AS song => type BEGIN
+  COPY_EXISTING ~d5ba%song%.spl~ ~override~
+    PHP_EACH new_songs_list AS sing => tape BEGIN
+      PATCH_IF !(~%sing%~ STRING_EQUAL_CASE ~01~) BEGIN
+        LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR match_resource = ~d5ba01a~ resource = EVAL ~d5ba%sing%a~ END
+      END
+      LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%sing%x~ END
+    END
+  IF_EXISTS BUT_ONLY
+END
+//___________________________________________________________________________________
+
+
+// learn songs via old feat system___________________________________________________
+//
+COPY ~might_and_guile/bardsong/d5bslst.2da~ ~override~
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5sngkn.2da~) BEGIN
+    COPY ~might_and_guile/bardsong/d5sngkn.2da~ ~override~
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY song_nums_lets BEGIN
+	1	=> a
+	2	=> b
+	3	=> c
+	4	=> d
+	5	=> e
+	6	=> f
+	7	=> g
+	8	=> h
+	9	=> i
+	10	=> j
+	11	=> k
+	12	=> l
+	13	=> m
+	14	=> n
+	15	=> o
+	16	=> p
+	17	=> q
+	18	=> r
+	19	=> s
+	20	=> t
+END
+
+INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
+
+COPY ~might_and_guile/nubards/d5bdlst.2da~ ~override~
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5sngkn.2da~) BEGIN
+    COPY ~might_and_guile/nubards/d5sngkn.2da~ ~override~
+END
+
+OUTER_SPRINT song_select_string @40008 // ~Song Selection~ 
+OUTER_SET song_select_strref = RESOLVE_STR_REF (%song_select_string%)
+OUTER_SPRINT song_title_string @40006 
+OUTER_SPRINT song_label_string @40007 
+
+COPY ~might_and_guile/nubards/d5songch.bam~ ~override~
+
+ACTION_PHP_EACH song_nums_lets AS num => let BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%num%.spl~) BEGIN
+	  COPY ~might_and_guile/misc/d5feat1.spl~ ~override/d5song%num%.spl~ 
+		LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5feat1~ resource = EVAL ~d5song%num%~ END
+	END
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%num%.eff~) BEGIN
+	  COPY ~might_and_guile/misc/d5feat1.eff~ ~override/d5song%num%.eff~ 
+		WRITE_EVALUATED_ASCII 0x30 ~d5song%let%~ #8
+	END
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%let%.spl~) BEGIN
+	  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5song%let%.spl~
+		SAY NAME1 @40009
+		SAY UNIDENTIFIED_DESC @40010
+		WRITE_ASCII 0x3a ~d5songch~ #8
+		LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5songch~ END
+		LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5song%let%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5song%num%~ END
+	END
+END
+
+/*
+COPY_EXISTING ~kitlist.2da~ ~override~
+	READ_2DA_ENTRIES_NOW r2en_kitlist 10
+	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER r2en_kitlist row 8 kitlist_class
+	  PATCH_IF (~%kitlist_class%~ STRING_EQUAL_CASE ~5~) BEGIN
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_clab
+		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
+		GET_STRREF %kitlist_name% kit_name_strref
+		SPRINT song_select_name ~%kit_name_strref% %song_select_string%~
+		SET kit_seq_name = RESOLVE_STR_REF (~%song_select_name%~) 
+		SET kit_seq_tip = RESOLVE_STR_REF (~%song_select_name%~) 
+		SET kit_seq_index = %kitlist_index% 
+		INNER_ACTION BEGIN
+		  LAF CREATE_SEQUENCER_MENU 
+		   INT_VAR 
+			name = %kit_seq_name%
+			tip = %kit_seq_tip%
+			desc = RESOLVE_STR_REF (~blah~) 
+			class = 2
+		   STR_VAR 
+			resref = EVAL ~d5sn%kit_seq_index%~
+			icon = ~spcl919b~
+			spelltable = ~d5sngkn~ 
+			spelllist = ~d5bslst~
+			title = EVAL ~%song_title_string%~
+			label = EVAL ~%song_label_string%~
+		  END
+		  COPY_EXISTING ~d5sn%kit_seq_index%.spl~ ~override~
+			LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5sn%kit_seq_index%~ END
+		  IF_EXISTS BUT_ONLY
+		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+			COPY_EXISTING ~d5song%letter%.spl~ ~override~
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5sn%kit_seq_index%~ END
+			IF_EXISTS BUT_ONLY
+		  END
+		END
+	  END
+	END
+BUT_ONLY
+*/
+LAF CREATE_SEQUENCER_MENU 
+  INT_VAR 
+	name = %song_select_strref%
+	tip = %song_select_strref%
+	desc = RESOLVE_STR_REF (~blah~) 
+	class = 2
+  STR_VAR 
+	resref = EVAL ~d5basng~
+	icon = ~spcl919b~
+	spelltable = ~d5sngkn~ 
+	spelllist = ~d5bslst~
+	title = EVAL ~%song_title_string%~
+	label = EVAL ~%song_label_string%~
+END
+ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
+  COPY_EXISTING ~d5song%letter%.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5basng~ END
+  IF_EXISTS BUT_ONLY
+END
+
+ACTION_PHP_EACH new_songs_list AS sng => typ BEGIN
+  COPY_EXISTING ~d5us%sng%.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5us%sng%~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~d5ba%sng%~ END
+  IF_EXISTS BUT_ONLY
+END
+
+ACTION_PHP_EACH new_songs_list AS song => type BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5ub%song%.spl~) /*&& !(FILE_EXISTS_IN_GAME ~d5ub%song%l.spl~)*/ BEGIN
+	COPY_EXISTING ~d5us%song%.spl~ ~override/d5ub%song%l.spl~
+  END
+END
+
+//___________________________________________________________________________________
+
+
+//ADD NEW AURAS TO CLAB TABLES_______________________________________________________
+//
+
+// ***** do this anew
+// make bard-targeting spell for clabba01
+// others are simple
+// remember to set up later kits for compatibility with this
+
+APPEND ~clabba01.2da~ 
+~D5_SONGS    AP_D5us01   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+D5_SONGS    GA_D5ba01   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+D5_SONGS    GA_D5songC  ****        GA_D5songD  ****        ****        GA_D5songE  ****        ****        GA_D5songF  ****        ****        GA_D5songG  ****        ****        GA_D5songH  ****        ****        GA_D5songI  ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+APPEND ~clabba02.2da~ // blade
+~D5_SONGS    AP_D5ba21   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+D5_SONGS    GA_D5ba21   ****        ****        GA_D5songD  ****        ****        ****        GA_D5songE  ****        ****        ****        GA_D5songF  ****        ****        ****        GA_D5songG  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+APPEND ~clabba02.2da~ // jester
+~D5_SONGS    AP_D5ba22   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+D5_SONGS    GA_D5ba22   ****        ****        GA_D5ba23   ****        ****        ****        GA_D5songE  ****        ****        ****        GA_D5songF  ****        ****        ****        GA_D5songG  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+APPEND ~clabba02.2da~ // skald
+~D5_SONGS    AP_D5ba02   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+D5_SONGS    GA_D5ba02   ****        ****        GA_D5ba03   ****        ****        ****        GA_D5songE  ****        ****        ****        GA_D5songF  ****        ****        ****        GA_D5songG  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+// etc.
+
+// ***** give intimidate to blade; malison + confusion to jester; courage + berserk to skald
+// ***** give intimidate to acrobat; pro evil to chorister; courage to dirge; luck + malison to gypsy
+// ***** give luck + intimidate to jongleur; pro evil + death ward to gallant; malison + entangle to meistersinger; pro evil + mind blank? to loresinger
+
+//___________________________________________________________________________________
+
+/*
+//ADD NEW AURAS TO S&S KITS__________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~a!acro.2da~ BEGIN		//		acrobat
+  APPEND ~a!acro.2da~ ~ABILITY     AP_d5ba21   ****        ****        ****        ****        GA_d5ba41   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~a!acro.2da~ ~ABILITY     GA_d5ba21   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!chor.2da~ BEGIN		//		chorister
+  APPEND ~a!chor.2da~ ~ABILITY     AP_d5ba06   ****        ****        ****        ****        GA_d5ba07   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~a!chor.2da~ ~ABILITY     GA_d5ba06   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!dirge.2da~ BEGIN		//		dirgesinger
+  COPY_EXISTING ~a!dirge.2da~ ~override~
+	REPLACE_TEXTUALLY ~AP_A!DS1 ~ ~****      ~
+  APPEND ~a!dirge.2da~ ~ABILITY     AP_d5ba21   ****        ****        ****        ****        GA_d5ba47   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~a!dirge.2da~ ~ABILITY     GA_d5ba21   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~a!gyp.2da~ BEGIN			//		gypsy
+  APPEND ~a!gyp.2da~ ~ABILITY     AP_d5ba01   ****        ****        ****        ****        GA_d5ba42   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~a!gyp.2da~ ~ABILITY     GA_d5ba01   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~a!gyp.2da~ ~ABILITY     GA_d5ba22   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~clastext.2da~) BEGIN
+  COPY_EXISTING ~clastext.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 5 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 5 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 5 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 5 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~sodcltxt.2da~) BEGIN
+  COPY_EXISTING ~sodcltxt.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 0 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 5 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 5 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 5 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 5 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~kitlist.2da~) BEGIN
+  COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_COLS cols // amount of columns
+	READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+	FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+	  READ_2DA_ENTRY_FORMER rows row 1 ~text~ // read column value
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!ACROBAT~ BEGIN
+	    SET acrobat_row = %row%
+		SET_2DA_ENTRY %acrobat_row% 4 cols RESOLVE_STR_REF (@21891)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!CHORISTER~ BEGIN
+	    SET chorister_row = %row%
+		SET_2DA_ENTRY %chorister_row% 4 cols RESOLVE_STR_REF (@21892)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!DIRGESINGER~ BEGIN
+	    SET dirge_row = %row%
+		SET_2DA_ENTRY %dirge_row% 4 cols RESOLVE_STR_REF (@21893)
+	  END
+	  PATCH_IF ~%text%~ STRING_EQUAL_CASE ~A!GYPSY~ BEGIN
+	    SET gypsy_row = %row%
+		SET_2DA_ENTRY %gypsy_row% 4 cols RESOLVE_STR_REF (@21894)
+	  END
+	END
+  BUT_ONLY
+END
+//___________________________________________________________________________________
+*/
+
+//ADD NEW AURAS TO WORLD_____________________________________________________________
+//
+// ***** need to make sure these work
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5bd05.itm~) BEGIN
+  COPY ~might_and_guile/bardsong/d5bd05.itm~ ~override~			//		mirror images
+    SAY NAME2 @40051
+    SAY IDENTIFIED_DESC @40052
+/*
+  ACTION_IF FILE_EXISTS_IN_GAME ~pwarden.cre~ BEGIN
+    COPY_EXISTING ~pwarden.cre~ ~override~
+  	ADD_CRE_ITEM ~d5ba05~ #1 #0 #0 ~IDENTIFIED~ ~INV~
+  END
+*/
+  ACTION_IF FILE_EXISTS_IN_GAME ~raelis.dlg~ BEGIN
+    COMPILE ~might_and_guile/bardsong/raelisadd.d~
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~edion.sto~) BEGIN
+    COPY_EXISTING ~edion.sto~ ~override~
+  	ADD_STORE_ITEM ~d5ba05~ #1 #0 #0 ~identified~ #1
+  END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5bd05.itm~) BEGIN
+// ***** need to make this work
+  COPY_EXISTING ~d5bd05.itm~ ~override~
+    LPF ADD_ITEM_EFFECT INT_VAR opcode = 326 parameter1 = 5 parameter2 = 105 timing = 1 STR_VAR resource = ~d5us05l~ END 
+  BUT_ONLY
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5bd24.itm~) BEGIN
+  COPY ~might_and_guile/bardsong/d5bd24.itm~ ~override~			//		hold undead
+	SAY NAME2 @40241
+	SAY IDENTIFIED_DESC @40242
+  ACTION_IF FILE_EXISTS_IN_GAME ~theshal.cre~ BEGIN
+    COPY_EXISTING ~theshal.cre~ ~override~
+  	ADD_CRE_ITEM ~d5ba24~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~shlehlan.sto~) BEGIN
+    COPY_EXISTING ~shlehlan.sto~ ~override~
+  	ADD_STORE_ITEM ~d5ba24~ #1 #0 #0 ~identified~ #1
+  END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5bd24.itm~) BEGIN
+// ***** need to make this work
+  COPY_EXISTING ~d5bd24.itm~ ~override~
+    LPF ADD_ITEM_EFFECT INT_VAR opcode = 326 parameter1 = 5 parameter2 = 105 timing = 1 STR_VAR resource = ~d5us24l~ END 
+  BUT_ONLY
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5bd25.itm~) BEGIN
+  COPY ~might_and_guile/bardsong/d5bd25.itm~ ~override~			//		entangle
+	SAY NAME2 @40241
+	SAY IDENTIFIED_DESC @40242
+  ACTION_IF FILE_EXISTS_IN_GAME ~jugmim01.cre~ BEGIN
+    COPY_EXISTING ~jugmim01.cre~ ~override~
+  	ADD_CRE_ITEM ~d5ba25~ #1 #0 #0 ~IDENTIFIED~ ~INV~
+  END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5bd25.itm~) BEGIN
+// ***** need to make this work
+  COPY_EXISTING ~d5bd25.itm~ ~override~
+    LPF ADD_ITEM_EFFECT INT_VAR opcode = 326 parameter1 = 5 parameter2 = 105 timing = 1 STR_VAR resource = ~d5us24l~ END 
+  BUT_ONLY
+END
+//___________________________________________________________________________________
+
+
+//CHANGE SOD BARD'S HAT______________________________________________________________
+//
+ACTION_IF !(MOD_IS_INSTALLED ~might_and_guile.tp2~ ~400~) BEGIN
+  COPY ~might_and_guile/bardsong/bdhelm11.itm~ ~override~
+	SAY IDENTIFIED_DESC @40900
+  COPY ~might_and_guile/bardsong/d5bah11.spl~ ~override~
+	SAY NAME1 @7
+  COPY ~might_and_guile/bardsong/d5bah11.eff~ ~override~
+//	SAY NAME1 @7
+END
+//___________________________________________________________________________________
+
+
+//CHANGE BARD HLAS___________________________________________________________________
+//
+LAF action_add_hla STR_VAR kit_name = ~BLADE~ ability = ~AP_d5ba61Z~ num_allowed = ~1~ END
+
+LAF action_add_hla STR_VAR kit_name = ~JESTER~ ability = ~AP_d5ba61Z~ num_allowed = ~1~ END
+
+LAF action_add_hla STR_VAR kit_name = ~BARD~ ability = ~AP_d5ba61Z~ num_allowed = ~1~ END
+//__________________________________________________________________________________
+
+CLEAR_ARRAYS

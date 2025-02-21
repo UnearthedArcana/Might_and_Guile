@@ -170,17 +170,21 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 
   ACTION_IF !(GAME_IS ~iwdee~) BEGIN
 
-	COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
-	  LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
-	BUT_ONLY
+    ACTION_IF !(MOD_IS_INSTALLED ~setup-iwdification.tp2~ ~110~) AND !(MOD_IS_INSTALLED ~setup-iwdification.tp2~ ~111~) BEGIN
 
-//	APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+	  COPY_EXISTING_REGEXP GLOB ~^lu.+\.2da$~ ~override~
+	    LPF patch_remove_hla STR_VAR remove_ability = ~GA_SPCL922~ END
+	  BUT_ONLY
 
-    ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
-      ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
-        APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+//	  APPEND ~clabrn01.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+
+      ACTION_PHP_EACH d5_rangers_array AS kit => clab BEGIN
+        ACTION_IF (FILE_EXISTS_IN_GAME ~%clab%.2da~) BEGIN
+          APPEND ~%clab%.2da~ ~TRACKING    GA_SPCL922  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****         ****        ****        ****        ****        ****        ****  ~
+        END
       END
-    END
+
+    END	// end not iwdification
 
   END
   

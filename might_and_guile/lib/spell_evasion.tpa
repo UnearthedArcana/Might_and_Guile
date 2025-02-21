@@ -2,11 +2,11 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//						IWD-style Spell Evasion +
+//							IWD-style Spell Evasion +
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-// Version: 3.6 - check_globals
+// Version: 3.7 - better item handling
 
 /*
 SAVES:
@@ -113,24 +113,31 @@ DEFINE_ACTION_FUNCTION add_evade_spell
 		LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 177 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 		LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 318 STR_VAR match_resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		PATCH_IF (~%evade_ext%~ STRING_EQUAL_CASE ~spl~) BEGIN
+	  ACTION_IF (~%evade_ext%~ STRING_EQUAL_CASE ~spl~) BEGIN
+	    COPY_EXISTING ~%evade_res%.%evade_ext%~ ~override~
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
 		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		END
-		PATCH_IF (~%evade_ext%~ STRING_EQUAL_CASE ~itm~) BEGIN
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		  LPF ADD_ITEM_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		END
+		  PATCH_IF %evade_cond% = 252 BEGIN	
+		    LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 318 match_parameter2 = 136 END
+		    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  END
+	  END
+	  ACTION_IF (~%evade_ext%~ STRING_EQUAL_CASE ~itm~) BEGIN
+	    COPY_EXISTING ~%evade_res%.%evade_ext%~ ~override~
+		  LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 177 target = 2 parameter1 = 0 parameter2 = 2 timing = 0 duration = 1 STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		  LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = %evade_cond% parameter2 = %not_evade% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  PATCH_IF %evade_cond% = 252 BEGIN	
+		    LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 318 match_parameter2 = 136 END
+		    LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
+		    LPF ADD_ITEM_EFFECT INT_VAR type = 99 insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
+		  END
+	  END
 // 	if traditional evasion, do not evade when helpless
-		PATCH_IF %evade_cond% = 252 BEGIN	
-		  LPF DELETE_EFFECT INT_VAR check_globals = 0 match_opcode = 318 match_parameter2 = 136 END
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%A%evasion_ind%~ END
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 duration = 1 timing = 0 parameter1 = 0x8015602f parameter2 = %state_row% STR_VAR resource = EVAL ~%evade_prefix%B%evasion_ind%~ END
-		END
 	  CREATE EFF ~%evade_prefix%A%evasion_ind%~
 		WRITE_LONG 0x10 318
 		WRITE_LONG 0x14 2

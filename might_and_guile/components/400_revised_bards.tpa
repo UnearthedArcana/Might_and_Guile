@@ -21,7 +21,7 @@ PP	OL	FT	MS	HiS	DI	ST	Stealth
 
 //COPY MARKER FILE__________________________________________________________________
 //
-COPY ~might_and_guile/lib/markers/d5_marker.d5~ ~override/d5__bards.d5~
+COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__bards.d5~
 //__________________________________________________________________________________
 
 
@@ -2241,11 +2241,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub01.spl~	//		learn song
 	SAY NAME1 @40011
 	SAY UNIDENTIFIED_DESC @40012
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 1
-	END
+	WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd01b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd01b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd01z~ END
@@ -2290,11 +2286,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub02.spl~
 	SAY NAME1 @40021
 	SAY UNIDENTIFIED_DESC @40022
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd02b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd02b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd02z~ END
@@ -2319,7 +2311,7 @@ COPY_EXISTING ~d5ub02.spl~ ~override/d5vb02.spl~
 OUTER_SPRINT $bard_songs_list(~02~) ~I~
 
 COPY ~might_and_guile/nubards/d5_bd03b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd03a.spl~ ~override~			//		power inspiration
+COPY ~might_and_guile/nubards/d5bd03a.spl~ ~override~			//		berserk inspiration
 	SAY NAME1 @40031
 	SAY UNIDENTIFIED_DESC @40032
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd03b~ END
@@ -2334,11 +2326,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub03.spl~
 	SAY NAME1 @40031
 	SAY UNIDENTIFIED_DESC @40032
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd03b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd03b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd03z~ END
@@ -2378,11 +2366,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub05.spl~
 	SAY NAME1 @40051
 	SAY UNIDENTIFIED_DESC @40052
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 2
-	END
 	WRITE_ASCII 0x3a ~d5_bd05b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd05b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd05z~ END
@@ -2407,7 +2391,7 @@ COPY_EXISTING ~d5ub05.spl~ ~override/d5vb05.spl~
 OUTER_SPRINT $bard_songs_list(~05~) ~I~
 
 COPY ~might_and_guile/nubards/d5_bd06b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd06a.spl~ ~override~			//		bless inspiration
+COPY ~might_and_guile/nubards/d5bd06a.spl~ ~override~			//		pro evil inspiration
 	SAY NAME1 @40061
 	SAY UNIDENTIFIED_DESC @40062
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd06b~ END
@@ -2422,11 +2406,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub06.spl~
 	SAY NAME1 @40061
 	SAY UNIDENTIFIED_DESC @40062
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd06b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd06b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd06z~ END
@@ -2451,7 +2431,7 @@ COPY_EXISTING ~d5ub06.spl~ ~override/d5vb06.spl~
 OUTER_SPRINT $bard_songs_list(~06~) ~I~
 
 COPY ~might_and_guile/nubards/d5_bd07b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd07a.spl~ ~override~			//		NPP inspiration
+COPY ~might_and_guile/nubards/d5bd07a.spl~ ~override~			//		NPP/death ward inspiration
 	SAY NAME1 @40071
 	SAY UNIDENTIFIED_DESC @40072
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd07b~ END
@@ -2466,11 +2446,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub07.spl~
 	SAY NAME1 @40071
 	SAY UNIDENTIFIED_DESC @40072
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd07b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd07b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd07z~ END
@@ -2494,94 +2470,6 @@ COPY_EXISTING ~d5ub07.spl~ ~override/d5vb07.spl~
 
 OUTER_SPRINT $bard_songs_list(~07~) ~I~
 
-COPY ~might_and_guile/nubards/d5_bd08b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd08a.spl~ ~override~			//		mind shield inspiration
-	SAY NAME1 @40081
-	SAY UNIDENTIFIED_DESC @40082
-	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd08b~ END
-	WRITE_SHORT 0x1c 4
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-COPY ~might_and_guile/nubards/d5bd08b.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd08b.eff~ ~override~
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub08.spl~
-	SAY NAME1 @40081
-	SAY UNIDENTIFIED_DESC @40082
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
-	WRITE_ASCII 0x3a ~d5_bd08b~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd08b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd08z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd08z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
-//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD08Y~ END
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd08z.spl~	//		206 song
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd08z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD08Y~ END
-CREATE EFF ~d5bd08y~
-	WRITE_LONG 0x10 171
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x24 9
-	WRITE_LONG 0x28 0
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5bd08a~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5BD08Y~ #8
-COPY_EXISTING ~d5ub08.spl~ ~override/d5vb08.spl~
-	WRITE_SHORT 0x1c 1
-
-OUTER_SPRINT $bard_songs_list(~08~) ~I~
-
-COPY ~might_and_guile/nubards/d5_bd09b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd09a.spl~ ~override~			//		death ward inspiration
-	SAY NAME1 @40091
-	SAY UNIDENTIFIED_DESC @40092
-	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd09b~ END
-	WRITE_SHORT 0x1c 4
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-COPY ~might_and_guile/nubards/d5bd09b.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd09b.eff~ ~override~
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub09.spl~
-	SAY NAME1 @40091
-	SAY UNIDENTIFIED_DESC @40092
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
-	WRITE_ASCII 0x3a ~d5_bd09b~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd09b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd09z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd09z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
-//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD09Y~ END
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd09z.spl~	//		206 song
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd09z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD09Y~ END
-CREATE EFF ~d5bd09y~
-	WRITE_LONG 0x10 171
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x24 9
-	WRITE_LONG 0x28 0
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5bd09a~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5BD09Y~ #8
-COPY_EXISTING ~d5ub09.spl~ ~override/d5vb09.spl~
-	WRITE_SHORT 0x1c 1
-
-OUTER_SPRINT $bard_songs_list(~09~) ~I~
-
 /*
 COPY ~might_and_guile/nubards/d5_bd10b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd10a.spl~ ~override~			//		electric charge inspiration
@@ -2599,11 +2487,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub10.spl~
 	SAY NAME1 @40101
 	SAY UNIDENTIFIED_DESC @40102
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 2
-	END
 	WRITE_ASCII 0x3a ~d5_bd10b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd10b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd10z~ END
@@ -2644,11 +2528,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub20.spl~
 	SAY NAME1 @40201
 	SAY UNIDENTIFIED_DESC @40202
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd20b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd20b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd20z~ END
@@ -2673,7 +2553,7 @@ COPY_EXISTING ~d5ub20.spl~ ~override/d5vb20.spl~
 OUTER_SPRINT $bard_songs_list(~20~) ~E~
 
 COPY ~might_and_guile/nubards/d5_bd21b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd21a.spl~ ~override~			//		combat penalties emanation
+COPY ~might_and_guile/nubards/d5bd21a.spl~ ~override~			//		intimidation emanation
 	SAY NAME1 @40211
 	SAY UNIDENTIFIED_DESC @40212
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd21b~ END
@@ -2688,11 +2568,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub21.spl~
 	SAY NAME1 @40211
 	SAY UNIDENTIFIED_DESC @40212
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd21b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd21b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd21z~ END
@@ -2717,7 +2593,7 @@ COPY_EXISTING ~d5ub21.spl~ ~override/d5vb21.spl~
 OUTER_SPRINT $bard_songs_list(~21~) ~E~
 
 COPY ~might_and_guile/nubards/d5_bd22b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		save penalties emanation
+COPY ~might_and_guile/nubards/d5bd22a.spl~ ~override~			//		malison emanation
 	SAY NAME1 @40221
 	SAY UNIDENTIFIED_DESC @40222
 	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd22b~ END
@@ -2732,11 +2608,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub22.spl~
 	SAY NAME1 @40221
 	SAY UNIDENTIFIED_DESC @40222
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd22b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd22b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd22z~ END
@@ -2776,11 +2648,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub23.spl~
 	SAY NAME1 @40231
 	SAY UNIDENTIFIED_DESC @40232
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
+	  WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd23b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd23b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd23z~ END
@@ -2820,11 +2688,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub24.spl~
 	SAY NAME1 @40241
 	SAY UNIDENTIFIED_DESC @40242
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
+	  WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd24b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd24b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd24z~ END
@@ -2864,11 +2728,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub25.spl~
 	SAY NAME1 @40251
 	SAY UNIDENTIFIED_DESC @40252
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd25b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd25b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd25z~ END
@@ -2909,11 +2769,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub41.spl~
 	SAY NAME1 @40411
 	SAY UNIDENTIFIED_DESC @40412
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd41b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd41b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd41z~ END
@@ -2953,11 +2809,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub42.spl~
 	SAY NAME1 @40421
 	SAY UNIDENTIFIED_DESC @40422
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd42b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd42b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd42z~ END
@@ -2997,11 +2849,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub43.spl~
 	SAY NAME1 @40431
 	SAY UNIDENTIFIED_DESC @40432
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
+	  WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd43b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd43b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd43z~ END
@@ -3039,15 +2887,12 @@ COPY ~might_and_guile/nubards/d5bd45a.spl~ ~override~			//		harmonic strike aura
 COPY ~might_and_guile/nubards/d5bd45b.spl~ ~override~
 COPY ~might_and_guile/nubards/d5bd45b.eff~ ~override~
 COPY ~might_and_guile/nubards/d5bd45c.eff~ ~override~
+COPY ~might_and_guile/nubards/d5bd45d.eff~ ~override~
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub45.spl~
 	SAY NAME1 @40451
 	SAY UNIDENTIFIED_DESC @40452
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 2
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 1
-	END
 	WRITE_ASCII 0x3a ~d5_bd45b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd45b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd45z~ END
@@ -3071,50 +2916,6 @@ COPY_EXISTING ~d5ub45.spl~ ~override/d5vb45.spl~
 
 OUTER_SPRINT $bard_songs_list(~45~) ~A~
 
-COPY ~might_and_guile/nubards/d5_bd46b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd46a.spl~ ~override~			//		fear aura
-	SAY NAME1 @40461
-	SAY UNIDENTIFIED_DESC @40462
-	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd46b~ END
-	WRITE_SHORT 0x1c 4
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-COPY ~might_and_guile/nubards/d5bd46b.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd46b.eff~ ~override~
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub46.spl~
-	SAY NAME1 @40461
-	SAY UNIDENTIFIED_DESC @40462
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
-	WRITE_ASCII 0x3a ~d5_bd46b~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd46b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd46z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd46z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
-//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD46Y~ END
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd46z.spl~	//		206 song
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd46z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD46Y~ END
-CREATE EFF ~d5bd46y~
-	WRITE_LONG 0x10 171
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x24 9
-	WRITE_LONG 0x28 0
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5bd46a~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5BD46Y~ #8
-COPY_EXISTING ~d5ub46.spl~ ~override/d5vb46.spl~
-	WRITE_SHORT 0x1c 1
-
-OUTER_SPRINT $bard_songs_list(~46~) ~A~
-
 COPY ~might_and_guile/nubards/d5_bd47b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd47a.spl~ ~override~			//		slow aura
 	SAY NAME1 @40471
@@ -3131,11 +2932,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub47.spl~
 	SAY NAME1 @40471
 	SAY UNIDENTIFIED_DESC @40472
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
+	  WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd47b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd47b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd47z~ END
@@ -3159,96 +2956,6 @@ COPY_EXISTING ~d5ub47.spl~ ~override/d5vb47.spl~
 
 OUTER_SPRINT $bard_songs_list(~47~) ~A~
 
-COPY ~might_and_guile/nubards/d5_bd48b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd48a.spl~ ~override~			//		dispel illusions aura
-	SAY NAME1 @40481
-	SAY UNIDENTIFIED_DESC @40482
-	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd48b~ END
-	WRITE_SHORT 0x1c 4
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-COPY ~might_and_guile/nubards/d5bd48b.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd48b.eff~ ~override~
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub48.spl~
-	SAY NAME1 @40481
-	SAY UNIDENTIFIED_DESC @40482
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
-	WRITE_ASCII 0x3a ~d5_bd48b~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd48b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd48z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd48z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
-//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD48Y~ END
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd48z.spl~	//		206 song
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd48z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD48Y~ END
-CREATE EFF ~d5bd48y~
-	WRITE_LONG 0x10 171
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x24 9
-	WRITE_LONG 0x28 0
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5bd48a~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5BD48Y~ #8
-COPY_EXISTING ~d5ub48.spl~ ~override/d5vb48.spl~
-	WRITE_SHORT 0x1c 1
-
-OUTER_SPRINT $bard_songs_list(~48~) ~A~
-
-COPY ~might_and_guile/nubards/d5_bd49b.bam~ ~override~
-COPY ~might_and_guile/nubards/d5bd49a.spl~ ~override~			//		hex aura
-	SAY NAME1 @40491
-	SAY UNIDENTIFIED_DESC @40492
-	LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5_bd49b~ END
-	WRITE_SHORT 0x1c 4
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 1 STR_VAR resource = ~d5bdyyy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 0x00001000 parameter2 = 138 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 38 parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-COPY ~might_and_guile/nubards/d5bd49b.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd49b.eff~ ~override~
-COPY ~might_and_guile/nubards/d5bd49c.spl~ ~override~
-COPY ~might_and_guile/nubards/d5bd49c.eff~ ~override~
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub49.spl~
-	SAY NAME1 @40491
-	SAY UNIDENTIFIED_DESC @40492
-	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
-	WRITE_ASCII 0x3a ~d5_bd49b~ #8
-	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd49b~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd49z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5bd49z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bdyyy~ END
-//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~D5BD49Y~ END
-COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bd49z.spl~	//		206 song
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5bd49z~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5BD49Y~ END
-CREATE EFF ~d5bd49y~
-	WRITE_LONG 0x10 171
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x24 9
-	WRITE_LONG 0x28 0
-	WRITE_SHORT 0x2c 100
-	WRITE_EVALUATED_ASCII 0x30 ~d5bd49a~ #8
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5BD49Y~ #8
-COPY_EXISTING ~d5ub49.spl~ ~override/d5vb49.spl~
-	WRITE_SHORT 0x1c 1
-
-OUTER_SPRINT $bard_songs_list(~49~) ~A~
-
 COPY ~might_and_guile/nubards/d5_bd51b.bam~ ~override~
 COPY ~might_and_guile/nubards/d5bd51a.spl~ ~override~			//		bladesong
 	SAY NAME1 @40511
@@ -3266,11 +2973,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub51.spl~
 	SAY NAME1 @40511
 	SAY UNIDENTIFIED_DESC @40512
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
-	  WRITE_LONG 0x34 2
-	END
+	  WRITE_LONG 0x34 1
 	WRITE_ASCII 0x3a ~d5_bd51b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd51b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd51z~ END
@@ -3310,11 +3013,7 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5ub61.spl~
 	SAY NAME1 @40611
 	SAY UNIDENTIFIED_DESC @40612
 	WRITE_SHORT 0x1c 2
-	PATCH_IF GAME_IS ~iwdee~ BEGIN
-	  WRITE_LONG 0x34 4
-	END ELSE BEGIN
 	  WRITE_LONG 0x34 2
-	END
 	WRITE_ASCII 0x3a ~d5_bd61b~ #8
 	LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5_bd61b~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5bd61z~ END
@@ -3365,23 +3064,19 @@ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdxxx.spl~	//		stop song
   SAY NAME1 @40003
   SAY UNIDENTIFIED_DESC @40003
   LPF ALTER_ITEM_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bdmusx~ END
-//  PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
   PHP_EACH bard_songs_list AS song => type BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%song%a~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%song%z~ END
   END
-//  PATCH_FOR_EACH nu_song_y IN ~01y~ ~02y~ ~03y~ ~05y~ ~06y~ ~07y~ ~08y~ ~20y~ ~21y~ ~22y~ ~23y~ ~24y~ ~25y~ ~41y~ ~42y~ ~43y~ ~45y~ ~46y~ ~47y~ ~48y~ ~49y~ ~51y~ ~61y~ BEGIN
   PHP_EACH bard_songs_list AS song => type BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~d5bd%song%y~ END
   END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5bdxxx~ END
 
 COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5bdyyy.spl~	//		add new learned songs
-//  PATCH_FOR_EACH nu_song IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
   PHP_EACH bard_songs_list AS song => type BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5bd%song%a~ END
   END
-//  PATCH_FOR_EACH nu_song_y IN ~01y~ ~02y~ ~03y~ ~05y~ ~06y~ ~07y~ ~08y~ ~20y~ ~21y~ ~22y~ ~23y~ ~24y~ ~25y~ ~41y~ ~42y~ ~43y~ ~45y~ ~46y~ ~47y~ ~48y~ ~49y~ ~51y~ ~61y~ BEGIN
   PHP_EACH bard_songs_list AS song => type BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~d5bd%song%y~ END
   END
@@ -3417,7 +3112,6 @@ BUT_ONLY
 
 ACTION_PHP_EACH opcode_38_spells AS ind => op38_spell BEGIN
   COPY_EXISTING ~%op38_spell%.spl~ ~override~
-//	PATCH_FOR_EACH nu_song_a IN ~01a~ ~02a~ ~03a~ ~05a~ ~06a~ ~07a~ ~08a~ ~20a~ ~21a~ ~22a~ ~23a~ ~24a~ ~25a~ ~41a~ ~42a~ ~43a~ ~45a~ ~46a~ ~47a~ ~48a~ ~49a~ ~51a~ ~61a~ BEGIN
     PHP_EACH bard_songs_list AS song => type BEGIN
 	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 38 opcode = 321 timing = 1 duration = 0 STR_VAR resource = ~%song%a~ END
 	END
@@ -3469,41 +3163,6 @@ END
 ACTION_IF (FILE_EXISTS_IN_GAME ~edion.sto~)THEN BEGIN
   COPY_EXISTING ~edion.sto~ ~override~
 	ADD_STORE_ITEM ~d5bd05~ #1 #0 #0 ~identified~ #1
-END
-
-COPY ~might_and_guile/nubards/d5bd08.itm~ ~override~			//		mind shield
-  SAY NAME2 @40081
-  SAY IDENTIFIED_DESC @40082
-  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
-  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd08ib~ END
-  PHP_EACH bard_kits_list AS clab => kind BEGIN
-	PATCH_IF !(~%clab%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
-	  PATCH_IF !(~%kind%~ STRING_EQUAL_CASE ~c~) BEGIN
-	    LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %clab_1% END
-	  END
-	  PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~c~) BEGIN
-	    LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %clab_1% STR_VAR resource = ~d5bd08ic~ END
-	  END
-	END
-  END
-CREATE EFF ~d5bd08ib~
-	WRITE_LONG 0x10 146
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 9
-	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5ub08l~ #8
-CREATE EFF ~d5bd08ic~
-	WRITE_LONG 0x10 146
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 9
-	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5vb08l~ #8
-
-ACTION_IF FILE_EXISTS_IN_GAME ~pirmur01.cre~ BEGIN
-  COPY_EXISTING ~pirmur01.cre~ ~override~
-	ADD_CRE_ITEM ~d5bd08~ #1 #0 #0 ~IDENTIFIED~ ~INV~
 END
 
 COPY ~might_and_guile/nubards/d5bd24.itm~ ~override~			//		hold undead
@@ -3580,41 +3239,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~jugmim01.cre~ BEGIN
 	ADD_CRE_ITEM ~d5bd25~ #1 #0 #0 ~IDENTIFIED~ ~INV~
 END
 
-COPY ~might_and_guile/nubards/d5bd48.itm~ ~override~			//		dispel illusions
-  SAY NAME2 @40481
-  SAY IDENTIFIED_DESC @40482
-  LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
-  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = %nu_bard_code% parameter2 = 9 STR_VAR resource = ~d5bd48ib~ END
-  PHP_EACH bard_kits_list AS clab => kind BEGIN
-	PATCH_IF !(~%clab%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
-	  PATCH_IF !(~%kind%~ STRING_EQUAL_CASE ~c~) BEGIN
-	    LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %clab_1% END
-	  END
-	  PATCH_IF (~%kind%~ STRING_EQUAL_CASE ~c~) BEGIN
-	    LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 177 match_parameter1 = %nu_bard_code% match_parameter2 = 9 parameter1 = %clab_1% STR_VAR resource = ~d5bd48ic~ END
-	  END
-	END
-  END
-CREATE EFF ~d5bd48ib~
-	WRITE_LONG 0x10 146
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 9
-	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5ub48l~ #8
-CREATE EFF ~d5bd48ic~
-	WRITE_LONG 0x10 146
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 9
-	WRITE_SHORT 0x2c 100
-	WRITE_ASCII 0x30 ~d5vb48l~ #8
-
-ACTION_IF (FILE_EXISTS_IN_GAME ~stoblack.sto~)THEN BEGIN
-  COPY_EXISTING ~stoblack.sto~ ~override~
-	ADD_STORE_ITEM ~d5bd48~ #0 #0 #0 ~identified~ #1
-END
-
 /*
 // need to put the scroll somewhere...
 COPY ~might_and_guile/nubards/d5bd51.itm~ ~override~			//		bladesong
@@ -3650,9 +3274,9 @@ CREATE EFF ~d5bd51ic~
 //___________________________________________________________________________________
 
 
-// add support for feat system________________________________________________________
+// learn songs via old feat system___________________________________________________
 //
-ACTION_DEFINE_ASSOCIATIVE_ARRAY feat_nums_lets BEGIN
+ACTION_DEFINE_ASSOCIATIVE_ARRAY song_nums_lets BEGIN
 	1	=> a
 	2	=> b
 	3	=> c
@@ -3677,67 +3301,60 @@ END
 
 INCLUDE ~might_and_guile/lib/sequencer_menu.tpa~
 
-COPY ~might_and_guile/nubards/d5flstb.2da~ ~override~
+COPY ~might_and_guile/nubards/d5bdlst.2da~ ~override~
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5ftskn.2da~) BEGIN
- ACTION_IF !(GAME_IS ~iwdee~) BEGIN
-  COPY ~might_and_guile/nubards/d5ftskn.2da~ ~override~
- END
- ACTION_IF (GAME_IS ~iwdee~) BEGIN
-  COPY ~might_and_guile/nubards/d5ftskn_iwd.2da~ ~override/d5ftskn.2da~
- END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5sngkn.2da~) BEGIN
+    COPY ~might_and_guile/nubards/d5sngkn.2da~ ~override~
 END
 
-OUTER_SPRINT feat_select_string @20011 // ~Feat Selection~ 
-OUTER_SET feat_select_strref = RESOLVE_STR_REF (%feat_select_string%)
-OUTER_SPRINT feat_title_string @20012 
-OUTER_SPRINT feat_label_string @20013 
+OUTER_SPRINT song_select_string @40008 // ~Song Selection~ 
+OUTER_SET song_select_strref = RESOLVE_STR_REF (%song_select_string%)
+OUTER_SPRINT song_title_string @40006 
+OUTER_SPRINT song_label_string @40007 
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
+COPY ~might_and_guile/nubards/d5songch.bam~ ~override~
 
-  COPY ~might_and_guile/misc/d5_feat.bam~ ~override~
-
-  ACTION_PHP_EACH feat_nums_lets AS num => let BEGIN
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5feat%num%.spl~) BEGIN
-	  COPY ~might_and_guile/misc/d5feat1.spl~ ~override/d5feat%num%.spl~ 
+ACTION_PHP_EACH song_nums_lets AS num => let BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%num%.spl~) BEGIN
+	  COPY ~might_and_guile/misc/d5feat1.spl~ ~override/d5song%num%.spl~ 
 		LPF DELETE_EFFECT INT_VAR match_opcode = 206 END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5feat1~ resource = EVAL ~d5feat%num%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 177 STR_VAR match_resource = ~d5feat1~ resource = EVAL ~d5song%num%~ END
 	END
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5feat%num%.eff~) BEGIN
-	  COPY ~might_and_guile/misc/d5feat1.eff~ ~override/d5feat%num%.eff~ 
-		WRITE_EVALUATED_ASCII 0x30 ~d5feat%let%~ #8
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%num%.eff~) BEGIN
+	  COPY ~might_and_guile/misc/d5feat1.eff~ ~override/d5song%num%.eff~ 
+		WRITE_EVALUATED_ASCII 0x30 ~d5song%let%~ #8
 	END
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5feat%let%.spl~) BEGIN
-	  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5feat%let%.spl~
-		SAY NAME1 @20099
-		SAY UNIDENTIFIED_DESC @20100
-		WRITE_ASCII 0x3a ~d5_feat~ #8
-		LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5_feat~ END
-		LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5feat%let%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5feat%num%~ END
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5song%let%.spl~) BEGIN
+	  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5song%let%.spl~
+		SAY NAME1 @40009
+		SAY UNIDENTIFIED_DESC @40010
+		WRITE_ASCII 0x3a ~d5songch~ #8
+		LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5songch~ END
+		LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5song%let%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5song%num%~ END
 	END
-  END
+END
 
-  COPY_EXISTING ~kitlist.2da~ ~override~
+COPY_EXISTING ~kitlist.2da~ ~override~
 	READ_2DA_ENTRIES_NOW r2en_kitlist 10
 	FOR (row = 2; row < r2en_kitlist; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER r2en_kitlist row 5 kitlist_2da
-	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
+	  PATCH_IF (~%kitlist_2da%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN // ***** need to liberalize this
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 0 kitlist_index
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 3 kitlist_name
 		READ_2DA_ENTRY_FORMER r2en_kitlist row 9 kitids_num
 		GET_STRREF %kitlist_name% kit_name_strref
-		SPRINT feat_select_name ~%kit_name_strref% %feat_select_string%~
-		SET kit_seq_name = RESOLVE_STR_REF (~%feat_select_name%~) 
-		SET kit_seq_tip = RESOLVE_STR_REF (~%feat_select_name%~) 
+		SPRINT song_select_name ~%kit_name_strref% %song_select_string%~
+		SET kit_seq_name = RESOLVE_STR_REF (~%song_select_name%~) 
+		SET kit_seq_tip = RESOLVE_STR_REF (~%song_select_name%~) 
 		SET kit_seq_index = %kitlist_index% 
 		INNER_ACTION BEGIN
-		  COPY_EXISTING ~d5flstb.2da~ ~override~
+		  COPY_EXISTING ~d5bdlst.2da~ ~override~
 			COUNT_2DA_COLS cols
 			COUNT_2DA_ROWS cols rows
 			FOR (col = 1; col < (cols - 1); ++col) BEGIN
-			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) feat_kit_2da
-			  PATCH_IF (~%feat_kit_2da%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
+			  READ_2DA_ENTRY 0 (col - 1) (cols - 1) song_kit_2da
+			  PATCH_IF (~%song_kit_2da%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
 				SET this_col = %col%
 				INNER_ACTION BEGIN
 				  LAF CREATE_SEQUENCER_MENU 
@@ -3748,65 +3365,71 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__rfeat.d5~) BEGIN
 					column = %this_col% 
 					class = 2
 				   STR_VAR 
-					resref = EVAL ~d5ft%kit_seq_index%~
+					resref = EVAL ~d5sn%kit_seq_index%~
 					icon = ~spcl919b~
-					spelltable = ~d5ftskn~ 
-					spelllist = ~d5flstb~
-					title = EVAL ~%feat_title_string%~
-					label = EVAL ~%feat_label_string%~
+					spelltable = ~d5sngkn~ 
+					spelllist = ~d5bdlst~
+					title = EVAL ~%song_title_string%~
+					label = EVAL ~%song_label_string%~
 				  END
-				  COPY_EXISTING ~d5ft%kit_seq_index%.spl~ ~override~
-					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%kit_seq_index%~ END
+				  COPY_EXISTING ~d5sn%kit_seq_index%.spl~ ~override~
+					LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5sn%kit_seq_index%~ END
 				  BUT_ONLY IF_EXISTS
 				END
 			  END
 			END
 		  BUT_ONLY
 		  ACTION_FOR_EACH letter IN ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ BEGIN
-			COPY_EXISTING ~d5feat%letter%.spl~ ~override~
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5ft%kit_seq_index%~ END
+			COPY_EXISTING ~d5song%letter%.spl~ ~override~
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %kitids_num% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = EVAL ~d5sn%kit_seq_index%~ END
 			IF_EXISTS BUT_ONLY
 		  END
 		END
 	  END
 	END
-  BUT_ONLY
-  COPY_EXISTING ~d5flstb.2da~ ~override~
+BUT_ONLY
+COPY_EXISTING ~d5bdlst.2da~ ~override~
 	COUNT_2DA_COLS cols
 	COUNT_2DA_ROWS cols rows
 	FOR (row = 1; row < rows; ++row) BEGIN
-  	  READ_2DA_ENTRY row 0 cols ~book_feat~
+  	  READ_2DA_ENTRY row 0 cols ~book_song~
 	  INNER_ACTION BEGIN
-		COPY_EXISTING ~%book_feat%.spl~ ~override/%book_feat%L.spl~
+		COPY_EXISTING ~%book_song%.spl~ ~override/%book_song%L.spl~
 		  WRITE_SHORT 0x1c 4
 		  WRITE_LONG 0x34 1
-		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_feat%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%book_song%~ END
 		IF_EXISTS BUT_ONLY
 	  END
 	END
-  BUT_ONLY
+BUT_ONLY
 
- ACTION_PHP_EACH feat_bard_list AS ind => ids BEGIN
-  COPY_EXISTING ~d5ft%ind%.spl~ ~override~
-	LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5ft%ind%~ END
+/* what was this trying to do??
+ACTION_PHP_EACH song_bard_list AS ind => ids BEGIN
+  COPY_EXISTING ~d5sn%ind%.spl~ ~override~
+	LPF DELETE_EFFECT INT_VAR match_opcode = 171 STR_VAR match_resource = EVAL ~d5sn%ind%~ END
   IF_EXISTS BUT_ONLY
- END
-
-  APPEND ~d5_bard.2da~ ~D5_SONGS    ****        ****        GA_D5FEATD  ****        ****        GA_D5FEATE  ****        ****        GA_D5FEATF  ****        ****        GA_D5FEATG  ****        ****        GA_D5FEATH  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-
 END
+*/
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5featx.spl~) BEGIN
-  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5featx.spl~
+APPEND ~d5_bard.2da~ ~D5_SONGS    GA_D5songC  ****        GA_D5songD  ****        ****        GA_D5songE  ****        ****        GA_D5songF  ****        ****        GA_D5songG  ****        ****        GA_D5songH  ****        ****        GA_D5songI  ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+// ***** give some to other kits too! ...every 5 levels?
+//ACTION_PHP_EACH bard_kits_list AS clab => kind BEGIN
+//  ACTION_IF !(~%clab%~ STRING_EQUAL_CASE ~d5_bard~) BEGIN
+//    APPEND ~%other_bard%.2da~ ~D5_SONGS    ****        ****        ****        GA_D5songD  ****        ****        ****        GA_D5songE  ****        ****        ****        GA_D5songF  ****        ****        ****        GA_D5songG  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
+//  END
+//END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5songx.spl~) BEGIN
+  COPY ~might_and_guile/misc/d5_base.spl~ ~override/d5songx.spl~
 END
-COPY ~might_and_guile/nubards/d5flstb.2da~ ~might_and_guile/temp/d5flstb.2da~
+COPY ~might_and_guile/nubards/d5bdlst.2da~ ~might_and_guile/temp/d5bdlst.2da~
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
   FOR (row = 1; row < rows; ++row) BEGIN
-  	READ_2DA_ENTRY row 0 cols spellbook_feat
+  	READ_2DA_ENTRY row 0 cols spellbook_song
 	INNER_ACTION BEGIN
-	  COPY_EXISTING ~d5featx.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spellbook_feat%~ END
+	  COPY_EXISTING ~d5songx.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spellbook_song%~ END
 	  BUT_ONLY
 	END
   END
@@ -4588,7 +4211,6 @@ COPY_EXISTING ~d5_blade.2da~ ~override~
 BUT_ONLY
 //____________________________________________________________________________________
 */
-
 
 
 //HLA TABLES__________________________________________________________________________

@@ -2393,7 +2393,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("D5_NO_CRASH","GLOBAL",0)
 		ReallyForceSpellRES("D5XCRSH",Myself)
-		Wait(2)
+		Wait(1)
 		RestParty()
 END
 >>>>>>>> 

@@ -195,19 +195,19 @@ ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_l1cantrips.qd~ BEGIN
 	COPY_EXISTING ~sppr212.spl~ ~override/d5_cho12.spl~
 	  WRITE_SHORT 0x1c 1
 	  WRITE_LONG 0x34 1
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 parameter2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 parameter2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
 	COPY_EXISTING ~d5_cho11.spl~ ~override~
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 parameter2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 parameter2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
 END
 //__________________________________________________________________________________
 

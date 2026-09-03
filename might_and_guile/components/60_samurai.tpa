@@ -115,8 +115,8 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu3.spl~			//	flurry of blows
   SAY UNIDENTIFIED_DESC @6014
   WRITE_ASCII 0x3a ~d5samu3~ #8
   LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5samu3~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 1 target = 1 parameter1 = 1 parameter2 = 0 timing = 0 duration = 19 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 2) parameter2 = 0 timing = 0 duration = 19 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 1 target = 1 parameter1 = 1 parameter2 = 0 timing = 0 duration = 25 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 1) parameter2 = 0 timing = 0 duration = 24 END
 
 COPY ~might_and_guile/fighter/samurai/d5samu4.bam~ ~override~
 COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5samu4.spl~			//	tiger strike
@@ -161,7 +161,7 @@ COPY ~might_and_guile/fighter/samurai/d5samu7.bam~ ~override~
 CREATE EFF ~d5samu6b~
 	WRITE_LONG 0x10 325
 	WRITE_LONG 0x14 2
-	WRITE_LONG 0x1c (0 - 2)
+	WRITE_LONG 0x1c (0 - 3)
 	WRITE_LONG 0x20 0
 	WRITE_LONG 0x24 0
 	WRITE_LONG 0x28 30

@@ -1,0 +1,89 @@
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								BARDS CAST IN LIGHT ARMOR
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+DEFINE_ACTION_FUNCTION bard_armored_casting BEGIN
+
+//COPY MARKER FILE__________________________________________________________________
+//
+COPY ~%MOD_FOLDER%/lib/markers/d5_marker.d5~ ~override/d5__bardarmor.d5~
+//__________________________________________________________________________________
+
+
+//ARMORED CASTING FOR BARDS__________________________________________________________
+//
+INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
+
+LAM D5_ARMORED_CASTING
+
+// let bards cast in leather
+//
+
+/* no do this in clabs - it will help 5E casting later
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	  READ_SHORT 0x1c type
+	  READ_LONG 0x22 appearance
+	  PATCH_IF (type = 2) BEGIN 	// armor
+		PATCH_IF (appearance = 16690) BEGIN // leather appearance
+		  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 177 parameter1 = 5 parameter2 = 5 timing = 2 STR_VAR resource = ~d5arca1~ END
+		END
+		PATCH_IF (appearance = 16691) BEGIN // chain appearance
+		  LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 177 parameter1 = 0x400f parameter2 = 9 timing = 2 STR_VAR resource = ~d5arca2~ END
+		END
+	  END
+	END
+BUT_ONLY
+*/
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS cols
+  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 10
+  FOR (row = 2; row < r2en_kitlist; row += 1) BEGIN
+	READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kit_name
+    READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 5 kit_table
+    READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+    READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 9 kit_ids
+    PATCH_IF (class_num = 5) BEGIN
+      INNER_ACTION BEGIN
+        APPEND ~%kit_table%.2da~ ~ARMCAST     AP_D5ARCA1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+      END
+    END
+  END
+BUT_ONLY
+
+
+// handle revised bards if they are there:
+//
+// ***** need to handle the qdmulti .EFFs
+
+ACTION_FOR_EACH nubard_clab IN 
+//    ~d5_whsl~		//	...non-arcane casters don't need this
+//    ~d5_lors~
+//    ~d5_lort~
+    ~d5_bard~
+    ~d5_blade~
+    ~d5_jstr~
+    ~d5_skld~
+    ~d5_glnt~
+    ~d5_mstr~
+    ~d5_jinx~
+    ~d5_hxbl~
+    ~d5_eleg~
+    ~d5_agnt~
+//    ~d5_hrld~
+    ~d5_blads~
+BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%nubard_clab%.2da~) BEGIN
+    APPEND ~%nubard_clab%.2da~ ~ARMCAST     AP_D5ARCA1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+END
+
+//___________________________________________________________________________________
+
+END	//	end define function
+

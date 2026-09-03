@@ -47,12 +47,13 @@
 @280   = ~Revised Backstabbing~
 @290   = ~Revised THAC0 Progression~
 @400   = ~Bard Overhaul: Multiclass Bards~
+@430   = ~Armored Spellcasting for Bards~
 @440   = ~Bard Song Overhaul~
-@450   = ~Add the Jongleur (bard kit)~
-@460   = ~Add the Loremaster (bard kit)~
-@470   = ~Add the Gallant (bard kit)~
-@480   = ~Add the Meistersinger (bard kit)~
-@490   = ~Add the Loresinger (bard kit)~
+@450   = ~Add the Jongleur (OG bard kit)~
+@460   = ~Add the Loremaster (OG bard kit)~
+@470   = ~Add the Gallant (OG bard kit)~
+@480   = ~Add the Meistersinger (OG bard kit)~
+@490   = ~Add the Loresinger (OG bard kit)~
 @499   = ~5E-Style Casting for 2E-Style Bards~
 //
 //
@@ -98,7 +99,7 @@ Abilities:
 - A Sohei Warrior may channel <PRO_HISHER> 'ki,' or inner energy, into feats of near-superhuman strength, agility, and ferocity. The Samurai gets three ki points at 1st level and another ki point every third level thereafter, up to nine at 18th level. These ki points may be used for the following abilities:
   -- Lay On Hands (heal oneself or a comrade)
   -- Shield of the Wind (evade missile attacks)
-  -- Flurry of Blows (attack with greater frequency but reduced accuracy)
+  -- Flurry of Blows (attack with greater frequency)
   -- Tiger Strike (perform a critical hit on the next attack)
   -- Stunning Blow (stun the target on a failed save, on the next attack)
   -- Inner Gate Strike (cause that target of the next attack to suffer saving throw penalties) 
@@ -120,7 +121,7 @@ This ability allows one to evade missile attacks with uncanny agility. For four 
 @6013  = ~Flurry of Blows~
 @6014  = ~Flurry of Blows:
 
-This ability allows a warrior to attack with superhuman ferocity, able to make one extra attack each round for the next three rounds. The accuracy of such attacks is somewhat impaired, however, with a 2-point penalty to hit during that time.~
+This ability allows a warrior to attack with superhuman ferocity, able to make one extra attack each round for the next four rounds. The accuracy of such attacks is somewhat impaired, however, with a 1-point penalty to hit during that time.~
 @6015  = ~Tiger Strike~
 @6016  = ~Tiger Strike:
 
@@ -128,7 +129,7 @@ This ability allows a warrior to focus all <PRO_HISHER> energy for a single impo
 @6017  = ~Inner Gate Strike~
 @6018  = ~Inner Gate Strike:
 
-This ability allows a warrior to strike at the spirit ofa target, in addition the the body. The next successful melee attack will cause the target to suffer a 2-point penalty on all saving throws for a period of five rounds.~
+This ability allows a warrior to strike at the spirit of a target, in addition the the body. The next successful melee attack will cause the target to suffer a 3-point penalty on all saving throws for a period of five rounds.~
 @6019  = ~War Cry~
 @6020  = ~War Cry
 
@@ -291,7 +292,7 @@ Prime Requisites For Dual-Classing: Strength, Dexterity, Wisdom
 @12013  = ~FOREST RANGER: the most common, or at least commonly visible, type of ranger, forest rangers are knowledgeable woodsmen and able warriors. Fiercely protective by nature, they are often called upon to fulfill a dual role: sometimes guiding travelers through areas with hostile wildlife, and at other times protecting that very wildlife from those who would carelessly exploit Toril's resource-rich woodlands.
 
 Advantages:
-- Innate ability to Charm animals and beats, once per day per 5 levels of experience.
+- Innate ability to Charm animals and beasts, once per day per 5 levels of experience.
 - Innate ability to cast the Goodberry spell once per day.
 - +2 bonus to hit and damage against (non-humanoid) mammals, gibberlings, and lycanthropes.
 
@@ -359,7 +360,7 @@ Restrictions:
 @12505  = ~MAGE HUNTER: These rangers participate in demanding rituals with Avenger druids in order to gain access to magic abilities which help them in their campaign against any wizards who use their skills to defile nature.
 
 Advantages:
-- Mage Hunters have a +1 bonus to saving throws vs spells. This bonus increases by one for each four levels gained, up to 20th level.
+- Mage Hunters have a +1 bonus to saving throws vs spells. This bonus increases by one for each five levels gained, up to 20th level.
 - Each successful melee hit bestows a 40% chance of spell failure on the target for one round.
 - May use a special Breaching Touch ability once per day per two levels. The Breaching Touch can disrupt and dispel one combat protection spell. The Breaching Touch will bypass any spell protections such as Spell Deflection and Globe of Invulnerability.
 - May cast an innate version of Minor Spell Deflection once per day per five levels.

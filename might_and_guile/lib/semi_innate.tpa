@@ -112,6 +112,7 @@ ACTION_IF /*(FILE_EXISTS_IN_GAME ~%points_table%.2da~)*/ !(~%points_table%~ STRI
             LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
             LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
             LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%table_spl%~ END
+        	LPF ADD_SPELL_EFFECT INT_VAR header = %this_header% insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_spont_rest% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%table_spl%~ END
           END
         END
       IF_EXISTS BUT_ONLY
@@ -243,9 +244,10 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~%semi_innate_prefix%fsh.spl~) BEGIN
     WRITE_LONG 0x34 1
     LPF QD_ADD_EMPTY_SPELL_HEADER INT_VAR type = 1 location = 4 target = 5 required_level = 1 END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = EVAL ~%semi_innate_prefix%172~ END	//	use 326 here...?
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 duration = 0 STR_VAR resource = ~d5zrest~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%semi_innate_prefix%x-1~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_innate_state% parameter2 = 110 timing = 4 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%pls~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_rest% parameter2 = 111 timing = 1 duration = 0 STR_VAR resource = ~d5zrest~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 318 insert_point = 0 target = 1 parameter1 = %semi_spont_rest% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = EVAL ~%semi_innate_prefix%fsh~ END
 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zrest.spl~) BEGIN

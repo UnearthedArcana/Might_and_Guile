@@ -47,6 +47,7 @@
 @280   = ~Revision de l'Attaque sournoise~
 @290   = ~Revision de la progression du TAC0~
 @400   = ~Remaniement des Bardes : Bardes multiclasses~
+@430   = ~Lancer de sorts dans armures pour les Bardes~
 @440   = ~Remaniement des chansons des Bardes~
 @450   = ~Ajouter le Jongleur (kit de barde)~
 @460   = ~Ajouter le Gardien du savoir (kit de barde)~
@@ -127,13 +128,13 @@ DÉSAVANTAGES :
 Cette capacité permet d'échapper aux attaques à projectiles avec une agilité surhumaine. Durant 4 rounds, le combattant dispose d'un bonus de 5 points à la classe d'armure contre les attaques à projectiles et parmi celles qui touchent leur cible, une peut être déviée chaque round sans causer de dégâts.~
 @6013  = ~Déluge de coups~
 @6014  = ~Déluge de coups :
-Cette capacité permet au combattant d'attaquer avec une férocité surhumaine. Il peut porter une attaque de plus chaque round pendant 3 rounds. Par contre, la précision de ses attaques est amoindrie et il subit une pénalité de 2 points aux jets d'attaque pendant cette période.~
+Cette capacité permet au combattant d'attaquer avec une férocité surhumaine. Il peut porter une attaque de plus chaque round pendant 4 rounds. Par contre, la précision de ses attaques est amoindrie et il subit une pénalité de 1 point aux jets d'attaque pendant cette période.~
 @6015  = ~Frappe du tigre~
 @6016  = ~Frappe du tigre :
 Cette capacité permet au combattant de concentrer toute son énergie dans une seule attaque. La prochaine attaque après son activation résultera automatiquement en un coup critique.~
 @6017  = ~Frappe de porte intérieure~
 @6018  = ~Frappe de porte intérieure :
-Cette capacité permet au combattant de s'attaque à l'esprit de la cible, en plus de s'attaquer à son corps. La prochaine attaque de corps à corps réussie inflige à la cible une pénalité de 2 points à tous les jets de sauvegarde pour une durée de 5 rounds.~
+Cette capacité permet au combattant de s'attaque à l'esprit de la cible, en plus de s'attaquer à son corps. La prochaine attaque de corps à corps réussie inflige à la cible une pénalité de 3 points à tous les jets de sauvegarde pour une durée de 5 rounds.~
 @6019  = ~Cri de guerre~
 @6020  = ~Cri de guerre :
 Avec son cri de guerre, le combattant émet un puissant cri effrayant qui fera paniquer tous les adversaires à moins de 5 m qui ne réussissent pas un jet de sauvegarde contre les sorts.~
@@ -364,7 +365,7 @@ Restrictions :
 @12505  = ~CHASSEUR DE MAGES : Ces rôdeurs prennent part à des rituels exigeants avec des druides justiciers pour obtenir des pouvoirs magiques qu'ils utilisent dans leur campagne contre les mages qui utilisent leurs talents pour souiller la nature.
 
 Avantages :
-- Bonus de +1 aux jets de sauvegarde contre les sorts. Ce bonus augmente d'un point supplémentaire tous les quatre niveaux jusqu'au niveau 20.
+- Bonus de +1 aux jets de sauvegarde contre les sorts. Ce bonus augmente d'un point supplémentaire tous les cinq niveaux jusqu'au niveau 20.
 - Toutes les attaques de mêlée réussies infligent un risque d'échec des sorts de 40 % à la cible pendant 1 round.
 - Peut utiliser une capacité spéciale, Toucher de brèche, une fois par jour pour chaque tranche de 2 niveaux. Le Toucher de brèche contourne toutes les protections de sorts comme Déviation de Sorts ou Globe d'invulnérabilité.
 - Peut lancer une version innée de Déviation de Sorts Mineure une fois par jour pour chaque tranche de 5 niveaux.

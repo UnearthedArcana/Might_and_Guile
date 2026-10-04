@@ -198,8 +198,8 @@ IF ~Global("D5_ARCS","GLOBAL",1)~ THEN BEGIN d5_arcs
  IF ~Global("D5_ARCSF","GLOBAL",1) Global("D5ARCSF","LOCALS",0)~ THEN REPLY @20517 GOTO d5_arcs_6		//	hammer
  IF ~Global("D5_ARCSG","GLOBAL",1) Global("D5ARCSG","LOCALS",0)~ THEN REPLY @20523 GOTO d5_arcs_7		//	stun
  IF ~Global("D5_ARCSH","GLOBAL",1) Global("D5ARCSH","LOCALS",0)~ THEN REPLY @20531 GOTO d5_arcs_8		//	entangle
- IF ~Global("D5_ARCSI","GLOBAL",1) Global("D5ARCSI","LOCALS",0)~ THEN REPLY @20533 GOTO d5_arcs_7		//	sleep
- IF ~Global("D5_ARCSJ","GLOBAL",1) Global("D5ARCSJ","LOCALS",0)~ THEN REPLY @20535 GOTO d5_arcs_8		//	faerie fire
+ IF ~Global("D5_ARCSI","GLOBAL",1) Global("D5ARCSI","LOCALS",0)~ THEN REPLY @20533 GOTO d5_arcs_9		//	sleep
+ IF ~Global("D5_ARCSJ","GLOBAL",1) Global("D5ARCSJ","LOCALS",0)~ THEN REPLY @20535 GOTO d5_arcs_10		//	faerie fire
 END
 
 IF ~~ THEN BEGIN d5_arcs_1 											// trip

@@ -29,9 +29,29 @@ COPY_EXISTING ~kitlist.2da~ ~override~
     READ_2DA_ENTRY row 1 9 kitname
     READ_2DA_ENTRY row 8 9 kitclass
     PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~FERALAN~) BEGIN
+      READ_2DA_ENTRY row 6 9 prof_col
       SET_2DA_ENTRY row 8 9 2
     END
   END
+BUT_ONLY
+
+//fix weapon proficiencies__________________________________________________________
+// 
+COPY_EXISTING ~weapprof.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 0; row < rows; ++row ) BEGIN
+    READ_2DA_ENTRY row 11 cols val
+    SET_2DA_ENTRY row 36 cols val
+  END
+BUT_ONLY
+
+COPY_EXISTING ~weapprof.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  SET_2DA_ENTRY 23 36 cols 5
+  SET_2DA_ENTRY 24 36 cols 5
+  SET_2DA_ENTRY 25 36 cols 5
 BUT_ONLY
 
 //remove some ranger abilities______________________________________________________
